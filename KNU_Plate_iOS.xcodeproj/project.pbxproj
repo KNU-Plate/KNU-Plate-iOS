@@ -16,6 +16,7 @@
 		7CE4D7BA2609B2AC002FCC2D /* ExampleWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7B92609B2AC002FCC2D /* ExampleWebService.swift */; };
 		7CE4D7BD2609B2B5002FCC2D /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7BC2609B2B5002FCC2D /* ExampleViewModel.swift */; };
 		7CE4D7C02609B2C0002FCC2D /* ExampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7BF2609B2C0002FCC2D /* ExampleModel.swift */; };
+		7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7C42609B628002FCC2D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7CE4D7B92609B2AC002FCC2D /* ExampleWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleWebService.swift; sourceTree = "<group>"; };
 		7CE4D7BC2609B2B5002FCC2D /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
 		7CE4D7BF2609B2C0002FCC2D /* ExampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleModel.swift; sourceTree = "<group>"; };
+		7CE4D7C42609B628002FCC2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				7CE4D7B02609B183002FCC2D /* View Models */,
 				7CE4D7AF2609B17C002FCC2D /* Web Services */,
 				7CE4D7AE2609B175002FCC2D /* Controllers */,
+				7CE4D7C42609B628002FCC2D /* Constants.swift */,
 				7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */,
 				7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */,
 				7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */,
@@ -190,6 +193,7 @@
 				7CE4D79D2608DD2B002FCC2D /* ViewController.swift in Sources */,
 				7CE4D7C02609B2C0002FCC2D /* ExampleModel.swift in Sources */,
 				7CE4D7BA2609B2AC002FCC2D /* ExampleWebService.swift in Sources */,
+				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
 			);
