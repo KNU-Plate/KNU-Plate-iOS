@@ -51,12 +51,23 @@ extension NewRestaurantViewController: UITextFieldDelegate {
     
  
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         self.view.endEditing(true)
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+//        guard let name = textField.text else {
+//            let alert = AlertManager.showAlertMessage()
+//            AlertManager.showAlertMessage()
+        }
+        
+        if let name = textField.text {
+            newRestaurantViewModel.restaurantName = name
+        }
+        
+        
+
         self.view.endEditing(true)
     }
     
@@ -68,7 +79,6 @@ extension NewRestaurantViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
           self.view.endEditing(true)
     }
-    
     
 }
 
@@ -86,7 +96,6 @@ extension NewRestaurantViewController {
 
     func addDoneButtonOnKeyboard() {
         
- 
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
@@ -103,3 +112,6 @@ extension NewRestaurantViewController {
     }
     
 }
+
+
+//MARK: - Other Methods
