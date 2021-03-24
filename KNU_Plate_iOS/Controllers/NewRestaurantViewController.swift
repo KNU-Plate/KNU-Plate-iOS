@@ -16,9 +16,9 @@ class NewRestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        restaurantNameTextField.delegate = self
-        reviewTextView.delegate = self
-        addDoneButtonOnKeyboard()
+//        restaurantNameTextField.delegate = self
+//        reviewTextView.delegate = self
+//        addDoneButtonOnKeyboard()
         
     }
 
