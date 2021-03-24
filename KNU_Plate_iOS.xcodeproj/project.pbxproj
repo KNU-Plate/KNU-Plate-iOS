@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33D908E4DEF81AA85649752D /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036916560288BDA52FF7D22D /* Pods_KNU_Plate_iOS.framework */; };
+		3C279885260A1DF3008B89D3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C279884260A1DF3008B89D3 /* MainViewController.swift */; };
 		7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */; };
 		7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */; };
-		7CE4D79D2608DD2B002FCC2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D79C2608DD2B002FCC2D /* ViewController.swift */; };
 		7CE4D7A02608DD2B002FCC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D79E2608DD2B002FCC2D /* Main.storyboard */; };
 		7CE4D7A22608DD2E002FCC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */; };
 		7CE4D7A52608DD2E002FCC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */; };
@@ -19,10 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		036916560288BDA52FF7D22D /* Pods_KNU_Plate_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Plate_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CF5B9CF031759E3E1097276 /* Pods-KNU_Plate_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.release.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3143D3580E6DCB330D3F8AB8 /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		3C279884260A1DF3008B89D3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7CE4D7952608DD2B002FCC2D /* KNU_Plate_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNU_Plate_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7CE4D79C2608DD2B002FCC2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7CE4D79F2608DD2B002FCC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CE4D7A42608DD2E002FCC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,17 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D908E4DEF81AA85649752D /* Pods_KNU_Plate_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05CAB1FD673F2BFB7AC7AF2D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3143D3580E6DCB330D3F8AB8 /* Pods-KNU_Plate_iOS.debug.xcconfig */,
+				1CF5B9CF031759E3E1097276 /* Pods-KNU_Plate_iOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7CE4D78C2608DD2B002FCC2D = {
 			isa = PBXGroup;
 			children = (
 				7CE4D7972608DD2B002FCC2D /* KNU_Plate_iOS */,
 				7CE4D7962608DD2B002FCC2D /* Products */,
+				05CAB1FD673F2BFB7AC7AF2D /* Pods */,
+				DF2386A8A77546F7633B5ADD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +95,7 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7CE4D79C2608DD2B002FCC2D /* ViewController.swift */,
+				3C279884260A1DF3008B89D3 /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -116,6 +133,14 @@
 			path = "View (Storyboard)";
 			sourceTree = "<group>";
 		};
+		DF2386A8A77546F7633B5ADD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				036916560288BDA52FF7D22D /* Pods_KNU_Plate_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,9 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CE4D7A92608DD2E002FCC2D /* Build configuration list for PBXNativeTarget "KNU_Plate_iOS" */;
 			buildPhases = (
+				3E45FDAD0655257AE0BC63CC /* [CP] Check Pods Manifest.lock */,
 				7CE4D7912608DD2B002FCC2D /* Sources */,
 				7CE4D7922608DD2B002FCC2D /* Frameworks */,
 				7CE4D7932608DD2B002FCC2D /* Resources */,
+				7E236190F67F1D360D3C0ED3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -181,15 +208,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E45FDAD0655257AE0BC63CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KNU_Plate_iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E236190F67F1D360D3C0ED3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7CE4D7912608DD2B002FCC2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7CE4D7BD2609B2B5002FCC2D /* ExampleViewModel.swift in Sources */,
-				7CE4D79D2608DD2B002FCC2D /* ViewController.swift in Sources */,
 				7CE4D7C02609B2C0002FCC2D /* ExampleModel.swift in Sources */,
 				7CE4D7BA2609B2AC002FCC2D /* ExampleWebService.swift in Sources */,
+				3C279885260A1DF3008B89D3 /* MainViewController.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
 			);
@@ -335,11 +404,12 @@
 		};
 		7CE4D7AA2608DD2E002FCC2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3143D3580E6DCB330D3F8AB8 /* Pods-KNU_Plate_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				INFOPLIST_FILE = KNU_Plate_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -354,11 +424,12 @@
 		};
 		7CE4D7AB2608DD2E002FCC2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CF5B9CF031759E3E1097276 /* Pods-KNU_Plate_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				INFOPLIST_FILE = KNU_Plate_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
