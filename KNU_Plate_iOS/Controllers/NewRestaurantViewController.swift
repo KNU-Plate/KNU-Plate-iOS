@@ -55,21 +55,22 @@ extension NewRestaurantViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-//        guard let name = textField.text else {
-//            let alert = AlertManager.showAlertMessage()
-//            AlertManager.showAlertMessage()
-        }
-        
-        if let name = textField.text {
-            newRestaurantViewModel.restaurantName = name
-        }
-        
-        
-
-        self.view.endEditing(true)
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//
+////        guard let name = textField.text else {
+////            let alert = AlertManager.showAlertMessage()
+////            AlertManager.showAlertMessage()
+//        }
+//
+//
+//        if let name = textField.text {
+//            newRestaurantViewModel.restaurantName = name
+//        }
+//
+//
+//
+//        self.view.endEditing(true)
+//    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
