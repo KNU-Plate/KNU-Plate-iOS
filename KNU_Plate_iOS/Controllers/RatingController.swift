@@ -4,7 +4,7 @@ import UIKit
 
 class RatingController: UIStackView {
     
-    var starsRating = 3
+    var starsRating = 3                             // 기본 별점은 3점으로 시작
     
     var starsEmptyPicName = "star"                  // Empty star name (SF Symbol)
     var starsFilledPicName = "star.fill"            // Filled star name (SF Symbol)
@@ -14,7 +14,7 @@ class RatingController: UIStackView {
         let starButtons = self.subviews.filter{$0 is UIButton}
         var starTag = 1
         for button in starButtons {
-            if let button = button as? UIButton{
+            if let button = button as? UIButton {
                 button.setImage(UIImage(named: starsEmptyPicName), for: .normal)
                 button.addTarget(self, action: #selector(self.pressed(sender:)), for: .touchUpInside)
                 button.tag = starTag
