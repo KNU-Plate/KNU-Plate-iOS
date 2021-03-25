@@ -5,14 +5,14 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
-    //MARK: - tempview declaration
+    //MARK: - Tempview declaration
     let tempView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         return view
     }()
     
-    //MARK: - gate buttons declaration
+    //MARK: - Gate buttons declaration
     let northGateButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .gray
@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    //MARK: - gate labels declaration
+    //MARK: - Gate labels declaration
     let northGateLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.gateNames[0]
@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    //MARK: - viewDidLoad
+    //MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // set title of main view
@@ -82,9 +82,9 @@ class MainViewController: UIViewController {
     }
 }
 
-//MARK: - basic UI set up
+//MARK: - Basic UI set up
 extension MainViewController {
-    /// set up banner, buttons and labels
+    /// Set up banner, buttons and labels
     func setUpView() {
         // add tempview
         self.view.addSubview(tempView)
@@ -111,19 +111,17 @@ extension MainViewController {
         
         // tempview snapkit layout
         tempView.snp.makeConstraints { (make) in
-            make.height.equalTo(150)
             make.top.left.right.equalTo(safeArea)
+            make.bottom.equalTo(northGateButton.snp.top).offset(-inset)
         }
         
         // gate buttons snapkit layout
         northGateButton.snp.makeConstraints { (make) in
             make.height.width.equalTo(width)
-            make.top.equalTo(tempView.snp.bottom).offset(inset)
             make.left.equalTo(safeArea).inset(inset)
         }
         mainGateButton.snp.makeConstraints { (make) in
             make.height.width.equalTo(width)
-            make.top.equalTo(tempView.snp.bottom).offset(inset)
             make.left.equalTo(northGateButton.snp.right).offset(inset)
             make.right.equalTo(safeArea).inset(inset)
         }
@@ -131,12 +129,14 @@ extension MainViewController {
             make.height.width.equalTo(width)
             make.top.equalTo(northGateButton.snp.bottom).offset(inset)
             make.left.equalTo(safeArea).inset(inset)
+            make.bottom.equalTo(safeArea).offset(-inset)
         }
         westGateButton.snp.makeConstraints { (make) in
             make.height.width.equalTo(width)
             make.top.equalTo(mainGateButton.snp.bottom).offset(inset)
             make.left.equalTo(eastGateButton.snp.right).offset(inset)
             make.right.equalTo(safeArea).inset(inset)
+            make.bottom.equalTo(safeArea).offset(-inset)
         }
         
         // gate labels snapkit layout
@@ -154,7 +154,7 @@ extension MainViewController {
         }
     }
     
-    /// set target of the button
+    /// Set target of the button
     func setButtonTarget() {
         northGateButton.addTarget(self, action: #selector(gateButtonWasTapped), for: .touchUpInside)
         mainGateButton.addTarget(self, action: #selector(gateButtonWasTapped), for: .touchUpInside)
@@ -163,11 +163,11 @@ extension MainViewController {
     }
 }
 
-//MARK: - prepare for next view
+//MARK: - Prepare for next view
 extension MainViewController {
-    /// excute next view controller
+    /// Execute next view controller
     @objc func gateButtonWasTapped(_ sender: UIButton) {
-        guard let nextViewController = self.storyboard?.instantiateViewController(identifier: "RestaurantCollectionViewController") else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.restaurantCollectionViewController) else {
             fatalError()
         }
         nextViewController.navigationItem.title = Constants.gateNames[sender.tag]

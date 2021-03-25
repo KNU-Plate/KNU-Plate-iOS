@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F4531260B8866008E8AA7 /* MainViewController.swift */; };
 		3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F4537260B88B3008E8AA7 /* Main.storyboard */; };
+		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
@@ -28,6 +29,7 @@
 		2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurant.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
+				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
 			);
 			path = "View Controllers";
@@ -294,6 +297,7 @@
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
+				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 			);

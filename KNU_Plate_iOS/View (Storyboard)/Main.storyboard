@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="3604" y="-606.74662668665667"/>
         </scene>
-        <!--View Controller-->
+        <!--Restaurant Collection View Controller-->
         <scene sceneID="Oik-ys-PF1">
             <objects>
-                <viewController storyboardIdentifier="RestaurantCollectionViewController" id="oYm-XB-IXR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestaurantCollectionViewController" id="oYm-XB-IXR" customClass="RestaurantCollectionViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UJ9-EG-NfI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
