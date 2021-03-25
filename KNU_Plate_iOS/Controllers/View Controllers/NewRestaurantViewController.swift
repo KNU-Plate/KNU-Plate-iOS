@@ -55,22 +55,19 @@ extension NewRestaurantViewController: UITextFieldDelegate {
         return true
     }
     
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//
-////        guard let name = textField.text else {
-////            let alert = AlertManager.showAlertMessage()
-////            AlertManager.showAlertMessage()
-//        }
-//
-//
-//        if let name = textField.text {
-//            newRestaurantViewModel.restaurantName = name
-//        }
-//
-//
-//
-//        self.view.endEditing(true)
-//    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        guard let name = textField.text else {
+            let alert = AlertManager.createAlertMessage("식당 이름 입력", "식당명을 입력해주세요!")
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        newRestaurantViewModel.restaurantName = name
+
+
+        self.view.endEditing(true)
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -78,7 +75,7 @@ extension NewRestaurantViewController: UITextFieldDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-          self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
 }
