@@ -75,6 +75,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7CE10470260C446500E18C00 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
+				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7CE10471260C447500E18C00 /* Supporting View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7CD74B79260B209300D05B84 /* AlertManager.swift */,
+				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
+			);
+			path = "Supporting View Controllers";
+			sourceTree = "<group>";
+		};
 		7CE4D78C2608DD2B002FCC2D = {
 			isa = PBXGroup;
 			children = (
@@ -113,10 +131,8 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
-				7CD74B79260B209300D05B84 /* AlertManager.swift */,
-				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
-				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
+				7CE10471260C447500E18C00 /* Supporting View Controllers */,
+				7CE10470260C446500E18C00 /* View Controllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
