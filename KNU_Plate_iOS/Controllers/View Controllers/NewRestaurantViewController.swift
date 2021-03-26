@@ -19,7 +19,7 @@ class NewRestaurantViewController: UIViewController {
         restaurantNameTextField.delegate = self
         reviewTextView.delegate = self
         addDoneButtonOnKeyboard()
-        
+    
     }
 
 
@@ -39,8 +39,6 @@ class NewRestaurantViewController: UIViewController {
         default:
             newRestaurantViewModel.gate = "북문"
         }
-        
-        print(newRestaurantViewModel.gate)
     }
 }
 
@@ -49,7 +47,6 @@ class NewRestaurantViewController: UIViewController {
 
 extension NewRestaurantViewController: UITextFieldDelegate {
     
- 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
