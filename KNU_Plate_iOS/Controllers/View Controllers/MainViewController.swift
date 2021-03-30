@@ -2,46 +2,41 @@ import UIKit
 import SnapKit
 
 /// Shows the main screen of the app
-
 class MainViewController: UIViewController {
     
-    //MARK: - Tempview declaration
+    //MARK: - Tempview Declaration
     let tempView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         return view
     }()
     
-    //MARK: - Gate buttons declaration
+    //MARK: - Gate Buttons Declaration
     let northGateButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .gray
         button.tag = 0
         return button
     }()
     
     let mainGateButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .gray
         button.tag = 1
         return button
     }()
     
     let eastGateButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .gray
         button.tag = 2
         return button
     }()
     
     let westGateButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .gray
         button.tag = 3
         return button
     }()
     
-    //MARK: - Gate labels declaration
+    //MARK: - Gate Labels Declaration
     let northGateLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.gateNames[0]
@@ -70,20 +65,38 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    //MARK: - View lifecycle
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // set title of main view
         self.navigationItem.title = "크누플레이트"
         // set backbutton color
-        self.navigationController?.navigationBar.tintColor = UIColor(named: Constants.Color.KNU_Plate_Color)
+        self.navigationController?.navigationBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        setUpAllButtons()
         setUpView()
         setButtonTarget()
     }
 }
 
-//MARK: - Basic UI set up
+//MARK: - Basic UI Set Up
 extension MainViewController {
+    /// Set up all main button
+    func setUpAllButtons() {
+        setUpButton(northGateButton)
+        setUpButton(mainGateButton)
+        setUpButton(eastGateButton)
+        setUpButton(westGateButton)
+    }
+    
+    /// Set up button layout, background color
+    func setUpButton(_ button: UIButton) {
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 15.0
+        button.layer.borderWidth = 5.0
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.masksToBounds = true
+    }
+    
     /// Set up banner, buttons and labels
     func setUpView() {
         // add tempview
@@ -105,6 +118,7 @@ extension MainViewController {
         let safeArea = self.view.safeAreaLayoutGuide
         let itemsPerRow: CGFloat = 2
         let inset: CGFloat = 10
+        let labelInset: CGFloat = 3
         let paddingSpace: CGFloat = inset * (itemsPerRow + 1)
         let availableWidth = safeArea.layoutFrame.width - paddingSpace
         let width: CGFloat = availableWidth / itemsPerRow
@@ -141,16 +155,16 @@ extension MainViewController {
         
         // gate labels snapkit layout
         northGateLabel.snp.makeConstraints { (make) in
-            make.right.bottom.equalToSuperview()
+            make.right.bottom.equalToSuperview().inset(labelInset)
         }
         mainGateLabel.snp.makeConstraints { (make) in
-            make.right.bottom.equalToSuperview()
+            make.right.bottom.equalToSuperview().inset(labelInset)
         }
         eastGateLabel.snp.makeConstraints { (make) in
-            make.right.bottom.equalToSuperview()
+            make.right.bottom.equalToSuperview().inset(labelInset)
         }
         westGateLabel.snp.makeConstraints { (make) in
-            make.right.bottom.equalToSuperview()
+            make.right.bottom.equalToSuperview().inset(labelInset)
         }
     }
     
@@ -163,11 +177,11 @@ extension MainViewController {
     }
 }
 
-//MARK: - Prepare for next view
+//MARK: - Prepare For Next View
 extension MainViewController {
     /// Execute next view controller
     @objc func gateButtonWasTapped(_ sender: UIButton) {
-        guard let nextViewController = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.restaurantCollectionViewController) else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) else {
             fatalError()
         }
         nextViewController.navigationItem.title = Constants.gateNames[sender.tag]
