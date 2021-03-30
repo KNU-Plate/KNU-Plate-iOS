@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lBe-nV-ZZf">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -15,14 +15,14 @@
             <objects>
                 <viewController id="o5g-ui-yQX" customClass="MainViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oTd-5p-K4h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="ktd-cH-wld"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="크누플레이트" id="JGa-8I-VDR"/>
                     <connections>
-                        <segue destination="oYm-XB-IXR" kind="show" identifier="segue1" id="U2L-lh-uLa"/>
+                        <segue destination="JLt-lL-PKX" kind="show" identifier="NotUsingSegue1" id="sAW-d3-gSJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dx8-Os-6WU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -30,31 +30,41 @@
             <point key="canvasLocation" x="3604" y="-606.74662668665667"/>
         </scene>
         <!--Restaurant Collection View Controller-->
-        <scene sceneID="Oik-ys-PF1">
+        <scene sceneID="1Z6-rA-RUP">
             <objects>
-                <viewController storyboardIdentifier="RestaurantCollectionViewController" id="oYm-XB-IXR" customClass="RestaurantCollectionViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UJ9-EG-NfI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <collectionViewController storyboardIdentifier="RestaurantCollectionViewController" id="JLt-lL-PKX" customClass="RestaurantCollectionViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DKV-nU-oOi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="MYg-qq-mD8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="pgi-zg-iF8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BYg-aN-TBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bob-tS-Dvh">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="JLt-lL-PKX" id="boZ-5e-A0a"/>
+                            <outlet property="delegate" destination="JLt-lL-PKX" id="8lj-WS-XHn"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="tgi-cv-PR3"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7ez-qO-GgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4671" y="-607"/>
+            <point key="canvasLocation" x="4551" y="-607"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8GN-R7-e3H">
             <objects>
                 <viewController id="GiH-Vx-qId" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UOo-DN-spt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5e-PE-iyS">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="Title" id="7bj-rG-jw0"/>
@@ -103,7 +113,7 @@
                     <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="OQs-x5-kM5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wDg-wR-isa">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
