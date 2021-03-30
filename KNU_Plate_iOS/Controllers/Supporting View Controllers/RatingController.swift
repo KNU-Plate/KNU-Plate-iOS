@@ -29,19 +29,15 @@ class RatingController: UIStackView {
         let stackSubViews = self.subviews.filter {$0 is UIButton}
         for subView in stackSubViews {
             if let button = subView as? UIButton {
+                
+                let configuration = UIImage.SymbolConfiguration(pointSize: 35.0)
+                button.tintColor = .systemYellow
+                
                 if button.tag > starsRating {
-                    
-                    let configuration = UIImage.SymbolConfiguration(pointSize: 35.0)
                     button.setImage(UIImage(systemName: starsEmptyPicName, withConfiguration: configuration), for: .normal)
-                    button.tintColor = .systemYellow
                     
-                    
-                } else{
-                    
-                    let configuration = UIImage.SymbolConfiguration(pointSize: 35.0)
+                } else {
                     button.setImage(UIImage(systemName: starsFilledPicName, withConfiguration: configuration), for: .normal)
-                    button.tintColor = .systemYellow
-                    
                 }
             }
         }
