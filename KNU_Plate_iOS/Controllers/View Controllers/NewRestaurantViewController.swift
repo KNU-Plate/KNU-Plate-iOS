@@ -96,7 +96,7 @@ extension NewRestaurantViewController {
         
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.doneButtonAction))
         toolBar.items = [doneButton]
-        toolBar.tintColor = UIColor(named: Constants.Color.KNU_Plate_Color)
+        toolBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
         
         restaurantNameTextField.inputAccessoryView = toolBar
         reviewTextView.inputAccessoryView = toolBar
