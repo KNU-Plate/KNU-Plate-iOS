@@ -4,30 +4,55 @@ import SnapKit
 private let reuseIdentifier = "Cell"
 
 /// Shows restaurant list according to gate
-class RestaurantCollectionViewController: UICollectionViewController {
+class RestaurantCollectionViewController: UIViewController {
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     private let itemsPerRow: CGFloat = 2
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }()
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(collectionView)
+        setupCollectionView()
+        setCollectionViewLayout()
+    }
+}
+//MARK: - Basic Set Up
+extension RestaurantCollectionViewController {
+    func setupCollectionView() {
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
         self.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.backgroundColor = .white
+        self.collectionView.alwaysBounceVertical = true
     }
     
-    //MARK: - UICollectionViewDataSource
+    func setCollectionViewLayout() {
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+}
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//MARK: - UICollectionViewDataSource
+extension RestaurantCollectionViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 7
+        return 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RestaurantCollectionViewCell else {
             fatalError("fail to cast cell as RestaurantCollectionViewCell")
         }
@@ -40,37 +65,38 @@ class RestaurantCollectionViewController: UICollectionViewController {
         return cell
     }
 
-    // MARK: - UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 }
+
+// MARK: - UICollectionViewDelegate
+
+/*
+// Uncomment this method to specify if the specified item should be highlighted during tracking
+override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+    return true
+}
+*/
+
+/*
+// Uncomment this method to specify if the specified item should be selected
+override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    return true
+}
+*/
+
+/*
+// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+    return false
+}
+
+override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    return false
+}
+
+override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+
+}
+*/
 
 //MARK: - Collection View Flow Layout Delegate
 extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout {
