@@ -16,9 +16,8 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let ratingStackView: JinRatingController = {
-        let stackView = JinRatingController()
-        stackView.disableAllButton()
+    let ratingStackView: RatingStackView = {
+        let stackView = RatingStackView()
         return stackView
     }()
     

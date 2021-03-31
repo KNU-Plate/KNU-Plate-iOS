@@ -10,7 +10,7 @@
 		3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F4531260B8866008E8AA7 /* MainViewController.swift */; };
 		3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F4537260B88B3008E8AA7 /* Main.storyboard */; };
 		3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */; };
-		3C2DDBDF2611EB940075F25E /* JinRatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDE2611EB940075F25E /* JinRatingController.swift */; };
+		3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B2BD326143C9900CC010F /* RatingStackView.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
@@ -32,7 +32,7 @@
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
-		3C2DDBDE2611EB940075F25E /* JinRatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JinRatingController.swift; sourceTree = "<group>"; };
+		3C9B2BD326143C9900CC010F /* RatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStackView.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
@@ -68,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */,
+				3C9B2BD326143C9900CC010F /* RatingStackView.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -104,7 +105,6 @@
 			children = (
 				7CD74B79260B209300D05B84 /* AlertManager.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
-				3C2DDBDE2611EB940075F25E /* JinRatingController.swift */,
 			);
 			path = "Supporting View Controllers";
 			sourceTree = "<group>";
@@ -303,7 +303,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C2DDBDF2611EB940075F25E /* JinRatingController.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
@@ -315,6 +314,7 @@
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
 				3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */,
+				3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
