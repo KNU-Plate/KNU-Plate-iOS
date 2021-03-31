@@ -42,9 +42,9 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     // make corner round
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.cornerRadius = 15.0
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.cornerRadius = Constants.Layer.cornerRadius
+        self.layer.borderWidth = Constants.Layer.borderWidth
+        self.layer.borderColor = Constants.Layer.borderColor
         self.layer.masksToBounds = true
     }
     

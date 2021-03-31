@@ -8,8 +8,9 @@ class MainViewController: UIViewController {
     let tempView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderWidth = Constants.Layer.borderWidth
+        view.layer.borderColor = Constants.Layer.borderColor
+        view.layer.cornerRadius = Constants.Layer.cornerRadius
         return view
     }()
     
@@ -93,9 +94,9 @@ extension MainViewController {
     /// Set up button layout, background color
     func setUpButton(_ button: UIButton) {
         button.backgroundColor = .white
-        button.layer.cornerRadius = 15.0
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.cornerRadius = Constants.Layer.cornerRadius
+        button.layer.borderWidth = Constants.Layer.borderWidth
+        button.layer.borderColor = Constants.Layer.borderColor
         button.layer.masksToBounds = true
     }
     
@@ -127,7 +128,7 @@ extension MainViewController {
         
         // tempview snapkit layout
         tempView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(safeArea)
+            make.top.left.right.equalTo(safeArea).inset(inset)
             make.bottom.equalTo(northGateButton.snp.top).offset(-inset)
         }
         
