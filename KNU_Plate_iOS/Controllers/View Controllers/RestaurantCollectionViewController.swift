@@ -5,7 +5,7 @@ private let reuseIdentifier = "Cell"
 
 /// Shows restaurant list according to gate
 class RestaurantCollectionViewController: UIViewController {
-    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+    private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 2
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -49,7 +49,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return 7
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -7,6 +7,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -19,6 +20,13 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     let ratingStackView: RatingStackView = {
         let stackView = RatingStackView()
         return stackView
+    }()
+    
+    let likeButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        button.setImage(UIImage(named: "likeButton"), for: .normal)
+        return button
     }()
     
     //MARK: - Initialization Of The Cell
@@ -35,8 +43,8 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = 15.0
-        self.layer.borderWidth = 5.0
-        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.masksToBounds = true
     }
     
@@ -44,26 +52,39 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     /// Add views, autolayout using SnapKit and etc
     func setCell() {
         let inset: CGFloat = 3
-        self.backgroundColor = .lightGray
+        let imageViewHeight: CGFloat = self.frame.height*(0.7/Constants.heightPerWidthRestaurantCell)
+        let ratingStackViewWidth: CGFloat = self.frame.width*(3/5)
+        let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
+        
+        self.backgroundColor = .white
         self.addSubview(imageView)
         self.addSubview(nameLabel)
         self.addSubview(ratingStackView)
+        self.addSubview(likeButton)
         
-        imageView.backgroundColor = .lightGray
         imageView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.frame.height*(0.8/Constants.heightPerWidthRestaurantCell))
+            make.height.equalTo(imageViewHeight)
             make.top.left.right.equalToSuperview().inset(inset)
         }
         
         nameLabel.snp.makeConstraints { (make) in
+            make.height.equalTo(nameLabelHeight)
             make.top.equalTo(imageView.snp.bottom).offset(inset*2)
             make.left.right.equalToSuperview().inset(inset)
         }
         
         ratingStackView.snp.makeConstraints { (make) in
-            make.width.equalTo(self.frame.width/2)
+            make.width.equalTo(ratingStackViewWidth)
             make.top.equalTo(nameLabel.snp.bottom).offset(inset)
-            make.left.bottom.equalToSuperview().inset(inset)
+            make.left.equalToSuperview().inset(inset)
+            make.bottom.equalToSuperview().inset(inset*2)
+        }
+        
+        likeButton.snp.makeConstraints { (make) in
+            make.width.equalTo(likeButton.snp.height)
+            make.top.equalTo(nameLabel.snp.bottom).offset(inset/2)
+            make.right.equalToSuperview().inset(inset*2)
+            make.bottom.equalToSuperview().inset(inset*2)
         }
     }
 }

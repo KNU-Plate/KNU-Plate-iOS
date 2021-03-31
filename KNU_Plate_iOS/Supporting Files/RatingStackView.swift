@@ -14,7 +14,7 @@ class RatingStackView: UIStackView {
         for _ in 0..<5 {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
-            imageView.tintColor = .systemYellow
+            imageView.tintColor = UIColor(named: Constants.Color.appDefaultColor)
             imageView.image = UIImage(systemName: starsEmptyPicName)
             self.addArrangedSubview(imageView)
             self.starImages.append(imageView)

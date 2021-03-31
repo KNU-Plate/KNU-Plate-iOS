@@ -7,7 +7,9 @@ class MainViewController: UIViewController {
     //MARK: - Tempview Declaration
     let tempView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.lightGray.cgColor
         return view
     }()
     
@@ -90,10 +92,10 @@ extension MainViewController {
     
     /// Set up button layout, background color
     func setUpButton(_ button: UIButton) {
-        button.backgroundColor = .gray
+        button.backgroundColor = .white
         button.layer.cornerRadius = 15.0
-        button.layer.borderWidth = 5.0
-        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.masksToBounds = true
     }
     
@@ -118,7 +120,7 @@ extension MainViewController {
         let safeArea = self.view.safeAreaLayoutGuide
         let itemsPerRow: CGFloat = 2
         let inset: CGFloat = 10
-        let labelInset: CGFloat = 3
+        let labelInset: CGFloat = 5
         let paddingSpace: CGFloat = inset * (itemsPerRow + 1)
         let availableWidth = safeArea.layoutFrame.width - paddingSpace
         let width: CGFloat = availableWidth / itemsPerRow
