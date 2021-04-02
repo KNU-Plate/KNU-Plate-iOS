@@ -39,12 +39,10 @@ extension RestaurantCollectionViewController {
 }
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -53,7 +51,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RestaurantCollectionViewCell else {
-            fatalError("fail to cast cell as RestaurantCollectionViewCell")
+            fatalError("fail to dequeue cell or cast cell as RestaurantCollectionViewCell")
         }
     
         // Configure the cell
@@ -67,13 +65,25 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 }
 // MARK: - UICollectionViewDelegate
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
+    // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantViewController) else {
+            fatalError("fail to instantiate view controller")
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else {
+            fatalError("fail to get cell for indexpath or cast cell as RestaurantCollectionViewCell")
+        }
+        nextViewController.navigationItem.title = cell.nameLabel.text
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
+    
+    // cell deselected
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deselected, indexPath: \(indexPath.item)")
     }
+    
     // touch animation when cell is highlighted
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highligted, indexPath: \(indexPath.item)")
@@ -83,6 +93,7 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
             }
         }
     }
+    
     // touch animation when cell is unhighlighted
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         print("Unhighlited, indexPath: \(indexPath.item)")

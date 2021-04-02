@@ -73,6 +73,11 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // set title of main view
         self.navigationItem.title = "크누플레이트"
+        // set title color
+        if var textAttributes = navigationController?.navigationBar.titleTextAttributes {
+            textAttributes[NSAttributedString.Key.foregroundColor] = UIColor(named: Constants.Color.appDefaultColor)
+            navigationController?.navigationBar.titleTextAttributes = textAttributes
+        }
         // set backbutton color
         self.navigationController?.navigationBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
         setUpAllButtons()
