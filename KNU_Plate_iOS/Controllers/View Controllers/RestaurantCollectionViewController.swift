@@ -88,7 +88,13 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
         print("Unhighlited, indexPath: \(indexPath.item)")
         UIView.animate(withDuration: 0.2) {
             if let cell = collectionView.cellForItem(at: indexPath) {
-                cell.transform = .identity
+                cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            }
+        } completion: { _ in
+            UIView.animate(withDuration: 0.2) {
+                if let cell = collectionView.cellForItem(at: indexPath) {
+                    cell.transform = .identity
+                }
             }
         }
     }

@@ -25,9 +25,10 @@ extension UIButton {
         animate {
             sender.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         } completion: { _ in
-            sender.transform = .identity
+            self.animate {
+                sender.transform = .identity
+            }
         }
-
     }
     
     func animate(reaction: @escaping () -> Void, completion: ((Bool) -> Void)? = nil) {

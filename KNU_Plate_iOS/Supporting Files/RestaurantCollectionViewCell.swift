@@ -26,6 +26,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.tintColor = UIColor(named: Constants.Color.appDefaultColor)
         button.setImage(UIImage(named: "likeButton"), for: .normal)
+        button.addBounceReaction()
         return button
     }()
     
