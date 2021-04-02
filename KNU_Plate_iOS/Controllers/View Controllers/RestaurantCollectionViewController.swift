@@ -69,6 +69,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("deselected, indexPath: \(indexPath.item)")
@@ -79,7 +80,6 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
         UIView.animate(withDuration: 0.2) {
             if let cell = collectionView.cellForItem(at: indexPath) {
                 cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }
         }
     }

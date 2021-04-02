@@ -11,7 +11,6 @@ extension UIButton {
     @objc func touchDown(_ sender: UIButton) {
         animate {
             sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
     }
     
@@ -24,6 +23,7 @@ extension UIButton {
     @objc func touchUpSucceeded(_ sender: UIButton) {
         animate {
             sender.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         } completion: { _ in
             self.animate {
                 sender.transform = .identity
