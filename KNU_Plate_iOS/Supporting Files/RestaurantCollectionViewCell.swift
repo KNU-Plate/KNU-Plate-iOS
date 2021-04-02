@@ -56,7 +56,6 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         let ratingStackViewWidth: CGFloat = self.frame.width*(3/5)
         let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
         
-        self.backgroundColor = .white
         self.addSubview(imageView)
         self.addSubview(nameLabel)
         self.addSubview(ratingStackView)
