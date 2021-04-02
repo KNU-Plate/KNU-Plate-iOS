@@ -37,7 +37,6 @@ extension RestaurantCollectionViewController {
         }
     }
 }
-
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
     
@@ -66,38 +65,34 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
     }
 
 }
-
 // MARK: - UICollectionViewDelegate
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-    return true
+extension RestaurantCollectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected, indexPath: \(indexPath.item)")
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("deselected, indexPath: \(indexPath.item)")
+    }
+    // touch animation when cell is highlighted
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("Highligted, indexPath: \(indexPath.item)")
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            }
+        }
+    }
+    // touch animation when cell is unhighlighted
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        print("Unhighlited, indexPath: \(indexPath.item)")
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                cell.transform = .identity
+            }
+        }
+    }
 }
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-    return true
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-    return false
-}
-
-override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-    return false
-}
-
-override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-
-}
-*/
-
 //MARK: - Collection View Flow Layout Delegate
 extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

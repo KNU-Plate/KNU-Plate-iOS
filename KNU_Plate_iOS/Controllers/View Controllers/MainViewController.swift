@@ -91,13 +91,17 @@ extension MainViewController {
         setUpButton(westGateButton)
     }
     
-    /// Set up button layout, background color
+    /// Set up button layer, background color and touch reaction
     func setUpButton(_ button: UIButton) {
+        // background color
         button.backgroundColor = .white
+        // layer
         button.layer.cornerRadius = Constants.Layer.cornerRadius
         button.layer.borderWidth = Constants.Layer.borderWidth
         button.layer.borderColor = Constants.Layer.borderColor
         button.layer.masksToBounds = true
+        // touch reaction
+        button.addBounceReaction()
     }
     
     /// Set up banner, buttons and labels
