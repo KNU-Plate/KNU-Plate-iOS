@@ -8,6 +8,7 @@ struct Constants {
     
     struct StoryboardID {
         static let restaurantCollectionViewController = "RestaurantCollectionViewController"
+        static let restaurantViewController = "RestaurantViewController"
     }
     
     struct Layer {
