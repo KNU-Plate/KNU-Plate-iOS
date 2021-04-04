@@ -1,6 +1,8 @@
 import UIKit
 import SnapKit
 
+private let heightPerWidthCell: CGFloat = 1.1
+
 /// Cell of the RestaurantCollectionViewController
 class RestaurantCollectionViewCell: UICollectionViewCell {
     //MARK: - Declaration Of Views
@@ -22,10 +24,11 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let likeButton: UIButton = {
+    let favoriteButton: UIButton = {
         let button = UIButton()
+        button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        button.setImage(UIImage(named: "likeButton"), for: .normal)
+        button.setImage(UIImage(named: "favorite"), for: .normal)
         button.addBounceReaction()
         return button
     }()
@@ -53,14 +56,14 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     /// Add views, autolayout using SnapKit and etc
     func setCell() {
         let inset: CGFloat = 3
-        let imageViewHeight: CGFloat = self.frame.height*(0.7/Constants.heightPerWidthRestaurantCell)
+        let imageViewHeight: CGFloat = self.frame.height*(0.7/heightPerWidthCell)
         let ratingStackViewWidth: CGFloat = self.frame.width*(3/5)
         let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
         
         self.addSubview(imageView)
         self.addSubview(nameLabel)
         self.addSubview(ratingStackView)
-        self.addSubview(likeButton)
+        self.addSubview(favoriteButton)
         
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(imageViewHeight)
@@ -80,8 +83,8 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview().inset(inset*2)
         }
         
-        likeButton.snp.makeConstraints { (make) in
-            make.width.equalTo(likeButton.snp.height)
+        favoriteButton.snp.makeConstraints { (make) in
+            make.width.equalTo(favoriteButton.snp.height)
             make.top.equalTo(nameLabel.snp.bottom).offset(inset/2)
             make.right.equalToSuperview().inset(inset*2)
             make.bottom.equalToSuperview().inset(inset*2)

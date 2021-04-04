@@ -3,8 +3,7 @@ import UIKit
 /// Shows stars rating using ImageView
 class RatingStackView: UIStackView {
     var starImages: [UIImageView] = []
-    let starsEmptyPicName = "star"                  // Empty star name (SF Symbol)
-    let starsFilledPicName = "star.fill"            // Filled star name (SF Symbol)
+    let starPicName = "star rating"            // Filled star name
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -15,7 +14,6 @@ class RatingStackView: UIStackView {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             imageView.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-            imageView.image = UIImage(systemName: starsEmptyPicName)
             self.addArrangedSubview(imageView)
             self.starImages.append(imageView)
         }
@@ -28,10 +26,8 @@ class RatingStackView: UIStackView {
     /// Set starts rating
     func setStarsRating(rating: Int){
         for i in 0..<5 {
-            if i+1 > rating {
-                starImages[i].image = UIImage(systemName: starsEmptyPicName)
-            } else{
-                starImages[i].image = UIImage(systemName: starsFilledPicName)
+            if i+1 <= rating {
+                starImages[i].image = UIImage(named: starPicName)
             }
         }
     }
