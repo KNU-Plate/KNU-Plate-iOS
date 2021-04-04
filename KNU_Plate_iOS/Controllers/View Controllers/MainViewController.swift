@@ -72,7 +72,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // set title of main view
-        self.navigationItem.title = "크누플레이트"
+        self.navigationItem.title = "크슐랭가이드"
         // set title color
         if var textAttributes = navigationController?.navigationBar.titleTextAttributes {
             textAttributes[NSAttributedString.Key.foregroundColor] = UIColor(named: Constants.Color.appDefaultColor)

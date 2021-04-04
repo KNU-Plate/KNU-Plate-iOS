@@ -75,9 +75,6 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5e-PE-iyS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <navigationItem title="Title" id="7bj-rG-jw0"/>
-                                </items>
                             </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zpb-rZ-CLM"/>
@@ -88,11 +85,27 @@
                             <constraint firstItem="X5e-PE-iyS" firstAttribute="leading" secondItem="zpb-rZ-CLM" secondAttribute="leading" id="rbS-MY-c4L"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="ZXn-nE-q07"/>
+                    <tabBarItem key="tabBarItem" title="" image="favorite tab bar icon" id="ZXn-nE-q07"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeF-i4-v1a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664.8000000000002" y="116.49175412293854"/>
+            <point key="canvasLocation" x="2665" y="147"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="z68-we-k5N">
+            <objects>
+                <viewController id="NRn-iN-Yc0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ib2-su-pfl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Vz7-lh-1K0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="my page tab bar icon" id="AaV-h7-lvx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5fM-70-oqp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2665" y="992"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="YL3-xw-up6">
@@ -109,6 +122,7 @@
                     <connections>
                         <segue destination="kXd-ei-ZHL" kind="relationship" relationship="viewControllers" id="EHm-jx-xBh"/>
                         <segue destination="GiH-Vx-qId" kind="relationship" relationship="viewControllers" id="8ZI-bF-LYf"/>
+                        <segue destination="NRn-iN-Yc0" kind="relationship" relationship="viewControllers" id="l93-f3-f8p"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OhO-Pv-S81" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,7 +133,7 @@
         <scene sceneID="8d9-I0-7Mm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kXd-ei-ZHL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="OQs-x5-kM5"/>
+                    <tabBarItem key="tabBarItem" title="" image="home tab bar icon" id="OQs-x5-kM5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wDg-wR-isa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -143,8 +157,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="list.bullet" catalog="system" width="128" height="88"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="favorite tab bar icon" width="46" height="46"/>
+        <image name="home tab bar icon" width="42.5" height="42.5"/>
+        <image name="my page tab bar icon" width="42.5" height="42.5"/>
         <namedColor name="KNU_Plate Color">
             <color red="0.93725490196078431" green="0.30980392156862746" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

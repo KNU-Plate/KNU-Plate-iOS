@@ -1,8 +1,6 @@
 import UIKit
 import SnapKit
 
-private let heightPerWidthCell: CGFloat = 1.1
-
 /// Cell of the RestaurantCollectionViewController
 class RestaurantCollectionViewCell: UICollectionViewCell {
     //MARK: - Declaration Of Views
@@ -56,7 +54,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     /// Add views, autolayout using SnapKit and etc
     func setCell() {
         let inset: CGFloat = 3
-        let imageViewHeight: CGFloat = self.frame.height*(0.7/heightPerWidthCell)
+        let imageViewHeight: CGFloat = self.frame.height*(0.7/Constants.heightPerWidthRestaurantCell)
         let ratingStackViewWidth: CGFloat = self.frame.width*(3/5)
         let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
         
