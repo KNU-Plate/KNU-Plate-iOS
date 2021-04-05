@@ -15,6 +15,8 @@
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
+		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
+		7C311429261B136700392742 /* UserPickedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */; };
@@ -38,6 +40,8 @@
 		3C9B2BD326143C9900CC010F /* RatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStackView.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
+		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
+		7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurant.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 				3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */,
 				3C9B2BD326143C9900CC010F /* RatingStackView.swift */,
 				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
+				7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				3CECC1842617679800C971C5 /* RestaurantViewController.swift */,
 				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
+				7C311423261AE37200392742 /* NewReviewViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
+				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
+				7C311429261B136700392742 /* UserPickedImageCollectionViewCell.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				7CE4D7BA2609B2AC002FCC2D /* ExampleWebService.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
@@ -464,7 +472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Plate_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,7 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				INFOPLIST_FILE = KNU_Plate_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
