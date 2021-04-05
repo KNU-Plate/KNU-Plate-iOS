@@ -9,7 +9,6 @@ class WelcomeViewController: UIViewController {
         label.text = "크슐랭가이드"
         label.font = UIFont.systemFont(ofSize: 45)
         label.textColor = UIColor(named: Constants.Color.appDefaultColor)
-        label.sizeToFit()
         return label
     }()
     
@@ -30,7 +29,6 @@ class WelcomeViewController: UIViewController {
         button.addBounceReactionWithoutFeedback()
         return button
     }()
-    
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -42,7 +40,7 @@ class WelcomeViewController: UIViewController {
 
 //MARK: - Basic UI Set Up
 extension WelcomeViewController {
-    /// Set up labels
+    /// Set up views
     func setupView() {
         // local constants
         let loginButtonWidth: CGFloat = 200
@@ -60,13 +58,13 @@ extension WelcomeViewController {
         }
         
         // loginButton layer
-        loginButton.layer.cornerRadius = 0.5 * loginButtonHeight
+        loginButton.layer.cornerRadius = 0.5*loginButtonHeight
         
         // loginButton snapkit layout
         loginButton.snp.makeConstraints { (make) in
             make.width.equalTo(loginButtonWidth)
             make.height.equalTo(loginButtonHeight)
-            make.centerX.equalTo(self.view.snp.centerX)
+            make.centerX.equalToSuperview()
             make.centerY.equalTo(self.view.snp.bottom).multipliedBy(0.8)
         }
         
