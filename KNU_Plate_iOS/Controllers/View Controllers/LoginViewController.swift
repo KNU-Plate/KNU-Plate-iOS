@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
     let backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
+        button.setImage(UIImage(systemName: "arrow.backward"), for: .highlighted)
         button.tintColor = .white
         button.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
         button.addBounceReactionWithoutFeedback()
