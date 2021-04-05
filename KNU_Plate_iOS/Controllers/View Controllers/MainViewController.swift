@@ -80,8 +80,8 @@ class MainViewController: UIViewController {
         }
         // set backbutton color
         self.navigationController?.navigationBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        setUpAllButtons()
-        setUpView()
+        setupAllButtons()
+        setupView()
         setButtonTarget()
     }
 }
@@ -89,15 +89,15 @@ class MainViewController: UIViewController {
 //MARK: - Basic UI Set Up
 extension MainViewController {
     /// Set up all main button
-    func setUpAllButtons() {
-        setUpButton(northGateButton)
-        setUpButton(mainGateButton)
-        setUpButton(eastGateButton)
-        setUpButton(westGateButton)
+    func setupAllButtons() {
+        setupButton(northGateButton)
+        setupButton(mainGateButton)
+        setupButton(eastGateButton)
+        setupButton(westGateButton)
     }
     
     /// Set up button layer, background color and touch reaction
-    func setUpButton(_ button: UIButton) {
+    func setupButton(_ button: UIButton) {
         // background color
         button.backgroundColor = .white
         // layer
@@ -110,7 +110,7 @@ extension MainViewController {
     }
     
     /// Set up banner, buttons and labels
-    func setUpView() {
+    func setupView() {
         // add tempview
         self.view.addSubview(tempView)
         
@@ -180,7 +180,7 @@ extension MainViewController {
         }
     }
     
-    /// Set target of the button
+    /// Set target of the buttons
     func setButtonTarget() {
         northGateButton.addTarget(self, action: #selector(gateButtonWasTapped), for: .touchUpInside)
         mainGateButton.addTarget(self, action: #selector(gateButtonWasTapped), for: .touchUpInside)

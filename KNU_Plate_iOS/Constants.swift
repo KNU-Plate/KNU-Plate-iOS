@@ -9,6 +9,10 @@ struct Constants {
     struct StoryboardID {
         static let restaurantCollectionViewController = "RestaurantCollectionViewController"
         static let restaurantViewController = "RestaurantViewController"
+        static let welcomeViewController = "WelcomeViewController"
+        static let loginViewController = "LoginViewController"
+        static let registerViewController = "RegisterViewController"
+        static let verifyEmailViewController = "VerifyEmailViewController"
     }
     
     struct Layer {
