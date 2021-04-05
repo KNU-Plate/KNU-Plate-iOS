@@ -12,6 +12,10 @@
 		3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */; };
 		3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */; };
 		3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B2BD326143C9900CC010F /* RatingStackView.swift */; };
+		3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */; };
+		3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */; };
+		3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */; };
+		3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
@@ -36,6 +40,10 @@
 		3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TouchReaction.swift"; sourceTree = "<group>"; };
 		3C9B2BD326143C9900CC010F /* RatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStackView.swift; sourceTree = "<group>"; };
+		3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
@@ -102,6 +110,10 @@
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				3CECC1842617679800C971C5 /* RestaurantViewController.swift */,
 				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
+				3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */,
+				3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */,
+				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
+				3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -310,17 +322,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
+				3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
+				3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */,
 				7CE4D7BA2609B2AC002FCC2D /* ExampleWebService.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
+				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
 				3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */,
+				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */,
 				3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
