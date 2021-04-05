@@ -3,7 +3,7 @@ import UIKit
 
 struct Constants {
     struct Color {
-        static let appDefaultColor = "appDefaultColor"
+        static let appDefaultColor = "AppDefaultColor"
     }
     
     struct StoryboardID {
