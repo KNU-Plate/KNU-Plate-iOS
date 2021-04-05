@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
     
     let stackView: TextFieldStackView = {
         let stackView = TextFieldStackView()
+        stackView.addTextField(placeholder: "아이디 입력", isSecureText: false)
+        stackView.addTextField(placeholder: "비밀번호 입력", isSecureText: true)
         return stackView
     }()
     
@@ -36,6 +38,7 @@ class LoginViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTextFields()
         setupView()
         setButtonTarget()
     }
@@ -43,6 +46,14 @@ class LoginViewController: UIViewController {
 
 //MARK: - Basic UI Set Up
 extension LoginViewController {
+    /// Set up text field delegate
+    func setupTextFields() {
+        let textField1 = stackView.arrangedSubviews[0] as! UITextField
+        let textField2 = stackView.arrangedSubviews[1] as! UITextField
+        textField1.delegate = self
+        textField2.delegate = self
+    }
+    
     /// Set up views
     func setupView() {
         // local constants
@@ -56,10 +67,6 @@ extension LoginViewController {
         self.view.addSubview(stackView)
         self.view.addSubview(loginButton)
         self.view.addSubview(backButton)
-        
-        // add textfield on stackview
-        stackView.addTextField(placeholder: "아이디 입력", isSecureText: false)
-        stackView.addTextField(placeholder: "비밀번호 입력", isSecureText: true)
         
         // titleLabel snapkit layout
         titleLabel.snp.makeConstraints { (make) in
@@ -128,5 +135,22 @@ extension LoginViewController {
     
     @objc func backButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing: \((textField.text) ?? "Empty")")
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        print("textFieldDidEndEditing: \((textField.text) ?? "Empty")")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn \((textField.text) ?? "Empty")")
+        textField.resignFirstResponder()
+        return true
     }
 }
