@@ -22,10 +22,11 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let likeButton: UIButton = {
+    let favoriteButton: UIButton = {
         let button = UIButton()
+        button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        button.setImage(UIImage(named: "likeButton"), for: .normal)
+        button.setImage(UIImage(named: "favorite"), for: .normal)
         button.addBounceReaction()
         return button
     }()
@@ -60,7 +61,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         self.addSubview(imageView)
         self.addSubview(nameLabel)
         self.addSubview(ratingStackView)
-        self.addSubview(likeButton)
+        self.addSubview(favoriteButton)
         
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(imageViewHeight)
@@ -80,8 +81,8 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview().inset(inset*2)
         }
         
-        likeButton.snp.makeConstraints { (make) in
-            make.width.equalTo(likeButton.snp.height)
+        favoriteButton.snp.makeConstraints { (make) in
+            make.width.equalTo(favoriteButton.snp.height)
             make.top.equalTo(nameLabel.snp.bottom).offset(inset/2)
             make.right.equalToSuperview().inset(inset*2)
             make.bottom.equalToSuperview().inset(inset*2)
