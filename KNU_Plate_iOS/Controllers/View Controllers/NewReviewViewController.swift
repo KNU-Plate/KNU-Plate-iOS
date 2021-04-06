@@ -4,46 +4,87 @@ class NewReviewViewController: UIViewController {
   
     @IBOutlet weak var reviewImageCollectionView: UICollectionView!
     @IBOutlet weak var menuInputTextField: UITextField!
+    @IBOutlet weak var menuInputTableView: UITableView!
     
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
+    
+    private let viewModel: NewReviewViewModel = NewReviewViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reviewImageCollectionView.delegate = self
-        reviewImageCollectionView.dataSource = self
+        initialize()
         
-        setUpView()
-        
-        
-       
     
     }
+    
+
     
     @objc func addMenuButtonPressed() {
-        /// need edit
-        print("pressed")
+        /// 메뉴 개수 제한하는 로직 필요
+    
+        viewModel.addNewMenu()
+        menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
+                                      with: .bottom)
+        self.viewWillLayoutSubviews()
+        
     }
     
     
-    func setUpView() {
+    func initialize() {
+        
+        initializeView()
+        initializeCollectionView()
+        initializeTableView()
+    }
+    
+    func initializeTableView() {
+        
+        menuInputTableView.delegate = self
+        menuInputTableView.dataSource = self
+        
+        let menuNib = UINib(nibName: Constants.XIB.newMenuTableViewCell, bundle: nil)
+        let cellIdentifier = Constants.CellIdentifier.newMenuTableViewCell
+        menuInputTableView.register(menuNib, forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    func initializeCollectionView() {
+        
+        reviewImageCollectionView.delegate = self
+        reviewImageCollectionView.dataSource = self
+    }
+    
+    func initializeView() {
         
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
         menuInputTextField.layer.borderColor = UIColor.black.cgColor
         
-        menuInputTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        menuInputTextField.leftView = UIView(frame: CGRect(x: 0,
+                                                           y: 0,
+                                                           width: 10,
+                                                           height: 0))
         menuInputTextField.leftViewMode = .always
             
+        let addMenuButton = UIButton(frame: CGRect(x: 0,
+                                                   y: 0,
+                                                   width: 25,
+                                                   height: 25))
         
-        let addMenuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        addMenuButton.setImage(UIImage(named: "plus button"), for: .normal)
+        addMenuButton.setImage(UIImage(named: "plus button"),
+                               for: .normal)
         addMenuButton.isUserInteractionEnabled = true
         addMenuButton.contentMode = .scaleAspectFit
-        addMenuButton.addTarget(self, action: #selector(addMenuButtonPressed), for: .touchUpInside)
+        addMenuButton.addTarget(self,
+                                action: #selector(addMenuButtonPressed),
+                                for: .touchUpInside)
         
-        
-        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
+        let rightView = UIView(frame: CGRect(x: 0,
+                                             y: 0,
+                                             width: 30,
+                                             height: 25))
         rightView.addSubview(addMenuButton)
         menuInputTextField.rightView = rightView
         menuInputTextField.rightViewMode = .always
@@ -51,6 +92,8 @@ class NewReviewViewController: UIViewController {
 
 
 }
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -79,6 +122,44 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         
     }
     
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.menu.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.newMenuTableViewCell, for: indexPath) as? NewMenuTableViewCell else {
+            fatalError("Failed to dequeue cell for NewMenuTableViewCell")
+        }
+        
+        if self.viewModel.menu.count != 0 {
+            
+            //cell.delegate = self
+            cell.menuNameTextField.text = ""
+            cell.oneLineReviewForMenuTextField.text = ""
+            
+            
+        }
+     
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height + 80
+    }
     
     
+    
+
 }
