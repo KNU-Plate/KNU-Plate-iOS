@@ -12,12 +12,12 @@ class RegisterViewController: UIViewController {
         return label
     }()
     
-    let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pick profile pic(black)")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    let profileImageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "pick profile pic(black)"), for: .normal)
+        button.contentMode = .scaleAspectFill
+        button.addBounceReactionWithoutFeedback()
+        return button
     }()
     
     let stackView: TextFieldStackView = {
@@ -52,9 +52,8 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         picker.delegate = self
         setupView()
-        addProfileImageViewTarget()
+        addProfileImageButtonTarget()
         addBackButtonTarget()
-        // Do any additional setup after loading the view.
     }
 }
 //MARK: - Basic UI Set Up
@@ -69,7 +68,7 @@ extension RegisterViewController {
         
         // add label and stack view
         self.view.addSubview(titleLabel)
-        self.view.addSubview(profileImageView)
+        self.view.addSubview(profileImageButton)
         self.view.addSubview(stackView)
         self.view.addSubview(registerButton)
         self.view.addSubview(backButton)
@@ -81,8 +80,8 @@ extension RegisterViewController {
         }
         
         // profileImageView snapkit layout
-        profileImageView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(100)
+        profileImageButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(120)
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(25)
         }
@@ -90,7 +89,7 @@ extension RegisterViewController {
         // stackView snapkit layout
         stackView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(25)
+            make.top.equalTo(profileImageButton.snp.bottom).offset(25)
         }
         
         for i in 0..<4 {
@@ -134,17 +133,15 @@ extension RegisterViewController {
     }
     
     /// Set target of the profileImageView
-    func addProfileImageViewTarget() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
-        profileImageView.addGestureRecognizer(tapGesture)
-        profileImageView.isUserInteractionEnabled = true
+    func addProfileImageButtonTarget() {
+        profileImageButton.addTarget(self, action: #selector(touchToPickPhoto(_:)), for: .touchUpInside)
     }
     
     @objc func backButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func touchToPickPhoto() {
+    @objc func touchToPickPhoto(_ sender: UIButton) {
         let alert = UIAlertController(title: "선택", message: "프로필 사진을 어디서 가져올지 선택해주세요", preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "사진앨범", style: .default) { _ in
             self.openLibrary()
@@ -182,10 +179,10 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            profileImageView.image = image
+            profileImageButton.setImage(image, for: .normal)
             dismiss(animated: true, completion: nil)
         } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            profileImageView.image = image
+            profileImageButton.setImage(image, for: .normal)
             dismiss(animated: true, completion: nil)
         }
     }
