@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 
 class RegisterViewController: UIViewController {
+    
     private let picker = UIImagePickerController()
     
     let titleLabel: UILabel = {

@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 
 class LoginViewController: UIViewController {
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "크슐랭가이드"
