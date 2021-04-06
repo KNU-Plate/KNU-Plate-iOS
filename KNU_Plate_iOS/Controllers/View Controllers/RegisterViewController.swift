@@ -49,16 +49,27 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        setupTextFieldDelegate()
         setupView()
         addProfileImageButtonTarget()
         addBackButtonTarget()
     }
 }
+
 //MARK: - Basic UI Set Up
 extension RegisterViewController {
+    /// Set up text field delegate
+    func setupTextFieldDelegate() {
+        for i in 0..<4 {
+            let textField = stackView.arrangedSubviews[i] as! UITextField
+            textField.delegate = self
+        }
+    }
+    
     /// Set up views
     func setupView() {
         // local constants
@@ -161,6 +172,7 @@ extension RegisterViewController {
     }
 }
 
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func openLibrary() {
         picker.sourceType = .photoLibrary
@@ -187,4 +199,9 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             dismiss(animated: true, completion: nil)
         }
     }
+}
+
+//MARK: - UITextFieldDelegate
+extension RegisterViewController: UITextFieldDelegate {
+    
 }
