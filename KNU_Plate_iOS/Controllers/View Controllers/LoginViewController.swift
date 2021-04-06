@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextFields()
+        setupTextFieldDelegate()
         setupView()
         setButtonTarget()
     }
@@ -49,11 +49,11 @@ class LoginViewController: UIViewController {
 //MARK: - Basic UI Set Up
 extension LoginViewController {
     /// Set up text field delegate
-    func setupTextFields() {
-        let textField1 = stackView.arrangedSubviews[0] as! UITextField
-        let textField2 = stackView.arrangedSubviews[1] as! UITextField
-        textField1.delegate = self
-        textField2.delegate = self
+    func setupTextFieldDelegate() {
+        for i in 0..<2 {
+            let textField = stackView.arrangedSubviews[i] as! UITextField
+            textField.delegate = self
+        }
     }
     
     /// Set up views
