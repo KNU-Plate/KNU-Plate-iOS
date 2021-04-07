@@ -91,21 +91,21 @@ extension NewRestaurantViewController {
 
     func addDoneButtonOnKeyboard() {
         
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.doneButtonAction))
-        toolBar.items = [doneButton]
-        toolBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        
-        restaurantNameTextField.inputAccessoryView = toolBar
-        reviewTextView.inputAccessoryView = toolBar
-    }
+//        let toolBar = UIToolbar()
+//        toolBar.sizeToFit()
+//
+//        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.doneButtonAction))
+//        toolBar.items = [doneButton]
+//        toolBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+//
+//        restaurantNameTextField.inputAccessoryView = toolBar
+//        reviewTextView.inputAccessoryView = toolBar
+//    }
     
-    @objc func doneButtonAction() {
-        self.view.endEditing(true)
+//    @objc func doneButtonAction() {
+//        self.view.endEditing(true)
+//    }
     }
-    
 }
 
 
