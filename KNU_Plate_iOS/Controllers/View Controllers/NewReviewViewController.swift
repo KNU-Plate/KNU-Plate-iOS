@@ -6,6 +6,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var reviewImageCollectionView: UICollectionView!
     @IBOutlet weak var menuInputTextField: UITextField!
     @IBOutlet weak var menuInputTableView: UITableView!
+    @IBOutlet weak var reviewTextView: UITextView!
     
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
@@ -99,6 +100,7 @@ class NewReviewViewController: UIViewController {
         initializeView()
         initializeCollectionView()
         initializeTableView()
+        initializeTextView()
     }
     
     func initializeTableView() {
@@ -115,6 +117,13 @@ class NewReviewViewController: UIViewController {
         
         reviewImageCollectionView.delegate = self
         reviewImageCollectionView.dataSource = self
+    }
+    
+    func initializeTextView() {
+        
+        reviewTextView.delegate = self
+        reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+        reviewTextView.textColor = UIColor.lightGray
     }
     
     func initializeView() {
@@ -161,7 +170,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         /// need edit
-        10
+        5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -217,10 +226,30 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height + 80
+        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height + 30
+    }
+
+}
+
+//MARK: - UITextViewDelegate
+
+extension NewReviewViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+    
+        if textView.text.isEmpty {
+            textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+            textView.textColor = UIColor.lightGray
+        }
     }
     
     
-    
-
 }
