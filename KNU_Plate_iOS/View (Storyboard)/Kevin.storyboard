@@ -410,14 +410,43 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="TW1-UD-IA3" customClass="UserPickedImageCollectionViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="22.5" width="90" height="90"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addFoodImageCell" id="azM-4E-x6w" userLabel="addFoodImageCell" customClass="AddImageButtonCollectionViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="18.5" width="107" height="98"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aHs-z5-EUo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="98"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWT-mL-bU9" userLabel="Add Button">
+                                                                    <rect key="frame" x="5" y="5" width="97" height="88"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="80" id="cYg-6V-1SU"/>
+                                                                        <constraint firstAttribute="width" constant="80" id="ug7-UJ-xUR"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="add button"/>
+                                                                    <connections>
+                                                                        <action selector="pressedAddButton:" destination="qiJ-WK-XVG" eventType="touchUpInside" id="2fs-tI-a6K"/>
+                                                                        <action selector="pressedAddButton:" destination="azM-4E-x6w" eventType="touchUpInside" id="HGh-Xl-4CB"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="iWT-mL-bU9" secondAttribute="bottom" constant="5" id="DGf-N9-44F"/>
+                                                                <constraint firstItem="iWT-mL-bU9" firstAttribute="leading" secondItem="aHs-z5-EUo" secondAttribute="leading" constant="5" id="bGO-pw-5UX"/>
+                                                                <constraint firstAttribute="trailing" secondItem="iWT-mL-bU9" secondAttribute="trailing" constant="5" id="pcP-9P-zxw"/>
+                                                                <constraint firstItem="iWT-mL-bU9" firstAttribute="top" secondItem="aHs-z5-EUo" secondAttribute="top" constant="5" id="poq-dx-6Gr"/>
+                                                            </constraints>
+                                                        </collectionViewCellContentView>
+                                                        <size key="customSize" width="107" height="98"/>
+                                                    </collectionViewCell>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userPickedFoodImageCell" id="TW1-UD-IA3" customClass="UserPickedFoodImageCollectionViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="117" y="22.5" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zww-xz-nCQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add button" translatesAutoresizingMaskIntoConstraints="NO" id="RGL-Ec-gmc">
+                                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RGL-Ec-gmc">
                                                                     <rect key="frame" x="5" y="5" width="80" height="80"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="80" id="2GD-k3-WLb"/>
@@ -447,7 +476,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="v46-F2-JpX" userLabel="Divider Line">
                                                 <rect key="frame" x="0.5" y="293" width="374" height="1"/>
                                             </imageView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="주문한 메뉴를 하나씩 추가해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-SM-yiS">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="주문한 메뉴를 하나씩 추가해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-SM-yiS">
                                                 <rect key="frame" x="7.5" y="345" width="360" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="9eh-6j-UZ3"/>
@@ -488,7 +517,7 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="10" y="557" width="355" height="200"/>
+                                                <rect key="frame" x="15" y="557" width="345" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
@@ -509,7 +538,7 @@
                                             <constraint firstItem="v46-F2-JpX" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="3j9-bP-NII"/>
                                             <constraint firstItem="hPw-SM-yiS" firstAttribute="top" secondItem="cQc-rV-uSJ" secondAttribute="bottom" constant="15" id="4LA-0D-YIl"/>
                                             <constraint firstItem="FGG-vS-9ca" firstAttribute="top" secondItem="hPw-SM-yiS" secondAttribute="bottom" constant="10" id="4VM-XU-Nvy"/>
-                                            <constraint firstItem="gRK-0c-6HT" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="10" id="5Fa-gZ-Jlg"/>
+                                            <constraint firstItem="gRK-0c-6HT" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="15" id="5Fa-gZ-Jlg"/>
                                             <constraint firstItem="sUS-7Z-136" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="5GL-MX-cmP"/>
                                             <constraint firstItem="cQc-rV-uSJ" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="10" id="Efn-ns-ejy"/>
                                             <constraint firstItem="bBl-WA-nha" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="EyG-sH-S0z"/>
@@ -523,7 +552,7 @@
                                             <constraint firstItem="gRK-0c-6HT" firstAttribute="top" secondItem="flM-yg-k18" secondAttribute="bottom" constant="15" id="dHg-yn-f8K"/>
                                             <constraint firstItem="3Hk-u8-0mr" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="10" id="iw1-3y-XP9"/>
                                             <constraint firstItem="duy-ac-iPk" firstAttribute="top" secondItem="3Hk-u8-0mr" secondAttribute="bottom" constant="15" id="l4Q-0y-mLM"/>
-                                            <constraint firstAttribute="trailing" secondItem="gRK-0c-6HT" secondAttribute="trailing" constant="10" id="lAe-gY-fuG"/>
+                                            <constraint firstAttribute="trailing" secondItem="gRK-0c-6HT" secondAttribute="trailing" constant="15" id="lAe-gY-fuG"/>
                                             <constraint firstItem="FGG-vS-9ca" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="10" id="o9o-sZ-1kO"/>
                                             <constraint firstItem="hPw-SM-yiS" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="orY-kq-3fk"/>
                                             <constraint firstItem="duy-ac-iPk" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="qj2-5j-ZfU"/>
@@ -569,6 +598,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9m-id-0PN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="qiJ-WK-XVG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="591.20000000000005" y="1018.2908545727137"/>
         </scene>

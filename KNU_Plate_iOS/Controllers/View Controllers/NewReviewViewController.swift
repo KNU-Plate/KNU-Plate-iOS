@@ -19,7 +19,7 @@ class NewReviewViewController: UIViewController {
         initialize()
         
     
-        testAlamofire()
+        //testAlamofire()
     }
     
     
@@ -72,17 +72,9 @@ class NewReviewViewController: UIViewController {
             }
         }
  
-        
-//        curl -X 'POST' \
-//          'http://52.253.91.116:4100/api/signup' \
-//          -H 'accept: application/json' \
-//          -H 'Content-Type: application/x-www-form-urlencoded' \
-//          -d 'user_name=kevinkim&display_name=kevinkim&password=123456789&mail_address=kevinkim2586%40knu.ac.kr'
+
     }
     
-    
-    
-
     
     @objc func addMenuButtonPressed() {
         /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
@@ -97,7 +89,7 @@ class NewReviewViewController: UIViewController {
     
     func initialize() {
         
-        initializeView()
+        initializeTextField()
         initializeCollectionView()
         initializeTableView()
         initializeTextView()
@@ -124,9 +116,15 @@ class NewReviewViewController: UIViewController {
         reviewTextView.delegate = self
         reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
         reviewTextView.textColor = UIColor.lightGray
+        
+        reviewTextView.layer.cornerRadius = 14.0
+        reviewTextView.clipsToBounds = true
+        reviewTextView.layer.borderWidth = 1
+        reviewTextView.layer.borderColor = UIColor.black.cgColor
+        
     }
     
-    func initializeView() {
+    func initializeTextField() {
         
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
@@ -174,21 +172,30 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        let addImageButtonCellIdentifier = Constants.CellIdentifier.addFoodImageCell
+        let newFoodImageCellIdentifier = Constants.CellIdentifier.newUserPickedFoodImageCell
+        
+        
     
         /// need edit
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserPickedImageCollectionViewCell
+
         
         if indexPath.item == 0 {
-            cell.userPickedImageView.image = UIImage(named: "add button")
-            cell.cancelButtonImage.isHidden = true
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as! AddImageButtonCollectionViewCell
+//            cell.userPickedImageView.image = UIImage(named: "add button")
+//            cell.cancelButtonImage.isHidden = true
+//            cell.cancelButtonImage.isUserInteractionEnabled = true
+            return cell
         }
         else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as! UserPickedFoodImageCollectionViewCell
             cell.userPickedImageView.image = UIImage(named: "chinese food")
+            return cell
         }
         
-        
-        
-        return cell
+
         
     }
     
@@ -250,6 +257,4 @@ extension NewReviewViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
     }
-    
-    
 }

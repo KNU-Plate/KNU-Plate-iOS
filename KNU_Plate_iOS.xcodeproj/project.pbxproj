@@ -22,8 +22,9 @@
 		3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
-		7C311429261B136700392742 /* UserPickedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */; };
+		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
+		7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */; };
@@ -57,8 +58,9 @@
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
-		7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurant.swift; sourceTree = "<group>"; };
@@ -95,11 +97,11 @@
 		3C2DDBE22611FB1C0075F25E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C443226261D921100A0D83F /* UserPickedFoodImageViewCell */,
 				7CE4BA56261C28F8009A4464 /* NewMenuTableViewCell */,
 				3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */,
 				3C9B2BD326143C9900CC010F /* RatingStackView.swift */,
 				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
-				7C311428261B136700392742 /* UserPickedImageCollectionViewCell.swift */,
 				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 			);
@@ -121,6 +123,15 @@
 				ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7C443226261D921100A0D83F /* UserPickedFoodImageViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */,
+				7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */,
+			);
+			path = UserPickedFoodImageViewCell;
 			sourceTree = "<group>";
 		};
 		7CE10470260C446500E18C00 /* View Controllers */ = {
@@ -363,9 +374,10 @@
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
-				7C311429261B136700392742 /* UserPickedImageCollectionViewCell.swift in Sources */,
+				7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */,
+				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
