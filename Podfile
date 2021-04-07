@@ -9,6 +9,6 @@ target 'KNU_Plate_iOS' do
   pod 'SnapKit'
   pod 'Alamofire', '~> 5.2'
   pod 'IQKeyboardManagerSwift'
-  pod 'YPImagePicker'
+
 
 end

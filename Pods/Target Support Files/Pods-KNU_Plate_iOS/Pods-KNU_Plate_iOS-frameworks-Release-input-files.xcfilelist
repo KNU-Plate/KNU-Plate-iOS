@@ -1,7 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
-${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
-${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework
-${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework
