@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class NewReviewViewController: UIViewController {
   
@@ -17,7 +18,68 @@ class NewReviewViewController: UIViewController {
         initialize()
         
     
+        testAlamofire()
     }
+    
+    
+    func testAlamofire() {
+        
+        let baseURL = "http://52.253.91.116:4100/api/signup"
+        let user_name = "alex"
+        let display_name = "alexding"
+        let password = "123456789"
+        let email_address = "alexding@knu.ac.kr"
+        
+        let param: Parameters = [
+        
+            "user_name": user_name,
+            "display_name": display_name,
+            "password": password,
+            "mail_address": email_address
+        ]
+        
+        let headers: HTTPHeaders = [
+        
+            "accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+            
+        ]
+        
+        AF.request(baseURL, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: headers).responseJSON { (response) in
+            
+            switch response.result {
+        
+            case .success:
+                
+                if let result = try! response.result.get() as? [String: Any] {
+                    
+                    print(result)
+                    
+                    let userID = result["user_id"] as? String
+                    let userName = result["user_name"] as? String
+
+                    
+                    print(userID)
+                    print(userName)
+                }
+                
+            case .failure(let error):
+                print(error)
+                return
+                
+                
+            }
+        }
+ 
+        
+//        curl -X 'POST' \
+//          'http://52.253.91.116:4100/api/signup' \
+//          -H 'accept: application/json' \
+//          -H 'Content-Type: application/x-www-form-urlencoded' \
+//          -d 'user_name=kevinkim&display_name=kevinkim&password=123456789&mail_address=kevinkim2586%40knu.ac.kr'
+    }
+    
+    
     
 
     
