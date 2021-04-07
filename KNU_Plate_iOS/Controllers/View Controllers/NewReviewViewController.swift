@@ -121,7 +121,6 @@ class NewReviewViewController: UIViewController {
         reviewTextView.clipsToBounds = true
         reviewTextView.layer.borderWidth = 1
         reviewTextView.layer.borderColor = UIColor.black.cgColor
-        
     }
     
     func initializeTextField() {
@@ -177,20 +176,28 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         let addImageButtonCellIdentifier = Constants.CellIdentifier.addFoodImageCell
         let newFoodImageCellIdentifier = Constants.CellIdentifier.newUserPickedFoodImageCell
         
-        
     
-        /// need edit
+        
+        /// 첫 번째 Cell 은 항상 Add Button
+        if indexPath.item == 0 {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
+                fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
+            }
+            
+            cell.delegate = self
 
         
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as! AddImageButtonCollectionViewCell
-//            cell.userPickedImageView.image = UIImage(named: "add button")
-//            cell.cancelButtonImage.isHidden = true
-//            cell.cancelButtonImage.isUserInteractionEnabled = true
             return cell
         }
+        
+        /// 그 외의 셀은 사용자가 고른 사진  Cell
         else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as! UserPickedFoodImageCollectionViewCell
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
+                fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
+            }
+            
             cell.userPickedImageView.image = UIImage(named: "chinese food")
             return cell
         }
@@ -198,6 +205,17 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
 
         
     }
+    
+}
+
+//MARK: - AddImageDelegate
+
+extension NewReviewViewController: AddImageDelegate {
+    
+    func didPickImagesToUpload(images: [UIImage]) {
+        print("ok")
+    }
+    
     
 }
 
