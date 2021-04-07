@@ -22,7 +22,7 @@ class NewReviewViewController: UIViewController {
 
     
     @objc func addMenuButtonPressed() {
-        /// 메뉴 개수 제한하는 로직 필요
+        /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
     
         viewModel.addNewMenu()
         menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
@@ -106,7 +106,6 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
     
         /// need edit
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserPickedImageCollectionViewCell
-        
         
         if indexPath.item == 0 {
             cell.userPickedImageView.image = UIImage(named: "add button")
