@@ -14,9 +14,14 @@ class RatingController: UIStackView {
         let starButtons = self.subviews.filter{$0 is UIButton}
         var starTag = 1
         for button in starButtons {
+            
             if let button = button as? UIButton {
-                button.setImage(UIImage(named: starsEmptyPicName), for: .normal)
-                button.addTarget(self, action: #selector(self.pressed(sender:)), for: .touchUpInside)
+                
+                button.setImage(UIImage(named: starsEmptyPicName),
+                                for: .normal)
+                button.addTarget(self,
+                                 action: #selector(self.pressed(sender:)),
+                                 for: .touchUpInside)
                 button.tag = starTag
                 starTag = starTag + 1
             }
@@ -25,19 +30,25 @@ class RatingController: UIStackView {
     }
     
     func setStarsRating(rating:Int){
+        
         self.starsRating = rating
         let stackSubViews = self.subviews.filter {$0 is UIButton}
         for subView in stackSubViews {
+            
             if let button = subView as? UIButton {
                 
                 let configuration = UIImage.SymbolConfiguration(pointSize: 35.0)
                 button.tintColor = .systemYellow
                 
                 if button.tag > starsRating {
-                    button.setImage(UIImage(systemName: starsEmptyPicName, withConfiguration: configuration), for: .normal)
+                    button.setImage(UIImage(systemName: starsEmptyPicName,
+                                            withConfiguration: configuration),
+                                    for: .normal)
                     
                 } else {
-                    button.setImage(UIImage(systemName: starsFilledPicName, withConfiguration: configuration), for: .normal)
+                    button.setImage(UIImage(systemName: starsFilledPicName,
+                                            withConfiguration: configuration),
+                                    for: .normal)
                 }
             }
         }

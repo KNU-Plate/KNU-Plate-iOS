@@ -10,7 +10,7 @@ class NewRestaurantViewController: UIViewController {
     @IBOutlet weak var expandTextField: UITextField!
     @IBOutlet weak var reviewTextView: UITextView!
 
-    
+
     var newRestaurantViewModel = NewRestaurantViewModel()
 
     override func viewDidLoad() {
