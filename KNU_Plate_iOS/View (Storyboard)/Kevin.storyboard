@@ -453,21 +453,25 @@
                                                                         <constraint firstAttribute="width" constant="80" id="wM4-Bf-mN9"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel button" translatesAutoresizingMaskIntoConstraints="NO" id="1fu-K2-ezQ">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gR-ld-9MR" userLabel="Cancel Button">
                                                                     <rect key="frame" x="50" y="0.0" width="40" height="40"/>
-                                                                </imageView>
+                                                                    <state key="normal" image="cancel button"/>
+                                                                    <connections>
+                                                                        <action selector="pressedCancelButton:" destination="TW1-UD-IA3" eventType="touchUpInside" id="eFR-wN-mId"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="RGL-Ec-gmc" firstAttribute="leading" secondItem="Zww-xz-nCQ" secondAttribute="leading" constant="5" id="2TJ-j3-lFL"/>
-                                                                <constraint firstItem="1fu-K2-ezQ" firstAttribute="top" secondItem="Zww-xz-nCQ" secondAttribute="top" id="Ciu-tk-CXq"/>
+                                                                <constraint firstItem="7gR-ld-9MR" firstAttribute="top" secondItem="Zww-xz-nCQ" secondAttribute="top" id="MIu-vk-EqG"/>
                                                                 <constraint firstItem="RGL-Ec-gmc" firstAttribute="top" secondItem="Zww-xz-nCQ" secondAttribute="top" constant="5" id="Pl5-hU-Kkw"/>
-                                                                <constraint firstAttribute="trailing" secondItem="1fu-K2-ezQ" secondAttribute="trailing" id="XVx-oU-zSh"/>
                                                                 <constraint firstAttribute="bottom" secondItem="RGL-Ec-gmc" secondAttribute="bottom" constant="5" id="aae-b9-bqe"/>
                                                                 <constraint firstAttribute="trailing" secondItem="RGL-Ec-gmc" secondAttribute="trailing" constant="5" id="tbv-Py-INk"/>
+                                                                <constraint firstAttribute="trailing" secondItem="7gR-ld-9MR" secondAttribute="trailing" id="w11-je-m2V"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <connections>
-                                                            <outlet property="cancelButtonImage" destination="1fu-K2-ezQ" id="jjr-nW-t2W"/>
+                                                            <outlet property="cancelButton" destination="7gR-ld-9MR" id="Znq-Bw-rkX"/>
                                                             <outlet property="userPickedImageView" destination="RGL-Ec-gmc" id="cbx-xp-zVU"/>
                                                         </connections>
                                                     </collectionViewCell>

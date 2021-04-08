@@ -3,7 +3,6 @@ import BSImagePicker
 import Photos
 
 protocol AddImageDelegate {
-    
     func didPickImagesToUpload(images: [UIImage])
 }
 
@@ -72,13 +71,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 let newImage = UIImage(data: data!)
                 
                 self.userSelectedImages.append(newImage! as UIImage)
-                
-                
             }
-            
         }
-        print("complete photo array: \(userSelectedImages)")
-        
     }
-    
 }
