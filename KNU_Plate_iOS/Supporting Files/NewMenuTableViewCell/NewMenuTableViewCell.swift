@@ -11,7 +11,7 @@ class NewMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var menuNameTextField: UITextField!
     @IBOutlet weak var oneLineReviewForMenuTextField: UITextField!
     
-    var delegate: NewMenuTableViewCellDelegate?
+    var delegate: NewMenuTableViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
