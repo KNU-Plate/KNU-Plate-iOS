@@ -1,0 +1,13 @@
+import Foundation
+
+class UserManager {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}

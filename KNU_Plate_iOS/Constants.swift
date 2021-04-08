@@ -28,6 +28,8 @@ struct Constants {
     struct CellIdentifier {
         
         static let newMenuTableViewCell = "newMenuTableViewCell"
+        static let addFoodImageCell = "addFoodImageCell"
+        static let newUserPickedFoodImageCell = "userPickedFoodImageCell"
     }
     
     
