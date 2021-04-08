@@ -1,4 +1,6 @@
 import UIKit
+import BSImagePicker
+import Photos
 
 protocol AddImageDelegate {
     
@@ -10,51 +12,47 @@ protocol AddImageDelegate {
 class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
     var delegate: AddImageDelegate!
+    
+    var selectedAssets: [PHAsset] = [PHAsset]()
     var userSelectedImages: [UIImage] = [UIImage]()
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
-        print("pre sed Add button")
+        let imagePicker = ImagePickerController()
+ 
+ 
         
-        let actionSheet = UIAlertController(title: "먹은 음식 사진 고르기",
-                                            message: "맛있게 드신 음식 사진을 업로드해 주세요! ",
-                                            preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "취소",
-                                            style: .cancel,
-                                            handler: nil))
-        actionSheet.addAction(UIAlertAction(title: "사진 찍기",
-                                            style: .default,
-                                            handler: { [weak self] _ in
-                                                self?.presentCamera()
-                                            }))
-        actionSheet.addAction(UIAlertAction(title: "앨범에서 선택",
-                                            style: .default,
-                                            handler: { [weak self] _ in
-                                                self?.presentPhotoPicker()
-                                            }))
+        imagePicker.presentImagePicker(imagePicker, select: { (asset) in
+            // User selected an asset. Do something with it. Perhaps begin processing/upload?
+        }, deselect: { (asset) in
+            // User deselected an asset. Cancel whatever you did when asset was selected.
+        }, cancel: { (assets) in
+            // User canceled selection.
+        }, finish: { (assets) in
+            // User finished selection assets.
+            
+            for i in 0..<assets.count {
+                self.selectedAssets.append(assets[i])
+            }
+            self.convertAssetToImages()
+        })
         
-        self.window?.rootViewController?.present(actionSheet, animated: true, completion: nil)
         
     }
     
-    func presentCamera() {
+    func convertAssetToImages() {
         
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.delegate = self
-        vc.allowsEditing = true
-        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
-       
-    }
-    
-    func presentPhotoPicker() {
+        if selectedAssets.count != 0 {
+            
+            for i in 0..<selectedAssets.count {
+                
+                let imageManager = PHImageManager.default()
+                let option = PHImageR
+            }
+            
+        }
         
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
     }
     
 }
