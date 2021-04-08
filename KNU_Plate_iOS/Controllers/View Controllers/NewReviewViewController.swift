@@ -165,16 +165,13 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         /// need edit
-        5
+        self.viewModel.userSelectedImages.count + 1     /// Add Button 이 항상 있어야하므로 + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         let addImageButtonCellIdentifier = Constants.CellIdentifier.addFoodImageCell
         let newFoodImageCellIdentifier = Constants.CellIdentifier.newUserPickedFoodImageCell
-        
-    
         
         /// 첫 번째 Cell 은 항상 Add Button
         if indexPath.item == 0 {
@@ -196,20 +193,10 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             // 사용자가 앨범에서 고른 사진이 있는 경우
             if viewModel.userSelectedImages.count > 0 {
                 
-                
-                
-                
-                
-                
+                let imageArray = viewModel.userSelectedImages
+                cell.userPickedImageView.image = imageArray[indexPath.item - 1]
             }
-            
-            
-            
-            cell.userPickedImageView.image = UIImage(named: "chinese food")
             return cell
-            
-            
-            
         }
     }
 }
