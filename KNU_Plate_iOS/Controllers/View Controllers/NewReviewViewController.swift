@@ -11,6 +11,8 @@ class NewReviewViewController: UIViewController {
     
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
     
+    var userSelectedReviewImages: [UIImage] = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -164,7 +166,6 @@ class NewReviewViewController: UIViewController {
 extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /// need edit
         self.viewModel.userSelectedImages.count + 1     /// Add Button 이 항상 있어야하므로 + 1
     }
     
@@ -190,15 +191,18 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
                 fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
             }
             
+            cell.delegate = self
+            cell.indexPath = indexPath.item
+            
             // 사용자가 앨범에서 고른 사진이 있는 경우
             if viewModel.userSelectedImages.count > 0 {
-                
-                let imageArray = viewModel.userSelectedImages
-                cell.userPickedImageView.image = imageArray[indexPath.item - 1]
+                cell.userPickedImageView.image = viewModel.userSelectedImages[indexPath.item - 1]
             }
             return cell
         }
     }
+    
+
 }
 
 //MARK: - AddImageDelegate
@@ -208,11 +212,25 @@ extension NewReviewViewController: AddImageDelegate {
     func didPickImagesToUpload(images: [UIImage]) {
         
         viewModel.userSelectedImages = images
-        print("viewModel.userSelectedImages has been set")
         reviewImageCollectionView.reloadData()
     }
-    
-    
+}
+
+//MARK: - UserPickedFoodImageCellDelegate
+
+extension NewReviewViewController: UserPickedFoodImageCellDelegate {
+
+    func didPressCancelButton(at index: Int) {
+
+        let indexToDelete = IndexPath.init(row: index, section: 0)
+        reviewImageCollectionView.deleteItems(at: [indexToDelete])
+        
+        userSelectedReviewImages.remove(at: indexToDelete.item - 1)
+        
+        viewModel.userSelectedImages = userSelectedReviewImages
+        
+        reviewImageCollectionView.reloadData()
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
