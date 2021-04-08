@@ -7,9 +7,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTextField: UITextField!
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
-    
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    
     
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
     
@@ -184,10 +182,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
                 fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
             }
-            
             cell.delegate = self
-
-        
             return cell
         }
         
@@ -198,14 +193,25 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
                 fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
             }
             
+            // 사용자가 앨범에서 고른 사진이 있는 경우
+            if viewModel.userSelectedImages.count > 0 {
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+            
             cell.userPickedImageView.image = UIImage(named: "chinese food")
             return cell
+            
+            
+            
         }
-        
-
-        
     }
-    
 }
 
 //MARK: - AddImageDelegate
@@ -213,7 +219,10 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
 extension NewReviewViewController: AddImageDelegate {
     
     func didPickImagesToUpload(images: [UIImage]) {
-        print("ok")
+        
+        viewModel.userSelectedImages = images
+        print("viewModel.userSelectedImages has been set")
+        reviewImageCollectionView.reloadData()
     }
     
     

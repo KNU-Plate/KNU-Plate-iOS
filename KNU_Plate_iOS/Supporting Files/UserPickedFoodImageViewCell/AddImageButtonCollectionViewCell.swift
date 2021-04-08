@@ -18,17 +18,25 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
+        selectedAssets.removeAll()
+        userSelectedImages.removeAll()
+        
         let imagePicker = ImagePickerController()
- 
- 
+        imagePicker.settings.selection.max = 5
+        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
         
+        let vc = self.window?.rootViewController
         
-        imagePicker.presentImagePicker(imagePicker, select: { (asset) in
+        vc?.presentImagePicker(imagePicker, select: { (asset) in
+            
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
+   
         }, deselect: { (asset) in
             // User deselected an asset. Cancel whatever you did when asset was selected.
+  
         }, cancel: { (assets) in
             // User canceled selection.
+
         }, finish: { (assets) in
             // User finished selection assets.
             
@@ -36,10 +44,11 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 self.selectedAssets.append(assets[i])
             }
             self.convertAssetToImages()
+            self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
         })
         
         
-    }
+     }
     
     func convertAssetToImages() {
         
@@ -48,33 +57,28 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
             for i in 0..<selectedAssets.count {
                 
                 let imageManager = PHImageManager.default()
-                let option = PHImageR
+                let option = PHImageRequestOptions()
+                option.isSynchronous = true
+                var thumbnail = UIImage()
+                
+                imageManager.requestImage(for: selectedAssets[i],
+                                          targetSize: CGSize(width: 200, height: 200),
+                                          contentMode: .aspectFit,
+                                          options: option) { (result, info) in
+                    thumbnail = result!
+                }
+                
+                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                let newImage = UIImage(data: data!)
+                
+                self.userSelectedImages.append(newImage! as UIImage)
+                
+                
             }
             
         }
+        print("complete photo array: \(userSelectedImages)")
         
     }
     
-}
-
-//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
-
-extension AddImageButtonCollectionViewCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-        guard let selectedImages = info[UIImagePickerController.InfoKey.editedImage] as? [UIImage] else {
-            return
-        }
-        
-        self.userSelectedImages = selectedImages
-        
-    }
-    
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
 }

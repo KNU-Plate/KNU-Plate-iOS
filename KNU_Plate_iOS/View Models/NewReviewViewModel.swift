@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 class NewReviewViewModel {
     
@@ -12,11 +13,25 @@ class NewReviewViewModel {
         }
     }
     
-//    var reviewImages: Data {
+//
+//    var userSelectedImagesInJPEG: Data {
 //        didSet {
-//            newReview.
+//
 //        }
 //    }
+    
+    var userSelectedImages: [UIImage] {
+        
+        willSet {
+            userSelectedImages.removeAll()
+        }
+        
+        didSet {
+            /// 받은 UIImage 를 JPEGData 로 저장하고,
+            /// userSelectedImagesInJPEG 에 저장 후
+            /// NewReview 모델에 저장
+        }
+    }
     
     
     var menu: [Menu] //{
@@ -36,6 +51,7 @@ class NewReviewViewModel {
         
         self.rating = 3
         self.review = ""
+        self.userSelectedImages = [UIImage]()
         self.menu = [Menu]()
         
     }
