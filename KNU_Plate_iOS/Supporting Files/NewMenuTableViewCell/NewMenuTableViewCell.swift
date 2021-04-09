@@ -21,8 +21,8 @@ class NewMenuTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.selectionStyle = .none
         menuNameTextField.delegate = self
-       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
