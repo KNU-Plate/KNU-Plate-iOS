@@ -289,7 +289,7 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
@@ -301,7 +301,7 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
@@ -312,16 +312,15 @@
                                                             <constraint firstAttribute="width" constant="50" id="gED-sX-0UB"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
-                                                        <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                        <state key="normal" image="star rating (filled)">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAw-Ju-AQO">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNb-Lf-Ygq">
                                                         <rect key="frame" x="150" y="0.0" width="50" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="XQY-Y7-mFw"/>
-                                                            <constraint firstAttribute="width" constant="50" id="flZ-fh-iEL"/>
+                                                            <constraint firstAttribute="width" constant="50" id="kX1-Cr-olT"/>
+                                                            <constraint firstAttribute="height" constant="50" id="qcl-Zp-JbY"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -329,11 +328,11 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-8A-61m">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvX-S2-SGa">
                                                         <rect key="frame" x="200" y="0.0" width="50" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="FSk-SD-cXx"/>
-                                                            <constraint firstAttribute="width" constant="50" id="hMb-9P-YhX"/>
+                                                            <constraint firstAttribute="width" constant="50" id="8wm-4k-lXP"/>
+                                                            <constraint firstAttribute="height" constant="50" id="Lv0-e2-Vnl"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -599,6 +598,7 @@
                         <outlet property="reviewImageCollectionView" destination="bBl-WA-nha" id="Rxc-2R-z0o"/>
                         <outlet property="reviewTextView" destination="gRK-0c-6HT" id="Qi2-rk-ZV8"/>
                         <outlet property="scrollView" destination="F5q-WO-v7Q" id="hVf-OO-Ipy"/>
+                        <outlet property="starRating" destination="pf4-lN-svS" id="OrX-kk-SNu"/>
                         <outlet property="tableViewHeight" destination="Uto-kB-SrF" id="puQ-dt-S1q"/>
                     </connections>
                 </viewController>
@@ -656,7 +656,8 @@
         <image name="square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="star rating" width="65" height="65"/>
-        <image name="star rating (unfilled)" width="90" height="86"/>
+        <image name="star rating (filled)" width="54" height="51.5"/>
+        <image name="star rating (unfilled)" width="53.5" height="51"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

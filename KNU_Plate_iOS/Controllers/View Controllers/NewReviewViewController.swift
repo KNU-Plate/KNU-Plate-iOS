@@ -9,6 +9,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var starRating: RatingController!
     
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
     

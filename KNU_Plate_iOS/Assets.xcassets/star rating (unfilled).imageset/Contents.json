@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "star rating.png",
+      "filename" : "star rating(not_filled).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "star rating-1.png",
+      "filename" : "star rating(not_filled)-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "star rating-2.png",
+      "filename" : "star rating(not_filled)-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
