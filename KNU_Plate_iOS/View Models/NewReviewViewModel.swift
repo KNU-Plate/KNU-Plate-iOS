@@ -60,9 +60,12 @@ class NewReviewViewModel {
     
     func addNewMenu(name: String) {
         
+    
+        
         let newMenu = Menu()
         newMenu.menuName = name
         self.menu.append(newMenu)
+
     }
     
     
