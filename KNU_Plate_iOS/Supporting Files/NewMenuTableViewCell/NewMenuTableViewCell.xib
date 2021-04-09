@@ -57,7 +57,7 @@
                                     <action selector="pressedMenuGoodOrBad:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cba-De-cIk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7K-msT" userLabel="Cancel button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7K-msT" userLabel="Delete button">
                                 <rect key="frame" x="120" y="0.0" width="30" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="AjM-nQ-5au"/>
@@ -66,7 +66,6 @@
                                 <state key="normal" image="cancel button"/>
                                 <connections>
                                     <action selector="pressedDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7vp-rq-VDh"/>
-                                    <action selector="pressedMenuGoodOrBad:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E6F-9r-JOg"/>
                                 </connections>
                             </button>
                         </subviews>

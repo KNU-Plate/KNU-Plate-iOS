@@ -30,6 +30,8 @@ class NewMenuTableViewCell: UITableViewCell {
     }
     
     @IBAction func pressedMenuGoodOrBad(_ sender: UIButton) {
+        
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     
         switch sender {
         case goodButton:

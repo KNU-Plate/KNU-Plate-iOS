@@ -598,6 +598,7 @@
                         <outlet property="menuInputTextField" destination="hPw-SM-yiS" id="9Px-UO-eVZ"/>
                         <outlet property="reviewImageCollectionView" destination="bBl-WA-nha" id="Rxc-2R-z0o"/>
                         <outlet property="reviewTextView" destination="gRK-0c-6HT" id="Qi2-rk-ZV8"/>
+                        <outlet property="scrollView" destination="F5q-WO-v7Q" id="hVf-OO-Ipy"/>
                         <outlet property="tableViewHeight" destination="Uto-kB-SrF" id="puQ-dt-S1q"/>
                     </connections>
                 </viewController>
