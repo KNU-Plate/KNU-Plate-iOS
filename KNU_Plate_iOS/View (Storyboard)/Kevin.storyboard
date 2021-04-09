@@ -521,10 +521,10 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="15" y="557" width="345" height="200"/>
+                                                <rect key="frame" x="15" y="557" width="345" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
+                                                    <constraint firstAttribute="height" constant="150" id="S1U-Zw-Uv7"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -598,6 +598,7 @@
                         <outlet property="menuInputTextField" destination="hPw-SM-yiS" id="9Px-UO-eVZ"/>
                         <outlet property="reviewImageCollectionView" destination="bBl-WA-nha" id="Rxc-2R-z0o"/>
                         <outlet property="reviewTextView" destination="gRK-0c-6HT" id="Qi2-rk-ZV8"/>
+                        <outlet property="scrollView" destination="F5q-WO-v7Q" id="hVf-OO-Ipy"/>
                         <outlet property="tableViewHeight" destination="Uto-kB-SrF" id="puQ-dt-S1q"/>
                     </connections>
                 </viewController>

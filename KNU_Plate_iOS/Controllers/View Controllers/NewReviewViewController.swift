@@ -8,6 +8,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
     
@@ -75,9 +76,15 @@ class NewReviewViewController: UIViewController {
     }
     
     
-    @objc func addMenuButtonPressed() {
+    @objc func pressedAddMenuButton() {
         /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
         
+        if viewModel.menu.count >= 5 {
+            menuInputTextField.text?.removeAll()
+            let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"), "메뉴는 최대 5개까지만 입력이 가능합니다.")
+            self.present(alert, animated: true)
+            return
+        }
         if let nameOfMenu = menuInputTextField.text {
 
             if nameOfMenu.count == 0 {
@@ -86,14 +93,14 @@ class NewReviewViewController: UIViewController {
                 self.present(alert, animated: true)
                 return
             }
-        }
-        
+            
+            viewModel.addNewMenu(name: nameOfMenu)
+            menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
+                                          with: .bottom)
+            self.viewWillLayoutSubviews()
+            menuInputTextField.text?.removeAll()
     
-        viewModel.addNewMenu()
-        menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
-                                      with: .bottom)
-        self.viewWillLayoutSubviews()
-        menuInputTextField.text?.removeAll()
+        }
     }
     
     
@@ -161,14 +168,34 @@ extension NewReviewViewController: AddImageDelegate {
 
 extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 
-    func didPressCancelButton(at index: Int) {
+    func didPressDeleteImageButton(at index: Int) {
 
         let indexToDelete = IndexPath.init(row: index, section: 0)
         reviewImageCollectionView.deleteItems(at: [indexToDelete])
-        
         viewModel.userSelectedImages.remove(at: indexToDelete.item - 1)
         
         reviewImageCollectionView.reloadData()
+        viewWillLayoutSubviews()
+    }
+}
+
+//MARK: - NewMenuTableViewCellDelegate
+
+extension NewReviewViewController: NewMenuTableViewCellDelegate {
+   
+    // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
+    func didChangeMenuName() {
+        //
+    }
+    
+    func didPressDeleteMenuButton(at index: Int) {
+        
+        let indexToDelete = IndexPath.init(row: index, section: 0)
+        viewModel.menu.remove(at: indexToDelete.row)
+        menuInputTableView.deleteRows(at: [indexToDelete], with: .left)
+    
+        menuInputTableView.reloadData()
+        viewWillLayoutSubviews()
     }
 }
 
@@ -188,9 +215,11 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
         
         if self.viewModel.menu.count != 0 {
             
-            //cell.delegate = self
-            cell.menuNameTextField.text = ""
-            cell.oneLineReviewForMenuTextField.text = ""
+            let menuInfo = viewModel.menu[indexPath.row]
+            
+            cell.delegate = self
+            cell.menuNameTextField.text = menuInfo.menuName
+            cell.indexPath = indexPath.row
             
     
         }
@@ -198,13 +227,11 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
-    }
-    
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height + 30
+        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height
+        scrollView.frame = view.bounds
+        scrollView.contentSize = CGSize(width:self.view.bounds.width, height: view.frame.height)
     }
 
 }
@@ -294,7 +321,7 @@ extension NewReviewViewController {
         addMenuButton.isUserInteractionEnabled = true
         addMenuButton.contentMode = .scaleAspectFit
         addMenuButton.addTarget(self,
-                                action: #selector(addMenuButtonPressed),
+                                action: #selector(pressedAddMenuButton),
                                 for: .touchUpInside)
         
         let rightView = UIView(frame: CGRect(x: 0,
