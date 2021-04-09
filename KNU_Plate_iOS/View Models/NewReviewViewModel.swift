@@ -38,7 +38,9 @@ class NewReviewViewModel {
 //        didSet {
 //            newReview.menu.append(contentsOf: menu)
 //        }
-//    }
+        
+        
+    //}
     
     var review: String {
         didSet {
@@ -56,9 +58,10 @@ class NewReviewViewModel {
         
     }
     
-    func addNewMenu() {
+    func addNewMenu(name: String) {
         
         let newMenu = Menu()
+        newMenu.menuName = name
         self.menu.append(newMenu)
     }
     

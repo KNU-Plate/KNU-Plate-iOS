@@ -521,10 +521,10 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="15" y="557" width="345" height="200"/>
+                                                <rect key="frame" x="15" y="557" width="345" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
+                                                    <constraint firstAttribute="height" constant="150" id="S1U-Zw-Uv7"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>

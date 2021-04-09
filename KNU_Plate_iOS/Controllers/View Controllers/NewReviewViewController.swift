@@ -78,6 +78,8 @@ class NewReviewViewController: UIViewController {
     @objc func addMenuButtonPressed() {
         /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
         
+        
+        
         if let nameOfMenu = menuInputTextField.text {
 
             if nameOfMenu.count == 0 {
@@ -86,14 +88,13 @@ class NewReviewViewController: UIViewController {
                 self.present(alert, animated: true)
                 return
             }
+            
+            viewModel.addNewMenu(name: nameOfMenu)
+            menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
+                                          with: .bottom)
+            self.viewWillLayoutSubviews()
+            menuInputTextField.text?.removeAll()
         }
-        
-    
-        viewModel.addNewMenu()
-        menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
-                                      with: .bottom)
-        self.viewWillLayoutSubviews()
-        menuInputTextField.text?.removeAll()
     }
     
     
@@ -188,9 +189,13 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
         
         if self.viewModel.menu.count != 0 {
             
+            let menuInfo = viewModel.menu[indexPath.row]
+            
+            
+            
             //cell.delegate = self
-            cell.menuNameTextField.text = ""
-            cell.oneLineReviewForMenuTextField.text = ""
+            cell.menuNameTextField.text = menuInfo.menuName
+            //cell.oneLineReviewForMenuTextField.text = ""
             
     
         }
@@ -199,12 +204,13 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 40.0
     }
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height + 30
+        self.tableViewHeight?.constant = self.menuInputTableView.contentSize.height
+        
     }
 
 }
