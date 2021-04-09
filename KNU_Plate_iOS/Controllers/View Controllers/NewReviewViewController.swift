@@ -198,6 +198,10 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
         menuInputTableView.reloadData()
         viewWillLayoutSubviews()
     }
+    
+    func didPressEitherGoodOrBadButton(at index: Int, is good: Bool) {
+        //
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

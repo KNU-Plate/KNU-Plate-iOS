@@ -4,6 +4,7 @@ protocol NewMenuTableViewCellDelegate {
     
     func didChangeMenuName()
     func didPressDeleteMenuButton(at index: Int)
+    func didPressEitherGoodOrBadButton(at index: Int, is good: Bool)
 }
 
 class NewMenuTableViewCell: UITableViewCell {
@@ -37,29 +38,30 @@ class NewMenuTableViewCell: UITableViewCell {
         case goodButton:
             menuIsGood = true
             
-            goodButton.setImage(UIImage(named: "good (selected)"), for: .normal)
-            badButton.setImage(UIImage(named: "bad (not-selected)"), for: .normal)
+            goodButton.setImage(UIImage(named: "good (selected)"),
+                                for: .normal)
+            badButton.setImage(UIImage(named: "bad (not-selected)"),
+                               for: .normal)
             
             
         case badButton:
             menuIsGood = false
             
-            goodButton.setImage(UIImage(named: "good (not-selected)"), for: .normal)
-            badButton.setImage(UIImage(named: "bad (selected)"), for: .normal)
+            goodButton.setImage(UIImage(named: "good (not-selected)"),
+                                for: .normal)
+            badButton.setImage(UIImage(named: "bad (selected)"),
+                               for: .normal)
             
-            
-
         default:
             return
         }
         
-
+        if let isGood = menuIsGood {
+            delegate?.didPressEitherGoodOrBadButton(at: indexPath, is: isGood)
+        }
     }
-
-    
     
     @IBAction func pressedDeleteButton(_ sender: UIButton) {
-        
         delegate?.didPressDeleteMenuButton(at: indexPath)
     }
     
