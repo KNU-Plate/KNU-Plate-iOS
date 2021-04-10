@@ -73,6 +73,7 @@ class NewReviewViewModel {
         
         if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuNameError }
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
+        
     }
     
     

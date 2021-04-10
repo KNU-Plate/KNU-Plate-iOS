@@ -26,7 +26,6 @@ public enum NewReviewInputError: Error, LocalizedError {
         case .insufficientReviewError:
             return "드셨던 음식에 대한 리뷰를 최소 5자 이상은 입력해주세요."
         
-        
         }
         
     }

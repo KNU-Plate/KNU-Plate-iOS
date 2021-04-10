@@ -82,7 +82,6 @@ class NewReviewViewController: UIViewController {
     
     
     @objc func pressedAddMenuButton() {
-        /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
         
         if viewModel.menus.count >= 5 {
             menuInputTextField.text?.removeAll()
@@ -110,12 +109,6 @@ class NewReviewViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
     // 완료 버튼 눌렀을 시 실행
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
@@ -127,15 +120,13 @@ class NewReviewViewController: UIViewController {
             
         } catch NewReviewInputError.insufficientMenuNameError {
             
-            let alertMessage = NewReviewInputError.insufficientMenuNameError.errorDescription
-            let alert = AlertManager.createAlertMessage("입력 오류", alertMessage)
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuNameError.errorDescription)
             self.present(alert, animated: true)
 
 
         } catch NewReviewInputError.insufficientReviewError {
             
-            let alertMessage = NewReviewInputError.insufficientReviewError.errorDescription
-            let alert = AlertManager.createAlertMessage("입력 오류", alertMessage)
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientReviewError.errorDescription )
             self.present(alert, animated: true)
             
 
@@ -144,6 +135,7 @@ class NewReviewViewController: UIViewController {
         }
 
         /// API related methods needed here (upload)
+        /// viewModel 내에서 NetworkManager.shared.uploadNewReview( ) 이런 식으로 해야 할듯
     }
 
 

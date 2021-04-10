@@ -7,6 +7,6 @@ class Menu: Codable {
      
     public init() {
         self.menuName = ""
-        self.isGood = true
+       self.isGood = true
     }
 }

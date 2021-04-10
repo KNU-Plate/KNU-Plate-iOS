@@ -16,13 +16,14 @@ class NewMenuTableViewCell: UITableViewCell {
     
     var delegate: NewMenuTableViewCellDelegate!
     
-    var menuIsGood: Bool?
+    var menuIsGood: Bool = true
     var indexPath: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.selectionStyle = .none
+        pressedMenuGoodOrBad(goodButton)
         menuNameTextField.delegate = self
     }
 
@@ -55,10 +56,8 @@ class NewMenuTableViewCell: UITableViewCell {
         default:
             return
         }
+        delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: menuIsGood)
         
-        if let isGood = menuIsGood {
-            delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: isGood)
-        }
     }
     
     @IBAction func pressedDeleteButton(_ sender: UIButton) {
