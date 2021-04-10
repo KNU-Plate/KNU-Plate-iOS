@@ -3,7 +3,7 @@ import UIKit
 /// Shows stars rating using ImageView
 class RatingStackView: UIStackView {
     var starImages: [UIImageView] = []
-    let starPicName = "star rating"            // Filled star name
+    let starPicName = "star rating (filled)"            // Filled star name
     
     override init(frame: CGRect) {
         super.init(frame: frame)

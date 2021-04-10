@@ -5,7 +5,7 @@ class NewReviewViewModel {
     
     var newReview = NewReview()
     
-    // Variable Initialization
+    //MARK: - Object Properties
     
     var rating: Int {
         didSet {
@@ -34,7 +34,7 @@ class NewReviewViewModel {
     }
     
     
-    var menu: [Menu] //{
+    var menus: [Menu] //{
 //        didSet {
 //            newReview.menu.append(contentsOf: menu)
 //        }
@@ -48,24 +48,32 @@ class NewReviewViewModel {
         }
     }
     
+    //MARK: - Init
     
     public init() {
         
         self.rating = 3
         self.review = ""
         self.userSelectedImages = [UIImage]()
-        self.menu = [Menu]()
+        self.menus = [Menu]()
         
     }
     
-    func addNewMenu(name: String) {
-        
+    //MARK: - Object Methods
     
+    func addNewMenu(name: String) {
         
         let newMenu = Menu()
         newMenu.menuName = name
-        self.menu.append(newMenu)
+        self.menus.append(newMenu)
 
+    }
+    
+    func validateUserInputs() throws {
+        
+        if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuNameError }
+        if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
+        
     }
     
     

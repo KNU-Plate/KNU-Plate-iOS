@@ -289,7 +289,7 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
@@ -301,7 +301,7 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
@@ -313,15 +313,15 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="star rating" symbolScale="default"/>
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAw-Ju-AQO">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNb-Lf-Ygq">
                                                         <rect key="frame" x="150" y="0.0" width="50" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="XQY-Y7-mFw"/>
-                                                            <constraint firstAttribute="width" constant="50" id="flZ-fh-iEL"/>
+                                                            <constraint firstAttribute="width" constant="50" id="kX1-Cr-olT"/>
+                                                            <constraint firstAttribute="height" constant="50" id="qcl-Zp-JbY"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -329,11 +329,11 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-8A-61m">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvX-S2-SGa">
                                                         <rect key="frame" x="200" y="0.0" width="50" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="FSk-SD-cXx"/>
-                                                            <constraint firstAttribute="width" constant="50" id="hMb-9P-YhX"/>
+                                                            <constraint firstAttribute="width" constant="50" id="8wm-4k-lXP"/>
+                                                            <constraint firstAttribute="height" constant="50" id="Lv0-e2-Vnl"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -361,7 +361,7 @@
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="음식 사진" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iU0-nf-Ezt">
                                                         <rect key="frame" x="29" y="0.0" width="67" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -374,7 +374,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-rV-uSJ" userLabel="Menu Label Stack View">
-                                                <rect key="frame" x="10" y="309" width="188" height="21"/>
+                                                <rect key="frame" x="10" y="309" width="181" height="21"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -384,13 +384,13 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 주문한 메뉴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kce-s5-NjQ">
-                                                        <rect key="frame" x="29" y="0.0" width="118.5" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <rect key="frame" x="29" y="0.0" width="111.5" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40m-bQ-U9i">
-                                                        <rect key="frame" x="155.5" y="0.0" width="32.5" height="21"/>
+                                                        <rect key="frame" x="148.5" y="0.0" width="32.5" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -508,7 +508,7 @@
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="리뷰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baP-m4-nEX">
                                                         <rect key="frame" x="29" y="0.0" width="31.5" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -590,6 +590,9 @@
                     <navigationItem key="navigationItem" id="TZe-Jp-l9S">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="cm0-HV-dEW">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedFinishButton:" destination="IOZ-J2-vp7" id="0GG-8c-qTl"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1100"/>
@@ -599,6 +602,7 @@
                         <outlet property="reviewImageCollectionView" destination="bBl-WA-nha" id="Rxc-2R-z0o"/>
                         <outlet property="reviewTextView" destination="gRK-0c-6HT" id="Qi2-rk-ZV8"/>
                         <outlet property="scrollView" destination="F5q-WO-v7Q" id="hVf-OO-Ipy"/>
+                        <outlet property="starRating" destination="pf4-lN-svS" id="OrX-kk-SNu"/>
                         <outlet property="tableViewHeight" destination="Uto-kB-SrF" id="puQ-dt-S1q"/>
                     </connections>
                 </viewController>
@@ -656,7 +660,8 @@
         <image name="square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="star rating" width="65" height="65"/>
-        <image name="star rating (unfilled)" width="90" height="86"/>
+        <image name="star rating (filled)" width="54" height="51.5"/>
+        <image name="star rating (unfilled)" width="53.5" height="51"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

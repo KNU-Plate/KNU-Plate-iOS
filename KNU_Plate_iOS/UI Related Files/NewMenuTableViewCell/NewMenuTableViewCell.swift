@@ -4,6 +4,7 @@ protocol NewMenuTableViewCellDelegate {
     
     func didChangeMenuName()
     func didPressDeleteMenuButton(at index: Int)
+    func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool)
 }
 
 class NewMenuTableViewCell: UITableViewCell {
@@ -15,14 +16,15 @@ class NewMenuTableViewCell: UITableViewCell {
     
     var delegate: NewMenuTableViewCellDelegate!
     
-    var menuIsGood: Bool?
+    var menuIsGood: Bool = true
     var indexPath: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.selectionStyle = .none
+        pressedMenuGoodOrBad(goodButton)
         menuNameTextField.delegate = self
-       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,29 +39,28 @@ class NewMenuTableViewCell: UITableViewCell {
         case goodButton:
             menuIsGood = true
             
-            goodButton.setImage(UIImage(named: "good (selected)"), for: .normal)
-            badButton.setImage(UIImage(named: "bad (not-selected)"), for: .normal)
+            goodButton.setImage(UIImage(named: "good (selected)"),
+                                for: .normal)
+            badButton.setImage(UIImage(named: "bad (not-selected)"),
+                               for: .normal)
             
             
         case badButton:
             menuIsGood = false
             
-            goodButton.setImage(UIImage(named: "good (not-selected)"), for: .normal)
-            badButton.setImage(UIImage(named: "bad (selected)"), for: .normal)
+            goodButton.setImage(UIImage(named: "good (not-selected)"),
+                                for: .normal)
+            badButton.setImage(UIImage(named: "bad (selected)"),
+                               for: .normal)
             
-            
-
         default:
             return
         }
+        delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: menuIsGood)
         
-
     }
-
-    
     
     @IBAction func pressedDeleteButton(_ sender: UIButton) {
-        
         delegate?.didPressDeleteMenuButton(at: indexPath)
     }
     

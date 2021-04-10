@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "star rating (unfilled).png",
+      "filename" : "star rating (filled).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "star rating (unfilled)-1.png",
+      "filename" : "star rating (filled)-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "star rating (unfilled)-2.png",
+      "filename" : "star rating (filled)-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }
