@@ -312,7 +312,8 @@
                                                             <constraint firstAttribute="width" constant="50" id="gED-sX-0UB"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
-                                                        <state key="normal" image="star rating (filled)">
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="star rating (filled)" symbolScale="default"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                                         </state>
                                                     </button>
@@ -589,6 +590,9 @@
                     <navigationItem key="navigationItem" id="TZe-Jp-l9S">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="cm0-HV-dEW">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedFinishButton:" destination="IOZ-J2-vp7" id="0GG-8c-qTl"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1100"/>

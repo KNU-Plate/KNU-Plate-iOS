@@ -96,7 +96,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C2DDBE22611FB1C0075F25E /* Supporting Files */ = {
+		3C2DDBE22611FB1C0075F25E /* UI Related Files */ = {
 			isa = PBXGroup;
 			children = (
 				7C443226261D921100A0D83F /* UserPickedFoodImageViewCell */,
@@ -107,7 +107,7 @@
 				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 			);
-			path = "Supporting Files";
+			path = "UI Related Files";
 			sourceTree = "<group>";
 		};
 		3F955F326C60DB233DE0AFBE /* Frameworks */ = {
@@ -125,6 +125,13 @@
 				ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7C16DF1B262157C800AA8239 /* Extensions (VC) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Extensions (VC)";
 			sourceTree = "<group>";
 		};
 		7C443226261D921100A0D83F /* UserPickedFoodImageViewCell */ = {
@@ -152,13 +159,13 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		7CE10471260C447500E18C00 /* Supporting View Controllers */ = {
+		7CE10471260C447500E18C00 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				7CD74B79260B209300D05B84 /* AlertManager.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 			);
-			path = "Supporting View Controllers";
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		7CE4BA56261C28F8009A4464 /* NewMenuTableViewCell */ = {
@@ -195,7 +202,7 @@
 				7CE4D7B12609B188002FCC2D /* Models */,
 				7CE4D7B02609B183002FCC2D /* View Models */,
 				7CE4D7AF2609B17C002FCC2D /* Network Group */,
-				3C2DDBE22611FB1C0075F25E /* Supporting Files */,
+				3C2DDBE22611FB1C0075F25E /* UI Related Files */,
 				7CE4D7AE2609B175002FCC2D /* Controllers */,
 				7CE4D7C42609B628002FCC2D /* Constants.swift */,
 				7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */,
@@ -209,7 +216,8 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7CE10471260C447500E18C00 /* Supporting View Controllers */,
+				7C16DF1B262157C800AA8239 /* Extensions (VC) */,
+				7CE10471260C447500E18C00 /* Utilities */,
 				7CE10470260C446500E18C00 /* View Controllers */,
 			);
 			path = Controllers;

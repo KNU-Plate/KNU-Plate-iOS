@@ -4,7 +4,7 @@ protocol NewMenuTableViewCellDelegate {
     
     func didChangeMenuName()
     func didPressDeleteMenuButton(at index: Int)
-    func didPressEitherGoodOrBadButton(at index: Int, is good: Bool)
+    func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool)
 }
 
 class NewMenuTableViewCell: UITableViewCell {
@@ -57,7 +57,7 @@ class NewMenuTableViewCell: UITableViewCell {
         }
         
         if let isGood = menuIsGood {
-            delegate?.didPressEitherGoodOrBadButton(at: indexPath, is: isGood)
+            delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: isGood)
         }
     }
     

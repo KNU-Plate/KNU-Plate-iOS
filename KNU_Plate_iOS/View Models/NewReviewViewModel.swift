@@ -34,7 +34,7 @@ class NewReviewViewModel {
     }
     
     
-    var menu: [Menu] //{
+    var menus: [Menu] //{
 //        didSet {
 //            newReview.menu.append(contentsOf: menu)
 //        }
@@ -54,17 +54,15 @@ class NewReviewViewModel {
         self.rating = 3
         self.review = ""
         self.userSelectedImages = [UIImage]()
-        self.menu = [Menu]()
+        self.menus = [Menu]()
         
     }
     
     func addNewMenu(name: String) {
         
-    
-        
         let newMenu = Menu()
         newMenu.menuName = name
-        self.menu.append(newMenu)
+        self.menus.append(newMenu)
 
     }
     

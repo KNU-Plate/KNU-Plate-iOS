@@ -2,23 +2,22 @@ import UIKit
 import Alamofire
 
 class NewReviewViewController: UIViewController {
-  
+
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var starRating: RatingController!
     @IBOutlet weak var reviewImageCollectionView: UICollectionView!
     @IBOutlet weak var menuInputTextField: UITextField!
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var starRating: RatingController!
-    
+
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
-    
-    var userSelectedReviewImages: [UIImage] = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
+        
         
     
         //testAlamofire()
@@ -77,15 +76,21 @@ class NewReviewViewController: UIViewController {
     }
     
     
+    
+    
+    
+    
+    
     @objc func pressedAddMenuButton() {
         /// 메뉴 개수 제한하는 로직 필요 -> 무분별한 메뉴 추가 방지 // 최대 3개? 4개? 백엔드랑 상의해보기
         
-        if viewModel.menu.count >= 5 {
+        if viewModel.menus.count >= 5 {
             menuInputTextField.text?.removeAll()
             let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"), "메뉴는 최대 5개까지만 입력이 가능합니다.")
             self.present(alert, animated: true)
             return
         }
+        
         if let nameOfMenu = menuInputTextField.text {
 
             if nameOfMenu.count == 0 {
@@ -96,12 +101,43 @@ class NewReviewViewController: UIViewController {
             }
             
             viewModel.addNewMenu(name: nameOfMenu)
-            menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menu.count - 1, section: 0)],
+            menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menus.count - 1, section: 0)],
                                           with: .bottom)
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
     
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    // 완료 버튼 눌렀을 시 실행
+    @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
+        
+
+        validateUserInputs()
+        
+        /// API related methods needed here (upload)
+    }
+    
+    
+    // 모든 User Input 확인 ->
+    func validateUserInputs() {
+        
+        ///음식사진은 "선택" -> Optional
+        /// 주문한 메뉴는 필수
+        /// 리뷰도 필수 (리뷰 글자도 최소 5자 이상 쓰게하는건 어떰?
+        /// 별점?
+        
+        
+        
+        
+        
     }
     
     
@@ -143,7 +179,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.delegate = self
             cell.indexPath = indexPath.item
             
-            // 사용자가 앨범에서 고른 사진이 있는 경우
+            /// 사용자가 앨범에서 고른 사진이 있는 경우
             if viewModel.userSelectedImages.count > 0 {
                 cell.userPickedImageView.image = viewModel.userSelectedImages[indexPath.item - 1]
             }
@@ -192,15 +228,17 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     func didPressDeleteMenuButton(at index: Int) {
         
         let indexToDelete = IndexPath.init(row: index, section: 0)
-        viewModel.menu.remove(at: indexToDelete.row)
+        viewModel.menus.remove(at: indexToDelete.row)
         menuInputTableView.deleteRows(at: [indexToDelete], with: .left)
     
         menuInputTableView.reloadData()
         viewWillLayoutSubviews()
     }
     
-    func didPressEitherGoodOrBadButton(at index: Int, is good: Bool) {
-        //
+    func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool) {
+        
+        viewModel.menus[index].isGood = isGood
+
     }
 }
 
@@ -209,7 +247,7 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.menu.count
+        return self.viewModel.menus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -218,9 +256,9 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Failed to dequeue cell for NewMenuTableViewCell")
         }
         
-        if self.viewModel.menu.count != 0 {
+        if self.viewModel.menus.count != 0 {
             
-            let menuInfo = viewModel.menu[indexPath.row]
+            let menuInfo = viewModel.menus[indexPath.row]
             
             cell.delegate = self
             cell.menuNameTextField.text = menuInfo.menuName
@@ -241,7 +279,16 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-//MARK: - UITextViewDelegate
+//MARK: - UITextFieldDelegate -> For menuInputTextField
+
+extension NewReviewViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        pressedAddMenuButton()
+    }
+}
+
+//MARK: - UITextViewDelegate -> For reviewTextView
 
 extension NewReviewViewController: UITextViewDelegate {
     
@@ -258,7 +305,10 @@ extension NewReviewViewController: UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
             textView.textColor = UIColor.lightGray
+            return
         }
+        viewModel.review = textView.text
+
     }
 }
 
@@ -305,6 +355,7 @@ extension NewReviewViewController {
     
     func initializeTextField() {
         
+        menuInputTextField.delegate = self
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1

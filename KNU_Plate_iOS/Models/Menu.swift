@@ -3,10 +3,10 @@ import Foundation
 class Menu: Codable {
     
     var menuName: String
-    var oneLineReview: String
+    var isGood: Bool
      
     public init() {
         self.menuName = ""
-        self.oneLineReview = ""
+        self.isGood = true
     }
 }
