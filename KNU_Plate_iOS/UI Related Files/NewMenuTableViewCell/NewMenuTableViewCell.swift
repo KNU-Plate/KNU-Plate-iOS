@@ -2,7 +2,7 @@ import UIKit
 
 protocol NewMenuTableViewCellDelegate {
     
-    func didChangeMenuName()
+    func didChangeMenuName(at index: Int, _ newMenuName: String)
     func didPressDeleteMenuButton(at index: Int)
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool)
 }
@@ -33,6 +33,8 @@ class NewMenuTableViewCell: UITableViewCell {
     
     @IBAction func pressedMenuGoodOrBad(_ sender: UIButton) {
         
+        menuNameTextField.resignFirstResponder()
+        
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     
         switch sender {
@@ -43,7 +45,6 @@ class NewMenuTableViewCell: UITableViewCell {
                                 for: .normal)
             badButton.setImage(UIImage(named: "bad (not-selected)"),
                                for: .normal)
-            
             
         case badButton:
             menuIsGood = false
@@ -68,8 +69,20 @@ class NewMenuTableViewCell: UITableViewCell {
 
 extension NewMenuTableViewCell: UITextFieldDelegate {
     
-    ///menuNameTextField 글자 수 제한도 필요해 보임.
+    func textFieldDidEndEditing(_ textField: UITextField) {
     
-    
-    
+        if let editedMenu = textField.text {
+            
+            guard editedMenu.count > 0 else {
+                
+                let alert = AlertManager.createAlertMessage("메뉴가 비었습니다.", "메뉴명을 입력해 주세요.")
+                let vc = self.window?.rootViewController
+                vc?.present(alert, animated: true)
+                
+                delegate?.didChangeMenuName(at: indexPath, "")
+                return
+            }
+            delegate?.didChangeMenuName(at: indexPath, editedMenu)
+        }
+    }
 }

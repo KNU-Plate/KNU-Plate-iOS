@@ -24,25 +24,14 @@ class NewRestaurantViewModel {
         }
     }
     
-    var rating: Int {
-        didSet {
-            newRestaurant.rating = rating
-        }
-    }
-    
-    var userReview: String {
-        didSet {
-            newRestaurant.userReview = userReview
-        }
-    }
+
     
     public init() {
         
         self.restaurantName = ""
         self.gate = ""
         self.foodCategory = ""
-        self.rating = 3
-        self.userReview = ""
+        
     }
     
     

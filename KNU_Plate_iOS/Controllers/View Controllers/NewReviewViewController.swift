@@ -20,12 +20,12 @@ class NewReviewViewController: UIViewController {
         
         
     
-        //testAlamofire()
+   
     }
     
     func testAlamofire() {
         
-        let baseURL = "http://52.253.91.116:4100/api/signup"
+        let baseURL = "http://3.35.58.40:4100/api/signup"
         let user_name = "alex"
         let display_name = "alexding"
         let password = "123456789"
@@ -75,12 +75,6 @@ class NewReviewViewController: UIViewController {
 
     }
     
-    
-    
-    
-    
-    
-    
     @objc func pressedAddMenuButton() {
         
         if viewModel.menus.count >= 5 {
@@ -118,9 +112,9 @@ class NewReviewViewController: UIViewController {
 
             try viewModel.validateUserInputs()
             
-        } catch NewReviewInputError.insufficientMenuNameError {
+        } catch NewReviewInputError.insufficientMenuError {
             
-            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuNameError.errorDescription)
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuError.errorDescription)
             self.present(alert, animated: true)
 
 
@@ -130,7 +124,12 @@ class NewReviewViewController: UIViewController {
             self.present(alert, animated: true)
             
 
-        } catch {
+        } catch NewReviewInputError.blankMenuNameError {
+            
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.blankMenuNameError.errorDescription)
+            self.present(alert, animated: true)
+        }
+        catch {
             print("Unexpected Error occured in pressedFinishButton")
         }
 
@@ -216,8 +215,8 @@ extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 extension NewReviewViewController: NewMenuTableViewCellDelegate {
    
     // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
-    func didChangeMenuName() {
-        //
+    func didChangeMenuName(at index: Int, _ newMenuName: String) {
+       viewModel.menus[index].menuName = newMenuName
     }
     
     func didPressDeleteMenuButton(at index: Int) {
@@ -300,9 +299,6 @@ extension NewReviewViewController: UITextViewDelegate {
             return
         }
         viewModel.review = textView.text
-   
-        
-
     }
 
 }
