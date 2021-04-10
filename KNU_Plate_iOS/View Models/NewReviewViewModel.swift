@@ -5,7 +5,7 @@ class NewReviewViewModel {
     
     var newReview = NewReview()
     
-    // Variable Initialization
+    //MARK: - Object Properties
     
     var rating: Int {
         didSet {
@@ -48,6 +48,7 @@ class NewReviewViewModel {
         }
     }
     
+    //MARK: - Init
     
     public init() {
         
@@ -58,12 +59,20 @@ class NewReviewViewModel {
         
     }
     
+    //MARK: - Object Methods
+    
     func addNewMenu(name: String) {
         
         let newMenu = Menu()
         newMenu.menuName = name
         self.menus.append(newMenu)
 
+    }
+    
+    func validateUserInputs() throws {
+        
+        if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuNameError }
+        if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
     }
     
     

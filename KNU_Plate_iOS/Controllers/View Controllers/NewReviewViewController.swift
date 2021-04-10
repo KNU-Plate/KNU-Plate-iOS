@@ -105,7 +105,7 @@ class NewReviewViewController: UIViewController {
                                           with: .bottom)
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
-    
+            
         }
     }
     
@@ -119,29 +119,32 @@ class NewReviewViewController: UIViewController {
     // 완료 버튼 눌렀을 시 실행
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
+        reviewTextView.resignFirstResponder()
+    
+        do {
 
-        validateUserInputs()
-        
+            try viewModel.validateUserInputs()
+            
+        } catch NewReviewInputError.insufficientMenuNameError {
+            
+            let alertMessage = NewReviewInputError.insufficientMenuNameError.errorDescription
+            let alert = AlertManager.createAlertMessage("입력 오류", alertMessage)
+            self.present(alert, animated: true)
+
+
+        } catch NewReviewInputError.insufficientReviewError {
+            
+            let alertMessage = NewReviewInputError.insufficientReviewError.errorDescription
+            let alert = AlertManager.createAlertMessage("입력 오류", alertMessage)
+            self.present(alert, animated: true)
+            
+
+        } catch {
+            print("Unexpected Error occured in pressedFinishButton")
+        }
+
         /// API related methods needed here (upload)
     }
-    
-    
-    // 모든 User Input 확인 ->
-    func validateUserInputs() {
-        
-        ///음식사진은 "선택" -> Optional
-        /// 주문한 메뉴는 필수
-        /// 리뷰도 필수 (리뷰 글자도 최소 5자 이상 쓰게하는건 어떰?
-        /// 별점?
-        
-        
-        
-        
-        
-    }
-    
-    
-    
 
 
 }
@@ -238,7 +241,6 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool) {
         
         viewModel.menus[index].isGood = isGood
-
     }
 }
 
@@ -283,9 +285,7 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension NewReviewViewController: UITextFieldDelegate {
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        pressedAddMenuButton()
-    }
+    
 }
 
 //MARK: - UITextViewDelegate -> For reviewTextView
@@ -308,8 +308,11 @@ extension NewReviewViewController: UITextViewDelegate {
             return
         }
         viewModel.review = textView.text
+   
+        
 
     }
+
 }
 
 

@@ -4,7 +4,7 @@ class NewRestaurantViewModel {
     
     var newRestaurant = NewRestaurant()
     
-    // Variable Initialization
+    //MARK: - Object Properties
     
     var restaurantName: String {
         didSet {
