@@ -22,6 +22,9 @@
 		3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1C2621590800AA8239 /* UserInputError.swift */; };
+		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
+		7C16DF232621810700AA8239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF222621810700AA8239 /* User.swift */; };
+		7C16DF26262183C900AA8239 /* RegisterInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
@@ -60,6 +63,9 @@
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		7C16DF1C2621590800AA8239 /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
+		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		7C16DF222621810700AA8239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfoModel.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -230,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				7C44321C261D7D1500A0D83F /* UserManager.swift */,
+				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -249,6 +256,8 @@
 				7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */,
 				7CE4BA5B261C31FF009A4464 /* NewReview.swift */,
 				7CBE745126208366002E1FF7 /* Menu.swift */,
+				7C16DF222621810700AA8239 /* User.swift */,
+				7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -383,11 +392,13 @@
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				7CBE745226208366002E1FF7 /* Menu.swift in Sources */,
 				3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */,
+				7C16DF232621810700AA8239 /* User.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
+				7C16DF202621779600AA8239 /* NetworkError.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
 				7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
@@ -397,6 +408,7 @@
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
+				7C16DF26262183C900AA8239 /* RegisterInfoModel.swift in Sources */,
 				3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */,
 				7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */,
 				7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */,

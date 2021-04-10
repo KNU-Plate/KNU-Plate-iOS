@@ -71,10 +71,20 @@ class NewReviewViewModel {
     
     func validateUserInputs() throws {
         
-        if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuNameError }
+        if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuError }
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
+        
+        for eachMenu in self.menus {
+            
+            print("eachMenu: \(eachMenu.menuName.count)")
+            
+            guard eachMenu.menuName.count > 0 else {
+                throw NewReviewInputError.blankMenuNameError
+            }
+        }
         
     }
     
     
 }
+

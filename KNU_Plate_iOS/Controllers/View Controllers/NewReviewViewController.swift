@@ -20,66 +20,8 @@ class NewReviewViewController: UIViewController {
         
         
     
-        //testAlamofire()
+   
     }
-    
-    func testAlamofire() {
-        
-        let baseURL = "http://52.253.91.116:4100/api/signup"
-        let user_name = "alex"
-        let display_name = "alexding"
-        let password = "123456789"
-        let email_address = "alexding@knu.ac.kr"
-        
-        let param: Parameters = [
-        
-            "user_name": user_name,
-            "display_name": display_name,
-            "password": password,
-            "mail_address": email_address
-        ]
-        
-        let headers: HTTPHeaders = [
-        
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded"
-            
-        ]
-        
-        AF.request(baseURL, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: headers).responseJSON { (response) in
-            
-            switch response.result {
-        
-            case .success:
-                
-                if let result = try! response.result.get() as? [String: Any] {
-                    
-                    print(result)
-                    
-                    let userID = result["user_id"] as? String
-                    let userName = result["user_name"] as? String
-
-                    
-                    print(userID)
-                    print(userName)
-                }
-                
-            case .failure(let error):
-                print(error)
-                return
-                
-                
-            }
-        }
-
-
-    }
-    
-    
-    
-    
-    
-    
     
     @objc func pressedAddMenuButton() {
         
@@ -118,9 +60,9 @@ class NewReviewViewController: UIViewController {
 
             try viewModel.validateUserInputs()
             
-        } catch NewReviewInputError.insufficientMenuNameError {
+        } catch NewReviewInputError.insufficientMenuError {
             
-            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuNameError.errorDescription)
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuError.errorDescription)
             self.present(alert, animated: true)
 
 
@@ -130,7 +72,12 @@ class NewReviewViewController: UIViewController {
             self.present(alert, animated: true)
             
 
-        } catch {
+        } catch NewReviewInputError.blankMenuNameError {
+            
+            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.blankMenuNameError.errorDescription)
+            self.present(alert, animated: true)
+        }
+        catch {
             print("Unexpected Error occured in pressedFinishButton")
         }
 
@@ -216,8 +163,8 @@ extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 extension NewReviewViewController: NewMenuTableViewCellDelegate {
    
     // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
-    func didChangeMenuName() {
-        //
+    func didChangeMenuName(at index: Int, _ newMenuName: String) {
+       viewModel.menus[index].menuName = newMenuName
     }
     
     func didPressDeleteMenuButton(at index: Int) {
@@ -300,9 +247,6 @@ extension NewReviewViewController: UITextViewDelegate {
             return
         }
         viewModel.review = textView.text
-   
-        
-
     }
 
 }

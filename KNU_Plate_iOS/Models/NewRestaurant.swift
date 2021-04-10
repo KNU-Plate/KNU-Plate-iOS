@@ -5,11 +5,13 @@ import Foundation
 class NewRestaurant: Codable {
     
     var name: String = ""
+    
+    /// located gate
     var gate: String = ""
+    
     var foodCategory: String = "한식"
-    var rating: Int = 3
-    var userReview: String = ""
-   
+    
+    //var 
     
     // 추가로 뭐 필요한지 생각해보기
     
