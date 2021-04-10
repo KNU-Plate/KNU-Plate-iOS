@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HTTPStatusError: Int, Error, LocalizedError {
+public enum HTTPStatus: Int, Error, LocalizedError {
     
     case success = 200
     /// The request was unacceptable, often due to missing a required parameter.

@@ -23,58 +23,6 @@ class NewReviewViewController: UIViewController {
    
     }
     
-    func testAlamofire() {
-        
-        let baseURL = "http://3.35.58.40:4100/api/signup"
-        let user_name = "alex"
-        let display_name = "alexding"
-        let password = "123456789"
-        let email_address = "alexding@knu.ac.kr"
-        
-        let param: Parameters = [
-        
-            "user_name": user_name,
-            "display_name": display_name,
-            "password": password,
-            "mail_address": email_address
-        ]
-        
-        let headers: HTTPHeaders = [
-        
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded"
-            
-        ]
-        
-        AF.request(baseURL, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: headers).responseJSON { (response) in
-            
-            switch response.result {
-        
-            case .success:
-                
-                if let result = try! response.result.get() as? [String: Any] {
-                    
-                    print(result)
-                    
-                    let userID = result["user_id"] as? String
-                    let userName = result["user_name"] as? String
-
-                    
-                    print(userID)
-                    print(userName)
-                }
-                
-            case .failure(let error):
-                print(error)
-                return
-                
-                
-            }
-        }
-
-
-    }
-    
     @objc func pressedAddMenuButton() {
         
         if viewModel.menus.count >= 5 {
