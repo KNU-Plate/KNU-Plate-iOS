@@ -30,6 +30,7 @@
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
 		7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */; };
 		7CBE745226208366002E1FF7 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* Menu.swift */; };
+		7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */; };
@@ -71,6 +72,7 @@
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CBE745126208366002E1FF7 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoModel.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurant.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				7CBE745126208366002E1FF7 /* Menu.swift */,
 				7C16DF222621810700AA8239 /* User.swift */,
 				7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */,
+				7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
 				3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */,
+				7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */,
 				7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurant.swift in Sources */,

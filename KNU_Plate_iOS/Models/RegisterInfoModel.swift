@@ -1,7 +1,6 @@
 import Foundation
 import Alamofire
 
-
 //MARK: - 새로운 사용자 회원가입용 Model -> UserManager.shared.signUp(with model: RegisterInfoModel)
 
 struct RegisterInfoModel {
@@ -30,8 +29,6 @@ struct RegisterInfoModel {
         parameters["display_name"] = displayName
         parameters["password"] = password
         parameters["mail_address"] = email
-        
-    
     }
 
     /// API parameters

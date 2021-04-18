@@ -18,19 +18,30 @@ class NewReviewViewController: UIViewController {
         
         initialize()
         //testSignup()
+        //testLogin()
     }
     
-    func testSignup() {
-        
-        let username = "hello0001"
-        let displayName = "hello3"
-        let password = "123456789"
-        let email = "423213213@knu.ac.kr"
-        
-        let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
-        
-        UserManager.shared.signUp(with: newRegisterModel)
-    }
+//    func testLogin() {
+//
+//        let username = "alexkim1234"
+//        let password = "123456789"
+//
+//        let newLoginModel = LoginInfoModel(username: username, password: password)
+//
+//        UserManager.shared.logIn(with: newLoginModel)
+//    }
+//
+//    func testSignup() {
+//
+//        let username = "hello0001"
+//        let displayName = "hello3"
+//        let password = "123456789"
+//        let email = "423213213@knu.ac.kr"
+//
+//        let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
+//
+//        UserManager.shared.signUp(with: newRegisterModel)
+//    }
     
     @objc func pressedAddMenuButton() {
         
