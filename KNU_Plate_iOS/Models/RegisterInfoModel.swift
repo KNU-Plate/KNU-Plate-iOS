@@ -39,6 +39,7 @@ struct RegisterInfoModel {
     
     /// HTTP Headers
     var headers: HTTPHeaders = [
+        
         "accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
     ]

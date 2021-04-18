@@ -17,13 +17,11 @@ class NewReviewViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        
-        
-    
-   
     }
     
     @objc func pressedAddMenuButton() {
+        
+        //MARK: - TODO : Error 처리를 VC 에서 하는게 맞는가? View Model 에서 하는거 고려해보기
         
         if viewModel.menus.count >= 5 {
             menuInputTextField.text?.removeAll()
@@ -65,7 +63,6 @@ class NewReviewViewController: UIViewController {
             let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuError.errorDescription)
             self.present(alert, animated: true)
 
-
         } catch NewReviewInputError.insufficientReviewError {
             
             let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientReviewError.errorDescription )
@@ -84,11 +81,9 @@ class NewReviewViewController: UIViewController {
         /// API related methods needed here (upload)
         /// viewModel 내에서 NetworkManager.shared.uploadNewReview( ) 이런 식으로 해야 할듯
     }
-
-
 }
 
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource -> 사용자가 업로드 할 사진을 위한 Collection View
 
 extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -111,7 +106,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
         
-        /// 그 외의 셀은 사용자가 고른 사진  Cell
+        /// 그 외의 셀은 사용자가 고른 사진으로 구성된  Cell
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
@@ -128,8 +123,6 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
     }
-    
-
 }
 
 //MARK: - AddImageDelegate
@@ -178,12 +171,11 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     }
     
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool) {
-        
         viewModel.menus[index].isGood = isGood
     }
 }
 
-//MARK: - UITableViewDelegate, UITableViewDataSource
+//MARK: - UITableViewDelegate, UITableViewDataSource -> 메뉴 입력을 위한 TableView
 
 extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -248,9 +240,7 @@ extension NewReviewViewController: UITextViewDelegate {
         }
         viewModel.review = textView.text
     }
-
 }
-
 
 //MARK: - UI Configuration
 

@@ -17,6 +17,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
+        /// 기존 선택된 사진 모두 초기화
         selectedAssets.removeAll()
         userSelectedImages.removeAll()
         

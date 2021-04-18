@@ -24,6 +24,13 @@ class User {
     public var dateCreated: String
     
     public var isActive: String
+     
+    
+    
+    
+    
+    /// variable for medal image
+    public var ranking: Int
     
     public init() {
         self.id = ""
@@ -33,6 +40,7 @@ class User {
         self.email = ""
         self.dateCreated = ""
         self.isActive = ""
+        self.ranking = 3
     }
 
     enum Codingkeys: String, CodingKey {
