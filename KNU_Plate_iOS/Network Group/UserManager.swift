@@ -6,8 +6,10 @@ class UserManager {
     //MARK: - Singleton
     static let shared: UserManager = UserManager()
     
-    let signUpRequestURL = "http://3.35.58.40:4100/api/signup"
-    let logInRequestURL = "http://3.35.58.40:4100/api/login"
+    let signUpRequestURL = "\(Constants.API_BASE_URL)signup"
+    let logInRequestURL = "\(Constants.API_BASE_URL)login"
+    let issueEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let emailVerificationURL = "\(Constants.API_BASE_URL)mail-auth/verification"
     
     
     
@@ -27,7 +29,7 @@ class UserManager {
                         
                         if let responseBody = try! response.result.get() as? [String: String] {
                             
-                            self.updateUserRegisterInfo(with: responseBody)
+                            self.saveUserRegisterInfo(with: responseBody)
                             //return HTTPStatus.success
                             
                             
@@ -86,13 +88,9 @@ class UserManager {
                         
                         if let responseBody = try! response.result.get() as? [String: Any] {
                             
-                           
+                            self.saveLoginInfoToUserDefaults(with: responseBody)
                             
-                            print(responseBody)
-                            
-                            
-                            //return HTTPStatus.success
-                            
+                        
                             
                             /// success 하고 홈화면으로 넘어가야함
                         }
@@ -130,11 +128,62 @@ class UserManager {
         
     }
     
-    //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
-    func saveLoginInfoToUserDefaults(with model: [String: String]) {
+
+    //MARK: - 이메일 인증 코드 발급 함수
+    func getEmailVerificationCode() {
         
+        AF.request(issueEmailVerificationCodeURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody).responseJSON { (response) in
+                    
+                    switch response.response?.statusCode {
+                    
+                    /// Success :  200
+                    case HTTPStatus.success.rawValue:
+                        
+                        if let responseBody = try! response.result.get() as? [String: Int] {
+                            
+                            self.saveLoginInfoToUserDefaults(with: responseBody)
+                            
+                        
+                            
+                            /// success 하고 홈화면으로 넘어가야함
+                        }
+                        else {
+                            print("Failed to convert signup request response JSON to model")
+                        }
+                        
+                        
+                    /// Bad Request: 400
+                    case HTTPStatus.badRequest.rawValue:
+                        
+                        print(HTTPStatus.badRequest.errorDescription)
+                        //return HTTPStatus.badRequest
+                        
+                    /// Internal Error : 500
+                    case HTTPStatus.internalError.rawValue:
+                        
+                        print(HTTPStatus.internalError.errorDescription)
+                    //return HTTPStatus.internalError
+                    
+                    /// Not Found Error : 404
+                    case HTTPStatus.notFound.rawValue:
+                        
+                        //return HTTPStatus.notFound
+                        
+                        print("not found")
+                        
+                        
+                    default:
+                        
+                        break
+                        
+                    } /// end - switch
+                    
+                    
+                    
+                   }
     }
-    
     
     
 }
@@ -142,7 +191,9 @@ class UserManager {
 
 extension UserManager {
     
-    func updateUserRegisterInfo(with model: [String: String]) {
+    func saveUserRegisterInfo(with model: [String: String]) {
+        
+        //TODO: - Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
         
         User.shared.id = model["user_id"]!
         User.shared.username = model["user_name"]!
@@ -151,5 +202,11 @@ extension UserManager {
         User.shared.email = model["mail_address"]!
         User.shared.dateCreated = model["date_create"]!
         User.shared.isActive = model["is_active"]!
+    }
+    
+    //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
+    func saveLoginInfoToUserDefaults(with model: [String: Any]) {
+        
+        
     }
 }
