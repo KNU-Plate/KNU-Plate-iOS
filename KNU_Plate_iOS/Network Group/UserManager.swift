@@ -24,20 +24,31 @@ class UserManager {
                     
                     case HTTPStatus.success.rawValue:
                         
-                        if let result = try! response.result.get() as? [String: Any] {
+                        if let result = try! response.result.get() as? [String: String] {
+                            
+                            print(result)
                             
                             self.updateUserRegisterInfo(with: result)
                             
                             /// success 하고 다음 vc 로 넘어가야 할 듯
                         }
+                        else {
+                            print("Failed to convert signup request response JSON to model")
+                        }
                         
                     case HTTPStatus.badRequest.rawValue:
-                        print("bad request")
+                        
+                        
+                        print(HTTPStatus.badRequest.errorDescription)
                         
                     case HTTPStatus.internalError.rawValue:
-                        print("internal error")
-                        
+                 
+                       
+                  
+                        print(HTTPStatus.internalError.errorDescription)
+                     
                     case HTTPStatus.notFound.rawValue:
+                        
                         print("not found")
                     default:
                         break
@@ -63,14 +74,14 @@ class UserManager {
 
 extension UserManager {
     
-    func updateUserRegisterInfo(with model: [String: Any]) {
+    func updateUserRegisterInfo(with model: [String: String]) {
         
-        User.shared.id = model["user_id"] as! String
-        User.shared.username = model["user_name"] as! String
-        User.shared.password = model["password"] as! String
-        User.shared.displayName = model["display_name"] as! String
-        User.shared.email = model["mail_address"] as! String
-        User.shared.dateCreated = model["date_create"] as! String
-        User.shared.isActive = model["is_active"] as! String
+        User.shared.id = model["user_id"]!
+        User.shared.username = model["user_name"]!
+        User.shared.password = model["password"]!
+        User.shared.displayName = model["display_name"]!
+        User.shared.email = model["mail_address"]!
+        User.shared.dateCreated = model["date_create"]!
+        User.shared.isActive = model["is_active"]!
     }
 }
