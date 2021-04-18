@@ -3,10 +3,13 @@ import Foundation
 public enum HTTPStatus: Int, Error, LocalizedError {
     
     case success = 200
+    
     /// The request was unacceptable, often due to missing a required parameter.
     case badRequest = 400
+    
     /// Something went wrong on our end.
     case internalError = 500
+    
     /// The requested resource doesn’t exist.
     case notFound = 404
     
@@ -15,13 +18,13 @@ public enum HTTPStatus: Int, Error, LocalizedError {
         switch self {
         
         case .success:
-            return "Success"
+            return "Success: 200"
         case .badRequest:
-            return "잘못된 요청입니다."
+            return "Bad Request: 400"
         case .internalError:
-            return "서버에 문제가 있습니다."
+            return "Internal Server Error: 500"
         case .notFound:
-            return "조회에 실패하였습니다"
+            return "Not Found Error: 404"
         }
     }
     

@@ -26,11 +26,18 @@ class NewMenuTableViewCell: UITableViewCell {
         pressedMenuGoodOrBad(goodButton)
         menuNameTextField.delegate = self
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+    /// 초기화
+    override func prepareForReuse() {
+        menuNameTextField.text = ""
+        pressedMenuGoodOrBad(goodButton)
+    }
+
+    //MARK: - 추천 / 비추천 버튼 눌렀을 때 실행
     @IBAction func pressedMenuGoodOrBad(_ sender: UIButton) {
         
         menuNameTextField.resignFirstResponder()
@@ -41,34 +48,34 @@ class NewMenuTableViewCell: UITableViewCell {
         case goodButton:
             menuIsGood = true
             
-            goodButton.setImage(UIImage(named: "good (selected)"),
+            goodButton.setImage(UIImage(named: "thumbs up(selected)"),
                                 for: .normal)
-            badButton.setImage(UIImage(named: "bad (not-selected)"),
+            badButton.setImage(UIImage(named: "thumbs down(not_selected)"),
                                for: .normal)
             
         case badButton:
             menuIsGood = false
             
-            goodButton.setImage(UIImage(named: "good (not-selected)"),
+            goodButton.setImage(UIImage(named: "thumbs up(not_selected)"),
                                 for: .normal)
-            badButton.setImage(UIImage(named: "bad (selected)"),
+            badButton.setImage(UIImage(named: "thumbs down(selected)"),
                                for: .normal)
             
         default:
             return
         }
-        delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: menuIsGood)
         
+        delegate?.didPressEitherGoodOrBadButton(at: indexPath, menu: menuIsGood)
     }
     
     @IBAction func pressedDeleteButton(_ sender: UIButton) {
         delegate?.didPressDeleteMenuButton(at: indexPath)
     }
-    
 }
 
 extension NewMenuTableViewCell: UITextFieldDelegate {
     
+    /// 메뉴명이 비어있는 상황 방지 
     func textFieldDidEndEditing(_ textField: UITextField) {
     
         if let editedMenu = textField.text {

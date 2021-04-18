@@ -76,8 +76,6 @@ class NewReviewViewModel {
         
         for eachMenu in self.menus {
             
-            print("eachMenu: \(eachMenu.menuName.count)")
-            
             guard eachMenu.menuName.count > 0 else {
                 throw NewReviewInputError.blankMenuNameError
             }

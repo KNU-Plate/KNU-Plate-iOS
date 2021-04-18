@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 struct Constants {
-    
+
     struct Color {
         
         static let appDefaultColor = "AppDefaultColor"
@@ -38,6 +38,17 @@ struct Constants {
         static let newMenuTableViewCell = "NewMenuTableViewCell"
     }
     
+    struct UserDefaultsKey {
+        
+        static let isLoggedIn = "isLoggedIn"
+        static let username = "username"
+        static let password = "password"
+        
+        //TODO: - accessToken, refreshToken, expires, expires_refresh 도 다 저장해야되는지 준수씨랑 상의
+        
+    }
+    
+    static let API_BASE_URL = "http://3.35.58.40:4100/api/"
     
     
     
