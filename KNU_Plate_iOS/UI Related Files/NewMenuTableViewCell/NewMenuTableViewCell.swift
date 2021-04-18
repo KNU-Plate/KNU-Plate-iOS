@@ -25,6 +25,7 @@ class NewMenuTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         pressedMenuGoodOrBad(goodButton)
         menuNameTextField.delegate = self
+        menuNameTextField.isUserInteractionEnabled = false          /// False 로 계속 둘지 생각해보기
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +34,7 @@ class NewMenuTableViewCell: UITableViewCell {
     
     /// 초기화
     override func prepareForReuse() {
+        indexPath = 0
         menuNameTextField.text = ""
         pressedMenuGoodOrBad(goodButton)
     }

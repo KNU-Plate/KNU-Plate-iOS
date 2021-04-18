@@ -137,13 +137,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		7C16DF1B262157C800AA8239 /* Extensions (VC) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Extensions (VC)";
-			sourceTree = "<group>";
-		};
 		7C443226261D921100A0D83F /* UserPickedFoodImageViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +220,6 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7C16DF1B262157C800AA8239 /* Extensions (VC) */,
 				7CE10471260C447500E18C00 /* Utilities */,
 				7CE10470260C446500E18C00 /* View Controllers */,
 			);

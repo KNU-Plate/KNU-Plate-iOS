@@ -18,68 +18,62 @@
                 <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sdC-Ol-AXQ">
-                        <rect key="frame" x="10" y="5" width="150" height="35"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="메뉴명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-uX-0ge">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
-                                <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="D6H-Jo-Buq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                    </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="T4Z-b4-URM" userLabel="Rating Stack View">
-                        <rect key="frame" x="170" y="5" width="150" height="35"/>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="메뉴명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-uX-0ge">
+                        <rect key="frame" x="5" y="5" width="160" height="35"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="D6H-Jo-Buq"/>
+                            <constraint firstAttribute="width" constant="160" id="kQp-Ol-YA0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="T4Z-b4-URM" userLabel="Rating Stack View">
+                        <rect key="frame" x="208.5" y="5" width="76.5" height="35"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SN-CZ-MWC" userLabel="Good button">
-                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="Q1V-sh-UEY"/>
-                                    <constraint firstAttribute="height" constant="35" id="qVN-dt-7tF"/>
-                                </constraints>
-                                <state key="normal" image="good (not-selected)"/>
+                                <rect key="frame" x="0.0" y="0.0" width="21.5" height="35"/>
+                                <state key="normal" image="thumbs up(not_selected)">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="100"/>
+                                </state>
                                 <connections>
                                     <action selector="pressedMenuGoodOrBad:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oth-md-VJa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdG-xy-tiV" userLabel="Bad button">
-                                <rect key="frame" x="59" y="0.0" width="35" height="35"/>
+                                <rect key="frame" x="41.5" y="0.0" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="TF3-vb-QWg"/>
                                     <constraint firstAttribute="width" constant="35" id="U3a-MP-af2"/>
                                 </constraints>
-                                <state key="normal" image="bad (not-selected)"/>
+                                <state key="normal" image="thumbs down(not_selected)"/>
                                 <connections>
                                     <action selector="pressedMenuGoodOrBad:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cba-De-cIk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7K-msT" userLabel="Delete button">
-                                <rect key="frame" x="120" y="0.0" width="30" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="AjM-nQ-5au"/>
-                                    <constraint firstAttribute="height" constant="35" id="Qjv-QY-UA6"/>
-                                </constraints>
-                                <state key="normal" image="cancel button"/>
-                                <connections>
-                                    <action selector="pressedDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7vp-rq-VDh"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="Tn2-UW-QmQ"/>
-                        </constraints>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7K-msT" userLabel="Delete button">
+                        <rect key="frame" x="295" y="5" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="AN6-Yb-Qht"/>
+                            <constraint firstAttribute="width" constant="30" id="AjM-nQ-5au"/>
+                            <constraint firstAttribute="height" constant="35" id="Qjv-QY-UA6"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="q8G-a7-IxW"/>
+                        </constraints>
+                        <state key="normal" image="cancel button"/>
+                        <connections>
+                            <action selector="pressedDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7vp-rq-VDh"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="T4Z-b4-URM" secondAttribute="trailing" constant="10" id="4lM-H1-vtf"/>
-                    <constraint firstItem="sdC-Ol-AXQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="X3k-VY-8wS"/>
-                    <constraint firstItem="sdC-Ol-AXQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Xv9-Tf-p9u"/>
-                    <constraint firstItem="T4Z-b4-URM" firstAttribute="leading" secondItem="sdC-Ol-AXQ" secondAttribute="trailing" constant="10" id="dwI-Pi-tGb"/>
+                    <constraint firstAttribute="trailing" secondItem="PNB-7K-msT" secondAttribute="trailing" constant="5" id="A1Z-lu-dmn"/>
+                    <constraint firstItem="PNB-7K-msT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Gez-kl-Lb9"/>
+                    <constraint firstItem="PNB-7K-msT" firstAttribute="leading" secondItem="T4Z-b4-URM" secondAttribute="trailing" constant="10" id="QVB-qr-mXH"/>
+                    <constraint firstItem="v6T-uX-0ge" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ccX-ku-LpI"/>
                     <constraint firstItem="T4Z-b4-URM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="gca-RW-dog"/>
+                    <constraint firstItem="v6T-uX-0ge" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="jgW-LB-MSl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -93,9 +87,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bad (not-selected)" width="35" height="37"/>
         <image name="cancel button" width="40" height="40"/>
-        <image name="good (not-selected)" width="35" height="37.5"/>
+        <image name="thumbs down(not_selected)" width="21.5" height="21.5"/>
+        <image name="thumbs up(not_selected)" width="21.5" height="21.5"/>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
