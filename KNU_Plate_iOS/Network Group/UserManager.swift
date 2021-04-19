@@ -14,6 +14,7 @@ class UserManager {
     
     
     //MARK: - 회원가입 함수
+    //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
     func signUp(with model: RegisterInfoModel) {
         
         AF.request(signUpRequestURL,
@@ -21,7 +22,7 @@ class UserManager {
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
                    headers: model.headers).responseJSON { (response) in
-            
+                    
                     switch response.response?.statusCode {
                     
                     /// Success :  200
@@ -44,8 +45,8 @@ class UserManager {
                     case HTTPStatus.badRequest.rawValue:
                         
                         print(HTTPStatus.badRequest.errorDescription)
-                        //return HTTPStatus.badRequest
-                        
+                    //return HTTPStatus.badRequest
+                    
                     /// Internal Error : 500
                     case HTTPStatus.internalError.rawValue:
                         
@@ -65,13 +66,91 @@ class UserManager {
                         break
                         
                     } /// end - switch
-                } // end - closure
+                   } // end - closure
         
         
         
     }
     
-
+    //    func signUp(with model: RegisterInfoModel) {
+    //
+    //        AF.request(signUpRequestURL,
+    //                   method: .post,
+    //                   parameters: model.parameters,
+    //                   encoding: URLEncoding.httpBody,
+    //                   headers: model.headers)
+    //            .validate(statusCode: 200..<300)
+    //            .responseJSON { (response) in
+    //
+    //                switch response.result {
+    //
+    //                case .success:
+    //                    print("response: \(response)")
+    //                    print("HTTP Response Code: \(response.response?.statusCode)")
+    //
+    //
+    //                    if let responseBody = try! response.result.get() as? [String: Any] {
+    //
+    //                        self.saveLoginInfoToUserDefaults(with: responseBody)
+    //                        print("responseBody: \(responseBody)")
+    //
+    //                    }
+    //
+    //                case let .failure(error):
+    //
+    //                    print(error)
+    //                    print(response)
+    //
+    //
+    //                /// Success :  200
+    //
+    //
+    //                } /// end - switch
+    //            } // end - closure
+    //
+    //
+    //
+    //    }
+    //
+    //    func logIn(with model: LoginInfoModel) {
+    //
+    //        AF.request(logInRequestURL,
+    //                   method: .post,
+    //                   parameters: model.parameters,
+    //                   encoding: URLEncoding.httpBody,
+    //                   headers: model.headers).responseJSON { (response) in
+    //
+    //                    switch response.result {
+    //
+    //                    case .success:
+    //
+    //                        print("response: \(response)")
+    //                        print("response result: \(response.result)")
+    //
+    //                        if let responseBody = try! response.result.get() as? [String: Any] {
+    //
+    //                            self.saveLoginInfoToUserDefaults(with: responseBody)
+    //                            print("responseBody: \(responseBody)")
+    //
+    //
+    //
+    //                            /// success 하고 홈화면으로 넘어가야함
+    //                        }
+    //                        else {
+    //                            print("failed to parse JSON")
+    //                        }
+    //                    case let .failure(error):
+    //                        print(error)
+    //
+    //                        print(response.response?.statusCode)
+    //
+    //
+    //                    } /// end - switch
+    //                   } // end - closure
+    //
+    //    }
+    
+    
     //MARK: - 로그인 함수
     func logIn(with model: LoginInfoModel) {
         
@@ -80,7 +159,7 @@ class UserManager {
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
                    headers: model.headers).responseJSON { (response) in
-            
+                    
                     switch response.response?.statusCode {
                     
                     /// Success :  200
@@ -90,7 +169,7 @@ class UserManager {
                             
                             self.saveLoginInfoToUserDefaults(with: responseBody)
                             
-                        
+                            
                             
                             /// success 하고 홈화면으로 넘어가야함
                         }
@@ -103,8 +182,8 @@ class UserManager {
                     case HTTPStatus.badRequest.rawValue:
                         
                         print(HTTPStatus.badRequest.errorDescription)
-                        //return HTTPStatus.badRequest
-                        
+                    //return HTTPStatus.badRequest
+                    
                     /// Internal Error : 500
                     case HTTPStatus.internalError.rawValue:
                         
@@ -124,11 +203,11 @@ class UserManager {
                         break
                         
                     } /// end - switch
-                } // end - closure
+                   } // end - closure
         
     }
     
-
+    
     //MARK: - 이메일 인증 코드 발급 함수
     func getEmailVerificationCode() {
         
@@ -145,7 +224,7 @@ class UserManager {
                             
                             self.saveLoginInfoToUserDefaults(with: responseBody)
                             
-                        
+                            
                             
                             /// success 하고 홈화면으로 넘어가야함
                         }
@@ -158,8 +237,8 @@ class UserManager {
                     case HTTPStatus.badRequest.rawValue:
                         
                         print(HTTPStatus.badRequest.errorDescription)
-                        //return HTTPStatus.badRequest
-                        
+                    //return HTTPStatus.badRequest
+                    
                     /// Internal Error : 500
                     case HTTPStatus.internalError.rawValue:
                         

@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-//MARK: - 사용자 로그인용 Model -> UserManager.shared.logIn(with mode: LoginInfoModel)
+//MARK: - 사용자 로그인용 Model -> UserManager.shared.logIn(with model: LoginInfoModel)
 
 struct LoginInfoModel {
     

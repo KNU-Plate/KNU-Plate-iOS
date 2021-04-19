@@ -165,9 +165,9 @@
 		7CE10471260C447500E18C00 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7C16DF1C2621590800AA8239 /* UserInputError.swift */,
 				7CD74B79260B209300D05B84 /* AlertManager.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
-				7C16DF1C2621590800AA8239 /* UserInputError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
