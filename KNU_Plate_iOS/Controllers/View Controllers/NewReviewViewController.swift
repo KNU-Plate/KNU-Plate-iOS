@@ -69,6 +69,8 @@ class NewReviewViewController: UIViewController {
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
             
+            
+            
         }
     }
     
@@ -80,7 +82,24 @@ class NewReviewViewController: UIViewController {
     
         do {
 
+            //TODO: - 마지막으로 업로드하기 전에 확인 질문 띄우기?
+            //TODO: - "완료" 버튼 누르고 시간이 좀 많이 걸린다 싶으면 activity indicator (loading 표시) 하나 넣는거 고려
+            
             try viewModel.validateUserInputs()
+            viewModel.rating = starRating.starsRating
+            
+            
+            
+            print("입력 모두 정상")
+            print(viewModel.rating)
+            print(viewModel.menus[0].menuName)
+            print(viewModel.review)
+            print(starRating.starsRating)
+            /// user input이 정상이라면 본격 업로드
+            
+       
+            
+            
             
         } catch NewReviewInputError.insufficientMenuError {
             

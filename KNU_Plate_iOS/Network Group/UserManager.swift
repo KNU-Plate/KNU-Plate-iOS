@@ -1,17 +1,20 @@
 import Foundation
 import Alamofire
 
+//MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
+
 class UserManager {
     
     //MARK: - Singleton
     static let shared: UserManager = UserManager()
     
+    //MARK: - API Request URLs
     let signUpRequestURL = "\(Constants.API_BASE_URL)signup"
     let logInRequestURL = "\(Constants.API_BASE_URL)login"
     let issueEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
     let emailVerificationURL = "\(Constants.API_BASE_URL)mail-auth/verification"
     
-    
+    private init() {}
     
     //MARK: - 회원가입 함수
     //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
