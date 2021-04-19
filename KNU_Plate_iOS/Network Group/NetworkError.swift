@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HTTPStatus: Int, Error, LocalizedError {
+enum HTTPStatus: Int, Error, LocalizedError {
     
     case success = 200
     
@@ -13,7 +13,7 @@ public enum HTTPStatus: Int, Error, LocalizedError {
     /// The requested resource doesn’t exist.
     case notFound = 404
     
-    public var errorDescription: String {
+    var errorDescription: String? {
         
         switch self {
         

@@ -21,27 +21,27 @@ class NewReviewViewController: UIViewController {
         //testLogin()
     }
     
-//    func testLogin() {
-//
-//        let username = "alexkim1234"
-//        let password = "123456789"
-//
-//        let newLoginModel = LoginInfoModel(username: username, password: password)
-//
-//        UserManager.shared.logIn(with: newLoginModel)
-//    }
-//
-//    func testSignup() {
-//
-//        let username = "hello0001"
-//        let displayName = "hello3"
-//        let password = "123456789"
-//        let email = "423213213@knu.ac.kr"
-//
-//        let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
-//
-//        UserManager.shared.signUp(with: newRegisterModel)
-//    }
+    func testLogin() {
+
+        let username = "kevinkim"
+        let password = "123456789"
+
+        let newLoginModel = LoginInfoModel(username: username, password: password)
+
+        UserManager.shared.logIn(with: newLoginModel)
+    }
+
+    func testSignup() {
+
+        let username = "kevinkim"
+        let displayName = "kevinkim"
+        let password = "123456789"
+        let email = "kevinkim2586@knu.ac.kr"
+
+        let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
+
+        UserManager.shared.signUp(with: newRegisterModel)
+    }
     
     @objc func pressedAddMenuButton() {
         
@@ -64,8 +64,8 @@ class NewReviewViewController: UIViewController {
             }
             
             viewModel.addNewMenu(name: nameOfMenu)
-            menuInputTableView.insertRows(at: [IndexPath(row: viewModel.menus.count - 1, section: 0)],
-                                          with: .bottom)
+            
+            menuInputTableView.reloadData()
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
             
@@ -76,7 +76,7 @@ class NewReviewViewController: UIViewController {
     // 완료 버튼 눌렀을 시 실행
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
-        reviewTextView.resignFirstResponder()
+        self.view.endEditing(true)
     
         do {
 
@@ -166,10 +166,7 @@ extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 
     func didPressDeleteImageButton(at index: Int) {
 
-        let indexToDelete = IndexPath.init(row: index, section: 0)
-        reviewImageCollectionView.deleteItems(at: [indexToDelete])
-        viewModel.userSelectedImages.remove(at: indexToDelete.item - 1)
-        
+        viewModel.userSelectedImages.remove(at: index - 1)
         reviewImageCollectionView.reloadData()
         viewWillLayoutSubviews()
     }
@@ -185,11 +182,8 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     }
     
     func didPressDeleteMenuButton(at index: Int) {
-        
-        let indexToDelete = IndexPath.init(row: index, section: 0)
-        viewModel.menus.remove(at: indexToDelete.row)
-        menuInputTableView.deleteRows(at: [indexToDelete], with: .left)
     
+        viewModel.menus.remove(at: index)
         menuInputTableView.reloadData()
         viewWillLayoutSubviews()
     }
@@ -235,6 +229,39 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+
+//MARK: - UIPickerViewDataSource & UIPickerViewDelegate
+
+extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        //TODO: - viewModel.existingMenu.count 뭐 이런식으로 해야할듯
+        /// 가장 마지막 row 는 "직접 입력" 이어야 함 -> dismiss picker view and keyboard pop up
+        
+        return 5
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "Hello"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        menuInputTextField.text = "Hello"
+        print("didSelectRow activated")
+    }
+    
+    
+}
+
+
+
+
 
 //MARK: - UITextFieldDelegate -> For menuInputTextField
 
@@ -309,6 +336,7 @@ extension NewReviewViewController {
     func initializeTextField() {
         
         menuInputTextField.delegate = self
+        menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
@@ -340,6 +368,49 @@ extension NewReviewViewController {
         rightView.addSubview(addMenuButton)
         menuInputTextField.rightView = rightView
         menuInputTextField.rightViewMode = .always
+        initializePickerViewForMenuTextField()
+    }
+    
+    func initializePickerViewForMenuTextField() {
+        
+        let existingMenusPickerView = UIPickerView()
+        existingMenusPickerView.backgroundColor = .white
+        existingMenusPickerView.delegate = self
+        existingMenusPickerView.dataSource = self
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = .systemBlue
+        toolBar.sizeToFit()
+
+        let doneButton = UIBarButtonItem(title: "완료",
+                                         style: UIBarButtonItem.Style.done,
+                                         target: self,
+                                         action: #selector(self.dismissPicker))
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+                                          target: nil,
+                                          action: nil)
+        
+        let cancelButton = UIBarButtonItem(title: "취소",
+                                           style: UIBarButtonItem.Style.plain,
+                                           target: self,
+                                           action: #selector(self.dismissPicker))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        menuInputTextField.inputView = existingMenusPickerView
+        menuInputTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func dismissPicker(){
+        self.view.endEditing(true)
+//        workings = ""
+//        userInputTextField.text = ""
+//        resultTextField.text = ""
+//        userInputTextField.becomeFirstResponder()
     }
     
 }

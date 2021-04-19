@@ -71,9 +71,13 @@ class NewReviewViewModel {
     
     func validateUserInputs() throws {
         
+        /// 메뉴 개수가 0개이면 Error
         if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuError }
+        
+        /// 리뷰 글자수가 5 미만이면 Error
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
         
+        /// 입력한 메뉴 중 메뉴명이 비어있는게 하나라도 있으면 Error
         for eachMenu in self.menus {
             
             guard eachMenu.menuName.count > 0 else {
