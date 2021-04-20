@@ -1,11 +1,11 @@
 import Foundation
 
-//MARK: - Error 관리 enum
+//MARK: - Error 관리 enum 모음
 
 
 //MARK: - 신규 리뷰 등록 시 일어날 수 있는 Error
  
-public enum NewReviewInputError: Error, LocalizedError {
+enum NewReviewInputError: Error, LocalizedError {
     
     /// 메뉴를 하나도 안 추가했을 때 발생하는 Error
     case insufficientMenuError
@@ -33,7 +33,7 @@ public enum NewReviewInputError: Error, LocalizedError {
 
 //MARK: - 신규 맛집 등록 시 일어날 수 있는 Error
 
-public enum NewRestaurantInputError: Error, LocalizedError {
+enum NewRestaurantInputError: Error, LocalizedError {
     
     
 }

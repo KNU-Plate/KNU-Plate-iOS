@@ -7,7 +7,7 @@ class RatingController: UIStackView {
     var starsRating = 3                                             // 기본 별점은 3점으로 시작
     
     var starsEmptyPicName = "star rating (unfilled)"                // Empty star name (SF Symbol)
-    var starsFilledPicName = "star rating (filled)"                          // Filled star name (SF Symbol)
+    var starsFilledPicName = "star rating (filled)"                 // Filled star name (SF Symbol)
     
     override func draw(_ rect: CGRect) {
         

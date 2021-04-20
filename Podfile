@@ -10,5 +10,8 @@ target 'KNU_Plate_iOS' do
   pod 'Alamofire', '~> 5.2'
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
+  pod 'NMapsMap'
+  
+  
 
 end
