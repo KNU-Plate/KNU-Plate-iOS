@@ -19,6 +19,7 @@ class NewReviewViewController: UIViewController {
         initialize()
         //testSignup()
         //testLogin()
+
     }
     
     func testLogin() {

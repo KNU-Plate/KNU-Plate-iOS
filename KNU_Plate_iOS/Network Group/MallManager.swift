@@ -6,7 +6,7 @@ import Alamofire
 class MallManager {
     
     //MARK: - Singleton
-    static let shared: NetworkManager = NetworkManager()
+    static let shared: MallManager = MallManager()
     
     //MARK: - API Request URLs
     

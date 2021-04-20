@@ -2,12 +2,14 @@ PODS:
   - Alamofire (5.4.2)
   - BSImagePicker (3.3.1)
   - IQKeyboardManagerSwift (6.5.6)
+  - NMapsMap (3.11.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
   - IQKeyboardManagerSwift
+  - NMapsMap
   - SnapKit
 
 SPEC REPOS:
@@ -15,14 +17,16 @@ SPEC REPOS:
     - Alamofire
     - BSImagePicker
     - IQKeyboardManagerSwift
+    - NMapsMap
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  NMapsMap: e6dbea85c2c195c7532deb637a5e90fd70f94fed
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 4608a7ca4a0001575d4cb6b16a8ebea9be966a0e
+PODFILE CHECKSUM: 57a1b35ad2cd4e4267d23ca6d663ec37507c9d0f
 
 COCOAPODS: 1.10.1
