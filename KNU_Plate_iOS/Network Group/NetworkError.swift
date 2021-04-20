@@ -27,6 +27,18 @@ enum HTTPStatus: Int, Error, LocalizedError {
             return "Not Found Error: 404"
         }
     }
-    
-    
+}
+
+/// error(String)를 사용자에게 표시될 메시지로 변환
+func errorToMessage(_ errorString: String) -> String {
+    let message: String
+    // conditions have to be added
+    if errorString == "user_name length is too short or too long" {
+        message = "로그인 아이디는 4자 이상 20자 이하여야 합니다."
+    } else if errorString == "user_name is unique" {
+        message = "아이디가 중복입니다."
+    } else {
+        message = "알 수 없는 에러입니다."
+    }
+    return message
 }
