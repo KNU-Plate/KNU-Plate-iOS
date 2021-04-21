@@ -27,25 +27,26 @@ class UserManager {
                    headers: model.headers)
             .responseJSON { (response) in
                 
-                guard let res = response.response?.statusCode else { return }
+                guard let statusCode = response.response?.statusCode else { return }
                 
-                switch res {
-                
+                switch statusCode {
                 case 200..<300:
-                    //print(response.result)
-                    if let responseBody = try! response.result.get() as? [String: String] {
+                    do {
+                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self, from: response.data!)
+                        self.saveUserRegisterInfo(with: decodedData)
                         
-                        self.saveUserRegisterInfo(with: responseBody)
-                        
-                        /// success 하고 다음 vc 로 넘어가야 할 듯 (이메일 인증)
+                    } catch {
+                        print("There was an error decoding JSON Data")
                     }
+                    
                 default:
-                    if let json = try! response.result.get() as? [String:Any] {
-                        
-                        if let error = json["error"] as? String {
-                            
-                            let message = errorToMessage(error)
-                            // print(message) or use AlertManager
+                    if let responseJSON = try! response.result.get() as? [String:Any] {
+                        if let error = responseJSON["error"] as? String {
+                            if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
+                                print(errorMessage)
+                            } else {
+                                print("알 수 없는 에러입니다.")
+                            }
                         }
                     }
                 }
