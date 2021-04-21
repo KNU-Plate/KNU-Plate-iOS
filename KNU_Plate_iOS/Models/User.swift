@@ -25,14 +25,10 @@ class User {
     
     public var isActive: String
      
-    
-    
-    
-    
     /// variable for medal image
     public var ranking: Int
     
-    public init() {
+    private init() {
         self.id = ""
         self.username = ""
         self.password = ""
@@ -47,7 +43,7 @@ class User {
 
         case password
 
-        case userName = "user_name"
+        case username = "user_name"
         case displayName = "display_name"
         case email = "mail_address"
         case dateCreated = "date_create"

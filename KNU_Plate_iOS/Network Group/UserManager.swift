@@ -18,102 +18,50 @@ class UserManager {
     
     //MARK: - 회원가입 함수
     //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
+    
     func signUp(with model: RegisterInfoModel) {
         
         AF.request(signUpRequestURL,
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers)
+            .responseJSON { (response) in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200..<300:
                     
-                    switch response.response?.statusCode {
-                    
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
+                    do {
                         
-                        if let responseBody = try! response.result.get() as? [String: String] {
+                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self, from: response.data!)
+                        self.saveUserRegisterInfo(with: decodedData)
+                        
+                    } catch {
+                        print("There was an error decoding JSON Data")
+                    }
+                    
+                default:
+                    
+                    if let responseJSON = try! response.result.get() as? [String : String] {
+                        
+                        if let error = responseJSON["error"] {
                             
-                            self.saveUserRegisterInfo(with: responseBody)
-                            //return HTTPStatus.success
-                            
-                            
-                            /// success 하고 다음 vc 로 넘어가야 할 듯 (이메일 인증)
+                            let errorMessage = SignUpError.shared.returnErrorMessage(error)
+                            print(errorMessage)
+                
                         }
-                        else {
-                            print("Failed to convert signup request response body JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
-                        
-                    default:
-                        
-                        break
-                        
-                    } /// end - switch
-                   } // end - closure
-        
-        
-        
+                    }
+                }
+            }
     }
     
-    //    func signUp(with model: RegisterInfoModel) {
-    //
-    //        AF.request(signUpRequestURL,
-    //                   method: .post,
-    //                   parameters: model.parameters,
-    //                   encoding: URLEncoding.httpBody,
-    //                   headers: model.headers)
-    //            .validate(statusCode: 200..<300)
-    //            .responseJSON { (response) in
-    //
-    //                switch response.result {
-    //
-    //                case .success:
-    //                    print("response: \(response)")
-    //                    print("HTTP Response Code: \(response.response?.statusCode)")
-    //
-    //
-    //                    if let responseBody = try! response.result.get() as? [String: Any] {
-    //
-    //                        self.saveLoginInfoToUserDefaults(with: responseBody)
-    //                        print("responseBody: \(responseBody)")
-    //
-    //                    }
-    //
-    //                case let .failure(error):
-    //
-    //                    print(error)
-    //                    print(response)
-    //
-    //
-    //                /// Success :  200
-    //
-    //
-    //                } /// end - switch
-    //            } // end - closure
-    //
-    //
-    //
-    //    }
+    
+    
+
+    
     //
     //    func logIn(with model: LoginInfoModel) {
     //
@@ -273,17 +221,17 @@ class UserManager {
 
 extension UserManager {
     
-    func saveUserRegisterInfo(with model: [String: String]) {
+    func saveUserRegisterInfo(with model: RegisterResponseModel) {
         
-        //TODO: - Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
+        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
         
-        User.shared.id = model["user_id"]!
-        User.shared.username = model["user_name"]!
-        User.shared.password = model["password"]!
-        User.shared.displayName = model["display_name"]!
-        User.shared.email = model["mail_address"]!
-        User.shared.dateCreated = model["date_create"]!
-        User.shared.isActive = model["is_active"]!
+        User.shared.id = model.userID
+        User.shared.username = model.username
+        User.shared.password = model.password
+        User.shared.displayName = model.displayName
+        User.shared.email = model.email
+        User.shared.dateCreated = model.dateCreated
+        User.shared.isActive = model.isActive
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
