@@ -33,7 +33,6 @@ class UserManager {
                 switch statusCode {
                 
                 case 200..<300:
-                    
                     do {
                         
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self, from: response.data!)
@@ -44,63 +43,20 @@ class UserManager {
                     }
                     
                 default:
-                    
                     if let responseJSON = try! response.result.get() as? [String : String] {
                         
                         if let error = responseJSON["error"] {
                             
-                            let errorMessage = SignUpError.shared.returnErrorMessage(error)
-                            print(errorMessage)
-                
+                            if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
+                                print(errorMessage)
+                            } else {
+                                print("알 수 없는 에러 발생.")
+                            }
                         }
                     }
                 }
             }
     }
-    
-    
-    
-
-    
-    //
-    //    func logIn(with model: LoginInfoModel) {
-    //
-    //        AF.request(logInRequestURL,
-    //                   method: .post,
-    //                   parameters: model.parameters,
-    //                   encoding: URLEncoding.httpBody,
-    //                   headers: model.headers).responseJSON { (response) in
-    //
-    //                    switch response.result {
-    //
-    //                    case .success:
-    //
-    //                        print("response: \(response)")
-    //                        print("response result: \(response.result)")
-    //
-    //                        if let responseBody = try! response.result.get() as? [String: Any] {
-    //
-    //                            self.saveLoginInfoToUserDefaults(with: responseBody)
-    //                            print("responseBody: \(responseBody)")
-    //
-    //
-    //
-    //                            /// success 하고 홈화면으로 넘어가야함
-    //                        }
-    //                        else {
-    //                            print("failed to parse JSON")
-    //                        }
-    //                    case let .failure(error):
-    //                        print(error)
-    //
-    //                        print(response.response?.statusCode)
-    //
-    //
-    //                    } /// end - switch
-    //                   } // end - closure
-    //
-    //    }
-    
     
     //MARK: - 로그인 함수
     func logIn(with model: LoginInfoModel) {
@@ -111,51 +67,34 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: model.headers).responseJSON { (response) in
                     
-                    switch response.response?.statusCode {
+                    guard let statusCode = response.response?.statusCode else { return }
                     
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
-                        
-                        if let responseBody = try! response.result.get() as? [String: Any] {
+                    switch statusCode {
+                    
+                    case 200..<300:
+                        do {
                             
-                            self.saveLoginInfoToUserDefaults(with: responseBody)
+                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
+                            self.saveLoginInfoToUserDefaults(with: decodedData)
                             
-                            
-                            
-                            /// success 하고 홈화면으로 넘어가야함
+                        } catch {
+                            print("There was an error decoding JSON Data")
                         }
-                        else {
-                            print("Failed to convert signup request response JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
                         
                     default:
-                        
-                        break
-                        
-                    } /// end - switch
-                   } // end - closure
-        
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            
+                            if let error = responseJSON["error"] {
+                                
+                                if let errorMessage = LogInError(rawValue: error)?.returnErrorMessage() {
+                                    print(errorMessage)
+                                } else {
+                                    print("알 수 없는 에러 발생.")
+                                }
+                            }
+                        }
+                    }
+                }
     }
     
     
@@ -166,53 +105,34 @@ class UserManager {
                    method: .post,
                    encoding: URLEncoding.httpBody).responseJSON { (response) in
                     
-                    switch response.response?.statusCode {
+                    guard let statusCode = response.response?.statusCode else { return }
                     
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
-                        
-                        if let responseBody = try! response.result.get() as? [String: Int] {
+                    switch statusCode {
+                    
+                    case 200..<300:
+                        do {
                             
-                            self.saveLoginInfoToUserDefaults(with: responseBody)
+                            //let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
                             
                             
-                            
-                            /// success 하고 홈화면으로 넘어가야함
+                        } catch {
+                            print("There was an error decoding JSON Data")
                         }
-                        else {
-                            print("Failed to convert signup request response JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
                         
                     default:
-                        
-                        break
-                        
-                    } /// end - switch
-                    
-                    
-                    
-                   }
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            
+                            if let error = responseJSON["error"] {
+                                
+                                if let errorMessage = MailVerificationIssuanceError(rawValue: error)?.returnErrorMessage() {
+                                    print(errorMessage)
+                                } else {
+                                    print("알 수 없는 에러 발생.")
+                                }
+                            }
+                        }
+                    }
+                }
     }
     
     
@@ -235,7 +155,7 @@ extension UserManager {
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
-    func saveLoginInfoToUserDefaults(with model: [String: Any]) {
+    func saveLoginInfoToUserDefaults(with model: LoginResponseModel) {
         
         
     }
