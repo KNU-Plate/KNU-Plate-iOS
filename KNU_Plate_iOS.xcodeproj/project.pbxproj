@@ -64,6 +64,8 @@
 		7C1F790E2632E1FB00C7B41D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F790D2632E1FB00C7B41D /* CoreLocation.framework */; };
 		7C1F79102632E20200C7B41D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F790F2632E20200C7B41D /* SystemConfiguration.framework */; };
 		7C1F79122632E20800C7B41D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F79112632E20800C7B41D /* OpenGLES.framework */; };
+		7C1F79DD2633025900C7B41D /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79DC2633025900C7B41D /* MapManager.swift */; };
+		7C1F79DF26330AD000C7B41D /* SearchRestaurantByKeywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
@@ -169,6 +171,8 @@
 		7C1F790D2632E1FB00C7B41D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7C1F790F2632E20200C7B41D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7C1F79112632E20800C7B41D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7C1F79DC2633025900C7B41D /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantByKeywordModel.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -422,6 +426,7 @@
 			children = (
 				7C44321C261D7D1500A0D83F /* UserManager.swift */,
 				7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */,
+				7C1F79DC2633025900C7B41D /* MapManager.swift */,
 				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
 			);
 			path = "Network Group";
@@ -446,6 +451,7 @@
 				7C16DF222621810700AA8239 /* User.swift */,
 				7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */,
 				7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */,
+				7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -611,9 +617,11 @@
 				7C16DF232621810700AA8239 /* User.swift in Sources */,
 				7C1F79062632E04700C7B41D /* ExampleViewController.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */,
+				7C1F79DF26330AD000C7B41D /* SearchRestaurantByKeywordModel.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
+				7C1F79DD2633025900C7B41D /* MapManager.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */,
 				7C16DF202621779600AA8239 /* NetworkError.swift in Sources */,

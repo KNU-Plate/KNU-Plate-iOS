@@ -13,8 +13,7 @@ class FindRestaurantViewController: UIViewController, MTMapViewDelegate {
         mapView = MTMapView()
         mapView.delegate = self
         mapView.baseMapType = .standard
-
-
+        
         
     }
     
