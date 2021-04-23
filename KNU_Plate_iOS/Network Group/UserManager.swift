@@ -31,7 +31,6 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
                 case 200..<300:
                     do {
                         
