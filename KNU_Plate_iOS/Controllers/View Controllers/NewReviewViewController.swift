@@ -17,7 +17,7 @@ class NewReviewViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        //testSignup()
+        testSignup()
         //testLogin()
 
     }
@@ -34,10 +34,10 @@ class NewReviewViewController: UIViewController {
 
     func testSignup() {
 
-        let username = "kevinkim"
-        let displayName = "kevinkim"
+        let username = "alexding"
+        let displayName = "alexding"
         let password = "123456789"
-        let email = "kevinkim2586@knu.ac.kr"
+        let email = "alexding@knu.ac.kr"
 
         let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
 

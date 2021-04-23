@@ -1,5 +1,7 @@
 import Foundation
 
+//MARK: - 각종 Network 관련된 Error 를 처리하는 파일
+
 enum HTTPStatus: Int, Error, LocalizedError {
     
     case success = 200
@@ -27,6 +29,82 @@ enum HTTPStatus: Int, Error, LocalizedError {
             return "Not Found Error: 404"
         }
     }
-    
-    
 }
+
+//MARK: - 회원가입 Error Message 관리
+
+enum SignUpError: String {
+    
+    case usernameLengthTooLong = "user_name length is too short or too long"
+    case usernameAlreadyExists = "user_name is unique"
+    
+    ///다른 에러는 준수씨한테 받기
+    
+    func returnErrorMessage() -> String {
+        
+        switch self {
+        
+        case .usernameLengthTooLong:
+            return "로그인 아이디는 4자 이상 20자 이하여야 합니다."
+        case .usernameAlreadyExists:
+            return "아이디가 중복입니다."
+        //TODO: - 준수씨한테 가능한 모든 오류 목록 받기
+        }
+    }
+
+}
+
+//MARK: - 로그인 Error Message 관리
+
+enum LogInError: String {
+    
+    case userNotFound = "invalid password"
+    case invalidPassword = "user not founded"
+    
+    func returnErrorMessage() -> String {
+        
+        switch self {
+        
+        case.userNotFound:
+            return "아이디가 잘못되었습니다."
+        case .invalidPassword:
+            return "비밀번호를 다시 한 번 확인해 주세요."
+        }
+    }
+}
+
+//MARK: - 메일 인증 Error Message 관리
+
+//enum MailVerificationError: String {
+//
+//
+//}
+
+//MARK: - 인증코드 발급 Error Message 관리
+
+enum MailVerificationIssuanceError: String {
+    
+    case emptyToken = "token is empty"
+
+    func returnErrorMessage() -> String {
+        
+        switch self {
+        
+        case .emptyToken:
+            return "잘못된 요청입니다."
+        }
+    }
+
+}
+//
+////MARK: - 로그아웃 Error Message 관리
+//
+//enum LogOutError: String {
+//
+//}
+//
+//enum UnregisterError: String {
+//
+//
+//}
+
