@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 
 class LoginViewController: UIViewController {
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "크슐랭가이드"
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextFields()
+        setupTextFieldDelegate()
         setupView()
         setButtonTarget()
     }
@@ -48,11 +49,11 @@ class LoginViewController: UIViewController {
 //MARK: - Basic UI Set Up
 extension LoginViewController {
     /// Set up text field delegate
-    func setupTextFields() {
-        let textField1 = stackView.arrangedSubviews[0] as! UITextField
-        let textField2 = stackView.arrangedSubviews[1] as! UITextField
-        textField1.delegate = self
-        textField2.delegate = self
+    func setupTextFieldDelegate() {
+        for i in 0..<2 {
+            let textField = stackView.arrangedSubviews[i] as! UITextField
+            textField.delegate = self
+        }
     }
     
     /// Set up views
@@ -63,7 +64,7 @@ extension LoginViewController {
         let loginButtonWidth: CGFloat = 180
         let loginButtonHeight: CGFloat = 40
         
-        // add label and stack view on self.view
+        // add label and stack view
         self.view.addSubview(titleLabel)
         self.view.addSubview(stackView)
         self.view.addSubview(loginButton)
@@ -81,6 +82,19 @@ extension LoginViewController {
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
         }
         
+        for i in 0..<2 {
+            let textField = stackView.arrangedSubviews[i] as! UITextField
+            // stackView's subview(textfield) layer
+            textField.layer.cornerRadius = 0.5*textFieldHeight
+            // stackView's subview(textfield) snapkit layout
+            textField.snp.makeConstraints { (make) in
+                make.height.equalTo(textFieldHeight)
+                make.width.equalTo(textFieldWidth)
+            }
+            // stackView's subview(textfield) padding
+            textField.setPaddingPoints(left: 10, right: 10)
+        }
+        
         // loginButton layer
         loginButton.layer.cornerRadius = 0.5*loginButtonHeight
         
@@ -92,7 +106,7 @@ extension LoginViewController {
             make.centerY.equalTo(self.view.snp.bottom).multipliedBy(0.9)
         }
         
-        // loginButton layer
+        // backButton layer
         backButton.layer.cornerRadius = 0.5*loginButtonHeight
         
         // backButton snapkit layout
@@ -101,27 +115,6 @@ extension LoginViewController {
             make.centerX.equalTo(loginButton.snp.left).multipliedBy(0.5)
             make.centerY.equalTo(loginButton)
         }
-        
-        let textField1 = stackView.arrangedSubviews[0] as! UITextField
-        let textField2 = stackView.arrangedSubviews[1] as! UITextField
-        
-        // stackView's subview(textfield) snapkit layout
-        textField1.snp.makeConstraints { (make) in
-            make.height.equalTo(textFieldHeight)
-            make.width.equalTo(textFieldWidth)
-        }
-        textField2.snp.makeConstraints { (make) in
-            make.height.equalTo(textFieldHeight)
-            make.width.equalTo(textFieldWidth)
-        }
-        
-        // stackView's subview(textfield) layer
-        textField1.layer.cornerRadius = 0.5*textFieldHeight
-        textField2.layer.cornerRadius = 0.5*textFieldHeight
-        
-        // stackView's subview(textfield) padding
-        textField1.setPaddingPoints(left: 10, right: 10)
-        textField2.setPaddingPoints(left: 10, right: 10)
     }
     
     /// Set target of the buttons
@@ -142,15 +135,15 @@ extension LoginViewController {
 //MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textFieldDidBeginEditing: \((textField.text) ?? "Empty")")
+        print("textFieldDidBeginEditing: \(textField.text ?? "empty")")
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        print("textFieldDidEndEditing: \((textField.text) ?? "Empty")")
+        print("textFieldDidEndEditing: \(textField.text ?? "empty")")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textFieldShouldReturn \((textField.text) ?? "Empty")")
+        print("textFieldShouldReturn \(textField.text ?? "empty")")
         textField.resignFirstResponder()
         return true
     }
