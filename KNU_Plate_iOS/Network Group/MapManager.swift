@@ -9,18 +9,44 @@ class MapManager {
     static let shared: MapManager = MapManager()
     
     //MARK: - API Request URLs
-    
-    
-    ///https://dapi.kakao.com/v2/local/search/keyword.json?y=37.514322572335935&x=127.06283102249932&radius=20000
+    let searchByKeywordRequestURL = "https://dapi.kakao.com/v2/local/search/keyword.json?"
     
     
     private init() {}
     
     //MARK: - 키워드로 장소 검색
-    func searchByKeyword() {
+    func searchByKeyword(with model: SearchRestaurantByKeywordModel) {
         ///파라미터로 검색 키워드가 들어가야 할 것임
         
-        
+        AF.request(searchByKeywordRequestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers)
+            .responseJSON { (response) in
+            
+                guard let statusCode = response.response?.statusCode else {
+                    return
+                }
+                
+                switch statusCode {
+                
+                case 200:
+                    do {
+                        
+                    } catch {
+                        
+                    }
+                default:
+                    
+                }
+            
+            
+            
+            
+            }
+            
+            
         
         
         

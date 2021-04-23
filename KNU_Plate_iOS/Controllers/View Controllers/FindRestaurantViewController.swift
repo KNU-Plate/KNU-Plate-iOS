@@ -9,17 +9,28 @@ class FindRestaurantViewController: UIViewController, MTMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+        initializeMapView()
 
-        mapView = MTMapView()
-        mapView.delegate = self
-        mapView.baseMapType = .standard
+        
         
         
     }
     
-
+    
+    
+    
+    
+    func initializeMapView() {
+        
+        mapView = MTMapView()
+        mapView.delegate = self
+        mapView.baseMapType = .standard
+    }
     
     
     
     
 }
+
+
