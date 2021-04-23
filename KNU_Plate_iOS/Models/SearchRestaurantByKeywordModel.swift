@@ -1,8 +1,40 @@
-//
-//  SearchRestaurantByKeywordModel.swift
-//  KNU_Plate_iOS
-//
-//  Created by Kevin Kim on 2021/04/23.
-//
-
 import Foundation
+import Alamofire
+
+//MARK: - 카카오맵 화면에서 키워드로 식당 검색 시 사용하는 Model -> MapManager.shared.searchByKeyword()
+
+struct SearchRestaurantByKeywordModel {
+    
+    /// X 좌표값, 경위도인 경우 longitude (경도)
+    var x: String = "35.889529"
+    
+    /// Y 좌표값, 경위도인 경우 latitude(위도)
+    var y: String = "128.609971"
+    
+    /// 중심 좌표부터의 반경거리
+    /// 일단 기본 5km 로 설정
+    var radius: String = "5000"
+    
+    /// 사용자 검색 매장
+    var query: String
+    
+    init(query: String) {
+        
+        self.query = query
+        
+        /// Initialize parameters
+        parameters["x"] = self.x
+        parameters["y"] = self.y
+        parameters["radius"] = self.radius
+        parameters["query"] = self.query
+    }
+    
+    /// API Parameters
+    var parameters: Parameters = [:]
+    
+    /// HTTP Headers
+    var headers: HTTPHeaders = [
+    
+        "Authorization": "KakaoAK \(Constants.Kakao.API_Key)"
+    ]
+}
