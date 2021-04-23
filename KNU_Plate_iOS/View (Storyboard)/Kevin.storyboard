@@ -619,7 +619,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nX9-qd-1Ok" customClass="NMFNaverMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nX9-qd-1Ok" userLabel="Map View" customClass="MTMapView" customModule="KNU_Plate_iOS">
                                 <rect key="frame" x="0.0" y="286" width="375" height="381"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -677,12 +677,42 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="naverMapView" destination="nX9-qd-1Ok" id="MvR-fU-jWm"/>
+                        <outlet property="mapView" destination="nX9-qd-1Ok" id="Elr-MN-0IW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPa-sk-vOl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-348" y="1758.1709145427287"/>
+        </scene>
+        <!--Example View Controller-->
+        <scene sceneID="2mT-EE-gHf">
+            <objects>
+                <viewController id="crA-ja-4ef" customClass="ExampleViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FfJ-v2-Q2d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyZ-Wm-64Z" customClass="MTMapView">
+                                <rect key="frame" x="30" y="30" width="315" height="607"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bAJ-bC-yCq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="trailing" secondItem="dyZ-Wm-64Z" secondAttribute="trailing" constant="30" id="H85-kK-KaC"/>
+                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="bottom" secondItem="dyZ-Wm-64Z" secondAttribute="bottom" constant="30" id="Urj-9V-NOR"/>
+                            <constraint firstItem="dyZ-Wm-64Z" firstAttribute="leading" secondItem="bAJ-bC-yCq" secondAttribute="leading" constant="30" id="huP-Ez-XLf"/>
+                            <constraint firstItem="dyZ-Wm-64Z" firstAttribute="top" secondItem="bAJ-bC-yCq" secondAttribute="top" constant="30" id="iXG-Wv-okX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="kakaoMapView" destination="dyZ-Wm-64Z" id="njP-Le-dci"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PzC-al-4Wi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="1939"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ahY-8s-sFi">

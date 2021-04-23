@@ -11,7 +11,5 @@ target 'KNU_Plate_iOS' do
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
 
-  
-  
 
 end
