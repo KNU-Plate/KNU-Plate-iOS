@@ -9,14 +9,20 @@ class UserManager {
     static let shared: UserManager = UserManager()
     
     //MARK: - API Request URLs
-    let signUpRequestURL = "\(Constants.API_BASE_URL)signup"
-    let logInRequestURL = "\(Constants.API_BASE_URL)login"
-    let issueEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
-    let emailVerificationURL = "\(Constants.API_BASE_URL)mail-auth/verification"
+    
+    /// 조회 request url 추가해야힘
+    let unregisterRequestURL            = "\(Constants.API_BASE_URL)auth/unregister"
+    let logOutRequestURL                = "\(Constants.API_BASE_URL)auth/logout"
+    let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
+    let signUpRequestURL                = "\(Constants.API_BASE_URL)signup"
+    let logInRequestURL                 = "\(Constants.API_BASE_URL)login"
+    let requestEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let emailVerificationURL            = "\(Constants.API_BASE_URL)mail-auth/verification"
+    
     
     private init() {}
     
-    //MARK: - 회원가입 함수
+    //MARK: - 회원가입
     //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
     
     func signUp(with model: RegisterInfoModel) {
@@ -58,7 +64,7 @@ class UserManager {
             }
     }
     
-    //MARK: - 로그인 함수
+    //MARK: - 로그인
     func logIn(with model: LoginInfoModel) {
         
         AF.request(logInRequestURL,
@@ -98,10 +104,10 @@ class UserManager {
     }
     
     
-    //MARK: - 이메일 인증 코드 발급 함수
+    //MARK: - 이메일 인증 코드 발급
     func getEmailVerificationCode() {
         
-        AF.request(issueEmailVerificationCodeURL,
+        AF.request(requestEmailVerificationCodeURL,
                    method: .post,
                    encoding: URLEncoding.httpBody).responseJSON { (response) in
                     
@@ -132,8 +138,20 @@ class UserManager {
                             }
                         }
                     }
-                }
+                   }
     }
+    
+    //MARK: - 로그아웃
+    func logOut() {
+    
+    }
+    
+    //MARK: - 토큰 갱신
+    func refreshToken() {
+        
+    }
+    
+    
     
     
 }
