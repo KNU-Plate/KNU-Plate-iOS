@@ -21,7 +21,6 @@ class MapManager {
         AF.request(searchByKeywordRequestURL,
                    method: .get,
                    parameters: model.parameters,
-                   encoding: URLEncoding.httpBody,
                    headers: model.headers)
             .responseJSON { (response) in
             
@@ -33,12 +32,13 @@ class MapManager {
                 
                 case 200:
                     do {
-                        
+                        let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self, from: response.data!)
+                        print(decodedData)
                     } catch {
-                        
+                        print("There was an error decoding JSON Data (KakaoMap)")
                     }
                 default:
-                    
+                    print("default activated")
                 }
             
             

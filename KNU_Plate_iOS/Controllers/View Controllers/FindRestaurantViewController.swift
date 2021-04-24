@@ -12,9 +12,21 @@ class FindRestaurantViewController: UIViewController, MTMapViewDelegate {
             
         initializeMapView()
 
+        test()
+        
+    
         
         
+    }
+    
+    func test() {
         
+        let searchKeyword = "카카오프렌즈"
+        
+        let model = SearchRestaurantByKeywordModel(query: searchKeyword)
+   
+        
+        MapManager.shared.searchByKeyword(with: model)
     }
     
     
