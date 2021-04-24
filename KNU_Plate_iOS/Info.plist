@@ -2,12 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NMFClientId</key>
-	<string>4pt032e7dv</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>6536c927cc48b7eef60d77d79f1a2d85</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>사용자의 현재 위치를 받아와야 합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>찍으신 사진을 업로드 하기 위해서는 사진 앨범에 접근해야 합니다. </string>
+	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
 	<key>NSCameraUsageDescription</key>
-	<string>음식 사진 촬영 후 등록을 위해 카메라에 접근하려 합니다.</string>
+	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -68,9 +70,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>NSCameraUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
 </dict>
 </plist>

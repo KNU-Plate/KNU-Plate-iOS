@@ -31,7 +31,7 @@ struct RegisterInfoModel {
         parameters["mail_address"] = email
     }
 
-    /// API parameters
+    /// API Parameters
     var parameters: Parameters = [:]
     
     /// HTTP Headers

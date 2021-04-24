@@ -1,6 +1,6 @@
 import Foundation
 
-//MARK: - Error 관리 enum 모음
+//MARK: - User Input 시 일어날수 있는 Error 관리 enum 모음
 
 
 //MARK: - 신규 리뷰 등록 시 일어날 수 있는 Error

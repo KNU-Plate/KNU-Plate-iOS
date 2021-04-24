@@ -17,7 +17,7 @@ class NewReviewViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        testSignup()
+        //testSignup()
         //testLogin()
 
     }
