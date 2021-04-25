@@ -7,7 +7,6 @@ protocol SearchRestaurantViewModelDelegate {
 class SearchRestaurantViewModel {
     
     //MARK: - Object Properties
-    
     var delegate: SearchRestaurantViewModelDelegate?
     
     /// 검색어에 검색된 문서 수
@@ -38,6 +37,7 @@ class SearchRestaurantViewModel {
         }
     }
     
+    /// search 함수에서 append 를 하기 때문에 다른 검색어로 검색할 때 reset 을 해줘야 한다.
     func resetSearchResults() {
         
         placeName.removeAll()

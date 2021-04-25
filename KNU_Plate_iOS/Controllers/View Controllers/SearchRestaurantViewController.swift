@@ -14,28 +14,16 @@ class SearchRestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.delegate = self
-        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
-            
         initialize()
-        //test()
-      
-    }
-    
-    func test() {
-        
-        let keyword = "스타벅스"
-        
-   
-        viewModel.search(with: keyword)
-        
-        
-        
     }
     
     func initialize() {
         
+        viewModel.delegate = self
+        
         searchBar.delegate = self
+        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
+        
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
         initializeMapView()
@@ -49,12 +37,8 @@ class SearchRestaurantViewController: UIViewController {
 extension SearchRestaurantViewController: SearchRestaurantViewModelDelegate {
     
     func didFetchSearchResults() {
-        print("didFetchSearchResults")
         searchResultTableView.reloadData()
     }
-    
-    
-    
 }
 
 //MARK: - MTMapViewDelegate
@@ -79,7 +63,9 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.searchedRestaurantResultCell) else {
+        let cellIdentifier = Constants.CellIdentifier.searchedRestaurantResultCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) else {
             fatalError("Failed to dequeue searchedRestaurantResultCell")
         }
         
@@ -88,12 +74,8 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
 
             cell.textLabel?.text = viewModel.placeName[indexPath.row]
             cell.detailTextLabel?.text = viewModel.address[indexPath.row]
-            
-        } else {
-            cell.textLabel?.text = "검색된 결과가 없습니다."
         }
         return cell
-        
     }
     
     
@@ -112,19 +94,14 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        print("searchBarSearchButtonClicked")
-
+    
         let searchKeyword = searchBar.text!
-        
-        print(searchKeyword)
-        
         viewModel.search(with: searchKeyword)
         searchBar.resignFirstResponder()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
