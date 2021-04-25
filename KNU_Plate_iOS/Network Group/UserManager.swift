@@ -41,7 +41,8 @@ class UserManager {
                 case 200..<300:
                     do {
                         
-                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self, from: response.data!)
+                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
+                                                                   from: response.data!)
                         self.saveUserRegisterInfo(with: decodedData)
                         
                     } catch {
@@ -80,7 +81,8 @@ class UserManager {
                     case 200..<300:
                         do {
                             
-                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
+                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
+                                                                       from: response.data!)
                             self.saveLoginInfoToUserDefaults(with: decodedData)
                             
                         } catch {

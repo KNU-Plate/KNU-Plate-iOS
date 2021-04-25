@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - 회원가입 시도 후 성공 시 반환되는 Model
 
-struct RegisterResponseModel: Codable {
+struct RegisterResponseModel: Decodable {
     
     let userID: String
     let username: String

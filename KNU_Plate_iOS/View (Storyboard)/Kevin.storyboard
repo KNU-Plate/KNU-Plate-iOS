@@ -611,10 +611,10 @@
             </objects>
             <point key="canvasLocation" x="591.20000000000005" y="1018.2908545727137"/>
         </scene>
-        <!--Find Restaurant View Controller-->
+        <!--Search Restaurant View Controller-->
         <scene sceneID="hme-Ha-kos">
             <objects>
-                <viewController id="3h8-MA-OtV" customClass="FindRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3h8-MA-OtV" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sFR-OL-uXi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -634,7 +634,7 @@
                                     <constraint firstAttribute="height" constant="200" id="0lQ-zi-E1h"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="dmC-pz-ljK" detailTextLabel="A9Q-9W-bUS" style="IBUITableViewCellStyleSubtitle" id="kpz-VC-Ksq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchedRestaurantResultCell" textLabel="dmC-pz-ljK" detailTextLabel="A9Q-9W-bUS" style="IBUITableViewCellStyleSubtitle" id="kpz-VC-Ksq">
                                         <rect key="frame" x="0.0" y="28" width="375" height="55.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kpz-VC-Ksq" id="J5H-ml-dF7">
@@ -678,6 +678,8 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="nX9-qd-1Ok" id="Elr-MN-0IW"/>
+                        <outlet property="searchBar" destination="9QS-NF-wgu" id="Msg-2q-fGj"/>
+                        <outlet property="searchResultTableView" destination="Uws-fr-Ph3" id="DgR-w7-nQ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPa-sk-vOl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -20,3 +20,12 @@ class AlertManager {
     
     
 }
+
+
+//func simpleAlert(vc: UIViewController, title: String, message msg: String, handler: ((UIAlertAction) -> Void)? = nil) {
+//    let alert = UIAlertController(title : title, message: msg,
+//                                  preferredStyle: .alert)
+//    let okAction = UIAlertAction(title: "확인", style: .cancel, handler: handler)
+//    alert.addAction(okAction)
+//    vc.present(alert, animated: false, completion: nil)
+//}

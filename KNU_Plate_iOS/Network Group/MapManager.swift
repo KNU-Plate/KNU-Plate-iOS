@@ -15,8 +15,8 @@ class MapManager {
     private init() {}
     
     //MARK: - 키워드로 장소 검색
-    func searchByKeyword(with model: SearchRestaurantByKeywordModel) {
-        ///파라미터로 검색 키워드가 들어가야 할 것임
+    func searchByKeyword(with model: SearchRestaurantByKeywordModel,
+                         completion: @escaping ((SearchRestaurantByKeywordResponseModel) -> Void)) {
         
         AF.request(searchByKeywordRequestURL,
                    method: .get,
@@ -32,8 +32,11 @@ class MapManager {
                 
                 case 200:
                     do {
-                        let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self, from: response.data!)
-                        print(decodedData)
+                        let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
+                                                                   from: response.data!)
+                        
+                        completion(decodedData)
+                        
                     } catch {
                         print("There was an error decoding JSON Data (KakaoMap)")
                     }

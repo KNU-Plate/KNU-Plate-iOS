@@ -30,6 +30,7 @@ struct Constants {
         static let newMenuTableViewCell = "newMenuTableViewCell"
         static let addFoodImageCell = "addFoodImageCell"
         static let newUserPickedFoodImageCell = "userPickedFoodImageCell"
+        static let searchedRestaurantResultCell = "searchedRestaurantResultCell"
     }
     
     
