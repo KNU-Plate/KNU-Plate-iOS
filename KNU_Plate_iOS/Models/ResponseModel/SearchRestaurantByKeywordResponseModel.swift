@@ -2,10 +2,15 @@ import Foundation
 
 //MARK: - 카카오맵 키워드로 매장 검색 후 성공 시 반환되는 Model
 
-struct SearchRestaurantByKeywordResponseModel: Codable {
+struct SearchRestaurantByKeywordResponseModel: Decodable {
     
     let documents: [SearchedRestaurantInfo]
     let meta: MetaData
+    
+    enum CodingKeys: String, CodingKey {
+        case documents, meta
+    }
+    
 }
 
 struct SearchedRestaurantInfo: Codable {
@@ -47,8 +52,7 @@ struct MetaData: Codable {
 
     /// 검색어에 검색된 문서 수
     let totalCount: Int
-
-
+    
     enum CodingKeys: String, CodingKey {
 
         case isEnd = "is_end"

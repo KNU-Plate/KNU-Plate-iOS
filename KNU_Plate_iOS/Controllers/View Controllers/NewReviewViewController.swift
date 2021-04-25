@@ -427,10 +427,6 @@ extension NewReviewViewController {
     
     @objc func dismissPicker(){
         self.view.endEditing(true)
-//        workings = ""
-//        userInputTextField.text = ""
-//        resultTextField.text = ""
-//        userInputTextField.becomeFirstResponder()
     }
     
 }
