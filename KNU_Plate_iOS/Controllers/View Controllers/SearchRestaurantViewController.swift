@@ -53,6 +53,11 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         mapView = MTMapView()
         mapView.delegate = self
         mapView.baseMapType = .standard
+        
+        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: 35.888949648310486, longitude: 128.6104881544238)),
+                             zoomLevel: 1,
+                             animated: true)
+        
     }
     
     func updateMapWithMarker(longitude: Double, latitude: Double, placeName: String) {
@@ -61,18 +66,23 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
                              zoomLevel: 1,
                              animated: true)
         
-        mapView.showCurrentLocationMarker = true
-
-        
         mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude))
+        
         pointItem = MTMapPOIItem()
         pointItem?.showAnimationType = .springFromGround
         pointItem?.markerType = .bluePin
-        
-        
         pointItem?.mapPoint = mapPoint
         pointItem?.itemName = placeName
+        
+        
         mapView.add(pointItem)
+    }
+    
+    // 사용자가 POI (Point of Interest) Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출
+    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonOf poiItem: MTMapPOIItem!) {
+        
+        
+        /// Perform Segue
     }
 }
 
@@ -103,15 +113,11 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        mapView.removeAllPOIItems()
         let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
-        
         updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
-        
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
 }
 
 //MARK: - UISearchBarDelegate
