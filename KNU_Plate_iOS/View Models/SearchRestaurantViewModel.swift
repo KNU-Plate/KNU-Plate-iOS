@@ -17,6 +17,8 @@ class SearchRestaurantViewModel {
     
     var address: [String] = []
     
+    var documents: [SearchedRestaurantInfo] = []
+    
     
     
     //MARK: - Object Methods
@@ -28,7 +30,10 @@ class SearchRestaurantViewModel {
         
         MapManager.shared.searchByKeyword(with: searchModel) { result in
             
+            self.documents = result.documents
+            
             for result in result.documents {
+                
                 self.placeName.append(result.placeName)
                 self.address.append(result.address)
             }
@@ -36,6 +41,23 @@ class SearchRestaurantViewModel {
             self.delegate?.didFetchSearchResults()
         }
     }
+    
+    func fetchLocation(of index: Int) -> (Double, Double, String) {
+        
+        let placeName = documents[index].placeName
+        
+        if let x = Double(documents[index].x), let y = Double(documents[index].y) {
+            return (x, y, placeName)
+        }
+
+        /// 기본값 반환 (경북대 중앙)
+        let x = 128.6104881544238       /// longitude
+        let y = 35.888949648310486      /// latitude
+        
+        return (x, y, placeName)
+       
+    }
+    
     
     /// search 함수에서 append 를 하기 때문에 다른 검색어로 검색할 때 reset 을 해줘야 한다.
     func resetSearchResults() {

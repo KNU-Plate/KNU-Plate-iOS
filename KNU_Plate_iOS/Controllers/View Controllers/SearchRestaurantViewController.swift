@@ -9,6 +9,9 @@ class SearchRestaurantViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchResultTableView: UITableView!
     
+    var mapPoint: MTMapPoint?
+    var pointItem: MTMapPOIItem?
+    
     private let viewModel: SearchRestaurantViewModel = SearchRestaurantViewModel()
     
     override func viewDidLoad() {
@@ -41,7 +44,7 @@ extension SearchRestaurantViewController: SearchRestaurantViewModelDelegate {
     }
 }
 
-//MARK: - MTMapViewDelegate
+//MARK: - MTMapViewDelegate & Map Related Methods
 
 extension SearchRestaurantViewController: MTMapViewDelegate {
     
@@ -50,6 +53,26 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         mapView = MTMapView()
         mapView.delegate = self
         mapView.baseMapType = .standard
+    }
+    
+    func updateMapWithMarker(longitude: Double, latitude: Double, placeName: String) {
+        
+        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude)),
+                             zoomLevel: 1,
+                             animated: true)
+        
+        mapView.showCurrentLocationMarker = true
+
+        
+        mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: latitude, longitude: longitude))
+        pointItem = MTMapPOIItem()
+        pointItem?.showAnimationType = .springFromGround
+        pointItem?.markerType = .bluePin
+        
+        
+        pointItem?.mapPoint = mapPoint
+        pointItem?.itemName = placeName
+        mapView.add(pointItem)
     }
 }
 
@@ -71,11 +94,21 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
         
         /// 검색된 결과가 있을 경우
         if viewModel.totalCount != 0 {
-
+            
             cell.textLabel?.text = viewModel.placeName[indexPath.row]
             cell.detailTextLabel?.text = viewModel.address[indexPath.row]
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
+        
+        updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
+        
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -103,6 +136,7 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+
 }
 
 
