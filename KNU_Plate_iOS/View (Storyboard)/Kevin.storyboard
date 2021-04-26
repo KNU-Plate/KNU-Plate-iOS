@@ -623,6 +623,16 @@
                                 <rect key="frame" x="0.0" y="286" width="375" height="381"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ap7-sW-joB" userLabel="Next Button">
+                                <rect key="frame" x="285" y="577" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="WIX-gy-wkX"/>
+                                    <constraint firstAttribute="height" constant="70" id="coC-LA-o3I"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="pressedNextButton:" destination="3h8-MA-OtV" eventType="touchUpInside" id="Xi0-Pw-Lku"/>
+                                </connections>
+                            </button>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="9QS-NF-wgu">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -667,6 +677,8 @@
                             <constraint firstItem="9QS-NF-wgu" firstAttribute="trailing" secondItem="lSE-yw-Uca" secondAttribute="trailing" id="5he-bW-8kn"/>
                             <constraint firstItem="Uws-fr-Ph3" firstAttribute="leading" secondItem="lSE-yw-Uca" secondAttribute="leading" id="9Kh-4t-PTF"/>
                             <constraint firstItem="nX9-qd-1Ok" firstAttribute="leading" secondItem="lSE-yw-Uca" secondAttribute="leading" id="PId-Vx-v5s"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ap7-sW-joB" secondAttribute="bottom" constant="20" id="TfJ-9k-LI3"/>
+                            <constraint firstItem="lSE-yw-Uca" firstAttribute="trailing" secondItem="ap7-sW-joB" secondAttribute="trailing" constant="20" id="W21-nQ-aRh"/>
                             <constraint firstItem="lSE-yw-Uca" firstAttribute="trailing" secondItem="Uws-fr-Ph3" secondAttribute="trailing" id="XxM-Zt-9Rx"/>
                             <constraint firstItem="9QS-NF-wgu" firstAttribute="leading" secondItem="lSE-yw-Uca" secondAttribute="leading" id="ab5-h8-PKh"/>
                             <constraint firstItem="9QS-NF-wgu" firstAttribute="top" secondItem="lSE-yw-Uca" secondAttribute="top" constant="20" id="cbk-lm-Yp2"/>
@@ -678,6 +690,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="nX9-qd-1Ok" id="Elr-MN-0IW"/>
+                        <outlet property="nextButton" destination="ap7-sW-joB" id="Jc7-Ph-ubH"/>
                         <outlet property="searchBar" destination="9QS-NF-wgu" id="Msg-2q-fGj"/>
                         <outlet property="searchResultTableView" destination="Uws-fr-Ph3" id="DgR-w7-nQ1"/>
                     </connections>

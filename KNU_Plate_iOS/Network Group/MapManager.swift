@@ -34,7 +34,6 @@ class MapManager {
                     do {
                         let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
                                                                    from: response.data!)
-                        
                         completion(decodedData)
                         
                     } catch {
@@ -43,20 +42,8 @@ class MapManager {
                 default:
                     print("default activated")
                 }
-            
-            
-            
-            
             }
-            
-            
-        
-        
-        
-        
-        
     }
-    
 
     
 }
