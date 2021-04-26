@@ -336,6 +336,18 @@
 			path = UserPickedFoodImageViewCell;
 			sourceTree = "<group>";
 		};
+		7C85F8422636EFC500FA9FCC /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */,
+				7CE4BA5B261C31FF009A4464 /* NewReview.swift */,
+				7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */,
+				7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */,
+				7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
 		7CC96309263052EA00AA71E1 /* ResponseModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,14 +465,10 @@
 		7CE4D7B12609B188002FCC2D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C85F8422636EFC500FA9FCC /* RequestModel */,
 				7CC96309263052EA00AA71E1 /* ResponseModel */,
-				7CD74B71260B11CC00D05B84 /* NewRestaurant.swift */,
-				7CE4BA5B261C31FF009A4464 /* NewReview.swift */,
 				7CBE745126208366002E1FF7 /* Menu.swift */,
 				7C16DF222621810700AA8239 /* User.swift */,
-				7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */,
-				7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */,
-				7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

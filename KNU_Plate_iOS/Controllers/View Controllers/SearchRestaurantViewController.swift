@@ -62,9 +62,23 @@ class SearchRestaurantViewController: UIViewController {
                                       style: .default,
                                       handler: { (action: UIAlertAction!) in
                                         
-                                        /// Perform Segue
+                                        self.performSegue(withIdentifier: Constants.SegueIdentifier.goToNewRestaurantVC, sender: self)
+                                        
+//                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                                        let secondVC = storyboard.instantiateViewController(identifier: "NewRestaurantViewController")
+//                                        self.show(secondVC, sender: self)
+
                                       }))
         self.present(alert, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Constants.SegueIdentifier.goToNewRestaurantVC {
+            
+            let newRestaurantVC = segue.destination as! NewRestaurantViewController
+            newRestaurantVC.restaurantName = viewModel.placeName[viewModel.currentlySelectedIndex]
+        }
     }
 }
 

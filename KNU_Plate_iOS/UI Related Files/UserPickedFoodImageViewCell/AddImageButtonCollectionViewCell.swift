@@ -17,6 +17,8 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
     
     @IBAction func pressedAddButton(_ sender: UIButton) {
         
+        print("PRESSED ADD BUTTON")
+        
         /// 기존 선택된 사진 모두 초기화
         selectedAssets.removeAll()
         userSelectedImages.removeAll()
@@ -46,8 +48,6 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
             self.convertAssetToImages()
             self.delegate?.didPickImagesToUpload(images: self.userSelectedImages)
         })
-        
-        
      }
     
     func convertAssetToImages() {

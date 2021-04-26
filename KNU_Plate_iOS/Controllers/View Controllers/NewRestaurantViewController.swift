@@ -10,10 +10,15 @@ class NewRestaurantViewController: UIViewController {
     @IBOutlet var expandButtonTextField: UITextField!
     @IBOutlet var reviewImageCollectionView: UICollectionView!
     
+    var restaurantName: String?
+    
     var viewModel = NewRestaurantViewModel(restaurantName: "매장명")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+ 
+        
         
         initialize()
         
@@ -24,8 +29,6 @@ class NewRestaurantViewController: UIViewController {
 
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
       
-   
-        
         switch sender.selectedSegmentIndex {
         case 0:
             viewModel.gate = viewModel.schoolGates[0]
@@ -36,7 +39,7 @@ class NewRestaurantViewController: UIViewController {
         case 3:
             viewModel.gate = viewModel.schoolGates[3]
         default:
-            viewModel.gate = "북문"
+            viewModel.gate = viewModel.schoolGates[0]
         }
     }
 }
@@ -47,8 +50,15 @@ extension NewRestaurantViewController {
 
     func initialize() {
         
+        initializeRestaurantName()
         initializeCollectionView()
         createPickerView()
+    }
+    
+    func initializeRestaurantName() {
+        
+        if let restaurantName = restaurantName { viewModel.restaurantName = restaurantName }
+        restaurantNameLabel.text = viewModel.restaurantName
     }
     
     func initializeCollectionView() {
