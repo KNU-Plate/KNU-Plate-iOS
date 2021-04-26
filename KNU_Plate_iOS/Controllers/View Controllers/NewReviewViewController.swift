@@ -17,21 +17,10 @@ class NewReviewViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        //testSignup()
-        //testLogin()
+   
 
     }
     
-    func testLogin() {
-
-        let username = "kevinkim"
-        let password = "123456789"
-
-        let newLoginModel = LoginInfoModel(username: username, password: password)
-
-        UserManager.shared.logIn(with: newLoginModel)
-    }
-
     func testSignup() {
 
         let username = "alexding"
@@ -234,10 +223,7 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.menuNameTextField.text = menuInfo.menuName
             cell.indexPath = indexPath.row
-            
-    
         }
-     
         return cell
     }
     
@@ -278,9 +264,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     
     
 }
-
-
-
 
 
 //MARK: - UITextFieldDelegate -> For menuInputTextField

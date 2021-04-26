@@ -33,7 +33,7 @@ class SearchRestaurantViewModel {
             
             self.documents = result.documents
             
-            ///수정 좀 하기
+            ///수정 좀 하기 -> append 말고 한 방에 value assign 
             for result in result.documents {
                 
                 self.placeName.append(result.placeName)
@@ -59,7 +59,6 @@ class SearchRestaurantViewModel {
         
         return (x, y, placeName)
     }
-    
     
     /// search 함수에서 append 를 하기 때문에 다른 검색어로 검색할 때 reset 을 해줘야 한다.
     func resetSearchResults() {

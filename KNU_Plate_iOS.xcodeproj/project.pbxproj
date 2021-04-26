@@ -815,7 +815,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kevinkim.KNU-Plate-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kevinkim/Desktop/KNU_PLATE/KNU-Plate-iOS/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -843,7 +843,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kevinkim.KNU-Plate-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kevinkim/Desktop/KNU_PLATE/KNU-Plate-iOS/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

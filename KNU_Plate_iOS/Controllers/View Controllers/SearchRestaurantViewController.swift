@@ -41,20 +41,31 @@ class SearchRestaurantViewController: UIViewController {
         buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
         nextButton.setImage(buttonImage, for: .normal)
         nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
-        
-        
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
         let placeSelected = viewModel.currentlySelectedIndex
         let alertMessage = viewModel.placeName[placeSelected]
-        let alert = AlertManager.createAlertMessage(("위치가 여기 맞나요?"),
-                                                    alertMessage)
+        
+        let alert = UIAlertController(title: "위치가 여기 맞나요?",
+                                      message: alertMessage,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "다시 고를게요",
+                                      style: .destructive,
+                                      handler: { (action: UIAlertAction!) in
+                                        
+                                      }))
+        
+        alert.addAction(UIAlertAction(title: "네 맞아요!",
+                                      style: .default,
+                                      handler: { (action: UIAlertAction!) in
+                                        
+                                        /// Perform Segue
+                                      }))
         self.present(alert, animated: true)
     }
-    
-
 }
 
 //MARK: - SearchRestaurantViewModelDelegate
@@ -95,15 +106,8 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         pointItem?.mapPoint = mapPoint
         pointItem?.itemName = placeName
         pointItem?.showDisclosureButtonOnCalloutBalloon = false
-        
-        
-        mapView.add(pointItem)
-    }
     
-    // 사용자가 POI (Point of Interest) Item 아이콘(마커) 위에 나타난 말풍선(Callout Balloon)을 터치한 경우 호출
-    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonOf poiItem: MTMapPOIItem!) {
-        
-        /// Perform Segue
+        mapView.add(pointItem)
     }
 }
 
@@ -137,7 +141,6 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
         mapView.removeAllPOIItems()
         let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
         updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
-        
     }
 }
 

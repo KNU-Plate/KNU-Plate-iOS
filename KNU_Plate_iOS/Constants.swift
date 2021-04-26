@@ -16,6 +16,7 @@ struct Constants {
         static let loginViewController = "LoginViewController"
         static let registerViewController = "RegisterViewController"
         static let verifyEmailViewController = "VerifyEmailViewController"
+        static let newRestaurantViewController = "NewRestaurantViewController"
     }
     
     struct Layer {
@@ -31,6 +32,11 @@ struct Constants {
         static let addFoodImageCell = "addFoodImageCell"
         static let newUserPickedFoodImageCell = "userPickedFoodImageCell"
         static let searchedRestaurantResultCell = "searchedRestaurantResultCell"
+    }
+    
+    struct SegueIdentifier {
+        
+        static let goToNewRestaurantVC = "goToNewRestaurantVC"
     }
     
     
