@@ -295,6 +295,9 @@
                     <navigationItem key="navigationItem" title="신규 매장 등록" id="3Rm-Oq-Xv4">
                         <barButtonItem key="rightBarButtonItem" title="올리기" id="LKC-nw-Eac">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedUploadButton:" destination="UEI-g0-ezW" id="Oqd-gu-4yk"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>

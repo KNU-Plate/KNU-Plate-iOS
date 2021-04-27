@@ -17,16 +17,17 @@ class NewRestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
-        
-        
         initialize()
-        
-       
-    
+
     }
 
-
+    @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
+        
+        print(viewModel.newRestaurant.foodCategory)
+        print(viewModel.newRestaurant.gate)
+        print(viewModel.newRestaurant.name)
+    }
+    
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
       
         switch sender.selectedSegmentIndex {
@@ -41,41 +42,6 @@ class NewRestaurantViewController: UIViewController {
         default:
             viewModel.gate = viewModel.schoolGates[0]
         }
-    }
-}
-
-//MARK: - UI Configuration Methods
-
-extension NewRestaurantViewController {
-
-    func initialize() {
-        
-        initializeRestaurantName()
-        initializeCollectionView()
-        createPickerView()
-    }
-    
-    func initializeRestaurantName() {
-        
-        if let restaurantName = restaurantName { viewModel.restaurantName = restaurantName }
-        restaurantNameLabel.text = viewModel.restaurantName
-    }
-    
-    func initializeCollectionView() {
-        
-        reviewImageCollectionView.delegate = self
-        reviewImageCollectionView.dataSource = self
-    }
-    
-    func createPickerView() {
-        
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-
-        expandButtonTextField.inputView = pickerView
-        
-        /// Toolbar 없으면 추가로 넣기 ("완료" 버튼)
     }
 }
 
@@ -163,5 +129,39 @@ extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSou
         viewModel.foodCategory = selectedFoodCategory
         
         foodCategoryTextField.text = selectedFoodCategory
+    }
+}
+
+//MARK: - UI Configuration Methods
+
+extension NewRestaurantViewController {
+
+    func initialize() {
+        
+        initializeRestaurantName()
+        initializeCollectionView()
+        createPickerView()
+    }
+    
+    func initializeRestaurantName() {
+        
+        if let restaurantName = restaurantName { viewModel.restaurantName = restaurantName }
+        restaurantNameLabel.text = viewModel.restaurantName
+    }
+    
+    func initializeCollectionView() {
+        
+        reviewImageCollectionView.delegate = self
+        reviewImageCollectionView.dataSource = self
+    }
+    
+    func createPickerView() {
+        
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+
+        expandButtonTextField.inputView = pickerView
+        foodCategoryTextField.inputView = pickerView
     }
 }

@@ -146,11 +146,13 @@ class UserManager {
     //MARK: - 로그아웃
     func logOut() {
     
+        
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
     
     //MARK: - 토큰 갱신
     func refreshToken() {
-        
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
     
     

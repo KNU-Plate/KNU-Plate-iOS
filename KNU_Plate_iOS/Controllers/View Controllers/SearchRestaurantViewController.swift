@@ -1,7 +1,6 @@
 import UIKit
 
-
-//MARK: - 신규 맛집 등록 시 위치 우선 검색
+//MARK: - 신규 맛집 등록 시 위치 검색하는 화면
 
 class SearchRestaurantViewController: UIViewController {
     
@@ -21,29 +20,9 @@ class SearchRestaurantViewController: UIViewController {
         initialize()
     }
     
-    func initialize() {
-        
-        viewModel.delegate = self
-        
-        /// SearchBar 초기화
-        searchBar.delegate = self
-        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
-        
-        /// TableView 초기화
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        
-        initializeMapView()
-        
-        /// Next Button 초기화
-        nextButton.layer.cornerRadius = nextButton.frame.width / 2
-        var buttonImage: UIImage = UIImage(named: "arrow_right")!
-        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
-        nextButton.setImage(buttonImage, for: .normal)
-        nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
-    }
-    
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        
+        /// Select 안 했는데 nextButton 누르면 에러남
         
         let placeSelected = viewModel.currentlySelectedIndex
         let alertMessage = viewModel.placeName[placeSelected]
@@ -63,11 +42,7 @@ class SearchRestaurantViewController: UIViewController {
                                       handler: { (action: UIAlertAction!) in
                                         
                                         self.performSegue(withIdentifier: Constants.SegueIdentifier.goToNewRestaurantVC, sender: self)
-                                        
-//                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                        let secondVC = storyboard.instantiateViewController(identifier: "NewRestaurantViewController")
-//                                        self.show(secondVC, sender: self)
-
+        
                                       }))
         self.present(alert, animated: true)
     }
@@ -181,6 +156,44 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 
+}
+
+//MARK: - UI Configuration
+
+extension SearchRestaurantViewController {
+    
+    func initialize() {
+        
+        viewModel.delegate = self
+        
+        initializeSearchBar()
+        initializeTableView()
+        initializeMapView()
+        initializeUIComponents()
+    }
+    
+    func initializeSearchBar() {
+
+        searchBar.delegate = self
+        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
+    }
+    
+    func initializeTableView() {
+        
+        searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
+    }
+    
+    func initializeUIComponents() {
+        
+        nextButton.layer.cornerRadius = nextButton.frame.width / 2
+        var buttonImage: UIImage = UIImage(named: "arrow_right")!
+        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
+        nextButton.setImage(buttonImage, for: .normal)
+        nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
+    }
+    
+    
 }
 
 

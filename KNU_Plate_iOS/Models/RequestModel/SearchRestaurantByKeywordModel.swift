@@ -6,14 +6,14 @@ import Alamofire
 struct SearchRestaurantByKeywordModel {
     
     /// X 좌표값, 경위도인 경우 longitude (경도)
-    var x: String = "128.6104881544238"
+    let x: String = "128.6104881544238"
     
     /// Y 좌표값, 경위도인 경우 latitude(위도)
-    var y: String = "35.888949648310486"
+    let y: String = "35.888949648310486"
     
     /// 중심 좌표부터의 반경거리
     /// 일단 기본 5km 로 설정
-    var radius: String = "3000"
+    let radius: String = "2000"
     
     /// 사용자 검색 매장
     var query: String
@@ -33,7 +33,7 @@ struct SearchRestaurantByKeywordModel {
     var parameters: Parameters = [:]
     
     /// HTTP Headers
-    var headers: HTTPHeaders = [
+    let headers: HTTPHeaders = [
     
         "Authorization": "KakaoAK \(Constants.Kakao.API_Key)"
     ]

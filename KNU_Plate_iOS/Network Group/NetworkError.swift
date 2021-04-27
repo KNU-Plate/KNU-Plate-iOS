@@ -22,9 +22,9 @@ enum HTTPStatus: Int, Error, LocalizedError {
         case .success:
             return "Success: 200"
         case .badRequest:
-            return "Bad Request: 400"
+            return "Bad Request: 400"               /// 잘못된 요청 . 타입 오류, 필수값 오류
         case .internalError:
-            return "Internal Server Error: 500"
+            return "Internal Server Error: 500"     /// 일관적으로 처리 -> 삭제된 계정, 없는 계정 조회 시 500번대 error return .. 많아봤자 20개
         case .notFound:
             return "Not Found Error: 404"
         }

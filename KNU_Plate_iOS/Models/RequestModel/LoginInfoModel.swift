@@ -6,10 +6,10 @@ import Alamofire
 struct LoginInfoModel {
     
     /// 로그인 이름
-    var username: String
+    let username: String
     
     ///비밀번호
-    var password: String
+    let password: String
     
     init(username: String, password: String) {
         
@@ -21,7 +21,7 @@ struct LoginInfoModel {
         parameters["password"] = password
     }
     
-    /// API parameters
+    /// API Parameters
     var parameters: Parameters = [:]
     
     /// HTTP Headers
@@ -30,8 +30,4 @@ struct LoginInfoModel {
         "accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
     ]
-    
-    
-    
-    
 }

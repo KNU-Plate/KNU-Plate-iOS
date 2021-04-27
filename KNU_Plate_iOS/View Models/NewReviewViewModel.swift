@@ -21,11 +21,9 @@ class NewReviewViewModel {
 //    }
     
     var userSelectedImages: [UIImage] {
-        
         willSet {
             userSelectedImages.removeAll()
         }
-        
         didSet {
             /// 받은 UIImage 를 JPEGData 로 저장하고,
             /// userSelectedImagesInJPEG 에 저장 후
@@ -66,7 +64,6 @@ class NewReviewViewModel {
         let newMenu = Menu()
         newMenu.menuName = name
         self.menus.append(newMenu)
-
     }
     
     func validateUserInputs() throws {

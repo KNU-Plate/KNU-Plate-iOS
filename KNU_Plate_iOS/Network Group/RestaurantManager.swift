@@ -18,6 +18,7 @@ class RestaurantManager {
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurant) {
         
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
     
     
@@ -27,6 +28,7 @@ class RestaurantManager {
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReview) {
         
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
 
     

@@ -7,7 +7,8 @@ class NewRestaurantViewModel {
     //MARK: - Object Properties
     
     var restaurantName: String {
-        didSet {            newRestaurant.name = restaurantName
+        didSet {
+            newRestaurant.name = restaurantName
         }
     }
     

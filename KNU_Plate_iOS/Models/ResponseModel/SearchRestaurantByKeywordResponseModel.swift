@@ -28,6 +28,9 @@ struct SearchedRestaurantInfo: Codable {
 
     /// 전체 도로명 주소
     let roadAddressName: String
+    
+    /// 매장 전화번호
+    let phone: String
 
     /// X 좌표값, 경위도인 경우 longitude (경도)
     let x: String
@@ -37,7 +40,7 @@ struct SearchedRestaurantInfo: Codable {
 
     enum CodingKeys: String, CodingKey {
 
-        case id,x,y
+        case id,phone,x,y
         case address = "address_name"
         case placeName = "place_name"
         case placeURL = "place_url"
