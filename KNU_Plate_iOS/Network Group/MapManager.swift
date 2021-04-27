@@ -17,7 +17,7 @@ class MapManager {
     //MARK: - 키워드로 장소 검색
     func searchByKeyword(with model: SearchRestaurantByKeywordModel,
                          completion: @escaping ((SearchRestaurantByKeywordResponseModel) -> Void)) {
-        
+            
         AF.request(searchByKeywordRequestURL,
                    method: .get,
                    parameters: model.parameters,
@@ -34,7 +34,6 @@ class MapManager {
                     do {
                         let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
                                                                    from: response.data!)
-                        
                         completion(decodedData)
                         
                     } catch {
@@ -43,20 +42,8 @@ class MapManager {
                 default:
                     print("default activated")
                 }
-            
-            
-            
-            
             }
-            
-            
-        
-        
-        
-        
-        
     }
-    
 
     
 }

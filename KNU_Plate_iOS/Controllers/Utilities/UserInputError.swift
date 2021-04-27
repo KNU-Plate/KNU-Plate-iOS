@@ -16,7 +16,7 @@ enum NewReviewInputError: Error, LocalizedError {
     /// 리뷰를 적지 않았을 때 발생하는 Error
     case insufficientReviewError
     
-    public var errorDescription: String {
+    var errorDescription: String {
         
         switch self {
         
@@ -35,6 +35,7 @@ enum NewReviewInputError: Error, LocalizedError {
 
 enum NewRestaurantInputError: Error, LocalizedError {
     
+
     
 }
 

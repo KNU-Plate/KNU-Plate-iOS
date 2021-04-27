@@ -19,7 +19,8 @@ class SearchRestaurantViewModel {
     
     var documents: [SearchedRestaurantInfo] = []
     
-    
+    /// 현재 선택된 장소
+    var currentlySelectedIndex: Int = 0
     
     //MARK: - Object Methods
     
@@ -32,6 +33,7 @@ class SearchRestaurantViewModel {
             
             self.documents = result.documents
             
+            ///수정 좀 하기 -> append 말고 한 방에 value assign 
             for result in result.documents {
                 
                 self.placeName.append(result.placeName)
@@ -45,6 +47,7 @@ class SearchRestaurantViewModel {
     func fetchLocation(of index: Int) -> (Double, Double, String) {
         
         let placeName = documents[index].placeName
+        currentlySelectedIndex = index
         
         if let x = Double(documents[index].x), let y = Double(documents[index].y) {
             return (x, y, placeName)
@@ -55,9 +58,7 @@ class SearchRestaurantViewModel {
         let y = 35.888949648310486      /// latitude
         
         return (x, y, placeName)
-       
     }
-    
     
     /// search 함수에서 append 를 하기 때문에 다른 검색어로 검색할 때 reset 을 해줘야 한다.
     func resetSearchResults() {
