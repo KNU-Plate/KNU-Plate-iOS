@@ -22,7 +22,7 @@ class SearchRestaurantViewController: UIViewController {
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
-        /// Select 안 했는데 nextButton 누르면 에러남
+        /// Select 안 했는데 nextButton 누르면 에러남 고치기
         
         let placeSelected = viewModel.currentlySelectedIndex
         let alertMessage = viewModel.placeName[placeSelected]
@@ -30,19 +30,15 @@ class SearchRestaurantViewController: UIViewController {
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
                                       message: alertMessage,
                                       preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "다시 고를게요",
-                                      style: .destructive,
-                                      handler: { (action: UIAlertAction!) in
-                                        
-                                      }))
-        
+                                      style: .cancel,
+                                      handler: nil))
         alert.addAction(UIAlertAction(title: "네 맞아요!",
                                       style: .default,
                                       handler: { (action: UIAlertAction!) in
                                         
                                         self.performSegue(withIdentifier: Constants.SegueIdentifier.goToNewRestaurantVC, sender: self)
-        
+                                        
                                       }))
         self.present(alert, animated: true)
     }
@@ -52,7 +48,22 @@ class SearchRestaurantViewController: UIViewController {
         if segue.identifier == Constants.SegueIdentifier.goToNewRestaurantVC {
             
             let newRestaurantVC = segue.destination as! NewRestaurantViewController
-            newRestaurantVC.restaurantName = viewModel.placeName[viewModel.currentlySelectedIndex]
+            
+            let indexSelected = viewModel.currentlySelectedIndex
+            
+            let restaurantName = viewModel.placeName[indexSelected]
+            let address = viewModel.documents[indexSelected].address
+            let contact = viewModel.documents[indexSelected].contact
+            let category = viewModel.documents[indexSelected].categoryName
+            let latitude = Double(viewModel.documents[indexSelected].y)!
+            let longitude = Double(viewModel.documents[indexSelected].x)!
+        
+            newRestaurantVC.initializeViewModelVariables(name: restaurantName,
+                                                         address: address,
+                                                         contact: contact,
+                                                         categoryName: category,
+                                                         latitude: latitude,
+                                                         longitude: longitude)
         }
     }
 }

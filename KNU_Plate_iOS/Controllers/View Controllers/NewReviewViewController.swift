@@ -59,7 +59,7 @@ class NewReviewViewController: UIViewController {
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
             
-            
+            ///viewModel.upload() 하는 함수가 최종으로 있어야함
             
         }
     }

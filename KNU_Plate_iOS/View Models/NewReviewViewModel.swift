@@ -3,7 +3,7 @@ import UIKit
 
 class NewReviewViewModel {
     
-    var newReview = NewReview()
+    var newReview = NewReviewModel()
     
     //MARK: - Object Properties
     

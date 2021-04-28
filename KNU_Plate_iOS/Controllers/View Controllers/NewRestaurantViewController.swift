@@ -10,39 +10,50 @@ class NewRestaurantViewController: UIViewController {
     @IBOutlet var expandButtonTextField: UITextField!
     @IBOutlet var reviewImageCollectionView: UICollectionView!
     
-    var restaurantName: String?
-    
-    var viewModel = NewRestaurantViewModel(restaurantName: "매장명")
+    var viewModel = NewRestaurantViewModel(restaurantName: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
-
+        
+    }
+    
+    // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
+    func initializeViewModelVariables(name: String, address: String, contact: String, categoryName: String, latitude: Double, longitude: Double) {
+        
+        viewModel.restaurantName = name
+        viewModel.address = address
+        viewModel.contact = contact
+        viewModel.categoryName = categoryName
+        viewModel.latitude = latitude
+        viewModel.longitude = longitude
     }
 
     @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
         
-        print(viewModel.newRestaurant.foodCategory)
-        print(viewModel.newRestaurant.gate)
-        print(viewModel.newRestaurant.name)
+        /// validate user input
+        /// NewRestaurantModel() 잘 생성됐는지 체크
+        
+        viewModel.upload()
+       
     }
     
-    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-      
-        switch sender.selectedSegmentIndex {
-        case 0:
-            viewModel.gate = viewModel.schoolGates[0]
-        case 1:
-            viewModel.gate = viewModel.schoolGates[1]
-        case 2:
-            viewModel.gate = viewModel.schoolGates[2]
-        case 3:
-            viewModel.gate = viewModel.schoolGates[3]
-        default:
-            viewModel.gate = viewModel.schoolGates[0]
-        }
-    }
+//    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
+//
+//        switch sender.selectedSegmentIndex {
+//        case 0:
+//            viewModel.gate = viewModel.schoolGates[0]
+//        case 1:
+//            viewModel.gate = viewModel.schoolGates[1]
+//        case 2:
+//            viewModel.gate = viewModel.schoolGates[2]
+//        case 3:
+//            viewModel.gate = viewModel.schoolGates[3]
+//        default:
+//            viewModel.gate = viewModel.schoolGates[0]
+//        }
+//    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource -> 사용자가 업로드 할 사진을 위한 Collection View
@@ -144,8 +155,6 @@ extension NewRestaurantViewController {
     }
     
     func initializeRestaurantName() {
-        
-        if let restaurantName = restaurantName { viewModel.restaurantName = restaurantName }
         restaurantNameLabel.text = viewModel.restaurantName
     }
     

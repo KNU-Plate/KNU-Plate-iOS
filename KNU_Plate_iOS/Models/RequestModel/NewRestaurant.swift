@@ -17,9 +17,6 @@ class NewRestaurantModel {
     /// 매장 위치
     let address: String
     
-    /// 카테고리 이름 ( i.e 음식점 > 카페 > 커피전문점 > 스타벅스 )
-    let categoryName: String
-    
     /// Y 좌표값, 경위도인 경우 latitude(위도)
     let latitude: Double
     
@@ -32,38 +29,34 @@ class NewRestaurantModel {
     /// 매장이 위치한 문
     //var gate: String
     
-    let boundary = UUID().uuidString
-    
-    init(name: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double) {
+    init(name: String, contact: String, foodCategory: String, address: String, latitude: Double, longitude: Double) {
         
         self.name = name
         self.contact = contact
         self.foodCategory = foodCategory
         self.address = address
-        self.categoryName = categoryName
         self.latitude = latitude
         self.longitude = longitude
         
-        print(UUID().uuidString)
-        
         /// Initialize parameters
-
-        /// API 호출 시 유저의 accessToken 도 같이 호출해야 함
-        /// headers["accessToken"] = User.shared.accessToken 이런 식으로 해야할듯
-        
-
+        parameters["mall_name"] = name
+        parameters["contact"] = contact
+        parameters["category_name"] = foodCategory
+        parameters["address"] = address
+        parameters["latitude"] = latitude
+        parameters["longitude"] = longitude
         
         
     }
- 
+    
+    /// API Parameters
+    var parameters: Parameters = [:]
+    
     /// HTTP Headers
     var headers: HTTPHeaders = [
         
         "accept": "application/json",
-        "Content-Type" : "multipart/form-data"
-        "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2MzMDMyY2UtMjFiNS00OTA1LTg2MDctNjI1OWQxZjRhNjQyIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNjE5NjA0ODY2LCJleHAiOjE2MTk2MDY2NjZ9._vH4egIXqgqomTNpFclq_eXWYxfSP-YHbB_6P2MS_5A"
-        //"Authorization" : User.shared.accessToken
-        
+        "Content-Type": "multipart/form-data"
     ]
 
 }
