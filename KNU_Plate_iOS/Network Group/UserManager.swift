@@ -41,7 +41,6 @@ class UserManager {
                 
                 case 200..<300:
                     do {
-                        
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
                         self.saveUserRegisterInfo(with: decodedData)
@@ -58,7 +57,7 @@ class UserManager {
                             if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
                                 print(errorMessage)
                             } else {
-                                print("알 수 없는 에러 발생.")
+                                print("알 수 없는 오류가 발생했습니다.")
                             }
                         }
                     }

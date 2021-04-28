@@ -98,6 +98,22 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
     
 }
 
+extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
+    
+    func didCompleteUpload(_ success: Bool) {
+        
+        if success {
+            
+            /// 매장 등록 완료 Alert 표시
+        } else {
+            
+            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
+        }
+    }
+    
+    
+}
+
 //MARK: - AddImageDelegate
 
 extension NewRestaurantViewController: AddImageDelegate {
@@ -148,6 +164,8 @@ extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSou
 extension NewRestaurantViewController {
 
     func initialize() {
+        
+        viewModel.delegate = self
         
         initializeRestaurantName()
         initializeCollectionView()

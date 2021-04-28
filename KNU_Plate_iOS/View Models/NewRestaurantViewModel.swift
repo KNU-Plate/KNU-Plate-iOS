@@ -1,12 +1,13 @@
 import Foundation
 
 protocol NewRestaurantViewModelDelegate {
-    func didCompleteUpload()
+    func didCompleteUpload(_ success: Bool)
 }
 
 class NewRestaurantViewModel {
     
     //MARK: - Object Properties
+    var delegate: NewRestaurantViewModelDelegate?
     
     var restaurantName: String
     
@@ -82,12 +83,11 @@ class NewRestaurantViewModel {
                                                     categoryName: categoryName,
                                                     latitude: latitude,
                                                     longitude: longitude)
-
-        ///delegate 으로 completion핸들
-        
-        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { result in
+        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             
-            print(result)
+            print("RESULT: \(isSuccess)")
+            
+            self.delegate?.didCompleteUpload(isSuccess)
             
         }
         

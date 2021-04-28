@@ -108,3 +108,18 @@ enum MailVerificationIssuanceError: String {
 //
 //}
 
+//MARK: - 신규 매장 등록 Error Message 관리
+
+enum NewRestaurantUploadError: String {
+    
+    case mallAlreadyExists = "already enrolled mall"
+    
+    func returnErrorMessage() -> String {
+        
+        switch self {
+        
+        case .mallAlreadyExists:
+            return "이미 등록된 매장입니다. 홈화면으로 돌아가시겠습니까?"
+        }
+    }
+}

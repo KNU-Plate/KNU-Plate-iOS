@@ -16,7 +16,7 @@ class RestaurantManager {
     
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurantModel,
-                             completion: @escaping ((NewRestaurantResponseModel) -> Void)){
+                             completion: @escaping ((Bool) -> Void)){
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -37,8 +37,10 @@ class RestaurantManager {
             switch statusCode {
             
             case 200:
-                
+
                 print("매장 등록 성공")
+                completion(true)
+               
                 
             /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
             
@@ -48,75 +50,20 @@ class RestaurantManager {
                     
                     if let error = responseJSON["error"] {
                         
-                        print(error)
+                        if let errorMessage = NewRestaurantUploadError(rawValue: error)?.returnErrorMessage() {
+                            
+                            print(errorMessage)
+                            
+                        } else {
+                            print("알 수 없는 오류가 발생했습니다.")
+                            
+                        }
+                        completion(false)
                     }
                 }
             }
-     
-            
-            
-            
-            
         }
-        
-        
     }
-    
-    
-    
-    
-    //    func uploadNewRestaurant(with model: NewRestaurantModel,
-    //                             completion: @escaping ((NewRestaurantResponseModel) -> Void)){
-    //
-    //        AF.request(uploadNewRestaurantRequestURL,
-    //                   method: .post,
-    //                   parameters: model.parameters,
-    //                   headers: model.headers)
-    //            .responseJSON { (response) in
-    //
-    //                guard let statusCode = response.response?.statusCode else {
-    //                    return
-    //                }
-    //
-    //                switch statusCode {
-    //
-    //                case 200:
-    //
-    //                    do {
-    //
-    //                        print("COMPLETED!")
-    //                        print(response.data!)
-    //
-    //                        let decodedData = try JSONDecoder().decode(NewRestaurantResponseModel.self, from: response.data!)
-    //
-    //
-    //                        completion(decodedData)
-    //                    } catch {
-    //                        print("There was an error decoding JSON Data into NewRestaurantResponseModel")
-    //                    }
-    //
-    //
-    //                default:
-    //
-    //                    if let responseJSON = try! response.result.get() as? [String : String] {
-    //
-    //                        if let error = responseJSON["error"] {
-    //
-    //                            print(error)
-    //                        }
-    //                    }
-    //
-    //
-    //                    print("ERROR in Restaurant Manager")
-    //
-    //
-    //                }
-    //            }
-    //    }
-    
-    
-    
-    
     
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReviewModel) {
