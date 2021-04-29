@@ -15,7 +15,19 @@ class NewRestaurantViewModel {
     var gate: String
     
     /// 매장 관련 사진 배열
-    var userSelectedImages: [UIImage]
+    var userSelectedImages: [UIImage] {
+        didSet {
+            userSelectedImagesInDataFormat?.removeAll()
+            
+            for image in userSelectedImages {
+                if let imageData = image.jpegData(compressionQuality: 0.5) {
+                    userSelectedImagesInDataFormat?.append(imageData)
+                }
+            }
+        }
+    }
+    
+    var userSelectedImagesInDataFormat: [Data]?
     
     /// 사용자가 선택한 음식 카테고리 (i.e 한식, 중식)
     var foodCategory: String
@@ -57,6 +69,7 @@ class NewRestaurantViewModel {
         self.categoryName = ""
         self.latitude = 0.0
         self.longitude = 0.0
+        self.userSelectedImagesInDataFormat = nil
     }
     
     //MARK: - Object Methods
@@ -65,8 +78,6 @@ class NewRestaurantViewModel {
         
         
     }
-    
-    
     
     // 신규 매장 등록
     func upload() {
@@ -77,7 +88,8 @@ class NewRestaurantViewModel {
                                                     address: address,
                                                     categoryName: categoryName,
                                                     latitude: latitude,
-                                                    longitude: longitude)
+                                                    longitude: longitude,
+                                                    images: userSelectedImagesInDataFormat)
         
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             

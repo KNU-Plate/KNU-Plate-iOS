@@ -30,9 +30,21 @@ class RestaurantManager {
                                      withName: "latitude")
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
-         
-            //사진도 추가해야함
             
+            /// 사용자가 업로드 할 사진도 같이 골랐으면 수행
+            if let imageArray = model.images {
+                print("imageArray is not nil")
+                
+                for images in imageArray {
+                    
+                    /// fileName 변경하는거 알아보기
+                    multipartFormData.append(images,
+                                             withName: "thumbnail",
+                                             fileName: "mall_image",
+                                             mimeType: "image/jpeg")
+                }
+            }
+                    
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers)
         .responseJSON { (response) in

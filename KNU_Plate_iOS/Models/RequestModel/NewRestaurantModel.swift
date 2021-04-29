@@ -27,12 +27,12 @@ class NewRestaurantModel {
     let longitude: Double
     
     /// 매장 관련 이미지
-    //let thumbnail: [Data]?
+    let images: [Data]?
     
     /// 매장이 위치한 문
     //var gate: String
     
-    init(name: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double) {
+    init(name: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double, images: [Data]?) {
         
         self.name = name
         self.contact = contact
@@ -41,6 +41,8 @@ class NewRestaurantModel {
         self.categoryName = categoryName
         self.latitude = latitude
         self.longitude = longitude
+        self.images = images
+        
         
         //print(UUID().uuidString)
 
