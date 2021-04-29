@@ -20,26 +20,15 @@ class NewReviewViewController: UIViewController {
    
 
     }
-    
-    func testSignup() {
 
-        let username = "alexding"
-        let displayName = "alexding"
-        let password = "123456789"
-        let email = "alexding@knu.ac.kr"
-
-        let newRegisterModel = RegisterInfoModel(username: username, displayName: displayName, password: password, email: email)
-
-        UserManager.shared.signUp(with: newRegisterModel)
-    }
-    
     @objc func pressedAddMenuButton() {
         
         //MARK: - TODO : Error 처리를 VC 에서 하는게 맞는가? View Model 에서 하는거 고려해보기
         
         if viewModel.menus.count >= 5 {
             menuInputTextField.text?.removeAll()
-            let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"), "메뉴는 최대 5개까지만 입력이 가능합니다.")
+            let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"),
+                                                        "메뉴는 최대 5개까지만 입력이 가능합니다.")
             self.present(alert, animated: true)
             return
         }
@@ -48,7 +37,8 @@ class NewReviewViewController: UIViewController {
 
             if nameOfMenu.count == 0 {
                 
-                let alert = AlertManager.createAlertMessage("드신 메뉴를 입력해주세요.", "빈 칸으로 놔두는건 안 돼요~")
+                let alert = AlertManager.createAlertMessage("드신 메뉴를 입력해주세요.",
+                                                            "빈 칸으로 놔두는건 안 돼요~")
                 self.present(alert, animated: true)
                 return
             }
@@ -59,8 +49,7 @@ class NewReviewViewController: UIViewController {
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
             
-            ///viewModel.upload() 하는 함수가 최종으로 있어야함
-            
+
         }
     }
     
@@ -78,18 +67,9 @@ class NewReviewViewController: UIViewController {
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
-            
-            
-            print("입력 모두 정상")
-            print(viewModel.rating)
-            print(viewModel.menus[0].menuName)
-            print(viewModel.review)
-            print(starRating.starsRating)
             /// user input이 정상이라면 본격 업로드
             
        
-            
-            
             
         } catch NewReviewInputError.insufficientMenuError {
             

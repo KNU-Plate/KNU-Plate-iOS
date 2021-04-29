@@ -20,6 +20,12 @@ class SearchRestaurantViewController: UIViewController {
         initialize()
     }
     
+    /// 카카오 지도가 메모리를 많이 잡아먹는 것 같은데 이거 관련해서 생각해보기
+    deinit {
+        mapView = nil
+        mapPoint = nil
+    }
+    
     @IBAction func pressedNextButton(_ sender: UIButton) {
         
         /// Select 안 했는데 nextButton 누르면 에러남 고치기
@@ -166,7 +172,6 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-
 }
 
 //MARK: - UI Configuration

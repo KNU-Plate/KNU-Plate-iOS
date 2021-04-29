@@ -56,6 +56,22 @@ class NewRestaurantViewController: UIViewController {
 //    }
 }
 
+//MARK: - NewRestaurantViewModelDelegate
+
+extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
+    
+    func didCompleteUpload(_ success: Bool) {
+        
+        if success {
+            
+            /// 매장 등록 완료 Alert 표시
+        } else {
+            
+            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
+        }
+    }
+}
+
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource -> 사용자가 업로드 할 사진을 위한 Collection View
 
 extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -95,23 +111,6 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         }
     }
-    
-}
-
-extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
-    
-    func didCompleteUpload(_ success: Bool) {
-        
-        if success {
-            
-            /// 매장 등록 완료 Alert 표시
-        } else {
-            
-            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
-        }
-    }
-    
-    
 }
 
 //MARK: - AddImageDelegate
@@ -135,6 +134,8 @@ extension NewRestaurantViewController: UserPickedFoodImageCellDelegate {
         reviewImageCollectionView.reloadData()
     }
 }
+
+//MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 
 extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     

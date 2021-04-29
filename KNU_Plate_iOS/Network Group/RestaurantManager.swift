@@ -20,11 +20,16 @@ class RestaurantManager {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
-            multipartFormData.append(Data(model.name.utf8), withName: "mall_name")
-            multipartFormData.append(Data(model.categoryName.utf8), withName: "category_name")
-            multipartFormData.append(Data(model.address.utf8), withName: "address")
-            multipartFormData.append(Data(String(model.latitude).utf8), withName: "latitude")
-            multipartFormData.append(Data(String(model.longitude).utf8), withName: "longitude")
+            multipartFormData.append(Data(model.name.utf8),
+                                     withName: "mall_name")
+            multipartFormData.append(Data(model.categoryName.utf8),
+                                     withName: "category_name")
+            multipartFormData.append(Data(model.address.utf8),
+                                     withName: "address")
+            multipartFormData.append(Data(String(model.latitude).utf8),
+                                     withName: "latitude")
+            multipartFormData.append(Data(String(model.longitude).utf8),
+                                     withName: "longitude")
          
             //사진도 추가해야함
             

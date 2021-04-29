@@ -32,8 +32,6 @@ class NewRestaurantModel {
     /// 매장이 위치한 문
     //var gate: String
     
-    let boundary = UUID().uuidString
-    
     init(name: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double) {
         
         self.name = name
@@ -44,16 +42,11 @@ class NewRestaurantModel {
         self.latitude = latitude
         self.longitude = longitude
         
-        print(UUID().uuidString)
-        
-        /// Initialize parameters
+        //print(UUID().uuidString)
+
 
         /// API 호출 시 유저의 accessToken 도 같이 호출해야 함
         /// headers["accessToken"] = User.shared.accessToken 이런 식으로 해야할듯
-        
-
-        
-        
     }
  
     /// HTTP Headers

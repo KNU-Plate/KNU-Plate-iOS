@@ -15,12 +15,7 @@ class NewRestaurantViewModel {
     var gate: String
     
     /// 매장 관련 사진 배열
-    var userSelectedImages: [UIImage] {
-        /// 굳이 필요없지 않나 ?
-        willSet {
-            userSelectedImages.removeAll()
-        }
-    }
+    var userSelectedImages: [UIImage]
     
     /// 사용자가 선택한 음식 카테고리 (i.e 한식, 중식)
     var foodCategory: String
@@ -83,6 +78,7 @@ class NewRestaurantViewModel {
                                                     categoryName: categoryName,
                                                     latitude: latitude,
                                                     longitude: longitude)
+        
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             
             print("RESULT: \(isSuccess)")
