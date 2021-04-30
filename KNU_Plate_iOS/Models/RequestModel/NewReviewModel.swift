@@ -3,23 +3,60 @@ import Alamofire
 
 //MARK: - 한 매장에 대한 신규 리뷰 작성을 위한 Model
 
-class NewReviewModel {
+class NewReviewModel: Encodable {
     
-    var rating: Int
-//    var reviewImages: Data?              // 데이터 타입이 Data 맞는지 확인해보기 -> byte buffer 형태로 보내는게 맞는가?
+    /// 매장 아이디
+    var mallID: Int
+    
+    /// 메뉴 정보 -> JSON 배열 형태
     var menus: [Menu]
+    
+    /// 리뷰 내용 
     var review: String
     
+    /// 평점
+    var rating: Int
+    
+    /// 리뷰 이미지
+    var reviewImages: [Data]?
+
     public init() {
         
-        self.rating = 3
-        //self.reviewImages = ?
-        
+        self.mallID = 0
         self.menus = [Menu]()
         self.review = ""
+        self.rating = 3
     }
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case mallID = "mall_id"
+        case menus = "menu_info"
+        case review = "contents"
+        case rating = "evaluate"
+        case reviewImages = "review_image"
+        
+    }
+    
     
     
 }
 
 
+/*
+ menus 보낼 때의 Model 형식 (String 형태로 보내야함)
+ 
+ [
+  {
+    "menu_id":1,
+    "is_like": "Y"
+ 
+   },
+   {
+    "menu_id":2,
+    "is_like": "Y"
+   }
+ ]
+    
+ 
+ */

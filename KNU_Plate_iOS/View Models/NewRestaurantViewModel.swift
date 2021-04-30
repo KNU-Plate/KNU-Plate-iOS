@@ -99,9 +99,7 @@ class NewRestaurantViewModel {
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             
             print("RESULT: \(isSuccess)")
-            
             self.delegate?.didCompleteUpload(isSuccess)
-            
         }
         
         

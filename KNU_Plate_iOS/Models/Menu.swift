@@ -1,6 +1,6 @@
 import Foundation
 
-class Menu: Codable {
+class Menu: Encodable {
     
     var menuName: String
     var isGood: Bool
@@ -8,5 +8,11 @@ class Menu: Codable {
     public init() {
         self.menuName = ""
         self.isGood = true
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case menuName = "id"
+        case isGood = "is_like"
     }
 }

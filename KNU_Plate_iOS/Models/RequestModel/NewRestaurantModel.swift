@@ -56,7 +56,7 @@ class NewRestaurantModel {
         
         "accept": "application/json",
         "Content-Type" : "multipart/form-data",
-        "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2MzMDmodelsdmodeMyY2UtMjFiNS00OTA1LTg2MDctNjI1OWQxZjRhNjQyIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNjE5NzY5MTc1LCJleHAiOjE2MTk3NzA5NzV9.n0IgcReBWVkOdklsimrZEv6WXMpZG1jI0LGRJnENURg"
+        "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2MzMDMyY2UtMjFiNS00OTA1LTg2MDctNjI1OWQxZjRhNjQyIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNjE5NzcwMDE3LCJleHAiOjE2MTk3NzE4MTd9.CqfbX5_2ckkX8zgto3EGqbS_dNQ0fZaPN0VCvXwj6O8"
         //"Authorization" : User.shared.accessToken
         
     ]

@@ -18,14 +18,6 @@ class RestaurantManager {
     func uploadNewRestaurant(with model: NewRestaurantModel,
                              completion: @escaping ((Bool) -> Void)){
         
-        print(model.name)
-        print(model.contact)
-        print(model.categoryName)
-        print(model.address)
-        print(model.latitude)
-        print(model.longitude)
-        print(model.images)
-        
         AF.upload(multipartFormData: { (multipartFormData) in
             
             multipartFormData.append(Data(model.name.utf8),
