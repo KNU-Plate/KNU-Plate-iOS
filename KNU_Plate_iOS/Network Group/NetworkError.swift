@@ -22,9 +22,9 @@ enum HTTPStatus: Int, Error, LocalizedError {
         case .success:
             return "Success: 200"
         case .badRequest:
-            return "Bad Request: 400"
+            return "Bad Request: 400"               /// 잘못된 요청 . 타입 오류, 필수값 오류
         case .internalError:
-            return "Internal Server Error: 500"
+            return "Internal Server Error: 500"     /// 일관적으로 처리 -> 삭제된 계정, 없는 계정 조회 시 500번대 error return .. 많아봤자 20개
         case .notFound:
             return "Not Found Error: 404"
         }
@@ -107,3 +107,18 @@ enum MailVerificationIssuanceError: String {
 //
 //}
 
+//MARK: - 신규 매장 등록 Error Message 관리
+
+enum NewRestaurantUploadError: String {
+    
+    case mallAlreadyExists = "already enrolled mall"
+    
+    func returnErrorMessage() -> String {
+        
+        switch self {
+        
+        case .mallAlreadyExists:
+            return "이미 등록된 매장입니다. 홈화면으로 돌아가시겠습니까?"
+        }
+    }
+}

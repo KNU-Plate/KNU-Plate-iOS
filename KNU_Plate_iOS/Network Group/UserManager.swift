@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import Security
 
 //MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
 
@@ -39,7 +40,6 @@ class UserManager {
                 switch statusCode {
                 case 200..<300:
                     do {
-                        
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
                         self.saveUserRegisterInfo(with: decodedData)
@@ -56,7 +56,7 @@ class UserManager {
                             if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
                                 print(errorMessage)
                             } else {
-                                print("알 수 없는 에러 발생.")
+                                print("알 수 없는 오류가 발생했습니다.")
                             }
                         }
                     }
@@ -145,11 +145,13 @@ class UserManager {
     //MARK: - 로그아웃
     func logOut() {
     
+        
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
     
     //MARK: - 토큰 갱신
     func refreshToken() {
-        
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
     
     
@@ -163,7 +165,7 @@ extension UserManager {
     func saveUserRegisterInfo(with model: RegisterResponseModel) {
         
         //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
-        
+
         User.shared.id = model.userID
         User.shared.username = model.username
         User.shared.password = model.password
@@ -171,10 +173,19 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
+        
+        
+        User.shared.accessToken = model.accessToken
+        User.shared.refreshToken = model.refreshToken
+        
+        
+
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
     func saveLoginInfoToUserDefaults(with model: LoginResponseModel) {
+        
+        //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
         
         
     }

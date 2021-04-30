@@ -1,7 +1,6 @@
 import UIKit
 
-
-//MARK: - 신규 맛집 등록 시 위치 우선 검색
+//MARK: - 신규 맛집 등록 시 위치 검색하는 화면
 
 class SearchRestaurantViewController: UIViewController {
     
@@ -21,29 +20,15 @@ class SearchRestaurantViewController: UIViewController {
         initialize()
     }
     
-    func initialize() {
-        
-        viewModel.delegate = self
-        
-        /// SearchBar 초기화
-        searchBar.delegate = self
-        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
-        
-        /// TableView 초기화
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        
-        initializeMapView()
-        
-        /// Next Button 초기화
-        nextButton.layer.cornerRadius = nextButton.frame.width / 2
-        var buttonImage: UIImage = UIImage(named: "arrow_right")!
-        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
-        nextButton.setImage(buttonImage, for: .normal)
-        nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
+    /// 카카오 지도가 메모리를 많이 잡아먹는 것 같은데 이거 관련해서 생각해보기
+    deinit {
+        mapView = nil
+        mapPoint = nil
     }
     
     @IBAction func pressedNextButton(_ sender: UIButton) {
+        
+        /// Select 안 했는데 nextButton 누르면 에러남 고치기
         
         let placeSelected = viewModel.currentlySelectedIndex
         let alertMessage = viewModel.placeName[placeSelected]
@@ -51,23 +36,15 @@ class SearchRestaurantViewController: UIViewController {
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
                                       message: alertMessage,
                                       preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "다시 고를게요",
-                                      style: .destructive,
-                                      handler: { (action: UIAlertAction!) in
-                                        
-                                      }))
-        
+                                      style: .cancel,
+                                      handler: nil))
         alert.addAction(UIAlertAction(title: "네 맞아요!",
                                       style: .default,
                                       handler: { (action: UIAlertAction!) in
                                         
                                         self.performSegue(withIdentifier: Constants.SegueIdentifier.goToNewRestaurantVC, sender: self)
                                         
-//                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                        let secondVC = storyboard.instantiateViewController(identifier: "NewRestaurantViewController")
-//                                        self.show(secondVC, sender: self)
-
                                       }))
         self.present(alert, animated: true)
     }
@@ -77,7 +54,22 @@ class SearchRestaurantViewController: UIViewController {
         if segue.identifier == Constants.SegueIdentifier.goToNewRestaurantVC {
             
             let newRestaurantVC = segue.destination as! NewRestaurantViewController
-            newRestaurantVC.restaurantName = viewModel.placeName[viewModel.currentlySelectedIndex]
+            
+            let indexSelected = viewModel.currentlySelectedIndex
+            
+            let restaurantName = viewModel.placeName[indexSelected]
+            let address = viewModel.documents[indexSelected].address
+            let contact = viewModel.documents[indexSelected].contact
+            let category = viewModel.documents[indexSelected].categoryName
+            let latitude = Double(viewModel.documents[indexSelected].y)!
+            let longitude = Double(viewModel.documents[indexSelected].x)!
+        
+            newRestaurantVC.initializeViewModelVariables(name: restaurantName,
+                                                         address: address,
+                                                         contact: contact,
+                                                         categoryName: category,
+                                                         latitude: latitude,
+                                                         longitude: longitude)
         }
     }
 }
@@ -180,7 +172,44 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+}
 
+//MARK: - UI Configuration
+
+extension SearchRestaurantViewController {
+    
+    func initialize() {
+        
+        viewModel.delegate = self
+        
+        initializeSearchBar()
+        initializeTableView()
+        initializeMapView()
+        initializeUIComponents()
+    }
+    
+    func initializeSearchBar() {
+
+        searchBar.delegate = self
+        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
+    }
+    
+    func initializeTableView() {
+        
+        searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
+    }
+    
+    func initializeUIComponents() {
+        
+        nextButton.layer.cornerRadius = nextButton.frame.width / 2
+        var buttonImage: UIImage = UIImage(named: "arrow_right")!
+        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
+        nextButton.setImage(buttonImage, for: .normal)
+        nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
+    }
+    
+    
 }
 
 

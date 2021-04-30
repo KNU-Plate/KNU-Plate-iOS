@@ -10,72 +10,66 @@ class NewRestaurantViewController: UIViewController {
     @IBOutlet var expandButtonTextField: UITextField!
     @IBOutlet var reviewImageCollectionView: UICollectionView!
     
-    var restaurantName: String?
-    
-    var viewModel = NewRestaurantViewModel(restaurantName: "매장명")
+    var viewModel = NewRestaurantViewModel(restaurantName: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
-        
-        
         initialize()
         
-       
+    }
     
+    // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
+    func initializeViewModelVariables(name: String, address: String, contact: String, categoryName: String, latitude: Double, longitude: Double) {
+        
+        viewModel.restaurantName = name
+        viewModel.address = address
+        viewModel.contact = contact
+        viewModel.categoryName = categoryName
+        viewModel.latitude = latitude
+        viewModel.longitude = longitude
     }
 
-
-    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-      
-        switch sender.selectedSegmentIndex {
-        case 0:
-            viewModel.gate = viewModel.schoolGates[0]
-        case 1:
-            viewModel.gate = viewModel.schoolGates[1]
-        case 2:
-            viewModel.gate = viewModel.schoolGates[2]
-        case 3:
-            viewModel.gate = viewModel.schoolGates[3]
-        default:
-            viewModel.gate = viewModel.schoolGates[0]
-        }
+    @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
+        
+        /// validate user input
+        /// NewRestaurantModel() 잘 생성됐는지 체크
+        
+        viewModel.upload()
+       
     }
+    
+//    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
+//
+//        switch sender.selectedSegmentIndex {
+//        case 0:
+//            viewModel.gate = viewModel.schoolGates[0]
+//        case 1:
+//            viewModel.gate = viewModel.schoolGates[1]
+//        case 2:
+//            viewModel.gate = viewModel.schoolGates[2]
+//        case 3:
+//            viewModel.gate = viewModel.schoolGates[3]
+//        default:
+//            viewModel.gate = viewModel.schoolGates[0]
+//        }
+//    }
 }
 
-//MARK: - UI Configuration Methods
+//MARK: - NewRestaurantViewModelDelegate
 
-extension NewRestaurantViewController {
-
-    func initialize() {
-        
-        initializeRestaurantName()
-        initializeCollectionView()
-        createPickerView()
-    }
+extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
-    func initializeRestaurantName() {
+    func didCompleteUpload(_ success: Bool) {
         
-        if let restaurantName = restaurantName { viewModel.restaurantName = restaurantName }
-        restaurantNameLabel.text = viewModel.restaurantName
-    }
-    
-    func initializeCollectionView() {
-        
-        reviewImageCollectionView.delegate = self
-        reviewImageCollectionView.dataSource = self
-    }
-    
-    func createPickerView() {
-        
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-
-        expandButtonTextField.inputView = pickerView
-        
-        /// Toolbar 없으면 추가로 넣기 ("완료" 버튼)
+        if success {
+            
+            
+            /// 매장 등록 완료 Alert 표시
+        } else {
+            
+            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
+        }
     }
 }
 
@@ -118,7 +112,6 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         }
     }
-    
 }
 
 //MARK: - AddImageDelegate
@@ -143,6 +136,8 @@ extension NewRestaurantViewController: UserPickedFoodImageCellDelegate {
     }
 }
 
+//MARK: - UIPickerViewDelegate, UIPickerViewDataSource
+
 extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -163,5 +158,39 @@ extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSou
         viewModel.foodCategory = selectedFoodCategory
         
         foodCategoryTextField.text = selectedFoodCategory
+    }
+}
+
+//MARK: - UI Configuration Methods
+
+extension NewRestaurantViewController {
+
+    func initialize() {
+        
+        viewModel.delegate = self
+        
+        initializeRestaurantName()
+        initializeCollectionView()
+        createPickerView()
+    }
+    
+    func initializeRestaurantName() {
+        restaurantNameLabel.text = viewModel.restaurantName
+    }
+    
+    func initializeCollectionView() {
+        
+        reviewImageCollectionView.delegate = self
+        reviewImageCollectionView.dataSource = self
+    }
+    
+    func createPickerView() {
+        
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+
+        expandButtonTextField.inputView = pickerView
+        foodCategoryTextField.inputView = pickerView
     }
 }

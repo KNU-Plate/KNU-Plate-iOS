@@ -40,7 +40,7 @@ class MapManager {
                         print("There was an error decoding JSON Data (KakaoMap)")
                     }
                 default:
-                    print("default activated")
+                    print("default activated in MAPMANAGER")
                 }
             }
     }

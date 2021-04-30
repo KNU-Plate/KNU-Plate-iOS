@@ -16,6 +16,8 @@ enum NewReviewInputError: Error, LocalizedError {
     /// 리뷰를 적지 않았을 때 발생하는 Error
     case insufficientReviewError
     
+    // TODO: - 이것도 Network Error 형식으로 바꾸기
+    
     var errorDescription: String {
         
         switch self {
