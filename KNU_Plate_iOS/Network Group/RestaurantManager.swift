@@ -18,6 +18,14 @@ class RestaurantManager {
     func uploadNewRestaurant(with model: NewRestaurantModel,
                              completion: @escaping ((Bool) -> Void)){
         
+        print(model.name)
+        print(model.contact)
+        print(model.categoryName)
+        print(model.address)
+        print(model.latitude)
+        print(model.longitude)
+        print(model.images)
+        
         AF.upload(multipartFormData: { (multipartFormData) in
             
             multipartFormData.append(Data(model.name.utf8),
@@ -31,9 +39,7 @@ class RestaurantManager {
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
             
-            /// 사용자가 업로드 할 사진도 같이 골랐으면 수행
             if let imageArray = model.images {
-                print("imageArray is not nil")
                 
                 for images in imageArray {
                     
@@ -72,6 +78,7 @@ class RestaurantManager {
                             print(errorMessage)
                             
                         } else {
+                            print(error)
                             print("알 수 없는 오류가 발생했습니다.")
                             
                         }

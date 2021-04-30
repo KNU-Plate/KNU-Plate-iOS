@@ -64,6 +64,7 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         if success {
             
+            
             /// 매장 등록 완료 Alert 표시
         } else {
             
