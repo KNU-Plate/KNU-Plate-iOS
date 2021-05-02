@@ -50,14 +50,13 @@ class NewRestaurantModel {
         /// API 호출 시 유저의 accessToken 도 같이 호출해야 함
         /// headers["accessToken"] = User.shared.accessToken 이런 식으로 해야할듯
     }
- 
+    
     /// HTTP Headers
     var headers: HTTPHeaders = [
         
         "accept": "application/json",
-        "Content-Type" : "multipart/form-data",
-        "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2MzMDMyY2UtMjFiNS00OTA1LTg2MDctNjI1OWQxZjRhNjQyIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNjE5NzcwMDE3LCJleHAiOjE2MTk3NzE4MTd9.CqfbX5_2ckkX8zgto3EGqbS_dNQ0fZaPN0VCvXwj6O8"
-        //"Authorization" : User.shared.accessToken
+        "Content-Type": "multipart/form-data",
+        "Authorization" : User.shared.accessToken
         
     ]
 

@@ -9,8 +9,8 @@ class RestaurantManager {
     static let shared: RestaurantManager = RestaurantManager()
     
     //MARK: - API Request URLs
-    let uploadNewRestaurantRequestURL = "http://3.35.58.40:4100/api/mall"
-    
+    let uploadNewRestaurantRequestURL = "\(Constants.API_BASE_URL)mall"
+
     
     private init() {}
     
@@ -59,7 +59,7 @@ class RestaurantManager {
                 
             /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
             
-            
+        
             default:
                 if let responseJSON = try! response.result.get() as? [String : String] {
                     

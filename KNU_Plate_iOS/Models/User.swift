@@ -44,7 +44,7 @@ class User {
         self.dateCreated = ""
         self.isActive = ""
         self.ranking = 3
-        self.accessToken = ""
+        self.accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2MzMDMyY2UtMjFiNS00OTA1LTg2MDctNjI1OWQxZjRhNjQyIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiaWF0IjoxNjE5NzczNDU2LCJleHAiOjE2MTk3NzUyNTZ9.HwFBJXZmvubH6I3RfsTEA05p8mxUYOSXZyR7x0ES0Iw"
         self.refreshToken = ""
     }
 

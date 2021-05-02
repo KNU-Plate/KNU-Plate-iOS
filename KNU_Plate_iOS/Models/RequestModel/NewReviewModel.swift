@@ -19,14 +19,29 @@ class NewReviewModel: Encodable {
     
     /// 리뷰 이미지
     var reviewImages: [Data]?
-
-    public init() {
+    
+    init(mallID: Int, menus: [Menu], review: String, rating: Int,
+         reviewImages: [Data]?) {
         
-        self.mallID = 0
-        self.menus = [Menu]()
-        self.review = ""
-        self.rating = 3
+        self.mallID = mallID
+        self.menus = menus
+        self.review = review
+        self.rating = rating
+        self.reviewImages = reviewImages
     }
+    
+    
+    /// HTTP Headers
+    var headers: HTTPHeaders = [
+    
+    "accept": "application/json",
+    "Content-Type": "multipart/form-data",
+    "Authorization": User.shared.accessToken
+    
+    ]
+    
+    
+    
     
     enum CodingKeys: String, CodingKey {
         
@@ -37,9 +52,6 @@ class NewReviewModel: Encodable {
         case reviewImages = "review_image"
         
     }
-    
-    
-    
 }
 
 

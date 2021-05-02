@@ -3,13 +3,13 @@ import UIKit
 
 class NewReviewViewModel {
     
-    var newReview = NewReviewModel()
+    //var newReview = NewReviewModel()
     
     //MARK: - Object Properties
     
     var rating: Int {
         didSet {
-            newReview.rating = rating
+            //newReview.rating = rating
         }
     }
     
@@ -42,7 +42,7 @@ class NewReviewViewModel {
     
     var review: String {
         didSet {
-            newReview.review = review
+            //newReview.review = review
         }
     }
     

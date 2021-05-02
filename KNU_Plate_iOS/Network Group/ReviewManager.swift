@@ -9,9 +9,7 @@ class ReviewManager {
     static let shared: ReviewManager = ReviewManager()
     
     //MARK: - API Request URLs
-    let uploadNewReviewRequestURL = "http://3.35.58.40:4100/api/review"
-    
-    
+    let uploadNewReviewRequestURL = "\(Constants.API_BASE_URL)review"
     
     private init() { }
     

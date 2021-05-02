@@ -449,8 +449,8 @@
 				7C44321C261D7D1500A0D83F /* UserManager.swift */,
 				7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */,
 				7C1F79DC2633025900C7B41D /* MapManager.swift */,
-				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
 				7C32845F263BFA98008FD52D /* ReviewManager.swift */,
+				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
