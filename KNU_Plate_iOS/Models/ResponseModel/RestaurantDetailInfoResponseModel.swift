@@ -32,7 +32,7 @@ struct RestaurantDetailInfoResponseModel: Decodable {
     //let gate: String
     
     /// 매장에 등록된 총 메뉴 (배열)
-    let menus: [MenuInfo]
+    let menus: [ExistingMenuModel]
     
     
     /// 내 찜 목록에 추가되어 있는 매장인가? -> Y, N
@@ -44,27 +44,9 @@ struct RestaurantDetailInfoResponseModel: Decodable {
         case mallName = "mall_name"
         case categoryName = "category_name"
         case address, latitude, longitude
+        case menus = "menu"
         case rating = "evaluate_average"
         case recommendCount = "recommend_count"
         case isFavorite = "my_recommend"
     }
-}
-
-struct MenuInfo: Decodable {
-    
-    let menuID: Int
-    let mallID: Int
-    let menuName: String
-    let likes: Int
-    let dislikes: Int
-
-    enum CodingKeys: String, CodingKey {
-        
-        case menuID = "menu_id"
-        case mallID = "mall_id"
-        case menuName = "menu_name"
-        case likes = "like"
-        case dislikes = "dislikes"
-    }
-    
 }

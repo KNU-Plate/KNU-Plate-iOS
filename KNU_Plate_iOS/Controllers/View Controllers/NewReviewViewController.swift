@@ -10,6 +10,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    lazy var existingMenusPickerView = UIPickerView()
 
     private let viewModel: NewReviewViewModel = NewReviewViewModel()
     
@@ -17,16 +18,20 @@ class NewReviewViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-   
+        
+        
+        Test.shared.login()
 
     }
+    
+ 
 
     @objc func pressedAddMenuButton() {
         
         //MARK: - TODO : Error 처리를 VC 에서 하는게 맞는가? View Model 에서 하는거 고려해보기
         //viewModel: func validateMenuCount() -> Bool 이런식으로 처리하는거 생각해보기
         
-        if viewModel.menus.count >= 5 {
+        if viewModel.userAddedMenus.count >= 5 {
             menuInputTextField.text?.removeAll()
             let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"),
                                                         "메뉴는 최대 5개까지만 입력이 가능합니다.")
@@ -49,7 +54,8 @@ class NewReviewViewController: UIViewController {
             menuInputTableView.reloadData()
             self.viewWillLayoutSubviews()
             menuInputTextField.text?.removeAll()
-            
+            menuInputTextField.resignFirstResponder()
+            initializePickerViewForMenuTextField()
 
         }
     }
@@ -65,7 +71,7 @@ class NewReviewViewController: UIViewController {
             //TODO: - 마지막으로 업로드하기 전에 확인 질문 띄우기?
             //TODO: - "완료" 버튼 누르고 시간이 좀 많이 걸린다 싶으면 activity indicator (loading 표시) 하나 넣는거 고려
             
-            try viewModel.validateUserInputs()
+            //try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
             
@@ -165,13 +171,13 @@ extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 extension NewReviewViewController: NewMenuTableViewCellDelegate {
    
     // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
-    func didChangeMenuName(at index: Int, _ newMenuName: String) {
-       //viewModel.menus[index].menuName = newMenuName
-    }
+//    func didChangeMenuName(at index: Int, _ newMenuName: String) {
+//       viewModel.menus[index].menuName = newMenuName
+//    }
     
     func didPressDeleteMenuButton(at index: Int) {
     
-        viewModel.menus.remove(at: index)
+        viewModel.userAddedMenus.remove(at: index)
         menuInputTableView.reloadData()
         viewWillLayoutSubviews()
     }
@@ -179,9 +185,9 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool) {
         
         if isGood {
-            viewModel.menus[index].isGood = "Y"
+            viewModel.userAddedMenus[index].isGood = "Y"
         } else {
-            viewModel.menus[index].isGood = "N"
+            viewModel.userAddedMenus[index].isGood = "N"
         }
         
     }
@@ -192,7 +198,7 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.menus.count
+        return self.viewModel.userAddedMenus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,9 +207,9 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Failed to dequeue cell for NewMenuTableViewCell")
         }
         
-        if self.viewModel.menus.count != 0 {
+        if viewModel.userAddedMenus.count != 0 {
             
-            let menuInfo = viewModel.menus[indexPath.row]
+            let menuInfo = viewModel.userAddedMenus[indexPath.row]
             
             cell.delegate = self
             cell.menuNameTextField.text = menuInfo.menuName
@@ -231,20 +237,17 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        //TODO: - viewModel.existingMenu.count 뭐 이런식으로 해야할듯
-        /// 가장 마지막 row 는 "직접 입력" 이어야 함 -> dismiss picker view and keyboard pop up
-        
-        return 5
+        return viewModel.existingMenus.count
         
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "Hello"
+        return viewModel.existingMenus[row].menuName
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        menuInputTextField.text = "Hello"
-        print("didSelectRow activated")
+        
+        //menuInputTextField.text = viewModel.existingMenus[row].menuName
     }
     
     
@@ -348,7 +351,7 @@ extension NewReviewViewController {
         addMenuButton.addTarget(self,
                                 action: #selector(pressedAddMenuButton),
                                 for: .touchUpInside)
-        
+  
         let rightView = UIView(frame: CGRect(x: 0,
                                              y: 0,
                                              width: 30,
@@ -361,11 +364,10 @@ extension NewReviewViewController {
     
     func initializePickerViewForMenuTextField() {
         
-        let existingMenusPickerView = UIPickerView()
         existingMenusPickerView.backgroundColor = .white
         existingMenusPickerView.delegate = self
         existingMenusPickerView.dataSource = self
-        
+
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -391,10 +393,22 @@ extension NewReviewViewController {
         
         menuInputTextField.inputView = existingMenusPickerView
         menuInputTextField.inputAccessoryView = toolBar
+      
     }
     
-    @objc func dismissPicker(){
+    @objc func dismissPicker(pickerView: UIPickerView){
+        
         self.view.endEditing(true)
+        let selectedRow = existingMenusPickerView.selectedRow(inComponent: 0)
+        
+        if selectedRow == viewModel.existingMenus.count - 1 {
+            
+            menuInputTextField.inputView = nil
+            menuInputTextField.becomeFirstResponder()
+        }
+        
+       
+    
     }
     
 }

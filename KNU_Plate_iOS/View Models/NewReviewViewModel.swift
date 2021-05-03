@@ -3,15 +3,9 @@ import UIKit
 
 class NewReviewViewModel {
     
-    //var newReview = NewReviewModel()
-    
     //MARK: - Object Properties
     
-    var rating: Int {
-        didSet {
-            //newReview.rating = rating
-        }
-    }
+    var rating: Int
     
 //
 //    var userSelectedImagesInJPEG: Data {
@@ -31,25 +25,27 @@ class NewReviewViewModel {
         }
     }
     
+    /// 이미 매장에 등록되어 있는 메뉴 배열
+    var existingMenus: [ExistingMenuModel] = [
     
-    var menus: [EachMenu] //{
-//        didSet {
-//            newReview.menu.append(contentsOf: menu)
-//        }
         
-        
-    //}
+    ExistingMenuModel(menuID: 1, mallID: 1, menuName: "삼겹살", likes: 2, dislikes: 3),
+    ExistingMenuModel(menuID: 2, mallID: 1, menuName: "피자", likes: 4, dislikes: 10),
+    ExistingMenuModel(menuID: 2, mallID: 1, menuName: "족발", likes: 20, dislikes: 1),
     
-    var review: String {
-        didSet {
-            //newReview.review = review
-        }
-    }
+    // ------------------항상 있는것
+    ExistingMenuModel(menuID: 0, mallID: 0, menuName: "직접 입력", likes: 0, dislikes: 0)
+    ]
     
+    /// 사용자가 직접 추가한 메뉴
+    var userAddedMenus: [NewMenuModel]
     
-    var existingMenuInfo: [EachMenu]
+    /// 업로드 할 총 배열?
+    var menusToUpload: [UploadMenuModel]
+
     
-    
+    var review: String
+
     
     
     
@@ -61,37 +57,41 @@ class NewReviewViewModel {
     public init() {
         
         self.rating = 3
-        self.review = ""
+        
         self.userSelectedImages = [UIImage]()
-        self.menus = [EachMenu]()
+        //self.existingMenus = [ExistingMenuModel]()
+        self.userAddedMenus = [NewMenuModel]()
+        self.menusToUpload = [UploadMenuModel]()
+        self.review = ""
+
+ 
         
     }
     
     //MARK: - Object Methods
     
     func addNewMenu(name: String) {
-        
-        let newMenu = EachMenu()
-        newMenu.menuName = name
-        self.menus.append(newMenu)
+
+        let newMenu = NewMenuModel(menuName: name)
+        self.userAddedMenus.append(newMenu)
     }
     
     func validateUserInputs() throws {
-        
+
         /// 메뉴 개수가 0개이면 Error
-        if self.menus.count == 0 { throw NewReviewInputError.insufficientMenuError }
-        
+        if self.userAddedMenus.count == 0 { throw NewReviewInputError.insufficientMenuError }
+
         /// 리뷰 글자수가 5 미만이면 Error
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
-        
+
         /// 입력한 메뉴 중 메뉴명이 비어있는게 하나라도 있으면 Error
-        for eachMenu in self.menus {
-            
+        for eachMenu in userAddedMenus {
+
             guard eachMenu.menuName.count > 0 else {
                 throw NewReviewInputError.blankMenuNameError
             }
         }
-        
+
     }
     
     // 신규 리뷰 등록
