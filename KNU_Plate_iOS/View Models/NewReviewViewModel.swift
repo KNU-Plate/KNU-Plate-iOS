@@ -76,6 +76,18 @@ class NewReviewViewModel {
         self.userAddedMenus.append(newMenu)
     }
     
+    func validateMenuName(menu: String) throws {
+        
+        if userAddedMenus.count > 5 { throw NewReviewInputError.tooMuchMenusAdded }
+        if menu.count == 0 { throw NewReviewInputError.menuNameTooShort }
+        
+        for eachMenu in userAddedMenus {
+            if eachMenu.menuName == menu {
+                throw NewReviewInputError.alreadyExistingMenu
+            }
+        }
+    }
+    
     func validateUserInputs() throws {
 
         /// 메뉴 개수가 0개이면 Error
@@ -86,7 +98,6 @@ class NewReviewViewModel {
 
         /// 입력한 메뉴 중 메뉴명이 비어있는게 하나라도 있으면 Error
         for eachMenu in userAddedMenus {
-
             guard eachMenu.menuName.count > 0 else {
                 throw NewReviewInputError.blankMenuNameError
             }

@@ -23,13 +23,40 @@ class NewReviewViewController: UIViewController {
         Test.shared.login()
 
     }
-    
- 
 
     @objc func pressedAddMenuButton() {
         
-        //MARK: - TODO : Error 처리를 VC 에서 하는게 맞는가? View Model 에서 하는거 고려해보기
-        //viewModel: func validateMenuCount() -> Bool 이런식으로 처리하는거 생각해보기
+        do {
+            
+            if let nameOfMenu = menuInputTextField.text {
+                try viewModel.validateMenuName(menu: nameOfMenu)
+            }
+            
+        } catch NewReviewInputError.tooMuchMenusAdded {
+            
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.tooMuchMenusAdded.errorDescription)
+            self.present(alert, animated: true)
+            
+        } catch NewReviewInputError.menuNameTooShort {
+            
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.menuNameTooShort.errorDescription)
+            self.present(alert, animated: true)
+            
+        } catch NewReviewInputError.alreadyExistingMenu {
+            
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.alreadyExistingMenu.errorDescription)
+            self.present(alert, animated: true)
+        } catch {
+            print("Unexpected Error occured in pressedAddMenuButton")
+        }
+   
+        
+        
+        
+        
         
         if viewModel.userAddedMenus.count >= 5 {
             menuInputTextField.text?.removeAll()
@@ -71,7 +98,7 @@ class NewReviewViewController: UIViewController {
             //TODO: - 마지막으로 업로드하기 전에 확인 질문 띄우기?
             //TODO: - "완료" 버튼 누르고 시간이 좀 많이 걸린다 싶으면 activity indicator (loading 표시) 하나 넣는거 고려
             
-            //try viewModel.validateUserInputs()
+            try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
             
@@ -80,18 +107,21 @@ class NewReviewViewController: UIViewController {
             
         } catch NewReviewInputError.insufficientMenuError {
             
-            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientMenuError.errorDescription)
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.insufficientMenuError.errorDescription)
             self.present(alert, animated: true)
 
         } catch NewReviewInputError.insufficientReviewError {
             
-            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.insufficientReviewError.errorDescription )
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.insufficientReviewError.errorDescription )
             self.present(alert, animated: true)
             
 
         } catch NewReviewInputError.blankMenuNameError {
             
-            let alert = AlertManager.createAlertMessage("입력 오류", with: NewReviewInputError.blankMenuNameError.errorDescription)
+            let alert = AlertManager.createAlertMessage("입력 오류",
+                                                        with: NewReviewInputError.blankMenuNameError.errorDescription)
             self.present(alert, animated: true)
         }
         catch {
@@ -367,7 +397,14 @@ extension NewReviewViewController {
         existingMenusPickerView.backgroundColor = .white
         existingMenusPickerView.delegate = self
         existingMenusPickerView.dataSource = self
-
+        
+        menuInputTextField.inputView = existingMenusPickerView
+        menuInputTextField.inputAccessoryView = initializeToolbar()
+      
+    }
+    
+    func initializeToolbar() -> UIToolbar {
+        
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -391,24 +428,25 @@ extension NewReviewViewController {
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
-        menuInputTextField.inputView = existingMenusPickerView
-        menuInputTextField.inputAccessoryView = toolBar
-      
+        return toolBar
     }
     
     @objc func dismissPicker(pickerView: UIPickerView){
         
         self.view.endEditing(true)
+        
         let selectedRow = existingMenusPickerView.selectedRow(inComponent: 0)
         
+        /// 만약 "직접 입력" 옵션을 선택했을 시
         if selectedRow == viewModel.existingMenus.count - 1 {
             
             menuInputTextField.inputView = nil
+            menuInputTextField.inputAccessoryView = nil
             menuInputTextField.becomeFirstResponder()
+            
+        } else {
+            menuInputTextField.text = viewModel.existingMenus[selectedRow].menuName
         }
-        
-       
-    
     }
     
 }

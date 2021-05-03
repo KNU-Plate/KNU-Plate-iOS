@@ -36,7 +36,6 @@ class NewMenuTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         indexPath = 0
         menuNameTextField.text = ""
-        pressedMenuGoodOrBad(goodButton)
     }
 
     //MARK: - 추천 / 비추천 버튼 눌렀을 때 실행
