@@ -24,6 +24,7 @@ class NewReviewViewController: UIViewController {
     @objc func pressedAddMenuButton() {
         
         //MARK: - TODO : Error 처리를 VC 에서 하는게 맞는가? View Model 에서 하는거 고려해보기
+        //viewModel: func validateMenuCount() -> Bool 이런식으로 처리하는거 생각해보기
         
         if viewModel.menus.count >= 5 {
             menuInputTextField.text?.removeAll()
@@ -67,9 +68,9 @@ class NewReviewViewController: UIViewController {
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
-            /// user input이 정상이라면 본격 업로드
             
-       
+            viewModel.upload()
+   
             
         } catch NewReviewInputError.insufficientMenuError {
             
@@ -91,8 +92,6 @@ class NewReviewViewController: UIViewController {
             print("Unexpected Error occured in pressedFinishButton")
         }
 
-        /// API related methods needed here (upload)
-        /// viewModel 내에서 NetworkManager.shared.uploadNewReview( ) 이런 식으로 해야 할듯
     }
 }
 
@@ -167,7 +166,7 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
    
     // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
     func didChangeMenuName(at index: Int, _ newMenuName: String) {
-       viewModel.menus[index].menuName = newMenuName
+       //viewModel.menus[index].menuName = newMenuName
     }
     
     func didPressDeleteMenuButton(at index: Int) {
@@ -178,7 +177,13 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     }
     
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool) {
-        viewModel.menus[index].isGood = isGood
+        
+        if isGood {
+            viewModel.menus[index].isGood = "Y"
+        } else {
+            viewModel.menus[index].isGood = "N"
+        }
+        
     }
 }
 

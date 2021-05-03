@@ -32,7 +32,7 @@ class NewReviewViewModel {
     }
     
     
-    var menus: [Menu] //{
+    var menus: [EachMenu] //{
 //        didSet {
 //            newReview.menu.append(contentsOf: menu)
 //        }
@@ -46,6 +46,16 @@ class NewReviewViewModel {
         }
     }
     
+    
+    var existingMenuInfo: [EachMenu]
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - Init
     
     public init() {
@@ -53,7 +63,7 @@ class NewReviewViewModel {
         self.rating = 3
         self.review = ""
         self.userSelectedImages = [UIImage]()
-        self.menus = [Menu]()
+        self.menus = [EachMenu]()
         
     }
     
@@ -61,7 +71,7 @@ class NewReviewViewModel {
     
     func addNewMenu(name: String) {
         
-        let newMenu = Menu()
+        let newMenu = EachMenu()
         newMenu.menuName = name
         self.menus.append(newMenu)
     }
@@ -83,6 +93,44 @@ class NewReviewViewModel {
         }
         
     }
+    
+    // 신규 리뷰 등록
+    func upload() {
+        
+ 
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    /*
+     
+     
+     func upload() {
+         
+         let newRestaurantModel = NewRestaurantModel(name: restaurantName,
+                                                     contact: contact,
+                                                     foodCategory: foodCategory,
+                                                     address: address,
+                                                     categoryName: categoryName,
+                                                     latitude: latitude,
+                                                     longitude: longitude,
+                                                     images: userSelectedImagesInDataFormat)
+         
+         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
+             
+             print("RESULT: \(isSuccess)")
+             self.delegate?.didCompleteUpload(isSuccess)
+         }
+         
+         
+     }
+     */
     
     
 }

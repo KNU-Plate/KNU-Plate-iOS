@@ -40,5 +40,4 @@ struct RegisterInfoModel {
         "accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
     ]
-    
 }
