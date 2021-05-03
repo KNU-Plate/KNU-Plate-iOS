@@ -9,7 +9,8 @@ class RestaurantManager {
     static let shared: RestaurantManager = RestaurantManager()
     
     //MARK: - API Request URLs
-    let uploadNewRestaurantRequestURL = "\(Constants.API_BASE_URL)mall"
+    let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
+    let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
 
     
     private init() {}
@@ -82,7 +83,10 @@ class RestaurantManager {
     }
     
     //MARK: - 신규 리뷰 등록 
-    func uploadNewReview(with model: NewReviewModel) {
+    func uploadNewReview(with model: NewReviewModel,
+                         completion: @escaping ((Bool) -> Void)) {
+        
+        
         
         // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
