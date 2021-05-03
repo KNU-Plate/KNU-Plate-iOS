@@ -27,11 +27,18 @@ class NewReviewViewController: UIViewController {
     @objc func pressedAddMenuButton() {
         
         do {
-            
             if let nameOfMenu = menuInputTextField.text {
                 try viewModel.validateMenuName(menu: nameOfMenu)
+                
+                viewModel.addNewMenu(name: nameOfMenu)
+                
+                menuInputTableView.reloadData()
+                self.viewWillLayoutSubviews()
+                menuInputTextField.text?.removeAll()
+                menuInputTextField.resignFirstResponder()
+                initializePickerViewForMenuTextField()
+                return
             }
-            
         } catch NewReviewInputError.tooMuchMenusAdded {
             
             let alert = AlertManager.createAlertMessage("입력 오류",
@@ -49,44 +56,12 @@ class NewReviewViewController: UIViewController {
             let alert = AlertManager.createAlertMessage("입력 오류",
                                                         with: NewReviewInputError.alreadyExistingMenu.errorDescription)
             self.present(alert, animated: true)
+            
         } catch {
             print("Unexpected Error occured in pressedAddMenuButton")
         }
-   
-        
-        
-        
-        
-        
-        if viewModel.userAddedMenus.count >= 5 {
-            menuInputTextField.text?.removeAll()
-            let alert = AlertManager.createAlertMessage(("메뉴는 최대 5개 입력 가능"),
-                                                        "메뉴는 최대 5개까지만 입력이 가능합니다.")
-            self.present(alert, animated: true)
-            return
-        }
-        
-        if let nameOfMenu = menuInputTextField.text {
-
-            if nameOfMenu.count == 0 {
-                
-                let alert = AlertManager.createAlertMessage("드신 메뉴를 입력해주세요.",
-                                                            "빈 칸으로 놔두는건 안 돼요~")
-                self.present(alert, animated: true)
-                return
-            }
-            
-            viewModel.addNewMenu(name: nameOfMenu)
-            
-            menuInputTableView.reloadData()
-            self.viewWillLayoutSubviews()
-            menuInputTextField.text?.removeAll()
-            menuInputTextField.resignFirstResponder()
-            initializePickerViewForMenuTextField()
-
-        }
+        menuInputTextField.text?.removeAll()
     }
-    
     
     // 완료 버튼 눌렀을 시 실행
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
