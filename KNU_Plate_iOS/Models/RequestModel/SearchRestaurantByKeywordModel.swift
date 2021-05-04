@@ -13,7 +13,7 @@ struct SearchRestaurantByKeywordModel {
     
     /// 중심 좌표부터의 반경거리
     /// 일단 기본 5km 로 설정
-    let radius: String = "2000"
+    let radius: String = "1000"
     
     /// 사용자 검색 매장
     var query: String

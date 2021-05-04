@@ -79,12 +79,12 @@ class UserManager {
                     
                     case 200..<300:
                         do {
-                            
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
                             self.saveLoginInfoToUserDefaults(with: decodedData)
                             
                         } catch {
+                            print(error)
                             print("There was an error decoding JSON Data")
                         }
                         
@@ -174,7 +174,6 @@ extension UserManager {
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
         
-        
         User.shared.accessToken = model.accessToken
         User.shared.refreshToken = model.refreshToken
         
@@ -187,6 +186,6 @@ extension UserManager {
         
         //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
         
-        
+        User.shared.accessToken = model.accessToken
     }
 }

@@ -63,6 +63,8 @@ class NewRestaurantViewModel {
     /// X 좌표값, 경위도인 경우 longitude (경도)
     var longitude: Double
     
+    //MARK: - Init
+    
     public init(restaurantName: String) {
         
         self.restaurantName = restaurantName
@@ -99,9 +101,7 @@ class NewRestaurantViewModel {
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             
             print("RESULT: \(isSuccess)")
-            
             self.delegate?.didCompleteUpload(isSuccess)
-            
         }
         
         
