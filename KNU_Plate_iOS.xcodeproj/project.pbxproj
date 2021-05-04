@@ -251,6 +251,7 @@
 				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
+				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 			);
 			path = "UI Related Files";
 			sourceTree = "<group>";
@@ -394,9 +395,7 @@
 		7CE10471260C447500E18C00 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7C16DF1C2621590800AA8239 /* UserInputError.swift */,
 				7CD74B79260B209300D05B84 /* AlertManager.swift */,
-				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -434,6 +433,7 @@
 				7CE4D7B22609B18F002FCC2D /* View (Storyboard) */,
 				7CE4D7B12609B188002FCC2D /* Models */,
 				7CE4D7AF2609B17C002FCC2D /* Network Group */,
+				7CE775002641724C0032558F /* Error Management */,
 				7CE4D7B02609B183002FCC2D /* View Models */,
 				3C2DDBE22611FB1C0075F25E /* UI Related Files */,
 				7CE4D7AE2609B175002FCC2D /* Controllers */,
@@ -462,7 +462,6 @@
 				7C44321C261D7D1500A0D83F /* UserManager.swift */,
 				7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */,
 				7C1F79DC2633025900C7B41D /* MapManager.swift */,
-				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -499,6 +498,15 @@
 				7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */,
 			);
 			path = "View (Storyboard)";
+			sourceTree = "<group>";
+		};
+		7CE775002641724C0032558F /* Error Management */ = {
+			isa = PBXGroup;
+			children = (
+				7C16DF1F2621779600AA8239 /* NetworkError.swift */,
+				7C16DF1C2621590800AA8239 /* UserInputError.swift */,
+			);
+			path = "Error Management";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -17,15 +17,12 @@ class NewReviewViewModel {
     var userSelectedImagesInDataFormat: [Data]?
     
     var userSelectedImages: [UIImage] {
-        didSet {
-            convertUIImagesToDataFormat()
-        }
+        didSet { convertUIImagesToDataFormat() }
     }
     
     /// 이미 매장에 등록되어 있는 메뉴 배열
     var existingMenus: [ExistingMenuModel] = [
     
-        
     ExistingMenuModel(menuID: 1, mallID: 1, menuName: "삼겹살", likes: 2, dislikes: 3),
     ExistingMenuModel(menuID: 2, mallID: 1, menuName: "피자", likes: 4, dislikes: 10),
     ExistingMenuModel(menuID: 2, mallID: 1, menuName: "족발", likes: 20, dislikes: 1),
@@ -72,8 +69,6 @@ class NewReviewViewModel {
         if checkIfMenuNeedsToBeNewlyRegistered(menuName: name) {
             let newMenuToUpload = UploadMenuModel(mallID: 2,
                                                   menuName: name)
-            print("MALLID: \(newMenuToUpload.mallID)")
-            print("MENU NAME:  \(newMenuToUpload.menuName)")
             menusToUpload.append(newMenuToUpload)
         }
     }
@@ -91,24 +86,18 @@ class NewReviewViewModel {
     func uploadMenuInfo() {
         
         //TODO: - 수정 필요
-        
-        print("MENUS TO UPLOAD COUNT: \(menusToUpload.count)")
-        print(menusToUpload)
-        
-        
+
         let mall_id = menusToUpload[0].mallID
         let menu_name = menusToUpload[0].menuName
         
         let model = RegisterNewMenuModel(mallID: mall_id,
                                                  menuName: menu_name)
         
-        print("REGISTERNEWMENUMODEL: \(model)")
-        
+
         
         RestaurantManager.shared.uploadNewMenu(with: model) { responseModel in
             
-            print("CLOSURE ACTIVATED")
-            
+      
             
             
             
@@ -129,10 +118,8 @@ class NewReviewViewModel {
          
          */
         
-
         let menuInfo = convertMenusToUploadToJSONString()
-        print("MENUINFO: \(menuInfo)")
-    
+
         let newReviewModel = NewReviewModel(mallID: mallID,
                                             menus: menuInfo,
                                             review: review,
@@ -144,13 +131,12 @@ class NewReviewViewModel {
             print("SUCCESSFULLY UPLOAD NEW REVIEW")
             self.delegate?.didCompleteUpload(isSuccess)
         }
+        
+        
+        
     }
     
-    
-    
-    
-    
-    
+    //MARK: - Conversion Methods
     
     func convertUIImagesToDataFormat() {
         userSelectedImagesInDataFormat?.removeAll()

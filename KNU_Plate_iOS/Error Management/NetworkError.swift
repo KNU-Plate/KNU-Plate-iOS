@@ -123,3 +123,15 @@ enum NewRestaurantUploadError: String {
         }
     }
 }
+
+//MARK: - 신규 리뷰 등록 Error Message 관리
+
+//enum NewMenuUploadError: String {
+//
+//
+//    func returnErrorMessage() -> String {
+//
+//        switch self {
+//
+//    }
+//}
