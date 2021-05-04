@@ -17,7 +17,7 @@ class UploadMenuModel: Encodable {
     
     enum CodingKeys: String, CodingKey {
         
-        case id = "mall_id"
+        case id = "menu_id"
         case isGood = "is_like"
     }
 }
@@ -25,11 +25,16 @@ class UploadMenuModel: Encodable {
 
 /*
  
- {
-   "id": 0,
-   "is_like": "string"
- }
- 
+ [
+    {
+        "menu_id": 1,
+        "is_like": "Y"
+    },
+    {
+        "menu_id":2,
+        "is_like": "Y"
+    }
+ ]
  
 
  

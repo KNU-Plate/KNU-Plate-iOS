@@ -9,7 +9,7 @@ class NewReviewModel: Encodable {
     var mallID: Int
     
     /// 메뉴 정보 -> JSON 배열 형태
-    var menus: [UploadMenuModel]
+    var menus: String
     
     /// 리뷰 내용 
     var review: String
@@ -20,7 +20,7 @@ class NewReviewModel: Encodable {
     /// 리뷰 이미지
     var reviewImages: [Data]?
     
-    init(mallID: Int, menus: [UploadMenuModel], review: String, rating: Int,
+    init(mallID: Int, menus: String, review: String, rating: Int,
          reviewImages: [Data]?) {
         
         self.mallID = mallID
@@ -39,9 +39,6 @@ class NewReviewModel: Encodable {
     "Authorization": User.shared.accessToken
     
     ]
-    
-    
-    
     
     enum CodingKeys: String, CodingKey {
         

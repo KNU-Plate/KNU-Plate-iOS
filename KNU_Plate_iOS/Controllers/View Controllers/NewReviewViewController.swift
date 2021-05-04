@@ -12,7 +12,8 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     lazy var existingMenusPickerView = UIPickerView()
 
-    private let viewModel: NewReviewViewModel = NewReviewViewModel()
+    // 수정 필요
+    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,13 @@ class NewReviewViewController: UIViewController {
         
         
         Test.shared.login()
+        print("USER ACCESS TOKEN: \(User.shared.accessToken)")
 
+    }
+    
+    func initializeViewModelVariables(mallID: Int) {
+        
+        viewModel.mallID = mallID
     }
 
     @objc func pressedAddMenuButton() {
@@ -31,6 +38,7 @@ class NewReviewViewController: UIViewController {
                 try viewModel.validateMenuName(menu: nameOfMenu)
                 
                 viewModel.addNewMenu(name: nameOfMenu)
+                print("ADDED NEW MENU")
                 
                 menuInputTableView.reloadData()
                 self.viewWillLayoutSubviews()
@@ -76,9 +84,9 @@ class NewReviewViewController: UIViewController {
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
-            
-            viewModel.upload()
-   
+            // 메뉴 등록을 먼저하고 리뷰 등록을 하는 형식으로 API가 설계되어 있음
+            viewModel.uploadMenuInfo()
+            viewModel.uploadReview()
             
         } catch NewReviewInputError.insufficientMenuError {
             
@@ -198,6 +206,16 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
     }
 }
 
+//MARK: - NewReviewViewModelDelegate
+
+extension NewReviewViewController: NewReviewViewModelDelegate {
+    
+    func didCompleteUpload(_ success: Bool) {
+        //TODO: - 수정 필요
+        print("NEW REVIEW UPLOAD COMPLETE")
+    }
+}
+
 //MARK: - UITableViewDelegate, UITableViewDataSource -> 메뉴 입력을 위한 TableView
 
 extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
@@ -294,6 +312,8 @@ extension NewReviewViewController: UITextViewDelegate {
 extension NewReviewViewController {
     
     func initialize() {
+        
+        viewModel.delegate = self
         
         initializeTextField()
         initializeCollectionView()

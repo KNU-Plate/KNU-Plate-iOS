@@ -10,6 +10,7 @@ class RestaurantManager {
     
     //MARK: - API Request URLs
     let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
+    let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
 
     
@@ -80,6 +81,14 @@ class RestaurantManager {
                 }
             }
         }
+    }
+    
+    //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
+    func uploadNewMenu(with model: NewMenuModel,
+                       completion: @escaping ((Bool) -> Void)) {
+        
+        
+        
     }
     
     //MARK: - 신규 리뷰 등록 

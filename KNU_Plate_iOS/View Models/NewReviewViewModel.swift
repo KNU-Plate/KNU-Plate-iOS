@@ -1,27 +1,35 @@
 import Foundation
 import UIKit
 
+protocol NewReviewViewModelDelegate {
+    func didCompleteUpload(_ success: Bool)
+}
+
 class NewReviewViewModel {
     
     //MARK: - Object Properties
+    var delegate: NewReviewViewModelDelegate?
+    
+    var mallID: Int
     
     var rating: Int
     
-//
-//    var userSelectedImagesInJPEG: Data {
-//        didSet {
-//
-//        }
-//    }
+    var userSelectedImagesInDataFormat: [Data]?
     
     var userSelectedImages: [UIImage] {
-        willSet {
-            userSelectedImages.removeAll()
-        }
         didSet {
-            /// 받은 UIImage 를 JPEGData 로 저장하고,
-            /// userSelectedImagesInJPEG 에 저장 후
-            /// NewReview 모델에 저장
+            
+            userSelectedImagesInDataFormat?.removeAll()
+            
+            userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
+                
+                if let imageData = image.jpegData(compressionQuality: 0.5) {
+                    return imageData
+                } else {
+                    print("Unable to convert UIImage to Data type")
+                    return Data()
+                }
+            })
         }
     }
     
@@ -54,8 +62,10 @@ class NewReviewViewModel {
     
     //MARK: - Init
     
-    public init() {
+    public init(mallID: Int) {
         
+        ///mallID 추후 dynamic 하게 수정 self.mallID = mallID
+        self.mallID = 2
         self.rating = 3
         
         self.userSelectedImages = [UIImage]()
@@ -105,10 +115,10 @@ class NewReviewViewModel {
 
     }
     
-    // 신규 리뷰 등록
-    func upload() {
+    func uploadMenuInfo() {
         
- 
+        
+        
         
         
         
@@ -117,32 +127,56 @@ class NewReviewViewModel {
     }
     
     
+    // 신규 리뷰 등록
+    func uploadReview() {
+        
+        /*
+         현재 상황 : addMenu 하면 NewMenuModel 로 되지 UploadMenuModel 형태가 아님
+         변환이 필요해보임.
+         
+         */
+        
+      
+        
+        
+        
+        let menuInfo = convertMenusToUploadToJSONString()
+        print("MENUINFO: \(menuInfo)")
     
-    
-    /*
+        let newReviewModel = NewReviewModel(mallID: mallID,
+                                            menus: menuInfo,
+                                            review: review,
+                                            rating: rating,
+                                            reviewImages: userSelectedImagesInDataFormat)
+        
+        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
+            
+            print("SUCCESSFULLY UPLOAD NEW REVIEW")
+            self.delegate?.didCompleteUpload(isSuccess)
+        }
+        
+ 
      
-     
-     func upload() {
-         
-         let newRestaurantModel = NewRestaurantModel(name: restaurantName,
-                                                     contact: contact,
-                                                     foodCategory: foodCategory,
-                                                     address: address,
-                                                     categoryName: categoryName,
-                                                     latitude: latitude,
-                                                     longitude: longitude,
-                                                     images: userSelectedImagesInDataFormat)
-         
-         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
-             
-             print("RESULT: \(isSuccess)")
-             self.delegate?.didCompleteUpload(isSuccess)
-         }
-         
-         
-     }
-     */
+        
+    }
     
-    
+    func convertMenusToUploadToJSONString() -> String {
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .withoutEscapingSlashes
+            
+            let JSONData = try encoder.encode(menusToUpload)
+            let JSONString = String(data: JSONData, encoding: .utf8)
+            
+            if let encodedData = JSONString {
+                return encodedData
+            }
+            
+        } catch {
+            print("There was an error in convertMenusToUploadToJSONString()")
+        }
+        fatalError("convertMenusToUploadToJSONString FAILED")
+    }
 }
 
