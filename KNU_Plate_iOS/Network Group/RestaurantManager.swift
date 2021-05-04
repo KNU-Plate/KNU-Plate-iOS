@@ -12,7 +12,7 @@ class RestaurantManager {
     let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
-
+    
     
     private init() {}
     
@@ -44,7 +44,7 @@ class RestaurantManager {
                                              mimeType: "image/jpeg")
                 }
             }
-                    
+            
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers)
         .responseJSON { (response) in
@@ -54,14 +54,14 @@ class RestaurantManager {
             switch statusCode {
             
             case 200:
-
+                
                 print("매장 등록 성공")
                 completion(true)
-               
+                
                 
             /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
             
-        
+            
             default:
                 if let responseJSON = try! response.result.get() as? [String : String] {
                     
@@ -84,20 +84,51 @@ class RestaurantManager {
     }
     
     //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
-    func uploadNewMenu(with model: NewMenuModel,
-                       completion: @escaping ((Bool) -> Void)) {
+    func uploadNewMenu(with model: RegisterNewMenuModel,
+                       completion: @escaping ((MenuRegisterResponseModel) -> Void)) {
         
+        AF.request(uploadNewMenuRequestURL,
+                   method: .post,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else {
+                        return
+                    }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        
+                        print("ALAMOFIRE SUCCESS IN UPLOADING NEW MENU")
+                        
+                        
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            
+                            if let error = responseJSON["error"] {
+                                
+                                print(error)
+                                //                                if let errorMessage = MailVerificationIssuanceError(rawValue: error)?.returnErrorMessage() {
+                                //                                    print(errorMessage)
+                            } else {
+                                print("알 수 없는 에러 발생.")
+                            }
+                        }
+                    }
+                    
+                    
+                   }
         
-        
+    
     }
     
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReviewModel,
                          completion: @escaping ((Bool) -> Void)) {
         
-        
-        
-        // AF Request 보낼 때 header 에 accessToken 첨부해야함
+       
     }
     
     

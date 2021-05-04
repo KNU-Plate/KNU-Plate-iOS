@@ -35,6 +35,7 @@ class NewReviewViewController: UIViewController {
         
         do {
             if let nameOfMenu = menuInputTextField.text {
+                
                 try viewModel.validateMenuName(menu: nameOfMenu)
                 
                 viewModel.addNewMenu(name: nameOfMenu)
@@ -85,8 +86,12 @@ class NewReviewViewController: UIViewController {
             viewModel.rating = starRating.starsRating
             
             // 메뉴 등록을 먼저하고 리뷰 등록을 하는 형식으로 API가 설계되어 있음
+            
+            
             viewModel.uploadMenuInfo()
-            viewModel.uploadReview()
+            
+            
+            //viewModel.uploadReview()
             
         } catch NewReviewInputError.insufficientMenuError {
             

@@ -18,18 +18,7 @@ class NewReviewViewModel {
     
     var userSelectedImages: [UIImage] {
         didSet {
-            
-            userSelectedImagesInDataFormat?.removeAll()
-            
-            userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
-                
-                if let imageData = image.jpegData(compressionQuality: 0.5) {
-                    return imageData
-                } else {
-                    print("Unable to convert UIImage to Data type")
-                    return Data()
-                }
-            })
+            convertUIImagesToDataFormat()
         }
     }
     
@@ -43,23 +32,20 @@ class NewReviewViewModel {
     
     // ------------------항상 있는것
     ExistingMenuModel(menuID: 0, mallID: 0, menuName: "직접 입력", likes: 0, dislikes: 0)
+        
     ]
     
-    /// 사용자가 직접 추가한 메뉴
+    /// 사용자가 추가한 메뉴
     var userAddedMenus: [NewMenuModel]
     
-    /// 업로드 할 총 배열?
+    /// 따로 DB 에 등록해야 할 메뉴
     var menusToUpload: [UploadMenuModel]
 
     
     var review: String
 
     
-    
-    
-    
-    
-    
+   
     //MARK: - Init
     
     public init(mallID: Int) {
@@ -74,8 +60,6 @@ class NewReviewViewModel {
         self.menusToUpload = [UploadMenuModel]()
         self.review = ""
 
- 
-        
     }
     
     //MARK: - Object Methods
@@ -84,7 +68,124 @@ class NewReviewViewModel {
 
         let newMenu = NewMenuModel(menuName: name)
         self.userAddedMenus.append(newMenu)
+        
+        if checkIfMenuNeedsToBeNewlyRegistered(menuName: name) {
+            let newMenuToUpload = UploadMenuModel(mallID: 2,
+                                                  menuName: name)
+            print("MALLID: \(newMenuToUpload.mallID)")
+            print("MENU NAME:  \(newMenuToUpload.menuName)")
+            menusToUpload.append(newMenuToUpload)
+        }
     }
+    
+    // DB에 새로 등록해야 하는 메뉴인지 파악하는 함수
+    func checkIfMenuNeedsToBeNewlyRegistered(menuName: String) -> Bool {
+        
+        for eachMenu in existingMenus {
+            if menuName == eachMenu.menuName { return false }
+        }
+        return true
+    }
+    
+    // DB에 메뉴 등록
+    func uploadMenuInfo() {
+        
+        //TODO: - 수정 필요
+        
+        print("MENUS TO UPLOAD COUNT: \(menusToUpload.count)")
+        print(menusToUpload)
+        
+        
+        let mall_id = menusToUpload[0].mallID
+        let menu_name = menusToUpload[0].menuName
+        
+        let model = RegisterNewMenuModel(mallID: mall_id,
+                                                 menuName: menu_name)
+        
+        print("REGISTERNEWMENUMODEL: \(model)")
+        
+        
+        RestaurantManager.shared.uploadNewMenu(with: model) { responseModel in
+            
+            print("CLOSURE ACTIVATED")
+            
+            
+            
+            
+        }
+
+        
+        
+
+    }
+    
+    
+    // 신규 리뷰 등록
+    func uploadReview() {
+        
+        /*
+         현재 상황 : addMenu 하면 NewMenuModel 로 되지 UploadMenuModel 형태가 아님
+         변환이 필요해보임.
+         
+         */
+        
+
+        let menuInfo = convertMenusToUploadToJSONString()
+        print("MENUINFO: \(menuInfo)")
+    
+        let newReviewModel = NewReviewModel(mallID: mallID,
+                                            menus: menuInfo,
+                                            review: review,
+                                            rating: rating,
+                                            reviewImages: userSelectedImagesInDataFormat)
+        
+        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
+            
+            print("SUCCESSFULLY UPLOAD NEW REVIEW")
+            self.delegate?.didCompleteUpload(isSuccess)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    func convertUIImagesToDataFormat() {
+        userSelectedImagesInDataFormat?.removeAll()
+        
+        userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
+            
+            if let imageData = image.jpegData(compressionQuality: 0.5) {
+                return imageData
+            } else {
+                print("Unable to convert UIImage to Data type")
+                return Data()
+            }
+        })
+    }
+    
+    func convertMenusToUploadToJSONString() -> String {
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .withoutEscapingSlashes
+            
+            let JSONData = try encoder.encode(menusToUpload)
+            let JSONString = String(data: JSONData, encoding: .utf8)
+            
+            if let encodedData = JSONString {
+                return encodedData
+            }
+            
+        } catch {
+            print("There was an error in convertMenusToUploadToJSONString()")
+        }
+        fatalError("convertMenusToUploadToJSONString FAILED")
+    }
+    
+    //MARK: - User Input Validation Methods
     
     func validateMenuName(menu: String) throws {
         
@@ -112,71 +213,6 @@ class NewReviewViewModel {
                 throw NewReviewInputError.blankMenuNameError
             }
         }
-
-    }
-    
-    func uploadMenuInfo() {
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
-    
-    // 신규 리뷰 등록
-    func uploadReview() {
-        
-        /*
-         현재 상황 : addMenu 하면 NewMenuModel 로 되지 UploadMenuModel 형태가 아님
-         변환이 필요해보임.
-         
-         */
-        
-      
-        
-        
-        
-        let menuInfo = convertMenusToUploadToJSONString()
-        print("MENUINFO: \(menuInfo)")
-    
-        let newReviewModel = NewReviewModel(mallID: mallID,
-                                            menus: menuInfo,
-                                            review: review,
-                                            rating: rating,
-                                            reviewImages: userSelectedImagesInDataFormat)
-        
-        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
-            
-            print("SUCCESSFULLY UPLOAD NEW REVIEW")
-            self.delegate?.didCompleteUpload(isSuccess)
-        }
-        
- 
-     
-        
-    }
-    
-    func convertMenusToUploadToJSONString() -> String {
-        
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .withoutEscapingSlashes
-            
-            let JSONData = try encoder.encode(menusToUpload)
-            let JSONString = String(data: JSONData, encoding: .utf8)
-            
-            if let encodedData = JSONString {
-                return encodedData
-            }
-            
-        } catch {
-            print("There was an error in convertMenusToUploadToJSONString()")
-        }
-        fatalError("convertMenusToUploadToJSONString FAILED")
     }
 }
 

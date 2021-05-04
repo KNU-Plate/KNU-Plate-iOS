@@ -18,5 +18,4 @@ struct ExistingMenuModel: Decodable {
         case likes = "like"
         case dislikes = "dislikes"
     }
-    
 }

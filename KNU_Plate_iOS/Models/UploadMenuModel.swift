@@ -5,20 +5,20 @@ import Foundation
 class UploadMenuModel: Encodable {
     
     /// 매장 고유 ID (Auto-Increment 값)
-    var id: Int
+    var mallID: Int
     
     /// Y | N
-    var isGood: String
+    var menuName: String
     
-    public init() {
-        self.id = 0
-        self.isGood = "Y"
+    public init(mallID: Int, menuName: String) {
+        self.mallID = mallID
+        self.menuName = menuName
     }
     
     enum CodingKeys: String, CodingKey {
         
-        case id = "menu_id"
-        case isGood = "is_like"
+        case mallID = "mall_id"
+        case menuName = "menu_name"
     }
 }
 
