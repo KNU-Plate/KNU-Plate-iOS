@@ -51,7 +51,6 @@ enum SignUpError: String {
         //TODO: - 준수씨한테 가능한 모든 오류 목록 받기
         }
     }
-
 }
 
 //MARK: - 로그인 Error Message 관리
