@@ -56,10 +56,10 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
         }
     
         // Configure the cell
-        let rating: Int = 4
+        let rating: Double = 4.2
         cell.imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
         cell.nameLabel.text = "배터지는깐풍기"
-        cell.ratingStackView.setStarsRating(rating: rating)
+        cell.ratingStackView.setAverageRating(rating: rating)
         return cell
     }
 

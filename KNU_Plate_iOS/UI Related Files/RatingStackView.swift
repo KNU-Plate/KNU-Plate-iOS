@@ -1,34 +1,38 @@
 import UIKit
+import Then
+import SnapKit
 
 /// Shows stars rating using ImageView
 class RatingStackView: UIStackView {
-    var starImages: [UIImageView] = []
-    let starPicName = "star rating (filled)"            // Filled star name
+    let starImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        $0.image = UIImage(named: "star rating (filled)")
+    }
+    
+    let averageRatingLabel = UILabel()
+    
+    var averageRating: Double = 0 {
+        didSet {
+            averageRatingLabel.text = String(averageRating)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.axis = .horizontal
         self.alignment = .fill
         self.distribution = .fillEqually
-        for _ in 0..<5 {
-            let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFit
-            imageView.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-            self.addArrangedSubview(imageView)
-            self.starImages.append(imageView)
-        }
+        self.addArrangedSubview(starImage)
+        self.addArrangedSubview(averageRatingLabel)
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     /// Set starts rating
-    func setStarsRating(rating: Int){
-        for i in 0..<5 {
-            if i+1 <= rating {
-                starImages[i].image = UIImage(named: starPicName)
-            }
-        }
+    func setAverageRating(rating: Double){
+        averageRating = rating
     }
 }
