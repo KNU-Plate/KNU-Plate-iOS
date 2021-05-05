@@ -87,10 +87,12 @@ class RestaurantManager {
     func uploadNewMenu(with model: RegisterNewMenuModel,
                        completion: @escaping ((MenuRegisterResponseModel) -> Void)) {
         
+        //let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
+        
         AF.request(uploadNewMenuRequestURL,
                    method: .post,
                    parameters: model.parameters,
-                   encoding: URLEncoding.httpBody,
+                   encoding: URLEncoding(arrayEncoding: .noBrackets),
                    headers: model.headers).responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else {

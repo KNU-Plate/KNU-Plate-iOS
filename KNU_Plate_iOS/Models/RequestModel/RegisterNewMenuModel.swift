@@ -6,19 +6,26 @@ import Alamofire
 struct RegisterNewMenuModel {
     
     let mallID: Int
-    let menuName: String
+    let menuName: [String]
     
-    init(mallID: Int, menuName: String) {
+    init(mallID: Int, menuName: [String]) {
         
         self.mallID = mallID
         self.menuName = menuName
         
-        parameters["mall_id"] = mallID
-        parameters["menu_name"] = menuName
+        parameters["mall_id"]?.append(mallID)
+        
+        for eachMenu in menuName {
+            parameters["menu_name"]?.append(eachMenu)
+        }
     }
     
     /// API Parameters
-    var parameters: Parameters = [:]
+    var parameters: [String: [Any]] = [
+        
+        "mall_id" : [],
+        "menu_name" : []
+    ]
     
     /// HTTP Headers
     var headers: HTTPHeaders = [

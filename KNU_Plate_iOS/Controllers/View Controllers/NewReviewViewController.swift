@@ -39,7 +39,6 @@ class NewReviewViewController: UIViewController {
                 try viewModel.validateMenuName(menu: nameOfMenu)
                 
                 viewModel.addNewMenu(name: nameOfMenu)
-                print("ADDED NEW MENU")
                 
                 menuInputTableView.reloadData()
                 self.viewWillLayoutSubviews()
@@ -215,7 +214,7 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 
 extension NewReviewViewController: NewReviewViewModelDelegate {
     
-    func didCompleteUpload(_ success: Bool) {
+    func didCompleteReviewUpload(_ success: Bool) {
         //TODO: - 수정 필요
         print("NEW REVIEW UPLOAD COMPLETE")
     }

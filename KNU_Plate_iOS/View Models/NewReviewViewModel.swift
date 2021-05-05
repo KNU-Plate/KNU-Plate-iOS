@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol NewReviewViewModelDelegate {
-    func didCompleteUpload(_ success: Bool)
+    func didCompleteReviewUpload(_ success: Bool)
 }
 
 class NewReviewViewModel {
@@ -33,7 +33,7 @@ class NewReviewViewModel {
     ]
     
     /// 사용자가 추가한 메뉴
-    var userAddedMenus: [NewMenuModel]
+    var userAddedMenus: [UserAddedMenuModel]
     
     /// 따로 DB 에 등록해야 할 메뉴
     var menusToUpload: [UploadMenuModel]
@@ -53,7 +53,7 @@ class NewReviewViewModel {
         
         self.userSelectedImages = [UIImage]()
         //self.existingMenus = [ExistingMenuModel]()
-        self.userAddedMenus = [NewMenuModel]()
+        self.userAddedMenus = [UserAddedMenuModel]()
         self.menusToUpload = [UploadMenuModel]()
         self.review = ""
 
@@ -63,11 +63,11 @@ class NewReviewViewModel {
     
     func addNewMenu(name: String) {
 
-        let newMenu = NewMenuModel(menuName: name)
+        let newMenu = UserAddedMenuModel(menuName: name)
         self.userAddedMenus.append(newMenu)
         
         if checkIfMenuNeedsToBeNewlyRegistered(menuName: name) {
-            let newMenuToUpload = UploadMenuModel(mallID: 2,
+            let newMenuToUpload = UploadMenuModel(mallID: self.mallID,
                                                   menuName: name)
             menusToUpload.append(newMenuToUpload)
         }
@@ -86,12 +86,15 @@ class NewReviewViewModel {
     func uploadMenuInfo() {
         
         //TODO: - 수정 필요
-
-        let mall_id = menusToUpload[0].mallID
-        let menu_name = menusToUpload[0].menuName
+        let mall_id = self.mallID
+        var menuNames: [String] = []
+        
+        for eachMenu in menusToUpload {
+            menuNames.append(eachMenu.menuName)
+        }
         
         let model = RegisterNewMenuModel(mallID: mall_id,
-                                                 menuName: menu_name)
+                                                 menuName: menuNames)
         
 
         
@@ -129,7 +132,7 @@ class NewReviewViewModel {
         RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
             
             print("SUCCESSFULLY UPLOAD NEW REVIEW")
-            self.delegate?.didCompleteUpload(isSuccess)
+            self.delegate?.didCompleteReviewUpload(isSuccess)
         }
         
         
