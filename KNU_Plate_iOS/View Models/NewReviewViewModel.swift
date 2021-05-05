@@ -25,7 +25,7 @@ class NewReviewViewModel {
     var existingMenus: [ExistingMenuModel] = [
     
     ExistingMenuModel(menuID: 2, mallID: 2, menuName: "삼겹살", likes: 2, dislikes: 3),
-    ExistingMenuModel(menuID: 3, mallID: 1, menuName: "피자", likes: 4, dislikes: 10),
+    ExistingMenuModel(menuID: 1, mallID: 2, menuName: "백반", likes: 4, dislikes: 10),
     ExistingMenuModel(menuID: 4, mallID: 1, menuName: "족발", likes: 20, dislikes: 1),
     
     // ------------------항상 있는것
@@ -43,6 +43,8 @@ class NewReviewViewModel {
     var finalMenuInfo: [FinalMenuModel]
     
     var review: String
+    
+    var menuInfoInJSONString: String
 
    
     //MARK: - Init
@@ -59,6 +61,7 @@ class NewReviewViewModel {
         self.menusToUpload = [UploadMenuModel]()
         self.finalMenuInfo = [FinalMenuModel]()
         self.review = ""
+        self.menuInfoInJSONString = ""
     }
     
     //MARK: - Object Methods
@@ -84,6 +87,19 @@ class NewReviewViewModel {
         return true
     }
     
+    func startUploading() {
+        
+        if menusToUpload.isEmpty {
+            
+            convertMenusToUploadableFormat(with: nil)
+            menuInfoInJSONString = convertMenusToJSONString(from: finalMenuInfo)
+            uploadReview()
+            
+        } else {
+            uploadNewMenus()
+        }
+    }
+    
     // DB에 메뉴 등록
     func uploadNewMenus() {
         
@@ -101,27 +117,20 @@ class NewReviewViewModel {
             print("RESPONSE MODEL: \(responseModel)")
             
             self.convertMenusToUploadableFormat(with: responseModel)
-            let menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
+            self.menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
             
-            print("MENUINFOINJSONSTRING: \(menuInfoInJSONString)")
-            
-            /*
-             
-             지금 문제!!! : like 인데 dislike 로 
-             */
-            
-            self.uploadReview(with: menuInfoInJSONString)
+            print("MENUINFOINJSONSTRING: \(self.menuInfoInJSONString)")
+            self.uploadReview()
             
         }
 
     }
     
-    
     // 신규 리뷰 등록
-    func uploadReview(with menus: String) {
+    func uploadReview() {
     
         let newReviewModel = NewReviewModel(mallID: mallID,
-                                            menus: menus,
+                                            menus: menuInfoInJSONString,
                                             review: review,
                                             rating: rating,
                                             reviewImages: userSelectedImagesInDataFormat)
@@ -149,7 +158,42 @@ class NewReviewViewModel {
         })
     }
     
-    //useraddedmenumodel 수정
+    func convertMenusToUploadableFormat(with model: [MenuRegisterResponseModel]?) {
+        
+        for i in 0..<userAddedMenus.count {
+
+            for j in 0..<existingMenus.count {
+                
+                if userAddedMenus[i].menuName == existingMenus[j].menuName {
+                    
+                    let menuID = existingMenus[j].menuID
+                    let isGood = userAddedMenus[i].isGood
+                    let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
+
+                    finalMenuInfo.append(newMenu)
+                }
+            }
+        }
+        
+        if let model = model {
+            
+            for i in 0..<model.count {
+                
+                for j in 0..<userAddedMenus.count {
+                    
+                    if model[i].menuName == userAddedMenus[j].menuName {
+                        
+                        let menuID = model[i].menuID
+                        let isGood = userAddedMenus[j].isGood
+                        let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
+                        
+                        finalMenuInfo.append(newMenu)
+                    }
+                }
+            }
+        }
+    }
+    
     func convertMenusToJSONString(from data: [FinalMenuModel]) -> String {
         
         do {
@@ -167,39 +211,7 @@ class NewReviewViewModel {
         }
         fatalError("NEW REVIEW VIEW MODEL - convertMenusToUploadToJSONString FAILED")
     }
-    
-    func convertMenusToUploadableFormat(with model: [MenuRegisterResponseModel]) {
-        
-        for i in 0..<userAddedMenus.count {
-            
-            for j in 0..<existingMenus.count {
-                
-                if userAddedMenus[i].menuName == existingMenus[j].menuName {
-                    
-                    let menuID = existingMenus[i].menuID
-                    let isGood = userAddedMenus[i].isGood
-                    let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
 
-                    finalMenuInfo.append(newMenu)
-                }
-            }
-        }
-        
-        for i in 0..<model.count {
-            
-            for j in 0..<userAddedMenus.count {
-                
-                if model[i].menuName == userAddedMenus[j].menuName {
-                    
-                    let menuID = model[i].menuID
-                    let isGood = userAddedMenus[i].isGood
-                    let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
-                    
-                    finalMenuInfo.append(newMenu)
-                }
-            }
-        }
-    }
     
     //MARK: - User Input Validation Methods
     
