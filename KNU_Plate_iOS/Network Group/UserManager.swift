@@ -179,7 +179,7 @@ class UserManager {
     
     
     //MARK: - 로그아웃
-    func logOut() {
+    func logOut(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
             "accept": "application/json",
@@ -187,8 +187,22 @@ class UserManager {
             "Authorization": User.shared.accessToken
         ]
         
-        
-        
+        AF.request(logOutRequestURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
     }
     
     //MARK: - 토큰 갱신
