@@ -108,6 +108,12 @@ enum MailVerificationIssuanceError: String {
 //
 //}
 
+
+
+
+
+
+
 //MARK: - 신규 매장 등록 Error Message 관리
 
 enum NewRestaurantUploadError: String {

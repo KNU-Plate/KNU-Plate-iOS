@@ -17,9 +17,10 @@ class UserManager {
     let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
     let signUpRequestURL                = "\(Constants.API_BASE_URL)signup"
     let logInRequestURL                 = "\(Constants.API_BASE_URL)login"
-    let sendEmailVerificationCodeURL     = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let sendEmailVerificationCodeURL    = "\(Constants.API_BASE_URL)mail-auth/issuance"
     let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
-    
+    let checkUserNameDuplicateURL       = "\(Constants.API_BASE_URL)check-user-name"
+    let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
     
     private init() {}
     
@@ -148,6 +149,31 @@ class UserManager {
                    }
     }
     
+    //MARK: - 아이디 or 닉네임 중복 체크
+    func checkDuplication(with model: CheckDuplicateModel,
+                          _ requestURL: String,
+                          completion: @escaping ((Bool) -> Void)) {
+        
+        AF.request(requestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        //이미 존재하는 아이디 또는 닉네임입니다.
+                        completion(false)
+                    }
+                   }
+    }
+    
     
     
     
@@ -155,8 +181,14 @@ class UserManager {
     //MARK: - 로그아웃
     func logOut() {
         
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": User.shared.accessToken
+        ]
         
-        // AF Request 보낼 때 header 에 accessToken 첨부해야함
+        
+        
     }
     
     //MARK: - 토큰 갱신
