@@ -25,8 +25,6 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
-    //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
-    
     func signUp(with model: RegisterInfoModel) {
         
         AF.request(signUpRequestURL,
@@ -174,10 +172,6 @@ class UserManager {
                    }
     }
     
-    
-    
-    
-    
     //MARK: - 로그아웃
     func logOut(completion: @escaping ((Bool) -> Void)) {
         
@@ -189,6 +183,33 @@ class UserManager {
         
         AF.request(logOutRequestURL,
                    method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 회원 탈퇴
+    func unregisterUser(completion: @escaping ((Bool) -> Void)) {
+        
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": User.shared.accessToken
+        ]
+        
+        AF.request(unregisterRequestURL,
+                   method: .delete,
                    encoding: URLEncoding.httpBody,
                    headers: headers).responseJSON { (response) in
                     
