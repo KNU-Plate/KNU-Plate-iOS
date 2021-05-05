@@ -39,7 +39,7 @@ class NewReviewModel: Encodable {
     "Authorization": User.shared.accessToken
     
     ]
-    
+
     enum CodingKeys: String, CodingKey {
         
         case mallID = "mall_id"
@@ -47,25 +47,18 @@ class NewReviewModel: Encodable {
         case review = "contents"
         case rating = "evaluate"
         case reviewImages = "review_image"
-        
     }
 }
 
 
-/*
- menus 보낼 때의 Model 형식 (String 형태로 보내야함)
- 
- [
-  {
-    "menu_id":1,
-    "is_like": "Y"
- 
-   },
-   {
-    "menu_id":2,
-    "is_like": "Y"
-   }
- ]
+struct Menus: Encodable {
     
- 
- */
+    let menuID: String
+    let isLike: String
+    
+    enum CodingKeys: String, CodingKey {
+        case menuID = "menu_id"
+        case isLike = "is_like"
+    }
+}
+

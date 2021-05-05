@@ -47,7 +47,7 @@ class RestaurantManager {
             
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers)
-        .responseJSON { (response) in
+        .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
             
@@ -85,9 +85,7 @@ class RestaurantManager {
     
     //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
     func uploadNewMenu(with model: RegisterNewMenuModel,
-                       completion: @escaping ((MenuRegisterResponseModel) -> Void)) {
-        
-        //let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
+                       completion: @escaping (([MenuRegisterResponseModel]) -> Void)) {
         
         AF.request(uploadNewMenuRequestURL,
                    method: .post,
@@ -103,8 +101,16 @@ class RestaurantManager {
                     
                     case 200:
                         
-                        print("ALAMOFIRE SUCCESS IN UPLOADING NEW MENU")
+                        print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW MENU")
                         
+                        do {
+                            let decodedData = try JSONDecoder().decode([MenuRegisterResponseModel].self,
+                                                                       from: response.data!)
+                            completion(decodedData)
+                        } catch {
+                            
+                            print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error)")
+                        }
                         
                     default:
                         if let responseJSON = try! response.result.get() as? [String : String] {
@@ -129,8 +135,58 @@ class RestaurantManager {
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReviewModel,
                          completion: @escaping ((Bool) -> Void)) {
+     
+        AF.upload(multipartFormData: { (multipartFormData) in
+            
+            multipartFormData.append(Data(String(model.mallID).utf8),
+                                     withName: "mall_id")
+            multipartFormData.append(Data(model.menus.utf8),
+                                     withName: "menu_info")
+            multipartFormData.append(Data(model.review.utf8),
+                                     withName: "contents")
+            multipartFormData.append(Data(String(model.rating).utf8),
+                                     withName: "evaluate")
+    
+            if let imageArray = model.reviewImages {
+                
+                for images in imageArray {
+                    
+                    multipartFormData.append(images,
+                                             withName: "review_image",
+                                             fileName: "mall_image",
+                                             mimeType: "image/jpeg")
+                    
+                }
+            }
+        }, to: uploadNewReviewRequestURL,
+        headers: model.headers)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else {
+                return
+            }
+            
+            switch statusCode {
+            
+            case 200:
+                
+                print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
+                
+                completion(true)
+                
+                
+            default:
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    
+                    if let error = responseJSON["error"] {
+                        
+                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                    }
+                }
+                
+            }
+    }
         
-       
     }
     
     

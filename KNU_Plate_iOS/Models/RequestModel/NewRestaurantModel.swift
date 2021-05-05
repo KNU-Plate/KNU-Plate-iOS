@@ -42,13 +42,6 @@ class NewRestaurantModel {
         self.latitude = latitude
         self.longitude = longitude
         self.images = images
-        
-        
-        //print(UUID().uuidString)
-
-
-        /// API 호출 시 유저의 accessToken 도 같이 호출해야 함
-        /// headers["accessToken"] = User.shared.accessToken 이런 식으로 해야할듯
     }
     
     /// HTTP Headers
@@ -57,7 +50,6 @@ class NewRestaurantModel {
         "accept": "application/json",
         "Content-Type": "multipart/form-data",
         "Authorization" : User.shared.accessToken
-        
     ]
 
 }

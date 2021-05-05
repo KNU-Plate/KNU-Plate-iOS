@@ -1,6 +1,6 @@
 import Foundation
 
-//MARK: - "리뷰 등록" API 호출 시 사용하는 Model
+//MARK: - "메뉴 등록" API 호출 시 사용하는 Model
 
 class UploadMenuModel: Encodable {
     
@@ -10,7 +10,7 @@ class UploadMenuModel: Encodable {
     /// Y | N
     var menuName: String
     
-    public init(mallID: Int, menuName: String) {
+    init(mallID: Int, menuName: String) {
         self.mallID = mallID
         self.menuName = menuName
     }
@@ -21,21 +21,3 @@ class UploadMenuModel: Encodable {
         case menuName = "menu_name"
     }
 }
-
-
-/*
- 
- [
-    {
-        "menu_id": 1,
-        "is_like": "Y"
-    },
-    {
-        "menu_id":2,
-        "is_like": "Y"
-    }
- ]
- 
-
- 
- */

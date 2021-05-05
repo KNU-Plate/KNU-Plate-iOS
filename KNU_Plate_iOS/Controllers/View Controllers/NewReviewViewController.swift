@@ -87,7 +87,7 @@ class NewReviewViewController: UIViewController {
             // 메뉴 등록을 먼저하고 리뷰 등록을 하는 형식으로 API가 설계되어 있음
             
             
-            viewModel.uploadMenuInfo()
+            viewModel.uploadNewMenus()
             
             
             //viewModel.uploadReview()
@@ -213,6 +213,10 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 //MARK: - NewReviewViewModelDelegate
 
 extension NewReviewViewController: NewReviewViewModelDelegate {
+    
+    func didCompleteNewMenuUpload(_ success: Bool) {
+        
+    }
     
     func didCompleteReviewUpload(_ success: Bool) {
         //TODO: - 수정 필요

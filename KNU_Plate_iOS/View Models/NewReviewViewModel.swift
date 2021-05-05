@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 protocol NewReviewViewModelDelegate {
+    func didCompleteNewMenuUpload(_ success: Bool)
     func didCompleteReviewUpload(_ success: Bool)
 }
 
@@ -23,9 +24,9 @@ class NewReviewViewModel {
     /// 이미 매장에 등록되어 있는 메뉴 배열
     var existingMenus: [ExistingMenuModel] = [
     
-    ExistingMenuModel(menuID: 1, mallID: 1, menuName: "삼겹살", likes: 2, dislikes: 3),
-    ExistingMenuModel(menuID: 2, mallID: 1, menuName: "피자", likes: 4, dislikes: 10),
-    ExistingMenuModel(menuID: 2, mallID: 1, menuName: "족발", likes: 20, dislikes: 1),
+    ExistingMenuModel(menuID: 2, mallID: 2, menuName: "삼겹살", likes: 2, dislikes: 3),
+    ExistingMenuModel(menuID: 3, mallID: 1, menuName: "피자", likes: 4, dislikes: 10),
+    ExistingMenuModel(menuID: 4, mallID: 1, menuName: "족발", likes: 20, dislikes: 1),
     
     // ------------------항상 있는것
     ExistingMenuModel(menuID: 0, mallID: 0, menuName: "직접 입력", likes: 0, dislikes: 0)
@@ -37,11 +38,12 @@ class NewReviewViewModel {
     
     /// 따로 DB 에 등록해야 할 메뉴
     var menusToUpload: [UploadMenuModel]
-
+    
+    // 리뷰를 최종적으로 등록할 때 필요한 메뉴의 Model
+    var finalMenuInfo: [FinalMenuModel]
     
     var review: String
 
-    
    
     //MARK: - Init
     
@@ -55,14 +57,14 @@ class NewReviewViewModel {
         //self.existingMenus = [ExistingMenuModel]()
         self.userAddedMenus = [UserAddedMenuModel]()
         self.menusToUpload = [UploadMenuModel]()
+        self.finalMenuInfo = [FinalMenuModel]()
         self.review = ""
-
     }
     
     //MARK: - Object Methods
     
     func addNewMenu(name: String) {
-
+    
         let newMenu = UserAddedMenuModel(menuName: name)
         self.userAddedMenus.append(newMenu)
         
@@ -83,48 +85,43 @@ class NewReviewViewModel {
     }
     
     // DB에 메뉴 등록
-    func uploadMenuInfo() {
+    func uploadNewMenus() {
         
         //TODO: - 수정 필요
-        let mall_id = self.mallID
         var menuNames: [String] = []
         
         for eachMenu in menusToUpload {
             menuNames.append(eachMenu.menuName)
         }
-        
-        let model = RegisterNewMenuModel(mallID: mall_id,
-                                                 menuName: menuNames)
-        
-
-        
+        let model = RegisterNewMenuModel(mallID: self.mallID,
+                                         menuName: menuNames)
+    
         RestaurantManager.shared.uploadNewMenu(with: model) { responseModel in
             
-      
+            print("RESPONSE MODEL: \(responseModel)")
             
+            self.convertMenusToUploadableFormat(with: responseModel)
+            let menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
             
+            print("MENUINFOINJSONSTRING: \(menuInfoInJSONString)")
+            
+            /*
+             
+             지금 문제!!! : like 인데 dislike 로 
+             */
+            
+            self.uploadReview(with: menuInfoInJSONString)
             
         }
-
-        
-        
 
     }
     
     
     // 신규 리뷰 등록
-    func uploadReview() {
-        
-        /*
-         현재 상황 : addMenu 하면 NewMenuModel 로 되지 UploadMenuModel 형태가 아님
-         변환이 필요해보임.
-         
-         */
-        
-        let menuInfo = convertMenusToUploadToJSONString()
-
+    func uploadReview(with menus: String) {
+    
         let newReviewModel = NewReviewModel(mallID: mallID,
-                                            menus: menuInfo,
+                                            menus: menus,
                                             review: review,
                                             rating: rating,
                                             reviewImages: userSelectedImagesInDataFormat)
@@ -134,9 +131,6 @@ class NewReviewViewModel {
             print("SUCCESSFULLY UPLOAD NEW REVIEW")
             self.delegate?.didCompleteReviewUpload(isSuccess)
         }
-        
-        
-        
     }
     
     //MARK: - Conversion Methods
@@ -155,23 +149,56 @@ class NewReviewViewModel {
         })
     }
     
-    func convertMenusToUploadToJSONString() -> String {
+    //useraddedmenumodel 수정
+    func convertMenusToJSONString(from data: [FinalMenuModel]) -> String {
         
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .withoutEscapingSlashes
             
-            let JSONData = try encoder.encode(menusToUpload)
+            let JSONData = try encoder.encode(data)
             let JSONString = String(data: JSONData, encoding: .utf8)
             
             if let encodedData = JSONString {
                 return encodedData
             }
-            
         } catch {
-            print("There was an error in convertMenusToUploadToJSONString()")
+            print("NEW REVIEW VIEW MODEL - There was an error in convertMenusToUploadToJSONString()")
         }
-        fatalError("convertMenusToUploadToJSONString FAILED")
+        fatalError("NEW REVIEW VIEW MODEL - convertMenusToUploadToJSONString FAILED")
+    }
+    
+    func convertMenusToUploadableFormat(with model: [MenuRegisterResponseModel]) {
+        
+        for i in 0..<userAddedMenus.count {
+            
+            for j in 0..<existingMenus.count {
+                
+                if userAddedMenus[i].menuName == existingMenus[j].menuName {
+                    
+                    let menuID = existingMenus[i].menuID
+                    let isGood = userAddedMenus[i].isGood
+                    let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
+
+                    finalMenuInfo.append(newMenu)
+                }
+            }
+        }
+        
+        for i in 0..<model.count {
+            
+            for j in 0..<userAddedMenus.count {
+                
+                if model[i].menuName == userAddedMenus[j].menuName {
+                    
+                    let menuID = model[i].menuID
+                    let isGood = userAddedMenus[i].isGood
+                    let newMenu = FinalMenuModel(menuID: menuID, isGood: isGood)
+                    
+                    finalMenuInfo.append(newMenu)
+                }
+            }
+        }
     }
     
     //MARK: - User Input Validation Methods
@@ -182,7 +209,7 @@ class NewReviewViewModel {
         if menu.count == 0 { throw NewReviewInputError.menuNameTooShort }
         
         for eachMenu in userAddedMenus {
-            if eachMenu.menuName == menu {
+            guard eachMenu.menuName != menu else {
                 throw NewReviewInputError.alreadyExistingMenu
             }
         }
