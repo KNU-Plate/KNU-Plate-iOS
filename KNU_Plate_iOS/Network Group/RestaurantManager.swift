@@ -155,7 +155,6 @@ class RestaurantManager {
                                              withName: "review_image",
                                              fileName: "mall_image",
                                              mimeType: "image/jpeg")
-                    
                 }
             }
         }, to: uploadNewReviewRequestURL,

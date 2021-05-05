@@ -17,33 +17,32 @@ class MapManager {
     //MARK: - 키워드로 장소 검색
     func searchByKeyword(with model: SearchRestaurantByKeywordModel,
                          completion: @escaping ((SearchRestaurantByKeywordResponseModel) -> Void)) {
-            
+        
         AF.request(searchByKeywordRequestURL,
                    method: .get,
                    parameters: model.parameters,
-                   headers: model.headers)
-            .responseJSON { (response) in
-            
-                guard let statusCode = response.response?.statusCode else {
-                    return
-                }
-                
-                switch statusCode {
-                
-                case 200:
-                    do {
-                        let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
-                                                                   from: response.data!)
-                        completion(decodedData)
-                        
-                    } catch {
-                        print("There was an error decoding JSON Data (KakaoMap)")
+                   headers: model.headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else {
+                        return
                     }
-                default:
-                    print("default activated in MAPMANAGER")
-                }
-            }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        do {
+                            let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
+                                                                       from: response.data!)
+                            completion(decodedData)
+                            
+                        } catch {
+                            print("There was an error decoding JSON Data (KakaoMap)")
+                        }
+                    default:
+                        print("default activated in MAPMANAGER")
+                    }
+                   }
     }
-
+    
     
 }

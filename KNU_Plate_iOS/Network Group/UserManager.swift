@@ -234,6 +234,11 @@ class UserManager {
     
     
     
+    //MARK: - 회원 정보 수정
+    func editUserInformation() {
+        
+    }
+    
 }
 
 
@@ -262,7 +267,6 @@ extension UserManager {
     func saveLoginInfoToUserDefaults(with model: LoginResponseModel) {
         
         //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
-        
         User.shared.accessToken = model.accessToken
     }
 }
