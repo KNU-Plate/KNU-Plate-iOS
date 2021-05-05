@@ -6,33 +6,36 @@ class User {
     static var shared: User = User()
     
     /// user unique ID
-    public var id: String
+    var id: String
     
-    /// username
-    public var username: String
+    ///
+    var username: String
     
     /// user password
-    public var password: String
+    var password: String
     
     /// nickname
-    public var displayName: String
+    var displayName: String
     
     /// user email address (...@knu.ac.kr)
-    public var email: String
+    var email: String
     
     /// registered date
-    public var dateCreated: String
+    var dateCreated: String
     
-    public var isActive: String
+    /// 활성화 상태 여부 (Y/N)
+    var isActive: String
      
-    
-    
-    
-    
     /// variable for medal image
-    public var ranking: Int
+    var ranking: Int
     
-    public init() {
+    var accessToken: String
+    
+    var refreshToken: String
+    
+    
+    
+    private init() {
         self.id = ""
         self.username = ""
         self.password = ""
@@ -41,13 +44,14 @@ class User {
         self.dateCreated = ""
         self.isActive = ""
         self.ranking = 3
+        self.accessToken = ""
+        self.refreshToken = ""
     }
 
     enum Codingkeys: String, CodingKey {
 
         case password
-
-        case userName = "user_name"
+        case username = "user_name"
         case displayName = "display_name"
         case email = "mail_address"
         case dateCreated = "date_create"

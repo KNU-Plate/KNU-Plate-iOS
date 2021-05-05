@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import Security
 
 //MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
 
@@ -9,15 +10,21 @@ class UserManager {
     static let shared: UserManager = UserManager()
     
     //MARK: - API Request URLs
-    let signUpRequestURL = "\(Constants.API_BASE_URL)signup"
-    let logInRequestURL = "\(Constants.API_BASE_URL)login"
-    let issueEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
-    let emailVerificationURL = "\(Constants.API_BASE_URL)mail-auth/verification"
+    
+    /// 조회 request url 추가해야힘
+    let unregisterRequestURL            = "\(Constants.API_BASE_URL)auth/unregister"
+    let logOutRequestURL                = "\(Constants.API_BASE_URL)auth/logout"
+    let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
+    let signUpRequestURL                = "\(Constants.API_BASE_URL)signup"
+    let logInRequestURL                 = "\(Constants.API_BASE_URL)login"
+    let sendEmailVerificationCodeURL    = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
+    let checkUserNameDuplicateURL       = "\(Constants.API_BASE_URL)check-user-name"
+    let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
     
     private init() {}
     
-    //MARK: - 회원가입 함수
-    //TODO: - signUp ( ) 파라미터로 @escaping method 넣기.
+    //MARK: - 회원가입
     func signUp(with model: RegisterInfoModel) {
         
         AF.request(signUpRequestURL,
@@ -25,136 +32,38 @@ class UserManager {
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
                    headers: model.headers).responseJSON { (response) in
-                    
-                    switch response.response?.statusCode {
-                    
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200..<300:
+                    do {
+                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
+                                                                   from: response.data!)
+                        self.saveUserRegisterInfo(with: decodedData)
                         
-                        if let responseBody = try! response.result.get() as? [String: String] {
+                    } catch {
+                        print("There was an error decoding JSON Data")
+                    }
+                    
+                default:
+                    if let responseJSON = try! response.result.get() as? [String : String] {
+                        
+                        if let error = responseJSON["error"] {
                             
-                            self.saveUserRegisterInfo(with: responseBody)
-                            //return HTTPStatus.success
-                            
-                            
-                            /// success 하고 다음 vc 로 넘어가야 할 듯 (이메일 인증)
+                            if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
+                                print(errorMessage)
+                            } else {
+                                print("알 수 없는 오류가 발생했습니다.")
+                            }
                         }
-                        else {
-                            print("Failed to convert signup request response body JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
-                        
-                    default:
-                        
-                        break
-                        
-                    } /// end - switch
-                   } // end - closure
-        
-        
-        
+                    }
+                }
+            }
     }
     
-    //    func signUp(with model: RegisterInfoModel) {
-    //
-    //        AF.request(signUpRequestURL,
-    //                   method: .post,
-    //                   parameters: model.parameters,
-    //                   encoding: URLEncoding.httpBody,
-    //                   headers: model.headers)
-    //            .validate(statusCode: 200..<300)
-    //            .responseJSON { (response) in
-    //
-    //                switch response.result {
-    //
-    //                case .success:
-    //                    print("response: \(response)")
-    //                    print("HTTP Response Code: \(response.response?.statusCode)")
-    //
-    //
-    //                    if let responseBody = try! response.result.get() as? [String: Any] {
-    //
-    //                        self.saveLoginInfoToUserDefaults(with: responseBody)
-    //                        print("responseBody: \(responseBody)")
-    //
-    //                    }
-    //
-    //                case let .failure(error):
-    //
-    //                    print(error)
-    //                    print(response)
-    //
-    //
-    //                /// Success :  200
-    //
-    //
-    //                } /// end - switch
-    //            } // end - closure
-    //
-    //
-    //
-    //    }
-    //
-    //    func logIn(with model: LoginInfoModel) {
-    //
-    //        AF.request(logInRequestURL,
-    //                   method: .post,
-    //                   parameters: model.parameters,
-    //                   encoding: URLEncoding.httpBody,
-    //                   headers: model.headers).responseJSON { (response) in
-    //
-    //                    switch response.result {
-    //
-    //                    case .success:
-    //
-    //                        print("response: \(response)")
-    //                        print("response result: \(response.result)")
-    //
-    //                        if let responseBody = try! response.result.get() as? [String: Any] {
-    //
-    //                            self.saveLoginInfoToUserDefaults(with: responseBody)
-    //                            print("responseBody: \(responseBody)")
-    //
-    //
-    //
-    //                            /// success 하고 홈화면으로 넘어가야함
-    //                        }
-    //                        else {
-    //                            print("failed to parse JSON")
-    //                        }
-    //                    case let .failure(error):
-    //                        print(error)
-    //
-    //                        print(response.response?.statusCode)
-    //
-    //
-    //                    } /// end - switch
-    //                   } // end - closure
-    //
-    //    }
-    
-    
-    //MARK: - 로그인 함수
+    //MARK: - 로그인
     func logIn(with model: LoginInfoModel) {
         
         AF.request(logInRequestURL,
@@ -163,132 +72,201 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: model.headers).responseJSON { (response) in
                     
-                    switch response.response?.statusCode {
+                    guard let statusCode = response.response?.statusCode else { return }
                     
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
-                        
-                        if let responseBody = try! response.result.get() as? [String: Any] {
+                    switch statusCode {
+                    
+                    case 200..<300:
+                        do {
+                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
+                                                                       from: response.data!)
+                            self.saveLoginInfoToUserDefaults(with: decodedData)
                             
-                            self.saveLoginInfoToUserDefaults(with: responseBody)
-                            
-                            
-                            
-                            /// success 하고 홈화면으로 넘어가야함
+                        } catch {
+                            print(error)
+                            print("There was an error decoding JSON Data")
                         }
-                        else {
-                            print("Failed to convert signup request response JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
                         
                     default:
-                        
-                        break
-                        
-                    } /// end - switch
-                   } // end - closure
-        
-    }
-    
-    
-    //MARK: - 이메일 인증 코드 발급 함수
-    func getEmailVerificationCode() {
-        
-        AF.request(issueEmailVerificationCodeURL,
-                   method: .post,
-                   encoding: URLEncoding.httpBody).responseJSON { (response) in
-                    
-                    switch response.response?.statusCode {
-                    
-                    /// Success :  200
-                    case HTTPStatus.success.rawValue:
-                        
-                        if let responseBody = try! response.result.get() as? [String: Int] {
+                        if let responseJSON = try! response.result.get() as? [String : String] {
                             
-                            self.saveLoginInfoToUserDefaults(with: responseBody)
-                            
-                            
-                            
-                            /// success 하고 홈화면으로 넘어가야함
+                            if let error = responseJSON["error"] {
+                                
+                                if let errorMessage = LogInError(rawValue: error)?.returnErrorMessage() {
+                                    print(errorMessage)
+                                } else {
+                                    print("알 수 없는 에러 발생.")
+                                }
+                            }
                         }
-                        else {
-                            print("Failed to convert signup request response JSON to model")
-                        }
-                        
-                        
-                    /// Bad Request: 400
-                    case HTTPStatus.badRequest.rawValue:
-                        
-                        print(HTTPStatus.badRequest.errorDescription)
-                    //return HTTPStatus.badRequest
-                    
-                    /// Internal Error : 500
-                    case HTTPStatus.internalError.rawValue:
-                        
-                        print(HTTPStatus.internalError.errorDescription)
-                    //return HTTPStatus.internalError
-                    
-                    /// Not Found Error : 404
-                    case HTTPStatus.notFound.rawValue:
-                        
-                        //return HTTPStatus.notFound
-                        
-                        print("not found")
-                        
-                        
-                    default:
-                        
-                        break
-                        
-                    } /// end - switch
-                    
-                    
-                    
+                    }
                    }
     }
     
+    
+    //MARK: - 이메일 인증 코드 발급
+    func sendEmailVerificationCode(completion: @escaping ((Bool) -> Void)) {
+        
+        AF.request(sendEmailVerificationCodeURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: RequestEmailVerifyCodeModel().headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 인증 코드 확인 (메일 인증)
+    func verifyEmail(with model: VerifyMailModel,
+                     completion: @escaping ((Bool) -> Void)) {
+        
+        AF.request(emailAuthenticationURL,
+                   method: .patch,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 아이디 or 닉네임 중복 체크
+    func checkDuplication(with model: CheckDuplicateModel,
+                          _ requestURL: String,
+                          completion: @escaping ((Bool) -> Void)) {
+        
+        AF.request(requestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        //이미 존재하는 아이디 또는 닉네임입니다.
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 로그아웃
+    func logOut(completion: @escaping ((Bool) -> Void)) {
+        
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": User.shared.accessToken
+        ]
+        
+        AF.request(logOutRequestURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 회원 탈퇴
+    func unregisterUser(completion: @escaping ((Bool) -> Void)) {
+        
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": User.shared.accessToken
+        ]
+        
+        AF.request(unregisterRequestURL,
+                   method: .delete,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 토큰 갱신
+    func refreshToken() {
+        // AF Request 보낼 때 header 에 accessToken 첨부해야함
+    }
+    
+    
+    
+    
+    //MARK: - 회원 정보 수정
+    func editUserInformation() {
+        
+    }
     
 }
 
 
 extension UserManager {
     
-    func saveUserRegisterInfo(with model: [String: String]) {
+    func saveUserRegisterInfo(with model: RegisterResponseModel) {
         
-        //TODO: - Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
+        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
         
-        User.shared.id = model["user_id"]!
-        User.shared.username = model["user_name"]!
-        User.shared.password = model["password"]!
-        User.shared.displayName = model["display_name"]!
-        User.shared.email = model["mail_address"]!
-        User.shared.dateCreated = model["date_create"]!
-        User.shared.isActive = model["is_active"]!
+        User.shared.id = model.userID
+        User.shared.username = model.username
+        User.shared.password = model.password
+        User.shared.displayName = model.displayName
+        User.shared.email = model.email
+        User.shared.dateCreated = model.dateCreated
+        User.shared.isActive = model.isActive
+        
+        User.shared.accessToken = model.accessToken
+        User.shared.refreshToken = model.refreshToken
+        
+        
+        
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
-    func saveLoginInfoToUserDefaults(with model: [String: Any]) {
+    func saveLoginInfoToUserDefaults(with model: LoginResponseModel) {
         
-        
+        //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
+        User.shared.accessToken = model.accessToken
     }
 }

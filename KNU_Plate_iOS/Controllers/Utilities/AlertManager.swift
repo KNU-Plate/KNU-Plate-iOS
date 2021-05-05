@@ -17,6 +17,26 @@ class AlertManager {
         return alert
     }
     
+//    class func createAlertMessage(title: String, message: String, withAction: Bool) -> UIAlertController {
+//
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+//
+//        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { (action: UIAlertAction!) in
+//            <#code#>
+//        }))
+//
+//
+//    }
+    
     
     
 }
+
+
+//func simpleAlert(vc: UIViewController, title: String, message msg: String, handler: ((UIAlertAction) -> Void)? = nil) {
+//    let alert = UIAlertController(title : title, message: msg,
+//                                  preferredStyle: .alert)
+//    let okAction = UIAlertAction(title: "확인", style: .cancel, handler: handler)
+//    alert.addAction(okAction)
+//    vc.present(alert, animated: false, completion: nil)
+//}

@@ -2,5 +2,4 @@ ${PODS_ROOT}/Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS-framewor
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BSImagePicker/BSImagePicker.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
-${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
