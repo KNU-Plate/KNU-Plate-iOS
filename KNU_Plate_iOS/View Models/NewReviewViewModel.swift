@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 
 protocol NewReviewViewModelDelegate {
-    func didCompleteNewMenuUpload(_ success: Bool)
     func didCompleteReviewUpload(_ success: Bool)
 }
 
@@ -39,11 +38,12 @@ class NewReviewViewModel {
     /// 따로 DB 에 등록해야 할 메뉴
     var menusToUpload: [UploadMenuModel]
     
-    // 리뷰를 최종적으로 등록할 때 필요한 메뉴의 Model
+    /// 리뷰를 최종적으로 등록할 때 필요한 메뉴의 Model
     var finalMenuInfo: [FinalMenuModel]
     
     var review: String
     
+    ///
     var menuInfoInJSONString: String
 
    
@@ -103,7 +103,6 @@ class NewReviewViewModel {
     // DB에 메뉴 등록
     func uploadNewMenus() {
         
-        //TODO: - 수정 필요
         var menuNames: [String] = []
         
         for eachMenu in menusToUpload {
@@ -114,16 +113,10 @@ class NewReviewViewModel {
     
         RestaurantManager.shared.uploadNewMenu(with: model) { responseModel in
             
-            print("RESPONSE MODEL: \(responseModel)")
-            
             self.convertMenusToUploadableFormat(with: responseModel)
             self.menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
-            
-            print("MENUINFOINJSONSTRING: \(self.menuInfoInJSONString)")
             self.uploadReview()
-            
         }
-
     }
     
     // 신규 리뷰 등록
@@ -174,7 +167,7 @@ class NewReviewViewModel {
                 }
             }
         }
-        
+    
         if let model = model {
             
             for i in 0..<model.count {

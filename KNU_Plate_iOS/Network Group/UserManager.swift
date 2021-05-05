@@ -17,8 +17,8 @@ class UserManager {
     let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
     let signUpRequestURL                = "\(Constants.API_BASE_URL)signup"
     let logInRequestURL                 = "\(Constants.API_BASE_URL)login"
-    let requestEmailVerificationCodeURL = "\(Constants.API_BASE_URL)mail-auth/issuance"
-    let emailVerificationURL            = "\(Constants.API_BASE_URL)mail-auth/verification"
+    let getEmailVerificationCodeURL     = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
     
     
     private init() {}
@@ -102,50 +102,34 @@ class UserManager {
                             }
                         }
                     }
-                }
+                   }
     }
     
     
     //MARK: - 이메일 인증 코드 발급
-    func getEmailVerificationCode() {
+    func getEmailVerificationCode(completion: @escaping ((Bool) -> Void)) {
         
-        AF.request(requestEmailVerificationCodeURL,
+        AF.request(getEmailVerificationCodeURL,
                    method: .post,
-                   encoding: URLEncoding.httpBody).responseJSON { (response) in
+                   encoding: URLEncoding.httpBody,
+                   headers: RequestEmailVerifyCodeModel().headers).responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
                     
-                    case 200..<300:
-                        do {
-                            
-                            //let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
-                            
-                            
-                        } catch {
-                            print("There was an error decoding JSON Data")
-                        }
+                    case 200:
+                        completion(true)
                         
                     default:
-                        if let responseJSON = try! response.result.get() as? [String : String] {
-                            
-                            if let error = responseJSON["error"] {
-                                
-                                if let errorMessage = MailVerificationIssuanceError(rawValue: error)?.returnErrorMessage() {
-                                    print(errorMessage)
-                                } else {
-                                    print("알 수 없는 에러 발생.")
-                                }
-                            }
-                        }
+                        completion(false)
                     }
                    }
     }
     
     //MARK: - 로그아웃
     func logOut() {
-    
+        
         
         // AF Request 보낼 때 header 에 accessToken 첨부해야함
     }
@@ -166,7 +150,7 @@ extension UserManager {
     func saveUserRegisterInfo(with model: RegisterResponseModel) {
         
         //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
-
+        
         User.shared.id = model.userID
         User.shared.username = model.username
         User.shared.password = model.password
@@ -179,7 +163,7 @@ extension UserManager {
         User.shared.refreshToken = model.refreshToken
         
         
-
+        
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.

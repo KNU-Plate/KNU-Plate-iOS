@@ -2,7 +2,6 @@ import UIKit
 
 protocol NewMenuTableViewCellDelegate {
     
-    //func didChangeMenuName(at index: Int, _ newMenuName: String)
     func didPressDeleteMenuButton(at index: Int)
     func didPressEitherGoodOrBadButton(at index: Int, menu isGood: Bool)
 }

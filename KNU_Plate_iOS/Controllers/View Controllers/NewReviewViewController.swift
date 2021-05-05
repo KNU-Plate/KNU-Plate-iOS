@@ -20,7 +20,6 @@ class NewReviewViewController: UIViewController {
         
         initialize()
         
-        
         Test.shared.login()
         print("USER ACCESS TOKEN: \(User.shared.accessToken)")
 
@@ -84,13 +83,8 @@ class NewReviewViewController: UIViewController {
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
-            // 메뉴 등록을 먼저하고 리뷰 등록을 하는 형식으로 API가 설계되어 있음
-            
             viewModel.startUploading()
-            //viewModel.uploadNewMenus()
-            
-            
-            //viewModel.uploadReview()
+
             
         } catch NewReviewInputError.insufficientMenuError {
             
@@ -123,7 +117,7 @@ class NewReviewViewController: UIViewController {
 extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.viewModel.userSelectedImages.count + 1     /// Add Button 이 항상 있어야하므로 + 1
+        viewModel.userSelectedImages.count + 1     /// Add Button 이 항상 있어야하므로 + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -147,7 +141,6 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
                 fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
             }
-            
             cell.delegate = self
             cell.indexPath = indexPath.item
             
@@ -186,12 +179,7 @@ extension NewReviewViewController: UserPickedFoodImageCellDelegate {
 //MARK: - NewMenuTableViewCellDelegate
 
 extension NewReviewViewController: NewMenuTableViewCellDelegate {
-   
-    // 이미 추가한 메뉴의 이름을 변경했을 때 실행되는 함수
-//    func didChangeMenuName(at index: Int, _ newMenuName: String) {
-//       viewModel.menus[index].menuName = newMenuName
-//    }
-    
+
     func didPressDeleteMenuButton(at index: Int) {
     
         viewModel.userAddedMenus.remove(at: index)
@@ -206,7 +194,6 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
         } else {
             viewModel.userAddedMenus[index].isGood = "N"
         }
-        
     }
 }
 
@@ -214,12 +201,9 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 
 extension NewReviewViewController: NewReviewViewModelDelegate {
     
-    func didCompleteNewMenuUpload(_ success: Bool) {
-        
-    }
-    
     func didCompleteReviewUpload(_ success: Bool) {
         //TODO: - 수정 필요
+        // 리뷰 등록을 완료했다고 작게 알림 띄우는게 좋을듯
         print("NEW REVIEW UPLOAD COMPLETE")
     }
 }
@@ -229,7 +213,7 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
 extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.userAddedMenus.count
+        return viewModel.userAddedMenus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -239,7 +223,6 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if viewModel.userAddedMenus.count != 0 {
-            
             let menuInfo = viewModel.userAddedMenus[indexPath.row]
             
             cell.delegate = self
@@ -269,7 +252,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return viewModel.existingMenus.count
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -280,8 +262,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
         
         //menuInputTextField.text = viewModel.existingMenus[row].menuName
     }
-    
-    
 }
 
 
@@ -403,7 +383,6 @@ extension NewReviewViewController {
         
         menuInputTextField.inputView = existingMenusPickerView
         menuInputTextField.inputAccessoryView = initializeToolbar()
-      
     }
     
     func initializeToolbar() -> UIToolbar {
@@ -446,7 +425,6 @@ extension NewReviewViewController {
             menuInputTextField.inputView = nil
             menuInputTextField.inputAccessoryView = nil
             menuInputTextField.becomeFirstResponder()
-            
         } else {
             menuInputTextField.text = viewModel.existingMenus[selectedRow].menuName
         }
