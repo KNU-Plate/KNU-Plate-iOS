@@ -17,7 +17,7 @@ class UserManager {
     let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
     let signUpRequestURL                = "\(Constants.API_BASE_URL)signup"
     let logInRequestURL                 = "\(Constants.API_BASE_URL)login"
-    let getEmailVerificationCodeURL     = "\(Constants.API_BASE_URL)mail-auth/issuance"
+    let sendEmailVerificationCodeURL     = "\(Constants.API_BASE_URL)mail-auth/issuance"
     let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
     
     
@@ -32,8 +32,7 @@ class UserManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers)
-            .responseJSON { (response) in
+                   headers: model.headers).responseJSON { (response) in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
@@ -107,12 +106,34 @@ class UserManager {
     
     
     //MARK: - 이메일 인증 코드 발급
-    func getEmailVerificationCode(completion: @escaping ((Bool) -> Void)) {
+    func sendEmailVerificationCode(completion: @escaping ((Bool) -> Void)) {
         
-        AF.request(getEmailVerificationCodeURL,
+        AF.request(sendEmailVerificationCodeURL,
                    method: .post,
                    encoding: URLEncoding.httpBody,
                    headers: RequestEmailVerifyCodeModel().headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
+    }
+    
+    //MARK: - 인증 코드 확인 (메일 인증)
+    func verifyEmail(with model: VerifyMailModel,
+                     completion: @escaping ((Bool) -> Void)) {
+        
+        AF.request(emailAuthenticationURL,
+                   method: .patch,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.httpBody,
+                   headers: model.headers).responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -126,6 +147,10 @@ class UserManager {
                     }
                    }
     }
+    
+    
+    
+    
     
     //MARK: - 로그아웃
     func logOut() {
