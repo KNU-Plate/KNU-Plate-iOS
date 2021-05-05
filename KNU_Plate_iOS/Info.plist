@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>KAKAO_APP_KEY</key>
-	<string>6536c927cc48b7eef60d77d79f1a2d85</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>사용자의 현재 위치를 받아와야 합니다.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
-	<key>NSCameraUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -26,8 +18,16 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>6536c927cc48b7eef60d77d79f1a2d85</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>사용자의 현재 위치를 받아와야 합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -42,7 +42,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>Kevin</string>
+					<string>Main</string>
 				</dict>
 			</array>
 		</dict>
@@ -52,7 +52,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Kevin</string>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
