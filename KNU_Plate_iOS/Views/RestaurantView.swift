@@ -59,7 +59,9 @@ class RestaurantView: UIView {
         $0.textColor = UIColor.lightGray
         $0.font = UIFont.systemFont(ofSize: 20)
     }
-    let numberLabel = UILabel()
+    let numberLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 15)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
