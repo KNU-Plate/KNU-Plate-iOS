@@ -73,6 +73,7 @@
 		7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */; };
 		7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */; };
 		7C5E2132264662F900E98FE5 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */; };
+		7C5E21342646771A00E98FE5 /* ReviewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E21332646771A00E98FE5 /* ReviewTableViewModel.swift */; };
 		7C5EDD4F26427A8700B79178 /* FinalMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD4E26427A8700B79178 /* FinalMenuModel.swift */; };
 		7C5EDD512642BD0100B79178 /* RequestEmailVerifyCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD502642BD0000B79178 /* RequestEmailVerifyCodeModel.swift */; };
 		7C5EDD532642BF1F00B79178 /* VerifyMailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD522642BF1F00B79178 /* VerifyMailModel.swift */; };
@@ -195,6 +196,7 @@
 		7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
+		7C5E21332646771A00E98FE5 /* ReviewTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewModel.swift; sourceTree = "<group>"; };
 		7C5EDD4E26427A8700B79178 /* FinalMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalMenuModel.swift; sourceTree = "<group>"; };
 		7C5EDD502642BD0000B79178 /* RequestEmailVerifyCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmailVerifyCodeModel.swift; sourceTree = "<group>"; };
 		7C5EDD522642BF1F00B79178 /* VerifyMailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMailModel.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		7C5E212E264662CF00E98FE5 /* ReviewTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				7C5E21332646771A00E98FE5 /* ReviewTableViewModel.swift */,
 				7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */,
 				7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */,
 			);
@@ -705,6 +708,7 @@
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
 				7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */,
 				7CA66219264113CF000E0B7A /* MenuRegisterResponseModel.swift in Sources */,
+				7C5E21342646771A00E98FE5 /* ReviewTableViewModel.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */,
 				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,

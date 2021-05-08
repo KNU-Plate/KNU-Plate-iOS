@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2bF-tq-S23">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -758,27 +758,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyZ-Wm-64Z" customClass="MTMapView">
-                                <rect key="frame" x="30" y="30" width="315" height="607"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L4B-Zp-FJt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bAJ-bC-yCq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="trailing" secondItem="dyZ-Wm-64Z" secondAttribute="trailing" constant="30" id="H85-kK-KaC"/>
-                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="bottom" secondItem="dyZ-Wm-64Z" secondAttribute="bottom" constant="30" id="Urj-9V-NOR"/>
-                            <constraint firstItem="dyZ-Wm-64Z" firstAttribute="leading" secondItem="bAJ-bC-yCq" secondAttribute="leading" constant="30" id="huP-Ez-XLf"/>
-                            <constraint firstItem="dyZ-Wm-64Z" firstAttribute="top" secondItem="bAJ-bC-yCq" secondAttribute="top" constant="30" id="iXG-Wv-okX"/>
+                            <constraint firstItem="L4B-Zp-FJt" firstAttribute="leading" secondItem="bAJ-bC-yCq" secondAttribute="leading" id="YWo-aX-ydU"/>
+                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="bottom" secondItem="L4B-Zp-FJt" secondAttribute="bottom" id="gmb-Oe-WbX"/>
+                            <constraint firstItem="bAJ-bC-yCq" firstAttribute="trailing" secondItem="L4B-Zp-FJt" secondAttribute="trailing" id="j0t-FR-0LJ"/>
+                            <constraint firstItem="L4B-Zp-FJt" firstAttribute="top" secondItem="bAJ-bC-yCq" secondAttribute="top" id="slW-OA-IJu"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="kakaoMapView" destination="dyZ-Wm-64Z" id="njP-Le-dci"/>
+                        <outlet property="tableView" destination="L4B-Zp-FJt" id="heO-WI-p2X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzC-al-4Wi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2228" y="1106"/>
+            <point key="canvasLocation" x="-348" y="2538.9805097451276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ahY-8s-sFi">

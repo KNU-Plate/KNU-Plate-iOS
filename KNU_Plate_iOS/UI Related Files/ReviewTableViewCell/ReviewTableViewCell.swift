@@ -13,8 +13,6 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -24,7 +22,6 @@ class ReviewTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-      
     }
     
     @objc func showMoreOptions() {
@@ -45,7 +42,6 @@ class ReviewTableViewCell: UITableViewCell {
         
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
-        
     }
     
 }
@@ -56,7 +52,7 @@ extension ReviewTableViewCell {
     
     func configurePageControl() {
         
-        reviewImageView.isUserInteractionEnabled = true
+        reviewImageView?.isUserInteractionEnabled = true
 
 //        pageControl.numberOfPages =
         pageControl.currentPageIndicatorTintColor = .white

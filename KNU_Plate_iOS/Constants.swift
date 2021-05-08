@@ -43,7 +43,7 @@ struct Constants {
     struct XIB {
         
         static let newMenuTableViewCell = "NewMenuTableViewCell"
-        static let reviewTableViewCell = "reviewTableViewCell"
+        static let reviewTableViewCell = "ReviewTableViewCell"
     }
     
     struct UserDefaultsKey {
