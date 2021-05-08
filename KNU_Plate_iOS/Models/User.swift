@@ -27,7 +27,7 @@ class User {
     var isActive: String
      
     /// variable for medal image
-    var ranking: Int
+    var medal: Int
     
     var accessToken: String
     
@@ -43,7 +43,7 @@ class User {
         self.email = ""
         self.dateCreated = ""
         self.isActive = ""
-        self.ranking = 3
+        self.medal = 3
         self.accessToken = ""
         self.refreshToken = ""
     }

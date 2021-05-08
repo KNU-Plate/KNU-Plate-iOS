@@ -11,7 +11,6 @@ class UserManager {
     
     //MARK: - API Request URLs
     
-    /// 조회 request url 추가해야힘
     let unregisterRequestURL            = "\(Constants.API_BASE_URL)auth/unregister"
     let logOutRequestURL                = "\(Constants.API_BASE_URL)auth/logout"
     let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
@@ -36,7 +35,7 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                case 200..<300:
+                case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
@@ -75,7 +74,7 @@ class UserManager {
                     
                     switch statusCode {
                     
-                    case 200..<300:
+                    case 200:
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)

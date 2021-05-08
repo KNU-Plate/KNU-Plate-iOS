@@ -93,7 +93,8 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         mapView.delegate = self
         mapView.baseMapType = .standard
         
-        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: 35.888949648310486, longitude: 128.6104881544238)),
+        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: 35.888949648310486,
+                                                                longitude: 128.6104881544238)),
                              zoomLevel: 1,
                              animated: true)
     }

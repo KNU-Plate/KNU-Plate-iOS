@@ -67,18 +67,6 @@ class SearchRestaurantViewModel {
         address.removeAll()
     }
     
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
     
     
 }

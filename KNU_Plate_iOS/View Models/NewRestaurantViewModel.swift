@@ -16,20 +16,7 @@ class NewRestaurantViewModel {
     
     /// 매장 관련 사진 배열
     var userSelectedImages: [UIImage] {
-        didSet {
-           
-            userSelectedImagesInDataFormat?.removeAll()
-            
-            userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
-                
-                if let imageData = image.jpegData(compressionQuality: 0.5) {
-                    return imageData
-                } else {
-                    print("Unable to convert UIImage to Data type")
-                    return Data()
-                }
-            })
-        }
+        didSet { convertUIImagesToDataFormat() }
     }
     
     var userSelectedImagesInDataFormat: [Data]?
@@ -105,6 +92,20 @@ class NewRestaurantViewModel {
         }
         
         
+    }
+    
+    func convertUIImagesToDataFormat() {
+        userSelectedImagesInDataFormat?.removeAll()
+        
+        userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
+            
+            if let imageData = image.jpegData(compressionQuality: 0.5) {
+                return imageData
+            } else {
+                print("Unable to convert UIImage to Data type")
+                return Data()
+            }
+        })
     }
 
     
