@@ -11,11 +11,9 @@ class ReviewTableViewModel {
     
     let userNickname: String
     
-    var userMedal: Int {
-        didSet { self.userMedalImage = determineUserMedalImage() }
+    var userMedalImage: UIImage {
+        get { User.shared.medalImage }
     }
-    
-    var userMedalImage: UIImage = UIImage(named: "third medal")!
     
     var reviewImages: [UIImage]?
     
@@ -44,7 +42,7 @@ class ReviewTableViewModel {
         }
     }
     
-    init(profileImage: Data?, nickname: String, userMedal: Int, reviewImages: [Data]?, rating: Int, review: String ) {
+    init(profileImage: Data?, nickname: String, reviewImages: [Data]?, rating: Int, review: String ) {
         
         if let profileImageAvailable = profileImage {
             self.profileImageInDataFormat = profileImageAvailable
@@ -54,20 +52,11 @@ class ReviewTableViewModel {
         }
         
         self.userNickname = nickname
-        self.userMedal = userMedal
         self.rating = rating
         self.review = review
     }
     
     
 
-    func determineUserMedalImage() -> UIImage {
-        
-        switch userMedal {
-        case 1: return UIImage(named: "first medal")!
-        case 2: return UIImage(named: "second medal")!
-        case 3: return UIImage(named: "third medal")!
-        default: return UIImage(named: "third medal")!
-        }
-    }
+
 }

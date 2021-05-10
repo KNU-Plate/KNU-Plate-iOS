@@ -38,7 +38,7 @@ class SearchRestaurantViewController: UIViewController {
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
                                       message: alertMessage,
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "다시 고를게요",
+        alert.addAction(UIAlertAction(title: "다시 고를래요",
                                       style: .cancel,
                                       handler: nil))
         alert.addAction(UIAlertAction(title: "네 맞아요!",
@@ -67,6 +67,8 @@ class SearchRestaurantViewController: UIViewController {
             let category = viewModel.documents[indexSelected].categoryName
             let latitude = Double(viewModel.documents[indexSelected].y)!
             let longitude = Double(viewModel.documents[indexSelected].x)!
+            
+            // 나중에 구조체로 묶어서 한 번에 보내는 것도 고려
         
             newRestaurantVC.initializeViewModelVariables(name: restaurantName,
                                                          address: address,

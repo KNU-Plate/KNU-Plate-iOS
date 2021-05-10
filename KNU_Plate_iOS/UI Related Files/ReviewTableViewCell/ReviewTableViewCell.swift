@@ -17,7 +17,6 @@ class ReviewTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         initialize()
-      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,16 +29,21 @@ class ReviewTableViewCell: UITableViewCell {
         configureShowMoreButton()
     }
     
+    func configure(with viewModel: ReviewTableViewModel) {
+        
+        
+        
+        
+    }
+    
+    
     func configureShowMoreButton() {
         showMoreButton.addTarget(self,
                                  action: #selector(showMoreOptions),
                                  for: .touchUpInside)
     }
     
-    func configure(with viewModel: ReviewTableViewModel) {
-        
-    }
-    
+
     @objc func showMoreOptions() {
         
         let actionSheet = UIAlertController(title: nil,

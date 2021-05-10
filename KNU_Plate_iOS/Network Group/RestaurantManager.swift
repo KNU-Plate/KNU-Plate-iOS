@@ -194,7 +194,7 @@ class RestaurantManager {
 //    func fetchReviewList(with model: FetchReviewListModel,
 //                         pagination: Bool = false,
 //                         completion: @escaping (Result<[ReviewListResponseModel], Error>) -> Void) {
-//        
+//
 //        if pagination {
 //            self.isPaginating = true
 //        }

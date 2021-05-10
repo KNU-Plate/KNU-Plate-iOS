@@ -19,11 +19,8 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         configureShowMoreButton()
     }
     
-    
-
-    
     override func configure(with viewModel: ReviewTableViewModel) {
-        
+    
         
     }
    

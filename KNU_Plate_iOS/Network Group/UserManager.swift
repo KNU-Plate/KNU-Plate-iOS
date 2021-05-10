@@ -279,9 +279,12 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
+        User.shared.medal = model.medal
         
-        User.shared.accessToken = model.accessToken
-        User.shared.refreshToken = model.refreshToken
+        if let profileImageLink = model.userProfileImage {
+            User.shared.profileImageLink = profileImageLink
+        }
+ 
         
         
         
