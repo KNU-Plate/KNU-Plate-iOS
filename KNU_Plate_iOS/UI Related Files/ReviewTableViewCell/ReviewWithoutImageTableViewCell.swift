@@ -4,9 +4,6 @@ import UIKit
 
 class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
 
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         

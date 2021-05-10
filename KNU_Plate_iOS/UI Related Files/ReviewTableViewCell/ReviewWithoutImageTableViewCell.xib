@@ -144,6 +144,14 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="rating" destination="f7v-4X-YQM" id="zGJ-Qd-Wzd"/>
+                <outlet property="reviewLabel" destination="XqR-Mi-iUW" id="WWH-De-3wW"/>
+                <outlet property="showMoreButton" destination="Pji-Pv-0oY" id="5CM-PO-rYR"/>
+                <outlet property="userMedalImageView" destination="Yau-f3-2up" id="4z9-Dp-RQb"/>
+                <outlet property="userNicknameLabel" destination="0Ao-Rj-VLI" id="1Fa-Vk-ry7"/>
+                <outlet property="userProfileImageView" destination="TdZ-j1-5yW" id="py9-mY-fH1"/>
+            </connections>
             <point key="canvasLocation" x="65.94202898550725" y="124.88839285714285"/>
         </tableViewCell>
     </objects>
