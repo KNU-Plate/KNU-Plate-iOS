@@ -201,9 +201,9 @@ class UserManager {
     func unregisterUser(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": User.shared.accessToken
+            .authorization("application/json"),
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization(User.shared.accessToken)
         ]
         
         AF.request(unregisterRequestURL,
@@ -225,8 +225,26 @@ class UserManager {
     }
     
     //MARK: - 토큰 갱신
-    func refreshToken() {
-        // AF Request 보낼 때 header 에 accessToken 첨부해야함
+    func refreshToken(completion: @escaping ((Bool) -> Void)) {
+    
+        let headers: HTTPHeaders = [.accept("application/json")]
+        
+        AF.request(refreshTokenRequestURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        completion(true)
+                        
+                    default:
+                        completion(false)
+                    }
+                   }
     }
     
     
