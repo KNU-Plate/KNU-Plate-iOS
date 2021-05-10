@@ -5,6 +5,7 @@ import Foundation
 class ReviewTableViewModel {
     
     //let userID: Int  이것도 필요할 수도 있음(신고하기 기능을 위해)
+    // 아니면 review
     
     var userProfileImage: UIImage = UIImage(named: "default_profile_image")!
     
