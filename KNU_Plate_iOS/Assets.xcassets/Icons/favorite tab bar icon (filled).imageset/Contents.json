@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "favorite tab bar icon-1@3x@1x.png",
+      "filename" : "dd@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "favorite tab bar icon-1@3x@2x.png",
+      "filename" : "dd@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "favorite tab bar icon-1@3x@3x.png",
+      "filename" : "dd@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }
