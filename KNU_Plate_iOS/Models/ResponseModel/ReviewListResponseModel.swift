@@ -20,7 +20,6 @@ struct ReviewListResponseModel: Decodable {
         case review = "contents"
         case rating = "evaluate"
         case reviewImages = "review_image"
-        
     }
     
 }
