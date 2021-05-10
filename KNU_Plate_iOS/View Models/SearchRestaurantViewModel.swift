@@ -20,7 +20,7 @@ class SearchRestaurantViewModel {
     var documents: [SearchedRestaurantInfo] = []
     
     /// 현재 선택된 장소
-    var currentlySelectedIndex: Int = 0
+    var currentlySelectedIndex: Int?
     
     //MARK: - Object Methods
     

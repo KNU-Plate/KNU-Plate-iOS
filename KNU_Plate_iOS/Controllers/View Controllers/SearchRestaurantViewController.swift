@@ -30,7 +30,9 @@ class SearchRestaurantViewController: UIViewController {
         
         /// Select 안 했는데 nextButton 누르면 에러남 고치기
         
-        let placeSelected = viewModel.currentlySelectedIndex
+        guard let placeSelected = viewModel.currentlySelectedIndex else {
+            return
+        }
         let alertMessage = viewModel.placeName[placeSelected]
         
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
@@ -55,7 +57,9 @@ class SearchRestaurantViewController: UIViewController {
             
             let newRestaurantVC = segue.destination as! NewRestaurantViewController
             
-            let indexSelected = viewModel.currentlySelectedIndex
+            guard let indexSelected = viewModel.currentlySelectedIndex else {
+                return
+            }
             
             let restaurantName = viewModel.placeName[indexSelected]
             let address = viewModel.documents[indexSelected].address

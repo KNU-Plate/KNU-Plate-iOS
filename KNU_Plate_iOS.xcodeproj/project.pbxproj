@@ -55,7 +55,6 @@
 		7C1F78F62632DE3500C7B41D /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78DA2632DE3500C7B41D /* daum_th_line.png */; };
 		7C1F78F72632DE3500C7B41D /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78DB2632DE3500C7B41D /* map_pin_shadow.png */; };
 		7C1F78FA2632DE3E00C7B41D /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78DC2632DE3500C7B41D /* DaumMap.framework */; };
-		7C1F78FB2632DE3E00C7B41D /* DaumMap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78DC2632DE3500C7B41D /* DaumMap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C1F78FE2632DE5E00C7B41D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78FD2632DE5E00C7B41D /* libsqlite3.tbd */; };
 		7C1F79062632E04700C7B41D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79052632E04700C7B41D /* ExampleViewController.swift */; };
 		7C1F79082632E1E600C7B41D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F79072632E1E600C7B41D /* libxml2.tbd */; };
@@ -106,20 +105,6 @@
 		7CE4D7A52608DD2E002FCC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */; };
 		7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7C42609B628002FCC2D /* Constants.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		7C1F78FC2632DE3E00C7B41D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7C1F78FB2632DE3E00C7B41D /* DaumMap.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -550,7 +535,6 @@
 				7CE4D7922608DD2B002FCC2D /* Frameworks */,
 				7CE4D7932608DD2B002FCC2D /* Resources */,
 				1C8C566DC1AA8A5951F2E133 /* [CP] Embed Pods Frameworks */,
-				7C1F78FC2632DE3E00C7B41D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

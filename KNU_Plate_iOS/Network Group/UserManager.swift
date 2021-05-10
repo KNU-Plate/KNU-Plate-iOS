@@ -174,9 +174,9 @@ class UserManager {
     func logOut(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": User.shared.accessToken
+            .authorization("application/json"),
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization(User.shared.accessToken)
         ]
         
         AF.request(logOutRequestURL,
