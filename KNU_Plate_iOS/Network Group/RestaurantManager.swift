@@ -190,47 +190,44 @@ class RestaurantManager {
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
-    var isPaginating = false
-    func fetchReviewList(with model: FetchReviewListModel,
-                         pagination: Bool = false,
-                         completion: @escaping (Result<[ReviewListResponseModel], Error>) -> Void) {
-        
-        if pagination {
-            self.isPaginating = true
-        }
-        
-        AF.request(fetchReviewListRequestURL,
-                   method: .get,
-                   parameters: model.parameters,
-                   encoding: URLEncoding.queryString,
-                   headers: model.headers).responseJSON { response in
-                    
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 200:
-                        
-                    default:
-                        
-                    
-                    }
-                    
-                    
-                    
-                   }
-        
-        
-        
-        
-        
-        if pagination {
-            self.isPaginating = false
-        }
-        
-        
-    }
+//    var isPaginating = false
+//    func fetchReviewList(with model: FetchReviewListModel,
+//                         pagination: Bool = false,
+//                         completion: @escaping (Result<[ReviewListResponseModel], Error>) -> Void) {
+//        
+//        if pagination {
+//            self.isPaginating = true
+//        }
+//
+//        AF.request(fetchReviewListRequestURL,
+//                   method: .get,
+//                   parameters: model.parameters,
+//                   encoding: URLEncoding.queryString,
+//                   headers: model.headers).responseJSON { response in
+//
+//
+//                    guard let statusCode = response.response?.statusCode else { return }
+//
+//                    switch statusCode {
+//
+//                    case 200:
+//
+//                    default:
+//
+//
+//                    }
+//
+//
+//
+//                   }
+//
+//
+//        if pagination {
+//            self.isPaginating = false
+//        }
+//
+//
+//    }
     
     
     

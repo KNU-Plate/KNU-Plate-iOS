@@ -81,6 +81,8 @@
 		7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */; };
 		7C99FB9C2648FE520063C967 /* ReviewListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */; };
 		7C99FB9E2648FFD60063C967 /* FetchReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9D2648FFD60063C967 /* FetchReviewListModel.swift */; };
+		7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9F26490B010063C967 /* ReviewWithoutImageTableViewCell.swift */; };
+		7C99FBA226490B010063C967 /* ReviewWithoutImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C99FBA026490B010063C967 /* ReviewWithoutImageTableViewCell.xib */; };
 		7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66206263FD05A000E0B7A /* UserAddedMenuModel.swift */; };
 		7CA6620E263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */; };
 		7CA66215263FF65C000E0B7A /* ExistingMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66214263FF65C000E0B7A /* ExistingMenuModel.swift */; };
@@ -192,6 +194,8 @@
 		7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
 		7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListResponseModel.swift; sourceTree = "<group>"; };
 		7C99FB9D2648FFD60063C967 /* FetchReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchReviewListModel.swift; sourceTree = "<group>"; };
+		7C99FB9F26490B010063C967 /* ReviewWithoutImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWithoutImageTableViewCell.swift; sourceTree = "<group>"; };
+		7C99FBA026490B010063C967 /* ReviewWithoutImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewWithoutImageTableViewCell.xib; sourceTree = "<group>"; };
 		7CA66206263FD05A000E0B7A /* UserAddedMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddedMenuModel.swift; sourceTree = "<group>"; };
 		7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailInfoResponseModel.swift; sourceTree = "<group>"; };
 		7CA66214263FF65C000E0B7A /* ExistingMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingMenuModel.swift; sourceTree = "<group>"; };
@@ -359,6 +363,8 @@
 				7C5E21332646771A00E98FE5 /* ReviewTableViewModel.swift */,
 				7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */,
 				7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */,
+				7C99FB9F26490B010063C967 /* ReviewWithoutImageTableViewCell.swift */,
+				7C99FBA026490B010063C967 /* ReviewWithoutImageTableViewCell.xib */,
 			);
 			path = ReviewTableViewCell;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C99FBA226490B010063C967 /* ReviewWithoutImageTableViewCell.xib in Resources */,
 				7CD74B8D260B38C000D05B84 /* Kevin.storyboard in Resources */,
 				7C1F78DF2632DE3500C7B41D /* shadow_balloon.png in Resources */,
 				7C1F78F12632DE3500C7B41D /* map_present_direction.png in Resources */,
@@ -723,6 +730,7 @@
 				7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */,
 				7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
+				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurantModel.swift in Sources */,
 				7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */,
 				3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */,

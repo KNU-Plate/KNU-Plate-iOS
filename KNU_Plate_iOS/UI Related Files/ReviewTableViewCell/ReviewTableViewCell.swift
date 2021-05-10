@@ -24,6 +24,22 @@ class ReviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func initialize() {
+        
+        configurePageControl()
+        configureShowMoreButton()
+    }
+    
+    func configureShowMoreButton() {
+        showMoreButton.addTarget(self,
+                                 action: #selector(showMoreOptions),
+                                 for: .touchUpInside)
+    }
+    
+    func configure(with viewModel: ReviewTableViewModel) {
+        
+    }
+    
     @objc func showMoreOptions() {
         
         let actionSheet = UIAlertController(title: nil,
@@ -43,12 +59,6 @@ class ReviewTableViewCell: UITableViewCell {
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
     }
-    
-}
-
-//MARK: - Page Control
-
-extension ReviewTableViewCell {
     
     func configurePageControl() {
         
@@ -94,25 +104,4 @@ extension ReviewTableViewCell {
 //        }
 //    }
     
-}
-
-//MARK: - UI Configuration
-
-extension ReviewTableViewCell {
-    
-    func initialize() {
-        
-        configurePageControl()
-        configureShowMoreButton()
-        
-        
-        
-    }
-    
-    func configureShowMoreButton() {
-        
-        showMoreButton.addTarget(self,
-                                 action: #selector(showMoreOptions),
-                                 for: .touchUpInside)
-    }
 }

@@ -21,14 +21,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="geb-sR-uJc">
-                        <rect key="frame" x="15" y="5" width="40" height="40"/>
+                        <rect key="frame" x="10" y="5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Nvb-P2-pOp"/>
                             <constraint firstAttribute="width" constant="40" id="aEl-dh-94k"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0O-tV-0Vl">
-                        <rect key="frame" x="65" y="15" width="44.5" height="20.5"/>
+                        <rect key="frame" x="60" y="15" width="44.5" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="RWa-su-pbQ"/>
                         </constraints>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="gbI-TM-Qp7">
-                        <rect key="frame" x="124.5" y="15" width="20" height="20"/>
+                        <rect key="frame" x="119.5" y="15" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="Wul-BX-mwp"/>
                             <constraint firstAttribute="height" constant="20" id="c9L-Rj-EPv"/>
@@ -62,7 +62,7 @@
                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="BVS-G5-oR6">
                         <rect key="frame" x="20" y="205" width="330" height="27.5"/>
                     </pageControl>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnO-Rx-9HI" userLabel="Star Rating Stack View" customClass="RatingController" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnO-Rx-9HI" userLabel="Star Rating Stack View" customClass="RatingController" customModule="KNU_Plate_iOS" customModuleProvider="target">
                         <rect key="frame" x="15" y="245" width="100" height="20"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JbB-ft-lpT">
@@ -140,7 +140,7 @@
                     <constraint firstAttribute="trailing" secondItem="wbI-zo-8Yg" secondAttribute="trailing" constant="15" id="7ME-nw-zej"/>
                     <constraint firstItem="fnO-Rx-9HI" firstAttribute="top" secondItem="KQd-zG-zct" secondAttribute="bottom" constant="10" id="AZ7-eL-8dS"/>
                     <constraint firstAttribute="trailing" secondItem="UB8-9o-VVn" secondAttribute="trailing" constant="10" id="DPc-Ao-SKS"/>
-                    <constraint firstItem="geb-sR-uJc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="M4c-su-yFC"/>
+                    <constraint firstItem="geb-sR-uJc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="M4c-su-yFC"/>
                     <constraint firstAttribute="bottom" secondItem="UB8-9o-VVn" secondAttribute="bottom" constant="10" id="PTH-Ck-Slk"/>
                     <constraint firstItem="KQd-zG-zct" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ZPy-gw-bwx"/>
                     <constraint firstAttribute="trailingMargin" secondItem="BVS-G5-oR6" secondAttribute="trailing" id="ZWy-gu-ql1"/>
