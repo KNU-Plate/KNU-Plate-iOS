@@ -34,7 +34,7 @@ class RestaurantView: UIView {
     }
     let favoriteButton = UIButton().then {
         $0.setImage(UIImage(named: "favorite tab bar icon"), for: .normal)
-//        $0.setImage(UIImage(named: "favorite tab bar icon(filled)"), for: .selected)
+        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .highlighted)
         $0.addBounceReactionWithoutFeedback()
     }
     
@@ -95,7 +95,7 @@ class RestaurantView: UIView {
             make.edges.equalToSuperview()
         }
         
-        let imageContentsViewHeight: CGFloat = frame.height*0.4
+        let imageContentsViewHeight: CGFloat = 300
         let imageContentsViewWidth: CGFloat = frame.width
 
         imageContentsView.snp.makeConstraints { make in
