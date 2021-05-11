@@ -12,6 +12,7 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     lazy var existingMenusPickerView = UIPickerView()
 
+
     // 수정 필요
     private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 0)
     
