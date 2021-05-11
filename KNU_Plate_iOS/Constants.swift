@@ -32,6 +32,9 @@ struct Constants {
         static let addFoodImageCell = "addFoodImageCell"
         static let newUserPickedFoodImageCell = "userPickedFoodImageCell"
         static let searchedRestaurantResultCell = "searchedRestaurantResultCell"
+        static let reviewTableViewCell = "reviewTableViewCell"
+        static let reviewWithoutImageTableViewCell = "reviewWithoutImageTableViewCell"
+    
     }
     
     struct SegueIdentifier {
@@ -43,6 +46,8 @@ struct Constants {
     struct XIB {
         
         static let newMenuTableViewCell = "NewMenuTableViewCell"
+        static let reviewTableViewCell = "ReviewTableViewCell"
+        static let reviewWithoutImageTableViewCell = "ReviewWithoutImageTableViewCell"
     }
     
     struct UserDefaultsKey {
@@ -50,8 +55,6 @@ struct Constants {
         static let isLoggedIn = "isLoggedIn"
         static let username = "username"
         static let password = "password"
-        
-        //TODO: - accessToken, refreshToken, expires, expires_refresh 도 다 저장해야되는지 준수씨랑 상의
         
     }
     

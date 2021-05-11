@@ -30,13 +30,15 @@ class SearchRestaurantViewController: UIViewController {
         
         /// Select 안 했는데 nextButton 누르면 에러남 고치기
         
-        let placeSelected = viewModel.currentlySelectedIndex
+        guard let placeSelected = viewModel.currentlySelectedIndex else {
+            return
+        }
         let alertMessage = viewModel.placeName[placeSelected]
         
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
                                       message: alertMessage,
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "다시 고를게요",
+        alert.addAction(UIAlertAction(title: "다시 고를래요",
                                       style: .cancel,
                                       handler: nil))
         alert.addAction(UIAlertAction(title: "네 맞아요!",
@@ -55,7 +57,9 @@ class SearchRestaurantViewController: UIViewController {
             
             let newRestaurantVC = segue.destination as! NewRestaurantViewController
             
-            let indexSelected = viewModel.currentlySelectedIndex
+            guard let indexSelected = viewModel.currentlySelectedIndex else {
+                return
+            }
             
             let restaurantName = viewModel.placeName[indexSelected]
             let address = viewModel.documents[indexSelected].address
@@ -63,6 +67,8 @@ class SearchRestaurantViewController: UIViewController {
             let category = viewModel.documents[indexSelected].categoryName
             let latitude = Double(viewModel.documents[indexSelected].y)!
             let longitude = Double(viewModel.documents[indexSelected].x)!
+            
+            // 나중에 구조체로 묶어서 한 번에 보내는 것도 고려
         
             newRestaurantVC.initializeViewModelVariables(name: restaurantName,
                                                          address: address,
@@ -93,7 +99,8 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         mapView.delegate = self
         mapView.baseMapType = .standard
         
-        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: 35.888949648310486, longitude: 128.6104881544238)),
+        mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: 35.888949648310486,
+                                                                longitude: 128.6104881544238)),
                              zoomLevel: 1,
                              animated: true)
     }

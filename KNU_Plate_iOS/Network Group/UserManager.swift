@@ -11,7 +11,6 @@ class UserManager {
     
     //MARK: - API Request URLs
     
-    /// 조회 request url 추가해야힘
     let unregisterRequestURL            = "\(Constants.API_BASE_URL)auth/unregister"
     let logOutRequestURL                = "\(Constants.API_BASE_URL)auth/logout"
     let refreshTokenRequestURL          = "\(Constants.API_BASE_URL)auth/refresh"
@@ -36,14 +35,14 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                case 200..<300:
+                case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
                         self.saveUserRegisterInfo(with: decodedData)
                         
                     } catch {
-                        print("There was an error decoding JSON Data")
+                        print("UserManager - signUP catch ERROR: \(error)")
                     }
                     
                 default:
@@ -75,15 +74,14 @@ class UserManager {
                     
                     switch statusCode {
                     
-                    case 200..<300:
+                    case 200:
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
                             self.saveLoginInfoToUserDefaults(with: decodedData)
                             
                         } catch {
-                            print(error)
-                            print("There was an error decoding JSON Data")
+                            print("UserManager - logIn catch ERROR: \(error)")
                         }
                         
                     default:
@@ -175,9 +173,9 @@ class UserManager {
     func logOut(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": User.shared.accessToken
+            .authorization("application/json"),
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization(User.shared.accessToken)
         ]
         
         AF.request(logOutRequestURL,
@@ -202,9 +200,9 @@ class UserManager {
     func unregisterUser(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
-            "accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": User.shared.accessToken
+            .authorization("application/json"),
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization(User.shared.accessToken)
         ]
         
         AF.request(unregisterRequestURL,
@@ -226,8 +224,35 @@ class UserManager {
     }
     
     //MARK: - 토큰 갱신
-    func refreshToken() {
-        // AF Request 보낼 때 header 에 accessToken 첨부해야함
+    func refreshToken(completion: @escaping ((Bool) -> Void)) {
+    
+        let headers: HTTPHeaders = [
+            .accept("application/json"),
+            .authorization(User.shared.refreshToken)
+        ]
+        
+        AF.request(refreshTokenRequestURL,
+                   method: .post,
+                   encoding: URLEncoding.httpBody,
+                   headers: headers).responseJSON { (response) in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        do {
+                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
+                            self.saveLoginInfoToUserDefaults(with: decodedData)
+                            completion(true)
+                            
+                        } catch {
+                            print("UserManager - refreshToken catch ERROR: \(error)")
+                        }
+                    default:
+                        //TODO: - accessToken 이 아닌 refreshToken 으로 했는데도 fail 하면 그땐 재로그인이 필요함. 즉, 실패 알림 띄우고 로그인 화면으로 강제로 가게끔 해야함.
+                        completion(false)
+                    }
+                   }
     }
     
     
@@ -254,9 +279,12 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
+        User.shared.medal = model.medal
         
-        User.shared.accessToken = model.accessToken
-        User.shared.refreshToken = model.refreshToken
+        if let profileImageLink = model.userProfileImage {
+            User.shared.profileImageLink = profileImageLink
+        }
+ 
         
         
         
@@ -267,5 +295,6 @@ extension UserManager {
         
         //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
         User.shared.accessToken = model.accessToken
+        User.shared.refreshToken = model.refreshToken
     }
 }

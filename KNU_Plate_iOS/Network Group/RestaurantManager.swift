@@ -12,6 +12,7 @@ class RestaurantManager {
     let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
+    let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
     
     
     private init() {}
@@ -33,14 +34,17 @@ class RestaurantManager {
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
             
+            
             if let imageArray = model.images {
-                
+
+                print("IMAGE ARRAY: \(imageArray)")
+
                 for images in imageArray {
-                    
+
                     /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
-                                             fileName: "mall_image",
+                                             fileName: "image.jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -52,12 +56,10 @@ class RestaurantManager {
             guard let statusCode = response.response?.statusCode else { return }
             
             switch statusCode {
-            
             case 200:
                 
                 print("매장 등록 성공")
                 completion(true)
-                
                 
             /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
             
@@ -187,6 +189,46 @@ class RestaurantManager {
     }
         
     }
+    
+    //MARK: - 특정 매장 리뷰 목록 불러오기
+//    var isPaginating = false
+//    func fetchReviewList(with model: FetchReviewListModel,
+//                         pagination: Bool = false,
+//                         completion: @escaping (Result<[ReviewListResponseModel], Error>) -> Void) {
+//
+//        if pagination {
+//            self.isPaginating = true
+//        }
+//
+//        AF.request(fetchReviewListRequestURL,
+//                   method: .get,
+//                   parameters: model.parameters,
+//                   encoding: URLEncoding.queryString,
+//                   headers: model.headers).responseJSON { response in
+//
+//
+//                    guard let statusCode = response.response?.statusCode else { return }
+//
+//                    switch statusCode {
+//
+//                    case 200:
+//
+//                    default:
+//
+//
+//                    }
+//
+//
+//
+//                   }
+//
+//
+//        if pagination {
+//            self.isPaginating = false
+//        }
+//
+//
+//    }
     
     
     
