@@ -21,4 +21,8 @@ class RestaurantViewController: UIViewController {
         restaurantView.foodCategoryLabel.text = "세계 음식"
         restaurantView.numberLabel.text = "\(39)명 참여"
     }
+    
+    override func viewDidLayoutSubviews() {
+        print("-> \(restaurantView.locationButton.frame.height)")
+    }
 }
