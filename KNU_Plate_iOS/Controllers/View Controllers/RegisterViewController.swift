@@ -23,10 +23,11 @@ class RegisterViewController: UIViewController {
     
     let stackView: TextFieldStackView = {
         let stackView = TextFieldStackView()
-        stackView.addTextField(placeholder: "닉네임 입력", isSecureText: false)
         stackView.addTextField(placeholder: "아이디 입력", isSecureText: false)
+        stackView.addTextField(placeholder: "닉네임 입력", isSecureText: false)
         stackView.addTextField(placeholder: "비밀번호 입력", isSecureText: true)
         stackView.addTextField(placeholder: "비밀번호 확인", isSecureText: true)
+        stackView.addTextField(placeholder: "학교 이메일 입력", isSecureText: false)
         return stackView
     }()
     
@@ -64,7 +65,7 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     /// Set up text field delegate
     func setupTextFieldDelegate() {
-        for i in 0..<4 {
+        for i in 0..<5 {
             let textField = stackView.arrangedSubviews[i] as! UITextField
             textField.delegate = self
         }
@@ -104,7 +105,7 @@ extension RegisterViewController {
             make.top.equalTo(profileImageButton.snp.bottom).offset(25)
         }
         
-        for i in 0..<4 {
+        for i in 0..<5 {
             let textField = stackView.arrangedSubviews[i] as! UITextField
             // stackView's subview(textfield) layer
             textField.layer.cornerRadius = 0.5*textFieldHeight
@@ -203,5 +204,26 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
 
 //MARK: - UITextFieldDelegate
 extension RegisterViewController: UITextFieldDelegate {
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("end")
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == stackView.arrangedSubviews[0] {
+            // textField is id text field
+            stackView.arrangedSubviews[1].becomeFirstResponder()
+        } else if textField == stackView.arrangedSubviews[1] {
+            // textField is nickname text field
+            stackView.arrangedSubviews[2].becomeFirstResponder()
+        } else if textField == stackView.arrangedSubviews[2] {
+            // textField is password text field
+            stackView.arrangedSubviews[3].becomeFirstResponder()
+        } else if textField == stackView.arrangedSubviews[3] {
+            // textField is confirm text field
+            stackView.arrangedSubviews[4].becomeFirstResponder()
+        } else if textField == stackView.arrangedSubviews[4] {
+            // textField is email text field
+            textField.resignFirstResponder()
+        }
+        return true
+    }
 }

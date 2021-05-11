@@ -10,6 +10,8 @@
 		3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F4531260B8866008E8AA7 /* MainViewController.swift */; };
 		3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F4537260B88B3008E8AA7 /* Main.storyboard */; };
 		3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */; };
+		3C3898AC26429764007E26DF /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78DC2632DE3500C7B41D /* DaumMap.framework */; };
+		3C3898B126429868007E26DF /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3898B026429868007E26DF /* RestaurantView.swift */; };
 		3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */; };
 		3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B2BD326143C9900CC010F /* RatingStackView.swift */; };
 		3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */; };
@@ -18,6 +20,10 @@
 		3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */; };
 		3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */; };
 		3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */; };
+		3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */; };
+		3CC2A4E3264ACA1C00F5E392 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E2264ACA1C00F5E392 /* ReviewViewController.swift */; };
+		3CC2A4E5264ACA2B00F5E392 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */; };
+		3CC2A4E7264ACA3400F5E392 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E6264ACA3400F5E392 /* MenuViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
@@ -117,6 +123,7 @@
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
+		3C3898B026429868007E26DF /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TouchReaction.swift"; sourceTree = "<group>"; };
 		3C9B2BD326143C9900CC010F /* RatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStackView.swift; sourceTree = "<group>"; };
 		3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +132,10 @@
 		3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
 		3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
+		3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AlignTextBelow.swift"; sourceTree = "<group>"; };
+		3CC2A4E2264ACA1C00F5E392 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		3CC2A4E6264ACA3400F5E392 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		7C16DF1C2621590800AA8239 /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
@@ -243,7 +254,7 @@
 				7C1F790A2632E1ED00C7B41D /* libc++.tbd in Frameworks */,
 				7C1F79082632E1E600C7B41D /* libxml2.tbd in Frameworks */,
 				7C1F78FE2632DE5E00C7B41D /* libsqlite3.tbd in Frameworks */,
-				7C1F78FA2632DE3E00C7B41D /* DaumMap.framework in Frameworks */,
+				3C3898AC26429764007E26DF /* DaumMap.framework in Frameworks */,
 				539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,12 +271,21 @@
 				3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */,
 				3C9B2BD326143C9900CC010F /* RatingStackView.swift */,
 				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
+				3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */,
 				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 			);
 			path = "UI Related Files";
+			sourceTree = "<group>";
+		};
+		3C3898AF26429840007E26DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C3898B026429868007E26DF /* RestaurantView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3F955F326C60DB233DE0AFBE /* Frameworks */ = {
@@ -409,6 +429,9 @@
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				3CECC1842617679800C971C5 /* RestaurantViewController.swift */,
+				3CC2A4E2264ACA1C00F5E392 /* ReviewViewController.swift */,
+				3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */,
+				3CC2A4E6264ACA3400F5E392 /* MenuViewController.swift */,
 				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
 				7C311423261AE37200392742 /* NewReviewViewController.swift */,
 				3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */,
@@ -461,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				7CE4D7B22609B18F002FCC2D /* View (Storyboard) */,
+				3C3898AF26429840007E26DF /* Views */,
 				7CE4D7B12609B188002FCC2D /* Models */,
 				7CE4D7AF2609B17C002FCC2D /* Network Group */,
 				7CE775002641724C0032558F /* Error Management */,
@@ -689,8 +713,14 @@
 				7CE4BA5C261C31FF009A4464 /* NewReviewModel.swift in Sources */,
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
+				3CC2A4E3264ACA1C00F5E392 /* ReviewViewController.swift in Sources */,
+				7CE4BA5C261C31FF009A4464 /* NewReview.swift in Sources */,
+				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
+				3CC2A4E5264ACA2B00F5E392 /* LocationViewController.swift in Sources */,
+				7CBE745226208366002E1FF7 /* Menu.swift in Sources */,
 				3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */,
 				7C16DF232621810700AA8239 /* User.swift in Sources */,
+				3CC2A4E7264ACA3400F5E392 /* MenuViewController.swift in Sources */,
 				7C1F79062632E04700C7B41D /* ExampleViewController.swift in Sources */,
 				7C99FB9C2648FE520063C967 /* ReviewListResponseModel.swift in Sources */,
 				7C5EDD552642C22500B79178 /* CheckDuplicateModel.swift in Sources */,
@@ -736,6 +766,8 @@
 				7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */,
 				7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */,
 				7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */,
+				3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */,
+				3C3898B126429868007E26DF /* RestaurantView.swift in Sources */,
 				7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
@@ -886,8 +918,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -899,6 +932,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kevinkim.KNU-Plate-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -914,8 +948,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -927,6 +962,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kevinkim.KNU-Plate-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/KNU_Plate_iOS/Kakao-Map-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

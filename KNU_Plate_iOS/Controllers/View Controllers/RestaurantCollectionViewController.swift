@@ -1,11 +1,10 @@
 import UIKit
 import SnapKit
 
-private let reuseIdentifier = "Cell"
-
 /// Shows restaurant list according to gate
 class RestaurantCollectionViewController: UIViewController {
     
+    private let reuseIdentifier = "Cell"
     private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 2
     
@@ -57,10 +56,10 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
         }
     
         // Configure the cell
-        let rating: Int = 4
+        let rating: Double = 4.2
         cell.imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
         cell.nameLabel.text = "배터지는깐풍기"
-        cell.ratingStackView.setStarsRating(rating: rating)
+        cell.ratingStackView.setAverageRating(rating: rating)
         return cell
     }
 

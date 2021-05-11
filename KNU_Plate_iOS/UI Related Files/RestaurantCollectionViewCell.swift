@@ -55,7 +55,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     func setCell() {
         let inset: CGFloat = 3
         let imageViewHeight: CGFloat = self.frame.height*(0.7/Constants.heightPerWidthRestaurantCell)
-        let ratingStackViewWidth: CGFloat = self.frame.width*(3/5)
+        let ratingStackViewWidth: CGFloat = self.frame.width*(1/3)
         let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
         
         self.addSubview(imageView)
