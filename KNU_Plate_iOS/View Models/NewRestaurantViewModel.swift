@@ -98,8 +98,10 @@ class NewRestaurantViewModel {
         userSelectedImagesInDataFormat?.removeAll()
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
+    
             
-            if let imageData = image.jpegData(compressionQuality: 0.5) {
+            if let imageData =
+                image.jpegData(compressionQuality: 0.5) {
                 return imageData
             } else {
                 print("Unable to convert UIImage to Data type")

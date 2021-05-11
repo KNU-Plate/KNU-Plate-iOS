@@ -15,6 +15,8 @@ class NewRestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Test.shared.login()
+        
         initialize()
         
     }

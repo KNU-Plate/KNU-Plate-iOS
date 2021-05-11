@@ -8,6 +8,6 @@ struct ReviewDetail {
     let nickname: String
     let medal: UIImage
     let reviewImages: [UIImage]?
-    let rating: String
+    let rating: Int
     let review: String
 }

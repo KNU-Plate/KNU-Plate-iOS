@@ -34,14 +34,17 @@ class RestaurantManager {
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
             
+            
             if let imageArray = model.images {
-                
+
+                print("IMAGE ARRAY: \(imageArray)")
+
                 for images in imageArray {
-                    
+
                     /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
-                                             fileName: "mall_image",
+                                             fileName: "image.jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -53,12 +56,10 @@ class RestaurantManager {
             guard let statusCode = response.response?.statusCode else { return }
             
             switch statusCode {
-            
             case 200:
                 
                 print("매장 등록 성공")
                 completion(true)
-                
                 
             /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
             

@@ -2,14 +2,16 @@ import Foundation
 
 //MARK: - ReviewTableViewCell 을 위한 ViewModel
 
-class ReviewTableViewModel {
+struct ReviewTableViewModel {
     
     //let userID: Int  이것도 필요할 수도 있음(신고하기 기능을 위해)
     // 아니면 review
     
+    var userID: String = ""
+    
     var userProfileImage: UIImage = UIImage(named: "default_profile_image")!
     
-    let userNickname: String
+    let userNickname: String = ""
     
     var userMedalImage: UIImage {
         get { User.shared.medalImage }
@@ -17,9 +19,9 @@ class ReviewTableViewModel {
     
     var reviewImages: [UIImage]?
     
-    let rating: Int
+    var rating: Int = 5
     
-    let review: String
+    var review: String = ""
     
     var profileImageInDataFormat: Data? {
         didSet {
@@ -42,19 +44,19 @@ class ReviewTableViewModel {
         }
     }
     
-    init(profileImage: Data?, nickname: String, reviewImages: [Data]?, rating: Int, review: String ) {
-        
-        if let profileImageAvailable = profileImage {
-            self.profileImageInDataFormat = profileImageAvailable
-        }
-        if let reviewImagesAvailable = reviewImages {
-            self.reviewImagesInDataFormat = reviewImagesAvailable
-        }
-        
-        self.userNickname = nickname
-        self.rating = rating
-        self.review = review
-    }
+//    init(profileImage: Data?, nickname: String, reviewImages: [Data]?, rating: Int, review: String ) {
+//
+//        if let profileImageAvailable = profileImage {
+//            self.profileImageInDataFormat = profileImageAvailable
+//        }
+//        if let reviewImagesAvailable = reviewImages {
+//            self.reviewImagesInDataFormat = reviewImagesAvailable
+//        }
+//
+//        self.userNickname = nickname
+//        self.rating = rating
+//        self.review = review
+//    }
     
     
 

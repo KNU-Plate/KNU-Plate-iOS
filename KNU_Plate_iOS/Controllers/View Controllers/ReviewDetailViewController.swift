@@ -26,18 +26,18 @@ class ReviewDetailViewController: UIViewController {
         userProfileImageView.image = model.profileImage
         userNicknameLabel.text = model.nickname
         userMedalImageView.image = model.medal
-        rating.setStarsRating(rating: Int(model.rating)!)
+        rating.setStarsRating(rating: Int(exactly: model.rating)!)
         reviewLabel.text = model.review
         
         if let images = model.reviewImages {
             reviewImages.append(contentsOf: images)
             configurePageControl(reviewImageExists: true)
         } else {
-            configurePageControl()
+            configurePageControl(reviewImageExists: false)
         }
     }
     
-    func configurePageControl(reviewImageExists: Bool = false) {
+    func configurePageControl(reviewImageExists: Bool) {
         
         if !reviewImageExists {
             reviewImageView.image = nil
