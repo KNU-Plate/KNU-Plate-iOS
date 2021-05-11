@@ -17,6 +17,9 @@ struct Constants {
         static let registerViewController = "RegisterViewController"
         static let verifyEmailViewController = "VerifyEmailViewController"
         static let newRestaurantViewController = "NewRestaurantViewController"
+        static let reviewViewController = "ReviewViewController"
+        static let locationViewController = "LocationViewController"
+        static let menuViewController = "MenuViewController"
     }
     
     struct Layer {

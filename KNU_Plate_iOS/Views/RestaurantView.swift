@@ -79,6 +79,7 @@ class RestaurantView: UIView {
     }
     
     let reviewButton = UIButton(type: .custom).then {
+        $0.tag = 0
         $0.setImage(UIImage(named: "review"), for: .normal)
         $0.setImage(UIImage(named: "review (selected)"), for: .selected)
         $0.setImage(UIImage(named: "review (selected)"), for: .highlighted)
@@ -89,6 +90,7 @@ class RestaurantView: UIView {
         $0.alignTextBelow()
     }
     let locationButton = UIButton(type: .custom).then {
+        $0.tag = 1
         $0.setImage(UIImage(named: "location"), for: .normal)
         $0.setImage(UIImage(named: "location (selected)"), for: .selected)
         $0.setImage(UIImage(named: "location (selected)"), for: .highlighted)
@@ -99,6 +101,7 @@ class RestaurantView: UIView {
         $0.alignTextBelow()
     }
     let menuButton = UIButton().then {
+        $0.tag = 2
         $0.setImage(UIImage(named: "menu"), for: .normal)
         $0.setImage(UIImage(named: "menu (selected)"), for: .selected)
         $0.setImage(UIImage(named: "menu (selected)"), for: .highlighted)
