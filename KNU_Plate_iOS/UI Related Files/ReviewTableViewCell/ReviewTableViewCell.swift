@@ -62,6 +62,8 @@ class ReviewTableViewCell: UITableViewCell {
         let reportUser = UIAlertAction(title: "사용자 신고하기",
                                        style: .default) { alert in
             
+        
+            
             // 신고하기 action 을 여기서 취해야함
             //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
         }
