@@ -96,6 +96,7 @@
 		7CA6621726400698000E0B7A /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6621626400698000E0B7A /* Test.swift */; };
 		7CA66219264113CF000E0B7A /* MenuRegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */; };
 		7CA6621B26412203000E0B7A /* RegisterNewMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6621A26412203000E0B7A /* RegisterNewMenuModel.swift */; };
+		7CB8DF65264D37090001CC6D /* UIViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */; };
 		7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
 		7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */; };
 		7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */; };
@@ -216,6 +217,7 @@
 		7CA6621626400698000E0B7A /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRegisterResponseModel.swift; sourceTree = "<group>"; };
 		7CA6621A26412203000E0B7A /* RegisterNewMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewMenuModel.swift; sourceTree = "<group>"; };
+		7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController Extension.swift"; sourceTree = "<group>"; };
 		7CBE745126208366002E1FF7 /* UploadMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadMenuModel.swift; sourceTree = "<group>"; };
 		7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoModel.swift; sourceTree = "<group>"; };
 		7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
+				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
 			);
 			path = "UI Related Files";
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
 				7CC96307263051CC00AA71E1 /* RegisterResponseModel.swift in Sources */,
 				7C65869B26494C5D004B8584 /* ReviewDetailViewController.swift in Sources */,
+				7CB8DF65264D37090001CC6D /* UIViewController Extension.swift in Sources */,
 				7C1F77892632A9B800C7B41D /* SearchRestaurantViewController.swift in Sources */,
 				7C16DF26262183C900AA8239 /* RegisterInfoModel.swift in Sources */,
 				3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */,
