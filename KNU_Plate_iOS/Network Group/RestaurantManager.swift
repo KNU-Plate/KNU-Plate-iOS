@@ -204,7 +204,9 @@ class RestaurantManager {
                         do {
                             
                             let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
-                            print(decodedData)
+                            
+                        
+                            completion(decodedData)
                             
                             
                         } catch {
