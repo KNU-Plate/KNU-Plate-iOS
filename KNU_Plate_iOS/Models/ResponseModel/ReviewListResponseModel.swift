@@ -10,7 +10,8 @@ struct ReviewListResponseModel: Decodable {
     let mallID: Int
     let review: String
     let rating: Int
-    let reviewImages: [Data]?
+    let reviewImages: String?
+    let 
     
     enum CodingKeys: String, CodingKey {
         

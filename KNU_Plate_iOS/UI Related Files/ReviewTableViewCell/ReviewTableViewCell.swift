@@ -17,6 +17,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
  
@@ -31,13 +32,13 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.review = model.review
         viewModel.rating = model.rating
         
-        if let reviewImageData = model.reviewImages {
-            for eachImage in reviewImageData {
-                viewModel.reviewImages?.append(UIImage(data: eachImage)!)
-            }
-        } else {
-            print("ReviewTableViewCell - No review images available")
-        }
+//        if let reviewImageData = model.reviewImages {
+//            for eachImage in reviewImageData {
+//                viewModel.reviewImages?.append(UIImage(data: eachImage)!)
+//            }
+//        } else {
+//            print("ReviewTableViewCell - No review images available")
+//        }
         
         initialize()
     }

@@ -146,12 +146,11 @@ class RestaurantManager {
                                      withName: "evaluate")
     
             if let imageArray = model.reviewImages {
-                
                 for images in imageArray {
                     
                     multipartFormData.append(images,
                                              withName: "review_image",
-                                             fileName: "mall_image",
+                                             fileName: "mall_image.jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
