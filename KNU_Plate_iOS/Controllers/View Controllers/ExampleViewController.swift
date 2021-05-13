@@ -1,4 +1,3 @@
-
 import UIKit
 
 class ExampleViewController: UIViewController {
@@ -7,6 +6,8 @@ class ExampleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Test.shared.login()
         
         
         tableView.delegate = self
@@ -18,8 +19,10 @@ class ExampleViewController: UIViewController {
         let cellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
         tableView.register(reviewNib, forCellReuseIdentifier: cellID)
         tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: cellID2)
+
         
         
+  
     }
     
     let array = ["괜찮아요",
@@ -62,14 +65,21 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
   
+        let model = FetchReviewListModel(mallID: 2, page: 1)
+        
+        
+        RestaurantManager.shared.fetchReviewList(with: model) { responseModel in
+            
+        
+            print("CLOSURE ACTIVATED IN EXAMPLE VIEW CONTROLLER")
+        }
+        
         performSegue(withIdentifier: "goSeeDetailReview", sender: self)
 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        tableView.indexPathForSelectedRow
-
+       
         guard let vc = segue.destination as? ReviewDetailViewController else {
             return
         }

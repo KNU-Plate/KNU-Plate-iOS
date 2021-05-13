@@ -186,6 +186,48 @@ class RestaurantManager {
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
+    func fetchReviewList(with model: FetchReviewListModel,
+                         completion: @escaping (([ReviewListResponseModel]) -> Void)) {
+        
+        
+        AF.request(fetchReviewListRequestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.queryString,
+                   headers: model.headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        do {
+                            
+                            let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
+                            print(decodedData)
+                            
+                            
+                        } catch {
+                            print("Restaurant Manager - fetchReviewList ERROR: \(error)")
+                            
+                        }
+                        
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            
+                            if let error = responseJSON["error"] {
+                                
+                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                            }
+                        }
+                    
+                    
+                   }
+    }
+        
+        
+    }
+    
 //    var isPaginating = false
 //    func fetchReviewList(with model: FetchReviewListModel,
 //                         pagination: Bool = false,

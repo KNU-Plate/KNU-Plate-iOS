@@ -8,8 +8,8 @@ struct UserDisplayModel: Decodable {
     let username: String
     let displayName: String
     let mailAddress: String
-    let medal: Int
-    let userProfileImage: String?
+    let medal: Int?
+    let userProfileImage: [UserThumbnail]?
     
     enum CodingKeys: String, CodingKey {
         
@@ -19,7 +19,23 @@ struct UserDisplayModel: Decodable {
         case mailAddress = "mail_address"
         case medal = "medal_id"
         case userProfileImage = "user_thumbnail"
-        
     }
+}
+
+struct UserThumbnail: Decodable {
     
+    let fileID: String
+    let path: String
+    let originalName: String
+    let fileFolderID: String
+    let uploaderID: String
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case fileID = "file_id"
+        case path
+        case originalName = "original_name"
+        case fileFolderID = "file_folder_id"
+        case uploaderID = "uploader"
+    }
 }
