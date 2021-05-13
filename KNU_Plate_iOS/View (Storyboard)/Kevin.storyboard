@@ -755,7 +755,7 @@
             <objects>
                 <viewController id="UgD-ys-ZlP" customClass="ReviewDetailViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X4V-tM-bJu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="od1-e7-aAf">
@@ -885,6 +885,7 @@
                             <constraint firstItem="FLJ-HF-uOB" firstAttribute="top" secondItem="g45-dp-hLO" secondAttribute="top" constant="30" id="z2g-cM-me3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="XSL-EO-JJx"/>
                     <connections>
                         <outlet property="pageControl" destination="qV8-ib-u15" id="3IF-X9-a45"/>
                         <outlet property="rating" destination="Tlf-Px-RwT" id="aWS-NZ-DHj"/>
@@ -923,11 +924,12 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="L4B-Zp-FJt" id="heO-WI-p2X"/>
+                        <segue destination="UgD-ys-ZlP" kind="show" identifier="goSeeDetailReview" id="YpF-aC-tBJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzC-al-4Wi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-348" y="3283"/>
+            <point key="canvasLocation" x="-1311" y="2454"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ahY-8s-sFi">
@@ -976,10 +978,10 @@
         <image name="first medal" width="41" height="41"/>
         <image name="food image" width="35.5" height="35.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
-        <image name="menu" width="67.5" height="67.5"/>
+        <image name="menu" width="41.5" height="41.5"/>
         <image name="review icon" width="83" height="83"/>
-        <image name="star rating (filled)" width="54" height="51.5"/>
-        <image name="star rating (unfilled)" width="53.5" height="51"/>
+        <image name="star rating (filled)" width="36" height="34.5"/>
+        <image name="star rating (unfilled)" width="35.5" height="34"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

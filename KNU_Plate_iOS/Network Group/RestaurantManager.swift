@@ -34,11 +34,7 @@ class RestaurantManager {
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
             
-            
             if let imageArray = model.images {
-
-                print("IMAGE ARRAY: \(imageArray)")
-
                 for images in imageArray {
 
                     /// fileName 변경하는거 알아보기

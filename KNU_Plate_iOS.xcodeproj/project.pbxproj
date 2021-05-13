@@ -60,7 +60,6 @@
 		7C1F78F52632DE3500C7B41D /* map_present_background_update.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78D92632DE3500C7B41D /* map_present_background_update.png */; };
 		7C1F78F62632DE3500C7B41D /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78DA2632DE3500C7B41D /* daum_th_line.png */; };
 		7C1F78F72632DE3500C7B41D /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78DB2632DE3500C7B41D /* map_pin_shadow.png */; };
-		7C1F78FA2632DE3E00C7B41D /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78DC2632DE3500C7B41D /* DaumMap.framework */; };
 		7C1F78FE2632DE5E00C7B41D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78FD2632DE5E00C7B41D /* libsqlite3.tbd */; };
 		7C1F79062632E04700C7B41D /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79052632E04700C7B41D /* ExampleViewController.swift */; };
 		7C1F79082632E1E600C7B41D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F79072632E1E600C7B41D /* libxml2.tbd */; };
@@ -439,8 +438,8 @@
 				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
 				3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */,
 				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
-				7C1F79052632E04700C7B41D /* ExampleViewController.swift */,
 				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
+				7C1F79052632E04700C7B41D /* ExampleViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -714,10 +713,10 @@
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
 				3CC2A4E3264ACA1C00F5E392 /* ReviewViewController.swift in Sources */,
-				7CE4BA5C261C31FF009A4464 /* NewReview.swift in Sources */,
+				7CE4BA5C261C31FF009A4464 /* NewReviewModel.swift in Sources */,
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				3CC2A4E5264ACA2B00F5E392 /* LocationViewController.swift in Sources */,
-				7CBE745226208366002E1FF7 /* Menu.swift in Sources */,
+				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
 				3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */,
 				7C16DF232621810700AA8239 /* User.swift in Sources */,
 				3CC2A4E7264ACA3400F5E392 /* MenuViewController.swift in Sources */,

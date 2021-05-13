@@ -57,9 +57,35 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             cell.reviewLabel.text = "시험시험시험"
             return cell
         }
-
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
- 
+        performSegue(withIdentifier: "goSeeDetailReview", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let vc = segue.destination as? ReviewDetailViewController else {
+            return
+        }
+        
+
+        let profileImage = UIImage(named: "default profile image")!
+        let nickname = "kevinkim"
+        let medal = UIImage(named: "first medal")!
+        let rating = 5
+        let review = "완전 맛있었어요! 사장님도 친절하시구 ㅎㅎ"
+        
+        var reviewImages: [UIImage] = []
+        reviewImages.append(UIImage(named: "american food")!)
+        reviewImages.append(UIImage(named: "beer")!)
+        
+        let reviewDetails = ReviewDetail(profileImage: profileImage, nickname: nickname, medal: medal, reviewImages: reviewImages, rating: rating, review: review)
+        
+        vc.initialize(with: reviewDetails)
+        
+        
     }
     
     
