@@ -1,4 +1,5 @@
 import Foundation
+import ProgressHUD
 
 protocol ReviewListViewModelDelegate {
     func didFetchReviewListResults()
@@ -19,6 +20,7 @@ class ReviewListViewModel {
     //MARK: - Object Methods
     
     func fetchReviewList(of mallID: Int) {
+  
         
         let model = FetchReviewListModel(mallID: mallID, page: page)
     

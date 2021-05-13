@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import ProgressHUD
 
 //MARK: - 매장 관련 로직을 처리하는 클래스 -> i.e 매장 등록, 매장 목록 조회, 매장 주소 검색, 매장 삭제 등
 

@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 class ExampleViewController: UIViewController {
 
@@ -25,7 +26,9 @@ class ExampleViewController: UIViewController {
         viewModel.delegate = self
     }
     @IBAction func pressedButton(_ sender: UIButton) {
-        print("BUTTON PRESSED")
+        
+        ProgressHUD.animationType = .multipleCirclePulse
+        ProgressHUD.show("데이터 가져오는 중..")
         viewModel.fetchReviewList(of: 2)
     }
     
@@ -35,7 +38,9 @@ class ExampleViewController: UIViewController {
 extension ExampleViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
+        
         tableView.reloadData()
+        ProgressHUD.dismiss()
     }
 }
 
