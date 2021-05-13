@@ -438,8 +438,8 @@
 				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
 				3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */,
 				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
-				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
 				7C1F79052632E04700C7B41D /* ExampleViewController.swift */,
+				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -919,7 +919,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -949,7 +949,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

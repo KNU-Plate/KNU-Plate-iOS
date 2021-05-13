@@ -10,15 +10,28 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
-    var reviewDetails: ReviewDetail?
+    var reviewDetails = ReviewDetail()
     var reviewImages: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        initialize(with: reviewDetails)
+        
+    }
+    
+    func configure(with model: ReviewDetail) {
 
-        if let reviewDetail = reviewDetails {
-            initialize(with: reviewDetail)
-        } else { return }
+
+        
+        reviewDetails.profileImage = model.profileImage
+        reviewDetails.nickname = model.nickname
+        reviewDetails.medal = model.medal
+        reviewDetails.rating = model.rating
+    
+        reviewDetails.review = model.review
+        reviewDetails.reviewImages = model.reviewImages
     }
     
     func initialize(with model: ReviewDetail) {
@@ -35,6 +48,7 @@ class ReviewDetailViewController: UIViewController {
         } else {
             configurePageControl(reviewImageExists: false)
         }
+        
     }
     
     func configurePageControl(reviewImageExists: Bool) {

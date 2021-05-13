@@ -9,7 +9,7 @@ struct ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImage: UIImage = UIImage(named: "default_profile_image")!
+    var userProfileImage: UIImage = UIImage(named: "default profile image")!
     
     let userNickname: String = ""
     
