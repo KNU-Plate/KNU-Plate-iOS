@@ -14,18 +14,14 @@ class ReviewListViewModel {
     
     var reviewList: [ReviewListResponseModel]?
     
-    
-    
-    
-    
+
     
     //MARK: - Object Methods
     
     func fetchReviewList(of mallID: Int) {
         
         let model = FetchReviewListModel(mallID: mallID, page: page)
-        
-
+    
         RestaurantManager.shared.fetchReviewList(with: model) { responseModel in
             
             self.reviewList = responseModel

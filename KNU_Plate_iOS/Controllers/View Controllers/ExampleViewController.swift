@@ -21,15 +21,15 @@ class ExampleViewController: UIViewController {
         let cellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
         tableView.register(reviewNib, forCellReuseIdentifier: cellID)
         tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: cellID2)
+        
+        viewModel.delegate = self
+    }
+    @IBAction func pressedButton(_ sender: UIButton) {
+        print("BUTTON PRESSED")
+        viewModel.fetchReviewList(of: 2)
     }
     
-    let array = ["괜찮아요",
-                 "괜찮아요괜찮아요괜찮아요괜찮아요","괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요","괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요괜찮아요",
-                 "괜찮아요괜찮아요괜찮아요괜찮아요",
-                 "괜찮아요괜찮아요괜찮아요괜찮아요",
-                 "괜찮아요괜찮아요괜찮아요괜찮아요",
-                 "괜찮아요괜찮아요괜찮아요괜찮아요"]
-    
+
 }
 
 extension ExampleViewController: ReviewListViewModelDelegate {
@@ -54,8 +54,18 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else {
                 fatalError("Failed to dequeue cell for ReviewTableViewCell")
             }
-            cell.reviewImageView.image = UIImage(named: "test1")!
-            cell.reviewLabel.text = array[indexPath.row]
+            
+            
+            
+            if let reviewLists = viewModel.reviewList {
+                
+                cell.configure(with: reviewLists[indexPath.row])
+            } else {
+                print("REVIEW LIST IS EMPTY")
+            }
+            
+            
+    
             return cell
         }
         else {
@@ -70,7 +80,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.fetchReviewList(of: 2)
+    
         performSegue(withIdentifier: "goSeeDetailReview", sender: self)
     }
     

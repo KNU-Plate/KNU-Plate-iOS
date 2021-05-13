@@ -11,6 +11,7 @@ target 'KNU_Plate_iOS' do
   pod 'IQKeyboardManagerSwift'
   pod "BSImagePicker", "~> 3.1"
   pod 'Then'
+  pod 'ProgressHUD'
 
 
 end

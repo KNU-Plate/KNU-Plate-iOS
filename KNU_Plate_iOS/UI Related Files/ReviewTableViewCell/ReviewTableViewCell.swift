@@ -32,6 +32,8 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.review = model.review
         viewModel.rating = model.rating
         
+        
+        
 //        if let reviewImageData = model.reviewImages {
 //            for eachImage in reviewImageData {
 //                viewModel.reviewImages?.append(UIImage(data: eachImage)!)
@@ -45,48 +47,39 @@ class ReviewTableViewCell: UITableViewCell {
     
     func initialize() {
         
+        initializeCellUIComponents()
         configurePageControl()
         configureShowMoreButton()
     }
+    
+    func initializeCellUIComponents() {
+        
+        reviewImageView.image = UIImage(named: "test1")
+        reviewLabel.text = viewModel.review
+        rating.setStarsRating(rating: viewModel.rating)
+        
+        
+        
+    }
+    
+    
+    
     
     func configureShowMoreButton() {
         showMoreButton.addTarget(self,
                                  action: #selector(showMoreOptions),
                                  for: .touchUpInside)
     }
-    
-    @objc func showMoreOptions() {
-        
-        let actionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-        let reportUser = UIAlertAction(title: "사용자 신고하기",
-                                       style: .default) { alert in
-            
-        
-            
-            // 신고하기 action 을 여기서 취해야함
-            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
-        }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)                            
-        actionSheet.addAction(reportUser)
-        actionSheet.addAction(cancelAction)
-        
-        let vc = self.window?.rootViewController
-        vc?.present(actionSheet, animated: true)
-    }
-    
+
     func configurePageControl() {
         
         reviewImageView.isUserInteractionEnabled = true
 
-        pageControl.numberOfPages = viewModel.reviewImages!.count
+        //pageControl.numberOfPages = viewModel.reviewImages!.count
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
         
-        reviewImageView.image = viewModel.reviewImages![0]
+        //reviewImageView.image = viewModel.reviewImages![0]
 
         let swipeLeft = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(self.respondToSwipeGesture(_:)))
@@ -120,5 +113,29 @@ class ReviewTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    @objc func showMoreOptions() {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        let reportUser = UIAlertAction(title: "사용자 신고하기",
+                                       style: .default) { alert in
+            
+        
+            
+            // 신고하기 action 을 여기서 취해야함
+            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
+        }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        actionSheet.addAction(reportUser)
+        actionSheet.addAction(cancelAction)
+        
+        let vc = self.window?.rootViewController
+        vc?.present(actionSheet, animated: true)
+    }
+    
     
 }
