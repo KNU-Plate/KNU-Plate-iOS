@@ -11,38 +11,22 @@ struct ReviewTableViewModel {
     
     var userProfileImage: UIImage = UIImage(named: "default profile image")!
     
-    let userNickname: String = ""
+    var userNickname: String = ""
     
-    var userMedalImage: UIImage {
-        get { User.shared.medalImage }
-    }
-    
-    var reviewImages: [UIImage]?
+    var medal: Int = 3
     
     var rating: Int = 5
     
     var review: String = ""
     
-    var profileImageInDataFormat: Data? {
-        didSet {
-            if let profileImageAvailable = self.profileImageInDataFormat {
-                self.userProfileImage = UIImage(data: profileImageAvailable)
-                    ?? UIImage(named: "default_profile_image")!
-            }
-        }
+    var profileImageURL: URL?
+    
+    var reviewImages: [UIImage]?
+    
+    var reviewImagesFolderID: String? {
+        didSet { fetchReviewImages() }
     }
     
-    var reviewImagesInDataFormat: [Data]? {
-        didSet {
-            
-            if let reviewImagesAvailable = self.reviewImagesInDataFormat {
-                for eachImage in reviewImagesAvailable {
-                    let reviewImage = UIImage(data: eachImage)!
-                    reviewImages?.append(reviewImage)
-                }
-            }
-        }
-    }
     
 //    init(profileImage: Data?, nickname: String, reviewImages: [Data]?, rating: Int, review: String ) {
 //
@@ -58,7 +42,22 @@ struct ReviewTableViewModel {
 //        self.review = review
 //    }
     
+    mutating func fetchReviewImages() {
+        
+        if let folderID = reviewImagesFolderID {
+            FileManager.shared.searchFileFolder(fileFolderID: folderID) { fileInfo in
+                self.downloadReviewImages(reviewFiles: fileInfo)
+            }
+        }
+    }
     
-
+    mutating func downloadReviewImages(reviewFiles: [FileInfo]) {
+    
+        for eachFile in reviewFiles {
+            let downloadURL = URL(string: eachFile.path)
+            let imageData = try! Data(contentsOf: downloadURL!)
+            self.reviewImages?.append(UIImage(data: imageData) ?? UIImage(named: "default review image")!)
+        }
+    }
 
 }

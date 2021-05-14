@@ -9,7 +9,7 @@ struct UserDisplayModel: Decodable {
     let displayName: String
     let mailAddress: String
     let medal: Int?
-    let userProfileImage: [UserThumbnail]?
+    let userProfileImage: [FileInfo]?
     
     enum CodingKeys: String, CodingKey {
         
@@ -22,7 +22,7 @@ struct UserDisplayModel: Decodable {
     }
 }
 
-struct UserThumbnail: Decodable {
+struct FileInfo: Decodable {
     
     let fileID: String
     let path: String

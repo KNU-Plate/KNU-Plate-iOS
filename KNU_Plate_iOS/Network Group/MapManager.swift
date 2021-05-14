@@ -23,9 +23,7 @@ class MapManager {
                    parameters: model.parameters,
                    headers: model.headers).responseJSON { (response) in
                     
-                    guard let statusCode = response.response?.statusCode else {
-                        return
-                    }
+                    guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
                     

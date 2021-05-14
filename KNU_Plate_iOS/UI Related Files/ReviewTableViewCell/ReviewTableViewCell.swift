@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
@@ -19,8 +20,6 @@ class ReviewTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-    
- 
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -29,14 +28,16 @@ class ReviewTableViewCell: UITableViewCell {
     func configure(with model: ReviewListResponseModel) {
         
         viewModel.userID = model.userID
+        viewModel.userNickname = model.userInfo.displayName
+        viewModel.medal = model.userInfo.medal ?? 3
         viewModel.review = model.review
         viewModel.rating = model.rating
         
-        if let reviewImageData = model.reviewImages {
-            viewModel.reviewImages?.append(contentsOf: reviewImageData)
-         
-        } else {
-            print("ReviewTableViewCell - No review images available")
+        if let fileFolderID = model.userInfo.userProfileImage?[0].path {
+            viewModel.profileImageURL = URL(string: fileFolderID)
+        }
+        if let fileFolderID = model.reviewImageFileFolderID {
+            viewModel.reviewImagesFolderID = fileFolderID
         }
         
         initialize()
@@ -45,34 +46,31 @@ class ReviewTableViewCell: UITableViewCell {
     func initialize() {
         
         initializeCellUIComponents()
-        configurePageControl()
+        configureUI()
         configureShowMoreButton()
     }
     
     func initializeCellUIComponents() {
         
-        reviewImageView.image = UIImage(named: "test1")
+        userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
         reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         
-        
-        
+        if let profileImageURL = viewModel.profileImageURL {
+            userProfileImageView.kf.setImage(with: profileImageURL)
+            viewModel.userProfileImage = userProfileImageView.image!
+        }
+        if let reviewImages = viewModel.reviewImages {
+            reviewImageView.image = reviewImages[0]
+            configurePageControl()
+        }
     }
     
-    
-    
-    
-    func configureShowMoreButton() {
-        showMoreButton.addTarget(self,
-                                 action: #selector(showMoreOptions),
-                                 for: .touchUpInside)
-    }
-
     func configurePageControl() {
         
         reviewImageView.isUserInteractionEnabled = true
 
-        //pageControl.numberOfPages = viewModel.reviewImages!.count
+        pageControl.numberOfPages = viewModel.reviewImages!.count
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
         
@@ -89,8 +87,19 @@ class ReviewTableViewCell: UITableViewCell {
 
         self.reviewImageView.addGestureRecognizer(swipeLeft)
         self.reviewImageView.addGestureRecognizer(swipeRight)
+    }
+    
+    func configureUI() {
         
-        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+
+    func configureShowMoreButton() {
+        showMoreButton.addTarget(self,
+                                 action: #selector(showMoreOptions),
+                                 for: .touchUpInside)
     }
     
     @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
@@ -119,6 +128,7 @@ class ReviewTableViewCell: UITableViewCell {
         let reportUser = UIAlertAction(title: "사용자 신고하기",
                                        style: .default) { alert in
             
+            let userIDToReport = self.viewModel.userID
         
             
             // 신고하기 action 을 여기서 취해야함
@@ -132,6 +142,29 @@ class ReviewTableViewCell: UITableViewCell {
         
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
+    }
+    
+    func getReviewDetails() -> ReviewDetail {
+        
+        let profileImage = viewModel.userProfileImage
+        let nickname = viewModel.userNickname
+        let medal = viewModel.medal
+        let rating = viewModel.rating
+        let review = viewModel.review
+        
+        let reviewImages: [UIImage]?
+        
+        if let images = viewModel.reviewImages {
+            reviewImages = images
+        } else { reviewImages = nil }
+        
+        let reviewDetails = ReviewDetail(profileImage: profileImage,
+                                         nickname: nickname,
+                                         medal: medal,
+                                         reviewImages: reviewImages,
+                                         rating: rating,
+                                         review: review)
+        return reviewDetails
     }
     
     

@@ -17,29 +17,27 @@ class ReviewDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         initialize(with: reviewDetails)
-        
     }
     
+    // 객체 생성 전 초기화
     func configure(with model: ReviewDetail) {
-
-
         
         reviewDetails.profileImage = model.profileImage
         reviewDetails.nickname = model.nickname
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
-    
         reviewDetails.review = model.review
         reviewDetails.reviewImages = model.reviewImages
     }
     
+    // Review Cell
+    //TODO: - 아랫부분 함수 파라미터 없애고 그냥 userProfileImageView.image = self.reviewDetails.profileImage 되는지 확인
     func initialize(with model: ReviewDetail) {
         
         userProfileImageView.image = model.profileImage
         userNicknameLabel.text = model.nickname
-        userMedalImageView.image = model.medal
+        userMedalImageView.image = setUserMedalImage(medalRank: model.medal)
         rating.setStarsRating(rating: Int(exactly: model.rating)!)
         reviewLabel.text = model.review
         
@@ -49,16 +47,15 @@ class ReviewDetailViewController: UIViewController {
         } else {
             configurePageControl(reviewImageExists: false)
         }
-        
     }
     
     func configurePageControl(reviewImageExists: Bool) {
         
+        // 리뷰 이미지가 없으면
         if !reviewImageExists {
             reviewImageView.image = nil
             return
         }
-        
         reviewImageView.isUserInteractionEnabled = true
         
         pageControl.numberOfPages = reviewImages.count

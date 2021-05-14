@@ -25,10 +25,12 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
     }
+    
     @IBAction func pressedButton(_ sender: UIButton) {
         
         ProgressHUD.animationType = .multipleCirclePulse
         ProgressHUD.show("데이터 가져오는 중..")
+        //TODO: - dynamic 하게 변경할 필요 있음
         viewModel.fetchReviewList(of: 2)
     }
     
@@ -60,14 +62,10 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("Failed to dequeue cell for ReviewTableViewCell")
             }
             
-            
-            
             if let reviewLists = viewModel.reviewList {
                 
                 cell.configure(with: reviewLists[indexPath.row])
-            } else {
-                print("REVIEW LIST IS EMPTY")
-            }
+            } else { print("REVIEW LIST IS EMPTY") }
             
             
     
@@ -75,7 +73,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else {
-                fatalError("Failed to dequeue cell for ReviewWithoutImageTableViewCell")
+                fatalError()
             }
             cell.reviewLabel.text = "시험시험시험"
             return cell
@@ -85,32 +83,17 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-    
         performSegue(withIdentifier: "goSeeDetailReview", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        guard let vc = segue.destination as? ReviewDetailViewController else {
-            return
-        }
-
-//        guard let cell = sender as? ReviewTableViewCell else {
-//            return
-//        }
-
+        guard let vc = segue.destination as? ReviewDetailViewController else { return }
+        guard let indexSelected = tableView.indexPathForSelectedRow else { return }
+        guard let cell = tableView.cellForRow(at: indexSelected) as? ReviewTableViewCell else { return }
         
-        let profileImage = UIImage(named: "default profile image")!
-        let nickname = "kevinkim"
-        let medal = UIImage(named: "first medal")!
-        let rating = 5
-        let review = "완전 맛있었어요! 사장님도 친절하시구 ㅎㅎ"
-
-        var reviewImages: [UIImage] = []
-        reviewImages.append(UIImage(named: "american food")!)
-        reviewImages.append(UIImage(named: "beer")!)
-
-        let reviewDetails = ReviewDetail(profileImage: profileImage, nickname: nickname, medal: medal, reviewImages: reviewImages, rating: rating, review: review)
+        
+        let reviewDetails = cell.getReviewDetails()
 
         vc.configure(with: reviewDetails)
 

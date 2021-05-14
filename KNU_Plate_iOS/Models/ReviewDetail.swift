@@ -6,7 +6,7 @@ struct ReviewDetail {
     
     var profileImage: UIImage = UIImage()
     var nickname: String = ""
-    var medal: UIImage = UIImage()
+    var medal: Int = 3
     var reviewImages: [UIImage]?
     var rating: Int = 0
     var review: String = ""

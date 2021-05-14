@@ -14,9 +14,34 @@ class FileManager {
     private init() {}
     
     func searchFileFolder(fileFolderID: String,
-                          completion: @escaping ((String) -> Void)){
-        // String -> path 를 반환하는 것
+                          completion: @escaping (([FileInfo]) -> Void)){
         
-        
+        let parameters: Parameters = ["file_folder_id": fileFolderID]
+        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
+       
+        AF.request(searchFileFolderRequestURL,
+                   method: .get,
+                   parameters: parameters,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        do {
+                            let decodedData = try JSONDecoder().decode([FileInfo].self, from: response.data!)
+                            
+                            print("FILE MANAGER - searchFileFolder() DECODED DATA: \(decodedData)")
+                            
+                            completion(decodedData)
+                            
+                        } catch { print("FILE MANAGER - searchFileFolder() Error decoding: \(error)") }
+                        
+                    default:
+                        print("DEFAULT activated in FILE MANAGER - searchFileFolder()")
+                    }
+                   }
     }
+    
 }

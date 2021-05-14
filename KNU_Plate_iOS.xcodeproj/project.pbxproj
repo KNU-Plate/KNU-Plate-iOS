@@ -100,6 +100,7 @@
 		7CB8DF67264D3AB40001CC6D /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF66264D3AB40001CC6D /* FileManager.swift */; };
 		7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */; };
 		7CB8DF6C264D473C0001CC6D /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF6B264D473C0001CC6D /* ReviewListViewModel.swift */; };
+		7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */; };
 		7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
 		7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */; };
 		7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */; };
@@ -224,6 +225,7 @@
 		7CB8DF66264D3AB40001CC6D /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDisplayModel.swift; sourceTree = "<group>"; };
 		7CB8DF6B264D473C0001CC6D /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
+		7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		7CBE745126208366002E1FF7 /* UploadMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadMenuModel.swift; sourceTree = "<group>"; };
 		7CC962E1262C06D700AA71E1 /* LoginInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoModel.swift; sourceTree = "<group>"; };
 		7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				7CD74B79260B209300D05B84 /* AlertManager.swift */,
+				7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				7C5EDD4F26427A8700B79178 /* FinalMenuModel.swift in Sources */,
 				7CB8DF67264D3AB40001CC6D /* FileManager.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
+				7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */,
 				3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */,
 				7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */,
 				7CC962E2262C06D700AA71E1 /* LoginInfoModel.swift in Sources */,

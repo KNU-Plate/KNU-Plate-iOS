@@ -104,7 +104,7 @@ class NewReviewViewModel {
     func uploadNewMenus() {
         
         var menuNames: [String] = []
-        
+    
         for eachMenu in menusToUpload {
             menuNames.append(eachMenu.menuName)
         }
