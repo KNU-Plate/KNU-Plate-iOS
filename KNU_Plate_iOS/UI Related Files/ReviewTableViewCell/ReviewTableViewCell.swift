@@ -34,10 +34,10 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.rating = model.rating
         
         if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.profileImageURL = URL(string: fileFolderID)
+            viewModel.userProfileImageURLInString = fileFolderID
         }
-        if let fileFolderID = model.reviewImageFileFolderID {
-            viewModel.reviewImagesFolderID = fileFolderID
+        if let fileFolderID = model.reviewImageFileInfo {
+            viewModel.reviewImagesFolder = fileFolderID
         }
         
         initialize()
@@ -55,10 +55,11 @@ class ReviewTableViewCell: UITableViewCell {
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
         reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
-        
-        if let profileImageURL = viewModel.profileImageURL {
+        userNicknameLabel.text = viewModel.userNickname
+         
+        if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.kf.setImage(with: profileImageURL)
-            viewModel.userProfileImage = userProfileImageView.image!
+            userProfileImageView.image = viewModel.userProfileImage
         }
         if let reviewImages = viewModel.reviewImages {
             reviewImageView.image = reviewImages[0]

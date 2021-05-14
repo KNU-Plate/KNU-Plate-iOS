@@ -2,12 +2,18 @@ import Foundation
 
 //MARK: - ReviewTableViewCell 을 위한 ViewModel
 
-struct ReviewTableViewModel {
-    
-    //let userID: Int  이것도 필요할 수도 있음(신고하기 기능을 위해)
-    // 아니면 review
+class ReviewTableViewModel {
     
     var userID: String = ""
+    
+    var userProfileImageURLInString: String? {
+        didSet {
+            userProfileImageURL = URL(string: userProfileImageURLInString!)
+            downloadProfileImage()
+        }
+    }
+    
+    var userProfileImageURL: URL?
     
     var userProfileImage: UIImage = UIImage(named: "default profile image")!
     
@@ -18,46 +24,32 @@ struct ReviewTableViewModel {
     var rating: Int = 5
     
     var review: String = ""
-    
-    var profileImageURL: URL?
-    
+
     var reviewImages: [UIImage]?
     
-    var reviewImagesFolderID: String? {
-        didSet { fetchReviewImages() }
+    var reviewImagesFolder: [FileInfo]? {
+        didSet { downloadReviewImages() }
     }
     
-    
-//    init(profileImage: Data?, nickname: String, reviewImages: [Data]?, rating: Int, review: String ) {
-//
-//        if let profileImageAvailable = profileImage {
-//            self.profileImageInDataFormat = profileImageAvailable
-//        }
-//        if let reviewImagesAvailable = reviewImages {
-//            self.reviewImagesInDataFormat = reviewImagesAvailable
-//        }
-//
-//        self.userNickname = nickname
-//        self.rating = rating
-//        self.review = review
-//    }
-    
-    mutating func fetchReviewImages() {
+    func downloadReviewImages() {
         
-        if let folderID = reviewImagesFolderID {
-            FileManager.shared.searchFileFolder(fileFolderID: folderID) { fileInfo in
-                self.downloadReviewImages(reviewFiles: fileInfo)
+        if let folder = reviewImagesFolder {
+            
+            for eachImageInfo in folder {
+                let downloadURL = URL(string: eachImageInfo.path)
+                let imageData = try! Data(contentsOf: downloadURL!)
+                self.reviewImages?.append(UIImage(data: imageData) ?? UIImage(named: "default review image")!)
             }
         }
     }
     
-    mutating func downloadReviewImages(reviewFiles: [FileInfo]) {
-    
-        for eachFile in reviewFiles {
-            let downloadURL = URL(string: eachFile.path)
-            let imageData = try! Data(contentsOf: downloadURL!)
-            self.reviewImages?.append(UIImage(data: imageData) ?? UIImage(named: "default review image")!)
-        }
+    func downloadProfileImage() {
+        
+        let downloadURL = URL(string: userProfileImageURLInString!)
+        let imageData = try! Data(contentsOf: downloadURL!)
+        self.userProfileImage = UIImage(data: imageData) ?? UIImage(named: "default review image")!
     }
+    
+
 
 }
