@@ -56,28 +56,26 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row < 4 {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else {
-                fatalError("Failed to dequeue cell for ReviewTableViewCell")
-            }
-            
-            if let reviewLists = viewModel.reviewList {
-                
-                cell.configure(with: reviewLists[indexPath.row])
-            } else { print("REVIEW LIST IS EMPTY") }
-            
-            
-    
-            return cell
+        guard let reviewLists = viewModel.reviewList else { return UITableViewCell() }
+        guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else {
+            fatalError()
         }
-        else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else {
-                fatalError()
-            }
-            cell.reviewLabel.text = "시험시험시험"
-            return cell
+        guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else {
+            fatalError()
         }
+        
+        if reviewLists[indexPath.row].reviewImageFileInfo != nil {
+            
+            reviewCell.configure(with: reviewLists[indexPath.row])
+            return reviewCell
+            
+        } else {
+            
+            reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
+            return reviewCellWithoutReviewImages
+        
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,12 +90,9 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         guard let indexSelected = tableView.indexPathForSelectedRow else { return }
         guard let cell = tableView.cellForRow(at: indexSelected) as? ReviewTableViewCell else { return }
         
-        
         let reviewDetails = cell.getReviewDetails()
 
         vc.configure(with: reviewDetails)
-
-
     }
 
 }
