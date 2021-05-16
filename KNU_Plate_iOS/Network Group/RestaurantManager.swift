@@ -14,6 +14,7 @@ class RestaurantManager {
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
+    let markFavoriteRequestURL      = "\(Constants.API_BASE_URL)mall/recommend/"
     
     
     private init() {}
@@ -256,6 +257,35 @@ class RestaurantManager {
 //
 //
 //    }
+    
+    
+    //MARK: - 매장 좋아요하기 API
+    func markFavorite(mallID: Int,
+                      completion: @escaping ((Bool) -> Void)) {
+        
+        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
+        
+        AF.request(markFavoriteRequestURL + String(mallID),
+                   method: .post,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        
+                        print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
+                        completion(true)
+                        
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            if let error = responseJSON["error"] {
+                                print(error)
+                            } else { print("알 수 없는 에러 발생.") }
+                        }
+                    }
+                   }
+    }
     
     
     

@@ -45,7 +45,6 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
-        //reviewImageView.image = UIImage(named: "default review image")!
         
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.kf.setImage(with: profileImageURL)
