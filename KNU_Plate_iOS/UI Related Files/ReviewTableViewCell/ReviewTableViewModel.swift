@@ -28,7 +28,9 @@ class ReviewTableViewModel {
     var reviewImages: [UIImage] = []
     
     var reviewImagesFolder: [FileInfo]? {
-        didSet { downloadReviewImages() }
+        didSet {
+            downloadReviewImages()
+        }
     }
 
     

@@ -18,13 +18,16 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-
-        
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel.reviewImages.removeAll()
     }
     
     func configure(with model: ReviewListResponseModel) {
@@ -78,7 +81,6 @@ class ReviewTableViewCell: UITableViewCell {
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
         
-        //reviewImageView.image = viewModel.reviewImages![0]
 
         let swipeLeft = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(self.respondToSwipeGesture(_:)))

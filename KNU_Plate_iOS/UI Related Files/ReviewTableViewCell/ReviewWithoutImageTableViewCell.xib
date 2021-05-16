@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ao-Rj-VLI">
-                        <rect key="frame" x="60" y="15" width="44.5" height="20.5"/>
+                        <rect key="frame" x="65" y="15" width="44.5" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Cx6-Rv-z3S"/>
                         </constraints>
@@ -40,14 +40,14 @@
                         <state key="normal" image="ellipsis" catalog="system"/>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="TdZ-j1-5yW">
-                        <rect key="frame" x="10" y="5" width="40" height="40"/>
+                        <rect key="frame" x="15" y="5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="628-xT-SdN"/>
                             <constraint firstAttribute="width" constant="40" id="eKX-9E-g5s"/>
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="Yau-f3-2up">
-                        <rect key="frame" x="114.5" y="15" width="20" height="20"/>
+                        <rect key="frame" x="119.5" y="15" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="3hK-Gw-Z9s"/>
                             <constraint firstAttribute="width" constant="20" id="aVK-dW-hw8"/>
@@ -127,7 +127,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="f7v-4X-YQM" firstAttribute="top" secondItem="TdZ-j1-5yW" secondAttribute="bottom" constant="10" id="GxS-Ne-UOJ"/>
-                    <constraint firstItem="TdZ-j1-5yW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Qsu-Jw-AT8"/>
+                    <constraint firstItem="TdZ-j1-5yW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Qsu-Jw-AT8"/>
                     <constraint firstItem="f7v-4X-YQM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="T0C-oj-DSv"/>
                     <constraint firstAttribute="bottom" secondItem="XqR-Mi-iUW" secondAttribute="bottom" constant="10" id="Viw-PD-gGq"/>
                     <constraint firstItem="TdZ-j1-5yW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Ygk-G1-5Ws"/>
