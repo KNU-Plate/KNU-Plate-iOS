@@ -17,7 +17,7 @@ class ReviewDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initialize(with: reviewDetails)
+        initialize()
     }
     
     // 객체 생성 전 초기화
@@ -32,28 +32,37 @@ class ReviewDetailViewController: UIViewController {
     }
     
     // Review Cell
-    //TODO: - 아랫부분 함수 파라미터 없애고 그냥 userProfileImageView.image = self.reviewDetails.profileImage 되는지 확인
-    func initialize(with model: ReviewDetail) {
+    func initialize() {
         
-        userProfileImageView.image = model.profileImage
-        userNicknameLabel.text = model.nickname
-        userMedalImageView.image = setUserMedalImage(medalRank: model.medal)
-        rating.setStarsRating(rating: Int(exactly: model.rating)!)
-        reviewLabel.text = model.review
+        userProfileImageView.image = reviewDetails.profileImage
+        userNicknameLabel.text = reviewDetails.nickname
+        userMedalImageView.image = setUserMedalImage(medalRank: reviewDetails.medal)
+        rating.setStarsRating(rating: Int(exactly: reviewDetails.rating)!)
+        reviewLabel.text = reviewDetails.review
         
-        if let images = model.reviewImages {
+        if let images = reviewDetails.reviewImages {
             reviewImages.append(contentsOf: images)
             configurePageControl(reviewImageExists: true)
         } else {
             configurePageControl(reviewImageExists: false)
         }
+        
+        configureUI()
+    }
+    
+    func configureUI() {
+        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func configurePageControl(reviewImageExists: Bool) {
         
         // 리뷰 이미지가 없으면
         if !reviewImageExists {
-            reviewImageView.image = nil
+            reviewImageView.image = UIImage(named: "default review image")!
+            
             return
         }
         reviewImageView.isUserInteractionEnabled = true

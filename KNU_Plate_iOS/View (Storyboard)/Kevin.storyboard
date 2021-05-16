@@ -891,7 +891,7 @@
                         <outlet property="rating" destination="Tlf-Px-RwT" id="aWS-NZ-DHj"/>
                         <outlet property="reviewImageView" destination="cLd-YC-auL" id="ZC4-X5-5ue"/>
                         <outlet property="reviewLabel" destination="txl-HT-ULj" id="ZMC-mr-jO1"/>
-                        <outlet property="userMedalImageView" destination="cLd-YC-auL" id="S0f-fI-gAe"/>
+                        <outlet property="userMedalImageView" destination="FLJ-HF-uOB" id="UX1-Ik-a0o"/>
                         <outlet property="userNicknameLabel" destination="eWA-ib-GWK" id="EBz-Xf-ObZ"/>
                         <outlet property="userProfileImageView" destination="od1-e7-aAf" id="QUe-kF-2Iq"/>
                     </connections>

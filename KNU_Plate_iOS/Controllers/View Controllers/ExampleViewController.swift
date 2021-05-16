@@ -12,7 +12,6 @@ class ExampleViewController: UIViewController {
         
         Test.shared.login()
         
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -57,32 +56,24 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let reviewLists = viewModel.reviewList else { return UITableViewCell() }
-        guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else {
-            fatalError()
-        }
-        guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else {
-            fatalError()
-        }
+
+        guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
+        guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
         
         if reviewLists[indexPath.row].reviewImageFileInfo != nil {
-            
             reviewCell.configure(with: reviewLists[indexPath.row])
             return reviewCell
-            
         } else {
-            
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
             return reviewCellWithoutReviewImages
-        
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         viewModel.selectedIndex = indexPath
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "goSeeDetailReview", sender: self)
+        performSegue(withIdentifier: Constants.SegueIdentifier.goSeeDetailReview, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,7 +82,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.cellForRow(at: viewModel.selectedIndex!) as? ReviewTableViewCell else { return }
         
         let reviewDetails = cell.getReviewDetails()
-
+        
         vc.configure(with: reviewDetails)
     }
 

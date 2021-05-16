@@ -40,6 +40,7 @@ struct Constants {
     struct SegueIdentifier {
         
         static let goToNewRestaurantVC = "goToNewRestaurantVC"
+        static let goSeeDetailReview = "goSeeDetailReview"
     }
     
     

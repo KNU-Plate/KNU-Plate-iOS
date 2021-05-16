@@ -9,6 +9,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+  
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,6 +28,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
             viewModel.userProfileImageURLInString = fileFolderID
         }
         initialize()
+      
     }
     
     override func initialize() {
