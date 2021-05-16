@@ -63,17 +63,18 @@ class ReviewTableViewCell: UITableViewCell {
             userProfileImageView.kf.setImage(with: profileImageURL)
             userProfileImageView.image = viewModel.userProfileImage
         }
-        if let reviewImages = viewModel.reviewImages {
-            reviewImageView.image = reviewImages[0]
+        if !viewModel.reviewImages.isEmpty {
+            reviewImageView.image = viewModel.reviewImages[0]
             configurePageControl()
         }
+    
     }
     
     func configurePageControl() {
         
         reviewImageView.isUserInteractionEnabled = true
 
-        pageControl.numberOfPages = viewModel.reviewImages!.count
+        pageControl.numberOfPages = viewModel.reviewImages.count
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.pageIndicatorTintColor = .lightGray
         
@@ -113,10 +114,10 @@ class ReviewTableViewCell: UITableViewCell {
 
             case UISwipeGestureRecognizer.Direction.left :
                 pageControl.currentPage += 1
-                reviewImageView.image = viewModel.reviewImages![pageControl.currentPage]
+                reviewImageView.image = viewModel.reviewImages[pageControl.currentPage]
             case UISwipeGestureRecognizer.Direction.right :
                 pageControl.currentPage -= 1
-                reviewImageView.image = viewModel.reviewImages![pageControl.currentPage]
+                reviewImageView.image = viewModel.reviewImages[pageControl.currentPage]
             default:
                 break
             }
@@ -157,10 +158,10 @@ class ReviewTableViewCell: UITableViewCell {
         
         let reviewImages: [UIImage]?
         
-        if let images = viewModel.reviewImages {
-            reviewImages = images
+        if !viewModel.reviewImages.isEmpty {
+            reviewImages = viewModel.reviewImages
         } else { reviewImages = nil }
-        
+      
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,

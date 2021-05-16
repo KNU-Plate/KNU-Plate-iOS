@@ -25,11 +25,12 @@ class ReviewTableViewModel {
     
     var review: String = ""
 
-    var reviewImages: [UIImage]?
+    var reviewImages: [UIImage] = []
     
     var reviewImagesFolder: [FileInfo]? {
         didSet { downloadReviewImages() }
     }
+
     
     func downloadReviewImages() {
         
@@ -38,7 +39,7 @@ class ReviewTableViewModel {
             for eachImageInfo in folder {
                 let downloadURL = URL(string: eachImageInfo.path)
                 let imageData = try! Data(contentsOf: downloadURL!)
-                self.reviewImages?.append(UIImage(data: imageData) ?? UIImage(named: "default review image")!)
+                self.reviewImages.append(UIImage(data: imageData)! ?? UIImage(named: "default review image")!)
             }
         }
     }

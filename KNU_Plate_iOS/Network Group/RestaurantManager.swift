@@ -190,7 +190,6 @@ class RestaurantManager {
     func fetchReviewList(with model: FetchReviewListModel,
                          completion: @escaping (([ReviewListResponseModel]) -> Void)) {
         
-        
         AF.request(fetchReviewListRequestURL,
                    method: .get,
                    parameters: model.parameters,
@@ -200,21 +199,13 @@ class RestaurantManager {
                     guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
-                    
                     case 200:
                         do {
-                            
                             let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
-                            
-                        
                             completion(decodedData)
-                            
-                            
                         } catch {
                             print("Restaurant Manager - fetchReviewList ERROR: \(error)")
-                            
                         }
-                        
                     default:
                         if let responseJSON = try! response.result.get() as? [String : String] {
                             
@@ -223,12 +214,8 @@ class RestaurantManager {
                                 print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
                             }
                         }
-                    
-                    
                    }
     }
-        
-        
     }
     
 //    var isPaginating = false

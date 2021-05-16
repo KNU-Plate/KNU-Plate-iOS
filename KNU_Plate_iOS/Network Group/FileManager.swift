@@ -13,7 +13,7 @@ class FileManager {
     
     private init() {}
     
-    func searchFileFolder(fileFolderID: String,
+    func searchFileFolder(fileFolderID: [FileInfo],
                           completion: @escaping (([FileInfo]) -> Void)){
         
         let parameters: Parameters = ["file_folder_id": fileFolderID]
