@@ -851,7 +851,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-HF-uOB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-HF-uOB">
                                 <rect key="frame" x="119.5" y="30" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Q71-Hv-VSC"/>
@@ -983,7 +983,6 @@
         <image name="add button" width="113" height="113"/>
         <image name="cancel button" width="40" height="40"/>
         <image name="default profile image" width="73" height="73"/>
-        <image name="first medal" width="41" height="41"/>
         <image name="food image" width="35.5" height="35.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu" width="41.5" height="41.5"/>

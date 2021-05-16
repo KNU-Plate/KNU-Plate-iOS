@@ -15,6 +15,8 @@ class ReviewListViewModel {
     
     var reviewList: [ReviewListResponseModel]?
     
+    var selectedIndex: IndexPath?
+    
     //MARK: - Object Methods
     
     func fetchReviewList(of mallID: Int) {

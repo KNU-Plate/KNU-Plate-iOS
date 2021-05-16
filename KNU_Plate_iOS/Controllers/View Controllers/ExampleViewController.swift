@@ -80,6 +80,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        viewModel.selectedIndex = indexPath
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "goSeeDetailReview", sender: self)
     }
@@ -87,8 +88,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         guard let vc = segue.destination as? ReviewDetailViewController else { return }
-        guard let indexSelected = tableView.indexPathForSelectedRow else { return }
-        guard let cell = tableView.cellForRow(at: indexSelected) as? ReviewTableViewCell else { return }
+        guard let cell = tableView.cellForRow(at: viewModel.selectedIndex!) as? ReviewTableViewCell else { return }
         
         let reviewDetails = cell.getReviewDetails()
 
