@@ -5,7 +5,6 @@ protocol ReviewListViewModelDelegate {
     func didFetchReviewListResults()
 }
 
-
 class ReviewListViewModel {
     
     //MARK: - Object Properties
@@ -26,7 +25,6 @@ class ReviewListViewModel {
         RestaurantManager.shared.fetchReviewList(with: model) { responseModel in
             
             self.reviewList = responseModel
-            print(responseModel)
             self.delegate?.didFetchReviewListResults()
         }
     }

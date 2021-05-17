@@ -5,16 +5,17 @@ import Kingfisher
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: UIImageView!
+    @IBOutlet var userProfileImageView: ReviewImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
-    @IBOutlet var reviewImageView: UIImageView!
+    @IBOutlet var reviewImageView: ReviewImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
     private var viewModel = ReviewTableViewModel()
+    var alreadyConfigured: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,10 +28,32 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        viewModel.reviewImages.removeAll()
+        
+
+        
     }
     
+    
     func configure(with model: ReviewListResponseModel) {
+        
+        //First reset everything
+        viewModel.userID = ""
+        viewModel.userProfileImageURLInString = nil
+        viewModel.reviewImages.removeAll()
+        userProfileImageView.image = nil
+        userNicknameLabel.text = nil
+        userMedalImageView.image = nil
+        reviewImageView.image = nil
+        reviewLabel.text = nil
+        pageControl.numberOfPages = 0
+        rating.setStarsRating(rating: 3)
+        
+        
+        
+        
+        
+        
+        
         
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
@@ -44,6 +67,8 @@ class ReviewTableViewCell: UITableViewCell {
         if let fileFolderID = model.reviewImageFileInfo {
             viewModel.reviewImagesFolder = fileFolderID
         }
+        
+        alreadyConfigured = true
         
         initialize()
     }
@@ -61,7 +86,7 @@ class ReviewTableViewCell: UITableViewCell {
         reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
-         
+
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.kf.setImage(with: profileImageURL)
             userProfileImageView.image = viewModel.userProfileImage

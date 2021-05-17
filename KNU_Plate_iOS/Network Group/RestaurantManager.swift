@@ -257,26 +257,25 @@ class RestaurantManager {
 //
 //
 //    }
-    
+   
     
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
+                      httpMethod: HTTPMethod,
                       completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
         
         AF.request(markFavoriteRequestURL + String(mallID),
-                   method: .post,
+                   method: httpMethod,
                    headers: headers).responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
                     case 200:
-                        
                         print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
                         completion(true)
-                        
                     default:
                         if let responseJSON = try! response.result.get() as? [String : String] {
                             if let error = responseJSON["error"] {
@@ -286,7 +285,4 @@ class RestaurantManager {
                     }
                    }
     }
-    
-    
-    
 }

@@ -8,11 +8,16 @@ class ReviewTableViewModel {
     
     var userProfileImageURLInString: String? {
         didSet {
-            userProfileImageURL = URL(string: userProfileImageURLInString!)
+            
+            guard let urlInString = userProfileImageURLInString else {
+                userProfileImageURL = nil
+                return
+            }
+            userProfileImageURL = URL(string: urlInString)
             downloadProfileImage()
         }
     }
-    
+
     var userProfileImageURL: URL?
     
     var userProfileImage: UIImage = UIImage(named: "default profile image")!
@@ -30,16 +35,15 @@ class ReviewTableViewModel {
     var reviewImagesFolder: [FileInfo]? {
         didSet { downloadReviewImages() }
     }
-
     
     func downloadReviewImages() {
         
-        if let folder = reviewImagesFolder {
+        if let folder = self.reviewImagesFolder {
             
             for eachImageInfo in folder {
                 let downloadURL = URL(string: eachImageInfo.path)
                 let imageData = try! Data(contentsOf: downloadURL!)
-                self.reviewImages.append(UIImage(data: imageData)! ?? UIImage(named: "default review image")!)
+                self.reviewImages.append(UIImage(data: imageData)!)
             }
         }
     }
