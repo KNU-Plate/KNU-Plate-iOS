@@ -10,7 +10,8 @@ struct ReviewListResponseModel: Decodable {
     let mallID: Int
     let review: String
     let rating: Int
-    let reviewImages: [Data]?
+    let reviewImageFileInfo: [FileInfo]?
+    let userInfo: UserDisplayModel
     
     enum CodingKeys: String, CodingKey {
         
@@ -19,7 +20,8 @@ struct ReviewListResponseModel: Decodable {
         case mallID = "mall_id"
         case review = "contents"
         case rating = "evaluate"
-        case reviewImages = "review_image"
+        case reviewImageFileInfo = "review_image"
+        case userInfo = "user"
     }
     
 }

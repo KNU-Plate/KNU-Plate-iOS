@@ -79,6 +79,7 @@ class UserManager {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
                             self.saveLoginInfoToUserDefaults(with: decodedData)
+                            print(User.shared.accessToken)
                             
                         } catch {
                             print("UserManager - logIn catch ERROR: \(error)")

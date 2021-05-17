@@ -8,7 +8,7 @@ struct FetchReviewListModel {
     let mallID: Int
     let page: Int
     
-    init(mallID: Int, page: Int) {
+    init(mallID: Int, page: Int = 0) {
         
         self.mallID = mallID
         self.page = page
@@ -23,8 +23,9 @@ struct FetchReviewListModel {
     
     /// HTTP Headers
     let headers: HTTPHeaders = [
-        
-        .accept("application/json"),
-        .authorization(User.shared.accessToken)
+  
+        "accept": "application/json",
+        "Authorization": User.shared.accessToken
+  
     ]
 }

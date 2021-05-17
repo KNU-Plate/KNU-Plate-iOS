@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3CD-QF-9Ve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -750,10 +750,10 @@
             </objects>
             <point key="canvasLocation" x="591" y="1633"/>
         </scene>
-        <!--Review Detail View Controller-->
+        <!--ReviewDetailViewController-->
         <scene sceneID="OOZ-rO-Did">
             <objects>
-                <viewController id="UgD-ys-ZlP" customClass="ReviewDetailViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewDetailViewController" title="ReviewDetailViewController" id="UgD-ys-ZlP" customClass="ReviewDetailViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X4V-tM-bJu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -851,7 +851,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-HF-uOB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-HF-uOB">
                                 <rect key="frame" x="119.5" y="30" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Q71-Hv-VSC"/>
@@ -891,7 +891,7 @@
                         <outlet property="rating" destination="Tlf-Px-RwT" id="aWS-NZ-DHj"/>
                         <outlet property="reviewImageView" destination="cLd-YC-auL" id="ZC4-X5-5ue"/>
                         <outlet property="reviewLabel" destination="txl-HT-ULj" id="ZMC-mr-jO1"/>
-                        <outlet property="userMedalImageView" destination="cLd-YC-auL" id="S0f-fI-gAe"/>
+                        <outlet property="userMedalImageView" destination="FLJ-HF-uOB" id="UX1-Ik-a0o"/>
                         <outlet property="userNicknameLabel" destination="eWA-ib-GWK" id="EBz-Xf-ObZ"/>
                         <outlet property="userProfileImageView" destination="od1-e7-aAf" id="QUe-kF-2Iq"/>
                     </connections>
@@ -912,6 +912,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="dN3-8a-P9z">
+                                <rect key="frame" x="0.0" y="311" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="pressedButton:" destination="crA-ja-4ef" eventType="touchUpInside" id="4xQ-cN-Z3l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bAJ-bC-yCq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -975,7 +983,6 @@
         <image name="add button" width="113" height="113"/>
         <image name="cancel button" width="40" height="40"/>
         <image name="default profile image" width="73" height="73"/>
-        <image name="first medal" width="41" height="41"/>
         <image name="food image" width="35.5" height="35.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu" width="41.5" height="41.5"/>

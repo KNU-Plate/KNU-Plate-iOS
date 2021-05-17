@@ -1,5 +1,6 @@
 import Foundation
 import Alamofire
+import ProgressHUD
 
 //MARK: - 매장 관련 로직을 처리하는 클래스 -> i.e 매장 등록, 매장 목록 조회, 매장 주소 검색, 매장 삭제 등
 
@@ -13,6 +14,7 @@ class RestaurantManager {
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
+    let markFavoriteRequestURL      = "\(Constants.API_BASE_URL)mall/recommend/"
     
     
     private init() {}
@@ -146,12 +148,11 @@ class RestaurantManager {
                                      withName: "evaluate")
     
             if let imageArray = model.reviewImages {
-                
                 for images in imageArray {
                     
                     multipartFormData.append(images,
                                              withName: "review_image",
-                                             fileName: "mall_image",
+                                             fileName: "mall_image.jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -187,6 +188,37 @@ class RestaurantManager {
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
+    func fetchReviewList(with model: FetchReviewListModel,
+                         completion: @escaping (([ReviewListResponseModel]) -> Void)) {
+        
+        AF.request(fetchReviewListRequestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   encoding: URLEncoding.queryString,
+                   headers: model.headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        do {
+                            let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
+                            completion(decodedData)
+                        } catch {
+                            print("Restaurant Manager - fetchReviewList ERROR: \(error)")
+                        }
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            
+                            if let error = responseJSON["error"] {
+                                
+                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                            }
+                        }
+                   }
+    }
+    }
+    
 //    var isPaginating = false
 //    func fetchReviewList(with model: FetchReviewListModel,
 //                         pagination: Bool = false,
@@ -225,7 +257,32 @@ class RestaurantManager {
 //
 //
 //    }
+   
     
-    
-    
+    //MARK: - 매장 좋아요하기 API
+    func markFavorite(mallID: Int,
+                      httpMethod: HTTPMethod,
+                      completion: @escaping ((Bool) -> Void)) {
+        
+        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
+        
+        AF.request(markFavoriteRequestURL + String(mallID),
+                   method: httpMethod,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    case 200:
+                        print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
+                        completion(true)
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            if let error = responseJSON["error"] {
+                                print(error)
+                            } else { print("알 수 없는 에러 발생.") }
+                        }
+                    }
+                   }
+    }
 }

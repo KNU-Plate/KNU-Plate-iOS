@@ -2,6 +2,8 @@ PODS:
   - Alamofire (5.4.2)
   - BSImagePicker (3.3.1)
   - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (6.3.0)
+  - ProgressHUD (13.6)
   - SnapKit (5.0.1)
   - Then (2.7.0)
 
@@ -9,6 +11,8 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
   - IQKeyboardManagerSwift
+  - Kingfisher (~> 6.0)
+  - ProgressHUD
   - SnapKit
   - Then
 
@@ -17,6 +21,8 @@ SPEC REPOS:
     - Alamofire
     - BSImagePicker
     - IQKeyboardManagerSwift
+    - Kingfisher
+    - ProgressHUD
     - SnapKit
     - Then
 
@@ -24,9 +30,11 @@ SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
+  ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 6bb938ae0012064eb0721e383e3eb4d77346a6f0
+PODFILE CHECKSUM: 3281e4232e6613f665a8b8b7e26c9dda3559b1ce
 
 COCOAPODS: 1.10.1

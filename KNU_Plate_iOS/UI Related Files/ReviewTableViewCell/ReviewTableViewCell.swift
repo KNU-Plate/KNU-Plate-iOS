@@ -1,53 +1,99 @@
 import UIKit
+import Kingfisher
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: UIImageView!
+    @IBOutlet var userProfileImageView: ReviewImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
-    @IBOutlet var reviewImageView: UIImageView!
+    @IBOutlet var reviewImageView: ReviewImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
     private var viewModel = ReviewTableViewModel()
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
+   
     }
-    
- 
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    
+    }
+    
+    
     func configure(with model: ReviewListResponseModel) {
         
+        //Reset Every Content-Related attributes
+        userProfileImageView.image = nil
+        userNicknameLabel.text = nil
+        userMedalImageView.image = nil
+
+        rating.setStarsRating(rating: 3)
+        reviewLabel.text = nil
+
+
+        // Configure View Model
+        viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
+        viewModel.userNickname = model.userInfo.displayName
+        viewModel.medal = model.userInfo.medal ?? 3
         viewModel.review = model.review
         viewModel.rating = model.rating
         
-        if let reviewImageData = model.reviewImages {
-            for eachImage in reviewImageData {
-                viewModel.reviewImages?.append(UIImage(data: eachImage)!)
-            }
-        } else {
-            print("ReviewTableViewCell - No review images available")
+        if let fileFolderID = model.userInfo.userProfileImage?[0].path {
+            viewModel.userProfileImageURLInString = fileFolderID
         }
-        
+        if let fileFolderID = model.reviewImageFileInfo {
+            viewModel.reviewImagesFileFolder = fileFolderID
+        }
         initialize()
     }
     
     func initialize() {
         
-        configurePageControl()
+        initializeCellUIComponents()
+        configureUI()
         configureShowMoreButton()
     }
     
+    func initializeCellUIComponents() {
+        
+        userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
+        reviewLabel.text = viewModel.review
+        rating.setStarsRating(rating: viewModel.rating)
+        userNicknameLabel.text = viewModel.userNickname
+
+        if let profileImageURL = viewModel.userProfileImageURL {
+            userProfileImageView.loadImage(from: profileImageURL)
+        } else {
+            userProfileImageView.image = UIImage(named: "default profile image")
+        }
+        
+        guard let path = viewModel.reviewImagesFileFolder?[0].path else { return }
+        
+        if let downloadURL = URL(string: path) {
+            reviewImageView.loadImage(from: downloadURL)
+        }
+  
+    }
+    
+    func configureUI() {
+        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+
     func configureShowMoreButton() {
         showMoreButton.addTarget(self,
                                  action: #selector(showMoreOptions),
@@ -62,12 +108,15 @@ class ReviewTableViewCell: UITableViewCell {
         let reportUser = UIAlertAction(title: "사용자 신고하기",
                                        style: .default) { alert in
             
+            let userIDToReport = self.viewModel.userID
+        
+            
             // 신고하기 action 을 여기서 취해야함
             //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
         }
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
-                                         handler: nil)                            
+                                         handler: nil)
         actionSheet.addAction(reportUser)
         actionSheet.addAction(cancelAction)
         
@@ -75,47 +124,23 @@ class ReviewTableViewCell: UITableViewCell {
         vc?.present(actionSheet, animated: true)
     }
     
-    func configurePageControl() {
+    func getReviewDetails() -> ReviewDetail {
         
-        reviewImageView.isUserInteractionEnabled = true
-
-        pageControl.numberOfPages = viewModel.reviewImages!.count
-        pageControl.currentPageIndicatorTintColor = .white
-        pageControl.pageIndicatorTintColor = .lightGray
-        
-        reviewImageView.image = viewModel.reviewImages![0]
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self,
-                                                 action: #selector(self.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-
-
-        let swipeRight = UISwipeGestureRecognizer(target: self,
-                                                  action: #selector(self.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-
-        self.reviewImageView.addGestureRecognizer(swipeLeft)
-        self.reviewImageView.addGestureRecognizer(swipeRight)
-        
-        
+        let profileImage = viewModel.userProfileImage
+        let nickname = viewModel.userNickname
+        let medal = viewModel.medal
+        let rating = viewModel.rating
+        let review = viewModel.review
+        let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
+      
+        let reviewDetails = ReviewDetail(profileImage: profileImage,
+                                         nickname: nickname,
+                                         medal: medal,
+                                         reviewImagesFileInfo: reviewImagesFileInfo,
+                                         rating: rating,
+                                         review: review)
+        return reviewDetails
     }
     
-    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
-
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-
-            switch swipeGesture.direction {
-
-            case UISwipeGestureRecognizer.Direction.left :
-                pageControl.currentPage += 1
-                reviewImageView.image = viewModel.reviewImages![pageControl.currentPage]
-            case UISwipeGestureRecognizer.Direction.right :
-                pageControl.currentPage -= 1
-                reviewImageView.image = viewModel.reviewImages![pageControl.currentPage]
-            default:
-                break
-            }
-        }
-    }
     
 }

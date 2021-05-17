@@ -4,10 +4,10 @@ import Foundation
 
 struct ReviewDetail {
     
-    var profileImage: UIImage
-    var nickname: String
-    var medal: UIImage
-    var reviewImages: [UIImage]?
-    var rating: Int
-    var review: String
+    var profileImage: UIImage = UIImage()
+    var nickname: String = ""
+    var medal: Int = 3
+    var reviewImagesFileInfo: [FileInfo]?
+    var rating: Int = 0
+    var review: String = ""
 }
