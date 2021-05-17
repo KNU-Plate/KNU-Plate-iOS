@@ -4,17 +4,17 @@ import Foundation
 
 class ReviewTableViewModel {
     
+    var reviewID: Int = 0
+    
     var userID: String = ""
     
     var userProfileImageURLInString: String? {
         didSet {
-            
-            guard let urlInString = userProfileImageURLInString else {
+            guard let urlString = userProfileImageURLInString else {
                 userProfileImageURL = nil
                 return
             }
-            userProfileImageURL = URL(string: urlInString)
-            downloadProfileImage()
+            userProfileImageURL = URL(string: urlString)
         }
     }
 
@@ -30,30 +30,11 @@ class ReviewTableViewModel {
     
     var review: String = ""
 
-    var reviewImages: [UIImage] = []
+    var reviewImagesFileFolder: [FileInfo]?
     
-    var reviewImagesFolder: [FileInfo]? {
-        didSet { downloadReviewImages() }
-    }
+
     
-    func downloadReviewImages() {
-        
-        if let folder = self.reviewImagesFolder {
-            
-            for eachImageInfo in folder {
-                let downloadURL = URL(string: eachImageInfo.path)
-                let imageData = try! Data(contentsOf: downloadURL!)
-                self.reviewImages.append(UIImage(data: imageData)!)
-            }
-        }
-    }
-    
-    func downloadProfileImage() {
-        
-        let downloadURL = URL(string: userProfileImageURLInString!)
-        let imageData = try! Data(contentsOf: downloadURL!)
-        self.userProfileImage = UIImage(data: imageData) ?? UIImage(named: "default review image")!
-    }
+
     
 
 

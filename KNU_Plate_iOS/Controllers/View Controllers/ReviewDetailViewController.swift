@@ -28,7 +28,7 @@ class ReviewDetailViewController: UIViewController {
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
         reviewDetails.review = model.review
-        reviewDetails.reviewImages = model.reviewImages
+        reviewDetails.reviewImagesFileInfo = model.reviewImagesFileInfo
     }
     
     // Review Cell
@@ -40,13 +40,29 @@ class ReviewDetailViewController: UIViewController {
         rating.setStarsRating(rating: Int(exactly: reviewDetails.rating)!)
         reviewLabel.text = reviewDetails.review
         
-        if let images = reviewDetails.reviewImages {
-            reviewImages.append(contentsOf: images)
-            configurePageControl(reviewImageExists: true)
-        } else {
-            configurePageControl(reviewImageExists: false)
-        }
         
+        // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
+        
+        OperationQueue().addOperation {
+            if let fileFolder = self.reviewDetails.reviewImagesFileInfo {
+                
+                for eachImageInfo in fileFolder {
+                    let downloadURL = URL(string: eachImageInfo.path)
+                    let imageData = try! Data(contentsOf: downloadURL!)
+                    DispatchQueue.main.async {
+                        self.reviewImages.append(UIImage(data: imageData)!)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.configurePageControl(reviewImageExists: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.configurePageControl(reviewImageExists: false)
+                }
+            }
+        }
+
         configureUI()
     }
     
@@ -62,7 +78,6 @@ class ReviewDetailViewController: UIViewController {
         // 리뷰 이미지가 없으면
         if !reviewImageExists {
             reviewImageView.image = UIImage(named: "default review image")!
-            
             return
         }
         reviewImageView.isUserInteractionEnabled = true

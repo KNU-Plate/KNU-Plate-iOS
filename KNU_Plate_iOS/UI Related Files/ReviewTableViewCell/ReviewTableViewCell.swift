@@ -15,11 +15,10 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet var reviewLabel: UILabel!
     
     private var viewModel = ReviewTableViewModel()
-    var alreadyConfigured: Bool = false
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+   
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,33 +27,23 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-
-        
+    
     }
     
     
     func configure(with model: ReviewListResponseModel) {
         
-        //First reset everything
-        viewModel.userID = ""
-        viewModel.userProfileImageURLInString = nil
-        viewModel.reviewImages.removeAll()
+        //Reset Every Content-Related attributes
         userProfileImageView.image = nil
         userNicknameLabel.text = nil
         userMedalImageView.image = nil
-        reviewImageView.image = nil
-        reviewLabel.text = nil
-        pageControl.numberOfPages = 0
+
         rating.setStarsRating(rating: 3)
-        
-        
-        
-        
-        
-        
-        
-        
+        reviewLabel.text = nil
+
+
+        // Configure View Model
+        viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
         viewModel.medal = model.userInfo.medal ?? 3
@@ -65,11 +54,8 @@ class ReviewTableViewCell: UITableViewCell {
             viewModel.userProfileImageURLInString = fileFolderID
         }
         if let fileFolderID = model.reviewImageFileInfo {
-            viewModel.reviewImagesFolder = fileFolderID
+            viewModel.reviewImagesFileFolder = fileFolderID
         }
-        
-        alreadyConfigured = true
-        
         initialize()
     }
     
@@ -88,36 +74,17 @@ class ReviewTableViewCell: UITableViewCell {
         userNicknameLabel.text = viewModel.userNickname
 
         if let profileImageURL = viewModel.userProfileImageURL {
-            userProfileImageView.kf.setImage(with: profileImageURL)
-            userProfileImageView.image = viewModel.userProfileImage
+            userProfileImageView.loadImage(from: profileImageURL)
+        } else {
+            userProfileImageView.image = UIImage(named: "default profile image")
         }
-        if !viewModel.reviewImages.isEmpty {
-            reviewImageView.image = viewModel.reviewImages[0]
-            configurePageControl()
+        
+        guard let path = viewModel.reviewImagesFileFolder?[0].path else { return }
+        
+        if let downloadURL = URL(string: path) {
+            reviewImageView.loadImage(from: downloadURL)
         }
-    
-    }
-    
-    func configurePageControl() {
-        
-        reviewImageView.isUserInteractionEnabled = true
-
-        pageControl.numberOfPages = viewModel.reviewImages.count
-        pageControl.currentPageIndicatorTintColor = .white
-        pageControl.pageIndicatorTintColor = .lightGray
-        
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self,
-                                                 action: #selector(self.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-
-
-        let swipeRight = UISwipeGestureRecognizer(target: self,
-                                                  action: #selector(self.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-
-        self.reviewImageView.addGestureRecognizer(swipeLeft)
-        self.reviewImageView.addGestureRecognizer(swipeRight)
+  
     }
     
     func configureUI() {
@@ -131,24 +98,6 @@ class ReviewTableViewCell: UITableViewCell {
         showMoreButton.addTarget(self,
                                  action: #selector(showMoreOptions),
                                  for: .touchUpInside)
-    }
-    
-    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
-
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-
-            switch swipeGesture.direction {
-
-            case UISwipeGestureRecognizer.Direction.left :
-                pageControl.currentPage += 1
-                reviewImageView.image = viewModel.reviewImages[pageControl.currentPage]
-            case UISwipeGestureRecognizer.Direction.right :
-                pageControl.currentPage -= 1
-                reviewImageView.image = viewModel.reviewImages[pageControl.currentPage]
-            default:
-                break
-            }
-        }
     }
     
     @objc func showMoreOptions() {
@@ -182,17 +131,12 @@ class ReviewTableViewCell: UITableViewCell {
         let medal = viewModel.medal
         let rating = viewModel.rating
         let review = viewModel.review
-        
-        let reviewImages: [UIImage]?
-        
-        if !viewModel.reviewImages.isEmpty {
-            reviewImages = viewModel.reviewImages
-        } else { reviewImages = nil }
+        let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
       
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImages: reviewImages,
+                                         reviewImagesFileInfo: reviewImagesFileInfo,
                                          rating: rating,
                                          review: review)
         return reviewDetails

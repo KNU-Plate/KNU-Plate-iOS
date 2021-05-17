@@ -54,7 +54,4 @@ class ReviewImageView: UIImageView {
     func removeSpinner() {
         spinner.removeFromSuperview()
     }
-    
-    func 
-    
 }

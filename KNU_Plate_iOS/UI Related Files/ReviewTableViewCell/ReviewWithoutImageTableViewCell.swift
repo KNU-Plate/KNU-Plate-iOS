@@ -8,6 +8,8 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+ 
     
     }
     
@@ -22,7 +24,14 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     }
     
     override func configure(with model: ReviewListResponseModel) {
+        
+        userProfileImageView.image = nil
+        userNicknameLabel.text = nil
+        userMedalImageView.image = nil
+        rating.setStarsRating(rating: 3)
+        reviewLabel.text = nil
     
+        viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
         viewModel.medal = model.userInfo.medal ?? 3
@@ -36,14 +45,6 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
       
     }
     
-    override func initialize() {
-        
-        initializeCellUIComponents()
-        configureUI()
-        configureShowMoreButton()
-
-    }
-    
     override func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
@@ -52,8 +53,9 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         userNicknameLabel.text = viewModel.userNickname
         
         if let profileImageURL = viewModel.userProfileImageURL {
-            userProfileImageView.kf.setImage(with: profileImageURL)
-            userProfileImageView.image = viewModel.userProfileImage
+            userProfileImageView.loadImage(from: profileImageURL)
+        } else {
+            userProfileImageView.image = UIImage(named: "default profile image")
         }
     }
     
@@ -68,7 +70,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImages: nil,
+                                         reviewImagesFileInfo: nil,
                                          rating: rating,
                                          review: review)
         return reviewDetails
