@@ -18,29 +18,24 @@ class ReviewTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-   
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    
+    func resetValues() {
+        userProfileImageView.image = nil
+        userNicknameLabel.text = nil
+        userMedalImageView.image = nil
+        rating.setStarsRating(rating: 3)
+        reviewLabel.text = nil
     }
-    
     
     func configure(with model: ReviewListResponseModel) {
         
         //Reset Every Content-Related attributes
-        userProfileImageView.image = nil
-        userNicknameLabel.text = nil
-        userMedalImageView.image = nil
-
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
-
+        resetValues()
 
         // Configure View Model
         viewModel.reviewID = model.reviewID
@@ -50,9 +45,11 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.review = model.review
         viewModel.rating = model.rating
         
+        // Check if a user profile image exists
         if let fileFolderID = model.userInfo.userProfileImage?[0].path {
             viewModel.userProfileImageURLInString = fileFolderID
         }
+        // Check if review images exists
         if let fileFolderID = model.reviewImageFileInfo {
             viewModel.reviewImagesFileFolder = fileFolderID
         }
@@ -92,6 +89,8 @@ class ReviewTableViewCell: UITableViewCell {
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView?.layer.cornerRadius = 10
     }
 
     func configureShowMoreButton() {

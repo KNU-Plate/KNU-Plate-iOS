@@ -8,36 +8,26 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
- 
-    
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        
-    }
-    
     override func configure(with model: ReviewListResponseModel) {
         
-        userProfileImageView.image = nil
-        userNicknameLabel.text = nil
-        userMedalImageView.image = nil
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
+        //Reset Every Content-Related attributes
+        resetValues()
     
+        // Configure View Model
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
         viewModel.medal = model.userInfo.medal ?? 3
         viewModel.review = model.review
         viewModel.rating = model.rating
-        
+       
+        // Check if a user profile image exists
         if let fileFolderID = model.userInfo.userProfileImage?[0].path {
             viewModel.userProfileImageURLInString = fileFolderID
         }

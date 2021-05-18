@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import ProgressHUD
 
 class NewReviewViewController: UIViewController {
 
@@ -83,6 +84,11 @@ class NewReviewViewController: UIViewController {
             
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
+            
+            
+            ProgressHUD.animationType = .circleRotateChase
+            ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
+            ProgressHUD.show()
             
             viewModel.startUploading()
 
@@ -205,6 +211,8 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     func didCompleteReviewUpload(_ success: Bool) {
         //TODO: - 수정 필요
         // 리뷰 등록을 완료했다고 작게 알림 띄우는게 좋을듯
+        
+        ProgressHUD.dismiss()
         print("NEW REVIEW UPLOAD COMPLETE")
     }
 }

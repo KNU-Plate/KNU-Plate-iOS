@@ -28,8 +28,11 @@ class ExampleViewController: UIViewController {
     
     @IBAction func pressedButton(_ sender: UIButton) {
         
-        ProgressHUD.animationType = .multipleCirclePulse
-        ProgressHUD.show("데이터 가져오는 중..")
+        ProgressHUD.animationType = .circleRotateChase
+        ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
+        ProgressHUD.show()
+        
+
         //TODO: - dynamic 하게 변경할 필요 있음
         viewModel.fetchReviewList(of: 2)
     }
@@ -53,72 +56,6 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.reviewList?.count ?? 0
     }
-    
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        guard let reviewLists = viewModel.reviewList else { return UITableViewCell() }
-//
-//        //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
-//        if reviewLists[indexPath.row].reviewImageFileInfo != nil {
-//
-//            guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
-//
-//
-//            reviewCell.reviewLabel.text = reviewLists[indexPath.row].review
-//            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewLists[indexPath.row].userInfo.medal ?? 1)
-//
-//
-//            if let pathString = reviewLists[indexPath.row].userInfo.userProfileImage?[0].path {
-//
-//                if let url = URL(string: pathString) {
-//                    reviewCell.userProfileImageView.loadImage(from: url)
-//                } else {
-//                    reviewCell.userProfileImageView.image = UIImage(named: "default profile image")
-//                }
-//            }
-//
-//            if let pathString = reviewLists[indexPath.row].reviewImageFileInfo?[0].path {
-//
-//                if let url = URL(string: pathString) {
-//                    reviewCell.reviewImageView.loadImage(from: url)
-//                }
-//            }
-//
-//
-//
-//            //reviewCell.configure(with: reviewLists[indexPath.row])
-//            return reviewCell
-//
-//
-//        // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
-//        } else {
-//
-//            guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
-//
-//
-//            reviewCellWithoutReviewImages.reviewLabel.text = reviewLists[indexPath.row].review
-//            reviewCellWithoutReviewImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewLists[indexPath.row].userInfo.medal ?? 1)
-//
-//
-//
-//            if let pathString = reviewLists[indexPath.row].userInfo.userProfileImage?[0].path {
-//
-//                if let url = URL(string: pathString) {
-//                    reviewCellWithoutReviewImages.userProfileImageView.loadImage(from: url)
-//                }
-//            } else {
-//                reviewCellWithoutReviewImages.userProfileImageView.image = UIImage(named: "default profile image")
-//            }
-//
-//
-//
-//
-//            //reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
-//            return reviewCellWithoutReviewImages
-//        }
-//    }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 

@@ -71,6 +71,8 @@ class ReviewDetailViewController: UIViewController {
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView.layer.cornerRadius = 10
     }
     
     func configurePageControl(reviewImageExists: Bool) {

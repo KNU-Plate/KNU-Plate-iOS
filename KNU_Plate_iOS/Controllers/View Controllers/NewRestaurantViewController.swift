@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 // 맛집 올리기 View Controller
 
@@ -36,6 +37,9 @@ class NewRestaurantViewController: UIViewController {
         
         /// validate user input
         /// NewRestaurantModel() 잘 생성됐는지 체크
+        ProgressHUD.animationType = .circleRotateChase
+        ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
+        ProgressHUD.show()
         
         viewModel.upload()
        
@@ -64,6 +68,8 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
     func didCompleteUpload(_ success: Bool) {
         
+        ProgressHUD.dismiss()
+        
         if success {
             
             
@@ -72,6 +78,8 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
             
             /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
         }
+        
+        
     }
 }
 

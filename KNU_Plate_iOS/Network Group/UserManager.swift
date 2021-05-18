@@ -136,11 +136,8 @@ class UserManager {
                     
                     switch statusCode {
                     
-                    case 200:
-                        completion(true)
-                        
-                    default:
-                        completion(false)
+                    case 200: completion(true)
+                    default: completion(false)
                     }
                    }
     }
@@ -160,8 +157,7 @@ class UserManager {
                     
                     switch statusCode {
                     
-                    case 200:
-                        completion(true)
+                    case 200: completion(true)
                         
                     default:
                         //이미 존재하는 아이디 또는 닉네임입니다.

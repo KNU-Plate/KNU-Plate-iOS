@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2bF-tq-S23">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -163,7 +163,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvo-R5-ufE">
                                                 <rect key="frame" x="273" y="173" width="92" height="27"/>
                                                 <subviews>
-                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="한식" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-Gz-ZSJ" userLabel="음식 종류">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="한식" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-Gz-ZSJ" userLabel="음식 종류">
                                                         <rect key="frame" x="0.0" y="0.0" width="70" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="xjZ-NX-0mM"/>
@@ -425,7 +425,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-rV-uSJ" userLabel="Menu Label Stack View">
                                                 <rect key="frame" x="10" y="309" width="181" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="Z5f-n5-v0T"/>
@@ -548,7 +548,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flM-yg-k18" userLabel="Review Label Stack View">
                                                 <rect key="frame" x="10" y="521" width="101" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review icon" translatesAutoresizingMaskIntoConstraints="NO" id="l7L-ct-he1">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="l7L-ct-he1">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="4gC-bY-qed"/>
@@ -985,8 +985,8 @@
         <image name="default profile image" width="73" height="73"/>
         <image name="food image" width="35.5" height="35.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
-        <image name="menu" width="41.5" height="41.5"/>
-        <image name="review icon" width="83" height="83"/>
+        <image name="menu (selected)" width="41.5" height="41.5"/>
+        <image name="review (selected)" width="41.5" height="41.5"/>
         <image name="star rating (filled)" width="36" height="34.5"/>
         <image name="star rating (unfilled)" width="35.5" height="34"/>
         <namedColor name="AppDefaultColor">
