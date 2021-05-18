@@ -94,27 +94,15 @@ class NewReviewViewController: UIViewController {
 
             
         } catch NewReviewInputError.insufficientMenuError {
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
             
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.insufficientMenuError.errorDescription)
-            self.present(alert, animated: true)
-
         } catch NewReviewInputError.insufficientReviewError {
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
             
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.insufficientReviewError.errorDescription )
-            self.present(alert, animated: true)
-            
-
         } catch NewReviewInputError.blankMenuNameError {
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
             
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.blankMenuNameError.errorDescription)
-            self.present(alert, animated: true)
-        }
-        catch {
-            print("Unexpected Error occured in pressedFinishButton")
-        }
+        } catch { print("Unexpected Error occurred in pressedFinishButton") }
 
     }
 }
