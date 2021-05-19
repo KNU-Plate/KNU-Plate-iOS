@@ -26,8 +26,8 @@ class NewRestaurantViewModel {
     
     /// 음식 카테고리 배열
     let foodCategoryArray: [String] = [
-        "한식", "일식", "중식", "양식",
-        "세계음식","카페", "술집"
+        "🇰🇷 한식", "🇯🇵 일식", "🇨🇳 중식", "🇺🇸 양식",
+        "🌎 세계음식","☕️ 카페", "🍹 술집"
     ]
     
     /// 학교 문 배열
@@ -56,7 +56,7 @@ class NewRestaurantViewModel {
         
         self.restaurantName = restaurantName
         self.gate = ""
-        self.foodCategory = "한식"        // 기본 값은 한식으로?
+        self.foodCategory = foodCategoryArray[0]
         self.userSelectedImages = [UIImage]()
         self.address = ""
         self.contact = ""

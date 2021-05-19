@@ -81,7 +81,7 @@
                                                 </segments>
                                             </segmentedControl>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6ST-On-OFP">
-                                                <rect key="frame" x="10" y="284" width="355" height="135"/>
+                                                <rect key="frame" x="10" y="285" width="355" height="135"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="135" id="jO8-p2-y4n"/>
@@ -160,28 +160,35 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvo-R5-ufE">
-                                                <rect key="frame" x="273" y="173" width="92" height="27"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvo-R5-ufE" userLabel="Food Stack View">
+                                                <rect key="frame" x="245" y="173" width="120" height="28"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="한식" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-Gz-ZSJ" userLabel="음식 종류">
-                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="27"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="🇰🇷 한식" textAlignment="right" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-Gz-ZSJ" userLabel="음식 종류">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="xjZ-NX-0mM"/>
-                                                            <constraint firstAttribute="width" constant="70" id="z6c-Jv-UEc"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="xjZ-NX-0mM"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="▼" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9f-gI-rV8" userLabel="Expand Button Text Field">
-                                                        <rect key="frame" x="75" y="0.0" width="17" height="27"/>
+                                                        <rect key="frame" x="105" y="0.0" width="15" height="28"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="15" id="Fz5-dh-LTh"/>
+                                                            <constraint firstAttribute="height" constant="28" id="Xgx-IP-jvy"/>
+                                                        </constraints>
                                                         <color key="textColor" name="KNU_Plate Color"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="AnX-Lc-Cqf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="n9f-gI-rV8" secondAttribute="trailing" id="CUy-XU-GxN"/>
                                                     <constraint firstItem="0Dh-Gz-ZSJ" firstAttribute="top" secondItem="Cvo-R5-ufE" secondAttribute="top" id="GMK-1x-Akf"/>
+                                                    <constraint firstItem="n9f-gI-rV8" firstAttribute="top" secondItem="Cvo-R5-ufE" secondAttribute="top" id="a8u-6x-y7e"/>
                                                     <constraint firstItem="0Dh-Gz-ZSJ" firstAttribute="leading" secondItem="Cvo-R5-ufE" secondAttribute="leading" id="u2k-xe-5kF"/>
                                                 </constraints>
                                             </stackView>
@@ -206,13 +213,13 @@
                                                 </constraints>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="sXo-pu-Jut" userLabel="Divider Line">
-                                                <rect key="frame" x="0.0" y="215" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="216" width="375" height="1"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="J8z-Gq-mOP" userLabel="Divider Line">
-                                                <rect key="frame" x="0.0" y="268" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="269" width="375" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1ie-rC-x84">
-                                                <rect key="frame" x="10" y="231" width="111.5" height="22"/>
+                                                <rect key="frame" x="10" y="232" width="111.5" height="22"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 사진" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-oh-epe">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="22"/>
@@ -294,7 +301,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="신규 매장 등록" id="3Rm-Oq-Xv4">
                         <barButtonItem key="rightBarButtonItem" title="올리기" id="LKC-nw-Eac">
-                            <color key="tintColor" name="AppDefaultColor"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="pressedUploadButton:" destination="UEI-g0-ezW" id="Oqd-gu-4yk"/>
                             </connections>
@@ -660,7 +667,7 @@
             </objects>
             <point key="canvasLocation" x="1529" y="753"/>
         </scene>
-        <!--Search Restaurant View Controller-->
+        <!--식당 등록-->
         <scene sceneID="hme-Ha-kos">
             <objects>
                 <viewController id="3h8-MA-OtV" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -737,7 +744,7 @@
                             <constraint firstItem="lSE-yw-Uca" firstAttribute="trailing" secondItem="nX9-qd-1Ok" secondAttribute="trailing" id="yR8-VO-FFL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="epQ-Sb-mL1"/>
+                    <navigationItem key="navigationItem" title="식당 등록" id="epQ-Sb-mL1"/>
                     <connections>
                         <outlet property="mapView" destination="nX9-qd-1Ok" id="Elr-MN-0IW"/>
                         <outlet property="nextButton" destination="ap7-sW-joB" id="Jc7-Ph-ubH"/>
@@ -968,6 +975,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7JS-KD-iKI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="AppDefaultColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

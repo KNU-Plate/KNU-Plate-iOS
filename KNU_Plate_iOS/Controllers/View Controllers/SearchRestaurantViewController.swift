@@ -123,9 +123,9 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         pointItem?.showDisclosureButtonOnCalloutBalloon = true
 
         
-        mapView.select(pointItem, animated: true)
-        mapView.add(pointItem)
         
+        mapView.add(pointItem)
+        mapView.select(pointItem, animated: true)
     
     }
     
