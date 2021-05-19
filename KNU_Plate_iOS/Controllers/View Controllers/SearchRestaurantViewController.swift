@@ -26,9 +26,7 @@ class SearchRestaurantViewController: UIViewController {
         mapPoint = nil
     }
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
-        
-        /// Select 안 했는데 nextButton 누르면 에러남 고치기
+    func presentVerificationAlert() {
         
         guard let placeSelected = viewModel.currentlySelectedIndex else {
             return
@@ -49,6 +47,10 @@ class SearchRestaurantViewController: UIViewController {
                                         
                                       }))
         self.present(alert, animated: true)
+    }
+    
+    @IBAction func pressedNextButton(_ sender: UIButton) {
+        presentVerificationAlert()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -118,9 +120,21 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         pointItem?.markerType = .bluePin
         pointItem?.mapPoint = mapPoint
         pointItem?.itemName = placeName
-        pointItem?.showDisclosureButtonOnCalloutBalloon = false
-    
+        pointItem?.showDisclosureButtonOnCalloutBalloon = true
+
+        
+        mapView.select(pointItem, animated: true)
         mapView.add(pointItem)
+        
+    
+    }
+    
+    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonOf poiItem: MTMapPOIItem!) {
+        presentVerificationAlert()
+    }
+    
+    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonRightSideOf poiItem: MTMapPOIItem!) {
+        presentVerificationAlert()
     }
 }
 
