@@ -49,23 +49,11 @@ class NewReviewViewController: UIViewController {
                 return
             }
         } catch NewReviewInputError.tooMuchMenusAdded {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.tooMuchMenusAdded.errorDescription)
-            self.present(alert, animated: true)
-            
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
         } catch NewReviewInputError.menuNameTooShort {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.menuNameTooShort.errorDescription)
-            self.present(alert, animated: true)
-            
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
         } catch NewReviewInputError.alreadyExistingMenu {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.alreadyExistingMenu.errorDescription)
-            self.present(alert, animated: true)
-            
+            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
         } catch {
             print("Unexpected Error occured in pressedAddMenuButton")
         }
@@ -92,7 +80,6 @@ class NewReviewViewController: UIViewController {
             
             viewModel.startUploading()
 
-            
         } catch NewReviewInputError.insufficientMenuError {
             self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
             
