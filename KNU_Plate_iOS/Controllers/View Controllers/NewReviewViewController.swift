@@ -66,18 +66,15 @@ class NewReviewViewController: UIViewController {
         self.view.endEditing(true)
     
         do {
-
-            //TODO: - 마지막으로 업로드하기 전에 확인 질문 띄우기?
-            //TODO: - "완료" 버튼 누르고 시간이 좀 많이 걸린다 싶으면 activity indicator (loading 표시) 하나 넣는거 고려
             
+            self.presentSimpleAlert(title: "리뷰를 업로드 하시겠습니까?", message: "")
+
             try viewModel.validateUserInputs()
             viewModel.rating = starRating.starsRating
             
-            
-            ProgressHUD.animationType = .circleRotateChase
-            ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
-            ProgressHUD.show()
-            
+            showProgressBar()
+           
+
             viewModel.startUploading()
 
         } catch NewReviewInputError.insufficientMenuError {
@@ -91,6 +88,7 @@ class NewReviewViewController: UIViewController {
             
         } catch { print("Unexpected Error occurred in pressedFinishButton") }
 
+        dismissProgressBar()
     }
 }
 
@@ -184,9 +182,6 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 extension NewReviewViewController: NewReviewViewModelDelegate {
     
     func didCompleteReviewUpload(_ success: Bool) {
-        //TODO: - 수정 필요
-        // 리뷰 등록을 완료했다고 작게 알림 띄우는게 좋을듯
-        
         ProgressHUD.dismiss()
         print("NEW REVIEW UPLOAD COMPLETE")
     }

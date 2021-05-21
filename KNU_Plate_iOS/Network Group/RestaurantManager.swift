@@ -14,7 +14,7 @@ class RestaurantManager {
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
-    let markFavoriteRequestURL      = "\(Constants.API_BASE_URL)mall/recommend/"
+    let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
     
     
     private init() {}
@@ -42,7 +42,7 @@ class RestaurantManager {
                     /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
-                                             fileName: "image.jpeg",
+                                             fileName: "\(UUID().uuidString).jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -152,7 +152,7 @@ class RestaurantManager {
                     
                     multipartFormData.append(images,
                                              withName: "review_image",
-                                             fileName: "mall_image.jpeg",
+                                             fileName: "\(UUID().uuidString).jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -181,6 +181,7 @@ class RestaurantManager {
                         print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
                     }
                 }
+                completion(false)
                 
             }
     }
@@ -282,6 +283,7 @@ class RestaurantManager {
                                 print(error)
                             } else { print("알 수 없는 에러 발생.") }
                         }
+                        completion(false)
                     }
                    }
     }

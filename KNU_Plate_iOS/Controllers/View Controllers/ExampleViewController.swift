@@ -23,17 +23,24 @@ class ExampleViewController: UIViewController {
         tableView.register(reviewNib, forCellReuseIdentifier: cellID)
         tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: cellID2)
         
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        
+        
         viewModel.delegate = self
     }
     
     @IBAction func pressedButton(_ sender: UIButton) {
         
-        ProgressHUD.animationType = .circleRotateChase
-        ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
-        ProgressHUD.show()
-        
+        showProgressBar()
+
 
         //TODO: - dynamic 하게 변경할 필요 있음
+        viewModel.fetchReviewList(of: 2)
+    }
+    
+    @objc func refreshTable() {
+    
         viewModel.fetchReviewList(of: 2)
     }
     
@@ -45,7 +52,8 @@ extension ExampleViewController: ReviewListViewModelDelegate {
     func didFetchReviewListResults() {
         
         tableView.reloadData()
-        ProgressHUD.dismiss()
+        tableView.refreshControl?.endRefreshing()
+        dismissProgressBar()
     }
 }
 
@@ -75,7 +83,6 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
-
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
             return reviewCellWithoutReviewImages
         }

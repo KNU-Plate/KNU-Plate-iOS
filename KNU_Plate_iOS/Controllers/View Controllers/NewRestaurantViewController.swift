@@ -37,9 +37,9 @@ class NewRestaurantViewController: UIViewController {
         
         /// validate user input
         /// NewRestaurantModel() 잘 생성됐는지 체크
-        ProgressHUD.animationType = .circleRotateChase
-        ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
-        ProgressHUD.show()
+        
+        showProgressBar()
+
         
         viewModel.upload()
        
@@ -68,18 +68,12 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
     func didCompleteUpload(_ success: Bool) {
         
-        ProgressHUD.dismiss()
-        
         if success {
-            
-            
-            /// 매장 등록 완료 Alert 표시
+            dismissProgressBar()
         } else {
-            
-            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
+            self.presentSimpleAlert(title: "신규 매장 등록 실패", message: "일시적인 오류로 매장 등록에 실패하였습니다. 잠시 후 다시 시도해주세요 🥲")
+            navigationController?.popToRootViewController(animated: true)
         }
-        
-        
     }
 }
 
@@ -166,7 +160,6 @@ extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSou
 
         let selectedFoodCategory = viewModel.foodCategoryArray[row]
         viewModel.foodCategory = selectedFoodCategory
-        
         foodCategoryTextField.text = selectedFoodCategory
     }
 }
