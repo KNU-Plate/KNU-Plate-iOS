@@ -51,7 +51,6 @@ class NewReviewViewModel {
     public init(mallID: Int = 2) {
         
         self.mallID = mallID
-
         
     }
     
@@ -218,6 +217,7 @@ class NewReviewViewModel {
 
         /// 리뷰 글자수가 5 미만이면 Error
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
+        
 
         /// 입력한 메뉴 중 메뉴명이 비어있는게 하나라도 있으면 Error
         for eachMenu in userAddedMenus {

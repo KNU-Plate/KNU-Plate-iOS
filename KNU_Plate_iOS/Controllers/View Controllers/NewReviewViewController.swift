@@ -11,11 +11,12 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
     lazy var existingMenusPickerView = UIPickerView()
 
 
-    // 수정 필요
-    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 0)
+    // 수정 필요 mallIID
+    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class NewReviewViewController: UIViewController {
     func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
         viewModel.mallID = mallID
+        viewModel.existingMenus.append(contentsOf: existingMenus)
     }
 
     @objc func pressedAddMenuButton() {
@@ -49,14 +51,19 @@ class NewReviewViewController: UIViewController {
                 initializePickerViewForMenuTextField()
                 return
             }
-        } catch NewReviewInputError.tooMuchMenusAdded {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
-        } catch NewReviewInputError.menuNameTooShort {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
-        } catch NewReviewInputError.alreadyExistingMenu {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
         } catch {
-            print("Unexpected Error occured in pressedAddMenuButton")
+            
+            switch error {
+            
+            case NewReviewInputError.tooMuchMenusAdded:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
+            case NewReviewInputError.menuNameTooShort:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
+            case NewReviewInputError.alreadyExistingMenu:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
+            default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+            
+            }
         }
         menuInputTextField.text?.removeAll()
     }
@@ -70,27 +77,29 @@ class NewReviewViewController: UIViewController {
              
             if !selectedOk { return }
             else {
-                
                 do {
-
                     try self.viewModel.validateUserInputs()
+                    
                     self.viewModel.rating = self.starRating.starsRating
                     
                     showProgressBar()
                    
                     self.viewModel.startUploading()
 
-                } catch NewReviewInputError.insufficientMenuError {
-                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
+                } catch {
                     
-                } catch NewReviewInputError.insufficientReviewError {
-                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
+                    switch error {
                     
-                } catch NewReviewInputError.blankMenuNameError {
-                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
-                    
-                } catch { print("Unexpected Error occurred in pressedFinishButton") }
-
+                    case NewReviewInputError.insufficientMenuError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
+                    case NewReviewInputError.insufficientReviewError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
+                    case NewReviewInputError.blankMenuNameError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
+                    default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                        
+                    }
+                }
                 dismissProgressBar()
             }
         }
