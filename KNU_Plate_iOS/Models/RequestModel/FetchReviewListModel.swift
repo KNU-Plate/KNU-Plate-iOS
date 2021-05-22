@@ -15,7 +15,7 @@ struct FetchReviewListModel {
         
         /// Initialize parameters
         parameters["mall_id"] = mallID
-        parameters["page"] = page
+        parameters["cursor"] = page
     }
     
     /// API Parameters
@@ -26,6 +26,5 @@ struct FetchReviewListModel {
   
         "accept": "application/json",
         "Authorization": User.shared.accessToken
-  
     ]
 }

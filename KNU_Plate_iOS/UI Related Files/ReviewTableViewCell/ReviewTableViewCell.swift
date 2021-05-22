@@ -47,7 +47,7 @@ class ReviewTableViewCell: UITableViewCell {
         
         // Check if a user profile image exists
         if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.userProfileImageURLInString = fileFolderID
+            viewModel.userProfileImageURLPath = fileFolderID
         }
         // Check if review images exists
         if let fileFolderID = model.reviewImageFileInfo {
@@ -69,6 +69,8 @@ class ReviewTableViewCell: UITableViewCell {
         reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
+        
+        
 
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
@@ -125,7 +127,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getReviewDetails() -> ReviewDetail {
         
-        let profileImage = viewModel.userProfileImage
+        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating

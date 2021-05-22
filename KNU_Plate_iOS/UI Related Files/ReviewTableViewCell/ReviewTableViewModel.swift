@@ -8,9 +8,9 @@ class ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImageURLInString: String? {
+    var userProfileImageURLPath: String? {
         didSet {
-            guard let urlString = userProfileImageURLInString else {
+            guard let urlString = userProfileImageURLPath else {
                 userProfileImageURL = nil
                 return
             }

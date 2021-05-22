@@ -64,31 +64,37 @@ class NewReviewViewController: UIViewController {
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
         self.view.endEditing(true)
+        
+        self.presentAlertWithCancelAction(title: "리뷰를 업로드 하시겠습니까?", message: "") { selectedOk in
+             
+            if !selectedOk { return }
+            else {
+                
+                do {
+
+                    try self.viewModel.validateUserInputs()
+                    self.viewModel.rating = self.starRating.starsRating
+                    
+                    showProgressBar()
+                   
+                    self.viewModel.startUploading()
+
+                } catch NewReviewInputError.insufficientMenuError {
+                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
+                    
+                } catch NewReviewInputError.insufficientReviewError {
+                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
+                    
+                } catch NewReviewInputError.blankMenuNameError {
+                    self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
+                    
+                } catch { print("Unexpected Error occurred in pressedFinishButton") }
+
+                dismissProgressBar()
+            }
+        }
     
-        do {
-            
-            self.presentSimpleAlert(title: "리뷰를 업로드 하시겠습니까?", message: "")
-
-            try viewModel.validateUserInputs()
-            viewModel.rating = starRating.starsRating
-            
-            showProgressBar()
-           
-
-            viewModel.startUploading()
-
-        } catch NewReviewInputError.insufficientMenuError {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
-            
-        } catch NewReviewInputError.insufficientReviewError {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
-            
-        } catch NewReviewInputError.blankMenuNameError {
-            self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
-            
-        } catch { print("Unexpected Error occurred in pressedFinishButton") }
-
-        dismissProgressBar()
+        
     }
 }
 

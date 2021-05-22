@@ -29,7 +29,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
        
         // Check if a user profile image exists
         if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.userProfileImageURLInString = fileFolderID
+            viewModel.userProfileImageURLPath = fileFolderID
         }
         initialize()
       

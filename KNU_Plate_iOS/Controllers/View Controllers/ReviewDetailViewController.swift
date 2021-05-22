@@ -34,6 +34,8 @@ class ReviewDetailViewController: UIViewController {
     // Review Cell
     func initialize() {
         
+        print("reviewdetailVC - initialize: \(reviewDetails.profileImage)")
+        
         userProfileImageView.image = reviewDetails.profileImage
         userNicknameLabel.text = reviewDetails.nickname
         userMedalImageView.image = setUserMedalImage(medalRank: reviewDetails.medal)
@@ -44,6 +46,7 @@ class ReviewDetailViewController: UIViewController {
         // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
         OperationQueue().addOperation {
+            
             if let fileFolder = self.reviewDetails.reviewImagesFileInfo {
                 
                 for eachImageInfo in fileFolder {

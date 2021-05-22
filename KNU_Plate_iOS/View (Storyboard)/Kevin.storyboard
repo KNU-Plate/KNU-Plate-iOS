@@ -766,14 +766,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="od1-e7-aAf">
-                                <rect key="frame" x="10" y="20" width="40" height="40"/>
+                                <rect key="frame" x="15" y="20" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Hri-jR-7h9"/>
                                     <constraint firstAttribute="width" constant="40" id="YSG-XO-0Nx"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWA-ib-GWK">
-                                <rect key="frame" x="60" y="30" width="44.5" height="20.5"/>
+                                <rect key="frame" x="65" y="30" width="44.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="sli-hM-eat"/>
                                 </constraints>
@@ -859,10 +859,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-HF-uOB">
-                                <rect key="frame" x="119.5" y="30" width="20" height="20"/>
+                                <rect key="frame" x="124.5" y="30" width="15" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Q71-Hv-VSC"/>
-                                    <constraint firstAttribute="width" constant="20" id="R00-dx-Nal"/>
+                                    <constraint firstAttribute="height" constant="15" id="Q71-Hv-VSC"/>
+                                    <constraint firstAttribute="width" constant="15" id="R00-dx-Nal"/>
                                 </constraints>
                             </imageView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qV8-ib-u15">
@@ -876,7 +876,7 @@
                             <constraint firstItem="g45-dp-hLO" firstAttribute="trailing" secondItem="qV8-ib-u15" secondAttribute="trailing" constant="15" id="8cD-j1-u6K"/>
                             <constraint firstItem="qV8-ib-u15" firstAttribute="leading" secondItem="g45-dp-hLO" secondAttribute="leading" constant="15" id="GOf-mB-nIJ"/>
                             <constraint firstItem="eWA-ib-GWK" firstAttribute="top" secondItem="g45-dp-hLO" secondAttribute="top" constant="30" id="GVE-p6-KZx"/>
-                            <constraint firstItem="od1-e7-aAf" firstAttribute="leading" secondItem="g45-dp-hLO" secondAttribute="leading" constant="10" id="HHR-pa-ozM"/>
+                            <constraint firstItem="od1-e7-aAf" firstAttribute="leading" secondItem="g45-dp-hLO" secondAttribute="leading" constant="15" id="HHR-pa-ozM"/>
                             <constraint firstItem="g45-dp-hLO" firstAttribute="trailing" secondItem="cLd-YC-auL" secondAttribute="trailing" constant="15" id="LEA-pM-vx5"/>
                             <constraint firstItem="od1-e7-aAf" firstAttribute="top" secondItem="g45-dp-hLO" secondAttribute="top" constant="20" id="OBQ-vu-Xh9"/>
                             <constraint firstItem="qV8-ib-u15" firstAttribute="top" secondItem="od1-e7-aAf" secondAttribute="bottom" constant="360" id="Qzx-AD-LLC"/>
@@ -919,14 +919,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="dN3-8a-P9z">
-                                <rect key="frame" x="0.0" y="311" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="pressedButton:" destination="crA-ja-4ef" eventType="touchUpInside" id="4xQ-cN-Z3l"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bAJ-bC-yCq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

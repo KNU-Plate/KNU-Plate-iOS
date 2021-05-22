@@ -1,8 +1,9 @@
 import Foundation
-import ProgressHUD
 
 protocol ReviewListViewModelDelegate {
     func didFetchReviewListResults()
+    func didFetchEmptyReviewListResults()
+    func failedFetchingReviewListResults()
 }
 
 class ReviewListViewModel {
@@ -10,22 +11,55 @@ class ReviewListViewModel {
     //MARK: - Object Properties
     var delegate: ReviewListViewModelDelegate?
     
-    var page: Int = 0
+    //var page: Int = 0
     
-    var reviewList: [ReviewListResponseModel]?
+    var reviewList: [ReviewListResponseModel] = []
     
     var selectedIndex: IndexPath?
     
+    var isPaginating: Bool = false
+    
+    var needToFetchMoreData: Bool = true
+    
     //MARK: - Object Methods
     
-    func fetchReviewList(of mallID: Int) {
+    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 0) {
   
-        let model = FetchReviewListModel(mallID: mallID, page: page)
+        if pagination {
+            isPaginating = true
+        }
+        
+        let model = FetchReviewListModel(mallID: mallID, page: index)
     
-        RestaurantManager.shared.fetchReviewList(with: model) { responseModel in
+        RestaurantManager.shared.fetchReviewList(with: model) { result in
             
-            self.reviewList = responseModel
-            self.delegate?.didFetchReviewListResults()
+            
+            switch result {
+            
+            case .success(let responseModel):
+                
+                if responseModel.isEmpty {
+                    self.needToFetchMoreData = false
+                    self.delegate?.didFetchEmptyReviewListResults()
+                    return
+                }
+            
+                self.reviewList.append(contentsOf: responseModel)
+    
+                if pagination {
+                    self.isPaginating = false
+                }
+                
+                self.delegate?.didFetchReviewListResults()
+                
+        
+            case .failure(let error):
+                print("ReviewListViewModel - fetchReviewList() error")
+                print(error.localizedDescription)
+                
+                
+            }
+            
         }
     }
     
