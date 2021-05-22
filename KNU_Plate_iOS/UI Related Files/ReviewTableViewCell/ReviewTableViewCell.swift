@@ -66,9 +66,15 @@ class ReviewTableViewCell: UITableViewCell {
     func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
-        reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
+        reviewLabel.text = viewModel.review
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 2
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewLabel.attributedText = NSAttributedString(string: viewModel.review, attributes: attributes)
+        reviewLabel.font = UIFont.systemFont(ofSize: 14)
         
         
 

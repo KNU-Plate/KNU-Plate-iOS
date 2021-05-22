@@ -9,7 +9,8 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var reviewImageView: UIImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
-    @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var reviewTextView: UITextView!
+    
     
     var reviewDetails = ReviewDetail()
     var reviewImages: [UIImage] = []
@@ -33,15 +34,18 @@ class ReviewDetailViewController: UIViewController {
     
     // Review Cell
     func initialize() {
-        
-        print("reviewdetailVC - initialize: \(reviewDetails.profileImage)")
-        
+         
         userProfileImageView.image = reviewDetails.profileImage
         userNicknameLabel.text = reviewDetails.nickname
         userMedalImageView.image = setUserMedalImage(medalRank: reviewDetails.medal)
         rating.setStarsRating(rating: Int(exactly: reviewDetails.rating)!)
-        reviewLabel.text = reviewDetails.review
         
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 3
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewTextView.attributedText = NSAttributedString(string: reviewDetails.review, attributes: attributes)
+        reviewTextView.font = UIFont.systemFont(ofSize: 14.5)
         
         // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
@@ -59,6 +63,7 @@ class ReviewDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: true)
                 }
+                
             } else {
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: false)
@@ -76,6 +81,12 @@ class ReviewDetailViewController: UIViewController {
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
         reviewImageView.layer.cornerRadius = 10
+        
+
+        
+        
+        
+        
     }
     
     func configurePageControl(reviewImageExists: Bool) {

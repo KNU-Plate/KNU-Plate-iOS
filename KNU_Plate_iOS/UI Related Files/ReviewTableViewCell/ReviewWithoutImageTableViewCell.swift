@@ -38,9 +38,19 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     override func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
-        reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
+        
+        
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 2
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewLabel.attributedText = NSAttributedString(string: viewModel.review,
+                                                        attributes: attributes)
+        reviewLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        
         
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
