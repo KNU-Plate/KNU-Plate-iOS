@@ -118,6 +118,8 @@ class NewReviewViewModel {
                                             rating: rating,
                                             reviewImages: userSelectedImagesInDataFormat)
         
+        print(userSelectedImagesInDataFormat![0])
+        
         RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
             
             print("SUCCESSFULLY UPLOAD NEW REVIEW")
@@ -129,10 +131,11 @@ class NewReviewViewModel {
     
     func convertUIImagesToDataFormat() {
         userSelectedImagesInDataFormat?.removeAll()
+
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             
-            if let imageData = image.jpegData(compressionQuality: 0.9) {
+            if let imageData = image.jpegData(compressionQuality: 1) {
                 return imageData
             } else {
                 print("Unable to convert UIImage to Data type")

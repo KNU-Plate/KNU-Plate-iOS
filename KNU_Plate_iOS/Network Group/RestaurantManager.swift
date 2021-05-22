@@ -149,7 +149,7 @@ class RestaurantManager {
     
             if let imageArray = model.reviewImages {
                 for images in imageArray {
-                    
+                
                     multipartFormData.append(images,
                                              withName: "review_image",
                                              fileName: "\(UUID().uuidString).jpeg",
@@ -160,18 +160,14 @@ class RestaurantManager {
         headers: model.headers)
         .responseJSON { response in
             
-            guard let statusCode = response.response?.statusCode else {
-                return
-            }
+            guard let statusCode = response.response?.statusCode else { return }
             
             switch statusCode {
             
             case 200:
                 
                 print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
-                
                 completion(true)
-                
                 
             default:
                 if let responseJSON = try! response.result.get() as? [String : String] {

@@ -103,8 +103,6 @@ class NewReviewViewController: UIViewController {
                 dismissProgressBar()
             }
         }
-    
-        
     }
 }
 
@@ -259,14 +257,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
 }
 
-
-//MARK: - UITextFieldDelegate -> For menuInputTextField
-
-extension NewReviewViewController: UITextFieldDelegate {
-    
-    
-}
-
 //MARK: - UITextViewDelegate -> For reviewTextView
 
 extension NewReviewViewController: UITextViewDelegate {
@@ -298,10 +288,16 @@ extension NewReviewViewController {
         
         viewModel.delegate = self
         
+        initializeStarRating()
         initializeTextField()
         initializeCollectionView()
         initializeTableView()
         initializeTextView()
+    }
+    
+    func initializeStarRating() {
+        
+        starRating.setStarsRating(rating: viewModel.rating)
     }
     
     func initializeTableView() {
@@ -333,8 +329,7 @@ extension NewReviewViewController {
     }
     
     func initializeTextField() {
-        
-        menuInputTextField.delegate = self
+
         menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true

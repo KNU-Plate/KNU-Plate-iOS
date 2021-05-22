@@ -219,15 +219,15 @@
                                                 <rect key="frame" x="0.0" y="269" width="375" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1ie-rC-x84">
-                                                <rect key="frame" x="10" y="232" width="111.5" height="22"/>
+                                                <rect key="frame" x="10" y="232" width="160.5" height="22"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 사진" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-oh-epe">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(선택)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-qt-gr8">
-                                                        <rect key="frame" x="79" y="0.0" width="32.5" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(선택/최대 5장)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-qt-gr8">
+                                                        <rect key="frame" x="79" y="0.0" width="81.5" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -408,8 +408,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Hk-u8-0mr" userLabel="Food Pic Label Stack View">
                                                 <rect key="frame" x="10" y="106" width="136.5" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food image" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
-                                                        <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
+                                                        <rect key="frame" x="0.0" y="1" width="21" height="18.5"/>
+                                                        <color key="tintColor" name="AppDefaultColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="9qO-J0-KeE"/>
                                                             <constraint firstAttribute="width" constant="21" id="eme-En-ijE"/>
@@ -577,10 +578,10 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="15" y="557" width="345" height="150"/>
+                                                <rect key="frame" x="15" y="557" width="345" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="S1U-Zw-Uv7"/>
+                                                    <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -991,9 +992,9 @@
         <image name="add button" width="113" height="113"/>
         <image name="cancel button" width="40" height="40"/>
         <image name="default profile image" width="73" height="73"/>
-        <image name="food image" width="35.5" height="35.5"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu (selected)" width="41.5" height="41.5"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="review (selected)" width="41.5" height="41.5"/>
         <image name="star rating (filled)" width="36" height="34.5"/>
         <image name="star rating (unfilled)" width="35.5" height="34"/>
