@@ -111,8 +111,6 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         
         let reviewDetails = cell.getReviewDetails()
         
-        
- 
         vc.configure(with: reviewDetails)
     }
 

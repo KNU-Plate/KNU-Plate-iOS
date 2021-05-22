@@ -44,7 +44,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbI-zo-8Yg">
-                        <rect key="frame" x="325" y="12" width="30" height="30"/>
+                        <rect key="frame" x="325" y="5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="Io6-it-BnV"/>
                             <constraint firstAttribute="height" constant="30" id="kV6-V0-gJU"/>
@@ -136,7 +136,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="BVS-G5-oR6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="0aI-dK-Obu"/>
-                    <constraint firstItem="wbI-zo-8Yg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="1Wk-6w-ufF"/>
+                    <constraint firstItem="wbI-zo-8Yg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="1Wk-6w-ufF"/>
                     <constraint firstAttribute="trailing" secondItem="wbI-zo-8Yg" secondAttribute="trailing" constant="15" id="7ME-nw-zej"/>
                     <constraint firstItem="fnO-Rx-9HI" firstAttribute="top" secondItem="KQd-zG-zct" secondAttribute="bottom" constant="10" id="AZ7-eL-8dS"/>
                     <constraint firstAttribute="trailing" secondItem="UB8-9o-VVn" secondAttribute="trailing" constant="10" id="DPc-Ao-SKS"/>

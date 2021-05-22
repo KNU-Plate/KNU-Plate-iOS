@@ -27,7 +27,8 @@ class NewReviewViewController: UIViewController {
 
     }
     
-    func initializeViewModelVariables(mallID: Int) {
+    // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
+    func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
         viewModel.mallID = mallID
     }

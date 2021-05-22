@@ -72,7 +72,7 @@ class SearchRestaurantViewController: UIViewController {
             
             // 나중에 구조체로 묶어서 한 번에 보내는 것도 고려
         
-            newRestaurantVC.initializeViewModelVariables(name: restaurantName,
+            newRestaurantVC.configure(name: restaurantName,
                                                          address: address,
                                                          contact: contact,
                                                          categoryName: category,

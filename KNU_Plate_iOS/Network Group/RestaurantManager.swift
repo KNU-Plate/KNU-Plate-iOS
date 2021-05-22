@@ -204,14 +204,9 @@ class RestaurantManager {
                     switch statusCode {
                     case 200:
                         do {
-                    
                             let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
-
-                            
-                            print("Restaurant Manager - fetched ReviewList : \(decodedData)")
-                            
                             completion(.success(decodedData))
-                        
+                
                         } catch {
                             print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                         }
@@ -229,8 +224,7 @@ class RestaurantManager {
     }
     
 
-   
-    
+
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
                       httpMethod: HTTPMethod,

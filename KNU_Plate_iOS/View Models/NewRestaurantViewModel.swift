@@ -15,14 +15,14 @@ class NewRestaurantViewModel {
     var gate: String = ""
     
     /// 매장 관련 사진 배열
-    var userSelectedImages: [UIImage] {
+    var userSelectedImages: [UIImage] = [] {
         didSet { convertUIImagesToDataFormat() }
     }
     
     var userSelectedImagesInDataFormat: [Data]? = nil
     
     /// 사용자가 선택한 음식 카테고리 (i.e 한식, 중식)
-    var foodCategory: String
+    var foodCategory: String = "🇰🇷 한식"
     
     /// 음식 카테고리 배열
     let foodCategoryArray: [String] = [
@@ -55,9 +55,6 @@ class NewRestaurantViewModel {
     public init(restaurantName: String) {
         
         self.restaurantName = restaurantName
-
-        self.foodCategory = foodCategoryArray[0]
-        self.userSelectedImages = [UIImage]()
   
     }
     

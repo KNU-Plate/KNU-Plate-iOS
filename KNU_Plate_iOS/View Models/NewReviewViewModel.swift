@@ -12,11 +12,11 @@ class NewReviewViewModel {
     
     var mallID: Int
     
-    var rating: Int
+    var rating: Int = 4
     
     var userSelectedImagesInDataFormat: [Data]?
     
-    var userSelectedImages: [UIImage] {
+    var userSelectedImages = [UIImage]() {
         didSet { convertUIImagesToDataFormat() }
     }
     
@@ -33,35 +33,26 @@ class NewReviewViewModel {
     ]
     
     /// 사용자가 추가한 메뉴
-    var userAddedMenus: [UserAddedMenuModel]
+    var userAddedMenus = [UserAddedMenuModel]()
     
     /// 따로 DB 에 등록해야 할 메뉴
-    var menusToUpload: [UploadMenuModel]
+    var menusToUpload = [UploadMenuModel]()
     
     /// 리뷰를 최종적으로 등록할 때 필요한 메뉴의 Model
-    var finalMenuInfo: [FinalMenuModel]
+    var finalMenuInfo = [FinalMenuModel]()
     
-    var review: String
-    
-    ///
-    var menuInfoInJSONString: String
+    var review: String = ""
+
+    var menuInfoInJSONString: String = ""
 
    
     //MARK: - Init
     
-    public init(mallID: Int) {
+    public init(mallID: Int = 2) {
         
-        ///mallID 추후 dynamic 하게 수정 self.mallID = mallID
-        self.mallID = 2
-        self.rating = 3
+        self.mallID = mallID
+
         
-        self.userSelectedImages = [UIImage]()
-        //self.existingMenus = [ExistingMenuModel]()
-        self.userAddedMenus = [UserAddedMenuModel]()
-        self.menusToUpload = [UploadMenuModel]()
-        self.finalMenuInfo = [FinalMenuModel]()
-        self.review = ""
-        self.menuInfoInJSONString = ""
     }
     
     //MARK: - Object Methods
