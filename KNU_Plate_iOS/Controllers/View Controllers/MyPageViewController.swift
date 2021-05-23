@@ -22,6 +22,9 @@ class MyPageViewController: UIViewController {
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
+        presentActionSheet()
+        
+        present(self.imagePicker, animated: true, completion: nil)
         
     }
     
@@ -29,8 +32,74 @@ class MyPageViewController: UIViewController {
 
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
+        UserManager.shared.logOut { result in
+            
+            switch result {
+            
+            case true:
+                
+                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
+                    
+                    if selectedOk {
+                        
+                        DispatchQueue.main.async {
+                            
+                            //TODO: - 최초 화면으로 돌아가는거 있어야함
+                            //self.popToInitialViewController()
+                        }
+                        
+                    } else { return }
+                }
+                
+            case false:
+                self.showToast(message: "일시적 네트워크 오류")
+            
+            }
+        }
+        
         
     }
+    
+    func removeProfileImage() {
+        
+        profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+        initializeProfileImageButton()
+
+        // API 통신
+    }
+    
+    func presentActionSheet() {
+        
+        let alert = UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
+        
+        let library = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
+            
+            self.initializeImagePicker()
+            self.present(self.imagePicker, animated: true)
+        }
+        
+        let remove = UIAlertAction(title: "프로필 사진 제거", style: .default) { _ in
+            self.removeProfileImage()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(remove)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func popToInitialViewController() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    }
+    
+    
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -72,10 +141,6 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-    
 }
 
 //MARK: - UI Configuration
@@ -83,8 +148,6 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
 extension MyPageViewController {
     
     func initialize() {
-        
-
         
         initializeProfileImageButton()
         initializeImagePicker()
@@ -98,12 +161,12 @@ extension MyPageViewController {
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     
-    func initializeImagePicker() {
+    func initializeMedalImage() {
         
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
+        userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
     }
+    
+
     
     func updateProfileImageButton(with image: UIImage) {
         
@@ -111,6 +174,13 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.borderWidth = 1
         profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    func initializeImagePicker() {
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
     }
     
     

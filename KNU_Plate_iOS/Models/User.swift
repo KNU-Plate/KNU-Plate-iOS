@@ -27,18 +27,19 @@ class User {
     var isActive: String = ""
      
     /// variable for medal
-    var medal: String = "3"
+    //var medal: String = "3"
+    var medal: Int = 3
     
-    var medalImage: UIImage {
-        get {
-            switch self.medal {
-            case "1": return UIImage(named: "first medal")!
-            case "2": return UIImage(named: "second medal")!
-            case "3": return UIImage(named: "third medal")!
-            default: return UIImage(named: "third medal")!
-            }
-        }
-    }
+//    var medalImage: UIImage {
+//        get {
+//            switch self.medal {
+//            case "1": return UIImage(named: "first medal")!
+//            case "2": return UIImage(named: "second medal")!
+//            case "3": return UIImage(named: "third medal")!
+//            default: return UIImage(named: "third medal")!
+//            }
+//        }
+//    }
         
     var accessToken: String = ""
     
@@ -54,14 +55,14 @@ class User {
     
     
     //MARK: - 사용자 메달 이미지가 필요할 때 사용
-    func getUserMedalInfo() -> UIImage {
-        switch self.medal {
-        case "1": return UIImage(named: "first medal")!
-        case "2": return UIImage(named: "second medal")!
-        case "3": return UIImage(named: "third medal")!
-        default: return UIImage(named: "third medal")!
-        }
-    }
+//    func getUserMedalInfo() -> UIImage {
+//        switch self.medal {
+//        case "1": return UIImage(named: "first medal")!
+//        case "2": return UIImage(named: "second medal")!
+//        case "3": return UIImage(named: "third medal")!
+//        default: return UIImage(named: "third medal")!
+//        }
+//    }
     
     
     

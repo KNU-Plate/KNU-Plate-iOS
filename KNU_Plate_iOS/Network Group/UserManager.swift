@@ -252,6 +252,11 @@ class UserManager {
                    }
     }
     
+    //MARK: - 사용자 정보 불러오기
+    func loadUserProfileInfo() {
+        
+        // medal 정보도 저장 맨날 하는게 좋을듯 
+    }
     
     
     
