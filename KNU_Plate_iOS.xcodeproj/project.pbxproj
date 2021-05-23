@@ -71,6 +71,7 @@
 		7C1F79DD2633025900C7B41D /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79DC2633025900C7B41D /* MapManager.swift */; };
 		7C1F79DF26330AD000C7B41D /* SearchRestaurantByKeywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */; };
 		7C1F79E12633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */; };
+		7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
@@ -197,6 +198,7 @@
 		7C1F79DC2633025900C7B41D /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		7C1F79DE26330ACF00C7B41D /* SearchRestaurantByKeywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantByKeywordModel.swift; sourceTree = "<group>"; };
 		7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantByKeywordResponseModel.swift; sourceTree = "<group>"; };
+		7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
 				7C1F79052632E04700C7B41D /* ExampleViewController.swift */,
 				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
+				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 				7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */,
+				7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

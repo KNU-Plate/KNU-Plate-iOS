@@ -987,6 +987,67 @@
             </objects>
             <point key="canvasLocation" x="-348" y="1634"/>
         </scene>
+        <!--건의사항-->
+        <scene sceneID="w0q-AI-vnf">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="X6o-QE-28v" customClass="SendDeveloperMessageViewController" customModule="KNU_Market" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jwx-Fu-klh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-R8-HRp">
+                                <rect key="frame" x="15" y="83" width="345" height="153"/>
+                                <string key="text">(i) 혹시 건의/제안사항이 있으신가요? 
+있으시면 편하게 아래에 적어서 “보내기"를 눌러주세요. 개발자들이 참고하여 추후 업데이트에 반영하도록 하겠습니다 :)
+
+(ii) 아니면 앱을 사용하시면서 문제가 있으셨나요? 어떤 문제든지 알려주시면 저희 크슐랭가이드팀이 검토 후 조치하도록 하겠습니다!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발팀에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-7f-w79">
+                                <rect key="frame" x="15" y="20" width="206" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ILg-xr-vks">
+                                <rect key="frame" x="15" y="271" width="345" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="FVk-Rg-jdI"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jex-w7-TPm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gqB-R8-HRp" secondAttribute="trailing" constant="15" id="HnC-8x-aBv"/>
+                            <constraint firstItem="ILg-xr-vks" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="LTK-IM-7Nm"/>
+                            <constraint firstItem="eTN-7f-w79" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="WDI-mK-WQN"/>
+                            <constraint firstItem="eTN-7f-w79" firstAttribute="top" secondItem="Jex-w7-TPm" secondAttribute="top" constant="20" id="Ya8-SZ-rTg"/>
+                            <constraint firstItem="gqB-R8-HRp" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="cYj-28-msQ"/>
+                            <constraint firstItem="gqB-R8-HRp" firstAttribute="top" secondItem="eTN-7f-w79" secondAttribute="bottom" constant="40" id="hew-FO-Ytc"/>
+                            <constraint firstItem="ILg-xr-vks" firstAttribute="top" secondItem="gqB-R8-HRp" secondAttribute="bottom" constant="35" id="l2H-MW-LJZ"/>
+                            <constraint firstItem="Jex-w7-TPm" firstAttribute="trailing" secondItem="ILg-xr-vks" secondAttribute="trailing" constant="15" id="uef-JL-lKh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="건의사항" id="CCs-4L-dxq">
+                        <barButtonItem key="rightBarButtonItem" title="보내기" id="DC2-vX-Wau">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="messageTextView" destination="ILg-xr-vks" id="Bzj-Qz-78V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aph-bM-sZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-348" y="3310"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add button" width="113" height="113"/>
