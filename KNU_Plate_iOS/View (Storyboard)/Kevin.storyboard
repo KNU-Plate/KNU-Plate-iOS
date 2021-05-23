@@ -1048,14 +1048,120 @@
             </objects>
             <point key="canvasLocation" x="-348" y="3310"/>
         </scene>
+        <!--My Page View Controller-->
+        <scene sceneID="a3a-g2-Jy2">
+            <objects>
+                <viewController title="My Page View Controller" id="pZm-rV-DhB" customClass="MyPageViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="brH-jB-qJ9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYK-HP-QV1" userLabel="Profile Image Button">
+                                <rect key="frame" x="15" y="40" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Goj-oj-mKi"/>
+                                    <constraint firstAttribute="height" constant="80" id="xh0-Li-x4V"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="pick profile pic(black)"/>
+                                <connections>
+                                    <action selector="pressedProfileImageButton:" destination="pZm-rV-DhB" eventType="touchUpInside" id="99c-GK-N76"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="05S-3l-tUd" userLabel="Divider Line">
+                                <rect key="frame" x="0.5" y="145" width="374" height="1"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-8S-Y4J">
+                                <rect key="frame" x="110" y="55" width="93" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="dpC-T1-xTk">
+                                <rect key="frame" x="110" y="85" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="bh7-GR-HR3"/>
+                                    <constraint firstAttribute="width" constant="25" id="uQS-SL-gIl"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QVo-TS-4Ii">
+                                <rect key="frame" x="0.0" y="146" width="375" height="270"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="270" id="WQU-lO-HpT"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="myPageCell" textLabel="lcs-Ii-eMj" rowHeight="56" style="IBUITableViewCellStyleDefault" id="GSp-Xd-NcW">
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GSp-Xd-NcW" id="a9F-cR-YIl">
+                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lcs-Ii-eMj">
+                                                    <rect key="frame" x="16" y="0.0" width="325.5" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McK-Wh-99g">
+                                <rect key="frame" x="15" y="436" width="59" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="로그아웃">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedLogOutButton:" destination="pZm-rV-DhB" eventType="touchUpInside" id="AKE-SZ-k4t"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7BU-FE-vVV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="McK-Wh-99g" firstAttribute="top" secondItem="QVo-TS-4Ii" secondAttribute="bottom" constant="20" id="8G1-bc-bOf"/>
+                            <constraint firstItem="QVo-TS-4Ii" firstAttribute="top" secondItem="05S-3l-tUd" secondAttribute="bottom" id="AGN-d0-nHj"/>
+                            <constraint firstItem="McK-Wh-99g" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="DAm-wS-Ecp"/>
+                            <constraint firstItem="dpC-T1-xTk" firstAttribute="leading" secondItem="QYK-HP-QV1" secondAttribute="trailing" constant="15" id="E4s-de-PV8"/>
+                            <constraint firstItem="05S-3l-tUd" firstAttribute="centerX" secondItem="brH-jB-qJ9" secondAttribute="centerX" id="JnK-RK-rTb"/>
+                            <constraint firstItem="05S-3l-tUd" firstAttribute="top" secondItem="QYK-HP-QV1" secondAttribute="bottom" constant="25" id="MRD-YN-N9h"/>
+                            <constraint firstItem="7G2-8S-Y4J" firstAttribute="leading" secondItem="QYK-HP-QV1" secondAttribute="trailing" constant="15" id="Mve-Nv-whL"/>
+                            <constraint firstItem="7BU-FE-vVV" firstAttribute="trailing" secondItem="QVo-TS-4Ii" secondAttribute="trailing" id="O05-ea-dfZ"/>
+                            <constraint firstItem="dpC-T1-xTk" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="10" id="TFX-8g-vu2"/>
+                            <constraint firstItem="QYK-HP-QV1" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="40" id="b5T-U9-hko"/>
+                            <constraint firstItem="QVo-TS-4Ii" firstAttribute="leading" secondItem="brH-jB-qJ9" secondAttribute="leading" id="lKB-yd-Cf0"/>
+                            <constraint firstItem="7G2-8S-Y4J" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="55" id="oLG-pr-l7z"/>
+                            <constraint firstItem="QYK-HP-QV1" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="pKm-zZ-ifd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="마이페이지" id="VlU-aN-b5g"/>
+                    <connections>
+                        <outlet property="logOutButton" destination="McK-Wh-99g" id="PMb-rQ-sPd"/>
+                        <outlet property="profileImageButton" destination="QYK-HP-QV1" id="Qqw-RV-3iH"/>
+                        <outlet property="tableView" destination="QVo-TS-4Ii" id="HhQ-pd-qwh"/>
+                        <outlet property="userMedal" destination="dpC-T1-xTk" id="w37-34-mcl"/>
+                        <outlet property="userNickname" destination="7G2-8S-Y4J" id="HlI-aw-9Sr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3aT-mJ-uLv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1311.2" y="3309.8950524737634"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add button" width="113" height="113"/>
         <image name="cancel button" width="40" height="40"/>
         <image name="default profile image" width="73" height="73"/>
+        <image name="first medal" width="41" height="41"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu (selected)" width="41.5" height="41.5"/>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="pick profile pic(black)" width="199" height="199"/>
         <image name="review (selected)" width="41.5" height="41.5"/>
         <image name="star rating (filled)" width="36" height="34.5"/>
         <image name="star rating (unfilled)" width="35.5" height="34"/>

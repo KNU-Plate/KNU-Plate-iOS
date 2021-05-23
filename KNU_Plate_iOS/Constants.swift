@@ -34,6 +34,7 @@ struct Constants {
         static let searchedRestaurantResultCell = "searchedRestaurantResultCell"
         static let reviewTableViewCell = "reviewTableViewCell"
         static let reviewWithoutImageTableViewCell = "reviewWithoutImageTableViewCell"
+        static let myPageCell = "myPageCell"
     
     }
     
