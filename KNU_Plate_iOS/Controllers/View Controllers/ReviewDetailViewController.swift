@@ -50,11 +50,11 @@ class ReviewDetailViewController: UIViewController {
         // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
         OperationQueue().addOperation {
-            
+
             if let file = self.reviewDetails.reviewImagesFileFolder?.files {
-                
+
                 for eachFile in file {
-                    
+
                     let downloadURL = URL(string: eachFile.path)
                     let imageData = try! Data(contentsOf: downloadURL!)
                     DispatchQueue.main.async {
@@ -64,14 +64,14 @@ class ReviewDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: true)
                 }
-                
+
             } else {
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: false)
                 }
             }
         }
-
+        
         configureUI()
     }
     

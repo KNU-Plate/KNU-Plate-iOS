@@ -133,11 +133,20 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-hM-0kY" customClass="ReviewImageView" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                        <rect key="frame" x="327" y="200" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="NUV-OA-xmt"/>
+                            <constraint firstAttribute="width" constant="15" id="qdH-dW-RDf"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BVS-G5-oR6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="0aI-dK-Obu"/>
+                    <constraint firstItem="Rya-hM-0kY" firstAttribute="top" secondItem="wbI-zo-8Yg" secondAttribute="bottom" constant="165" id="1Qy-aN-65H"/>
                     <constraint firstItem="wbI-zo-8Yg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="1Wk-6w-ufF"/>
                     <constraint firstAttribute="trailing" secondItem="wbI-zo-8Yg" secondAttribute="trailing" constant="15" id="7ME-nw-zej"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Rya-hM-0kY" secondAttribute="trailing" constant="8" id="7iT-n4-rI8"/>
                     <constraint firstItem="fnO-Rx-9HI" firstAttribute="top" secondItem="KQd-zG-zct" secondAttribute="bottom" constant="10" id="AZ7-eL-8dS"/>
                     <constraint firstAttribute="trailing" secondItem="UB8-9o-VVn" secondAttribute="trailing" constant="10" id="DPc-Ao-SKS"/>
                     <constraint firstItem="geb-sR-uJc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="M4c-su-yFC"/>
@@ -159,6 +168,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="multipleImageView" destination="Rya-hM-0kY" id="Tlm-p8-KZf"/>
                 <outlet property="pageControl" destination="BVS-G5-oR6" id="hqU-DV-QPw"/>
                 <outlet property="rating" destination="fnO-Rx-9HI" id="oCY-42-H5p"/>
                 <outlet property="reviewImageView" destination="KQd-zG-zct" id="d0a-wh-Eg7"/>

@@ -31,8 +31,8 @@ class ExampleViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
         
-        
         viewModel.delegate = self
+        viewModel.reviewList.removeAll()
     }
     
     
@@ -70,6 +70,7 @@ extension ExampleViewController: ReviewListViewModelDelegate {
 extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return viewModel.reviewList.count
         
         // 0 개이면 0개라고 표시할만한 cell이 있어야 할듯
@@ -116,6 +117,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
+//MARK: - UIScrollViewDelegate
 
 extension ExampleViewController: UIScrollViewDelegate {
     
@@ -144,8 +146,6 @@ extension ExampleViewController: UIScrollViewDelegate {
                 tableView.tableFooterView = createSpinnerFooter()
                 viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
             } else { return }
-    
-            
         }
     }
 }

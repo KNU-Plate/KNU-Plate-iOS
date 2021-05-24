@@ -36,6 +36,15 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
       
     }
     
+    override func configureUI() {
+        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView?.layer.cornerRadius = 10
+    }
+    
     override func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)

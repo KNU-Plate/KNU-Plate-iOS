@@ -14,6 +14,8 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
+    @IBOutlet var multipleImageView: ReviewImageView!
+    
     private var viewModel = ReviewTableViewModel()
 
     override func awakeFromNib() {
@@ -30,6 +32,7 @@ class ReviewTableViewCell: UITableViewCell {
         userMedalImageView.image = nil
         rating.setStarsRating(rating: 3)
         reviewLabel.text = nil
+        //multipleImageView.image = nil
     }
     
     func configure(with model: ReviewListResponseModel) {
@@ -77,7 +80,6 @@ class ReviewTableViewCell: UITableViewCell {
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
         
         
-        print("viewModel.userProfileImageURL: \(viewModel.userProfileImageURL)")
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
         } else {
@@ -100,6 +102,17 @@ class ReviewTableViewCell: UITableViewCell {
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
         reviewImageView?.layer.cornerRadius = 10
+        
+        guard let imageCount = viewModel.reviewImagesFileFolder?.files?.count else {
+            return
+        }
+        
+        if imageCount >= 2 {
+            multipleImageView.image = UIImage(named: "multiple images")
+        } else {
+            multipleImageView.image = nil
+        }
+        
     }
 
     func configureShowMoreButton() {
