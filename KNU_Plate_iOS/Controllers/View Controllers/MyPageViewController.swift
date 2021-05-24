@@ -3,8 +3,7 @@ import Alamofire
 
 class MyPageViewController: UIViewController {
     
-    
-    
+
     @IBOutlet var profileImageButton: UIButton!
     @IBOutlet var userNickname: UILabel!
     @IBOutlet var userMedal: UIImageView!
@@ -13,51 +12,45 @@ class MyPageViewController: UIViewController {
     
     lazy var imagePicker = UIImagePickerController()
     
+    var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        Test.shared.login()
+        
+        
 
-      
+        initialize()
     }
-    
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
         presentActionSheet()
-        
-        present(self.imagePicker, animated: true, completion: nil)
-        
     }
-    
-    
 
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
         UserManager.shared.logOut { result in
             
             switch result {
-            
             case true:
-                
                 self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
                     
                     if selectedOk {
-                        
+    
                         DispatchQueue.main.async {
                             
-                            //TODO: - 최초 화면으로 돌아가는거 있어야함
-                            //self.popToInitialViewController()
+                       
+                            self.popToWelcomeViewController()
                         }
-                        
                     } else { return }
                 }
-                
             case false:
                 self.showToast(message: "일시적 네트워크 오류")
-            
             }
         }
-        
-        
     }
     
     func removeProfileImage() {
@@ -92,14 +85,12 @@ class MyPageViewController: UIViewController {
     }
     
     
-    func popToInitialViewController() {
+    func popToWelcomeViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
-    
-    
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -143,14 +134,86 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
 }
 
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
+        
+        switch indexPath.row {
+        
+        case 0:
+            
+            cell.textLabel?.text = tableViewOptions[indexPath.row]
+         
+        case 1:
+            
+            cell.textLabel?.text = tableViewOptions[indexPath.row]
+    
+        case 2:
+            
+            cell.textLabel?.text = tableViewOptions[indexPath.row]
+
+        default:
+            return cell
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
+    
+            pushViewController(with: vc)
+        case 1:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
+        
+    
+       
+            pushViewController(with: vc)
+        case 2:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsViewController) else { return }
+            
+
+            pushViewController(with: vc)
+        default: return
+        }
+    }
+    
+    func pushViewController(with vc: UIViewController) {
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+   
+}
+
 //MARK: - UI Configuration
 
 extension MyPageViewController {
     
     func initialize() {
         
+        initializeTableView()
         initializeProfileImageButton()
+        initializeMedalImage()
         initializeImagePicker()
+    }
+    
+    func initializeTableView() {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func initializeProfileImageButton() {
@@ -166,12 +229,11 @@ extension MyPageViewController {
         userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
     }
     
-
-    
     func updateProfileImageButton(with image: UIImage) {
         
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
+        profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
         profileImageButton.layer.borderWidth = 1
         profileImageButton.layer.borderColor = UIColor.lightGray.cgColor
     }

@@ -73,6 +73,8 @@
 		7C1F79E12633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */; };
 		7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */; };
 		7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */; };
+		7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */; };
+		7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
@@ -201,6 +203,8 @@
 		7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantByKeywordResponseModel.swift; sourceTree = "<group>"; };
 		7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -469,8 +473,10 @@
 				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
 				7C1F79052632E04700C7B41D /* ExampleViewController.swift */,
 				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
-				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
 				7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */,
+				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
+				7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */,
+				7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 			files = (
 				7CE4BA5C261C31FF009A4464 /* NewReviewModel.swift in Sources */,
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
+				7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */,
 				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
 				3CC2A4E3264ACA1C00F5E392 /* ReviewViewController.swift in Sources */,
 				7CE4BA5C261C31FF009A4464 /* NewReviewModel.swift in Sources */,
@@ -760,6 +767,7 @@
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantByKeywordModel.swift in Sources */,
 				7CA6621B26412203000E0B7A /* RegisterNewMenuModel.swift in Sources */,
 				7CD74B7A260B209300D05B84 /* AlertManager.swift in Sources */,
+				7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */,
 				7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,

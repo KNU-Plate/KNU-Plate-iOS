@@ -17,6 +17,9 @@ struct Constants {
         static let registerViewController = "RegisterViewController"
         static let verifyEmailViewController = "VerifyEmailViewController"
         static let newRestaurantViewController = "NewRestaurantViewController"
+        static let sendDeveloperMessageViewController = "SendDeveloperMessageViewController"
+        static let settingsViewController = "SettingsViewController"
+        static let termsAndConditionsViewController = "TermsAndConditionViewController"
     }
     
     struct Layer {
@@ -42,6 +45,9 @@ struct Constants {
         
         static let goToNewRestaurantVC = "goToNewRestaurantVC"
         static let goSeeDetailReview = "goSeeDetailReview"
+        static let goToSendMessage = "goToSendMessage"
+        static let goToSettings = "goToSettings"
+        static let goToTermsAndConditions = "goToTermsAndConditions"
     }
     
     

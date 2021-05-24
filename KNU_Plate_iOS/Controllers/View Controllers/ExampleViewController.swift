@@ -80,7 +80,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         let reviewLists = viewModel.reviewList
 
         //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
-        if reviewLists[indexPath.row].reviewImageFileInfo != nil {
+        if reviewLists[indexPath.row].reviewImageFileFolder != nil {
             
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             

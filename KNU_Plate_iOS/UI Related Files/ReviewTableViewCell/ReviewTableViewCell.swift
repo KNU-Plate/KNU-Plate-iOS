@@ -46,12 +46,12 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.rating = model.rating
         
         // Check if a user profile image exists
-        if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.userProfileImageURLPath = fileFolderID
+        if let fileFolderID = model.userInfo.userProfileImageFolderID {
+            viewModel.userProfileImageFolderID = fileFolderID
         }
         // Check if review images exists
-        if let fileFolderID = model.reviewImageFileInfo {
-            viewModel.reviewImagesFileFolder = fileFolderID
+        if let fileFolder = model.reviewImageFileFolder {
+            viewModel.reviewImagesFileFolder = fileFolder
         }
         initialize()
     }
@@ -77,14 +77,15 @@ class ReviewTableViewCell: UITableViewCell {
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
         
         
-
+        print("viewModel.userProfileImageURL: \(viewModel.userProfileImageURL)")
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
         } else {
             userProfileImageView.image = UIImage(named: "default profile image")
         }
         
-        guard let path = viewModel.reviewImagesFileFolder?[0].path else { return }
+        // 리뷰 이미지 배열의 첫 번째 이미지 가져오기
+        guard let path = viewModel.reviewImagesFileFolder?.files?[0].path else { return }
         
         if let downloadURL = URL(string: path) {
             reviewImageView.loadImage(from: downloadURL)
@@ -143,7 +144,7 @@ class ReviewTableViewCell: UITableViewCell {
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImagesFileInfo: reviewImagesFileInfo,
+                                         reviewImagesFileFolder: reviewImagesFileInfo,
                                          rating: rating,
                                          review: review)
         return reviewDetails

@@ -29,7 +29,7 @@ class ReviewDetailViewController: UIViewController {
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
         reviewDetails.review = model.review
-        reviewDetails.reviewImagesFileInfo = model.reviewImagesFileInfo
+        reviewDetails.reviewImagesFileFolder = model.reviewImagesFileFolder
     }
     
     // Review Cell
@@ -51,10 +51,11 @@ class ReviewDetailViewController: UIViewController {
         
         OperationQueue().addOperation {
             
-            if let fileFolder = self.reviewDetails.reviewImagesFileInfo {
+            if let file = self.reviewDetails.reviewImagesFileFolder?.files {
                 
-                for eachImageInfo in fileFolder {
-                    let downloadURL = URL(string: eachImageInfo.path)
+                for eachFile in file {
+                    
+                    let downloadURL = URL(string: eachFile.path)
                     let imageData = try! Data(contentsOf: downloadURL!)
                     DispatchQueue.main.async {
                         self.reviewImages.append(UIImage(data: imageData)!)

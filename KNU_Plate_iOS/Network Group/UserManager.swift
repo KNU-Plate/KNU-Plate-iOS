@@ -281,14 +281,13 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
-        User.shared.medal = model.medal
+        User.shared.medal = Int(model.medal)!
         
         if let profileImageLink = model.userProfileImage {
             User.shared.profileImageLink = profileImageLink
         }
  
-        
-        
+    
         
     }
     
