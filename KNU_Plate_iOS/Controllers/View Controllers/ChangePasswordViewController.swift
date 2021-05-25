@@ -15,6 +15,8 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
+        self.view.endEditing(true)
+        
         if !validateUserInput() { return }
         
         
@@ -60,7 +62,6 @@ class ChangePasswordViewController: UIViewController {
     
 }
 
-
 //MARK: - UI Configuration
 
 extension ChangePasswordViewController {
@@ -75,7 +76,6 @@ extension ChangePasswordViewController {
         
         passwordTextField.isSecureTextEntry = true
         checkPasswordTextField.isSecureTextEntry = true
-        
     }
     
     func initializeButton() {

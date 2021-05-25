@@ -20,6 +20,7 @@ class UserManager {
     let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
     let checkUserNameDuplicateURL       = "\(Constants.API_BASE_URL)check-user-name"
     let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
+    let modifyUserInfoURL               = "\(Constants.API_BASE_URL)auth/modify"
     
     private init() {}
     
@@ -259,10 +260,63 @@ class UserManager {
     
     
     
-    //MARK: - 회원 정보 수정
-    func editUserInformation() {
+    //MARK: - 시용자 닉네임 수정
+    func updateNickname(with model: EditUserInfoModel,
+                        completion: @escaping ((Bool) -> Void)) {
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.nickname!.utf8),
+                                     withName: "display_name")
+            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
+                                     withName: "force")
+            
+        }, to: modifyUserInfoURL,
+        method: .patch,
+        headers: model.headers)
+        .responseJSON { response in
+            
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+                
+                // 새롭게 변경한 nickname 을 User.shared.nickname 에 저장해야할듯
+                print("닉네임 변경 성공")
+                completion(true)
+            default:
+                
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    if let error = responseJSON["error"] {
+                        print("UserManager - updateNickname error: \(error)")
+                        completion(false)
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    
+    //MARK: - 사용자 비밀번호 수정
+    func updatePassword(with model: EditUserInfoModel) {
+        
         
     }
+    
+    //MARK: - 사용자 프로필 이미지 업데이트
+    func updateProfileImage(with model: EditUserInfoModel) {
+        
+    }
+    
+    //MARK: - 사용자 프로필 이미지 제거
+    func removeProfileImage(completion: @escaping ((Bool) -> Void)) {
+        
+        
+    }
+    
+    
     
 }
 
@@ -297,4 +351,5 @@ extension UserManager {
         User.shared.accessToken = model.accessToken
         User.shared.refreshToken = model.refreshToken
     }
+    
 }

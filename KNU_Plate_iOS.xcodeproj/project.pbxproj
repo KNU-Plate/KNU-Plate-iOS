@@ -33,6 +33,7 @@
 		7C16DF26262183C900AA8239 /* RegisterInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */; };
 		7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */; };
+		7C1C1D04265CE40600C08C66 /* EditUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D03265CE40600C08C66 /* EditUserInfoModel.swift */; };
 		7C1F774A26314A1E00C7B41D /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */; };
 		7C1F77892632A9B800C7B41D /* SearchRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */; };
 		7C1F78DD2632DE3500C7B41D /* map_pinup_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78B82632DE3500C7B41D /* map_pinup_custom@3x.png */; };
@@ -155,6 +156,7 @@
 		7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfoModel.swift; sourceTree = "<group>"; };
 		7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7C1C1D03265CE40600C08C66 /* EditUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoModel.swift; sourceTree = "<group>"; };
 		7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
 		7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantViewController.swift; sourceTree = "<group>"; };
 		7C1F78B82632DE3500C7B41D /* map_pinup_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup_custom@3x.png"; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				7C5EDD522642BF1F00B79178 /* VerifyMailModel.swift */,
 				7C5EDD542642C22500B79178 /* CheckDuplicateModel.swift */,
 				7C99FB9D2648FFD60063C967 /* FetchReviewListModel.swift */,
+				7C1C1D03265CE40600C08C66 /* EditUserInfoModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
+				7C1C1D04265CE40600C08C66 /* EditUserInfoModel.swift in Sources */,
 				7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */,
 				7CC96307263051CC00AA71E1 /* RegisterResponseModel.swift in Sources */,
 				7C65869B26494C5D004B8584 /* ReviewDetailViewController.swift in Sources */,

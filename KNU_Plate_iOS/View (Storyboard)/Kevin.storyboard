@@ -1124,8 +1124,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7yd-wS-OPt">
+                                <rect key="frame" x="50" y="91" width="275" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W53-39-oK8">
-                                <rect key="frame" x="137.5" y="155" width="100" height="40"/>
+                                <rect key="frame" x="137.5" y="190" width="100" height="40"/>
                                 <color key="backgroundColor" name="AppDefaultColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fdn-cD-RPF"/>
@@ -1138,27 +1143,35 @@
                                     <action selector="pressedChangeButton:" destination="jB2-cQ-hgz" eventType="touchUpInside" id="9S2-yi-k5y"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7yd-wS-OPt">
-                                <rect key="frame" x="50" y="91" width="275" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2u-ll-lhh">
+                                <rect key="frame" x="159.5" y="140" width="56" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="중복 확인">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedCheckDuplicateButton:" destination="jB2-cQ-hgz" eventType="touchUpInside" id="9Ld-tI-6nI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cmr-2U-M1O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="W53-39-oK8" firstAttribute="top" secondItem="7yd-wS-OPt" secondAttribute="bottom" constant="30" id="Lar-SC-JXK"/>
+                            <constraint firstItem="S2u-ll-lhh" firstAttribute="top" secondItem="7yd-wS-OPt" secondAttribute="bottom" constant="15" id="EQw-HP-Ftc"/>
                             <constraint firstAttribute="trailing" secondItem="7yd-wS-OPt" secondAttribute="trailing" constant="50" id="ZPz-P2-ry5"/>
                             <constraint firstItem="7yd-wS-OPt" firstAttribute="top" secondItem="PA4-Bx-hnt" secondAttribute="bottom" constant="30" id="Zse-Pw-twe"/>
                             <constraint firstItem="PA4-Bx-hnt" firstAttribute="top" secondItem="Cmr-2U-M1O" secondAttribute="top" constant="40" id="aPw-uM-n9I"/>
+                            <constraint firstItem="W53-39-oK8" firstAttribute="top" secondItem="S2u-ll-lhh" secondAttribute="bottom" constant="20" id="h4v-sZ-SWN"/>
                             <constraint firstItem="PA4-Bx-hnt" firstAttribute="centerX" secondItem="hQT-pj-Y4g" secondAttribute="centerX" id="izn-If-BS3"/>
                             <constraint firstItem="7yd-wS-OPt" firstAttribute="leading" secondItem="Cmr-2U-M1O" secondAttribute="leading" constant="50" id="j1G-XK-5zw"/>
+                            <constraint firstItem="S2u-ll-lhh" firstAttribute="centerX" secondItem="hQT-pj-Y4g" secondAttribute="centerX" id="nhG-JZ-xdg"/>
                             <constraint firstItem="W53-39-oK8" firstAttribute="centerX" secondItem="hQT-pj-Y4g" secondAttribute="centerX" id="rbI-cJ-VBr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LET-uc-kdt"/>
                     <connections>
                         <outlet property="changeButton" destination="W53-39-oK8" id="Pg5-2a-zdr"/>
+                        <outlet property="checkAlreadyInUseButton" destination="S2u-ll-lhh" id="1YW-Mj-QZA"/>
                         <outlet property="nicknameTextField" destination="7yd-wS-OPt" id="y2h-Q3-AYy"/>
                     </connections>
                 </viewController>
