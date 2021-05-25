@@ -7,7 +7,7 @@ class ExampleViewController: UIViewController {
     
     private var viewModel = ReviewListViewModel()
     
-    let refreshControl = UIRefreshControl()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()

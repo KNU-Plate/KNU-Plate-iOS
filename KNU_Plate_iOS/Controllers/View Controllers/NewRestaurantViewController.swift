@@ -44,22 +44,7 @@ class NewRestaurantViewController: UIViewController {
         viewModel.upload()
        
     }
-    
-//    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-//
-//        switch sender.selectedSegmentIndex {
-//        case 0:
-//            viewModel.gate = viewModel.schoolGates[0]
-//        case 1:
-//            viewModel.gate = viewModel.schoolGates[1]
-//        case 2:
-//            viewModel.gate = viewModel.schoolGates[2]
-//        case 3:
-//            viewModel.gate = viewModel.schoolGates[3]
-//        default:
-//            viewModel.gate = viewModel.schoolGates[0]
-//        }
-//    }
+
 }
 
 //MARK: - NewRestaurantViewModelDelegate
@@ -68,10 +53,16 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
     func didCompleteUpload(_ success: Bool) {
         
+        dismissProgressBar()
+        
         if success {
-            dismissProgressBar()
+            
+            showToast(message: "매장 등록 성공 😄")
+            
+            //Go To MainViewController 해야할듯
+
         } else {
-            self.presentSimpleAlert(title: "신규 매장 등록 실패", message: "일시적인 오류로 매장 등록에 실패하였습니다. 잠시 후 다시 시도해주세요 🥲")
+            self.presentSimpleAlert(title: "신규 매장 등록 실패", message: "이미 등록된 매장입니다. 🥲")
             navigationController?.popToRootViewController(animated: true)
         }
     }

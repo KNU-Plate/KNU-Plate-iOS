@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3CD-QF-9Ve">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -54,34 +54,8 @@
                                                     <constraint firstItem="Yew-tz-emc" firstAttribute="leading" secondItem="0Br-ag-6Sh" secondAttribute="leading" id="Z1f-qN-Ka5"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yj6-zT-oyU">
-                                                <rect key="frame" x="10" y="75" width="255.5" height="17"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="식당이 어느 문 근처에 위치해 있나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MU5-Ye-auO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="208" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXC-3b-WvK">
-                                                        <rect key="frame" x="223" y="0.0" width="32.5" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" systemColor="systemGrayColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OFJ-Jz-IJa">
-                                                <rect key="frame" x="10" y="112" width="355" height="32"/>
-                                                <segments>
-                                                    <segment title="북문"/>
-                                                    <segment title="정/쪽문"/>
-                                                    <segment title="동문"/>
-                                                    <segment title="서문"/>
-                                                </segments>
-                                            </segmentedControl>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6ST-On-OFP">
-                                                <rect key="frame" x="10" y="285" width="355" height="135"/>
+                                                <rect key="frame" x="10" y="187" width="355" height="135"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="135" id="jO8-p2-y4n"/>
@@ -161,7 +135,7 @@
                                                 </cells>
                                             </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvo-R5-ufE" userLabel="Food Stack View">
-                                                <rect key="frame" x="245" y="173" width="120" height="28"/>
+                                                <rect key="frame" x="245" y="75" width="120" height="28"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="🇰🇷 한식" textAlignment="right" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-Gz-ZSJ" userLabel="음식 종류">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
@@ -193,7 +167,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="e1c-M0-HZi">
-                                                <rect key="frame" x="10" y="175" width="174.5" height="22"/>
+                                                <rect key="frame" x="10" y="75" width="174.5" height="22"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 카테고리 선택" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uZw-Qd-csJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="127" height="22"/>
@@ -213,21 +187,21 @@
                                                 </constraints>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="sXo-pu-Jut" userLabel="Divider Line">
-                                                <rect key="frame" x="0.0" y="216" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="118" width="375" height="1"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="J8z-Gq-mOP" userLabel="Divider Line">
-                                                <rect key="frame" x="0.0" y="269" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="171" width="375" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1ie-rC-x84">
-                                                <rect key="frame" x="10" y="232" width="160.5" height="22"/>
+                                                <rect key="frame" x="10" y="134" width="203.5" height="22"/>
                                                 <subviews>
-                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 사진" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-oh-epe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="22"/>
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 / 매장 사진" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-oh-epe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(선택/최대 5장)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-qt-gr8">
-                                                        <rect key="frame" x="79" y="0.0" width="81.5" height="22"/>
+                                                        <rect key="frame" x="122" y="0.0" width="81.5" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -239,7 +213,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(i) 해당 매장만의 음식 사진 및 매장 관련 사진을 업로드하여 주시기 바랍니다. 관련 없는 사진으로 의심 또는 판단 시 예고없이 삭제될 수 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-NH-fLi">
-                                                <rect key="frame" x="10" y="659" width="355" height="47"/>
+                                                <rect key="frame" x="10" y="402" width="355" height="47"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -247,34 +221,29 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="Cvo-R5-ufE" firstAttribute="top" secondItem="OFJ-Jz-IJa" secondAttribute="bottom" constant="30" id="3bS-rY-K2v"/>
                                             <constraint firstItem="J8z-Gq-mOP" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" id="57x-Yw-4ii"/>
                                             <constraint firstAttribute="trailing" secondItem="Cvo-R5-ufE" secondAttribute="trailing" constant="10" id="5QA-f3-gxf"/>
-                                            <constraint firstItem="yj6-zT-oyU" firstAttribute="top" secondItem="xtf-pe-g5w" secondAttribute="bottom" constant="15" id="8Kp-Ce-9QY"/>
-                                            <constraint firstAttribute="trailing" secondItem="OFJ-Jz-IJa" secondAttribute="trailing" constant="10" id="B8G-Py-n0F"/>
                                             <constraint firstItem="J8z-Gq-mOP" firstAttribute="top" secondItem="1ie-rC-x84" secondAttribute="bottom" constant="15" id="Bn4-e4-rN0"/>
-                                            <constraint firstAttribute="bottom" secondItem="Cc2-NH-fLi" secondAttribute="bottom" constant="150" id="ItP-di-oLA"/>
                                             <constraint firstItem="0Br-ag-6Sh" firstAttribute="top" secondItem="ld5-kX-rDV" secondAttribute="top" constant="15" id="KnJ-kn-uuX"/>
-                                            <constraint firstItem="e1c-M0-HZi" firstAttribute="top" secondItem="OFJ-Jz-IJa" secondAttribute="bottom" constant="32" id="MWf-2X-Nlb"/>
                                             <constraint firstItem="1ie-rC-x84" firstAttribute="top" secondItem="sXo-pu-Jut" secondAttribute="bottom" constant="15" id="NE7-qw-YFM"/>
+                                            <constraint firstItem="Cc2-NH-fLi" firstAttribute="top" secondItem="6ST-On-OFP" secondAttribute="bottom" constant="80" id="P17-jw-C3n"/>
                                             <constraint firstItem="Cc2-NH-fLi" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="Tad-9h-eq0"/>
                                             <constraint firstItem="e1c-M0-HZi" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="Ve2-o1-O6n"/>
                                             <constraint firstAttribute="trailing" secondItem="Cc2-NH-fLi" secondAttribute="trailing" constant="10" id="WrP-lv-LuF"/>
                                             <constraint firstAttribute="trailing" secondItem="sXo-pu-Jut" secondAttribute="trailing" id="XF6-W2-RN0"/>
+                                            <constraint firstItem="Cvo-R5-ufE" firstAttribute="top" secondItem="xtf-pe-g5w" secondAttribute="bottom" constant="15" id="XLj-XY-G6z"/>
                                             <constraint firstItem="xtf-pe-g5w" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" id="Xa9-oH-DFc"/>
                                             <constraint firstAttribute="trailing" secondItem="J8z-Gq-mOP" secondAttribute="trailing" id="ZMm-bI-d2P"/>
+                                            <constraint firstItem="e1c-M0-HZi" firstAttribute="top" secondItem="xtf-pe-g5w" secondAttribute="bottom" constant="15" id="ZUC-pz-MfD"/>
                                             <constraint firstAttribute="trailing" secondItem="6ST-On-OFP" secondAttribute="trailing" constant="10" id="aj5-zW-ECB"/>
                                             <constraint firstAttribute="trailing" secondItem="xtf-pe-g5w" secondAttribute="trailing" id="bSm-rA-QFl"/>
                                             <constraint firstItem="6ST-On-OFP" firstAttribute="top" secondItem="J8z-Gq-mOP" secondAttribute="bottom" constant="15" id="ceN-iV-4RD"/>
-                                            <constraint firstItem="yj6-zT-oyU" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="iXf-Ii-dIa"/>
                                             <constraint firstItem="0Br-ag-6Sh" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="isp-KU-iSE"/>
                                             <constraint firstItem="1ie-rC-x84" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="jWg-bW-jTW"/>
                                             <constraint firstItem="xtf-pe-g5w" firstAttribute="top" secondItem="0Br-ag-6Sh" secondAttribute="bottom" constant="20" id="mmk-kh-lQj"/>
                                             <constraint firstItem="sXo-pu-Jut" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" id="myI-nP-LEw"/>
                                             <constraint firstItem="sXo-pu-Jut" firstAttribute="top" secondItem="Cvo-R5-ufE" secondAttribute="bottom" constant="15" id="nCa-JN-dDv"/>
-                                            <constraint firstItem="OFJ-Jz-IJa" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="sdX-gA-peI"/>
                                             <constraint firstItem="6ST-On-OFP" firstAttribute="leading" secondItem="ld5-kX-rDV" secondAttribute="leading" constant="10" id="wlb-yV-mOb"/>
-                                            <constraint firstItem="OFJ-Jz-IJa" firstAttribute="top" secondItem="yj6-zT-oyU" secondAttribute="bottom" constant="20" id="yJB-tH-ECd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -301,7 +270,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="신규 매장 등록" id="3Rm-Oq-Xv4">
                         <barButtonItem key="rightBarButtonItem" title="올리기" id="LKC-nw-Eac">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedUploadButton:" destination="UEI-g0-ezW" id="Oqd-gu-4yk"/>
                             </connections>
@@ -313,7 +282,6 @@
                         <outlet property="foodCategoryTextField" destination="0Dh-Gz-ZSJ" id="gwI-Cm-Shl"/>
                         <outlet property="restaurantNameLabel" destination="pfI-7b-Rdh" id="tZ2-yQ-CLk"/>
                         <outlet property="reviewImageCollectionView" destination="6ST-On-OFP" id="bmz-7x-GBW"/>
-                        <outlet property="segmentedControl" destination="OFJ-Jz-IJa" id="3EL-XZ-jQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LIf-UN-BAi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -950,9 +918,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cFa-KU-yZI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -973,8 +940,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="AppDefaultColor"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
@@ -1301,9 +1270,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="AppDefaultColor"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="AppDefaultColor"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

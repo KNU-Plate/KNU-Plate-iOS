@@ -71,9 +71,10 @@ class RestaurantManager {
                             
                             print(errorMessage)
                             
+                            
+                            
                         } else {
                             print(error)
-                            print("알 수 없는 오류가 발생했습니다.")
                             
                         }
                         completion(false)
