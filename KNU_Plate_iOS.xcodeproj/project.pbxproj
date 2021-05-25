@@ -31,6 +31,8 @@
 		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
 		7C16DF232621810700AA8239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF222621810700AA8239 /* User.swift */; };
 		7C16DF26262183C900AA8239 /* RegisterInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */; };
+		7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */; };
+		7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */; };
 		7C1F774A26314A1E00C7B41D /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */; };
 		7C1F77892632A9B800C7B41D /* SearchRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */; };
 		7C1F78DD2632DE3500C7B41D /* map_pinup_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F78B82632DE3500C7B41D /* map_pinup_custom@3x.png */; };
@@ -151,6 +153,8 @@
 		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7C16DF222621810700AA8239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7C16DF25262183C900AA8239 /* RegisterInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfoModel.swift; sourceTree = "<group>"; };
+		7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
+		7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
 		7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantViewController.swift; sourceTree = "<group>"; };
 		7C1F78B82632DE3500C7B41D /* map_pinup_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup_custom@3x.png"; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */,
 				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
 				7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */,
+				7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */,
+				7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */,
 				7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */,
 			);
 			path = "View Controllers";
@@ -788,6 +794,7 @@
 				7C5E21342646771A00E98FE5 /* ReviewTableViewModel.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */,
+				7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
@@ -819,6 +826,7 @@
 				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurantModel.swift in Sources */,
 				7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */,
+				7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */,
 				7C99FB9E2648FFD60063C967 /* FetchReviewListModel.swift in Sources */,
 				7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */,

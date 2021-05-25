@@ -141,27 +141,26 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
         
+        cell.textLabel?.font = .systemFont(ofSize: 17)
+        
         switch indexPath.row {
         
         case 0:
-            
             cell.textLabel?.text = tableViewOptions[indexPath.row]
-         
         case 1:
-            
             cell.textLabel?.text = tableViewOptions[indexPath.row]
-    
         case 2:
-            
             cell.textLabel?.text = tableViewOptions[indexPath.row]
-
-        default:
-            return cell
+        default: break
         }
         return cell
     }
@@ -174,18 +173,12 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
-    
             pushViewController(with: vc)
         case 1:
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
-        
-    
-       
             pushViewController(with: vc)
         case 2:
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsViewController) else { return }
-            
-
             pushViewController(with: vc)
         default: return
         }

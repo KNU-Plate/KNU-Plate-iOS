@@ -144,19 +144,18 @@ class UserManager {
     
     //MARK: - 아이디 or 닉네임 중복 체크
     func checkDuplication(with model: CheckDuplicateModel,
-                          _ requestURL: String,
+                          requestURL: String,
                           completion: @escaping ((Bool) -> Void)) {
         
         AF.request(requestURL,
                    method: .get,
                    parameters: model.parameters,
-                   encoding: URLEncoding.httpBody,
+                   encoding: URLEncoding.queryString,
                    headers: model.headers).responseJSON { (response) in
-                    
+        
                     guard let statusCode = response.response?.statusCode else { return }
-                    
+                
                     switch statusCode {
-                    
                     case 200: completion(true)
                         
                     default:

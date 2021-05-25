@@ -48,6 +48,8 @@ struct Constants {
         static let goToSendMessage = "goToSendMessage"
         static let goToSettings = "goToSettings"
         static let goToTermsAndConditions = "goToTermsAndConditions"
+        static let goChangeDisplayName = "goChangeDisplayName"
+        static let goChangePassword = "goChangePassword"
     }
     
     
