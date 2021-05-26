@@ -14,6 +14,13 @@ class SettingsViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initialize()
+    
+    }
+    
     @IBAction func pressedChangeNickname(_ sender: UIButton) {
     }
     

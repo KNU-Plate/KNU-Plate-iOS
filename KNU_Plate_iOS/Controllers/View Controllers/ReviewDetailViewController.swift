@@ -56,10 +56,25 @@ class ReviewDetailViewController: UIViewController {
                 for eachFile in file {
 
                     let downloadURL = URL(string: eachFile.path)
-                    let imageData = try! Data(contentsOf: downloadURL!)
-                    DispatchQueue.main.async {
-                        self.reviewImages.append(UIImage(data: imageData)!)
+                    
+                    do {
+                        
+                        let imageData = try Data(contentsOf: downloadURL!)
+                        
+                        DispatchQueue.main.async {
+                            self.reviewImages.append(UIImage(data: imageData)!)
+                        }
+                        
+                    } catch {
+                        
+                        self.reviewImages.append(UIImage(named: "default review image")!)
+                        
                     }
+                    
+//                    let imageData = try! Data(contentsOf: downloadURL!)
+//                    DispatchQueue.main.async {
+//                        self.reviewImages.append(UIImage(data: imageData)!)
+//                    }
                 }
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: true)

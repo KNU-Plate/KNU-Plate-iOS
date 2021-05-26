@@ -11,14 +11,14 @@ struct RegisterResponseModel: Decodable {
     let email: String
     let dateCreated: String
     let isActive: String
-    let medal: String
+    let medal: Int
     let userProfileImage: String?
 
     enum Codingkeys: String, CodingKey {
 
         case password
         case userID = "user_id"
-        case userName = "user_name"
+        case username = "user_name"
         case displayName = "display_name"
         case email = "mail_address"
         case dateCreated = "date_create"

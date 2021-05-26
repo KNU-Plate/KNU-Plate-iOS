@@ -21,6 +21,7 @@ class UserManager {
     let checkUserNameDuplicateURL       = "\(Constants.API_BASE_URL)check-user-name"
     let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
     let modifyUserInfoURL               = "\(Constants.API_BASE_URL)auth/modify"
+    let loadUserProfileInfoURL          = "\(Constants.API_BASE_URL)auth"
     
     private init() {}
     
@@ -40,7 +41,7 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
-                        self.saveUserRegisterInfo(with: decodedData)
+                        self.saveUserRegisterInfoToDevice(with: decodedData)
                         
                     } catch {
                         print("UserManager - signUP catch ERROR: \(error)")
@@ -253,9 +254,44 @@ class UserManager {
     }
     
     //MARK: - 사용자 정보 불러오기
-    func loadUserProfileInfo() {
+    func loadUserProfileInfo(completion: @escaping ((Bool) -> Void)) {
         
-        // medal 정보도 저장 맨날 하는게 좋을듯 
+        // medal 정보도 저장 맨날 하는게 좋을듯
+        let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
+        
+        AF.request(loadUserProfileInfoURL,
+                   method: .get,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        do {
+                            
+                            let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                            self.saveUserInfoToDevice(with: decodedData)
+                            
+                        } catch {
+                            print("UserManager - loadUserProfileInfo() catch ERROR: \(error)")
+                            completion(false)
+                        }
+                        
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            if let error = responseJSON["error"] {
+                                print("UserManager - loadUserProfileInfo() default activated with error: \(error)")
+                            }
+                        }
+                        completion(false)
+                        
+                        
+                    }
+                    
+                    
+                    
+                   }
     }
     
     
@@ -282,7 +318,7 @@ class UserManager {
             switch statusCode {
             case 200:
                 
-                // 새롭게 변경한 nickname 을 User.shared.nickname 에 저장해야할듯
+                User.shared.displayName = model.nickname!
                 print("닉네임 변경 성공")
                 completion(true)
             default:
@@ -323,7 +359,7 @@ class UserManager {
 
 extension UserManager {
     
-    func saveUserRegisterInfo(with model: RegisterResponseModel) {
+    func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
         
         //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
         
@@ -334,14 +370,34 @@ extension UserManager {
         User.shared.email = model.email
         User.shared.dateCreated = model.dateCreated
         User.shared.isActive = model.isActive
-        User.shared.medal = Int(model.medal)!
+        User.shared.medal = model.medal
         
         if let profileImageLink = model.userProfileImage {
             User.shared.profileImageLink = profileImageLink
         }
- 
+    }
     
+    func saveUserInfoToDevice(with model: LoadUserInfoModel) {
         
+        User.shared.id = model.userID
+        User.shared.username = model.username
+        User.shared.displayName = model.displayName
+        User.shared.email = model.email
+        User.shared.medal = model.medal
+        
+        if let fileFolder = model.fileFolder {
+            if let profileImagePath = fileFolder.files?[0].path {
+                
+                let downloadURL = URL(string: profileImagePath)
+                
+                do {
+                    let imageData = try Data(contentsOf: downloadURL!)
+                    User.shared.profileImage = UIImage(data: imageData)
+                } catch {
+                    User.shared.profileImage = nil
+                }
+            }
+        }
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.

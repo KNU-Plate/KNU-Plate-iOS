@@ -39,7 +39,7 @@
                         <color key="tintColor" name="AppDefaultColor"/>
                         <state key="normal" image="ellipsis" catalog="system"/>
                     </button>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="TdZ-j1-5yW" customClass="ReviewImageView" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default profile image" translatesAutoresizingMaskIntoConstraints="NO" id="TdZ-j1-5yW" customClass="ProfileImageView" customModule="KNU_Plate_iOS" customModuleProvider="target">
                         <rect key="frame" x="15" y="5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="628-xT-SdN"/>

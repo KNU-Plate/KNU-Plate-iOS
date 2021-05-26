@@ -1,11 +1,10 @@
 import UIKit
-import Kingfisher
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: ReviewImageView!
+    @IBOutlet var userProfileImageView: ProfileImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
