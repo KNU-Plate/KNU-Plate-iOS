@@ -9,7 +9,8 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var reviewImageView: UIImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
-    @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var reviewTextView: UITextView!
+    
     
     var reviewDetails = ReviewDetail()
     var reviewImages: [UIImage] = []
@@ -28,41 +29,64 @@ class ReviewDetailViewController: UIViewController {
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
         reviewDetails.review = model.review
-        reviewDetails.reviewImagesFileInfo = model.reviewImagesFileInfo
+        reviewDetails.reviewImagesFileFolder = model.reviewImagesFileFolder
     }
     
     // Review Cell
     func initialize() {
-        
+         
         userProfileImageView.image = reviewDetails.profileImage
         userNicknameLabel.text = reviewDetails.nickname
         userMedalImageView.image = setUserMedalImage(medalRank: reviewDetails.medal)
         rating.setStarsRating(rating: Int(exactly: reviewDetails.rating)!)
-        reviewLabel.text = reviewDetails.review
         
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 3
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewTextView.attributedText = NSAttributedString(string: reviewDetails.review, attributes: attributes)
+        reviewTextView.font = UIFont.systemFont(ofSize: 14.5)
         
         // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
         OperationQueue().addOperation {
-            if let fileFolder = self.reviewDetails.reviewImagesFileInfo {
-                
-                for eachImageInfo in fileFolder {
-                    let downloadURL = URL(string: eachImageInfo.path)
-                    let imageData = try! Data(contentsOf: downloadURL!)
-                    DispatchQueue.main.async {
-                        self.reviewImages.append(UIImage(data: imageData)!)
+
+            if let file = self.reviewDetails.reviewImagesFileFolder?.files {
+
+                for eachFile in file {
+
+                    let downloadURL = URL(string: eachFile.path)
+                    
+                    do {
+                        
+                        let imageData = try Data(contentsOf: downloadURL!)
+                        
+                        DispatchQueue.main.async {
+                            self.reviewImages.append(UIImage(data: imageData)!)
+                        }
+                        
+                    } catch {
+                        
+                        self.reviewImages.append(UIImage(named: "default review image")!)
+                        
                     }
+                    
+//                    let imageData = try! Data(contentsOf: downloadURL!)
+//                    DispatchQueue.main.async {
+//                        self.reviewImages.append(UIImage(data: imageData)!)
+//                    }
                 }
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: true)
                 }
+
             } else {
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: false)
                 }
             }
         }
-
+        
         configureUI()
     }
     
@@ -71,6 +95,14 @@ class ReviewDetailViewController: UIViewController {
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView.layer.cornerRadius = 10
+        
+
+        
+        
+        
+        
     }
     
     func configurePageControl(reviewImageExists: Bool) {

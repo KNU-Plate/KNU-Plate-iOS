@@ -14,7 +14,7 @@ class RestaurantManager {
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
     let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
-    let markFavoriteRequestURL      = "\(Constants.API_BASE_URL)mall/recommend/"
+    let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
     
     
     private init() {}
@@ -42,7 +42,7 @@ class RestaurantManager {
                     /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
-                                             fileName: "image.jpeg",
+                                             fileName: "\(UUID().uuidString).jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -71,9 +71,10 @@ class RestaurantManager {
                             
                             print(errorMessage)
                             
+                            
+                            
                         } else {
                             print(error)
-                            print("알 수 없는 오류가 발생했습니다.")
                             
                         }
                         completion(false)
@@ -149,10 +150,10 @@ class RestaurantManager {
     
             if let imageArray = model.reviewImages {
                 for images in imageArray {
-                    
+                
                     multipartFormData.append(images,
                                              withName: "review_image",
-                                             fileName: "mall_image.jpeg",
+                                             fileName: "\(UUID().uuidString).jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
@@ -160,18 +161,14 @@ class RestaurantManager {
         headers: model.headers)
         .responseJSON { response in
             
-            guard let statusCode = response.response?.statusCode else {
-                return
-            }
+            guard let statusCode = response.response?.statusCode else { return }
             
             switch statusCode {
             
             case 200:
                 
                 print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
-                
                 completion(true)
-                
                 
             default:
                 if let responseJSON = try! response.result.get() as? [String : String] {
@@ -181,6 +178,7 @@ class RestaurantManager {
                         print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
                     }
                 }
+                completion(false)
                 
             }
     }
@@ -188,9 +186,10 @@ class RestaurantManager {
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
+
     func fetchReviewList(with model: FetchReviewListModel,
-                         completion: @escaping (([ReviewListResponseModel]) -> Void)) {
-        
+                         completion: @escaping ((Result<[ReviewListResponseModel],Error>) -> Void)) {
+      
         AF.request(fetchReviewListRequestURL,
                    method: .get,
                    parameters: model.parameters,
@@ -203,7 +202,8 @@ class RestaurantManager {
                     case 200:
                         do {
                             let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
-                            completion(decodedData)
+                            completion(.success(decodedData))
+                
                         } catch {
                             print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                         }
@@ -214,51 +214,14 @@ class RestaurantManager {
                                 
                                 print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
                             }
+                            
                         }
+                    }
                    }
     }
-    }
     
-//    var isPaginating = false
-//    func fetchReviewList(with model: FetchReviewListModel,
-//                         pagination: Bool = false,
-//                         completion: @escaping (Result<[ReviewListResponseModel], Error>) -> Void) {
-//
-//        if pagination {
-//            self.isPaginating = true
-//        }
-//
-//        AF.request(fetchReviewListRequestURL,
-//                   method: .get,
-//                   parameters: model.parameters,
-//                   encoding: URLEncoding.queryString,
-//                   headers: model.headers).responseJSON { response in
-//
-//
-//                    guard let statusCode = response.response?.statusCode else { return }
-//
-//                    switch statusCode {
-//
-//                    case 200:
-//
-//                    default:
-//
-//
-//                    }
-//
-//
-//
-//                   }
-//
-//
-//        if pagination {
-//            self.isPaginating = false
-//        }
-//
-//
-//    }
-   
-    
+
+
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
                       httpMethod: HTTPMethod,
@@ -282,6 +245,7 @@ class RestaurantManager {
                                 print(error)
                             } else { print("알 수 없는 에러 발생.") }
                         }
+                        completion(false)
                     }
                    }
     }

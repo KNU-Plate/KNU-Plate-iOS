@@ -20,6 +20,8 @@ class UserManager {
     let emailAuthenticationURL          = "\(Constants.API_BASE_URL)mail-auth/verification"
     let checkUserNameDuplicateURL       = "\(Constants.API_BASE_URL)check-user-name"
     let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
+    let modifyUserInfoURL               = "\(Constants.API_BASE_URL)auth/modify"
+    let loadUserProfileInfoURL          = "\(Constants.API_BASE_URL)auth"
     
     private init() {}
     
@@ -39,7 +41,7 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                    from: response.data!)
-                        self.saveUserRegisterInfo(with: decodedData)
+                        self.saveUserRegisterInfoToDevice(with: decodedData)
                         
                     } catch {
                         print("UserManager - signUP catch ERROR: \(error)")
@@ -136,32 +138,27 @@ class UserManager {
                     
                     switch statusCode {
                     
-                    case 200:
-                        completion(true)
-                        
-                    default:
-                        completion(false)
+                    case 200: completion(true)
+                    default: completion(false)
                     }
                    }
     }
     
     //MARK: - 아이디 or 닉네임 중복 체크
     func checkDuplication(with model: CheckDuplicateModel,
-                          _ requestURL: String,
+                          requestURL: String,
                           completion: @escaping ((Bool) -> Void)) {
         
         AF.request(requestURL,
                    method: .get,
                    parameters: model.parameters,
-                   encoding: URLEncoding.httpBody,
+                   encoding: URLEncoding.queryString,
                    headers: model.headers).responseJSON { (response) in
-                    
+        
                     guard let statusCode = response.response?.statusCode else { return }
-                    
+                
                     switch statusCode {
-                    
-                    case 200:
-                        completion(true)
+                    case 200: completion(true)
                         
                     default:
                         //이미 존재하는 아이디 또는 닉네임입니다.
@@ -256,20 +253,113 @@ class UserManager {
                    }
     }
     
+    //MARK: - 사용자 정보 불러오기
+    func loadUserProfileInfo(completion: @escaping ((Bool) -> Void)) {
+        
+        // medal 정보도 저장 맨날 하는게 좋을듯
+        let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
+        
+        AF.request(loadUserProfileInfoURL,
+                   method: .get,
+                   headers: headers).responseJSON { response in
+                    
+                    guard let statusCode = response.response?.statusCode else { return }
+                    
+                    switch statusCode {
+                    
+                    case 200:
+                        do {
+                            
+                            let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                            self.saveUserInfoToDevice(with: decodedData)
+                            
+                        } catch {
+                            print("UserManager - loadUserProfileInfo() catch ERROR: \(error)")
+                            completion(false)
+                        }
+                        
+                    default:
+                        if let responseJSON = try! response.result.get() as? [String : String] {
+                            if let error = responseJSON["error"] {
+                                print("UserManager - loadUserProfileInfo() default activated with error: \(error)")
+                            }
+                        }
+                        completion(false)
+                        
+                        
+                    }
+                    
+                    
+                    
+                   }
+    }
     
     
     
-    //MARK: - 회원 정보 수정
-    func editUserInformation() {
+    //MARK: - 시용자 닉네임 수정
+    func updateNickname(with model: EditUserInfoModel,
+                        completion: @escaping ((Bool) -> Void)) {
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.nickname!.utf8),
+                                     withName: "display_name")
+            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
+                                     withName: "force")
+            
+        }, to: modifyUserInfoURL,
+        method: .patch,
+        headers: model.headers)
+        .responseJSON { response in
+            
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+                
+                User.shared.displayName = model.nickname!
+                print("닉네임 변경 성공")
+                completion(true)
+            default:
+                
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    if let error = responseJSON["error"] {
+                        print("UserManager - updateNickname error: \(error)")
+                        completion(false)
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    
+    //MARK: - 사용자 비밀번호 수정
+    func updatePassword(with model: EditUserInfoModel) {
+        
         
     }
+    
+    //MARK: - 사용자 프로필 이미지 업데이트
+    func updateProfileImage(with model: EditUserInfoModel) {
+        
+    }
+    
+    //MARK: - 사용자 프로필 이미지 제거
+    func removeProfileImage(completion: @escaping ((Bool) -> Void)) {
+        
+        
+    }
+    
+    
     
 }
 
 
 extension UserManager {
     
-    func saveUserRegisterInfo(with model: RegisterResponseModel) {
+    func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
         
         //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
         
@@ -285,10 +375,29 @@ extension UserManager {
         if let profileImageLink = model.userProfileImage {
             User.shared.profileImageLink = profileImageLink
         }
- 
+    }
+    
+    func saveUserInfoToDevice(with model: LoadUserInfoModel) {
         
+        User.shared.id = model.userID
+        User.shared.username = model.username
+        User.shared.displayName = model.displayName
+        User.shared.email = model.email
+        User.shared.medal = model.medal
         
-        
+        if let fileFolder = model.fileFolder {
+            if let profileImagePath = fileFolder.files?[0].path {
+                
+                let downloadURL = URL(string: profileImagePath)
+                
+                do {
+                    let imageData = try Data(contentsOf: downloadURL!)
+                    User.shared.profileImage = UIImage(data: imageData)
+                } catch {
+                    User.shared.profileImage = nil
+                }
+            }
+        }
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
@@ -298,4 +407,5 @@ extension UserManager {
         User.shared.accessToken = model.accessToken
         User.shared.refreshToken = model.refreshToken
     }
+    
 }

@@ -1,11 +1,10 @@
 import UIKit
-import Kingfisher
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: ReviewImageView!
+    @IBOutlet var userProfileImageView: ProfileImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
@@ -14,33 +13,27 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
+    @IBOutlet var multipleImageView: ReviewImageView!
+    
     private var viewModel = ReviewTableViewModel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-   
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func resetValues() {
+        userProfileImageView.image = nil
+        userNicknameLabel.text = nil
+        userMedalImageView.image = nil
+        rating.setStarsRating(rating: 3)
+        reviewLabel.text = nil
+        //multipleImageView.image = nil
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    
-    }
-    
     
     func configure(with model: ReviewListResponseModel) {
         
         //Reset Every Content-Related attributes
-        userProfileImageView.image = nil
-        userNicknameLabel.text = nil
-        userMedalImageView.image = nil
-
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
-
+        resetValues()
 
         // Configure View Model
         viewModel.reviewID = model.reviewID
@@ -50,11 +43,13 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.review = model.review
         viewModel.rating = model.rating
         
-        if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.userProfileImageURLInString = fileFolderID
+        // Check if a user profile image exists
+        if let fileFolderID = model.userInfo.userProfileImageFolderID {
+            viewModel.userProfileImageFolderID = fileFolderID
         }
-        if let fileFolderID = model.reviewImageFileInfo {
-            viewModel.reviewImagesFileFolder = fileFolderID
+        // Check if review images exists
+        if let fileFolder = model.reviewImageFileFolder {
+            viewModel.reviewImagesFileFolder = fileFolder
         }
         initialize()
     }
@@ -69,17 +64,25 @@ class ReviewTableViewCell: UITableViewCell {
     func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
-        reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
-
+        reviewLabel.text = viewModel.review
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 2
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewLabel.attributedText = NSAttributedString(string: viewModel.review, attributes: attributes)
+        reviewLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
         } else {
             userProfileImageView.image = UIImage(named: "default profile image")
         }
         
-        guard let path = viewModel.reviewImagesFileFolder?[0].path else { return }
+        // 리뷰 이미지 배열의 첫 번째 이미지 가져오기
+        guard let path = viewModel.reviewImagesFileFolder?.files?[0].path else { return }
         
         if let downloadURL = URL(string: path) {
             reviewImageView.loadImage(from: downloadURL)
@@ -92,6 +95,19 @@ class ReviewTableViewCell: UITableViewCell {
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         userProfileImageView.layer.borderWidth = 1
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView?.layer.cornerRadius = 10
+        
+        guard let imageCount = viewModel.reviewImagesFileFolder?.files?.count else {
+            return
+        }
+        
+        if imageCount >= 2 {
+            multipleImageView.image = UIImage(named: "multiple images")
+        } else {
+            multipleImageView.image = nil
+        }
+        
     }
 
     func configureShowMoreButton() {
@@ -126,7 +142,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getReviewDetails() -> ReviewDetail {
         
-        let profileImage = viewModel.userProfileImage
+        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating
@@ -136,7 +152,7 @@ class ReviewTableViewCell: UITableViewCell {
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImagesFileInfo: reviewImagesFileInfo,
+                                         reviewImagesFileFolder: reviewImagesFileInfo,
                                          rating: rating,
                                          review: review)
         return reviewDetails

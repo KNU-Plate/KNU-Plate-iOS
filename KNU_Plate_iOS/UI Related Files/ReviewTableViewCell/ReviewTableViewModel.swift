@@ -8,16 +8,15 @@ class ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImageURLInString: String? {
+    var userProfileImageFolderID: String? {
+        
         didSet {
-            guard let urlString = userProfileImageURLInString else {
-                userProfileImageURL = nil
-                return
+            DispatchQueue.global(qos: .userInitiated).sync {
+                self.fetchProfileImageURL(with: self.userProfileImageFolderID!)
             }
-            userProfileImageURL = URL(string: urlString)
         }
     }
-
+    
     var userProfileImageURL: URL?
     
     var userProfileImage: UIImage = UIImage(named: "default profile image")!
@@ -30,10 +29,17 @@ class ReviewTableViewModel {
     
     var review: String = ""
 
-    var reviewImagesFileFolder: [FileInfo]?
+    var reviewImagesFileFolder: FileFolder?
     
 
-    
+    func fetchProfileImageURL(with folderID: String) {
+        
+        FileManager.shared.searchFileFolder(fileFolderID: folderID) { file in
+            
+            self.userProfileImageURL = URL(string: file[0].path)
+            
+        }
+    }
 
     
 

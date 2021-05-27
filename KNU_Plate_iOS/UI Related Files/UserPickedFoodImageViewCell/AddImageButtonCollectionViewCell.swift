@@ -29,6 +29,8 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
         
         vc?.presentImagePicker(imagePicker, select: { (asset) in
             
+            
+            
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
    
         }, deselect: { (asset) in
@@ -57,17 +59,23 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 let imageManager = PHImageManager.default()
                 let option = PHImageRequestOptions()
                 option.isSynchronous = true
+                option.deliveryMode = .highQualityFormat
+                option.resizeMode = .exact
+                
+            
                 var thumbnail = UIImage()
                 
                 imageManager.requestImage(for: selectedAssets[i],
-                                          targetSize: CGSize(width: 200, height: 200),
+                                          targetSize: CGSize(width: 1000, height: 1000),
                                           contentMode: .aspectFit,
                                           options: option) { (result, info) in
                     thumbnail = result!
                 }
                 
-                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                let data = thumbnail.jpegData(compressionQuality: 1.0)
                 let newImage = UIImage(data: data!)
+                
+                print(data)
                 
                 self.userSelectedImages.append(newImage! as UIImage)
             }

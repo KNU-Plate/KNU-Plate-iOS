@@ -8,49 +8,59 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
- 
-    
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        
-    }
-    
     override func configure(with model: ReviewListResponseModel) {
         
-        userProfileImageView.image = nil
-        userNicknameLabel.text = nil
-        userMedalImageView.image = nil
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
+        //Reset Every Content-Related attributes
+        resetValues()
     
+        // Configure View Model
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
         viewModel.medal = model.userInfo.medal ?? 3
         viewModel.review = model.review
         viewModel.rating = model.rating
+       
+        // Check if a user profile image exists
         
-        if let fileFolderID = model.userInfo.userProfileImage?[0].path {
-            viewModel.userProfileImageURLInString = fileFolderID
+        if let fileFolderID = model.userInfo.userProfileImageFolderID {
+            viewModel.userProfileImageFolderID = fileFolderID
         }
         initialize()
       
     }
     
+    override func configureUI() {
+        
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        userProfileImageView.layer.borderWidth = 1
+        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        reviewImageView?.layer.cornerRadius = 10
+    }
+    
     override func initializeCellUIComponents() {
         
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
-        reviewLabel.text = viewModel.review
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
+        
+        
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 2
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewLabel.attributedText = NSAttributedString(string: viewModel.review,
+                                                        attributes: attributes)
+        reviewLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        
         
         if let profileImageURL = viewModel.userProfileImageURL {
             userProfileImageView.loadImage(from: profileImageURL)
@@ -70,7 +80,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImagesFileInfo: nil,
+                                         reviewImagesFileFolder: nil,
                                          rating: rating,
                                          review: review)
         return reviewDetails

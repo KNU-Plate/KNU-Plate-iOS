@@ -9,7 +9,7 @@ struct UserDisplayModel: Decodable {
     let displayName: String
     let mailAddress: String
     let medal: Int?
-    let userProfileImage: [FileInfo]?
+    let userProfileImageFolderID: String?
     
     enum CodingKeys: String, CodingKey {
         
@@ -18,24 +18,38 @@ struct UserDisplayModel: Decodable {
         case displayName = "display_name"
         case mailAddress = "mail_address"
         case medal = "medal_id"
-        case userProfileImage = "user_thumbnail"
+        case userProfileImageFolderID = "user_thumbnail"
     }
 }
 
-struct FileInfo: Decodable {
+struct FileFolder: Decodable {
+    
+    
+    let fileFolderID: String
+    let dateCreated: String
+    let files: [Files]?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case fileFolderID = "file_folder_id"
+        case dateCreated = "date_create"
+        case files
+    }
+}
+
+struct Files: Decodable {
     
     let fileID: String
     let path: String
-    let originalName: String
     let fileFolderID: String
-    let uploaderID: String
+    let uploader: String
     
     enum CodingKeys: String, CodingKey {
         
         case fileID = "file_id"
         case path
-        case originalName = "original_name"
         case fileFolderID = "file_folder_id"
-        case uploaderID = "uploader"
+        case uploader
     }
+    
 }

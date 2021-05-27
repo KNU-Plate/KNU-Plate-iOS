@@ -44,7 +44,7 @@ struct RestaurantDetailInfoResponseModel: Decodable {
         case mallName = "mall_name"
         case categoryName = "category_name"
         case address, latitude, longitude
-        case menus = "menu"
+        case menus = "menus"
         case rating = "evaluate_average"
         case recommendCount = "recommend_count"
         case isFavorite = "my_recommend"

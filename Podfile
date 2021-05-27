@@ -12,6 +12,7 @@ target 'KNU_Plate_iOS' do
   pod "BSImagePicker", "~> 3.1"
   pod 'Then'
   pod 'ProgressHUD'
-  pod 'Kingfisher', '~> 6.0'
+  pod 'SwiftyJSON', '~> 4.0'
+  
 
 end

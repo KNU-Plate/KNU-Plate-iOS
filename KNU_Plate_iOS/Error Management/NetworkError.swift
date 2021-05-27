@@ -33,7 +33,7 @@ enum HTTPStatus: Int, Error, LocalizedError {
 
 //MARK: - 회원가입 Error Message 관리
 
-enum SignUpError: String {
+enum SignUpError: String, Error {
     
     case usernameLengthTooLong = "user_name length is too short or too long"
     case usernameAlreadyExists = "user_name is unique"
@@ -55,7 +55,7 @@ enum SignUpError: String {
 
 //MARK: - 로그인 Error Message 관리
 
-enum LogInError: String {
+enum LogInError: String, Error {
     
     case userNotFound = "invalid password"
     case invalidPassword = "user not founded"
@@ -81,7 +81,7 @@ enum LogInError: String {
 
 //MARK: - 인증코드 발급 Error Message 관리
 
-enum MailVerificationIssuanceError: String {
+enum MailVerificationIssuanceError: String, Error {
     
     case emptyToken = "token is empty"
 
@@ -115,7 +115,7 @@ enum MailVerificationIssuanceError: String {
 
 //MARK: - 신규 매장 등록 Error Message 관리
 
-enum NewRestaurantUploadError: String {
+enum NewRestaurantUploadError: String, Error {
     
     case mallAlreadyExists = "already enrolled mall"
     

@@ -26,9 +26,7 @@ class SearchRestaurantViewController: UIViewController {
         mapPoint = nil
     }
     
-    @IBAction func pressedNextButton(_ sender: UIButton) {
-        
-        /// Select 안 했는데 nextButton 누르면 에러남 고치기
+    func presentVerificationAlert() {
         
         guard let placeSelected = viewModel.currentlySelectedIndex else {
             return
@@ -51,6 +49,10 @@ class SearchRestaurantViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    @IBAction func pressedNextButton(_ sender: UIButton) {
+        presentVerificationAlert()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Constants.SegueIdentifier.goToNewRestaurantVC {
@@ -70,7 +72,7 @@ class SearchRestaurantViewController: UIViewController {
             
             // 나중에 구조체로 묶어서 한 번에 보내는 것도 고려
         
-            newRestaurantVC.initializeViewModelVariables(name: restaurantName,
+            newRestaurantVC.configure(name: restaurantName,
                                                          address: address,
                                                          contact: contact,
                                                          categoryName: category,
@@ -118,9 +120,21 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         pointItem?.markerType = .bluePin
         pointItem?.mapPoint = mapPoint
         pointItem?.itemName = placeName
-        pointItem?.showDisclosureButtonOnCalloutBalloon = false
-    
+        pointItem?.showDisclosureButtonOnCalloutBalloon = true
+
+        
+        
         mapView.add(pointItem)
+        mapView.select(pointItem, animated: true)
+    
+    }
+    
+    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonOf poiItem: MTMapPOIItem!) {
+        presentVerificationAlert()
+    }
+    
+    func mapView(_ mapView: MTMapView!, touchedCalloutBalloonRightSideOf poiItem: MTMapPOIItem!) {
+        presentVerificationAlert()
     }
 }
 

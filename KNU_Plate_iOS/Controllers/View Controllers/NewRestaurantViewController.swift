@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 // 맛집 올리기 View Controller
 
@@ -22,7 +23,7 @@ class NewRestaurantViewController: UIViewController {
     }
     
     // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
-    func initializeViewModelVariables(name: String, address: String, contact: String, categoryName: String, latitude: Double, longitude: Double) {
+    func configure(name: String, address: String, contact: String, categoryName: String, latitude: Double, longitude: Double) {
         
         viewModel.restaurantName = name
         viewModel.address = address
@@ -37,25 +38,13 @@ class NewRestaurantViewController: UIViewController {
         /// validate user input
         /// NewRestaurantModel() 잘 생성됐는지 체크
         
+        showProgressBar()
+
+        
         viewModel.upload()
        
     }
-    
-//    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
-//
-//        switch sender.selectedSegmentIndex {
-//        case 0:
-//            viewModel.gate = viewModel.schoolGates[0]
-//        case 1:
-//            viewModel.gate = viewModel.schoolGates[1]
-//        case 2:
-//            viewModel.gate = viewModel.schoolGates[2]
-//        case 3:
-//            viewModel.gate = viewModel.schoolGates[3]
-//        default:
-//            viewModel.gate = viewModel.schoolGates[0]
-//        }
-//    }
+
 }
 
 //MARK: - NewRestaurantViewModelDelegate
@@ -64,13 +53,17 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
     func didCompleteUpload(_ success: Bool) {
         
+        dismissProgressBar()
+        
         if success {
             
+            showToast(message: "매장 등록 성공 😄")
             
-            /// 매장 등록 완료 Alert 표시
+            //Go To MainViewController 해야할듯
+
         } else {
-            
-            /// 매장 등록 실패, 그리고 왜 실패했는지 message 띄우고 홈화면으로 복귀할지 물어보기 (예, 아니오)
+            self.presentSimpleAlert(title: "신규 매장 등록 실패", message: "이미 등록된 매장입니다. 🥲")
+            navigationController?.popToRootViewController(animated: true)
         }
     }
 }
@@ -158,7 +151,6 @@ extension NewRestaurantViewController: UIPickerViewDelegate, UIPickerViewDataSou
 
         let selectedFoodCategory = viewModel.foodCategoryArray[row]
         viewModel.foodCategory = selectedFoodCategory
-        
         foodCategoryTextField.text = selectedFoodCategory
     }
 }

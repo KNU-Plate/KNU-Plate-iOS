@@ -12,22 +12,22 @@ class NewRestaurantViewModel {
     var restaurantName: String
     
     /// 학교 문
-    var gate: String
+    var gate: String = ""
     
     /// 매장 관련 사진 배열
-    var userSelectedImages: [UIImage] {
+    var userSelectedImages: [UIImage] = [] {
         didSet { convertUIImagesToDataFormat() }
     }
     
-    var userSelectedImagesInDataFormat: [Data]?
+    var userSelectedImagesInDataFormat: [Data]? = nil
     
     /// 사용자가 선택한 음식 카테고리 (i.e 한식, 중식)
-    var foodCategory: String
+    var foodCategory: String = "🇰🇷 한식"
     
     /// 음식 카테고리 배열
     let foodCategoryArray: [String] = [
-        "한식", "일식", "중식", "양식",
-        "세계음식","카페", "술집"
+        "🇰🇷 한식", "🇯🇵 일식", "🇨🇳 중식", "🇺🇸 양식",
+        "🌎 세계음식","☕️ 카페", "🍹 술집"
     ]
     
     /// 학교 문 배열
@@ -36,34 +36,26 @@ class NewRestaurantViewModel {
     ]
     
     /// 매장 연락처
-    var contact: String
+    var contact: String = ""
     
     /// 카테고리 이름 ( i.e 음식점 > 카페 > 커피전문점 > 스타벅스 )
-    var categoryName: String
+    var categoryName: String = ""
     
     /// 매장 위치
-    var address: String
+    var address: String = ""
     
     /// Y 좌표값, 경위도인 경우 latitude(위도)
-    var latitude: Double
+    var latitude: Double = 0.0
     
     /// X 좌표값, 경위도인 경우 longitude (경도)
-    var longitude: Double
+    var longitude: Double = 0.0
     
     //MARK: - Init
     
     public init(restaurantName: String) {
         
         self.restaurantName = restaurantName
-        self.gate = ""
-        self.foodCategory = "한식"        // 기본 값은 한식으로?
-        self.userSelectedImages = [UIImage]()
-        self.address = ""
-        self.contact = ""
-        self.categoryName = ""
-        self.latitude = 0.0
-        self.longitude = 0.0
-        self.userSelectedImagesInDataFormat = nil
+  
     }
     
     //MARK: - Object Methods
@@ -87,19 +79,16 @@ class NewRestaurantViewModel {
         
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
             
-            print("RESULT: \(isSuccess)")
+            print("NewRestaurantViewModel - upload() RESULT: \(isSuccess)")
             self.delegate?.didCompleteUpload(isSuccess)
         }
-        
-        
     }
     
     func convertUIImagesToDataFormat() {
+        
         userSelectedImagesInDataFormat?.removeAll()
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
-    
-            
             if let imageData =
                 image.jpegData(compressionQuality: 0.5) {
                 return imageData
@@ -109,8 +98,6 @@ class NewRestaurantViewModel {
             }
         })
     }
-
-    
 }
 
 

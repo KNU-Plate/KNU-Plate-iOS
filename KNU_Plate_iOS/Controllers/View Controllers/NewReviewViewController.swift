@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import ProgressHUD
 
 class NewReviewViewController: UIViewController {
 
@@ -10,11 +11,12 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
     lazy var existingMenusPickerView = UIPickerView()
 
 
-    // 수정 필요
-    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 0)
+    // 수정 필요 mallIID
+    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,11 @@ class NewReviewViewController: UIViewController {
 
     }
     
-    func initializeViewModelVariables(mallID: Int) {
+    // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
+    func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
         viewModel.mallID = mallID
+        viewModel.existingMenus.append(contentsOf: existingMenus)
     }
 
     @objc func pressedAddMenuButton() {
@@ -47,26 +51,19 @@ class NewReviewViewController: UIViewController {
                 initializePickerViewForMenuTextField()
                 return
             }
-        } catch NewReviewInputError.tooMuchMenusAdded {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.tooMuchMenusAdded.errorDescription)
-            self.present(alert, animated: true)
-            
-        } catch NewReviewInputError.menuNameTooShort {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.menuNameTooShort.errorDescription)
-            self.present(alert, animated: true)
-            
-        } catch NewReviewInputError.alreadyExistingMenu {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.alreadyExistingMenu.errorDescription)
-            self.present(alert, animated: true)
-            
         } catch {
-            print("Unexpected Error occured in pressedAddMenuButton")
+            
+            switch error {
+            
+            case NewReviewInputError.tooMuchMenusAdded:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
+            case NewReviewInputError.menuNameTooShort:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
+            case NewReviewInputError.alreadyExistingMenu:
+                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
+            default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+            
+            }
         }
         menuInputTextField.text?.removeAll()
     }
@@ -75,41 +72,37 @@ class NewReviewViewController: UIViewController {
     @IBAction func pressedFinishButton(_ sender: UIBarButtonItem) {
         
         self.view.endEditing(true)
-    
-        do {
+        
+        self.presentAlertWithCancelAction(title: "리뷰를 업로드 하시겠습니까?", message: "") { selectedOk in
+             
+            if !selectedOk { return }
+            else {
+                do {
+                    try self.viewModel.validateUserInputs()
+                    
+                    self.viewModel.rating = self.starRating.starsRating
+                    
+                    showProgressBar()
+                   
+                    self.viewModel.startUploading()
 
-            //TODO: - 마지막으로 업로드하기 전에 확인 질문 띄우기?
-            //TODO: - "완료" 버튼 누르고 시간이 좀 많이 걸린다 싶으면 activity indicator (loading 표시) 하나 넣는거 고려
-            
-            try viewModel.validateUserInputs()
-            viewModel.rating = starRating.starsRating
-            
-            viewModel.startUploading()
-
-            
-        } catch NewReviewInputError.insufficientMenuError {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.insufficientMenuError.errorDescription)
-            self.present(alert, animated: true)
-
-        } catch NewReviewInputError.insufficientReviewError {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.insufficientReviewError.errorDescription )
-            self.present(alert, animated: true)
-            
-
-        } catch NewReviewInputError.blankMenuNameError {
-            
-            let alert = AlertManager.createAlertMessage("입력 오류",
-                                                        with: NewReviewInputError.blankMenuNameError.errorDescription)
-            self.present(alert, animated: true)
+                } catch {
+                    
+                    switch error {
+                    
+                    case NewReviewInputError.insufficientMenuError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
+                    case NewReviewInputError.insufficientReviewError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
+                    case NewReviewInputError.blankMenuNameError:
+                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
+                    default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                        
+                    }
+                }
+                dismissProgressBar()
+            }
         }
-        catch {
-            print("Unexpected Error occured in pressedFinishButton")
-        }
-
     }
 }
 
@@ -203,8 +196,7 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 extension NewReviewViewController: NewReviewViewModelDelegate {
     
     func didCompleteReviewUpload(_ success: Bool) {
-        //TODO: - 수정 필요
-        // 리뷰 등록을 완료했다고 작게 알림 띄우는게 좋을듯
+        ProgressHUD.dismiss()
         print("NEW REVIEW UPLOAD COMPLETE")
     }
 }
@@ -265,14 +257,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
 }
 
-
-//MARK: - UITextFieldDelegate -> For menuInputTextField
-
-extension NewReviewViewController: UITextFieldDelegate {
-    
-    
-}
-
 //MARK: - UITextViewDelegate -> For reviewTextView
 
 extension NewReviewViewController: UITextViewDelegate {
@@ -304,10 +288,16 @@ extension NewReviewViewController {
         
         viewModel.delegate = self
         
+        initializeStarRating()
         initializeTextField()
         initializeCollectionView()
         initializeTableView()
         initializeTextView()
+    }
+    
+    func initializeStarRating() {
+        
+        starRating.setStarsRating(rating: viewModel.rating)
     }
     
     func initializeTableView() {
@@ -339,8 +329,7 @@ extension NewReviewViewController {
     }
     
     func initializeTextField() {
-        
-        menuInputTextField.delegate = self
+
         menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
         menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true

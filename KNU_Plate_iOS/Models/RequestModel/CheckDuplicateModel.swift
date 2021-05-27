@@ -32,6 +32,5 @@ struct CheckDuplicateModel {
         
         "accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": User.shared.accessToken
     ]
 }

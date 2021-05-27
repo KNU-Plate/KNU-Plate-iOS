@@ -13,8 +13,8 @@ class FileManager {
     
     private init() {}
     
-    func searchFileFolder(fileFolderID: [FileInfo],
-                          completion: @escaping (([FileInfo]) -> Void)){
+    func searchFileFolder(fileFolderID: String,
+                          completion: @escaping (([Files]) -> Void)){
         
         let parameters: Parameters = ["file_folder_id": fileFolderID]
         let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
@@ -30,10 +30,7 @@ class FileManager {
                     
                     case 200:
                         do {
-                            let decodedData = try JSONDecoder().decode([FileInfo].self, from: response.data!)
-                            
-                            print("FILE MANAGER - searchFileFolder() DECODED DATA: \(decodedData)")
-                            
+                            let decodedData = try JSONDecoder().decode([Files].self, from: response.data!)
                             completion(decodedData)
                             
                         } catch { print("FILE MANAGER - searchFileFolder() Error decoding: \(error)") }
