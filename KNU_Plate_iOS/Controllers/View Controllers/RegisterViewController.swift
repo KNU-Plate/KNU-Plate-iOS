@@ -3,8 +3,13 @@ import SnapKit
 
 class RegisterViewController: UIViewController {
     
+    // MARK: - Properties Declaration
     private let picker = UIImagePickerController()
     
+    var idChecked: Bool = false
+    var nicknameChecked: Bool = false
+    
+    // MARK: - Views Declaration
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "크슐랭가이드"
@@ -50,18 +55,17 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
-    //MARK: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
         setupTextFieldDelegate()
         setupView()
-        addProfileImageButtonTarget()
-        addBackButtonTarget()
+        addButtonsTarget()
     }
 }
 
-//MARK: - Basic UI Set Up
+// MARK: - Basic UI Set Up
 extension RegisterViewController {
     /// Set up text field delegate
     func setupTextFieldDelegate() {
@@ -140,13 +144,9 @@ extension RegisterViewController {
         }
     }
     
-    /// Set target of the back button
-    func addBackButtonTarget() {
+    /// Set target of buttons
+    func addButtonsTarget() {
         backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
-    }
-    
-    /// Set target of the profileImageView
-    func addProfileImageButtonTarget() {
         profileImageButton.addTarget(self, action: #selector(touchToPickPhoto(_:)), for: .touchUpInside)
     }
     
@@ -204,23 +204,44 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
 
 //MARK: - UITextFieldDelegate
 extension RegisterViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("end")
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField === stackView.arrangedSubviews[0] {
+            idChecked = false
+        } else if textField === stackView.arrangedSubviews[1] {
+            nicknameChecked = false
+        }
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField === stackView.arrangedSubviews[0] {
+            // textField is id text field
+            // 아이디 중복 확인 *통신*
+            // 통신 결과 중복 아니면 var idChecked: Bool = true
+            // -> 회원가입 버튼 누를때 true여야 가입진행
+            // -> 에디팅이 시작되면 false로 바꿔줘야함
+        } else if textField === stackView.arrangedSubviews[1] {
+            // textField is nickname text field
+            // 닉네임 중복 확인 *통신*
+            // 통신 결과 중복 아니면 var nicknameChecked: Bool = true
+            // -> 회원가입 버튼 누를때 true여야 가입진행
+            // -> 에디팅이 시작되면 false로 바꿔줘야함
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == stackView.arrangedSubviews[0] {
+        if textField === stackView.arrangedSubviews[0] {
             // textField is id text field
             stackView.arrangedSubviews[1].becomeFirstResponder()
-        } else if textField == stackView.arrangedSubviews[1] {
+        } else if textField === stackView.arrangedSubviews[1] {
             // textField is nickname text field
             stackView.arrangedSubviews[2].becomeFirstResponder()
-        } else if textField == stackView.arrangedSubviews[2] {
+        } else if textField === stackView.arrangedSubviews[2] {
             // textField is password text field
             stackView.arrangedSubviews[3].becomeFirstResponder()
-        } else if textField == stackView.arrangedSubviews[3] {
+        } else if textField === stackView.arrangedSubviews[3] {
             // textField is confirm text field
             stackView.arrangedSubviews[4].becomeFirstResponder()
-        } else if textField == stackView.arrangedSubviews[4] {
+        } else if textField === stackView.arrangedSubviews[4] {
             // textField is email text field
             textField.resignFirstResponder()
         }

@@ -3,8 +3,14 @@ import Then
 
 class RestaurantView: UIView {
     
-    // MARK: - Scroll View Declaration
-    let scrollView = UIScrollView()
+    let tableView = UITableView().then {
+        $0.backgroundColor = .clear
+//        $0.sectionHeaderHeight = UITableView.automaticDimension
+    }
+    
+    // MARK: - Header View Declaration
+    let headerView = UIView()
+    let sectionHeaderView = UIView()
     
     // MARK: - Image Related View Declaration
     let imageContentsView = UIView()
@@ -68,10 +74,6 @@ class RestaurantView: UIView {
     }
     
     // MARK: - Page Select Related View Declaration
-    let topLine = UIView().then {
-        $0.backgroundColor = UIColor.lightGray
-    }
-    
     let selectStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
@@ -79,6 +81,7 @@ class RestaurantView: UIView {
     }
     
     let reviewButton = UIButton(type: .custom).then {
+        $0.tag = 0
         $0.setImage(UIImage(named: "review"), for: .normal)
         $0.setImage(UIImage(named: "review (selected)"), for: .selected)
         $0.setImage(UIImage(named: "review (selected)"), for: .highlighted)
@@ -89,6 +92,7 @@ class RestaurantView: UIView {
         $0.alignTextBelow()
     }
     let locationButton = UIButton(type: .custom).then {
+        $0.tag = 1
         $0.setImage(UIImage(named: "location"), for: .normal)
         $0.setImage(UIImage(named: "location (selected)"), for: .selected)
         $0.setImage(UIImage(named: "location (selected)"), for: .highlighted)
@@ -99,6 +103,7 @@ class RestaurantView: UIView {
         $0.alignTextBelow()
     }
     let menuButton = UIButton().then {
+        $0.tag = 2
         $0.setImage(UIImage(named: "menu"), for: .normal)
         $0.setImage(UIImage(named: "menu (selected)"), for: .selected)
         $0.setImage(UIImage(named: "menu (selected)"), for: .highlighted)
@@ -107,10 +112,6 @@ class RestaurantView: UIView {
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .selected)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .highlighted)
         $0.alignTextBelow()
-    }
-    
-    let bottomLine = UIView().then {
-        $0.backgroundColor = UIColor.lightGray
     }
     
     // MARK: - Bottom Content View Declaration
@@ -138,25 +139,18 @@ class RestaurantView: UIView {
         selectStackView.addArrangedSubview(locationButton)
         selectStackView.addArrangedSubview(menuButton)
 
-        scrollView.addSubview(imageContentsView)
-        scrollView.addSubview(stackView1)
-        scrollView.addSubview(stackView2)
-        scrollView.addSubview(stackView3)
-        scrollView.addSubview(topLine)
-        scrollView.addSubview(selectStackView)
-        scrollView.addSubview(bottomLine)
-        scrollView.addSubview(bottomContentsView)
-
-        self.addSubview(scrollView)
+        headerView.addSubview(imageContentsView)
+        headerView.addSubview(stackView1)
+        headerView.addSubview(stackView2)
+        headerView.addSubview(stackView3)
+        
+        tableView.tableHeaderView = headerView
+//        contentView.addSubview(selectStackView)
     }
     
     // MARK: - View Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
         
         let imageContentsViewHeight: CGFloat = 250
         let imageContentsViewWidth: CGFloat = frame.width
@@ -199,15 +193,21 @@ class RestaurantView: UIView {
             make.top.equalTo(imageButton2.snp.bottom).offset(padding)
             make.right.bottom.equalToSuperview().inset(padding)
         }
+        
+        let stackViewHeight: CGFloat = 35
 
         stackView1.snp.makeConstraints { make in
             make.top.equalTo(imageContentsView.snp.bottom).offset(padding*2)
             make.left.right.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(stackViewHeight)
         }
 
         stackView2.snp.makeConstraints { make in
             make.top.equalTo(stackView1.snp.bottom).offset(padding*2)
             make.left.right.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(stackViewHeight)
         }
 
         ratingStackView.snp.makeConstraints { make in
@@ -217,30 +217,15 @@ class RestaurantView: UIView {
         stackView3.snp.makeConstraints { make in
             make.top.equalTo(stackView2.snp.bottom).offset(padding*2)
             make.left.right.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(stackViewHeight)
         }
 
-        topLine.snp.makeConstraints { make in
-            make.top.equalTo(stackView3.snp.bottom).offset(padding*4)
-            make.height.equalTo(1)
-            make.width.centerX.equalToSuperview()
-        }
-
-        selectStackView.snp.makeConstraints { make in
-            make.top.equalTo(topLine.snp.bottom).offset(padding*2)
-            make.height.equalTo(70)
-            make.width.centerX.equalToSuperview()
-        }
-
-        bottomLine.snp.makeConstraints { make in
-            make.top.equalTo(selectStackView.snp.bottom).offset(padding*2)
-            make.height.equalTo(1)
-            make.width.centerX.equalToSuperview()
-        }
-
-        bottomContentsView.snp.makeConstraints { make in
-            make.top.equalTo(bottomLine.snp.bottom).offset(padding*2)
-            make.width.centerX.equalToSuperview()
-        }
+//        selectStackView.snp.makeConstraints { make in
+//            make.top.equalTo(topLine.snp.bottom).offset(padding*2)
+//            make.height.equalTo(70)
+//            make.width.centerX.equalToSuperview()
+//        }
     }
     
     required init?(coder: NSCoder) {
