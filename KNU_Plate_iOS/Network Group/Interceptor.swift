@@ -6,11 +6,17 @@ import SwiftyJSON
 final class Interceptor: RequestInterceptor {
     
     private var isRefreshing: Bool = false
+    private var retryLimit = 5
     
     // 어떠한 AF request 이든지간데 중간에 가로채서 header 에 accesstoken 을 넣는 것이기에 매번 넣을 필요 X
     func adapt(_ urlRequest: URLRequest,
                for session: Session,
                completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        
+        print("Interceptor - adapt() activated")
+        
+        print("ACCESS TOKEN: \(User.shared.accessToken)")
+        print("REFRESH TOKEN: \(User.shared.refreshToken)")
         
         var request = urlRequest
         
@@ -30,23 +36,33 @@ final class Interceptor: RequestInterceptor {
             return
         }
         
+        print("Interceptor - retry() activated with statusCode: \(statusCode)")
+        
         switch statusCode {
         
         case 200...299:
             completion(.doNotRetry)
             
         // TODO: 아래 status Code 수정 필요
-        case 403:
+        case 401:
             guard !isRefreshing else { return }
             
             refreshToken { refreshResult in
                 
+                print("Interceptor - retry() refreshToken result: \(refreshResult)")
+                
                 switch refreshResult {
                 
                 case .success(_):
-                    completion(.retry)
+                    
+                    if request.retryCount < self.retryLimit {
+                        completion(.retry)
+                    } else {
+                        completion(.doNotRetry)
+                    }
                 case .failure(_):
-                    completion(.retryWithDelay(2))
+                    // refresh 했는데도 fail 이 돌아온다면 세션이 만료되어 아예 로그인을 다시 해야한다는 알림을 띄우고, rootVC 바꾸기
+                    completion(.doNotRetry)
                 }
             }
         default:
@@ -66,7 +82,7 @@ extension Interceptor {
         self.isRefreshing = true
         
         let headers: HTTPHeaders = [
-            "authentication" : User.shared.accessToken
+            "Authorization" : User.shared.refreshToken
         ]
         
         AF.request(UserManager.shared.refreshTokenRequestURL,
@@ -76,6 +92,8 @@ extension Interceptor {
                     self?.isRefreshing = false
                     
                     guard let statusCode = response.response?.statusCode else { return }
+                    
+                    print("Interceptor - refreshToken() activated with statusCode: \(statusCode)")
                     
                     switch statusCode {
                     

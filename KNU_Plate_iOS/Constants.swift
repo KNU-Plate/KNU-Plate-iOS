@@ -2,6 +2,9 @@ import Foundation
 import UIKit
 
 struct Constants {
+    
+    static let API_BASE_URL = "http://3.35.58.40:4100/api/"
+    
 
     struct Color {
         
@@ -68,12 +71,19 @@ struct Constants {
         
     }
     
+    struct KeyChainKey {
+        
+        static let accessToken                  = "accessToken"
+        static let refreshToken                 = "refreshToken"
+        static let password                     = "password"
+    }
+    
+    
+    
     static let gateNames: [String] = ["북문", "정/쪽문", "동문", "서문"]
     static let heightPerWidthRestaurantCell: CGFloat = 1.1
     
     
-    
-    static let API_BASE_URL = "http://3.35.58.40:4100/api/"
     
     struct Kakao {
         
@@ -82,9 +92,6 @@ struct Constants {
         static let JS_Key = "0ec64d2e6e745c47c3816e69ed3caf5a"
         static let Admin_Key = "41f6c290aeeebf1584538be2eb0c3379"
     }
-    
-    
-
     
     
     

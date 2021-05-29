@@ -16,8 +16,8 @@ class ExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Test.shared.login()
-        
+        //Test.shared.login()
+
         
         
 

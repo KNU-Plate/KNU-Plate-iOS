@@ -1,6 +1,6 @@
 import Foundation
 import Alamofire
-import Security
+import SwiftKeychainWrapper
 
 //MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
 
@@ -82,7 +82,7 @@ class UserManager {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
                             self.saveAccessToken(with: decodedData)
-                            print(User.shared.accessToken)
+                            print("Access Token in Keychain: \(User.shared.accessToken)")
                             
                         } catch {
                             print("UserManager - logIn catch ERROR: \(error)")
@@ -394,8 +394,12 @@ extension UserManager {
     func saveAccessToken(with model: LoginResponseModel) {
         
         //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
-        User.shared.accessToken = model.accessToken
-        User.shared.refreshToken = model.refreshToken
+
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
+                                                                    forKey: Constants.KeyChainKey.accessToken)
+    
+        User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
+                                                                     forKey: Constants.KeyChainKey.refreshToken)
     }
     
     

@@ -9,6 +9,9 @@ class RestaurantManager {
     //MARK: - Singleton
     static let shared: RestaurantManager = RestaurantManager()
     
+    let interceptor = Interceptor()
+ 
+    
     //MARK: - API Request URLs
     let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
@@ -110,7 +113,7 @@ class RestaurantManager {
                             completion(decodedData)
                         } catch {
                             
-                            print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error)")
+                            print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error) with statusCode: \(statusCode)")
                         }
                         
                     default:
@@ -175,7 +178,7 @@ class RestaurantManager {
                     
                     if let error = responseJSON["error"] {
                         
-                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
                     }
                 }
                 completion(false)
@@ -194,7 +197,8 @@ class RestaurantManager {
                    method: .get,
                    parameters: model.parameters,
                    encoding: URLEncoding.queryString,
-                   headers: model.headers).responseJSON { response in
+                   headers: model.headers,
+                   interceptor: interceptor).validate().responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -208,11 +212,13 @@ class RestaurantManager {
                             print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                         }
                     default:
+                        
+                 
                         if let responseJSON = try! response.result.get() as? [String : String] {
                             
                             if let error = responseJSON["error"] {
                                 
-                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
                             }
                             
                         }
