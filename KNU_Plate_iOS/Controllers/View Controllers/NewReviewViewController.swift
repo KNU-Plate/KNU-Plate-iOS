@@ -16,7 +16,7 @@ class NewReviewViewController: UIViewController {
 
 
     // 수정 필요 mallIID
-    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 2)
+    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()

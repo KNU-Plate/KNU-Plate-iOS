@@ -29,8 +29,8 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
        
         // Check if a user profile image exists
         
-        if let fileFolderID = model.userInfo.userProfileImageFolderID {
-            viewModel.userProfileImageFolderID = fileFolderID
+        if let profileImagePath = model.userInfo.fileFolder?.files?[0].path {
+            viewModel.userProfileImagePath = profileImagePath
         }
         initialize()
       
@@ -50,7 +50,6 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         userMedalImageView.image = setUserMedalImage(medalRank: viewModel.medal)
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
-        
         
         
         let textViewStyle = NSMutableParagraphStyle()

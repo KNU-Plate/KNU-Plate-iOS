@@ -879,6 +879,37 @@
             </objects>
             <point key="canvasLocation" x="-348" y="2454"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="gni-49-vFy">
+            <objects>
+                <viewController id="LsD-BZ-mdu" customClass="TestViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iRX-YM-hRj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SdA-LC-zdS" customClass="ReviewImageView" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="8h7-EJ-vDg"/>
+                                    <constraint firstAttribute="height" constant="128" id="VTc-xD-aJJ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nz9-4x-YNz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SdA-LC-zdS" firstAttribute="centerX" secondItem="iRX-YM-hRj" secondAttribute="centerX" id="2zz-WT-iOK"/>
+                            <constraint firstItem="SdA-LC-zdS" firstAttribute="centerY" secondItem="iRX-YM-hRj" secondAttribute="centerY" id="Jyg-om-lxZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="SdA-LC-zdS" id="Bbq-Zw-ygy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="byd-1i-OGD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2532" y="3170"/>
+        </scene>
         <!--Example View Controller-->
         <scene sceneID="2mT-EE-gHf">
             <objects>

@@ -21,13 +21,17 @@ class ReviewListViewModel {
     
     var needToFetchMoreData: Bool = true
     
+    
     //MARK: - Object Methods
     
-    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 0) {
+    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 1) {
   
         if pagination {
             isPaginating = true
         }
+        
+        print("REVIEWLIST COUNT: \(reviewList.count)")
+        if reviewList.count == index { return }
         
         let model = FetchReviewListModel(mallID: mallID, page: index)
     
@@ -38,6 +42,8 @@ class ReviewListViewModel {
             
             case .success(let responseModel):
                 
+            
+                // empty 이거나 같은 값이 반환 ㅇㅇ?
                 if responseModel.isEmpty {
                     self.needToFetchMoreData = false
                     self.delegate?.didFetchEmptyReviewListResults()

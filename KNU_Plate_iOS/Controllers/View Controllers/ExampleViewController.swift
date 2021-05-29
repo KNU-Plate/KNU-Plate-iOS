@@ -1,5 +1,6 @@
 import UIKit
 import ProgressHUD
+import Alamofire
 
 class ExampleViewController: UIViewController {
 
@@ -9,14 +10,19 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    
+    let imageCache = NSCache<NSString, UIImage>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Test.shared.login()
         
+        
+        
+
         tableView.delegate = self
         tableView.dataSource = self
-        
         
         
         
@@ -33,6 +39,13 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            
+            self.viewModel.fetchReviewList(of: 3)
+            
+        }
+        
     }
     
     
@@ -40,7 +53,7 @@ class ExampleViewController: UIViewController {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 2)
+        viewModel.fetchReviewList(of: 3)
     }
 }
 
@@ -86,6 +99,49 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
             reviewCell.configure(with: reviewLists[indexPath.row])
+            
+//            let path = (reviewLists[indexPath.row].reviewImageFileFolder?.files?[0].path)!
+//            
+//            let url = URL(string: path)!
+//
+//            if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+//
+//                reviewCell.reviewImageView.image = cachedImage
+//            }
+//
+//            else {
+//
+//                DispatchQueue.global(qos: .background).async {
+//
+//
+//                    if let data = try? Data(contentsOf: url) {
+//                        let image = UIImage(data: data)!
+//
+//                        DispatchQueue.main.async {
+//
+//                            self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
+//                            reviewCell.reviewImageView.image = image
+//                        }
+//
+//                    }
+//                }
+//
+//
+//
+//            }
+//
+//
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             return reviewCell
 
         // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
@@ -139,12 +195,12 @@ extension ExampleViewController: UIScrollViewDelegate {
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
             
             guard !viewModel.isPaginating else { return }
-   
-            let indexToFetch = viewModel.reviewList.count
             
-            if  viewModel.needToFetchMoreData {
+            if viewModel.needToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
-                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
+                let indexToFetch = viewModel.reviewList.count
+                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                tableView.tableFooterView = nil
             } else { return }
         }
     }

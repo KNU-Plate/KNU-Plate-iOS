@@ -1,4 +1,6 @@
 import UIKit
+import SDWebImage
+import Alamofire
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
@@ -44,9 +46,10 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.rating = model.rating
         
         // Check if a user profile image exists
-        if let fileFolderID = model.userInfo.userProfileImageFolderID {
-            viewModel.userProfileImageFolderID = fileFolderID
+        if let profileImagePath = model.userInfo.fileFolder?.files?[0].path {
+            viewModel.userProfileImagePath = profileImagePath
         }
+   
         // Check if review images exists
         if let fileFolder = model.reviewImageFileFolder {
             viewModel.reviewImagesFileFolder = fileFolder
@@ -84,9 +87,16 @@ class ReviewTableViewCell: UITableViewCell {
         // 리뷰 이미지 배열의 첫 번째 이미지 가져오기
         guard let path = viewModel.reviewImagesFileFolder?.files?[0].path else { return }
         
+       
+        
         if let downloadURL = URL(string: path) {
+            
+            
+            print("downloadURL for review image: \(downloadURL) + reviewID: \(viewModel.reviewID)")
             reviewImageView.loadImage(from: downloadURL)
         }
+        
+
   
     }
     

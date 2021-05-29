@@ -10,6 +10,7 @@ struct UserDisplayModel: Decodable {
     let mailAddress: String
     let medal: Int?
     let userProfileImageFolderID: String?
+    let fileFolder: FileFolder?
     
     enum CodingKeys: String, CodingKey {
         
@@ -19,6 +20,7 @@ struct UserDisplayModel: Decodable {
         case mailAddress = "mail_address"
         case medal = "medal_id"
         case userProfileImageFolderID = "user_thumbnail"
+        case fileFolder = "file_folder"
     }
 }
 

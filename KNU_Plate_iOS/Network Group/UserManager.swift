@@ -26,6 +26,7 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
+    //TODO - multipartformdata 로 수정
     func signUp(with model: RegisterInfoModel) {
         
         AF.request(signUpRequestURL,
@@ -80,7 +81,7 @@ class UserManager {
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
-                            self.saveLoginInfoToUserDefaults(with: decodedData)
+                            self.saveAccessToken(with: decodedData)
                             print(User.shared.accessToken)
                             
                         } catch {
@@ -187,7 +188,6 @@ class UserManager {
                     
                     case 200:
                         completion(true)
-                        
                     default:
                         completion(false)
                     }
@@ -240,7 +240,7 @@ class UserManager {
                     case 200:
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
-                            self.saveLoginInfoToUserDefaults(with: decodedData)
+                            self.saveAccessToken(with: decodedData)
                             completion(true)
                             
                         } catch {
@@ -285,16 +285,9 @@ class UserManager {
                             }
                         }
                         completion(false)
-                        
-                        
                     }
-                    
-                    
-                    
                    }
     }
-    
-    
     
     //MARK: - 시용자 닉네임 수정
     func updateNickname(with model: EditUserInfoModel,
@@ -311,7 +304,6 @@ class UserManager {
         method: .patch,
         headers: model.headers)
         .responseJSON { response in
-            
             
             guard let statusCode = response.response?.statusCode else { return }
             
@@ -330,8 +322,6 @@ class UserManager {
                     }
                 }
             }
-            
-            
         }
     }
     
@@ -361,7 +351,7 @@ extension UserManager {
     
     func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
         
-        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경
+        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경 -> KeyChainWrapper 이용하기 
         
         User.shared.id = model.userID
         User.shared.username = model.username
@@ -401,11 +391,18 @@ extension UserManager {
     }
     
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
-    func saveLoginInfoToUserDefaults(with model: LoginResponseModel) {
+    func saveAccessToken(with model: LoginResponseModel) {
         
         //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
         User.shared.accessToken = model.accessToken
         User.shared.refreshToken = model.refreshToken
+    }
+    
+    
+    //TODO: - 로그아웃을 한 후에 UserDefaults 에 저장되어 있는 모든 값 지우기
+    func resetAllUserInfo() {
+        
+        
     }
     
 }
