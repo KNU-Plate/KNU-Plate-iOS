@@ -131,7 +131,6 @@ class NewReviewViewModel {
     
     func convertUIImagesToDataFormat() {
         userSelectedImagesInDataFormat?.removeAll()
-
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             

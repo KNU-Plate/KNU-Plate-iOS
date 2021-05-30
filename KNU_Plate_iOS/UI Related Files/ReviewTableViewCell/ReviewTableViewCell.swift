@@ -82,14 +82,10 @@ class ReviewTableViewCell: UITableViewCell {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         
+    
+        //userProfileImageView.layer.borderWidth = 1
+        //userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
-        
-        
-        
-        
-        
-        userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
         reviewImageView?.layer.cornerRadius = 10
         
@@ -142,12 +138,13 @@ class ReviewTableViewCell: UITableViewCell {
         let medal = viewModel.medal
         let rating = viewModel.rating
         let review = viewModel.review
-        let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
+        //let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
+        let reviewImageFiles = viewModel.reviewImagesFileFolder?.files
       
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImagesFileFolder: reviewImagesFileInfo,
+                                         reviewImageFiles: reviewImageFiles,
                                          rating: rating,
                                          review: review)
         return reviewDetails

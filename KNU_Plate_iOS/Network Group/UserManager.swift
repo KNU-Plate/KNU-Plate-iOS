@@ -29,44 +29,59 @@ class UserManager {
     
     //MARK: - 회원가입
     //TODO - multipartformdata 로 수정
-    func signUp(with model: RegisterInfoModel) {
+    func signUp(with model: RegisterInfoModel,
+                completion: @escaping ((Bool) -> Void)) {
         
-        AF.request(signUpRequestURL,
-                   method: .post,
-                   parameters: model.parameters,
-                   encoding: URLEncoding.httpBody,
-                   headers: model.headers,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { (response) in
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.username.utf8),
+                                     withName: "user_name")
+            multipartFormData.append(Data(model.displayName.utf8),
+                                     withName: "display_name")
+            multipartFormData.append(Data(model.password.utf8),
+                                     withName: "password")
+            multipartFormData.append(Data(model.email.utf8),
+                                     withName: "mail_address")
+            
+            if let profileImage = model.profileImage {
                 
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                case 200:
-                    do {
-                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
-                                                                   from: response.data!)
-                        self.saveUserRegisterInfoToDevice(with: decodedData)
-                        
-                    } catch {
-                        print("UserManager - signUP catch ERROR: \(error)")
-                    }
+                multipartFormData.append(profileImage,
+                                         withName: "user_thumbnail",
+                                         fileName: "\(UUID().uuidString).jpeg",
+                                         mimeType: "image/jpeg")
+            }
+        }, to: signUpRequestURL,
+        headers: model.headers)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+                do {
+                    let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
+                                                               from: response.data!)
+                    self.saveUserRegisterInfoToDevice(with: decodedData)
                     
-                default:
-                    if let responseJSON = try! response.result.get() as? [String : String] {
+                } catch {
+                    print("UserManager - signUP catch ERROR: \(error)")
+                }
+                
+            default:
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    
+                    if let error = responseJSON["error"] {
                         
-                        if let error = responseJSON["error"] {
-                            
-                            if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
-                                print(errorMessage)
-                            } else {
-                                print("알 수 없는 오류가 발생했습니다.")
-                            }
+                        if let errorMessage = SignUpError(rawValue: error)?.returnErrorMessage() {
+                            print(errorMessage)
+                        } else {
+                            print("알 수 없는 오류가 발생했습니다.")
                         }
                     }
                 }
             }
+            
+        }
     }
     
     //MARK: - 로그인
@@ -382,8 +397,7 @@ extension UserManager {
     
     func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
         
-        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경 -> KeyChainWrapper 이용하기 
-        
+        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경 -> KeyChainWrapper 이용하기
         User.shared.id = model.userID
         User.shared.username = model.username
         User.shared.password = model.password
@@ -424,11 +438,8 @@ extension UserManager {
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
     func saveAccessToken(with model: LoginResponseModel) {
         
-        
-        
         User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
                                                                     forKey: Constants.KeyChainKey.accessToken)
-    
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
         

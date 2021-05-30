@@ -17,28 +17,25 @@ struct RegisterInfoModel {
     /// 메일 주소 : @knu.ac.kr 로 끝나야하는데, 검사를 클라이언트에서 해야 할 듯
     let email: String
     
-    init(username: String, displayName: String, password: String, email: String) {
+    var profileImage: Data? = nil
+    
+    init(username: String, displayName: String, password: String, email: String, profileImage: Data?) {
 
         self.username = username
         self.displayName = displayName
         self.password = password
         self.email = email
-        
-        /// Initialize parameters
-        parameters["user_name"] = username
-        parameters["display_name"] = displayName
-        parameters["password"] = password
-        parameters["mail_address"] = email
+    
+        if let image = profileImage {
+            self.profileImage = image
+        }
     }
-
-    /// API Parameters
-    var parameters: Parameters = [:]
     
     /// HTTP Headers
     let headers: HTTPHeaders = [
         
 
         .accept("application/json"),
-        .contentType("application/x-www-form-urlencoded")
+        .contentType("multipart/form-data")
     ]
 }

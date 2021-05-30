@@ -7,7 +7,8 @@ struct ReviewDetail {
     var profileImage: UIImage = UIImage()
     var nickname: String = ""
     var medal: Int = 3
-    var reviewImagesFileFolder: FileFolder?
+    var reviewImageFiles: [Files]?
+    //var reviewImagesFileFolder: FileFolder?
     var rating: Int = 0
     var review: String = ""
 }

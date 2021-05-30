@@ -47,9 +47,10 @@ class ExampleViewController: UIViewController {
        
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
+        viewModel.fetchReviewList(of: 2)
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 2)
+
     }
 }
 
@@ -103,7 +104,6 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
                                                    placeholderImage: UIImage(named: "default review image"),
                                                    options: .continueInBackground,
                                                    completed: nil)
-            
             reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
                                                         placeholderImage: UIImage(named: "default profile image"),
                                                         options: .continueInBackground,
@@ -111,7 +111,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             return reviewCell
 
-        // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
+            // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
         }
         
         else {
@@ -121,13 +121,10 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
             
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
-            
-            
-            
             reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
-                                                        placeholderImage: UIImage(named: "default profile image"),
-                                                        options: .continueInBackground,
-                                                        completed: nil)
+                                                                           placeholderImage: UIImage(named: "default profile image"),
+                                                                           options: .continueInBackground,
+                                                                           completed: nil)
             
             return reviewCellWithoutReviewImages
         }
@@ -141,7 +138,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
         guard let vc = segue.destination as? ReviewDetailViewController else { return }
         guard let cell = tableView.cellForRow(at: viewModel.selectedIndex!) as? ReviewTableViewCell else { return }
         
@@ -149,7 +146,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.configure(with: reviewDetails)
     }
-
+    
 }
 
 //MARK: - UIScrollViewDelegate

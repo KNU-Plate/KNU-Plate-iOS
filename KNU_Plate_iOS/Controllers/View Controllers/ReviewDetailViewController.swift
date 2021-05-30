@@ -1,6 +1,5 @@
 import UIKit
-import Kingfisher
-
+import SDWebImage
 
 class ReviewDetailViewController: UIViewController {
     
@@ -12,9 +11,8 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewTextView: UITextView!
     
-    
     var reviewDetails = ReviewDetail()
-    var reviewImages: [UIImage] = []
+    var reviewImageFiles = [Files]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +28,7 @@ class ReviewDetailViewController: UIViewController {
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
         reviewDetails.review = model.review
-        reviewDetails.reviewImagesFileFolder = model.reviewImagesFileFolder
+        reviewDetails.reviewImageFiles = model.reviewImageFiles
     }
     
     // Review Cell
@@ -48,43 +46,14 @@ class ReviewDetailViewController: UIViewController {
         reviewTextView.attributedText = NSAttributedString(string: reviewDetails.review, attributes: attributes)
         reviewTextView.font = UIFont.systemFont(ofSize: 14.5)
         
-        // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let file = self.reviewDetails.reviewImagesFileFolder?.files {
-
-                for eachFile in file {
-
-                    let downloadURL = URL(string: eachFile.path)
-
-                    do {
-
-                        let imageData = try Data(contentsOf: downloadURL!)
-
-                        DispatchQueue.main.async {
-                            self.reviewImages.append(UIImage(data: imageData)!)
-                        }
-
-                    } catch {
-
-                        self.reviewImages.append(UIImage(named: "default review image")!)
-
-                    }
-
-
-                }
-                DispatchQueue.main.async {
-                    self.configurePageControl(reviewImageExists: true)
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.configurePageControl(reviewImageExists: false)
-                }
-            }
+        if let files = reviewDetails.reviewImageFiles {
+        
+            self.reviewImageFiles = files
+            configurePageControl(reviewImageExists: true)
+        } else {
+            configurePageControl(reviewImageExists: false)
         }
-        
 
         configureUI()
     }
@@ -92,28 +61,29 @@ class ReviewDetailViewController: UIViewController {
     func configureUI() {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-        userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
-        
         reviewImageView.layer.cornerRadius = 10
-        
     }
     
     func configurePageControl(reviewImageExists: Bool) {
         
         // 리뷰 이미지가 없으면
         if !reviewImageExists {
-            reviewImageView.image = UIImage(named: "default review image")!
+            reviewImageView.image = UIImage(systemName: "photo")
+            //reviewImageView.image = UIImage(named: "default review image")!
             return
         }
+
         reviewImageView.isUserInteractionEnabled = true
         
-        pageControl.numberOfPages = reviewImages.count
+        pageControl.numberOfPages = reviewImageFiles.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .white
         
-        reviewImageView.image = reviewImages[0]
+        reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[0].path),
+                                    placeholderImage: UIImage(named: "default review image"),
+                                    options: .continueInBackground,
+                                    completed: nil)
         
         let swipeLeft = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(self.respondToSwipeGesture(_:)))
@@ -128,17 +98,24 @@ class ReviewDetailViewController: UIViewController {
     }
 
     @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        
 
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
         
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.left :
                 pageControl.currentPage += 1
-                reviewImageView.image = reviewImages[pageControl.currentPage]
+                reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[pageControl.currentPage].path),
+                                            placeholderImage: UIImage(named: "default review image"),
+                                            options: .continueInBackground,
+                                            completed: nil)
                 
             case UISwipeGestureRecognizer.Direction.right :
                 pageControl.currentPage -= 1
-                reviewImageView.image = reviewImages[pageControl.currentPage]
+                reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[pageControl.currentPage].path),
+                                            placeholderImage: UIImage(named: "default review image"),
+                                            options: .continueInBackground,
+                                            completed: nil)
             default:
                 break
             }
