@@ -15,5 +15,6 @@ target 'KNU_Plate_iOS' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
   pod 'SDWebImage', '~> 5.0'
+  pod 'Kingfisher', '~> 6.0'
 
 end

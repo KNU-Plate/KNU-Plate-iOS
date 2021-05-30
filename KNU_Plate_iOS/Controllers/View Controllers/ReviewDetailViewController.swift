@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 
 class ReviewDetailViewController: UIViewController {
@@ -49,32 +50,29 @@ class ReviewDetailViewController: UIViewController {
         
         // 다운 가능한 리뷰 이미지를 하나하나 다운 받는 과정
         
-        OperationQueue().addOperation {
 
+        DispatchQueue.global(qos: .userInitiated).async {
             if let file = self.reviewDetails.reviewImagesFileFolder?.files {
 
                 for eachFile in file {
 
                     let downloadURL = URL(string: eachFile.path)
-                    
+
                     do {
-                        
+
                         let imageData = try Data(contentsOf: downloadURL!)
-                        
+
                         DispatchQueue.main.async {
                             self.reviewImages.append(UIImage(data: imageData)!)
                         }
-                        
+
                     } catch {
-                        
+
                         self.reviewImages.append(UIImage(named: "default review image")!)
-                        
+
                     }
-                    
-//                    let imageData = try! Data(contentsOf: downloadURL!)
-//                    DispatchQueue.main.async {
-//                        self.reviewImages.append(UIImage(data: imageData)!)
-//                    }
+
+
                 }
                 DispatchQueue.main.async {
                     self.configurePageControl(reviewImageExists: true)
@@ -87,6 +85,7 @@ class ReviewDetailViewController: UIViewController {
             }
         }
         
+
         configureUI()
     }
     
@@ -97,11 +96,6 @@ class ReviewDetailViewController: UIViewController {
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
         reviewImageView.layer.cornerRadius = 10
-        
-
-        
-        
-        
         
     }
     

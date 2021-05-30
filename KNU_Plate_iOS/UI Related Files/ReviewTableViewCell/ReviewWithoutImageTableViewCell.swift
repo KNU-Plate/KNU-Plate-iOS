@@ -62,7 +62,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         
         
         if let profileImageURL = viewModel.userProfileImageURL {
-            userProfileImageView.loadImage(from: profileImageURL)
+            //userProfileImageView.loadImage(from: profileImageURL)
         } else {
             userProfileImageView.image = UIImage(named: "default profile image")
         }

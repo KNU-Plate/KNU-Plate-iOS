@@ -11,8 +11,6 @@ class ReviewListViewModel {
     //MARK: - Object Properties
     var delegate: ReviewListViewModelDelegate?
     
-    //var page: Int = 0
-    
     var reviewList: [ReviewListResponseModel] = []
     
     var selectedIndex: IndexPath?
@@ -24,14 +22,14 @@ class ReviewListViewModel {
     
     //MARK: - Object Methods
     
-    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 1) {
+    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 0) {
   
         if pagination {
             isPaginating = true
         }
         
         print("REVIEWLIST COUNT: \(reviewList.count)")
-        if reviewList.count == index { return }
+        //if reviewList.count == index { return }
         
         let model = FetchReviewListModel(mallID: mallID, page: index)
     

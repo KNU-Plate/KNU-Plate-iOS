@@ -6,16 +6,16 @@ import Alamofire
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: ProfileImageView!
+    @IBOutlet var userProfileImageView: UIImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
-    @IBOutlet var reviewImageView: ReviewImageView!
+    @IBOutlet var reviewImageView: UIImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
-    @IBOutlet var multipleImageView: ReviewImageView!
+    @IBOutlet var multipleImageView: UIImageView!
     
     private var viewModel = ReviewTableViewModel()
 
@@ -29,7 +29,6 @@ class ReviewTableViewCell: UITableViewCell {
         userMedalImageView.image = nil
         rating.setStarsRating(rating: 3)
         reviewLabel.text = nil
-        //multipleImageView.image = nil
     }
     
     func configure(with model: ReviewListResponseModel) {
@@ -76,33 +75,19 @@ class ReviewTableViewCell: UITableViewCell {
         let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
         reviewLabel.attributedText = NSAttributedString(string: viewModel.review, attributes: attributes)
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
-        
-        
-        if let profileImageURL = viewModel.userProfileImageURL {
-            userProfileImageView.loadImage(from: profileImageURL)
-        } else {
-            userProfileImageView.image = UIImage(named: "default profile image")
-        }
-        
-        // 리뷰 이미지 배열의 첫 번째 이미지 가져오기
-        guard let path = viewModel.reviewImagesFileFolder?.files?[0].path else { return }
-        
-       
-        
-        if let downloadURL = URL(string: path) {
-            
-            
-            print("downloadURL for review image: \(downloadURL) + reviewID: \(viewModel.reviewID)")
-            reviewImageView.loadImage(from: downloadURL)
-        }
-        
-
   
     }
     
     func configureUI() {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
+        
+        
+        
+        
+        
+        
+        
         userProfileImageView.layer.borderWidth = 1
         userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
@@ -168,5 +153,24 @@ class ReviewTableViewCell: UITableViewCell {
         return reviewDetails
     }
     
+    func getReviewImageDownloadURL() -> URL? {
+        
+        let path = viewModel.reviewImagesFileFolder?.files?[0].path
+        
+        if let path = path {
+            if let url = URL(string: path) {
+                return url
+            }
+        }
+        return nil
+    }
+    
+    func getProfileImageDownloadURL() -> URL? {
+        
+        if let url = viewModel.userProfileImageURL {
+            return url
+        }
+        return nil
+    }
     
 }

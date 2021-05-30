@@ -9,6 +9,8 @@ class UserManager {
     //MARK: - Singleton
     static let shared: UserManager = UserManager()
     
+    let interceptor = Interceptor()
+    
     //MARK: - API Request URLs
     
     let unregisterRequestURL            = "\(Constants.API_BASE_URL)auth/unregister"
@@ -33,7 +35,10 @@ class UserManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
@@ -71,7 +76,10 @@ class UserManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -111,7 +119,10 @@ class UserManager {
         AF.request(sendEmailVerificationCodeURL,
                    method: .post,
                    encoding: URLEncoding.httpBody,
-                   headers: RequestEmailVerifyCodeModel().headers).responseJSON { (response) in
+                   headers: RequestEmailVerifyCodeModel().headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -133,7 +144,10 @@ class UserManager {
                    method: .patch,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -154,7 +168,10 @@ class UserManager {
                    method: .get,
                    parameters: model.parameters,
                    encoding: URLEncoding.queryString,
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
         
                     guard let statusCode = response.response?.statusCode else { return }
                 
@@ -180,7 +197,10 @@ class UserManager {
         AF.request(logOutRequestURL,
                    method: .post,
                    encoding: URLEncoding.httpBody,
-                   headers: headers).responseJSON { (response) in
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -206,7 +226,10 @@ class UserManager {
         AF.request(unregisterRequestURL,
                    method: .delete,
                    encoding: URLEncoding.httpBody,
-                   headers: headers).responseJSON { (response) in
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -232,7 +255,10 @@ class UserManager {
         AF.request(refreshTokenRequestURL,
                    method: .post,
                    encoding: URLEncoding.httpBody,
-                   headers: headers).responseJSON { (response) in
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -261,7 +287,10 @@ class UserManager {
         
         AF.request(loadUserProfileInfoURL,
                    method: .get,
-                   headers: headers).responseJSON { response in
+                   headers: headers,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -302,7 +331,9 @@ class UserManager {
             
         }, to: modifyUserInfoURL,
         method: .patch,
-        headers: model.headers)
+        headers: model.headers,
+        interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -393,13 +424,17 @@ extension UserManager {
     //TODO: - User Login 이후 아이디, 비번, 등의 info 를 User Defaults 에 저장하여, 자동 로그인이 이루어지도록 해야 함.
     func saveAccessToken(with model: LoginResponseModel) {
         
-        //TODO: - 앱 종료 후 바로 로그인이 가능하도록 아이디는 User Defaults 에 저장
-
+        
+        
         User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
                                                                     forKey: Constants.KeyChainKey.accessToken)
     
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
+        
+        print("UserManager - saveAccessToken success: ")
+        print("New accessToken: \(User.shared.accessToken)")
+        print("New refreshToken: \(User.shared.refreshToken)")
     }
     
     

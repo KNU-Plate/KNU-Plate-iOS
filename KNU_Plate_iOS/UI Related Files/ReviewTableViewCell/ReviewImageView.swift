@@ -3,31 +3,7 @@ import UIKit
 let reviewImageCache = NSCache<AnyObject, AnyObject>()
 
 class ReviewImageView: UIImageView {
-    
-//    func loadImage(from url: URL) {
-//
-//        if let imageCache = reviewImageCache.object(forKey: url.absoluteString as AnyObject) as? UIImage {
-//            image = imageCache
-//            return
-//        }
-//
-//        DispatchQueue.global().async { [weak self] in
-//
-//            if let data = try? Data(contentsOf: url) {
-//                print("DATA: \(data)")
-//                if let image = UIImage(data: data) {
-//                    print("IMAGE: \(image)")
-//                    DispatchQueue.main.async {
-//                        reviewImageCache.setObject(image, forKey: url.absoluteString as AnyObject)
-//                        self?.image = image
-//                    }
-//                } else { print("Error in Image")}
-//            } else { print("error in DATA")}
-//
-//        }
-//
-//    }
-    
+
 
     var task: URLSessionDataTask!
     let spinner = UIActivityIndicatorView(style: .medium)

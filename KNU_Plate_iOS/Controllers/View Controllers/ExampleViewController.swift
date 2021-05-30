@@ -1,6 +1,7 @@
 import UIKit
 import ProgressHUD
 import Alamofire
+import Kingfisher
 
 class ExampleViewController: UIViewController {
 
@@ -10,17 +11,12 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    
-    let imageCache = NSCache<NSString, UIImage>()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Test.shared.login()
-
-        
-        
-
+       
+    
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -42,18 +38,18 @@ class ExampleViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
             
-            self.viewModel.fetchReviewList(of: 3)
+            self.viewModel.fetchReviewList(of: 2)
             
         }
         
     }
     
-    
+       
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 3)
+        viewModel.fetchReviewList(of: 2)
     }
 }
 
@@ -100,56 +96,39 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             reviewCell.configure(with: reviewLists[indexPath.row])
             
-//            let path = (reviewLists[indexPath.row].reviewImageFileFolder?.files?[0].path)!
-//            
-//            let url = URL(string: path)!
-//
-//            if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
-//
-//                reviewCell.reviewImageView.image = cachedImage
-//            }
-//
-//            else {
-//
-//                DispatchQueue.global(qos: .background).async {
-//
-//
-//                    if let data = try? Data(contentsOf: url) {
-//                        let image = UIImage(data: data)!
-//
-//                        DispatchQueue.main.async {
-//
-//                            self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
-//                            reviewCell.reviewImageView.image = image
-//                        }
-//
-//                    }
-//                }
-//
-//
-//
-//            }
-//
-//
+            let reviewImageURL = reviewCell.getReviewImageDownloadURL()
+            let profileImageURL = reviewCell.getProfileImageDownloadURL()
             
+            reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
+                                                   placeholderImage: UIImage(named: "default review image"),
+                                                   options: .continueInBackground,
+                                                   completed: nil)
             
-            
-            
-            
-            
-            
-            
-            
-            
+            reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
+                                                        placeholderImage: UIImage(named: "default profile image"),
+                                                        options: .continueInBackground,
+                                                        completed: nil)
             
             return reviewCell
 
         // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
-        } else {
+        }
+        
+        else {
             
             guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
+            let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
+            
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
+            
+            
+            
+            reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
+                                                        placeholderImage: UIImage(named: "default profile image"),
+                                                        options: .continueInBackground,
+                                                        completed: nil)
+            
             return reviewCellWithoutReviewImages
         }
     }
@@ -192,14 +171,14 @@ extension ExampleViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
+        if position > (tableView.contentSize.height - 70 - scrollView.frame.size.height) {
             
             guard !viewModel.isPaginating else { return }
             
             if viewModel.needToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
                 let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
                 tableView.tableFooterView = nil
             } else { return }
         }
