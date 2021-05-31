@@ -5,46 +5,47 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newMenuTableViewCell" id="KGk-i7-Jjw" customClass="NewMenuTableViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newMenuTableViewCell" rowHeight="57" id="KGk-i7-Jjw" customClass="NewMenuTableViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="57"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="330" height="57"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="메뉴명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-uX-0ge">
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메뉴명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-uX-0ge">
                         <rect key="frame" x="5" y="5" width="180" height="35"/>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="D6H-Jo-Buq"/>
                             <constraint firstAttribute="width" constant="180" id="kQp-Ol-YA0"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="T4Z-b4-URM" userLabel="Rating Stack View">
-                        <rect key="frame" x="208.5" y="5" width="76.5" height="35"/>
+                        <rect key="frame" x="175" y="5" width="110" height="45"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SN-CZ-MWC" userLabel="Good button">
-                                <rect key="frame" x="0.0" y="0.0" width="21.5" height="35"/>
-                                <state key="normal" image="thumbs up(not_selected)">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="100"/>
-                                </state>
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="GqK-hF-O0k"/>
+                                    <constraint firstAttribute="height" constant="45" id="aDb-A3-y3X"/>
+                                </constraints>
+                                <state key="normal" image="thumbs up(not_selected)"/>
                                 <connections>
                                     <action selector="pressedMenuGoodOrBad:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oth-md-VJa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdG-xy-tiV" userLabel="Bad button">
-                                <rect key="frame" x="41.5" y="0.0" width="35" height="35"/>
+                                <rect key="frame" x="65" y="0.0" width="45" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="TF3-vb-QWg"/>
-                                    <constraint firstAttribute="width" constant="35" id="U3a-MP-af2"/>
+                                    <constraint firstAttribute="height" constant="45" id="TF3-vb-QWg"/>
+                                    <constraint firstAttribute="width" constant="45" id="U3a-MP-af2"/>
                                 </constraints>
                                 <state key="normal" image="thumbs down(not_selected)"/>
                                 <connections>
@@ -56,10 +57,8 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-7K-msT" userLabel="Delete button">
                         <rect key="frame" x="295" y="5" width="30" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="AN6-Yb-Qht"/>
                             <constraint firstAttribute="width" constant="30" id="AjM-nQ-5au"/>
                             <constraint firstAttribute="height" constant="35" id="Qjv-QY-UA6"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="q8G-a7-IxW"/>
                         </constraints>
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" image="x.circle" catalog="system"/>
@@ -84,15 +83,12 @@
                 <outlet property="goodButton" destination="6SN-CZ-MWC" id="dU1-IR-Yj9"/>
                 <outlet property="menuNameTextField" destination="v6T-uX-0ge" id="L23-bs-eRC"/>
             </connections>
-            <point key="canvasLocation" x="-286.95652173913044" y="136.60714285714286"/>
+            <point key="canvasLocation" x="-286.95652173913044" y="138.95089285714286"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="thumbs down(not_selected)" width="21.5" height="21.5"/>
         <image name="thumbs up(not_selected)" width="21.5" height="21.5"/>
         <image name="x.circle" catalog="system" width="128" height="121"/>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

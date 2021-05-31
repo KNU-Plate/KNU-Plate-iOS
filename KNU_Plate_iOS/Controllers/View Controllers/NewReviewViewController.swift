@@ -322,19 +322,19 @@ extension NewReviewViewController {
         reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
         reviewTextView.textColor = UIColor.lightGray
         
-        reviewTextView.layer.cornerRadius = 14.0
+        reviewTextView.layer.cornerRadius = 10.0
         reviewTextView.clipsToBounds = true
         reviewTextView.layer.borderWidth = 1
-        reviewTextView.layer.borderColor = UIColor.black.cgColor
+        reviewTextView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func initializeTextField() {
 
         menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
-        menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
+        menuInputTextField.layer.cornerRadius = 10 //menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
-        menuInputTextField.layer.borderColor = UIColor.black.cgColor
+        menuInputTextField.layer.borderColor = UIColor.lightGray.cgColor
         
         menuInputTextField.leftView = UIView(frame: CGRect(x: 0,
                                                            y: 0,

@@ -18,22 +18,44 @@ class NewMenuTableViewCell: UITableViewCell {
     var menuIsGood: Bool = true
     var indexPath: Int = 0
     
+    var thumbsUpSelected: UIImage = UIImage(named: "thumbs up(selected)")!
+    var thumbsUpNotSelected: UIImage = UIImage(named: "thumbs up(not_selected)")!
+    
+    var thumbsDownSelected: UIImage = UIImage(named: "thumbs down(selected)")!
+    var thumbsDownNotSelected: UIImage = UIImage(named: "thumbs down(not_selected)")!
+    
+    var buttonImageSize: Int = 25
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.selectionStyle = .none
-        pressedMenuGoodOrBad(goodButton)
         menuNameTextField.isUserInteractionEnabled = false
+        menuNameTextField.layer.borderWidth = 0
         
-        let font = UIFont.systemFont(ofSize: 20)
-        let configuration = UIImage.SymbolConfiguration(font: font)
-        let deleteImage = UIImage(systemName: "x.circle", withConfiguration: configuration)
-        deleteButton.setImage(deleteImage, for: .normal)
+        configureUI()
+        pressedMenuGoodOrBad(goodButton)
     }
     
     override func prepareForReuse() {
         indexPath = 0
         menuNameTextField.text = ""
+    }
+    
+    func configureUI() {
+        
+        thumbsUpSelected = thumbsUpSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
+        thumbsUpNotSelected = thumbsUpNotSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
+        thumbsDownSelected = thumbsDownSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
+        thumbsDownNotSelected = thumbsDownNotSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
+        
+        
+        
+        let font = UIFont.systemFont(ofSize: 25)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let deleteImage = UIImage(systemName: "x.circle", withConfiguration: configuration)
+        deleteButton.setImage(deleteImage, for: .normal)
+        
     }
 
     //MARK: - 추천 / 비추천 버튼 눌렀을 때 실행
@@ -47,17 +69,17 @@ class NewMenuTableViewCell: UITableViewCell {
         case goodButton:
             menuIsGood = true
             
-            goodButton.setImage(UIImage(named: "thumbs up(selected)"),
+            goodButton.setImage(thumbsUpSelected,
                                 for: .normal)
-            badButton.setImage(UIImage(named: "thumbs down(not_selected)"),
+            badButton.setImage(thumbsDownNotSelected,
                                for: .normal)
             
         case badButton:
             menuIsGood = false
             
-            goodButton.setImage(UIImage(named: "thumbs up(not_selected)"),
+            goodButton.setImage(thumbsUpNotSelected,
                                 for: .normal)
-            badButton.setImage(UIImage(named: "thumbs down(selected)"),
+            badButton.setImage(thumbsDownSelected,
                                for: .normal)
             
         default: return

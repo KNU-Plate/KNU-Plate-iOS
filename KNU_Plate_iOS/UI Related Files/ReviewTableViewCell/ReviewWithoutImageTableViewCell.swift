@@ -51,7 +51,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         rating.setStarsRating(rating: viewModel.rating)
         userNicknameLabel.text = viewModel.userNickname
         
-         d
+         
         let textViewStyle = NSMutableParagraphStyle()
         textViewStyle.lineSpacing = 2
         let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
