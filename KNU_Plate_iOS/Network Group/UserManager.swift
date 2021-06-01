@@ -297,8 +297,6 @@ class UserManager {
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Bool) -> Void)) {
         
-        //let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
-        
         AF.request(loadUserProfileInfoURL,
                    method: .get,
                    interceptor: interceptor)
@@ -310,7 +308,6 @@ class UserManager {
                 
                 case 200:
                     do {
-                            
                             let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
                             self.saveUserInfoToDevice(with: decodedData)
                             completion(true)
@@ -375,7 +372,44 @@ class UserManager {
     }
     
     //MARK: - 사용자 프로필 이미지 업데이트
-    func updateProfileImage(with model: EditUserInfoModel) {
+    func updateProfileImage(with model: EditUserInfoModel,
+                            completion: @escaping ((Bool) -> Void)) {
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
+                                     withName: "force")
+            
+            if let profileImage = model.userProfileImage {
+                multipartFormData.append(profileImage,
+                                         withName: "user_thumbnail",
+                                         fileName: "\(UUID().uuidString).jpeg",
+                                         mimeType: "image/jpeg")
+            }
+
+        }, to: modifyUserInfoURL,
+        method: .patch,
+        headers: model.headers,
+        interceptor: interceptor)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+            
+                print("UserManager - 프로필 이미지 변경 성공")
+                completion(true)
+            default:
+                
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    if let error = responseJSON["error"] {
+                        print("UserManager - updateNickname error: \(error)")
+                        completion(false)
+                    }
+                }
+            }
+        }
         
     }
     

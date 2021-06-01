@@ -23,6 +23,44 @@ class MyPageViewController: UIViewController {
         loadUserProfileInfo()
     }
     
+    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
+        
+        presentActionSheet()
+    }
+
+    func presentActionSheet() {
+        
+        let alert = UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
+            
+            self.initializeImagePicker()
+            self.present(self.imagePicker, animated: true)
+        }
+        let remove = UIAlertAction(title: "프로필 사진 제거", style: .default) { _ in
+            self.removeProfileImage()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(remove)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func popToWelcomeViewController() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    }
+}
+
+//MARK: - API Networking
+
+extension MyPageViewController {
+    
     func loadUserProfileInfo() {
         
         UserManager.shared.loadUserProfileInfo { result in
@@ -39,28 +77,22 @@ class MyPageViewController: UIViewController {
                         
                         self.profileImageButton.setImage(profileImage, for: .normal)
                     }
-                    
-                    
-                    
                 }
-                
-                
-                
             case false:
-                SnackBar.make(in: self.view, message: "", duration: .lengthLong).show()
+                SnackBar.make(in: self.view, message: "프로필 정보 불러오기 실패", duration: .lengthLong).show()
             }
-            
-            
-            
         }
-        
     }
     
-    @IBAction func pressedProfileImageButton(_ sender: UIButton) {
+    func removeProfileImage() {
         
-        presentActionSheet()
-    }
+        profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+        initializeProfileImageButton()
 
+        // API 통신
+    }
+    
+    
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
         UserManager.shared.logOut { result in
@@ -82,45 +114,8 @@ class MyPageViewController: UIViewController {
         }
     }
     
-    func removeProfileImage() {
-        
-        profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
-        initializeProfileImageButton()
-
-        // API 통신
-    }
-    
-    func presentActionSheet() {
-        
-        let alert = UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
-        
-        let library = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
-            
-            self.initializeImagePicker()
-            self.present(self.imagePicker, animated: true)
-        }
-        
-        let remove = UIAlertAction(title: "프로필 사진 제거", style: .default) { _ in
-            self.removeProfileImage()
-        }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        alert.addAction(library)
-        alert.addAction(remove)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
     
     
-    func popToWelcomeViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    
-    }
 }
 
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
@@ -132,25 +127,31 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
             dismiss(animated: true) {
-                
                 self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
-                    
+                
                     if selectedOk {
-            
-                        self.updateProfileImageButton(with: originalImage)
                         
                         showProgressBar()
+                    
+                        let imageData = originalImage.jpegData(compressionQuality: 1.0)!
+                        let model = EditUserInfoModel(userProfileImage: imageData)
                         
-                        OperationQueue().addOperation {
+                        UserManager.shared.updateProfileImage(with: model) { result in
                             
-                            // API - update user profile
+                            switch result {
                             
-    
-                            dismissProgressBar()
-                            
-                            
+                            case true:
+                                SnackBar.make(in: self.view, message: "프로필 이미지 변경 성공 🎉", duration: .lengthLong).show()
+                            case false:
+                                SnackBar.make(in: self.view, message: "프로필 이미지 변경에 실패하였습니다.", duration: .lengthLong).show()
+                            }
                         }
-              
+                    
+                        DispatchQueue.main.async {
+                            self.updateProfileImageButton(with: originalImage)
+                            User.shared.profileImage = originalImage
+                            dismissProgressBar()
+                        }
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
                     }
