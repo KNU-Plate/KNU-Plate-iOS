@@ -22,6 +22,8 @@ class SearchRestaurantViewModel {
     /// 현재 선택된 장소
     var currentlySelectedIndex: Int?
     
+    lazy var restaurantDetails = RestaurantDetailFromKakao()
+    
     //MARK: - Object Methods
     
     func search(with keyword: String) {
@@ -66,6 +68,22 @@ class SearchRestaurantViewModel {
         placeName.removeAll()
         address.removeAll()
     }
+    
+    
+    func getRestaurantDetails(for index: Int) -> RestaurantDetailFromKakao {
+        
+        restaurantDetails.name = placeName[index]
+        restaurantDetails.address = documents[index].address
+        restaurantDetails.contact = documents[index].contact
+        restaurantDetails.category = documents[index].categoryName
+        restaurantDetails.latitude = Double(documents[index].y)!
+        restaurantDetails.latitude = Double(documents[index].x)!
+        
+        return restaurantDetails
+    }
+    
+    
+    
     
     
     

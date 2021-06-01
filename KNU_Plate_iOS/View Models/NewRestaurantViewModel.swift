@@ -2,6 +2,8 @@ import Foundation
 
 protocol NewRestaurantViewModelDelegate {
     func didCompleteUpload(_ success: Bool)
+    func alreadyRegisteredRestaurant()
+    func failedToUpload()
 }
 
 class NewRestaurantViewModel {
@@ -77,10 +79,22 @@ class NewRestaurantViewModel {
                                                     longitude: longitude,
                                                     images: userSelectedImagesInDataFormat)
         
-        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
+        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { result in
             
-            print("NewRestaurantViewModel - upload() RESULT: \(isSuccess)")
-            self.delegate?.didCompleteUpload(isSuccess)
+            print("NewRestaurantViewModel - upload() RESULT: \(result)")
+            
+            switch result {
+            
+            case true:
+                self.delegate?.didCompleteUpload(true)
+                
+            case false:
+                self.delegate?.failedToUpload()
+                //self.delegate?.alreadyRegisteredRestaurant()
+            }
+            
+            
+            
         }
     }
     

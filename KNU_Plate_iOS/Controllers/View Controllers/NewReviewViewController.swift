@@ -1,6 +1,7 @@
 import UIKit
 import Alamofire
 import ProgressHUD
+import SnackBar_swift
 
 class NewReviewViewController: UIViewController {
 
@@ -61,12 +62,21 @@ class NewReviewViewController: UIViewController {
             switch error {
             
             case NewReviewInputError.tooMuchMenusAdded:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.tooMuchMenusAdded.errorDescription) 🥲",
+                              duration: .lengthLong).show()
             case NewReviewInputError.menuNameTooShort:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.menuNameTooShort.errorDescription) 🥲",
+                              duration: .lengthLong).show()
             case NewReviewInputError.alreadyExistingMenu:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
-            default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.alreadyExistingMenu.errorDescription) 🥲",
+                              duration: .lengthLong).show()
+            default:
+                SnackBar.make(in: self.view,
+                              message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
+                              duration: .lengthLong).show()
             
             }
         }

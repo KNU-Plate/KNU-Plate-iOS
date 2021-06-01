@@ -37,7 +37,7 @@ class SearchRestaurantViewController: UIViewController {
                                       message: alertMessage,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "다시 고를래요",
-                                      style: .cancel,
+                                      style: .default,
                                       handler: nil))
         alert.addAction(UIAlertAction(title: "네 맞아요!",
                                       style: .default,
@@ -59,25 +59,10 @@ class SearchRestaurantViewController: UIViewController {
             
             let newRestaurantVC = segue.destination as! NewRestaurantViewController
             
-            guard let indexSelected = viewModel.currentlySelectedIndex else {
-                return
-            }
+            guard let indexSelected = viewModel.currentlySelectedIndex else { return }
             
-            let restaurantName = viewModel.placeName[indexSelected]
-            let address = viewModel.documents[indexSelected].address
-            let contact = viewModel.documents[indexSelected].contact
-            let category = viewModel.documents[indexSelected].categoryName
-            let latitude = Double(viewModel.documents[indexSelected].y)!
-            let longitude = Double(viewModel.documents[indexSelected].x)!
-            
-            // 나중에 구조체로 묶어서 한 번에 보내는 것도 고려
-        
-            newRestaurantVC.configure(name: restaurantName,
-                                                         address: address,
-                                                         contact: contact,
-                                                         categoryName: category,
-                                                         latitude: latitude,
-                                                         longitude: longitude)
+            let restaurantDetails = viewModel.getRestaurantDetails(for: indexSelected)
+            newRestaurantVC.configure(with: restaurantDetails)
         }
     }
 }
@@ -122,8 +107,6 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
         pointItem?.itemName = placeName
         pointItem?.showDisclosureButtonOnCalloutBalloon = true
 
-        
-        
         mapView.add(pointItem)
         mapView.select(pointItem, animated: true)
     

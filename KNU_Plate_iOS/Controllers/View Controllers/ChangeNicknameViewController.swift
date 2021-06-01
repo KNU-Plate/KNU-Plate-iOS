@@ -30,15 +30,18 @@ class ChangeNicknameViewController: UIViewController {
         showProgressBar()
 
         if !didCheckNicknameDuplicate {
-            SnackBar.make(in: self.view, message: "🤔 닉네임 중복 확인을 먼저해주세요.", duration: .lengthLong).show()
-            //self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "🤔 닉네임 중복 확인을 먼저해주세요.",
+                          duration: .lengthLong).show()
+
             dismissProgressBar()
             return
         }
         
         guard let nickname = self.nickname else {
-            SnackBar.make(in: self.view, message: "🤔 빈 칸이 없는지 확인해주세요.", duration: .lengthLong).show()
-           // self.presentSimpleAlert(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "🤔 빈 칸이 없는지 확인해주세요.",
+                          duration: .lengthLong).show()
             return
         }
         
@@ -53,7 +56,9 @@ class ChangeNicknameViewController: UIViewController {
                 
             } else {
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(title: "닉네임 변경 실패", message: "네트워크 오류")
+                    SnackBar.make(in: self.view,
+                                  message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
+                                  duration: .lengthLong).show()
                 }
             }
             dismissProgressBar()
@@ -96,11 +101,15 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         guard nickname.count >= 2, nickname.count <= 10 else {
-            self.presentSimpleAlert(title: "닉네임 길이 오류", message: "닉네임은 2자 이상, 10자 이하로 작성해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "닉네임은 2자 이상, 10자 이하로 작성해주세요❗️ ",
+                          duration: .lengthLong).show()
             return false
         }
         self.nickname = nickname

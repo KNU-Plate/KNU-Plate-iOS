@@ -40,8 +40,6 @@ class RestaurantManager {
             
             if let imageArray = model.images {
                 for images in imageArray {
-                    
-                    /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
                                              fileName: "\(UUID().uuidString).jpeg",
@@ -59,13 +57,11 @@ class RestaurantManager {
             switch statusCode {
             case 200:
                 
-                print("매장 등록 성공")
+                print("RestaurantManager - 매장 등록 성공")
                 completion(true)
                 
-            /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
-            
-            
             default:
+                print("RestaurantManager - uploadNewRes() statusCode: \(statusCode)")
                 if let responseJSON = try! response.result.get() as? [String : String] {
                     
                     if let error = responseJSON["error"] {
@@ -73,11 +69,8 @@ class RestaurantManager {
                         if let errorMessage = NewRestaurantUploadError(rawValue: error)?.returnErrorMessage() {
                             
                             print(errorMessage)
-                            
-                            
-                            
                         } else {
-                            print(error)
+                            print("RestaurantManager - uploadNewRestaurant() error: \(error)")
                             
                         }
                         completion(false)

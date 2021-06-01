@@ -93,7 +93,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: model.headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -113,7 +112,8 @@ class UserManager {
                         }
                         
                     default:
-                        if let responseJSON = try! response.result.get() as? [String : String] {
+                        print("UserManager - login FAILED")
+                         if let responseJSON = try! response.result.get() as? [String : String] {
                             
                             if let error = responseJSON["error"] {
                                 
@@ -304,6 +304,8 @@ class UserManager {
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
+                print("loadUserProfileInfo statusCode: \(statusCode)")
+                
                 switch statusCode {
                 
                 case 200:
@@ -366,7 +368,41 @@ class UserManager {
     }
     
     //MARK: - 사용자 비밀번호 수정
-    func updatePassword(with model: EditUserInfoModel) {
+    func updatePassword(with model: EditUserInfoModel,
+                        completion: @escaping ((Bool) -> Void)) {
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.password!.utf8),
+                                     withName: "password")
+            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
+                                     withName: "force")
+            
+        }, to: modifyUserInfoURL,
+        method: .patch,
+        headers: model.headers,
+        interceptor: interceptor)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+                
+                print("비밀번호 변경 성공")
+                completion(true)
+            default:
+                
+                
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    if let error = responseJSON["error"] {
+                        print("UserManager - updatePassword error: \(error) and statusCode: \(statusCode)")
+                        completion(false)
+                    }
+                }
+            }
+        }
+        
         
         
     }

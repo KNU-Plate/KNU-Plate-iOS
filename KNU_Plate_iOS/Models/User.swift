@@ -12,6 +12,8 @@ class User {
     
     var password: String = ""
     
+    var savedPassword: Bool = false
+    
     /// nickname
     var displayName: String = ""
     
