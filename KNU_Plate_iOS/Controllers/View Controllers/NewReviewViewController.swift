@@ -106,13 +106,22 @@ class NewReviewViewController: UIViewController {
                     switch error {
                     
                     case NewReviewInputError.insufficientMenuError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
-                    case NewReviewInputError.insufficientReviewError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
-                    case NewReviewInputError.blankMenuNameError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
-                    default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.insufficientMenuError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
                         
+                    case NewReviewInputError.insufficientReviewError:
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.insufficientReviewError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
+                    case NewReviewInputError.blankMenuNameError:
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.blankMenuNameError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
+                    default:
+                        SnackBar.make(in: self.view,
+                                      message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
+                                      duration: .lengthLong).show()
                     }
                 }
                 dismissProgressBar()
@@ -138,7 +147,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.item == 0 {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
-                fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             return cell
@@ -148,7 +157,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
-                fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             cell.indexPath = indexPath.item
@@ -227,7 +236,7 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.newMenuTableViewCell, for: indexPath) as? NewMenuTableViewCell else {
-            fatalError("Failed to dequeue cell for NewMenuTableViewCell")
+            fatalError()
         }
         
         if viewModel.userAddedMenus.count != 0 {
@@ -287,7 +296,7 @@ extension NewReviewViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+            textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요! 🍔"
             textView.textColor = UIColor.lightGray
             return
         }
@@ -334,7 +343,7 @@ extension NewReviewViewController {
     func initializeTextView() {
         
         reviewTextView.delegate = self
-        reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+        reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요! 🍔"
         reviewTextView.textColor = UIColor.lightGray
         
         reviewTextView.layer.cornerRadius = 10.0
@@ -345,7 +354,7 @@ extension NewReviewViewController {
     
     func initializeTextField() {
 
-        menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
+        menuInputTextField.placeholder = "터치하여 메뉴를 고르거나 직접 입력해 보세요! 🍽"
         menuInputTextField.layer.cornerRadius = 10 //menuInputTextField.frame.height / 2
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
