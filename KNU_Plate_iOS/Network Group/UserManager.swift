@@ -416,11 +416,37 @@ class UserManager {
     //MARK: - 사용자 프로필 이미지 제거
     func removeProfileImage(completion: @escaping ((Bool) -> Void)) {
         
+        let model = EditUserInfoModel(removeUserProfileImage: true)
         
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
+                                     withName: "force")
+
+        }, to: modifyUserInfoURL,
+        method: .patch,
+        headers: model.headers,
+        interceptor: interceptor)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+            
+                print("UserManager - 프로필 이미지 제거하기 성공")
+                completion(true)
+            default:
+                
+                if let responseJSON = try! response.result.get() as? [String : String] {
+                    if let error = responseJSON["error"] {
+                        print("UserManager - updateNickname error: \(error)")
+                        completion(false)
+                    }
+                }
+            }
+        }
     }
-    
-    
-    
 }
 
 

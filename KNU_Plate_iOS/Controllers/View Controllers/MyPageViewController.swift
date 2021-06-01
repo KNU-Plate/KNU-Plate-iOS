@@ -86,12 +86,22 @@ extension MyPageViewController {
     
     func removeProfileImage() {
         
-        profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
-        initializeProfileImageButton()
-
-        // API 통신
+        UserManager.shared.removeProfileImage { result in
+            
+            switch result {
+            
+            case true:
+                SnackBar.make(in: self.view, message: "프로필 사진 제거 성공 🎉", duration: .lengthLong).show()
+                DispatchQueue.main.async {
+                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+                    self.initializeProfileImageButton()
+                    User.shared.profileImage = nil
+                }
+            case false:
+                SnackBar.make(in: self.view, message: "프로필 이미지 변경에 실패하였습니다.", duration: .lengthLong).show()
+            }
+        }
     }
-    
     
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
@@ -114,6 +124,27 @@ extension MyPageViewController {
         }
     }
     
+    func updateProfileImage(with image: UIImage) {
+        
+        let imageData = image.jpegData(compressionQuality: 1.0)!
+        let model = EditUserInfoModel(userProfileImage: imageData)
+        
+        UserManager.shared.updateProfileImage(with: model) { result in
+            
+            switch result {
+            
+            case true:
+                SnackBar.make(in: self.view, message: "프로필 사진 변경 성공 🎉", duration: .lengthLong).show()
+                DispatchQueue.main.async {
+                    self.updateProfileImageButton(with: image)
+                    User.shared.profileImage = image
+                }
+            case false:
+                SnackBar.make(in: self.view, message: "프로필 사진 변경에 실패하였습니다.", duration: .lengthLong).show()
+            }
+        }
+        
+    }
     
     
 }
@@ -132,26 +163,9 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                     if selectedOk {
                         
                         showProgressBar()
-                    
-                        let imageData = originalImage.jpegData(compressionQuality: 1.0)!
-                        let model = EditUserInfoModel(userProfileImage: imageData)
-                        
-                        UserManager.shared.updateProfileImage(with: model) { result in
-                            
-                            switch result {
-                            
-                            case true:
-                                SnackBar.make(in: self.view, message: "프로필 이미지 변경 성공 🎉", duration: .lengthLong).show()
-                            case false:
-                                SnackBar.make(in: self.view, message: "프로필 이미지 변경에 실패하였습니다.", duration: .lengthLong).show()
-                            }
-                        }
-                    
-                        DispatchQueue.main.async {
-                            self.updateProfileImageButton(with: originalImage)
-                            User.shared.profileImage = originalImage
-                            dismissProgressBar()
-                        }
+                        self.updateProfileImage(with: originalImage)
+                        dismissProgressBar()
+
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
                     }
