@@ -303,13 +303,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1056"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pf4-lN-svS" userLabel="Star Rating Stack View" customClass="RatingController" customModule="KNU_Plate_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="62.5" y="20" width="250" height="50"/>
+                                                <rect key="frame" x="75" y="20" width="225" height="45"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YeZ-oc-Gmm">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="NMk-wM-4CX"/>
-                                                            <constraint firstAttribute="width" constant="50" id="ShX-Sm-PrQ"/>
+                                                            <constraint firstAttribute="width" constant="45" id="6sM-GY-sCe"/>
+                                                            <constraint firstAttribute="height" constant="45" id="jtN-cD-T0I"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -318,10 +318,10 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMY-B1-ANM">
-                                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="45" y="0.0" width="45" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="qf3-DS-FRX"/>
-                                                            <constraint firstAttribute="height" constant="50" id="uI4-uQ-Yhb"/>
+                                                            <constraint firstAttribute="height" constant="45" id="Ant-mh-pLI"/>
+                                                            <constraint firstAttribute="width" constant="45" id="QJp-6c-y1R"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -330,10 +330,10 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJ8-cu-q7Q">
-                                                        <rect key="frame" x="100" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="90" y="0.0" width="45" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="ChA-8z-Th7"/>
-                                                            <constraint firstAttribute="width" constant="50" id="gED-sX-0UB"/>
+                                                            <constraint firstAttribute="width" constant="45" id="Ca4-3h-hq4"/>
+                                                            <constraint firstAttribute="height" constant="45" id="hxN-5o-32w"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -342,10 +342,10 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNb-Lf-Ygq">
-                                                        <rect key="frame" x="150" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="135" y="0.0" width="45" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="kX1-Cr-olT"/>
-                                                            <constraint firstAttribute="height" constant="50" id="qcl-Zp-JbY"/>
+                                                            <constraint firstAttribute="height" constant="45" id="caY-kQ-3K5"/>
+                                                            <constraint firstAttribute="width" constant="45" id="dyq-kF-vx2"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -354,10 +354,10 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvX-S2-SGa">
-                                                        <rect key="frame" x="200" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="180" y="0.0" width="45" height="45"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="8wm-4k-lXP"/>
-                                                            <constraint firstAttribute="height" constant="50" id="Lv0-e2-Vnl"/>
+                                                            <constraint firstAttribute="width" constant="45" id="NSX-WH-g6L"/>
+                                                            <constraint firstAttribute="height" constant="45" id="qCu-Xv-0cG"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemYellowColor"/>
                                                         <state key="normal">
@@ -368,13 +368,13 @@
                                                 </subviews>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="Wd8-SL-bnd" userLabel="Divider Line">
-                                                <rect key="frame" x="0.5" y="90" width="374" height="1"/>
+                                                <rect key="frame" x="0.5" y="85" width="374" height="1"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="duy-ac-iPk" userLabel="Divider Line">
-                                                <rect key="frame" x="0.5" y="142" width="374" height="1"/>
+                                                <rect key="frame" x="0.5" y="137" width="374" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Hk-u8-0mr" userLabel="Food Pic Label Stack View">
-                                                <rect key="frame" x="15" y="106" width="136.5" height="21"/>
+                                                <rect key="frame" x="15" y="101" width="136.5" height="21"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
                                                         <rect key="frame" x="0.0" y="1" width="21" height="18.5"/>
@@ -399,7 +399,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-rV-uSJ" userLabel="Menu Label Stack View">
-                                                <rect key="frame" x="15" y="309" width="181" height="21"/>
+                                                <rect key="frame" x="15" y="304" width="181" height="21"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -423,7 +423,7 @@
                                                 </subviews>
                                             </stackView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bBl-WA-nha">
-                                                <rect key="frame" x="8" y="148" width="359" height="135"/>
+                                                <rect key="frame" x="8" y="143" width="359" height="135"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="135" id="epd-cs-wjM"/>
@@ -479,8 +479,12 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gR-ld-9MR" userLabel="Cancel Button">
-                                                                    <rect key="frame" x="50" y="0.0" width="40" height="40"/>
-                                                                    <state key="normal" image="cancel button"/>
+                                                                    <rect key="frame" x="67" y="0.0" width="23" height="23"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="23" id="44x-e7-wE5"/>
+                                                                        <constraint firstAttribute="width" constant="23" id="o1w-su-qKg"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="delete button"/>
                                                                     <connections>
                                                                         <action selector="pressedCancelButton:" destination="TW1-UD-IA3" eventType="touchUpInside" id="eFR-wN-mId"/>
                                                                     </connections>
@@ -503,10 +507,10 @@
                                                 </cells>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="v46-F2-JpX" userLabel="Divider Line">
-                                                <rect key="frame" x="0.5" y="293" width="374" height="1"/>
+                                                <rect key="frame" x="0.5" y="288" width="374" height="1"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="주문한 메뉴를 하나씩 추가해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-SM-yiS">
-                                                <rect key="frame" x="7.5" y="345" width="360" height="40"/>
+                                                <rect key="frame" x="7.5" y="340" width="360" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="9eh-6j-UZ3"/>
                                                     <constraint firstAttribute="width" constant="360" id="gFr-hM-oZj"/>
@@ -515,14 +519,14 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FGG-vS-9ca" userLabel="Menu Table View">
-                                                <rect key="frame" x="10" y="395" width="355" height="100"/>
+                                                <rect key="frame" x="10" y="390" width="355" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="Uto-kB-SrF"/>
                                                 </constraints>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flM-yg-k18" userLabel="Review Label Stack View">
-                                                <rect key="frame" x="15" y="521" width="101" height="21"/>
+                                                <rect key="frame" x="15" y="516" width="101" height="21"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="l7L-ct-he1">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -546,7 +550,7 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="15" y="557" width="345" height="200"/>
+                                                <rect key="frame" x="15" y="552" width="345" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
@@ -556,7 +560,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="sUS-7Z-136" userLabel="Divider Line">
-                                                <rect key="frame" x="0.5" y="505" width="374" height="1"/>
+                                                <rect key="frame" x="0.5" y="500" width="374" height="1"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1431,17 +1435,18 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add button" width="113" height="113"/>
+        <image name="add button" width="226" height="226"/>
         <image name="cancel button" width="40" height="40"/>
         <image name="default profile image" width="73" height="73"/>
+        <image name="delete button" width="79" height="79"/>
         <image name="first medal" width="41" height="41"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu (selected)" width="41.5" height="41.5"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="pick profile pic(black)" width="199" height="199"/>
         <image name="review (selected)" width="41.5" height="41.5"/>
-        <image name="star rating (filled)" width="36" height="34.5"/>
-        <image name="star rating (unfilled)" width="35.5" height="34"/>
+        <image name="star rating (filled)" width="123" height="123"/>
+        <image name="star rating (unfilled)" width="123" height="123"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

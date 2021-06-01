@@ -53,7 +53,8 @@ class NewMenuTableViewCell: UITableViewCell {
         
         let font = UIFont.systemFont(ofSize: 25)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let deleteImage = UIImage(systemName: "x.circle", withConfiguration: configuration)
+        let deleteImage = UIImage(named: "delete button")
+        //let deleteImage = UIImage(systemName: "x.circle", withConfiguration: configuration)
         deleteButton.setImage(deleteImage, for: .normal)
         
     }

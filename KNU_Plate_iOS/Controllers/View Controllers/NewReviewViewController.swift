@@ -267,7 +267,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return viewModel.existingMenus.count
     }
     
@@ -277,7 +276,11 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        //menuInputTextField.text = viewModel.existingMenus[row].menuName
+        if row == viewModel.existingMenus.count - 1 {
+            menuInputTextField.text = ""
+            return
+        }
+        menuInputTextField.text = viewModel.existingMenus[row].menuName
     }
 }
 
@@ -355,7 +358,7 @@ extension NewReviewViewController {
     func initializeTextField() {
 
         menuInputTextField.placeholder = "터치하여 메뉴를 고르거나 직접 입력해 보세요! 🍽"
-        menuInputTextField.layer.cornerRadius = 10 //menuInputTextField.frame.height / 2
+        menuInputTextField.layer.cornerRadius = 10
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
         menuInputTextField.layer.borderColor = UIColor.lightGray.cgColor
@@ -431,6 +434,7 @@ extension NewReviewViewController {
         
         self.view.endEditing(true)
         
+        
         let selectedRow = existingMenusPickerView.selectedRow(inComponent: 0)
         
         /// 만약 "직접 입력" 옵션을 선택했을 시
@@ -441,6 +445,7 @@ extension NewReviewViewController {
             menuInputTextField.becomeFirstResponder()
         } else {
             menuInputTextField.text = viewModel.existingMenus[selectedRow].menuName
+            initializePickerViewForMenuTextField()
         }
     }
     

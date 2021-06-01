@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "bad (selected).png",
+      "filename" : "delete button.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bad (selected)-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bad (selected)-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
