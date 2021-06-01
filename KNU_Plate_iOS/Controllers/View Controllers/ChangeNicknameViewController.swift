@@ -1,4 +1,5 @@
 import UIKit
+import SnackBar_swift
 
 class ChangeNicknameViewController: UIViewController {
     
@@ -29,13 +30,15 @@ class ChangeNicknameViewController: UIViewController {
         showProgressBar()
 
         if !didCheckNicknameDuplicate {
-            self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
+            SnackBar.make(in: self.view, message: "🤔 닉네임 중복 확인을 먼저해주세요.", duration: .lengthLong).show()
+            //self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
             dismissProgressBar()
             return
         }
         
         guard let nickname = self.nickname else {
-            self.presentSimpleAlert(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view, message: "🤔 빈 칸이 없는지 확인해주세요.", duration: .lengthLong).show()
+           // self.presentSimpleAlert(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요.")
             return
         }
         
@@ -72,12 +75,14 @@ class ChangeNicknameViewController: UIViewController {
             if isNotDuplicate {
                 
                 DispatchQueue.main.async {
+                    print("Check Duplication: 중복 아님!")
                     self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
                     self.didCheckNicknameDuplicate = true
                 }
             } else {
                 
                 DispatchQueue.main.async {
+                    print("Check Duplication: 중복이다!")
                     self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢", for: .normal)
                     self.didCheckNicknameDuplicate = false
                 }

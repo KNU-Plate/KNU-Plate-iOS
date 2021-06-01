@@ -52,7 +52,6 @@ class RestaurantManager {
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers,
         interceptor: interceptor)
-        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -98,7 +97,6 @@ class RestaurantManager {
                    encoding: URLEncoding(arrayEncoding: .noBrackets),
                    headers: model.headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                 
                 guard let statusCode = response.response?.statusCode else {
@@ -167,7 +165,6 @@ class RestaurantManager {
         }, to: uploadNewReviewRequestURL,
         headers: model.headers,
         interceptor: interceptor)
-        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -205,7 +202,6 @@ class RestaurantManager {
                    encoding: URLEncoding.queryString,
                    headers: model.headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -245,7 +241,6 @@ class RestaurantManager {
                    method: httpMethod,
                    headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }

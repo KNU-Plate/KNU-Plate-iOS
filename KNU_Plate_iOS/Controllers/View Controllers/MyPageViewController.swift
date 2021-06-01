@@ -1,5 +1,6 @@
 import UIKit
 import Alamofire
+import SnackBar_swift
 
 class MyPageViewController: UIViewController {
     
@@ -18,11 +19,41 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         
-        Test.shared.login()
-        
-        
-
         initialize()
+        loadUserProfileInfo()
+    }
+    
+    func loadUserProfileInfo() {
+        
+        UserManager.shared.loadUserProfileInfo { result in
+            
+            switch result {
+            case true:
+        
+                DispatchQueue.main.async {
+                    
+                    self.userNickname.text = User.shared.displayName
+                    self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+                    
+                    if let profileImage = User.shared.profileImage {
+                        
+                        self.profileImageButton.setImage(profileImage, for: .normal)
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                
+            case false:
+                SnackBar.make(in: self.view, message: "", duration: .lengthLong).show()
+            }
+            
+            
+            
+        }
+        
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
@@ -41,14 +72,12 @@ class MyPageViewController: UIViewController {
                     if selectedOk {
     
                         DispatchQueue.main.async {
-                            
-                       
                             self.popToWelcomeViewController()
                         }
                     } else { return }
                 }
             case false:
-                self.showToast(message: "일시적 네트워크 오류")
+                SnackBar.make(in: self.view, message: "일시적 네트워크 오류", duration: .lengthLong).show()
             }
         }
     }
@@ -90,6 +119,7 @@ class MyPageViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    
     }
 }
 
@@ -171,7 +201,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
             pushViewController(with: vc)
         case 1:

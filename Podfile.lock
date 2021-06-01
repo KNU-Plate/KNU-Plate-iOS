@@ -2,12 +2,14 @@ PODS:
   - Alamofire (5.4.2)
   - BSImagePicker (3.3.1)
   - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (6.3.0)
   - ProgressHUD (13.6)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
+  - SnackBar.swift (0.1.0):
+    - SnapKit
   - SnapKit (5.0.1)
+  - SPIndicator (1.1.4)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
   - Then (2.7.0)
@@ -16,10 +18,11 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
   - IQKeyboardManagerSwift
-  - Kingfisher (~> 6.0)
   - ProgressHUD
   - SDWebImage (~> 5.0)
+  - SnackBar.swift
   - SnapKit
+  - SPIndicator
   - SwiftKeychainWrapper
   - SwiftyJSON (~> 4.0)
   - Then
@@ -29,10 +32,11 @@ SPEC REPOS:
     - Alamofire
     - BSImagePicker
     - IQKeyboardManagerSwift
-    - Kingfisher
     - ProgressHUD
     - SDWebImage
+    - SnackBar.swift
     - SnapKit
+    - SPIndicator
     - SwiftKeychainWrapper
     - SwiftyJSON
     - Then
@@ -41,14 +45,15 @@ SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SPIndicator: b702acd5374e2ca51e31660f454b6506402d7049
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 83125bb66f62138a39c5ecf465abc8d9f30c64ae
+PODFILE CHECKSUM: b887eefe4c2b1990b0bd37a423ed7693935b0522
 
 COCOAPODS: 1.10.1

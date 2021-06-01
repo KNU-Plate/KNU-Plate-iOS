@@ -101,6 +101,7 @@ class UserManager {
                     switch statusCode {
                     
                     case 200:
+                        print("UserManager - login Successful")
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                        from: response.data!)
@@ -136,7 +137,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: RequestEmailVerifyCodeModel().headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -161,7 +161,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: model.headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -185,15 +184,18 @@ class UserManager {
                    encoding: URLEncoding.queryString,
                    headers: model.headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
         
                     guard let statusCode = response.response?.statusCode else { return }
                 
                     switch statusCode {
-                    case 200: completion(true)
+                    
+                    case 200:
+                        
+                        completion(true)
                         
                     default:
+                        print("이미 존재하는 닉네임이다.")
                         //이미 존재하는 아이디 또는 닉네임입니다.
                         completion(false)
                     }
@@ -214,7 +216,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -222,6 +223,7 @@ class UserManager {
                     switch statusCode {
                     
                     case 200:
+                        //로그아웃을 하면 모든 userdefaults 삭제? keychain 도 ㅇㅇ
                         completion(true)
                     default:
                         completion(false)
@@ -243,7 +245,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -272,7 +273,6 @@ class UserManager {
                    encoding: URLEncoding.httpBody,
                    headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { (response) in
                     
                     guard let statusCode = response.response?.statusCode else { return }
@@ -297,25 +297,23 @@ class UserManager {
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Bool) -> Void)) {
         
-        // medal 정보도 저장 맨날 하는게 좋을듯
-        let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
+        //let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
         
         AF.request(loadUserProfileInfoURL,
                    method: .get,
-                   headers: headers,
                    interceptor: interceptor)
-            .validate()
             .responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 200:
-                        do {
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200:
+                    do {
                             
                             let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
                             self.saveUserInfoToDevice(with: decodedData)
+                            completion(true)
                             
                         } catch {
                             print("UserManager - loadUserProfileInfo() catch ERROR: \(error)")
@@ -348,7 +346,6 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
-        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }

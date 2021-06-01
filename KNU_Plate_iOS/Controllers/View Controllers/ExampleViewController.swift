@@ -1,7 +1,7 @@
 import UIKit
 import ProgressHUD
 import Alamofire
-import Kingfisher
+
 
 class ExampleViewController: UIViewController {
 

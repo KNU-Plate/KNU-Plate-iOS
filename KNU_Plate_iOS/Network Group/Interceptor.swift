@@ -15,12 +15,8 @@ final class Interceptor: RequestInterceptor {
         
         print("Interceptor - adapt() activated")
         
-        print("ACCESS TOKEN: \(User.shared.accessToken)")
-        print("REFRESH TOKEN: \(User.shared.refreshToken)")
-        
         var request = urlRequest
-        
-        request.headers.update(name: "Authorization", value: User.shared.accessToken)
+        request.headers.update(name: "Authorization", value: User.shared.refreshToken)
         
         completion(.success(request))
     }
@@ -44,6 +40,7 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
             
         // TODO: 아래 status Code 수정 필요
+        // 토큰 만료되면 statusCode 401: Unauthorized 가 날라옴
         case 401:
             guard !isRefreshing else { return }
             

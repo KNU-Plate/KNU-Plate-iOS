@@ -14,7 +14,6 @@ class NewReviewViewController: UIViewController {
     
     lazy var existingMenusPickerView = UIPickerView()
 
-
     // 수정 필요 mallIID
     private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 3)
     
@@ -26,6 +25,12 @@ class NewReviewViewController: UIViewController {
         Test.shared.login()
         print("USER ACCESS TOKEN: \(User.shared.accessToken)")
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //reset viewmodel 하기
     }
     
     // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
