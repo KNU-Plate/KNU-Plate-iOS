@@ -8,12 +8,10 @@ class ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImageFolderID: String? {
-        
+    var userProfileImagePath: String? {
         didSet {
-            DispatchQueue.global(qos: .userInitiated).sync {
-                self.fetchProfileImageURL(with: self.userProfileImageFolderID!)
-            }
+            guard let path = userProfileImagePath else { return }
+            self.userProfileImageURL = URL(string: path)
         }
     }
     

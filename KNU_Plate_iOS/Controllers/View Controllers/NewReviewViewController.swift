@@ -1,6 +1,7 @@
 import UIKit
 import Alamofire
 import ProgressHUD
+import SnackBar_swift
 
 class NewReviewViewController: UIViewController {
 
@@ -11,12 +12,13 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet var addMenuButton: UIButton!
     
     lazy var existingMenusPickerView = UIPickerView()
-
-
+    
+    
     // 수정 필요 mallIID
-    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 2)
+    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +30,22 @@ class NewReviewViewController: UIViewController {
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //reset viewmodel 하기
+    }
+    
     // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
     func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
         viewModel.mallID = mallID
         viewModel.existingMenus.append(contentsOf: existingMenus)
     }
-
-    @objc func pressedAddMenuButton() {
+    
+    @IBAction func pressedAddMenuButton(_ sender: Any) {
+        
+        self.view.endEditing(true)
         
         do {
             if let nameOfMenu = menuInputTextField.text {
@@ -56,12 +66,21 @@ class NewReviewViewController: UIViewController {
             switch error {
             
             case NewReviewInputError.tooMuchMenusAdded:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.tooMuchMenusAdded.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.tooMuchMenusAdded.errorDescription) 🥲",
+                              duration: .lengthLong).show()
             case NewReviewInputError.menuNameTooShort:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.menuNameTooShort.errorDescription)
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.menuNameTooShort.errorDescription) 🥲",
+                              duration: .lengthLong).show()
             case NewReviewInputError.alreadyExistingMenu:
-                self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.alreadyExistingMenu.errorDescription)
-            default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                SnackBar.make(in: self.view,
+                              message: "\(NewReviewInputError.alreadyExistingMenu.errorDescription) 🥲",
+                              duration: .lengthLong).show()
+            default:
+                SnackBar.make(in: self.view,
+                              message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
+                              duration: .lengthLong).show()
             
             }
         }
@@ -91,13 +110,22 @@ class NewReviewViewController: UIViewController {
                     switch error {
                     
                     case NewReviewInputError.insufficientMenuError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientMenuError.errorDescription)
-                    case NewReviewInputError.insufficientReviewError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.insufficientReviewError.errorDescription)
-                    case NewReviewInputError.blankMenuNameError:
-                        self.presentSimpleAlert(title: "입력 오류", message: NewReviewInputError.blankMenuNameError.errorDescription)
-                    default: self.presentSimpleAlert(title: "알 수 없는 오류 발생", message: "불편을 드려 죄송합니다. 알 수 없는 에러가 발생하였습니다.")
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.insufficientMenuError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
                         
+                    case NewReviewInputError.insufficientReviewError:
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.insufficientReviewError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
+                    case NewReviewInputError.blankMenuNameError:
+                        SnackBar.make(in: self.view,
+                                      message: "\(NewReviewInputError.blankMenuNameError.errorDescription) 🥲",
+                                      duration: .lengthLong).show()
+                    default:
+                        SnackBar.make(in: self.view,
+                                      message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
+                                      duration: .lengthLong).show()
                     }
                 }
                 dismissProgressBar()
@@ -123,7 +151,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.item == 0 {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
-                fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             return cell
@@ -133,7 +161,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
-                fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             cell.indexPath = indexPath.item
@@ -212,7 +240,7 @@ extension NewReviewViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.newMenuTableViewCell, for: indexPath) as? NewMenuTableViewCell else {
-            fatalError("Failed to dequeue cell for NewMenuTableViewCell")
+            fatalError()
         }
         
         if viewModel.userAddedMenus.count != 0 {
@@ -243,7 +271,6 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return viewModel.existingMenus.count
     }
     
@@ -253,7 +280,11 @@ extension NewReviewViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        //menuInputTextField.text = viewModel.existingMenus[row].menuName
+        if row == viewModel.existingMenus.count - 1 {
+            menuInputTextField.text = ""
+            return
+        }
+        menuInputTextField.text = viewModel.existingMenus[row].menuName
     }
 }
 
@@ -272,7 +303,7 @@ extension NewReviewViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+            textView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요! 🍔"
             textView.textColor = UIColor.lightGray
             return
         }
@@ -293,6 +324,7 @@ extension NewReviewViewController {
         initializeCollectionView()
         initializeTableView()
         initializeTextView()
+        initializeAddMenuButton()
     }
     
     func initializeStarRating() {
@@ -319,50 +351,47 @@ extension NewReviewViewController {
     func initializeTextView() {
         
         reviewTextView.delegate = self
-        reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요!"
+        reviewTextView.text = "방문하셨던 맛집에 대한 솔직한 리뷰를 남겨주세요! 🍔"
         reviewTextView.textColor = UIColor.lightGray
         
-        reviewTextView.layer.cornerRadius = 14.0
+        reviewTextView.layer.cornerRadius = 10.0
         reviewTextView.clipsToBounds = true
         reviewTextView.layer.borderWidth = 1
-        reviewTextView.layer.borderColor = UIColor.black.cgColor
+        reviewTextView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func initializeTextField() {
 
-        menuInputTextField.placeholder = "메뉴를 고르시거나 직접 입력해 보세요!"
-        menuInputTextField.layer.cornerRadius = menuInputTextField.frame.height / 2
+        menuInputTextField.placeholder = "드신 메뉴를 고르거나 입력해주세요! 🍽"
+        menuInputTextField.layer.cornerRadius = 10
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
-        menuInputTextField.layer.borderColor = UIColor.black.cgColor
+        menuInputTextField.layer.borderColor = UIColor.lightGray.cgColor
         
         menuInputTextField.leftView = UIView(frame: CGRect(x: 0,
                                                            y: 0,
                                                            width: 10,
                                                            height: 0))
         menuInputTextField.leftViewMode = .always
-            
-        let addMenuButton = UIButton(frame: CGRect(x: 0,
-                                                   y: 0,
-                                                   width: 25,
-                                                   height: 25))
         
-        addMenuButton.setImage(UIImage(named: "plus button"),
-                               for: .normal)
-        addMenuButton.isUserInteractionEnabled = true
-        addMenuButton.contentMode = .scaleAspectFit
-        addMenuButton.addTarget(self,
-                                action: #selector(pressedAddMenuButton),
-                                for: .touchUpInside)
-  
+        let expandButton = UITextField(frame: CGRect(x: 0,
+                                                     y: 0,
+                                                     width: 25,
+                                                     height: 25))
+        expandButton.background = UIImage(named: "expand button")
+        expandButton.isUserInteractionEnabled = true
+        expandButton.inputView = existingMenusPickerView
+        expandButton.tintColor = .clear
+
         let rightView = UIView(frame: CGRect(x: 0,
                                              y: 0,
                                              width: 30,
                                              height: 25))
-        rightView.addSubview(addMenuButton)
+        rightView.addSubview(expandButton)
         menuInputTextField.rightView = rightView
         menuInputTextField.rightViewMode = .always
         initializePickerViewForMenuTextField()
+        menuInputTextField.inputAccessoryView = initializeToolbar()
     }
     
     func initializePickerViewForMenuTextField() {
@@ -370,9 +399,13 @@ extension NewReviewViewController {
         existingMenusPickerView.backgroundColor = .white
         existingMenusPickerView.delegate = self
         existingMenusPickerView.dataSource = self
+    }
+    
+    func initializeAddMenuButton() {
         
-        menuInputTextField.inputView = existingMenusPickerView
-        menuInputTextField.inputAccessoryView = initializeToolbar()
+        addMenuButton.layer.cornerRadius = 5
+        addMenuButton.clipsToBounds = true
+        addMenuButton.addBounceReactionWithoutFeedback()
     }
     
     func initializeToolbar() -> UIToolbar {
@@ -395,7 +428,7 @@ extension NewReviewViewController {
         let cancelButton = UIBarButtonItem(title: "취소",
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
-                                           action: #selector(self.dismissPicker))
+                                           action: #selector(self.cancelPicker))
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -403,7 +436,11 @@ extension NewReviewViewController {
         return toolBar
     }
     
-    @objc func dismissPicker(pickerView: UIPickerView){
+    @objc func cancelPicker(pickerView: UIPickerView) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func dismissPicker(pickerView: UIPickerView) {
         
         self.view.endEditing(true)
         
@@ -411,12 +448,10 @@ extension NewReviewViewController {
         
         /// 만약 "직접 입력" 옵션을 선택했을 시
         if selectedRow == viewModel.existingMenus.count - 1 {
-            
-            menuInputTextField.inputView = nil
             menuInputTextField.inputAccessoryView = nil
             menuInputTextField.becomeFirstResponder()
         } else {
-            menuInputTextField.text = viewModel.existingMenus[selectedRow].menuName
+            menuInputTextField.resignFirstResponder()
         }
     }
     

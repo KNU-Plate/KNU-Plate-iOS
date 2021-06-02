@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 
 class User {
     
@@ -10,6 +11,8 @@ class User {
     var username: String = ""
     
     var password: String = ""
+    
+    var savedPassword: Bool = false
     
     /// nickname
     var displayName: String = ""
@@ -25,13 +28,54 @@ class User {
      
     var medal: Int = 3
     
-    var accessToken: String = ""
+    var accessToken: String {
+        
+        get {
+            let retrievedAccessToken: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.accessToken)
+            guard let accessToken = retrievedAccessToken else {
+                return "Invalid AccessToken"
+            }
+            return accessToken
+        }
     
-    var refreshToken: String = ""
+    }
+    
+    var refreshToken: String {
+        
+        get {
+            let retrievedRefreshToken: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.refreshToken)
+            guard let refreshToken = retrievedRefreshToken else {
+                return "Invalid RefreshToken"
+            }
+            return refreshToken
+        }
+    }
+    
+    var savedAccessToken: Bool = false
+    
+    var savedRefreshToken: Bool = false
     
     var profileImageLink: String = ""
     
     var profileImage: UIImage?
+    
+    func resetAllUserInfo() {
+        
+        self.id = ""
+        self.username = ""
+        self.displayName = ""
+        self.email = ""
+        self.dateCreated = ""
+        
+        self.savedAccessToken = false
+        self.savedRefreshToken = false
+        self.profileImage = nil
+        self.profileImageLink = ""
+    
+        
+        
+        
+    }
     
     
     private init() {}

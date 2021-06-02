@@ -48,7 +48,7 @@ class NewReviewViewModel {
    
     //MARK: - Init
     
-    public init(mallID: Int = 2) {
+    public init(mallID: Int = 3) {
         
         self.mallID = mallID
         
@@ -131,7 +131,6 @@ class NewReviewViewModel {
     
     func convertUIImagesToDataFormat() {
         userSelectedImagesInDataFormat?.removeAll()
-
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             

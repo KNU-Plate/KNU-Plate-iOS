@@ -1,19 +1,21 @@
 import UIKit
+import SDWebImage
+import Alamofire
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
 class ReviewTableViewCell: UITableViewCell {
     
-    @IBOutlet var userProfileImageView: ProfileImageView!
+    @IBOutlet var userProfileImageView: UIImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
     @IBOutlet var showMoreButton: UIButton!
-    @IBOutlet var reviewImageView: ReviewImageView!
+    @IBOutlet var reviewImageView: UIImageView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
     
-    @IBOutlet var multipleImageView: ReviewImageView!
+    @IBOutlet var multipleImageView: UIImageView!
     
     private var viewModel = ReviewTableViewModel()
 
@@ -27,7 +29,6 @@ class ReviewTableViewCell: UITableViewCell {
         userMedalImageView.image = nil
         rating.setStarsRating(rating: 3)
         reviewLabel.text = nil
-        //multipleImageView.image = nil
     }
     
     func configure(with model: ReviewListResponseModel) {
@@ -44,9 +45,10 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.rating = model.rating
         
         // Check if a user profile image exists
-        if let fileFolderID = model.userInfo.userProfileImageFolderID {
-            viewModel.userProfileImageFolderID = fileFolderID
+        if let profileImagePath = model.userInfo.fileFolder?.files?[0].path {
+            viewModel.userProfileImagePath = profileImagePath
         }
+   
         // Check if review images exists
         if let fileFolder = model.reviewImageFileFolder {
             viewModel.reviewImagesFileFolder = fileFolder
@@ -73,28 +75,17 @@ class ReviewTableViewCell: UITableViewCell {
         let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
         reviewLabel.attributedText = NSAttributedString(string: viewModel.review, attributes: attributes)
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
-        
-        
-        if let profileImageURL = viewModel.userProfileImageURL {
-            userProfileImageView.loadImage(from: profileImageURL)
-        } else {
-            userProfileImageView.image = UIImage(named: "default profile image")
-        }
-        
-        // 리뷰 이미지 배열의 첫 번째 이미지 가져오기
-        guard let path = viewModel.reviewImagesFileFolder?.files?[0].path else { return }
-        
-        if let downloadURL = URL(string: path) {
-            reviewImageView.loadImage(from: downloadURL)
-        }
   
     }
     
     func configureUI() {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-        userProfileImageView.layer.borderWidth = 1
-        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+    
+        //userProfileImageView.layer.borderWidth = 1
+        //userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
         
         reviewImageView?.layer.cornerRadius = 10
         
@@ -147,16 +138,36 @@ class ReviewTableViewCell: UITableViewCell {
         let medal = viewModel.medal
         let rating = viewModel.rating
         let review = viewModel.review
-        let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
+        //let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
+        let reviewImageFiles = viewModel.reviewImagesFileFolder?.files
       
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
-                                         reviewImagesFileFolder: reviewImagesFileInfo,
+                                         reviewImageFiles: reviewImageFiles,
                                          rating: rating,
                                          review: review)
         return reviewDetails
     }
     
+    func getReviewImageDownloadURL() -> URL? {
+        
+        let path = viewModel.reviewImagesFileFolder?.files?[0].path
+        
+        if let path = path {
+            if let url = URL(string: path) {
+                return url
+            }
+        }
+        return nil
+    }
+    
+    func getProfileImageDownloadURL() -> URL? {
+        
+        if let url = viewModel.userProfileImageURL {
+            return url
+        }
+        return nil
+    }
     
 }

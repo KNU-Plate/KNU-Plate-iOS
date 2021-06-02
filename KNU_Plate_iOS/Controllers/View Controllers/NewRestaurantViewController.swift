@@ -1,46 +1,44 @@
 import UIKit
 import ProgressHUD
+import SnackBar_swift
 
 // 맛집 올리기 View Controller
 
 class NewRestaurantViewController: UIViewController {
     
     @IBOutlet var restaurantNameLabel: UILabel!
-    @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var foodCategoryTextField: UITextField!
     @IBOutlet var expandButtonTextField: UITextField!
     @IBOutlet var reviewImageCollectionView: UICollectionView!
     
-    var viewModel = NewRestaurantViewModel(restaurantName: "")
+    private var viewModel = NewRestaurantViewModel(restaurantName: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Test.shared.login()
         
         initialize()
         
     }
     
     // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
-    func configure(name: String, address: String, contact: String, categoryName: String, latitude: Double, longitude: Double) {
+    func configure(with details: RestaurantDetailFromKakao) {
+    
+        viewModel.restaurantName = details.name
+        viewModel.address = details.address
+        viewModel.contact = details.contact
+        viewModel.categoryName = details.category
+        viewModel.latitude = details.latitude
+        viewModel.longitude = details.longitude
         
-        viewModel.restaurantName = name
-        viewModel.address = address
-        viewModel.contact = contact
-        viewModel.categoryName = categoryName
-        viewModel.latitude = latitude
-        viewModel.longitude = longitude
+    
+        print("configure longitude: \(details.longitude)")
+        print("configure latitude: \(details.latitude)")
     }
-
+    
     @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
         
-        /// validate user input
-        /// NewRestaurantModel() 잘 생성됐는지 체크
-        
         showProgressBar()
-
-        
         viewModel.upload()
        
     }
@@ -55,16 +53,43 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         dismissProgressBar()
         
-        if success {
-            
-            showToast(message: "매장 등록 성공 😄")
-            
-            //Go To MainViewController 해야할듯
-
-        } else {
-            self.presentSimpleAlert(title: "신규 매장 등록 실패", message: "이미 등록된 매장입니다. 🥲")
-            navigationController?.popToRootViewController(animated: true)
-        }
+        SnackBar.make(in: self.view,
+                      message: "매장 등록 성공 🎉",
+                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
+                        
+                        
+                        //Go To MainViewController 해야
+                        
+                      }).show()
+    }
+    
+    func failedToUpload(with error: NetworkError) {
+        
+        dismissProgressBar()
+        
+        SnackBar.make(in: self.view,
+                      message: error.errorDescription,
+                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
+                        
+                        
+                        //popToRoot 맞는지 확인
+                        //self.navigationController?.popToRootViewController(animated: true)
+                      }).show()
+    }
+    
+    func alreadyRegisteredRestaurant(){
+        
+        dismissProgressBar()
+        
+        SnackBar.make(in: self.view,
+                      message: "이미 등록된 매장입니다 🥲",
+                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
+                        
+                        
+                        //popToRoot 맞는지 확인
+                        //self.navigationController?.popToRootViewController(animated: true)
+                      }).show()
+        
     }
 }
 
@@ -85,7 +110,7 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
         if indexPath.item == 0 {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
-                fatalError("Failed to dequeue cell for AddImageButtonCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             return cell
@@ -95,7 +120,7 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newFoodImageCellIdentifier, for: indexPath) as? UserPickedFoodImageCollectionViewCell else {
-                fatalError("Failed to dequeue cell for UserPickedFoodImageCollectionViewCell")
+                fatalError()
             }
             cell.delegate = self
             cell.indexPath = indexPath.item

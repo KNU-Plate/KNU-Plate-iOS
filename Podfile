@@ -13,6 +13,10 @@ target 'KNU_Plate_iOS' do
   pod 'Then'
   pod 'ProgressHUD'
   pod 'SwiftyJSON', '~> 4.0'
-  
+  pod 'SwiftKeychainWrapper'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SPIndicator'
+  pod 'SnackBar.swift'
+
 
 end

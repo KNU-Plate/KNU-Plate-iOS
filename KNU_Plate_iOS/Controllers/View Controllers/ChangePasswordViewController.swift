@@ -1,4 +1,5 @@
 import UIKit
+import SnackBar_swift
 
 class ChangePasswordViewController: UIViewController {
     
@@ -19,17 +20,22 @@ class ChangePasswordViewController: UIViewController {
         
         if !validateUserInput() { return }
         
+        let model = EditUserInfoModel(password: passwordTextField.text!)
         
-        
-        //통신
-        
-        //통신 다 하면
-        
-        
-        navigationController?.popViewController(animated: true)
-        
-        
-        // 닉네임 변경된거 다시 표시해야할듯 -> User.shared.nickname 다시 변경
+        UserManager.shared.updatePassword(with: model) { result in
+            
+            switch result {
+            case .success(_):
+                SnackBar.make(in: self.view,
+                              message: "비밀번호 변경 성공 🎉",
+                              duration: .lengthLong).show()
+         
+            case .failure(_):
+                SnackBar.make(in: self.view,
+                              message: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲",
+                              duration: .lengthLong).show()
+            }
+        }
     }
     
     func validateUserInput() -> Bool {
@@ -41,12 +47,16 @@ class ChangePasswordViewController: UIViewController {
         
         guard !password.isEmpty,
               !checkPassword.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         
         guard password == checkPassword else {
-            self.presentSimpleAlert(title: "비밀번호가 일치하지 않습니다.", message: "")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호가 일치하지 않습니다 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         
@@ -54,7 +64,9 @@ class ChangePasswordViewController: UIViewController {
               password.count < 30,
               checkPassword.count >= 4,
               checkPassword.count < 30 else {
-            self.presentSimpleAlert(title: "비밀번호 길이 오류", message: "비밀번호는 4자 이상, 30자 미만으로 입력해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "비밀번호는 4자 이상, 30자 미만으로 입력해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         return true

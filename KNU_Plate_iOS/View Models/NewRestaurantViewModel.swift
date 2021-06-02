@@ -2,6 +2,8 @@ import Foundation
 
 protocol NewRestaurantViewModelDelegate {
     func didCompleteUpload(_ success: Bool)
+    func alreadyRegisteredRestaurant()
+    func failedToUpload(with error: NetworkError)
 }
 
 class NewRestaurantViewModel {
@@ -68,6 +70,16 @@ class NewRestaurantViewModel {
     // 신규 매장 등록
     func upload() {
         
+        print(restaurantName)
+        print(contact)
+        print(foodCategory)
+        print(address)
+        print(categoryName)
+        print(latitude)
+        print(longitude)
+
+        
+        
         let newRestaurantModel = NewRestaurantModel(name: restaurantName,
                                                     contact: contact,
                                                     foodCategory: foodCategory,
@@ -77,10 +89,23 @@ class NewRestaurantViewModel {
                                                     longitude: longitude,
                                                     images: userSelectedImagesInDataFormat)
         
-        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { isSuccess in
+    
+        
+        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { result in
             
-            print("NewRestaurantViewModel - upload() RESULT: \(isSuccess)")
-            self.delegate?.didCompleteUpload(isSuccess)
+            print("NewRestaurantViewModel - upload() RESULT: \(result)")
+            
+            switch result {
+            
+            case .success(_):
+                self.delegate?.didCompleteUpload(true)
+                
+            case .failure(let error):
+            
+                
+                // if 추가해서 어느게 매장 이미 등록된거고 어느게 그냥 서버 오류인지 확인
+                self.delegate?.failedToUpload(with: error)
+            }
         }
     }
     

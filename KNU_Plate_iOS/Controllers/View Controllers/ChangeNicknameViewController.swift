@@ -1,4 +1,5 @@
 import UIKit
+import SnackBar_swift
 
 class ChangeNicknameViewController: UIViewController {
     
@@ -29,28 +30,38 @@ class ChangeNicknameViewController: UIViewController {
         showProgressBar()
 
         if !didCheckNicknameDuplicate {
-            self.presentSimpleAlert(title: "닉네임 중복 확인", message: "닉네임 중복을 먼저 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "🤔 닉네임 중복 확인을 먼저해주세요.",
+                          duration: .lengthLong).show()
+
             dismissProgressBar()
             return
         }
         
         guard let nickname = self.nickname else {
-            self.presentSimpleAlert(title: "빈 칸 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "🤔 빈 칸이 없는지 확인해주세요.",
+                          duration: .lengthLong).show()
             return
         }
         
         let editUserModel = EditUserInfoModel(nickname: nickname)
         
-        UserManager.shared.updateNickname(with: editUserModel) { isSuccess in
-        
-            if isSuccess {
+        UserManager.shared.updateNickname(with: editUserModel) { result in
+            
+            switch result {
+            
+            case .success(_):
                 
                 dismissProgressBar()
                 self.navigationController?.popViewController(animated: true)
                 
-            } else {
+            case .failure(_):
+                
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(title: "닉네임 변경 실패", message: "네트워크 오류")
+                    SnackBar.make(in: self.view,
+                                  message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
+                                  duration: .lengthLong).show()
                 }
             }
             dismissProgressBar()
@@ -67,19 +78,34 @@ class ChangeNicknameViewController: UIViewController {
         let checkDuplicateModel = CheckDuplicateModel(displayName: nickname!)
         
         UserManager.shared.checkDuplication(with: checkDuplicateModel,
-                                            requestURL: requestURL) { isNotDuplicate in
+                                            requestURL: requestURL) { result in
             
-            if isNotDuplicate {
+            switch result {
+            
+            case .success(let isNotDuplicate):
                 
-                DispatchQueue.main.async {
-                    self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
-                    self.didCheckNicknameDuplicate = true
+                if isNotDuplicate {
+                
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍",
+                                                              for: .normal)
+                        self.didCheckNicknameDuplicate = true
+                    }
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢",
+                                                              for: .normal)
+                        self.didCheckNicknameDuplicate = false
+                    }
                 }
-            } else {
+                
+            case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢", for: .normal)
-                    self.didCheckNicknameDuplicate = false
+                    SnackBar.make(in: self.view,
+                                  message: error.errorDescription,
+                                  duration: .lengthLong).show()
                 }
             }
         }
@@ -91,11 +117,15 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            self.presentSimpleAlert(title: "입력 오류", message: "빈 칸이 없는지 확인해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "빈 칸이 없는지 확인해주세요 🥲",
+                          duration: .lengthLong).show()
             return false
         }
         guard nickname.count >= 2, nickname.count <= 10 else {
-            self.presentSimpleAlert(title: "닉네임 길이 오류", message: "닉네임은 2자 이상, 10자 이하로 작성해주세요.")
+            SnackBar.make(in: self.view,
+                          message: "닉네임은 2자 이상, 10자 이하로 작성해주세요❗️ ",
+                          duration: .lengthLong).show()
             return false
         }
         self.nickname = nickname

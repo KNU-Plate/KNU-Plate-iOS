@@ -9,6 +9,8 @@ class RestaurantManager {
     //MARK: - Singleton
     static let shared: RestaurantManager = RestaurantManager()
     
+    let interceptor = Interceptor()
+    
     //MARK: - API Request URLs
     let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
     let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
@@ -16,12 +18,11 @@ class RestaurantManager {
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
     let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
     
-    
     private init() {}
     
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurantModel,
-                             completion: @escaping ((Bool) -> Void)){
+                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)){
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -38,17 +39,15 @@ class RestaurantManager {
             
             if let imageArray = model.images {
                 for images in imageArray {
-
-                    /// fileName 변경하는거 알아보기
                     multipartFormData.append(images,
                                              withName: "thumbnail",
                                              fileName: "\(UUID().uuidString).jpeg",
                                              mimeType: "image/jpeg")
                 }
             }
-            
         }, to: uploadNewRestaurantRequestURL,
-        headers: model.headers)
+        headers: model.headers,
+        interceptor: interceptor)
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -56,30 +55,16 @@ class RestaurantManager {
             switch statusCode {
             case 200:
                 
-                print("매장 등록 성공")
-                completion(true)
+                print("RestaurantManager - 매장 등록 성공")
+                completion(.success(true))
                 
-            /// 매장 등록이 성공이면 해당 화면 닫고 홈화면으로 돌아가기 popToRootVC?
-            
-            
             default:
-                if let responseJSON = try! response.result.get() as? [String : String] {
-                    
-                    if let error = responseJSON["error"] {
-                        
-                        if let errorMessage = NewRestaurantUploadError(rawValue: error)?.returnErrorMessage() {
-                            
-                            print(errorMessage)
-                            
-                            
-                            
-                        } else {
-                            print(error)
-                            
-                        }
-                        completion(false)
-                    }
-                }
+                let error = NetworkError.returnError(statusCode: statusCode)
+                
+                print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                
+                completion(.failure(error))
+
             }
         }
     }
@@ -92,51 +77,48 @@ class RestaurantManager {
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding(arrayEncoding: .noBrackets),
-                   headers: model.headers).responseJSON { (response) in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .responseJSON { (response) in
+                
+                guard let statusCode = response.response?.statusCode else {
+                    return
+                }
+                
+                switch statusCode {
+                
+                case 200:
                     
-                    guard let statusCode = response.response?.statusCode else {
-                        return
+                    print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW MENU")
+                    
+                    do {
+                        let decodedData = try JSONDecoder().decode([MenuRegisterResponseModel].self,
+                                                                   from: response.data!)
+                        completion(decodedData)
+                    } catch {
+                        
+                        print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error) with statusCode: \(statusCode)")
                     }
                     
-                    switch statusCode {
-                    
-                    case 200:
+                default:
+                    if let responseJSON = try! response.result.get() as? [String : String] {
                         
-                        print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW MENU")
-                        
-                        do {
-                            let decodedData = try JSONDecoder().decode([MenuRegisterResponseModel].self,
-                                                                       from: response.data!)
-                            completion(decodedData)
-                        } catch {
+                        if let error = responseJSON["error"] {
                             
-                            print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error)")
-                        }
-                        
-                    default:
-                        if let responseJSON = try! response.result.get() as? [String : String] {
-                            
-                            if let error = responseJSON["error"] {
-                                
-                                print(error)
-                                //                                if let errorMessage = MailVerificationIssuanceError(rawValue: error)?.returnErrorMessage() {
-                                //                                    print(errorMessage)
-                            } else {
-                                print("알 수 없는 에러 발생.")
-                            }
+                            print(error)
+ 
+                        } else {
+                            print("알 수 없는 에러 발생.")
                         }
                     }
-                    
-                    
-                   }
-        
-    
+                }
+            }
     }
     
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReviewModel,
                          completion: @escaping ((Bool) -> Void)) {
-     
+        
         AF.upload(multipartFormData: { (multipartFormData) in
             
             multipartFormData.append(Data(String(model.mallID).utf8),
@@ -147,10 +129,10 @@ class RestaurantManager {
                                      withName: "contents")
             multipartFormData.append(Data(String(model.rating).utf8),
                                      withName: "evaluate")
-    
+            
             if let imageArray = model.reviewImages {
                 for images in imageArray {
-                
+                    
                     multipartFormData.append(images,
                                              withName: "review_image",
                                              fileName: "\(UUID().uuidString).jpeg",
@@ -158,7 +140,8 @@ class RestaurantManager {
                 }
             }
         }, to: uploadNewReviewRequestURL,
-        headers: model.headers)
+        headers: model.headers,
+        interceptor: interceptor)
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -175,26 +158,27 @@ class RestaurantManager {
                     
                     if let error = responseJSON["error"] {
                         
-                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
                     }
                 }
                 completion(false)
                 
             }
-    }
-        
+        }
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
-
+    
     func fetchReviewList(with model: FetchReviewListModel,
                          completion: @escaping ((Result<[ReviewListResponseModel],Error>) -> Void)) {
-      
+        
         AF.request(fetchReviewListRequestURL,
                    method: .get,
                    parameters: model.parameters,
                    encoding: URLEncoding.queryString,
-                   headers: model.headers).responseJSON { response in
+                   headers: model.headers,
+                   interceptor: interceptor)
+            .responseJSON { response in
                     
                     guard let statusCode = response.response?.statusCode else { return }
                     
@@ -203,7 +187,7 @@ class RestaurantManager {
                         do {
                             let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
                             completion(.success(decodedData))
-                
+                            
                         } catch {
                             print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                         }
@@ -212,7 +196,7 @@ class RestaurantManager {
                             
                             if let error = responseJSON["error"] {
                                 
-                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error)")
+                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
                             }
                             
                         }
@@ -220,8 +204,8 @@ class RestaurantManager {
                    }
     }
     
-
-
+    
+    
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
                       httpMethod: HTTPMethod,
@@ -231,22 +215,24 @@ class RestaurantManager {
         
         AF.request(markFavoriteRequestURL + String(mallID),
                    method: httpMethod,
-                   headers: headers).responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 200:
-                        print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
-                        completion(true)
-                    default:
-                        if let responseJSON = try! response.result.get() as? [String : String] {
-                            if let error = responseJSON["error"] {
-                                print(error)
-                            } else { print("알 수 없는 에러 발생.") }
-                        }
-                        completion(false)
+                   headers: headers,
+                   interceptor: interceptor)
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
+                    completion(true)
+                default:
+                    if let responseJSON = try! response.result.get() as? [String : String] {
+                        if let error = responseJSON["error"] {
+                            print(error)
+                        } else { print("알 수 없는 에러 발생.") }
                     }
-                   }
+                    completion(false)
+                }
+            }
     }
 }

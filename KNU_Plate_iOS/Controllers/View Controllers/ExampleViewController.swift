@@ -1,5 +1,8 @@
 import UIKit
 import ProgressHUD
+import Alamofire
+import SnackBar_swift
+import SDWebImage
 
 class ExampleViewController: UIViewController {
 
@@ -12,12 +15,9 @@ class ExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Test.shared.login()
-        
+ 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
         
         
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
@@ -33,14 +33,25 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
+        
+
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchReviewList(of: 3)
+        
+    }
     
+       
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 2)
+        viewModel.fetchReviewList(of: 3)
+
+
     }
 }
 
@@ -61,7 +72,9 @@ extension ExampleViewController: ReviewListViewModelDelegate {
     }
     
     func failedFetchingReviewListResults() {
-        showToast(message: "데이터 가져오기 실패")
+        SnackBar.make(in: self.view,
+                      message: "데이터 가져오기 실패. 잠시 후 다시 시도해주세요 🥲",
+                      duration: .lengthLong).show()
     }
 }
 
@@ -86,14 +99,39 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
             reviewCell.configure(with: reviewLists[indexPath.row])
+            
+   
+            let reviewImageURL = reviewCell.getReviewImageDownloadURL()
+            let profileImageURL = reviewCell.getProfileImageDownloadURL()
+            
+            reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
+                                                   placeholderImage: nil,
+                                                   options: .continueInBackground,
+                                                   completed: nil)
+            reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
+                                                        placeholderImage: UIImage(named: "default profile image"),
+                                                        options: .continueInBackground,
+                                                        completed: nil)
+            
             return reviewCell
 
+            
+        }
+        
         // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
-        } else {
+        else {
             
             guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
+            let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
+            
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
+            reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
+                                                                           placeholderImage: UIImage(named: "default profile image"),
+                                                                           options: .continueInBackground,
+                                                                           completed: nil)
+            
             return reviewCellWithoutReviewImages
         }
     }
@@ -106,7 +144,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
         guard let vc = segue.destination as? ReviewDetailViewController else { return }
         guard let cell = tableView.cellForRow(at: viewModel.selectedIndex!) as? ReviewTableViewCell else { return }
         
@@ -114,7 +152,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.configure(with: reviewDetails)
     }
-
+    
 }
 
 //MARK: - UIScrollViewDelegate
@@ -136,15 +174,17 @@ extension ExampleViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
+        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
             
             guard !viewModel.isPaginating else { return }
-   
-            let indexToFetch = viewModel.reviewList.count
             
-            if  viewModel.needToFetchMoreData {
+            if viewModel.needToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
-                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
+                
+                let indexToFetch = viewModel.reviewList.count
+                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                
+                tableView.tableFooterView = nil
             } else { return }
         }
     }

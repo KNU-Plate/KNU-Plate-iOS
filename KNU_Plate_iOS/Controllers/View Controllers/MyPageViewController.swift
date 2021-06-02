@@ -1,9 +1,10 @@
 import UIKit
 import Alamofire
+import SnackBar_swift
+import SPIndicator
 
 class MyPageViewController: UIViewController {
     
-
     @IBOutlet var profileImageButton: UIButton!
     @IBOutlet var userNickname: UILabel!
     @IBOutlet var userMedal: UIImageView!
@@ -17,12 +18,8 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        Test.shared.login()
-        
-        
-
         initialize()
+        loadUserProfileInfo()
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
@@ -30,52 +27,30 @@ class MyPageViewController: UIViewController {
         presentActionSheet()
     }
 
-    @IBAction func pressedLogOutButton(_ sender: UIButton) {
-        
-        UserManager.shared.logOut { result in
-            
-            switch result {
-            case true:
-                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
-                    
-                    if selectedOk {
-    
-                        DispatchQueue.main.async {
-                            
-                       
-                            self.popToWelcomeViewController()
-                        }
-                    } else { return }
-                }
-            case false:
-                self.showToast(message: "일시적 네트워크 오류")
-            }
-        }
-    }
-    
-    func removeProfileImage() {
-        
-        profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
-        initializeProfileImageButton()
-
-        // API 통신
-    }
-    
     func presentActionSheet() {
         
-        let alert = UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
-        
-        let library = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
+        let alert = UIAlertController(title: "프로필 사진 변경",
+                                      message: "",
+                                      preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "앨범에서 선택",
+                                    style: .default) { _ in
             
             self.initializeImagePicker()
             self.present(self.imagePicker, animated: true)
         }
-        
-        let remove = UIAlertAction(title: "프로필 사진 제거", style: .default) { _ in
-            self.removeProfileImage()
+        let remove = UIAlertAction(title: "프로필 사진 제거",
+                                   style: .default) { _ in
+            
+            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+                                              message: "정말로 제거하시겠습니까?") { selectedOk in
+                
+                if selectedOk { self.removeProfileImage() }
+                else { return }
+            }
         }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel,
+                                   handler: nil)
         
         alert.addAction(library)
         alert.addAction(remove)
@@ -93,6 +68,118 @@ class MyPageViewController: UIViewController {
     }
 }
 
+//MARK: - API Networking
+
+extension MyPageViewController {
+    
+    func loadUserProfileInfo() {
+        
+        UserManager.shared.loadUserProfileInfo { result in
+            
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    
+                    SPIndicator.present(title: "\(User.shared.displayName)님",
+                                        message: "환영합니다",
+                                        preset: .custom(UIImage(systemName: "face.smiling")!))
+                    
+                    self.userNickname.text = User.shared.displayName
+                    self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+                    
+                    if let profileImage = User.shared.profileImage {
+                        self.profileImageButton.setImage(profileImage, for: .normal)
+                    }
+                }
+            case .failure(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 정보 불러오기에 실패하였습니다 🥲",
+                              duration: .lengthLong).setAction(with: "재시도", action: {
+                                self.loadUserProfileInfo()
+                              }).show()
+            }
+        }
+    }
+    
+    func removeProfileImage() {
+        
+        UserManager.shared.removeProfileImage { result in
+            
+            switch result {
+            
+            case .success(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 사진 제거 성공 🎉",
+                              duration: .lengthLong).show()
+                DispatchQueue.main.async {
+                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+                    self.initializeProfileImageButton()
+                    User.shared.profileImage = nil
+                }
+            case .failure(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
+                              duration: .lengthLong).show()
+            }
+        }
+    }
+    
+    @IBAction func pressedLogOutButton(_ sender: UIButton) {
+        
+        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
+            
+            if selectedOk {
+                
+                UserManager.shared.logOut { result in
+                    
+                    switch result {
+                    
+                    case .success(_):
+                        
+                        DispatchQueue.main.async {
+                            self.popToWelcomeViewController()
+                        }
+                        
+                    case .failure(let error):
+                        SnackBar.make(in: self.view,
+                                      message: error.errorDescription,
+                                      duration: .lengthLong).setAction(with: "재시도", action: {
+                                        DispatchQueue.main.async {
+                                            self.pressedLogOutButton(self.logOutButton)
+                                        }
+                                      }).show()
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateProfileImage(with image: UIImage) {
+        
+        let imageData = image.jpegData(compressionQuality: 1.0)!
+        let model = EditUserInfoModel(userProfileImage: imageData)
+        
+        UserManager.shared.updateProfileImage(with: model) { result in
+            
+            switch result {
+            case .success(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 사진 변경 성공 🎉",
+                              duration: .lengthLong).show()
+                
+                DispatchQueue.main.async {
+                    self.updateProfileImageButton(with: image)
+                    User.shared.profileImage = image
+                }
+            case .failure(_):
+                SnackBar.make(in: self.view,
+                              message: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲",
+                              duration: .lengthLong).show()
+            }
+        }
+    }
+}
+
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
 extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -102,25 +189,13 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
             dismiss(animated: true) {
-                
                 self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
-                    
+                
                     if selectedOk {
-            
-                        self.updateProfileImageButton(with: originalImage)
-                        
                         showProgressBar()
-                        
-                        OperationQueue().addOperation {
-                            
-                            // API - update user profile
-                            
-    
-                            dismissProgressBar()
-                            
-                            
-                        }
-              
+                        self.updateProfileImage(with: originalImage)
+                        dismissProgressBar()
+
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
                     }
@@ -133,7 +208,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         dismiss(animated: true, completion: nil)
     }
 }
-
+ 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
@@ -171,7 +246,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
             pushViewController(with: vc)
         case 1:
@@ -185,7 +259,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func pushViewController(with vc: UIViewController) {
-        
         navigationController?.pushViewController(vc, animated: true)
     }
    

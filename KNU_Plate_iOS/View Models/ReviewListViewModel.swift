@@ -11,8 +11,6 @@ class ReviewListViewModel {
     //MARK: - Object Properties
     var delegate: ReviewListViewModelDelegate?
     
-    //var page: Int = 0
-    
     var reviewList: [ReviewListResponseModel] = []
     
     var selectedIndex: IndexPath?
@@ -20,6 +18,7 @@ class ReviewListViewModel {
     var isPaginating: Bool = false
     
     var needToFetchMoreData: Bool = true
+    
     
     //MARK: - Object Methods
     
@@ -29,21 +28,36 @@ class ReviewListViewModel {
             isPaginating = true
         }
         
+        print("REVIEWLIST COUNT: \(reviewList.count)")
+        
         let model = FetchReviewListModel(mallID: mallID, page: index)
     
         RestaurantManager.shared.fetchReviewList(with: model) { result in
-            
             
             switch result {
             
             case .success(let responseModel):
                 
+                // empty 이거나 같은 값이 반환 ㅇㅇ?
                 if responseModel.isEmpty {
                     self.needToFetchMoreData = false
                     self.delegate?.didFetchEmptyReviewListResults()
                     return
                 }
+                
+                
+                let firstMallID = responseModel[0].mallID
+                
+                for existingReviews in self.reviewList {
+                    
+                    if existingReviews.mallID == firstMallID {
+                        self.needToFetchMoreData = false
+                        self.delegate?.didFetchEmptyReviewListResults()
+                        return
+                    }
+                }
             
+                
                 self.reviewList.append(contentsOf: responseModel)
     
                 if pagination {
@@ -56,6 +70,7 @@ class ReviewListViewModel {
             case .failure(let error):
                 print("ReviewListViewModel - fetchReviewList() error")
                 print(error.localizedDescription)
+                self.delegate?.failedFetchingReviewListResults()
                 
                 
             }
