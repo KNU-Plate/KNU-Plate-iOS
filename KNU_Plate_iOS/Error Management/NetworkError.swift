@@ -1,34 +1,46 @@
 import Foundation
+import SwiftyJSON
 
 //MARK: - 각종 Network 관련된 Error 를 처리하는 파일
 
-enum HTTPStatus: Int, Error, LocalizedError {
+enum NetworkError: Int, Error {
     
     case success = 200
-    
-    /// The request was unacceptable, often due to missing a required parameter.
+
     case badRequest = 400
-    
-    /// Something went wrong on our end.
-    case internalError = 500
-    
-    /// The requested resource doesn’t exist.
+    case unauthorized = 401
     case notFound = 404
     
-    var errorDescription: String? {
+    case internalError = 500
+    
+    var errorDescription: String {
         
         switch self {
         
         case .success:
-            return "Success: 200"
+            return "성공"
         case .badRequest:
-            return "Bad Request: 400"               /// 잘못된 요청 . 타입 오류, 필수값 오류
+            return "일시적인 오류입니다. 잠시 후 다시 시도해주세요😢"
         case .internalError:
-            return "Internal Server Error: 500"     /// 일관적으로 처리 -> 삭제된 계정, 없는 계정 조회 시 500번대 error return .. 많아봤자 20개
+            return "개발팀도 예상치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요😢"
         case .notFound:
-            return "Not Found Error: 404"
+            return "요청히신 작업을 처리할 수 없습니다. 잠시 후 다시 시도해주세요😢 "
+        case .unauthorized:
+            return "세션이 만료되었습니다. 다시 로그인해주세요🧐"
         }
     }
+    
+    static func returnError(json: Data) -> NetworkError {
+        
+        do {
+            let json = try JSON(data: json)
+            let errorCode = json["error"].intValue
+            return NetworkError(rawValue: errorCode)!
+        } catch {
+            return .internalError
+        }
+    }
+
 }
 
 //MARK: - 회원가입 Error Message 관리
@@ -95,21 +107,15 @@ enum MailVerificationIssuanceError: String, Error {
     }
 
 }
-//
-////MARK: - 로그아웃 Error Message 관리
-//
-//enum LogOutError: String {
-//
-//}
-//
-//enum UnregisterError: String {
-//
-//
-//}
 
 
 
-
+enum RestaurantError: Error {
+    
+    
+    
+    
+}
 
 
 
@@ -129,14 +135,3 @@ enum NewRestaurantUploadError: String, Error {
     }
 }
 
-//MARK: - 신규 리뷰 등록 Error Message 관리
-
-//enum NewMenuUploadError: String {
-//
-//
-//    func returnErrorMessage() -> String {
-//
-//        switch self {
-//
-//    }
-//}

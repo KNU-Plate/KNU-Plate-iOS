@@ -59,6 +59,24 @@ class User {
     
     var profileImage: UIImage?
     
+    func resetAllUserInfo() {
+        
+        self.id = ""
+        self.username = ""
+        self.displayName = ""
+        self.email = ""
+        self.dateCreated = ""
+        
+        self.savedAccessToken = false
+        self.savedRefreshToken = false
+        self.profileImage = nil
+        self.profileImageLink = ""
+    
+        
+        
+        
+    }
+    
     
     private init() {}
     

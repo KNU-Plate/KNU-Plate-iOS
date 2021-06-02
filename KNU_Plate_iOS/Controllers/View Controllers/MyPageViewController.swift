@@ -29,21 +29,28 @@ class MyPageViewController: UIViewController {
 
     func presentActionSheet() {
         
-        let alert = UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
-        let library = UIAlertAction(title: "앨범에서 선택", style: .default) { _ in
+        let alert = UIAlertController(title: "프로필 사진 변경",
+                                      message: "",
+                                      preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "앨범에서 선택",
+                                    style: .default) { _ in
             
             self.initializeImagePicker()
             self.present(self.imagePicker, animated: true)
         }
-        let remove = UIAlertAction(title: "프로필 사진 제거", style: .default) { _ in
+        let remove = UIAlertAction(title: "프로필 사진 제거",
+                                   style: .default) { _ in
             
-            self.presentAlertWithCancelAction(title: "프로필 사진 제거", message: "정말로 제거하시겠습니까?") { selectedOk in
+            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+                                              message: "정말로 제거하시겠습니까?") { selectedOk in
                 
                 if selectedOk { self.removeProfileImage() }
                 else { return }
             }
         }
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel,
+                                   handler: nil)
         
         alert.addAction(library)
         alert.addAction(remove)
@@ -70,7 +77,7 @@ extension MyPageViewController {
         UserManager.shared.loadUserProfileInfo { result in
             
             switch result {
-            case true:
+            case .success(_):
                 DispatchQueue.main.async {
                     
                     SPIndicator.present(title: "\(User.shared.displayName)님",
@@ -84,13 +91,11 @@ extension MyPageViewController {
                         self.profileImageButton.setImage(profileImage, for: .normal)
                     }
                 }
-            case false:
+            case .failure(_):
                 SnackBar.make(in: self.view,
                               message: "프로필 정보 불러오기에 실패하였습니다 🥲",
                               duration: .lengthLong).setAction(with: "재시도", action: {
-                                
                                 self.loadUserProfileInfo()
-                                
                               }).show()
             }
         }
@@ -102,7 +107,7 @@ extension MyPageViewController {
             
             switch result {
             
-            case true:
+            case .success(_):
                 SnackBar.make(in: self.view,
                               message: "프로필 사진 제거 성공 🎉",
                               duration: .lengthLong).show()
@@ -111,7 +116,7 @@ extension MyPageViewController {
                     self.initializeProfileImageButton()
                     User.shared.profileImage = nil
                 }
-            case false:
+            case .failure(_):
                 SnackBar.make(in: self.view,
                               message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
                               duration: .lengthLong).show()
@@ -121,27 +126,30 @@ extension MyPageViewController {
     
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
-        UserManager.shared.logOut { result in
+        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
             
-            switch result {
-            case true:
-                self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
-
-                    if selectedOk {
+            if selectedOk {
+                
+                UserManager.shared.logOut { result in
+                    
+                    switch result {
+                    
+                    case .success(_):
+                        
                         DispatchQueue.main.async {
                             self.popToWelcomeViewController()
                         }
-                    } else { return }
+                        
+                    case .failure(let error):
+                        SnackBar.make(in: self.view,
+                                      message: error.errorDescription,
+                                      duration: .lengthLong).setAction(with: "재시도", action: {
+                                        DispatchQueue.main.async {
+                                            self.pressedLogOutButton(self.logOutButton)
+                                        }
+                                      }).show()
+                    }
                 }
-            case false:
-                SnackBar.make(in: self.view,
-                              message: "일시적 네트워크 오류 🥲",
-                              duration: .lengthLong).setAction(with: "재시도", action: {
-                                
-                                DispatchQueue.main.async {
-                                    self.pressedLogOutButton(self.logOutButton)
-                                }
-                              }).show()
             }
         }
     }
@@ -154,7 +162,7 @@ extension MyPageViewController {
         UserManager.shared.updateProfileImage(with: model) { result in
             
             switch result {
-            case true:
+            case .success(_):
                 SnackBar.make(in: self.view,
                               message: "프로필 사진 변경 성공 🎉",
                               duration: .lengthLong).show()
@@ -163,7 +171,7 @@ extension MyPageViewController {
                     self.updateProfileImageButton(with: image)
                     User.shared.profileImage = image
                 }
-            case false:
+            case .failure(_):
                 SnackBar.make(in: self.view,
                               message: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲",
                               duration: .lengthLong).show()

@@ -46,7 +46,6 @@ class RestaurantManager {
                                              mimeType: "image/jpeg")
                 }
             }
-            
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers,
         interceptor: interceptor)

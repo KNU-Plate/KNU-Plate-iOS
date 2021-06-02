@@ -56,7 +56,6 @@ class ReviewListViewModel {
                         return
                     }
                 }
-                
             
                 
                 self.reviewList.append(contentsOf: responseModel)

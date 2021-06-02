@@ -72,7 +72,9 @@ extension ExampleViewController: ReviewListViewModelDelegate {
     }
     
     func failedFetchingReviewListResults() {
-        showToast(message: "데이터 가져오기 실패")
+        SnackBar.make(in: self.view,
+                      message: "데이터 가져오기 실패. 잠시 후 다시 시도해주세요 🥲",
+                      duration: .lengthLong).show()
     }
 }
 

@@ -47,14 +47,17 @@ class ChangeNicknameViewController: UIViewController {
         
         let editUserModel = EditUserInfoModel(nickname: nickname)
         
-        UserManager.shared.updateNickname(with: editUserModel) { isSuccess in
-        
-            if isSuccess {
+        UserManager.shared.updateNickname(with: editUserModel) { result in
+            
+            switch result {
+            
+            case .success(_):
                 
                 dismissProgressBar()
                 self.navigationController?.popViewController(animated: true)
                 
-            } else {
+            case .failure(_):
+                
                 DispatchQueue.main.async {
                     SnackBar.make(in: self.view,
                                   message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
@@ -75,21 +78,34 @@ class ChangeNicknameViewController: UIViewController {
         let checkDuplicateModel = CheckDuplicateModel(displayName: nickname!)
         
         UserManager.shared.checkDuplication(with: checkDuplicateModel,
-                                            requestURL: requestURL) { isNotDuplicate in
+                                            requestURL: requestURL) { result in
             
-            if isNotDuplicate {
+            switch result {
+            
+            case .success(let isNotDuplicate):
                 
-                DispatchQueue.main.async {
-                    print("Check Duplication: 중복 아님!")
-                    self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍", for: .normal)
-                    self.didCheckNicknameDuplicate = true
+                if isNotDuplicate {
+                
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("사용하셔도 좋습니다 👍",
+                                                              for: .normal)
+                        self.didCheckNicknameDuplicate = true
+                    }
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢",
+                                                              for: .normal)
+                        self.didCheckNicknameDuplicate = false
+                    }
                 }
-            } else {
+                
+            case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    print("Check Duplication: 중복이다!")
-                    self.checkAlreadyInUseButton.setTitle("이미 사용 중인 닉네임입니다 😢", for: .normal)
-                    self.didCheckNicknameDuplicate = false
+                    SnackBar.make(in: self.view,
+                                  message: error.errorDescription,
+                                  duration: .lengthLong).show()
                 }
             }
         }

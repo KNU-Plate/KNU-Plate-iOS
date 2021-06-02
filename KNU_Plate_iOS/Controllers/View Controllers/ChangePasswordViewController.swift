@@ -25,12 +25,12 @@ class ChangePasswordViewController: UIViewController {
         UserManager.shared.updatePassword(with: model) { result in
             
             switch result {
-            case true:
+            case .success(_):
                 SnackBar.make(in: self.view,
                               message: "비밀번호 변경 성공 🎉",
                               duration: .lengthLong).show()
          
-            case false:
+            case .failure(_):
                 SnackBar.make(in: self.view,
                               message: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲",
                               duration: .lengthLong).show()
