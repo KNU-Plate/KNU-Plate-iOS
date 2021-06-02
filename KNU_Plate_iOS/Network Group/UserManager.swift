@@ -112,7 +112,7 @@ class UserManager {
                         }
                         
                     default:
-                        print("UserManager - login FAILED")
+                        print("UserManager - login FAILED with statusCode: \(statusCode)")
                          if let responseJSON = try! response.result.get() as? [String : String] {
                             
                             if let error = responseJSON["error"] {
@@ -120,7 +120,7 @@ class UserManager {
                                 if let errorMessage = LogInError(rawValue: error)?.returnErrorMessage() {
                                     print(errorMessage)
                                 } else {
-                                    print("알 수 없는 에러 발생.")
+                                    print("알 수 없는 에러 발생: error -> \(error)")
                                 }
                             }
                         }

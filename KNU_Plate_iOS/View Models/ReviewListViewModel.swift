@@ -29,25 +29,36 @@ class ReviewListViewModel {
         }
         
         print("REVIEWLIST COUNT: \(reviewList.count)")
-        //if reviewList.count == index { return }
         
         let model = FetchReviewListModel(mallID: mallID, page: index)
     
         RestaurantManager.shared.fetchReviewList(with: model) { result in
             
-            
             switch result {
             
             case .success(let responseModel):
                 
-            
                 // empty 이거나 같은 값이 반환 ㅇㅇ?
                 if responseModel.isEmpty {
                     self.needToFetchMoreData = false
                     self.delegate?.didFetchEmptyReviewListResults()
                     return
                 }
+                
+                
+                let firstMallID = responseModel[0].mallID
+                
+                for existingReviews in self.reviewList {
+                    
+                    if existingReviews.mallID == firstMallID {
+                        self.needToFetchMoreData = false
+                        self.delegate?.didFetchEmptyReviewListResults()
+                        return
+                    }
+                }
+                
             
+                
                 self.reviewList.append(contentsOf: responseModel)
     
                 if pagination {
@@ -60,6 +71,7 @@ class ReviewListViewModel {
             case .failure(let error):
                 print("ReviewListViewModel - fetchReviewList() error")
                 print(error.localizedDescription)
+                self.delegate?.failedFetchingReviewListResults()
                 
                 
             }

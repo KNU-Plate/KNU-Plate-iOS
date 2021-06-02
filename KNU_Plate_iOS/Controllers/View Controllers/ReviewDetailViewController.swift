@@ -80,8 +80,9 @@ class ReviewDetailViewController: UIViewController {
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .white
         
+        reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[0].path),
-                                    placeholderImage: UIImage(named: "default review image"),
+                                    placeholderImage: nil,
                                     options: .continueInBackground,
                                     completed: nil)
         
@@ -105,15 +106,17 @@ class ReviewDetailViewController: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.left :
                 pageControl.currentPage += 1
+                reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[pageControl.currentPage].path),
-                                            placeholderImage: UIImage(named: "default review image"),
+                                            placeholderImage: nil,
                                             options: .continueInBackground,
                                             completed: nil)
                 
             case UISwipeGestureRecognizer.Direction.right :
                 pageControl.currentPage -= 1
+                reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[pageControl.currentPage].path),
-                                            placeholderImage: UIImage(named: "default review image"),
+                                            placeholderImage: nil,
                                             options: .continueInBackground,
                                             completed: nil)
             default:

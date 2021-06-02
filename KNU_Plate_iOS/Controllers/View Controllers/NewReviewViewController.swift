@@ -12,9 +12,11 @@ class NewReviewViewController: UIViewController {
     @IBOutlet weak var menuInputTableView: UITableView!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet var addMenuButton: UIButton!
     
     lazy var existingMenusPickerView = UIPickerView()
-
+    
+    
     // 수정 필요 mallIID
     private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 3)
     
@@ -40,8 +42,10 @@ class NewReviewViewController: UIViewController {
         viewModel.mallID = mallID
         viewModel.existingMenus.append(contentsOf: existingMenus)
     }
-
-    @objc func pressedAddMenuButton() {
+    
+    @IBAction func pressedAddMenuButton(_ sender: Any) {
+        
+        self.view.endEditing(true)
         
         do {
             if let nameOfMenu = menuInputTextField.text {
@@ -320,6 +324,7 @@ extension NewReviewViewController {
         initializeCollectionView()
         initializeTableView()
         initializeTextView()
+        initializeAddMenuButton()
     }
     
     func initializeStarRating() {
@@ -357,7 +362,7 @@ extension NewReviewViewController {
     
     func initializeTextField() {
 
-        menuInputTextField.placeholder = "터치하여 메뉴를 고르거나 직접 입력해 보세요! 🍽"
+        menuInputTextField.placeholder = "드신 메뉴를 고르거나 입력해주세요! 🍽"
         menuInputTextField.layer.cornerRadius = 10
         menuInputTextField.clipsToBounds = true
         menuInputTextField.layer.borderWidth = 1
@@ -368,28 +373,25 @@ extension NewReviewViewController {
                                                            width: 10,
                                                            height: 0))
         menuInputTextField.leftViewMode = .always
-            
-        let addMenuButton = UIButton(frame: CGRect(x: 0,
-                                                   y: 0,
-                                                   width: 25,
-                                                   height: 25))
         
-        addMenuButton.setImage(UIImage(named: "plus button"),
-                               for: .normal)
-        addMenuButton.isUserInteractionEnabled = true
-        addMenuButton.contentMode = .scaleAspectFit
-        addMenuButton.addTarget(self,
-                                action: #selector(pressedAddMenuButton),
-                                for: .touchUpInside)
-  
+        let expandButton = UITextField(frame: CGRect(x: 0,
+                                                     y: 0,
+                                                     width: 25,
+                                                     height: 25))
+        expandButton.background = UIImage(named: "expand button")
+        expandButton.isUserInteractionEnabled = true
+        expandButton.inputView = existingMenusPickerView
+        expandButton.tintColor = .clear
+
         let rightView = UIView(frame: CGRect(x: 0,
                                              y: 0,
                                              width: 30,
                                              height: 25))
-        rightView.addSubview(addMenuButton)
+        rightView.addSubview(expandButton)
         menuInputTextField.rightView = rightView
         menuInputTextField.rightViewMode = .always
         initializePickerViewForMenuTextField()
+        menuInputTextField.inputAccessoryView = initializeToolbar()
     }
     
     func initializePickerViewForMenuTextField() {
@@ -397,9 +399,13 @@ extension NewReviewViewController {
         existingMenusPickerView.backgroundColor = .white
         existingMenusPickerView.delegate = self
         existingMenusPickerView.dataSource = self
+    }
+    
+    func initializeAddMenuButton() {
         
-        menuInputTextField.inputView = existingMenusPickerView
-        menuInputTextField.inputAccessoryView = initializeToolbar()
+        addMenuButton.layer.cornerRadius = 5
+        addMenuButton.clipsToBounds = true
+        addMenuButton.addBounceReactionWithoutFeedback()
     }
     
     func initializeToolbar() -> UIToolbar {
@@ -422,7 +428,7 @@ extension NewReviewViewController {
         let cancelButton = UIBarButtonItem(title: "취소",
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
-                                           action: #selector(self.dismissPicker))
+                                           action: #selector(self.cancelPicker))
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -430,22 +436,22 @@ extension NewReviewViewController {
         return toolBar
     }
     
-    @objc func dismissPicker(pickerView: UIPickerView){
+    @objc func cancelPicker(pickerView: UIPickerView) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func dismissPicker(pickerView: UIPickerView) {
         
         self.view.endEditing(true)
-        
         
         let selectedRow = existingMenusPickerView.selectedRow(inComponent: 0)
         
         /// 만약 "직접 입력" 옵션을 선택했을 시
         if selectedRow == viewModel.existingMenus.count - 1 {
-            
-            menuInputTextField.inputView = nil
             menuInputTextField.inputAccessoryView = nil
             menuInputTextField.becomeFirstResponder()
         } else {
-            menuInputTextField.text = viewModel.existingMenus[selectedRow].menuName
-            initializePickerViewForMenuTextField()
+            menuInputTextField.resignFirstResponder()
         }
     }
     

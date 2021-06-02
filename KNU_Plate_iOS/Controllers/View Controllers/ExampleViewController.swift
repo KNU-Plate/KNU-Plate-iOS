@@ -1,7 +1,8 @@
 import UIKit
 import ProgressHUD
 import Alamofire
-
+import SnackBar_swift
+import SDWebImage
 
 class ExampleViewController: UIViewController {
 
@@ -14,12 +15,9 @@ class ExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Test.shared.login()
-       
-    
+ 
         tableView.delegate = self
         tableView.dataSource = self
-        
         
         
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
@@ -36,20 +34,23 @@ class ExampleViewController: UIViewController {
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
-            
-            self.viewModel.fetchReviewList(of: 2)
-            
-        }
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchReviewList(of: 3)
         
     }
     
        
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
-        viewModel.fetchReviewList(of: 2)
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
+        viewModel.fetchReviewList(of: 3)
+
 
     }
 }
@@ -98,19 +99,12 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             reviewCell.configure(with: reviewLists[indexPath.row])
             
    
-            
-            
-            
-            
-            
-            
-            
-            
             let reviewImageURL = reviewCell.getReviewImageDownloadURL()
             let profileImageURL = reviewCell.getProfileImageDownloadURL()
             
+            reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
-                                                   placeholderImage: UIImage(named: "default review image"),
+                                                   placeholderImage: nil,
                                                    options: .continueInBackground,
                                                    completed: nil)
             reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
@@ -120,9 +114,10 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             return reviewCell
 
-            // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
+            
         }
         
+        // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
         else {
             
             guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
@@ -177,14 +172,16 @@ extension ExampleViewController: UIScrollViewDelegate {
         
         let position = scrollView.contentOffset.y
    
-        if position > (tableView.contentSize.height - 70 - scrollView.frame.size.height) {
+        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
             
             guard !viewModel.isPaginating else { return }
             
             if viewModel.needToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
+                
                 let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
+                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                
                 tableView.tableFooterView = nil
             } else { return }
         }
