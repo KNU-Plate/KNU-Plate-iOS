@@ -8,6 +8,6 @@ struct RestaurantDetailFromKakao {
     var address: String = ""
     var contact: String = ""
     var category: String = ""
-    var latitude: Double = 0
     var longitude: Double = 0
+    var latitude: Double = 0
 }

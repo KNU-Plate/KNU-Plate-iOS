@@ -18,12 +18,11 @@ class RestaurantManager {
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
     let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
     
-    
     private init() {}
     
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurantModel,
-                             completion: @escaping ((Bool) -> Void)){
+                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)){
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -57,24 +56,15 @@ class RestaurantManager {
             case 200:
                 
                 print("RestaurantManager - 매장 등록 성공")
-                completion(true)
+                completion(.success(true))
                 
             default:
-                print("RestaurantManager - uploadNewRes() statusCode: \(statusCode)")
-                if let responseJSON = try! response.result.get() as? [String : String] {
-                    
-                    if let error = responseJSON["error"] {
-                        
-                        if let errorMessage = NewRestaurantUploadError(rawValue: error)?.returnErrorMessage() {
-                            
-                            print(errorMessage)
-                        } else {
-                            print("RestaurantManager - uploadNewRestaurant() error: \(error)")
-                            
-                        }
-                        completion(false)
-                    }
-                }
+                let error = NetworkError.returnError(statusCode: statusCode)
+                
+                print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                
+                completion(.failure(error))
+
             }
         }
     }
@@ -116,18 +106,13 @@ class RestaurantManager {
                         if let error = responseJSON["error"] {
                             
                             print(error)
-                            //                                if let errorMessage = MailVerificationIssuanceError(rawValue: error)?.returnErrorMessage() {
-                            //                                    print(errorMessage)
+ 
                         } else {
                             print("알 수 없는 에러 발생.")
                         }
                     }
                 }
-                
-                
             }
-        
-        
     }
     
     //MARK: - 신규 리뷰 등록 
@@ -180,7 +165,6 @@ class RestaurantManager {
                 
             }
         }
-        
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기

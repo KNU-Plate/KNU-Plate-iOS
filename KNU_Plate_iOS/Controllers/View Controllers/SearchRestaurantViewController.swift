@@ -134,7 +134,7 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
         let cellIdentifier = Constants.CellIdentifier.searchedRestaurantResultCell
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) else {
-            fatalError("Failed to dequeue searchedRestaurantResultCell")
+            fatalError()
         }
         
         /// 검색된 결과가 있을 경우

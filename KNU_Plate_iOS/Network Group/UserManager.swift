@@ -113,7 +113,7 @@ class UserManager {
                     
                 default:
                     print("UserManager - login FAILED with statusCode: \(statusCode)")
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(statusCode: statusCode)
                     
                     
                     
@@ -200,7 +200,7 @@ class UserManager {
                     
                 default:
                     
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(statusCode: statusCode)
                     print("UserManager - 이미 존재하는 닉네임: \(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -231,7 +231,7 @@ class UserManager {
                     self.resetAllUserInfo()
                     completion(.success(true))
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(statusCode: statusCode)
                     completion(.failure(error))
                 }
             }
@@ -326,7 +326,7 @@ class UserManager {
                         completion(.failure(.internalError))
                     }
                 default:
-                    let error = NetworkError.returnError(json: response.data!)
+                    let error = NetworkError.returnError(statusCode: statusCode)
                     
                     print("UserManager - loadUserProfileInfo() default activated with error: \(error.errorDescription)")
                     completion(.failure(error))
@@ -360,7 +360,7 @@ class UserManager {
                 print("UserManager - 닉네임 변경 성공")
                 completion(.success(true))
             default:
-                let error = NetworkError.returnError(json: response.data!)
+                let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updateNickname error: \(error.errorDescription)")
                 completion(.failure(error))
             }
@@ -392,7 +392,7 @@ class UserManager {
                 completion(.success(true))
                 
             default:
-                let error = NetworkError.returnError(json: response.data!)
+                let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updatePassword error: \(error.errorDescription) and statusCode: \(statusCode)")
                 completion(.failure(error))
             }
@@ -428,7 +428,7 @@ class UserManager {
                 print("UserManager - 프로필 이미지 변경 성공")
                 completion(.success(true))
             default:
-                let error = NetworkError.returnError(json: response.data!)
+                let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updateNickname error: \(error.errorDescription)")
                 completion(.failure(error))
             }
@@ -458,7 +458,7 @@ class UserManager {
                 print("UserManager - 프로필 이미지 제거하기 성공")
                 completion(.success(true))
             default:
-                let error = NetworkError.returnError(json: response.data!)
+                let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updateNickname error: \(error.errorDescription)")
                 completion(.failure(error))
             }

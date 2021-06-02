@@ -30,6 +30,10 @@ class NewRestaurantViewController: UIViewController {
         viewModel.categoryName = details.category
         viewModel.latitude = details.latitude
         viewModel.longitude = details.longitude
+        
+    
+        print("configure longitude: \(details.longitude)")
+        print("configure latitude: \(details.latitude)")
     }
     
     @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
@@ -59,19 +63,18 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
                       }).show()
     }
     
-    func failedToUpload() {
+    func failedToUpload(with error: NetworkError) {
         
         dismissProgressBar()
         
         SnackBar.make(in: self.view,
-                      message: "개발자도 예기치 못한 오류입니다. 넓은 마음으로 이해해주세요 😥 ",
+                      message: error.errorDescription,
                       duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
                         
                         
                         //popToRoot 맞는지 확인
                         //self.navigationController?.popToRootViewController(animated: true)
                       }).show()
-        
     }
     
     func alreadyRegisteredRestaurant(){

@@ -22,7 +22,7 @@ class SearchRestaurantViewModel {
     /// 현재 선택된 장소
     var currentlySelectedIndex: Int?
     
-    lazy var restaurantDetails = RestaurantDetailFromKakao()
+    var restaurantDetails = RestaurantDetailFromKakao()
     
     //MARK: - Object Methods
     
@@ -52,8 +52,14 @@ class SearchRestaurantViewModel {
         currentlySelectedIndex = index
         
         if let x = Double(documents[index].x), let y = Double(documents[index].y) {
+            restaurantDetails.longitude = x
+            restaurantDetails.latitude = y
+            print("restaurantDetails longitude: \(restaurantDetails.longitude)")
+            print("restaurantDetails latitude: \(restaurantDetails.latitude)")
             return (x, y, placeName)
         }
+        
+        print("SearchResViewModel - Location unavailable")
 
         /// 기본값 반환 (경북대 중앙)
         let x = 128.6104881544238       /// longitude
@@ -76,8 +82,8 @@ class SearchRestaurantViewModel {
         restaurantDetails.address = documents[index].address
         restaurantDetails.contact = documents[index].contact
         restaurantDetails.category = documents[index].categoryName
+        restaurantDetails.longitude = Double(documents[index].x)!
         restaurantDetails.latitude = Double(documents[index].y)!
-        restaurantDetails.latitude = Double(documents[index].x)!
         
         return restaurantDetails
     }

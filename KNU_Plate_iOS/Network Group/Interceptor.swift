@@ -16,6 +16,7 @@ final class Interceptor: RequestInterceptor {
         
         var request = urlRequest
         request.headers.update(name: "Authorization", value: User.shared.accessToken)
+        request.timeoutInterval = 10
         
         completion(.success(request))
     }
@@ -42,7 +43,9 @@ final class Interceptor: RequestInterceptor {
         case 401:
             guard !isRefreshing else { return }
             
-            refreshToken() { refreshResult in
+            refreshToken() { [weak self] refreshResult in
+                
+                guard let self = self else { return }
                 
                 print("Interceptor - retry() refreshToken result: \(refreshResult)")
                 

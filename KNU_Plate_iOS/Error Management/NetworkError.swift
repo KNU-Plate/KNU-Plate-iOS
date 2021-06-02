@@ -30,15 +30,8 @@ enum NetworkError: Int, Error {
         }
     }
     
-    static func returnError(json: Data) -> NetworkError {
-        
-        do {
-            let json = try JSON(data: json)
-            let errorCode = json["error"].intValue
-            return NetworkError(rawValue: errorCode)!
-        } catch {
-            return .internalError
-        }
+    static func returnError(statusCode: Int) -> NetworkError {
+        return NetworkError(rawValue: statusCode) ?? .internalError
     }
 
 }
