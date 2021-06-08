@@ -3,14 +3,11 @@ import Then
 
 class RestaurantView: UIView {
     
-    let tableView = UITableView().then {
-        $0.backgroundColor = .clear
-//        $0.sectionHeaderHeight = UITableView.automaticDimension
-    }
+    // MARK: - Scroll View Declaration
+    let scrollView = UIScrollView()
     
-    // MARK: - Header View Declaration
-    let headerView = UIView()
-    let sectionHeaderView = UIView()
+    // MARK: - Content View Declaration
+    let contentView = UIView()
     
     // MARK: - Image Related View Declaration
     let imageContentsView = UIView()
@@ -74,6 +71,10 @@ class RestaurantView: UIView {
     }
     
     // MARK: - Page Select Related View Declaration
+    let topLine = UIView().then {
+        $0.backgroundColor = UIColor.lightGray
+    }
+    
     let selectStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
@@ -114,6 +115,10 @@ class RestaurantView: UIView {
         $0.alignTextBelow()
     }
     
+    let bottomLine = UIView().then {
+        $0.backgroundColor = UIColor.lightGray
+    }
+    
     // MARK: - Bottom Content View Declaration
     let bottomContentsView = UIView()
     
@@ -139,18 +144,32 @@ class RestaurantView: UIView {
         selectStackView.addArrangedSubview(locationButton)
         selectStackView.addArrangedSubview(menuButton)
 
-        headerView.addSubview(imageContentsView)
-        headerView.addSubview(stackView1)
-        headerView.addSubview(stackView2)
-        headerView.addSubview(stackView3)
+        contentView.addSubview(imageContentsView)
+        contentView.addSubview(stackView1)
+        contentView.addSubview(stackView2)
+        contentView.addSubview(stackView3)
+        contentView.addSubview(topLine)
+        contentView.addSubview(selectStackView)
+        contentView.addSubview(bottomLine)
+        contentView.addSubview(bottomContentsView)
         
-        tableView.tableHeaderView = headerView
-//        contentView.addSubview(selectStackView)
+        scrollView.addSubview(contentView)
+
+        self.addSubview(scrollView)
     }
     
     // MARK: - View Layout
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+        }
         
         let imageContentsViewHeight: CGFloat = 250
         let imageContentsViewWidth: CGFloat = frame.width
@@ -221,11 +240,32 @@ class RestaurantView: UIView {
             make.height.equalTo(stackViewHeight)
         }
 
-//        selectStackView.snp.makeConstraints { make in
-//            make.top.equalTo(topLine.snp.bottom).offset(padding*2)
-//            make.height.equalTo(70)
-//            make.width.centerX.equalToSuperview()
-//        }
+        topLine.snp.makeConstraints { make in
+            make.top.equalTo(stackView3.snp.bottom).offset(padding*4)
+            make.height.equalTo(1)
+            make.width.centerX.equalToSuperview()
+        }
+
+        selectStackView.snp.makeConstraints { make in
+            make.top.equalTo(topLine.snp.bottom).offset(padding*2)
+            make.height.equalTo(70)
+            make.width.centerX.equalToSuperview()
+        }
+
+        bottomLine.snp.makeConstraints { make in
+            make.top.equalTo(selectStackView.snp.bottom).offset(padding*2)
+            make.height.equalTo(1)
+            make.width.centerX.equalToSuperview()
+        }
+
+        bottomContentsView.snp.makeConstraints { make in
+            make.top.equalTo(bottomLine.snp.bottom).offset(padding*2)
+            make.left.right.width.bottom.equalToSuperview()
+        }
+        
+        print("-> layoutSubviews")
+        print("--> contentView height: \(contentView.frame.height)")
+        print("--> frame height: \(frame.height)")
     }
     
     required init?(coder: NSCoder) {
