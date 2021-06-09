@@ -457,6 +457,7 @@ class UserManager {
             case 200:
                 print("UserManager - 프로필 이미지 제거하기 성공")
                 completion(.success(true))
+                
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updateNickname error: \(error.errorDescription)")

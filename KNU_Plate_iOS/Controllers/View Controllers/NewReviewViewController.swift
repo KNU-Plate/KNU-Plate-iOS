@@ -128,7 +128,7 @@ class NewReviewViewController: UIViewController {
                                       duration: .lengthLong).show()
                     }
                 }
-                dismissProgressBar()
+                
             }
         }
     }
@@ -224,9 +224,26 @@ extension NewReviewViewController: NewMenuTableViewCellDelegate {
 extension NewReviewViewController: NewReviewViewModelDelegate {
     
     func didCompleteReviewUpload(_ success: Bool) {
-        ProgressHUD.dismiss()
+        dismissProgressBar()
         print("NEW REVIEW UPLOAD COMPLETE")
     }
+    
+    func failedUploadingReview(with error: NetworkError) {
+        SnackBar.make(in: self.view,
+                      message: error.errorDescription,
+                      duration: .lengthLong).show()
+    }
+    
+    func didCompleteMenuUpload() {
+        print("신규 메뉴 등록 성공")
+    }
+    
+    func failedUploadingMenu(with error: NetworkError) {
+        SnackBar.make(in: self.view,
+                      message: error.errorDescription,
+                      duration: .lengthLong).show()
+    }
+    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource -> 메뉴 입력을 위한 TableView

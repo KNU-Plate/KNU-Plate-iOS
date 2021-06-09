@@ -64,14 +64,14 @@ class RestaurantManager {
                 print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
                 
                 completion(.failure(error))
-
+                
             }
         }
     }
     
     //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
     func uploadNewMenu(with model: RegisterNewMenuModel,
-                       completion: @escaping (([MenuRegisterResponseModel]) -> Void)) {
+                       completion: @escaping ((Result<[MenuRegisterResponseModel], NetworkError>) -> Void)) {
         
         AF.request(uploadNewMenuRequestURL,
                    method: .post,
@@ -94,30 +94,26 @@ class RestaurantManager {
                     do {
                         let decodedData = try JSONDecoder().decode([MenuRegisterResponseModel].self,
                                                                    from: response.data!)
-                        completion(decodedData)
+                        completion(.success(decodedData))
+                        
                     } catch {
                         
                         print("RESTAURANT MANAGER - There was an error decoding JSON Data with error: \(error) with statusCode: \(statusCode)")
+                        
+                        completion(.failure(.internalError))
                     }
                     
                 default:
-                    if let responseJSON = try! response.result.get() as? [String : String] {
-                        
-                        if let error = responseJSON["error"] {
-                            
-                            print(error)
- 
-                        } else {
-                            print("알 수 없는 에러 발생.")
-                        }
-                    }
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("RestaurantManager - uploadNewMenu() error: \(error.errorDescription)")
+                    completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 신규 리뷰 등록 
     func uploadNewReview(with model: NewReviewModel,
-                         completion: @escaping ((Bool) -> Void)) {
+                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -151,18 +147,14 @@ class RestaurantManager {
             case 200:
                 
                 print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
-                completion(true)
+                completion(.success(true))
+                
                 
             default:
-                if let responseJSON = try! response.result.get() as? [String : String] {
-                    
-                    if let error = responseJSON["error"] {
-                        
-                        print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
-                    }
-                }
-                completion(false)
                 
+                let error = NetworkError.returnError(statusCode: statusCode)
+                print("RestaurantManager uploadNewReview error: \(error.errorDescription)")
+                completion(.failure(error))
             }
         }
     }
@@ -179,29 +171,29 @@ class RestaurantManager {
                    headers: model.headers,
                    interceptor: interceptor)
             .responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    case 200:
-                        do {
-                            let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
-                            completion(.success(decodedData))
-                            
-                        } catch {
-                            print("Restaurant Manager - fetchReviewList ERROR: \(error)")
-                        }
-                    default:
-                        if let responseJSON = try! response.result.get() as? [String : String] {
-                            
-                            if let error = responseJSON["error"] {
-                                
-                                print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
-                            }
-                            
-                        }
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    do {
+                        let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
+                        completion(.success(decodedData))
+                        
+                    } catch {
+                        print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                     }
-                   }
+                default:
+                    if let responseJSON = try! response.result.get() as? [String : String] {
+                        
+                        if let error = responseJSON["error"] {
+                            
+                            print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
+                        }
+                        
+                    }
+                }
+            }
     }
     
     

@@ -74,9 +74,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
                 
                 let data = thumbnail.jpegData(compressionQuality: 1.0)
                 let newImage = UIImage(data: data!)
-                
-                print(data)
-                
+            
                 self.userSelectedImages.append(newImage! as UIImage)
             }
         }

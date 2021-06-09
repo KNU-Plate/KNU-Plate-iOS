@@ -87,10 +87,4 @@ class SearchRestaurantViewModel {
         
         return restaurantDetails
     }
-    
-    
-    
-    
-    
-    
 }

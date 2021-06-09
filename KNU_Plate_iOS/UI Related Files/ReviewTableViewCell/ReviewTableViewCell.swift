@@ -138,7 +138,6 @@ class ReviewTableViewCell: UITableViewCell {
         let medal = viewModel.medal
         let rating = viewModel.rating
         let review = viewModel.review
-        //let reviewImagesFileInfo = viewModel.reviewImagesFileFolder
         let reviewImageFiles = viewModel.reviewImagesFileFolder?.files
       
         let reviewDetails = ReviewDetail(profileImage: profileImage,
