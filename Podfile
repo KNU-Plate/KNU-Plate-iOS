@@ -17,6 +17,7 @@ target 'KNU_Plate_iOS' do
   pod 'SDWebImage', '~> 5.0'
   pod 'SPIndicator'
   pod 'SnackBar.swift'
+  pod "GTProgressBar"
 
 
 end

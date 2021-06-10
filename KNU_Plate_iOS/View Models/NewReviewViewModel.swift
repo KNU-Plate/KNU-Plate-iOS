@@ -3,6 +3,11 @@ import UIKit
 
 protocol NewReviewViewModelDelegate {
     func didCompleteReviewUpload(_ success: Bool)
+    func failedUploadingReview(with error: NetworkError)
+    
+    func didCompleteMenuUpload()
+    func failedUploadingMenu(with error: NetworkError)
+    
 }
 
 class NewReviewViewModel {
@@ -48,7 +53,7 @@ class NewReviewViewModel {
    
     //MARK: - Init
     
-    public init(mallID: Int = 3) {
+    public init(mallID: Int = 2) {
         
         self.mallID = mallID
         
@@ -101,11 +106,20 @@ class NewReviewViewModel {
         let model = RegisterNewMenuModel(mallID: self.mallID,
                                          menuName: menuNames)
     
-        RestaurantManager.shared.uploadNewMenu(with: model) { responseModel in
+        RestaurantManager.shared.uploadNewMenu(with: model) { result in
             
-            self.convertMenusToUploadableFormat(with: responseModel)
-            self.menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
-            self.uploadReview()
+            switch result {
+            
+            case .success(let responseModel):
+                
+                self.convertMenusToUploadableFormat(with: responseModel)
+                self.menuInfoInJSONString = self.convertMenusToJSONString(from: self.finalMenuInfo)
+                self.uploadReview()
+                
+            case .failure(let error):
+                
+                self.delegate?.failedUploadingMenu(with: error)
+            }
         }
     }
     
@@ -118,12 +132,17 @@ class NewReviewViewModel {
                                             rating: rating,
                                             reviewImages: userSelectedImagesInDataFormat)
         
-        print(userSelectedImagesInDataFormat![0])
-        
-        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { isSuccess in
+        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { result in
             
-            print("SUCCESSFULLY UPLOAD NEW REVIEW")
-            self.delegate?.didCompleteReviewUpload(isSuccess)
+            switch result {
+            
+            case .success(_):
+                self.delegate?.didCompleteReviewUpload(true)
+                
+            case .failure(let error):
+                self.delegate?.failedUploadingReview(with: error)
+                
+            }
         }
     }
     

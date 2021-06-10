@@ -26,6 +26,7 @@ struct Constants {
         static let sendDeveloperMessageViewController = "SendDeveloperMessageViewController"
         static let settingsViewController = "SettingsViewController"
         static let termsAndConditionsViewController = "TermsAndConditionViewController"
+        static let menuRecommendationViewController = "MenuRecommendationViewController"
     }
     
     struct Layer {
@@ -44,6 +45,7 @@ struct Constants {
         static let reviewTableViewCell = "reviewTableViewCell"
         static let reviewWithoutImageTableViewCell = "reviewWithoutImageTableViewCell"
         static let myPageCell = "myPageCell"
+        static let menuRecommendCell = "menuRecommendCell"
     
     }
     

@@ -85,15 +85,16 @@ class UserManager {
     }
     
     //MARK: - 로그인
+    
+    //TODO: - multipartFormData 로 되어있던데 확인해보기 
     func logIn(with model: LoginInfoModel) {
         
         AF.request(logInRequestURL,
                    method: .post,
                    parameters: model.parameters,
                    encoding: URLEncoding.httpBody,
-                   headers: model.headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
+                   headers: model.headers)
+            .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
@@ -114,9 +115,7 @@ class UserManager {
                 default:
                     print("UserManager - login FAILED with statusCode: \(statusCode)")
                     let error = NetworkError.returnError(statusCode: statusCode)
-                    
-                    
-                    
+                
                     
                     if let responseJSON = try! response.result.get() as? [String : String] {
                         
@@ -449,6 +448,7 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
+
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -457,6 +457,7 @@ class UserManager {
             case 200:
                 print("UserManager - 프로필 이미지 제거하기 성공")
                 completion(.success(true))
+                
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
                 print("UserManager - updateNickname error: \(error.errorDescription)")

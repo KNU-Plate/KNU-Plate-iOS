@@ -26,9 +26,7 @@ class ChangeNicknameViewController: UIViewController {
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
         self.view.endEditing(true)
-        
-        showProgressBar()
-
+    
         if !didCheckNicknameDuplicate {
             SnackBar.make(in: self.view,
                           message: "🤔 닉네임 중복 확인을 먼저해주세요.",
@@ -45,6 +43,8 @@ class ChangeNicknameViewController: UIViewController {
             return
         }
         
+        showProgressBar()
+        
         let editUserModel = EditUserInfoModel(nickname: nickname)
         
         UserManager.shared.updateNickname(with: editUserModel) { result in
@@ -53,7 +53,6 @@ class ChangeNicknameViewController: UIViewController {
             
             case .success(_):
                 
-                dismissProgressBar()
                 self.navigationController?.popViewController(animated: true)
                 
             case .failure(_):

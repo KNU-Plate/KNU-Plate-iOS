@@ -36,8 +36,7 @@ final class Interceptor: RequestInterceptor {
         
         switch statusCode {
         
-        case 200...299:
-            completion(.doNotRetry)
+        case 200...299: completion(.doNotRetry)
             
         // 토큰이 만료되면 statusCode 401: Unauthorized 가 날라옴
         case 401:
@@ -52,6 +51,7 @@ final class Interceptor: RequestInterceptor {
                 switch refreshResult {
                 
                 case .success(_):
+
                     
                     if request.retryCount < self.retryLimit {
                         completion(.retry)
@@ -60,8 +60,10 @@ final class Interceptor: RequestInterceptor {
                     }
                 case .failure(let error):
         
-                    // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
+                    
                     if error == .unauthorized {
+                        // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
+                        
                         
                     } else {
                         completion(.doNotRetry)
@@ -75,7 +77,7 @@ final class Interceptor: RequestInterceptor {
                 print("Interceptor retry() error: \(error)")
                 completion(.doNotRetry)
             }
-            completion(.retry)
+            completion(.doNotRetry)
             
         }
     }

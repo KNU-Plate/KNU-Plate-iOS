@@ -70,16 +70,6 @@ class NewRestaurantViewModel {
     // 신규 매장 등록
     func upload() {
         
-        print(restaurantName)
-        print(contact)
-        print(foodCategory)
-        print(address)
-        print(categoryName)
-        print(latitude)
-        print(longitude)
-
-        
-        
         let newRestaurantModel = NewRestaurantModel(name: restaurantName,
                                                     contact: contact,
                                                     foodCategory: foodCategory,
@@ -88,8 +78,6 @@ class NewRestaurantViewModel {
                                                     latitude: latitude,
                                                     longitude: longitude,
                                                     images: userSelectedImagesInDataFormat)
-        
-    
         
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { result in
             
@@ -115,7 +103,7 @@ class NewRestaurantViewModel {
         
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             if let imageData =
-                image.jpegData(compressionQuality: 0.5) {
+                image.jpegData(compressionQuality: 1.0) {
                 return imageData
             } else {
                 print("Unable to convert UIImage to Data type")
