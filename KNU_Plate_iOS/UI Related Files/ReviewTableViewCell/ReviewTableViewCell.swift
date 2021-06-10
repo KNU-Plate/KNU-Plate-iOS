@@ -82,11 +82,6 @@ class ReviewTableViewCell: UITableViewCell {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         
-    
-        //userProfileImageView.layer.borderWidth = 1
-        //userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
         reviewImageView?.layer.cornerRadius = 10
         
         guard let imageCount = viewModel.reviewImagesFileFolder?.files?.count else {

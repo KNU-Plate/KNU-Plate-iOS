@@ -16,6 +16,6 @@ struct ExistingMenuModel: Decodable {
         case mallID = "mall_id"
         case menuName = "menu_name"
         case likes = "like"
-        case dislikes = "dislikes"
+        case dislikes = "dislike"
     }
 }
