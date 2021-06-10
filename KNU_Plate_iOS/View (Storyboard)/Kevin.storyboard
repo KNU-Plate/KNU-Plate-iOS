@@ -393,6 +393,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dislikeImageView" destination="rWj-Pw-ji9" id="fAC-D3-OMT"/>
+                                            <outlet property="dislikeTitleLabel" destination="p8h-Ns-HQk" id="Ado-cA-wmU"/>
+                                            <outlet property="likeImageView" destination="9Hx-vc-1kO" id="YAD-VQ-xiB"/>
+                                            <outlet property="likeTitleLabel" destination="bcj-1N-Sus" id="ytE-99-yBq"/>
                                             <outlet property="menuLabel" destination="XHc-Tf-kOd" id="3cJ-72-3nY"/>
                                             <outlet property="progressBar" destination="aLg-Zx-VU5" id="Hj0-Ch-n5B"/>
                                             <outlet property="totalDislikeLabel" destination="vNN-ed-3rQ" id="B9r-3B-GO7"/>

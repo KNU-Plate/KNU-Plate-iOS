@@ -170,6 +170,7 @@ class RestaurantManager {
                    method: .get,
                    headers: headers,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }

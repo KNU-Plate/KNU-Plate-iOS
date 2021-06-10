@@ -10,10 +10,14 @@ struct MenuRecommendationViewModel {
 
     var likePercentage: Double {
         get {
-            let total = likes + dislikes
+            if totalLikes == 0 { return 0.0 }
+            else { return Double(likes) / Double(totalLikes) }
+        }
+    }
     
-            if total == 0 { return 0 }
-            else { return Double(likes / total) }
+    var totalLikes: Int {
+        get {
+            return likes + dislikes
         }
     }
 

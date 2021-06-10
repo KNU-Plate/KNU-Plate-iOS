@@ -53,7 +53,7 @@ class NewReviewViewModel {
    
     //MARK: - Init
     
-    public init(mallID: Int = 3) {
+    public init(mallID: Int = 2) {
         
         self.mallID = mallID
         

@@ -6,7 +6,7 @@ class MenuRecommendationViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     
-    private var viewModel = MenuListViewModel()
+    var viewModel = MenuListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +82,14 @@ extension MenuRecommendationViewController: UITableViewDataSource, UITableViewDe
         }
         
         cell.configure(with: viewModel.menuList[indexPath.row])
-        
-        
+        cell.progressBar.animateTo(progress: CGFloat(cell.viewModel.likePercentage))
         return cell
     }
-    
-  
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
+
     
 }
