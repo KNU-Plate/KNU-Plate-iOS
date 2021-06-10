@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.4.2)
   - BSImagePicker (3.3.1)
+  - GTProgressBar (0.3.3)
   - IQKeyboardManagerSwift (6.5.6)
   - ProgressHUD (13.6)
   - SDWebImage (5.11.1):
@@ -17,6 +18,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
+  - GTProgressBar
   - IQKeyboardManagerSwift
   - ProgressHUD
   - SDWebImage (~> 5.0)
@@ -31,6 +33,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - BSImagePicker
+    - GTProgressBar
     - IQKeyboardManagerSwift
     - ProgressHUD
     - SDWebImage
@@ -44,6 +47,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -54,6 +58,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: b887eefe4c2b1990b0bd37a423ed7693935b0522
+PODFILE CHECKSUM: a4c8d86dd4c07a35e7b89fd800d57d7f931b9097
 
 COCOAPODS: 1.10.1

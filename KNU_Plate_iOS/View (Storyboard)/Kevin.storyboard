@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2bF-tq-S23">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="orY-fZ-A5Z">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -291,6 +291,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LIf-UN-BAi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1529" y="1737"/>
+        </scene>
+        <!--MenuRecommendationViewController-->
+        <scene sceneID="r0o-jy-nlN">
+            <objects>
+                <viewController storyboardIdentifier="MenuRecommendationViewController" title="MenuRecommendationViewController" id="orY-fZ-A5Z" customClass="MenuRecommendationViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1RS-Vv-pOc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메뉴별 추천" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COr-Gf-69w">
+                                <rect key="frame" x="15" y="25" width="87" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eUS-Lm-i18">
+                                <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuRecommendCell" rowHeight="100" id="Y89-IL-MWc" customClass="MenuRecommendationTableViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y89-IL-MWc" id="eIF-Ai-tkK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="샌드위치" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHc-Tf-kOd">
+                                                    <rect key="frame" x="16" y="40" width="90" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="hQY-tj-7Lc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLg-Zx-VU5" customClass="GTProgressBar" customModule="GTProgressBar">
+                                                    <rect key="frame" x="116" y="34" width="254" height="15"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="6Ij-hp-a99"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs up(selected,edited)" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-vc-1kO">
+                                                    <rect key="frame" x="114" y="54" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="6Zw-sX-1Cu"/>
+                                                        <constraint firstAttribute="height" constant="20" id="6mk-Wv-L4w"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aLg-Zx-VU5" firstAttribute="leading" secondItem="XHc-Tf-kOd" secondAttribute="trailing" constant="10" id="3eE-4p-7eR"/>
+                                                <constraint firstItem="aLg-Zx-VU5" firstAttribute="top" secondItem="eIF-Ai-tkK" secondAttribute="top" constant="34" id="Rh1-Fa-mKK"/>
+                                                <constraint firstItem="9Hx-vc-1kO" firstAttribute="top" secondItem="aLg-Zx-VU5" secondAttribute="bottom" constant="5" id="Wis-y3-BbR"/>
+                                                <constraint firstItem="9Hx-vc-1kO" firstAttribute="leading" secondItem="eIF-Ai-tkK" secondAttribute="leadingMargin" constant="98" id="aYJ-vb-BLf"/>
+                                                <constraint firstItem="XHc-Tf-kOd" firstAttribute="leading" secondItem="eIF-Ai-tkK" secondAttribute="leadingMargin" id="bHC-9G-dnK"/>
+                                                <constraint firstAttribute="trailing" secondItem="aLg-Zx-VU5" secondAttribute="trailing" constant="5" id="tok-WF-Os1"/>
+                                                <constraint firstItem="XHc-Tf-kOd" firstAttribute="centerY" secondItem="eIF-Ai-tkK" secondAttribute="centerY" id="zcA-S1-iI2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="menuLabel" destination="XHc-Tf-kOd" id="3cJ-72-3nY"/>
+                                            <outlet property="progressBar" destination="aLg-Zx-VU5" id="Hj0-Ch-n5B"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3ka-ND-NlP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="COr-Gf-69w" firstAttribute="top" secondItem="3ka-ND-NlP" secondAttribute="top" constant="25" id="65U-sb-WDE"/>
+                            <constraint firstItem="3ka-ND-NlP" firstAttribute="bottom" secondItem="eUS-Lm-i18" secondAttribute="bottom" id="N21-cI-Nex"/>
+                            <constraint firstItem="eUS-Lm-i18" firstAttribute="top" secondItem="COr-Gf-69w" secondAttribute="bottom" constant="15" id="ThO-HQ-GSe"/>
+                            <constraint firstItem="3ka-ND-NlP" firstAttribute="trailing" secondItem="eUS-Lm-i18" secondAttribute="trailing" id="lOw-tl-X9A"/>
+                            <constraint firstItem="COr-Gf-69w" firstAttribute="leading" secondItem="3ka-ND-NlP" secondAttribute="leading" constant="15" id="t1Y-LM-JNm"/>
+                            <constraint firstItem="eUS-Lm-i18" firstAttribute="leading" secondItem="3ka-ND-NlP" secondAttribute="leading" id="zpT-zn-fY3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="eUS-Lm-i18" id="QPF-fA-6cr"/>
+                        <outlet property="titleLabel" destination="COr-Gf-69w" id="hRt-WX-08A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cwY-rz-XX5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2788" y="2580.3598200899551"/>
         </scene>
         <!--리뷰 등록-->
         <scene sceneID="IT7-cX-3JL">
@@ -938,7 +1025,7 @@
         <!--Example View Controller-->
         <scene sceneID="2mT-EE-gHf">
             <objects>
-                <viewController id="crA-ja-4ef" customClass="ExampleViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExampleViewController" id="crA-ja-4ef" customClass="ExampleViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfJ-v2-Q2d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1468,6 +1555,7 @@
         <image name="review (selected)" width="41.5" height="41.5"/>
         <image name="star rating (filled)" width="123" height="123"/>
         <image name="star rating (unfilled)" width="123" height="123"/>
+        <image name="thumbs up(selected,edited)" width="142" height="142"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

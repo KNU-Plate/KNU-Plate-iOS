@@ -64,7 +64,6 @@ class RestaurantManager {
                 print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
                 
                 completion(.failure(error))
-                
             }
         }
     }
@@ -201,7 +200,7 @@ class RestaurantManager {
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
                       httpMethod: HTTPMethod,
-                      completion: @escaping ((Bool) -> Void)) {
+                      completion: @escaping ((Result<Bool,NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
         
@@ -216,14 +215,13 @@ class RestaurantManager {
                 switch statusCode {
                 case 200:
                     print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
-                    completion(true)
+                    completion(.success(true))
+            
                 default:
-                    if let responseJSON = try! response.result.get() as? [String : String] {
-                        if let error = responseJSON["error"] {
-                            print(error)
-                        } else { print("알 수 없는 에러 발생.") }
-                    }
-                    completion(false)
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("RESTAURANT MANAGER - mark favorite error: \(error.errorDescription)")
+                    completion(.failure(error))
+                  
                 }
             }
     }
