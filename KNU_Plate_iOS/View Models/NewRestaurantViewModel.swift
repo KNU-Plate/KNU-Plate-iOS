@@ -79,7 +79,9 @@ class NewRestaurantViewModel {
                                                     longitude: longitude,
                                                     images: userSelectedImagesInDataFormat)
         
-        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { result in
+        RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { [weak self] result in
+            
+            guard let self = self else { return }
             
             print("NewRestaurantViewModel - upload() RESULT: \(result)")
             

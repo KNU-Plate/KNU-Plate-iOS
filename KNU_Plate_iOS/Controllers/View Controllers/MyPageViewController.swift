@@ -74,7 +74,9 @@ extension MyPageViewController {
     
     func loadUserProfileInfo() {
         
-        UserManager.shared.loadUserProfileInfo { result in
+        UserManager.shared.loadUserProfileInfo { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(_):
@@ -105,7 +107,9 @@ extension MyPageViewController {
     
     func removeProfileImage() {
         
-        UserManager.shared.removeProfileImage { result in
+        UserManager.shared.removeProfileImage { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             
@@ -161,7 +165,9 @@ extension MyPageViewController {
         let imageData = image.jpegData(compressionQuality: 1.0)!
         let model = EditUserInfoModel(userProfileImage: imageData)
         
-        UserManager.shared.updateProfileImage(with: model) { result in
+        UserManager.shared.updateProfileImage(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(_):

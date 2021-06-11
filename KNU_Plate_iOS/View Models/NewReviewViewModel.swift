@@ -106,7 +106,9 @@ class NewReviewViewModel {
         let model = RegisterNewMenuModel(mallID: self.mallID,
                                          menuName: menuNames)
     
-        RestaurantManager.shared.uploadNewMenu(with: model) { result in
+        RestaurantManager.shared.uploadNewMenu(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             
@@ -132,7 +134,9 @@ class NewReviewViewModel {
                                             rating: rating,
                                             reviewImages: userSelectedImagesInDataFormat)
         
-        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { result in
+        RestaurantManager.shared.uploadNewReview(with: newReviewModel) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             

@@ -31,7 +31,9 @@ class SearchRestaurantViewModel {
         resetSearchResults()
         let searchModel = SearchRestaurantByKeywordModel(query: keyword)
         
-        MapManager.shared.searchByKeyword(with: searchModel) { result in
+        MapManager.shared.searchByKeyword(with: searchModel) { [weak self] result in
+            
+            guard let self = self else { return }
             
             self.documents = result.documents
             

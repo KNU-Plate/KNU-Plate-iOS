@@ -15,7 +15,9 @@ class MenuListViewModel {
     func fetchMenuList(of mallID: Int) {
         
         //TODO: mall id 수정 필요
-        RestaurantManager.shared.fetchRestaurantDetailInfo(of: mallID) { result in
+        RestaurantManager.shared.fetchRestaurantDetailInfo(of: mallID) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             

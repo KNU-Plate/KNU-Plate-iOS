@@ -32,7 +32,9 @@ class ReviewListViewModel {
         
         let model = FetchReviewListModel(mallID: mallID, page: index)
     
-        RestaurantManager.shared.fetchReviewList(with: model) { result in
+        RestaurantManager.shared.fetchReviewList(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             

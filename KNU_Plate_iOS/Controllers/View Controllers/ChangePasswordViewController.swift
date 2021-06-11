@@ -22,7 +22,9 @@ class ChangePasswordViewController: UIViewController {
         
         let model = EditUserInfoModel(password: passwordTextField.text!)
         
-        UserManager.shared.updatePassword(with: model) { result in
+        UserManager.shared.updatePassword(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
             case .success(_):
