@@ -5,9 +5,9 @@ class RestaurantViewController: UIViewController {
 
     let restaurantView = RestaurantView()
     
-    var reviewVC: UIViewController?
-    var locationVC: UIViewController?
-    var menuVC: UIViewController?
+    var reviewVC: ExampleViewController?
+    var locationVC: LocationViewController?
+    var menuVC: MenuViewController?
     
     var currentView: UIView?
     var currentButton: UIButton?
@@ -15,6 +15,12 @@ class RestaurantViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("+++++ RestaurantViewController viewDidLoad")
+        print("+++++ safeAreaLayoutGuide height: \(self.view.safeAreaLayoutGuide.layoutFrame.height)")
+        
+        restaurantView.scrollView.delegate = self
+//        restaurantView.scrollView.bounces = false
         
         self.view.addSubview(restaurantView)
         let safeArea = self.view.safeAreaLayoutGuide
@@ -35,22 +41,22 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("-> viewDidLayoutSubviews")
+        print("+++++ RestaurantViewController viewDidLayoutSubviews")
         
-        guard let currentView = self.currentView else { return }
-        currentView.snp.makeConstraints { make in
-            make.edges.equalTo(restaurantView.bottomContentsView)
-            make.height.equalTo(300).priority(.low)
-        }
+//        guard let currentView = self.currentView else { return }
+//        currentView.snp.makeConstraints { make in
+//            make.edges.equalTo(restaurantView.bottomContentsView)
+//            make.height.equalTo(250).priority(.low)
+//        }
     }
 }
 
 extension RestaurantViewController {
     func instantiateContentsViewControllers() {
         let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
-        let reviewVC = kevinSB.instantiateViewController(withIdentifier: "ExampleViewController")
-        guard let locationVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.locationViewController),
-              let menuVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.menuViewController)
+        guard let reviewVC = kevinSB.instantiateViewController(withIdentifier: "ExampleViewController") as? ExampleViewController,
+              let locationVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.locationViewController) as? LocationViewController,
+              let menuVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.menuViewController) as? MenuViewController
         else {
             fatalError()
         }
@@ -59,13 +65,16 @@ extension RestaurantViewController {
         self.locationVC = locationVC
         self.menuVC = menuVC
         
-        reviewVC.view.translatesAutoresizingMaskIntoConstraints = false
-        locationVC.view.translatesAutoresizingMaskIntoConstraints = false
-        menuVC.view.translatesAutoresizingMaskIntoConstraints = false
-        
+//        reviewVC.view.translatesAutoresizingMaskIntoConstraints = false
+//        locationVC.view.translatesAutoresizingMaskIntoConstraints = false
+//        menuVC.view.translatesAutoresizingMaskIntoConstraints = false
+
         self.addChild(reviewVC)
         self.addChild(locationVC)
         self.addChild(menuVC)
+        
+        reviewVC.didMove(toParent: self)
+        menuVC.didMove(toParent: self)
     }
     
     func setButtonTarget() {
@@ -75,10 +84,17 @@ extension RestaurantViewController {
     }
     
     func setDefaultContentView() {
-        currentButton = restaurantView.locationButton
+        currentButton = restaurantView.reviewButton
         currentButton?.isSelected = true
-        currentView = locationVC?.view
-        restaurantView.bottomContentsView.addSubview(currentView!)
+        currentView = reviewVC?.view
+        
+        guard let currentView = currentView else { return }
+        
+        restaurantView.bottomContentView.addSubview(currentView)
+        
+        currentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
@@ -105,7 +121,42 @@ extension RestaurantViewController {
         guard let view = tempView else { return }
         
         currentView?.removeFromSuperview()
-        restaurantView.bottomContentsView.addSubview(view)
+        restaurantView.bottomContentView.addSubview(view)
         currentView = view
+        
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
+
+extension RestaurantViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let currentView = self.currentView,
+              let reviewVC = self.reviewVC,
+              let menuVC = self.menuVC
+        else { return }
+        
+        let yPosition = scrollView.contentOffset.y
+        let topContentViewHeight: CGFloat = restaurantView.topContentView.frame.height
+        
+        print("+++++ RestaurantViewController - scrollViewDidScroll - topContentViewHeight: \(topContentViewHeight)")
+        if topContentViewHeight == 0 { return }
+        
+        switch currentView {
+        case reviewVC.view:
+            if yPosition >= topContentViewHeight {
+                reviewVC.tableView.isScrollEnabled = true
+                restaurantView.scrollView.isScrollEnabled = false
+            }
+        case menuVC.view:
+//            if yPosition >= topContentViewHeight {
+//                menuVC.tableView.isScrollEnabled = true
+//                restaurantView.scrollView.isScrollEnabled = false
+//            }
+            return
+        default:
+            return
+        }
     }
 }

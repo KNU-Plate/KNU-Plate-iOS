@@ -12,8 +12,11 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    var parentVC: RestaurantViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("+++++ ExampleViewController viewDidLoad")
         
  
         tableView.delegate = self
@@ -34,24 +37,26 @@ class ExampleViewController: UIViewController {
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
         
-
+        tableView.isScrollEnabled = false
+//        tableView.bounces = false
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("+++++ ExampleViewController viewWillAppear")
         
         viewModel.fetchReviewList(of: 3)
-        
     }
-    
-       
+
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
         viewModel.fetchReviewList(of: 3)
-
-
+    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        parentVC = parent as? RestaurantViewController
     }
 }
 
@@ -60,6 +65,7 @@ class ExampleViewController: UIViewController {
 extension ExampleViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
+        print("+++++ ExampleViewController didFetchReviewListResults")
         
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -81,6 +87,14 @@ extension ExampleViewController: ReviewListViewModelDelegate {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 330
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -186,6 +200,11 @@ extension ExampleViewController: UIScrollViewDelegate {
                 
                 tableView.tableFooterView = nil
             } else { return }
+        }
+        
+        if position <= 0 {
+            tableView.isScrollEnabled = false
+            parentVC?.restaurantView.scrollView.isScrollEnabled = true
         }
     }
 }
