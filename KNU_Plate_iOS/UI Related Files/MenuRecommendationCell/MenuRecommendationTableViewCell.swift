@@ -24,7 +24,10 @@ class MenuRecommendationTableViewCell: UITableViewCell {
         
         menuLabel.text = ""
         totalLikeLabel.text = ""
+        likeTitleLabel.text = ""
+        
         totalDislikeLabel.text = ""
+        dislikeTitleLabel.text = ""
     }
     
     func configure(with model: ExistingMenuModel) {

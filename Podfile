@@ -18,6 +18,6 @@ target 'KNU_Plate_iOS' do
   pod 'SPIndicator'
   pod 'SnackBar.swift'
   pod "GTProgressBar"
-
+  pod "ViewAnimator"
 
 end

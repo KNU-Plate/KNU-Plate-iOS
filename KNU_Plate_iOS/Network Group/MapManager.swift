@@ -11,7 +11,6 @@ class MapManager {
     //MARK: - API Request URLs
     let searchByKeywordRequestURL = "https://dapi.kakao.com/v2/local/search/keyword.json?"
     
-    
     private init() {}
     
     //MARK: - 키워드로 장소 검색

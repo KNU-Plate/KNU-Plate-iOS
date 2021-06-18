@@ -240,7 +240,6 @@ class UserManager {
     func unregisterUser(completion: @escaping ((Bool) -> Void)) {
         
         let headers: HTTPHeaders = [
-            .authorization("application/json"),
             .contentType("application/x-www-form-urlencoded"),
             .authorization(User.shared.accessToken)
         ]

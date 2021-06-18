@@ -23,7 +23,7 @@ class RestaurantManager {
     
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurantModel,
-                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)){
+                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             

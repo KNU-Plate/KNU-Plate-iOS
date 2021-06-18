@@ -100,7 +100,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             reviewCell.configure(with: reviewLists[indexPath.row])
             
-   
+
             let reviewImageURL = reviewCell.getReviewImageDownloadURL()
             let profileImageURL = reviewCell.getProfileImageDownloadURL()
             

@@ -14,6 +14,7 @@ PODS:
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
   - Then (2.7.0)
+  - ViewAnimator (3.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - SwiftKeychainWrapper
   - SwiftyJSON (~> 4.0)
   - Then
+  - ViewAnimator
 
 SPEC REPOS:
   trunk:
@@ -43,6 +45,7 @@ SPEC REPOS:
     - SwiftKeychainWrapper
     - SwiftyJSON
     - Then
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
@@ -57,7 +60,8 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
+  ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: a4c8d86dd4c07a35e7b89fd800d57d7f931b9097
+PODFILE CHECKSUM: 19510b2595bbe87baeeb74234cca048386caa457
 
 COCOAPODS: 1.10.1
