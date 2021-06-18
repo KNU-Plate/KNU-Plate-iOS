@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="orY-fZ-A5Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -514,8 +514,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Hk-u8-0mr" userLabel="Food Pic Label Stack View">
                                                 <rect key="frame" x="15" y="101" width="104" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
-                                                        <rect key="frame" x="0.0" y="1" width="21" height="18.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image icon" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
+                                                        <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                         <color key="tintColor" name="AppDefaultColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="9qO-J0-KeE"/>
@@ -539,7 +539,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-rV-uSJ" userLabel="Menu Label Stack View">
                                                 <rect key="frame" x="15" y="304" width="181" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu icon" translatesAutoresizingMaskIntoConstraints="NO" id="KeE-hZ-8K2">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="Z5f-n5-v0T"/>
@@ -665,7 +665,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flM-yg-k18" userLabel="Review Label Stack View">
                                                 <rect key="frame" x="15" y="516" width="99" height="21"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review (selected)" translatesAutoresizingMaskIntoConstraints="NO" id="l7L-ct-he1">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="write review icon" translatesAutoresizingMaskIntoConstraints="NO" id="l7L-ct-he1">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="4gC-bY-qed"/>
@@ -1130,13 +1130,13 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7JS-KD-iKI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="AppDefaultColor"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" name="AppDefaultColor"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1208,6 +1208,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aph-bM-sZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="591" y="3199"/>
+        </scene>
+        <!--Report Review View Controller-->
+        <scene sceneID="7CV-Zo-KOf">
+            <objects>
+                <viewController storyboardIdentifier="ReportReviewViewController" title="Report Review View Controller" hidesBottomBarWhenPushed="YES" id="sgF-R3-5K1" customClass="ReportReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0u5-Dj-QPs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elg-mH-1lz">
+                                <rect key="frame" x="15" y="83" width="345" height="57.5"/>
+                                <string key="text">(i) 해당 매장과 관련 없는 사진 또는 글이 포함되어 있나요?
+(ii) 게시글에 부적절한 언어가 포함되어 있나요?</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발팀에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggT-KU-m9w">
+                                <rect key="frame" x="15" y="20" width="206" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v6E-95-KVW" userLabel="Report Content Text View">
+                                <rect key="frame" x="15" y="175.5" width="345" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="qg8-tr-c3u"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HS6-Ld-USE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ggT-KU-m9w" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="EiQ-4V-30p"/>
+                            <constraint firstItem="v6E-95-KVW" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="FSZ-gw-xM6"/>
+                            <constraint firstAttribute="trailing" secondItem="elg-mH-1lz" secondAttribute="trailing" constant="15" id="MsB-gh-ydh"/>
+                            <constraint firstItem="elg-mH-1lz" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="bZp-WG-1sD"/>
+                            <constraint firstItem="v6E-95-KVW" firstAttribute="top" secondItem="elg-mH-1lz" secondAttribute="bottom" constant="35" id="fXn-dX-BVv"/>
+                            <constraint firstItem="elg-mH-1lz" firstAttribute="top" secondItem="ggT-KU-m9w" secondAttribute="bottom" constant="40" id="jgC-Pa-Gwu"/>
+                            <constraint firstItem="ggT-KU-m9w" firstAttribute="top" secondItem="HS6-Ld-USE" secondAttribute="top" constant="20" id="oaU-yJ-gOY"/>
+                            <constraint firstItem="HS6-Ld-USE" firstAttribute="trailing" secondItem="v6E-95-KVW" secondAttribute="trailing" constant="15" id="vmC-Ug-7wy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="건의사항" id="yW2-1v-f3h">
+                        <barButtonItem key="rightBarButtonItem" title="보내기" id="CuE-R4-zk0">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentTextView" destination="v6E-95-KVW" id="irr-Tw-R1Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Evb-Hg-WX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2788" y="3510"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="FY1-Qz-PcD">
@@ -1595,15 +1654,15 @@
         <image name="default profile image" width="73" height="73"/>
         <image name="delete button" width="79" height="79"/>
         <image name="first medal" width="41" height="41"/>
+        <image name="image icon" width="100" height="100"/>
         <image name="line divider (gray)" width="374" height="1"/>
-        <image name="menu (selected)" width="41.5" height="41.5"/>
-        <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="menu icon" width="100" height="100"/>
         <image name="pick profile pic(black)" width="199" height="199"/>
-        <image name="review (selected)" width="41.5" height="41.5"/>
         <image name="star rating (filled)" width="123" height="123"/>
         <image name="star rating (unfilled)" width="123" height="123"/>
         <image name="thumbs down(selected,edited)" width="140" height="140"/>
         <image name="thumbs up(selected,edited)" width="140" height="140"/>
+        <image name="write review icon" width="100" height="100"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

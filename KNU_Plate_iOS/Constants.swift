@@ -27,6 +27,7 @@ struct Constants {
         static let settingsViewController = "SettingsViewController"
         static let termsAndConditionsViewController = "TermsAndConditionViewController"
         static let menuRecommendationViewController = "MenuRecommendationViewController"
+        static let reportReviewViewController = "ReportReviewViewController"
     }
     
     struct Layer {

@@ -14,8 +14,7 @@ class SendDeveloperMessageViewController: UIViewController {
     
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
         
-        
-        
+    
     }
     
     

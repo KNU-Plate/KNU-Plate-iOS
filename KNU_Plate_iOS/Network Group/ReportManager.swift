@@ -17,59 +17,70 @@ class ReportManager {
     
     private init() {}
     
-    //MARK: - 유조 신고하기
-    func reportReview(with id: String,
-                    completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    //MARK: - 유저 신고하기
+    func reportReview(reviewID: Int,
+                      reason: String,
+                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
         
-        AF.request(reportURL,
-                   method: .post,
-                   headers: headers,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 200:
-                    completion(.success(true))
-                
-                default:
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    print("ReportManager - reportReview() error \(error.errorDescription) and statusCode: \(statusCode)")
-                    completion(.failure(error))
-                }
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append("\(reviewID)".data(using: .utf8)!,
+                                     withName: "review_id")
+            multipartFormData.append("\(reason)".data(using: .utf8)!,
+                                     withName: "reason")
+            
+        }, to: reportURL,
+        headers: headers,
+        interceptor: interceptor)
+        .validate()
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            
+            case 200:
+                completion(.success(true))
+            
+            default:
+                let error = NetworkError.returnError(statusCode: statusCode)
+                print("ReportManager - reportReview() error \(error.errorDescription) and statusCode: \(statusCode)")
+                completion(.failure(error))
             }
+        }
     }
 
-    
+    //MARK: - 건의사항 보내기
     func sendSuggestion(content: String,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
         
-        AF.request(suggestURL,
-                   method: .post,
-                   headers: headers,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 200:
-                    completion(.success(true))
-                    
-                default:
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    print("ReportManager - sendSuggestion() error \(error.errorDescription) and statusCode: \(statusCode)")
-                    completion(.failure(error))
-                }
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append("\(content)".data(using: .utf8)!,
+                                     withName: "contents")
+      
+        }, to: suggestURL,
+        headers: headers,
+        interceptor: interceptor)
+        .validate()
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            
+            case 200:
+                completion(.success(true))
+            
+            default:
+                let error = NetworkError.returnError(statusCode: statusCode)
+                print("ReportManager - sendSuggestion() error \(error.errorDescription) and statusCode: \(statusCode)")
+                completion(.failure(error))
             }
+        }
     }
 }

@@ -1,6 +1,7 @@
 import UIKit
 import SDWebImage
 import Alamofire
+import SnackBar_swift
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
@@ -58,6 +59,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     func initialize() {
         
+//        viewModel.delegate = self
+        
         initializeCellUIComponents()
         configureUI()
         configureShowMoreButton()
@@ -107,19 +110,16 @@ class ReviewTableViewCell: UITableViewCell {
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
-        let reportUser = UIAlertAction(title: "사용자 신고하기",
-                                       style: .default) { alert in
+        let reportReview = UIAlertAction(title: "사용자 신고하기",
+                                         style: .default) { alert in
             
-            let userIDToReport = self.viewModel.userID
-        
-            
-            // 신고하기 action 을 여기서 취해야함
-            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
+            self.viewModel.reportReview()
         }
+        
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
-        actionSheet.addAction(reportUser)
+        actionSheet.addAction(reportReview)
         actionSheet.addAction(cancelAction)
         
         let vc = self.window?.rootViewController
@@ -165,3 +165,16 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
 }
+
+//MARK: - ReviewTableViewModelDelegate
+
+//extension ReviewTableViewCell: ReviewTableViewModelDelegate {
+//    
+//    func didReportReview() {
+//        <#code#>
+//    }
+//    
+//    func failedReportingReview() {
+//        <#code#>
+//    }
+//}

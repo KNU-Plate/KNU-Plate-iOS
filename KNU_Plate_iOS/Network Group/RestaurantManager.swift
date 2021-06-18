@@ -49,6 +49,7 @@ class RestaurantManager {
         }, to: uploadNewRestaurantRequestURL,
         headers: model.headers,
         interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -79,6 +80,7 @@ class RestaurantManager {
                    encoding: URLEncoding(arrayEncoding: .noBrackets),
                    headers: model.headers,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { (response) in
                 
                 guard let statusCode = response.response?.statusCode else {
@@ -138,6 +140,7 @@ class RestaurantManager {
         }, to: uploadNewReviewRequestURL,
         headers: model.headers,
         interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -197,7 +200,7 @@ class RestaurantManager {
     //MARK: - 특정 매장 리뷰 목록 불러오기
     
     func fetchReviewList(with model: FetchReviewListModel,
-                         completion: @escaping ((Result<[ReviewListResponseModel],Error>) -> Void)) {
+                         completion: @escaping ((Result<[ReviewListResponseModel], NetworkError>) -> Void)) {
         
         AF.request(fetchReviewListRequestURL,
                    method: .get,
@@ -205,6 +208,7 @@ class RestaurantManager {
                    encoding: URLEncoding.queryString,
                    headers: model.headers,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -219,14 +223,9 @@ class RestaurantManager {
                         print("Restaurant Manager - fetchReviewList ERROR: \(error)")
                     }
                 default:
-                    if let responseJSON = try! response.result.get() as? [String : String] {
-                        
-                        if let error = responseJSON["error"] {
-                            
-                            print("RESTAURANT MANAGER - DEFAULT ACTIVATED ERROR MESSAGE: \(error) with statusCode: \(statusCode)")
-                        }
-                        
-                    }
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("RestaurantManager - fetchReviewList() error : \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
                 }
             }
     }
@@ -244,6 +243,7 @@ class RestaurantManager {
                    method: httpMethod,
                    headers: headers,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
