@@ -40,7 +40,7 @@ class ExampleViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchReviewList(of: 3)
+        viewModel.fetchReviewList(of: 2)
         
     }
     
@@ -49,7 +49,7 @@ class ExampleViewController: UIViewController {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 3)
+        viewModel.fetchReviewList(of: 2)
 
 
     }
@@ -98,6 +98,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
+            reviewCell.delegate = self
             reviewCell.configure(with: reviewLists[indexPath.row])
             
 
@@ -126,6 +127,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
             
+            reviewCellWithoutReviewImages.delegate = self
             reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
             reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
                                                                            placeholderImage: UIImage(named: "default profile image"),
@@ -152,7 +154,23 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.configure(with: reviewDetails)
     }
+}
+
+//MARK: - ReviewTableViewCellDelegate
+
+extension ExampleViewController: ReviewTableViewCellDelegate {
     
+    func goToReportReviewVC(reviewID: Int) {
+
+        let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
+            fatalError()
+        }
+        
+        vc.reviewID = reviewID
+    
+        self.present(vc, animated: true)
+    }
 }
 
 //MARK: - UIScrollViewDelegate
@@ -182,7 +200,7 @@ extension ExampleViewController: UIScrollViewDelegate {
                 tableView.tableFooterView = createSpinnerFooter()
                 
                 let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
                 
                 tableView.tableFooterView = nil
             } else { return }

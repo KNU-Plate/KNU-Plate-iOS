@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1225,8 +1225,8 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발팀에게 건의사항 보내기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggT-KU-m9w">
-                                <rect key="frame" x="15" y="20" width="206" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해당 게시글을 신고하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggT-KU-m9w">
+                                <rect key="frame" x="15" y="20" width="249" height="23"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1241,6 +1241,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pF3-Py-K2a">
+                                <rect key="frame" x="137.5" y="490.5" width="100" height="40"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="600-rl-TYW"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ve1-yc-0ZF"/>
+                                </constraints>
+                                <state key="normal" title="신고 접수">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSendButton:" destination="sgF-R3-5K1" eventType="touchUpInside" id="5vb-dw-kQU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HS6-Ld-USE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1248,20 +1262,21 @@
                             <constraint firstItem="ggT-KU-m9w" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="EiQ-4V-30p"/>
                             <constraint firstItem="v6E-95-KVW" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="FSZ-gw-xM6"/>
                             <constraint firstAttribute="trailing" secondItem="elg-mH-1lz" secondAttribute="trailing" constant="15" id="MsB-gh-ydh"/>
+                            <constraint firstItem="pF3-Py-K2a" firstAttribute="centerX" secondItem="0u5-Dj-QPs" secondAttribute="centerX" id="QIC-uH-ebJ"/>
                             <constraint firstItem="elg-mH-1lz" firstAttribute="leading" secondItem="HS6-Ld-USE" secondAttribute="leading" constant="15" id="bZp-WG-1sD"/>
                             <constraint firstItem="v6E-95-KVW" firstAttribute="top" secondItem="elg-mH-1lz" secondAttribute="bottom" constant="35" id="fXn-dX-BVv"/>
                             <constraint firstItem="elg-mH-1lz" firstAttribute="top" secondItem="ggT-KU-m9w" secondAttribute="bottom" constant="40" id="jgC-Pa-Gwu"/>
+                            <constraint firstItem="pF3-Py-K2a" firstAttribute="top" secondItem="v6E-95-KVW" secondAttribute="bottom" constant="15" id="jiQ-Td-iv4"/>
                             <constraint firstItem="ggT-KU-m9w" firstAttribute="top" secondItem="HS6-Ld-USE" secondAttribute="top" constant="20" id="oaU-yJ-gOY"/>
                             <constraint firstItem="HS6-Ld-USE" firstAttribute="trailing" secondItem="v6E-95-KVW" secondAttribute="trailing" constant="15" id="vmC-Ug-7wy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="건의사항" id="yW2-1v-f3h">
-                        <barButtonItem key="rightBarButtonItem" title="보내기" id="CuE-R4-zk0">
-                            <color key="tintColor" name="AppDefaultColor"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="건의사항" id="yW2-1v-f3h"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentTextView" destination="v6E-95-KVW" id="irr-Tw-R1Y"/>
+                        <outlet property="sendButton" destination="pF3-Py-K2a" id="nz3-cc-YBR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Evb-Hg-WX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

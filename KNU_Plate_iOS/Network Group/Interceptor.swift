@@ -114,7 +114,7 @@ extension Interceptor {
                             completion(.failure(.internalError))
                         }
                     default:
-                        print("Interceptor - refreshToken() failed default")
+                        print("Interceptor - refreshToken() failed default with statusCode: \(statusCode)")
                         completion(.failure(.unauthorized))
                     }
                    }

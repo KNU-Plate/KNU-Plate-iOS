@@ -3,6 +3,11 @@ import SDWebImage
 import Alamofire
 import SnackBar_swift
 
+protocol ReviewTableViewCellDelegate {
+    
+    func goToReportReviewVC(reviewID: Int)
+}
+
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
 class ReviewTableViewCell: UITableViewCell {
@@ -20,6 +25,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     private var viewModel = ReviewTableViewModel()
 
+    var delegate: ReviewTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -58,8 +65,6 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     func initialize() {
-        
-//        viewModel.delegate = self
         
         initializeCellUIComponents()
         configureUI()
@@ -113,7 +118,7 @@ class ReviewTableViewCell: UITableViewCell {
         let reportReview = UIAlertAction(title: "사용자 신고하기",
                                          style: .default) { alert in
             
-            self.viewModel.reportReview()
+            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID)
         }
         
         let cancelAction = UIAlertAction(title: "취소",
@@ -166,15 +171,3 @@ class ReviewTableViewCell: UITableViewCell {
     
 }
 
-//MARK: - ReviewTableViewModelDelegate
-
-//extension ReviewTableViewCell: ReviewTableViewModelDelegate {
-//    
-//    func didReportReview() {
-//        <#code#>
-//    }
-//    
-//    func failedReportingReview() {
-//        <#code#>
-//    }
-//}

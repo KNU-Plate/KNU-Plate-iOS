@@ -2,15 +2,7 @@ import Foundation
 
 //MARK: - ReviewTableViewCell 을 위한 ViewModel
 
-protocol ReviewTableViewModelDelegate {
-    
-    func didReportReview()
-    func failedReportingReview(with error: NetworkError)
-}
-
 class ReviewTableViewModel {
-    
-    var delegate: ReviewTableViewModelDelegate?
     
     var reviewID: Int = 0
     
@@ -48,23 +40,7 @@ class ReviewTableViewModel {
         }
     }
     
-    func reportReview() {
-        
-        ReportManager.shared.reportReview(reviewID: reviewID,
-                                          reason: ""){ result in
-            
-            switch result {
-            
-            case .success(_):
-                
-                self.delegate?.didReportReview()
-                
-            case .failure(let error):
-                self.delegate?.failedReportingReview(with: error)
-            }
-        }
-        
-    }
+
 
     
 

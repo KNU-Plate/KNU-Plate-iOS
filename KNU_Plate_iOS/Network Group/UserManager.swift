@@ -86,7 +86,7 @@ class UserManager {
     
     //MARK: - 로그인
     
-    //TODO: - multipartFormData 로 되어있던데 확인해보기 
+    //TODO: - multipartFormData 로 되어있던데 확인해보기
     func logIn(with model: LoginInfoModel) {
         
         AF.request(logInRequestURL,
@@ -305,6 +305,7 @@ class UserManager {
         AF.request(loadUserProfileInfoURL,
                    method: .get,
                    interceptor: interceptor)
+            .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
@@ -347,6 +348,7 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -380,6 +382,7 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -417,6 +420,7 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
@@ -447,7 +451,7 @@ class UserManager {
         method: .patch,
         headers: model.headers,
         interceptor: interceptor)
-
+        .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }

@@ -1,8 +1,12 @@
 import UIKit
+import SnackBar_swift
 
 class ReportReviewViewController: UIViewController {
     
     @IBOutlet var contentTextView: UITextView!
+    @IBOutlet var sendButton: UIButton!
+    
+    var reviewID: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -11,11 +15,49 @@ class ReportReviewViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedSendButton(_ sender: UIButton) {
+        
+        self.view.endEditing(true)
+        
+        if !validateUserInput() { return }
+        
+        showProgressBar()
+        
+        ReportManager.shared.reportReview(reviewID: reviewID,
+                                          reason: contentTextView.text!) { result in
+            
+            dismissProgressBar()
+            
+            switch result {
+            
+            case .success(_):
+                SnackBar.make(in: self.view,
+                              message: "신고해주셔서 감사합니다. 검토 후 처리할게요! 😁",
+                              duration: .lengthLong).show()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    
+                    self.dismiss(animated: true)
+                }
+                
+            case .failure(let error):
+                SnackBar.make(in: self.view,
+                              message: error.errorDescription,
+                              duration: .lengthLong).show()
+            }
+        }
+        
+    }
+}
 
+//MARK: - Initialization
 
+extension ReportReviewViewController {
+    
     func initialize() {
         
         initializeTextView()
+        initializeButton()
     }
     
     func initializeTextView() {
@@ -29,7 +71,28 @@ class ReportReviewViewController: UIViewController {
         contentTextView.text = "신고 내용을 적어주세요 🤔"
         contentTextView.textColor = UIColor.lightGray
     }
+    
+    func initializeButton() {
+        sendButton.layer.cornerRadius = 10
+    }
+}
 
+//MARK: - Input Validation
+
+extension ReportReviewViewController {
+    
+    func validateUserInput() -> Bool {
+        
+        guard let content = contentTextView.text else { return false }
+        
+        if content.count >= 3 { return true }
+        else {
+            SnackBar.make(in: self.view,
+                          message: "신고 내용을 3글자 이상 적어주세요 👀",
+                          duration: .lengthLong).show()
+            return false
+        }
+    }
 }
 
 //MARK: - UITextViewDelegate

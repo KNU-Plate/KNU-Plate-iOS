@@ -17,7 +17,7 @@ class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         initialize()
         loadUserProfileInfo()
     }
@@ -93,9 +93,9 @@ extension MyPageViewController {
                         self.profileImageButton.setImage(profileImage, for: .normal)
                     }
                 }
-            case .failure(_):
-                //수정 필요 
-                self.loadUserProfileInfo()
+            case .failure(let error):
+                print("\(error.errorDescription)")
+                //self.loadUserProfileInfo()
                 SnackBar.make(in: self.view,
                               message: "프로필 정보 불러오기에 실패하였습니다 🥲",
                               duration: .lengthLong).setAction(with: "재시도", action: {
