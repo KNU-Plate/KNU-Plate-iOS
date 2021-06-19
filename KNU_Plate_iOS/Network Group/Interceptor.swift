@@ -59,12 +59,15 @@ final class Interceptor: RequestInterceptor {
                         completion(.doNotRetry)
                     }
                 case .failure(let error):
-    
+                    
                     if error == .unauthorized {
+                        
+                        print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
                         // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
                         
                         
                     } else {
+                        print("Interceptor - 이건 뭔 에러지?")
                         completion(.doNotRetry)
                     }
                     

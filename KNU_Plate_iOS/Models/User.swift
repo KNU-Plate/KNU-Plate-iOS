@@ -5,6 +5,8 @@ class User {
     
     static var shared: User = User()
     
+    private init() {}
+    
     /// user unique ID
     var id: String = ""
     
@@ -14,7 +16,7 @@ class User {
     
     var savedPassword: Bool = false
     
-    /// nickname
+    /// 닉네임
     var displayName: String = ""
     
     /// user email address (...@knu.ac.kr)
@@ -37,7 +39,6 @@ class User {
             }
             return accessToken
         }
-    
     }
     
     var refreshToken: String {
@@ -71,13 +72,6 @@ class User {
         self.savedRefreshToken = false
         self.profileImage = nil
         self.profileImageLink = ""
-    
-        
-        
-        
     }
-    
-    
-    private init() {}
     
 }

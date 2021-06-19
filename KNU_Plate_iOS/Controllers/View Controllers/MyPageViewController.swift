@@ -10,7 +10,6 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userNickname: UILabel!
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var logOutButton: UIButton!
     @IBOutlet var infoButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
@@ -73,13 +72,7 @@ class MyPageViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
-    func popToWelcomeViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    }
+
     
     
 }
@@ -145,38 +138,7 @@ extension MyPageViewController {
             }
         }
     }
-    
-    @IBAction func pressedLogOutButton(_ sender: UIButton) {
-        
-        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?",
-                                          message: "") { selectedOk in
-            
-            if selectedOk {
-                
-                UserManager.shared.logOut { result in
-                    
-                    switch result {
-                    
-                    case .success(_):
-                        
-                        DispatchQueue.main.async {
-                            self.popToWelcomeViewController()
-                        }
-                        
-                    case .failure(let error):
-                        SnackBar.make(in: self.view,
-                                      message: error.errorDescription,
-                                      duration: .lengthLong).setAction(with: "재시도", action: {
-                                        DispatchQueue.main.async {
-                                            self.pressedLogOutButton(self.logOutButton)
-                                        }
-                                      }).show()
-                    }
-                }
-            }
-        }
-    }
-    
+
     func updateProfileImage(with image: UIImage) {
         
         let imageData = image.jpegData(compressionQuality: 1.0)!

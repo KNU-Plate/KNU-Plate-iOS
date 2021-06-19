@@ -1351,6 +1351,9 @@
                                 <state key="normal" title="로그아웃">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedLogOutButton:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="Ejo-Ad-A3H"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFs-FW-wte">
                                 <rect key="frame" x="15" y="221" width="64" height="33"/>
@@ -1358,6 +1361,9 @@
                                 <state key="normal" title="회원 탈퇴">
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressedUnregisterButton:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="Bnk-aG-yjQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VqW-eu-juY"/>
@@ -1386,6 +1392,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="pim-lv-5O5"/>
                     <connections>
+                        <outlet property="logOutButton" destination="6Zd-WO-jrJ" id="WAM-Vx-TBd"/>
+                        <outlet property="unregisterButton" destination="mFs-FW-wte" id="8mB-86-NgX"/>
                         <outlet property="userNicknameLabel" destination="Kpa-No-yCt" id="Tm7-oY-E8f"/>
                     </connections>
                 </viewController>
@@ -1613,16 +1621,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McK-Wh-99g">
-                                <rect key="frame" x="15" y="415" width="59" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="로그아웃">
-                                    <color key="titleColor" name="AppDefaultColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedLogOutButton:" destination="pZm-rV-DhB" eventType="touchUpInside" id="AKE-SZ-k4t"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-Fy-VqP">
                                 <rect key="frame" x="160" y="133" width="20" height="20"/>
                                 <constraints>
@@ -1640,9 +1638,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TXK-Fy-VqP" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="14" id="4Y8-k2-wfM"/>
-                            <constraint firstItem="McK-Wh-99g" firstAttribute="top" secondItem="QVo-TS-4Ii" secondAttribute="bottom" constant="5" id="8G1-bc-bOf"/>
                             <constraint firstItem="QVo-TS-4Ii" firstAttribute="top" secondItem="05S-3l-tUd" secondAttribute="bottom" id="AGN-d0-nHj"/>
-                            <constraint firstItem="McK-Wh-99g" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="DAm-wS-Ecp"/>
                             <constraint firstItem="dpC-T1-xTk" firstAttribute="leading" secondItem="QYK-HP-QV1" secondAttribute="trailing" constant="15" id="E4s-de-PV8"/>
                             <constraint firstItem="05S-3l-tUd" firstAttribute="centerX" secondItem="brH-jB-qJ9" secondAttribute="centerX" id="JnK-RK-rTb"/>
                             <constraint firstItem="05S-3l-tUd" firstAttribute="top" secondItem="QYK-HP-QV1" secondAttribute="bottom" constant="25" id="MRD-YN-N9h"/>
@@ -1659,7 +1655,6 @@
                     <navigationItem key="navigationItem" title="마이페이지" id="VlU-aN-b5g"/>
                     <connections>
                         <outlet property="infoButton" destination="TXK-Fy-VqP" id="5WJ-Tb-QKe"/>
-                        <outlet property="logOutButton" destination="McK-Wh-99g" id="PMb-rQ-sPd"/>
                         <outlet property="profileImageButton" destination="QYK-HP-QV1" id="Qqw-RV-3iH"/>
                         <outlet property="tableView" destination="QVo-TS-4Ii" id="HhQ-pd-qwh"/>
                         <outlet property="userMedal" destination="dpC-T1-xTk" id="w37-34-mcl"/>

@@ -80,14 +80,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    func popToWelcomeViewController() {
-        
-        UserManager.shared.resetAllUserInfo()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    }
+
     
     func initialize() {
         
