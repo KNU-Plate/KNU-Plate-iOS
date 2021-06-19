@@ -68,11 +68,22 @@ class ReviewDetailViewController: UIViewController {
         
         // 리뷰 이미지가 없으면
         if !reviewImageExists {
-            reviewImageView.image = UIImage(systemName: "photo")
-            //reviewImageView.image = UIImage(named: "default review image")!
+            reviewImageView.image = UIImage(named: "default review image")
             return
         }
-
+        
+        // 리뷰 이미지가 1개 밖에 없을 때
+        if reviewImageFiles.count == 1 {
+            pageControl.isHidden = true
+            reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            reviewImageView.sd_setImage(with: URL(string: reviewImageFiles[0].path),
+                                        placeholderImage: nil,
+                                        options: .continueInBackground,
+                                        completed: nil)
+            return
+        }
+        
+        // 리뷰 이미지가 2개 이상일 때
         reviewImageView.isUserInteractionEnabled = true
         
         pageControl.numberOfPages = reviewImageFiles.count

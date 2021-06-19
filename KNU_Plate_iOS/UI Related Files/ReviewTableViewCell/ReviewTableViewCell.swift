@@ -101,7 +101,6 @@ class ReviewTableViewCell: UITableViewCell {
         } else {
             multipleImageView.image = nil
         }
-        
     }
 
     func configureShowMoreButton() {
