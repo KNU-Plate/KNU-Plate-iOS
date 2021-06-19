@@ -115,7 +115,7 @@ class ReviewTableViewCell: UITableViewCell {
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
-        let reportReview = UIAlertAction(title: "사용자 신고하기",
+        let reportReview = UIAlertAction(title: "게시글 신고하기",
                                          style: .default) { alert in
             
             self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID)

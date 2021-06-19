@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.4.2)
   - BSImagePicker (3.3.1)
+  - EasyTipView (2.1.0)
   - GTProgressBar (0.3.3)
   - IQKeyboardManagerSwift (6.5.6)
   - ProgressHUD (13.6)
@@ -19,6 +20,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - BSImagePicker (~> 3.1)
+  - EasyTipView (~> 2.1)
   - GTProgressBar
   - IQKeyboardManagerSwift
   - ProgressHUD
@@ -35,6 +37,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - BSImagePicker
+    - EasyTipView
     - GTProgressBar
     - IQKeyboardManagerSwift
     - ProgressHUD
@@ -50,6 +53,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
@@ -62,6 +66,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 19510b2595bbe87baeeb74234cca048386caa457
+PODFILE CHECKSUM: a48dcb086c0ba8f1287b130aa0528c0bf82614c1
 
 COCOAPODS: 1.10.1
