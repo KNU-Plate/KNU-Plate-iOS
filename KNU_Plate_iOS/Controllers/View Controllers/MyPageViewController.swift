@@ -35,7 +35,7 @@ class MyPageViewController: UIViewController {
         infoButton.isUserInteractionEnabled = false
         initializeTipViewPreferences()
         
-        let tipView = EasyTipView(text: "",
+        let tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성 은메달: 리뷰 10개 이상 작성 동메달: 리뷰 0회 이상",
                               preferences: preferences,
                               delegate: self)
         tipView.show(forView: self.infoButton,
@@ -290,8 +290,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyPageViewController: EasyTipViewDelegate {
     
     func easyTipViewDidTap(_ tipView: EasyTipView) {
-      
-        
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
@@ -350,7 +348,7 @@ extension MyPageViewController {
     func initializeTipViewPreferences() {
         
 
-        preferences.drawing.font = UIFont.boldSystemFont(ofSize: 20)
+        preferences.drawing.font = UIFont.boldSystemFont(ofSize: 15)
         preferences.drawing.foregroundColor = .white
         preferences.drawing.backgroundColor = .lightGray
         preferences.drawing.arrowPosition = .top
