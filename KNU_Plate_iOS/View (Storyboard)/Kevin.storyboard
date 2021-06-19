@@ -1182,28 +1182,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAp-Rd-EWJ">
-                                <rect key="frame" x="137.5" y="586" width="100" height="40"/>
-                                <color key="backgroundColor" name="AppDefaultColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Ymu-LV-lEe"/>
-                                    <constraint firstAttribute="width" constant="100" id="fX0-fg-UTb"/>
-                                </constraints>
-                                <state key="normal" title="건의하기">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressedSendButton:" destination="X6o-QE-28v" eventType="touchUpInside" id="n4O-Sz-7LU"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jex-w7-TPm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="DAp-Rd-EWJ" firstAttribute="centerX" secondItem="Jwx-Fu-klh" secondAttribute="centerX" id="EDi-X0-poA"/>
                             <constraint firstAttribute="trailing" secondItem="gqB-R8-HRp" secondAttribute="trailing" constant="15" id="HnC-8x-aBv"/>
                             <constraint firstItem="ILg-xr-vks" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="LTK-IM-7Nm"/>
-                            <constraint firstItem="DAp-Rd-EWJ" firstAttribute="top" secondItem="ILg-xr-vks" secondAttribute="bottom" constant="15" id="Lcq-3X-BjZ"/>
                             <constraint firstItem="eTN-7f-w79" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="WDI-mK-WQN"/>
                             <constraint firstItem="eTN-7f-w79" firstAttribute="top" secondItem="Jex-w7-TPm" secondAttribute="top" constant="20" id="Ya8-SZ-rTg"/>
                             <constraint firstItem="gqB-R8-HRp" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="cYj-28-msQ"/>
@@ -1215,11 +1199,13 @@
                     <navigationItem key="navigationItem" title="건의사항" id="CCs-4L-dxq">
                         <barButtonItem key="rightBarButtonItem" title="보내기" id="DC2-vX-Wau">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedSendButton:" destination="X6o-QE-28v" id="WCQ-oh-lfs"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="messageTextView" destination="ILg-xr-vks" id="Bzj-Qz-78V"/>
-                        <outlet property="sendButton" destination="DAp-Rd-EWJ" id="N18-Bf-ekR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aph-bM-sZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1621,10 +1607,23 @@
                                     <action selector="pressedLogOutButton:" destination="pZm-rV-DhB" eventType="touchUpInside" id="AKE-SZ-k4t"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-Fy-VqP">
+                                <rect key="frame" x="160" y="133" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="C44-Ek-T1u"/>
+                                    <constraint firstAttribute="width" constant="20" id="aII-6J-XEa"/>
+                                </constraints>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="info.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="pressedInfoButtonWithSender:" destination="pZm-rV-DhB" eventType="touchUpInside" id="3Z0-kP-bpg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7BU-FE-vVV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="TXK-Fy-VqP" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="14" id="4Y8-k2-wfM"/>
                             <constraint firstItem="McK-Wh-99g" firstAttribute="top" secondItem="QVo-TS-4Ii" secondAttribute="bottom" constant="5" id="8G1-bc-bOf"/>
                             <constraint firstItem="QVo-TS-4Ii" firstAttribute="top" secondItem="05S-3l-tUd" secondAttribute="bottom" id="AGN-d0-nHj"/>
                             <constraint firstItem="McK-Wh-99g" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="DAm-wS-Ecp"/>
@@ -1636,12 +1635,14 @@
                             <constraint firstItem="dpC-T1-xTk" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="10" id="TFX-8g-vu2"/>
                             <constraint firstItem="QYK-HP-QV1" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="40" id="b5T-U9-hko"/>
                             <constraint firstItem="QVo-TS-4Ii" firstAttribute="leading" secondItem="brH-jB-qJ9" secondAttribute="leading" id="lKB-yd-Cf0"/>
+                            <constraint firstItem="TXK-Fy-VqP" firstAttribute="leading" secondItem="dpC-T1-xTk" secondAttribute="trailing" constant="25" id="oIQ-KL-MZg"/>
                             <constraint firstItem="7G2-8S-Y4J" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="55" id="oLG-pr-l7z"/>
                             <constraint firstItem="QYK-HP-QV1" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="pKm-zZ-ifd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="마이페이지" id="VlU-aN-b5g"/>
                     <connections>
+                        <outlet property="infoButton" destination="TXK-Fy-VqP" id="5WJ-Tb-QKe"/>
                         <outlet property="logOutButton" destination="McK-Wh-99g" id="PMb-rQ-sPd"/>
                         <outlet property="profileImageButton" destination="QYK-HP-QV1" id="Qqw-RV-3iH"/>
                         <outlet property="tableView" destination="QVo-TS-4Ii" id="HhQ-pd-qwh"/>
@@ -1687,6 +1688,7 @@
         <image name="delete button" width="79" height="79"/>
         <image name="first medal" width="41" height="41"/>
         <image name="image icon" width="100" height="100"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="line divider (gray)" width="374" height="1"/>
         <image name="menu icon" width="100" height="100"/>
         <image name="pick profile pic(black)" width="199" height="199"/>

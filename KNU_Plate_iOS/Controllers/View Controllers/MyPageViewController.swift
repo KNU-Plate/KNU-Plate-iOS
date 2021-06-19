@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import SnackBar_swift
 import SPIndicator
+import EasyTipView
 
 class MyPageViewController: UIViewController {
     
@@ -10,8 +11,10 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var logOutButton: UIButton!
+    @IBOutlet var infoButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
+    lazy var preferences = EasyTipView.Preferences()
     
     var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
     
@@ -25,6 +28,18 @@ class MyPageViewController: UIViewController {
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
         presentActionSheet()
+    }
+    
+    @IBAction func pressedInfoButton(sender: UIButton) {
+        
+        infoButton.isUserInteractionEnabled = false
+        initializeTipViewPreferences()
+        
+        let tipView = EasyTipView(text: "",
+                              preferences: preferences,
+                              delegate: self)
+        tipView.show(forView: self.infoButton,
+                     withinSuperview: self.view)
     }
 
     func presentActionSheet() {
@@ -59,13 +74,14 @@ class MyPageViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
     func popToWelcomeViewController() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
+    
+    
 }
 
 //MARK: - API Networking
@@ -269,8 +285,20 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func pushViewController(with vc: UIViewController) {
         navigationController?.pushViewController(vc, animated: true)
     }
-   
 }
+
+extension MyPageViewController: EasyTipViewDelegate {
+    
+    func easyTipViewDidTap(_ tipView: EasyTipView) {
+      
+        
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        infoButton.isUserInteractionEnabled = true
+    }
+}
+
 
 //MARK: - UI Configuration
 
@@ -319,6 +347,12 @@ extension MyPageViewController {
         imagePicker.allowsEditing = true
     }
     
-    
-    
+    func initializeTipViewPreferences() {
+        
+
+        preferences.drawing.font = UIFont.boldSystemFont(ofSize: 20)
+        preferences.drawing.foregroundColor = .white
+        preferences.drawing.backgroundColor = .lightGray
+        preferences.drawing.arrowPosition = .top
+    }
 }

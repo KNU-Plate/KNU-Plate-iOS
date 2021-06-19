@@ -6,7 +6,6 @@ import ProgressHUD
 class SendDeveloperMessageViewController: UIViewController {
     
     @IBOutlet weak var messageTextView: UITextView!
-    @IBOutlet var sendButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +14,7 @@ class SendDeveloperMessageViewController: UIViewController {
     }
  
     
-    @IBAction func pressedSendButton(_ sender: UIButton) {
+    @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
         
         self.view.endEditing(true)
         
@@ -43,6 +42,7 @@ class SendDeveloperMessageViewController: UIViewController {
                               duration: .lengthLong).show()
             }
         }
+        
     }
 }
 
@@ -53,7 +53,6 @@ extension SendDeveloperMessageViewController {
     func initialize() {
         
         initializeTextView()
-        initializeButton()
     }
     
     func initializeTextView() {
@@ -66,10 +65,6 @@ extension SendDeveloperMessageViewController {
         messageTextView.font = UIFont.systemFont(ofSize: 15)
         messageTextView.text = "개발팀에게 전하고 싶은 말을 자유롭게 작성해주세요 😁"
         messageTextView.textColor = UIColor.lightGray
-    }
-    
-    func initializeButton() {
-        sendButton.layer.cornerRadius = 10
     }
 }
 

@@ -197,6 +197,10 @@ class UserManager {
                 case 200:
                     completion(.success(true))
                     
+                case 400:
+                    // 중복
+                    completion(.success(false))
+                    
                 default:
                     
                     let error = NetworkError.returnError(statusCode: statusCode)
