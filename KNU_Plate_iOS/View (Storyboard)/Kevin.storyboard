@@ -1333,7 +1333,6 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangeNickname:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="Z91-rz-ZKU"/>
                                     <segue destination="jB2-cQ-hgz" kind="show" identifier="goChangeDisplayName" id="ooW-5Q-TLq"/>
                                 </connections>
                             </button>
@@ -1343,19 +1342,35 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedChangePassword:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="haR-OV-krr"/>
                                     <segue destination="B64-sq-Ydb" kind="show" id="C0M-Yi-nX0"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zd-WO-jrJ">
+                                <rect key="frame" x="15" y="168" width="59" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="로그아웃">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFs-FW-wte">
+                                <rect key="frame" x="15" y="221" width="64" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="회원 탈퇴">
+                                    <color key="titleColor" name="AppDefaultColor"/>
+                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VqW-eu-juY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Zd-WO-jrJ" firstAttribute="top" secondItem="FCg-az-mh6" secondAttribute="bottom" constant="30" id="0Uj-Al-nQ8"/>
+                            <constraint firstItem="mFs-FW-wte" firstAttribute="top" secondItem="6Zd-WO-jrJ" secondAttribute="bottom" constant="20" id="Ek8-Fi-Cnv"/>
                             <constraint firstItem="Kpa-No-yCt" firstAttribute="leading" secondItem="lES-S2-xIR" secondAttribute="trailing" constant="40" id="F3s-7K-ECn"/>
                             <constraint firstItem="VqW-eu-juY" firstAttribute="trailing" secondItem="eQT-u2-M3C" secondAttribute="trailing" constant="15" id="Gll-VL-Y7k"/>
                             <constraint firstItem="eQT-u2-M3C" firstAttribute="top" secondItem="VqW-eu-juY" secondAttribute="top" constant="20" id="OJ4-7B-hk2"/>
                             <constraint firstItem="NjZ-60-rG1" firstAttribute="top" secondItem="Kpa-No-yCt" secondAttribute="bottom" constant="28" id="UoA-uU-jjY"/>
                             <constraint firstItem="sAI-v8-5Pl" firstAttribute="top" secondItem="DJ2-hO-mGk" secondAttribute="bottom" constant="15" id="VgG-uK-n5G"/>
+                            <constraint firstItem="6Zd-WO-jrJ" firstAttribute="leading" secondItem="VqW-eu-juY" secondAttribute="leading" constant="15" id="WEk-nz-P86"/>
                             <constraint firstItem="DJ2-hO-mGk" firstAttribute="top" secondItem="eQT-u2-M3C" secondAttribute="bottom" constant="25" id="WUL-Qb-inZ"/>
                             <constraint firstItem="VqW-eu-juY" firstAttribute="trailing" secondItem="sAI-v8-5Pl" secondAttribute="trailing" constant="15" id="bCD-d9-4hu"/>
                             <constraint firstItem="NjZ-60-rG1" firstAttribute="leading" secondItem="FCg-az-mh6" secondAttribute="trailing" constant="25" id="eFP-Wf-VVD"/>
@@ -1366,6 +1381,7 @@
                             <constraint firstItem="VqW-eu-juY" firstAttribute="trailing" secondItem="DJ2-hO-mGk" secondAttribute="trailing" constant="15" id="tOU-2n-8Az"/>
                             <constraint firstItem="Kpa-No-yCt" firstAttribute="top" secondItem="eQT-u2-M3C" secondAttribute="bottom" constant="30" id="tnM-t2-8IQ"/>
                             <constraint firstItem="FCg-az-mh6" firstAttribute="leading" secondItem="VqW-eu-juY" secondAttribute="leading" constant="15" id="uvU-36-6gN"/>
+                            <constraint firstItem="mFs-FW-wte" firstAttribute="leading" secondItem="VqW-eu-juY" secondAttribute="leading" constant="15" id="vtY-3J-LOo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="pim-lv-5O5"/>

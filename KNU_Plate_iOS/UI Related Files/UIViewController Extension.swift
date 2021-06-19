@@ -36,6 +36,16 @@ extension UIViewController {
         self.present(alertController, animated: true)
     }
     
+    func popToWelcomeViewController() {
+        
+        UserManager.shared.resetAllUserInfo()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    }
+    
+    
     func showToast(message : String, font: UIFont = .systemFont(ofSize: 14.0)) {
 
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,

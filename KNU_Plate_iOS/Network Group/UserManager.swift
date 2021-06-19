@@ -240,34 +240,6 @@ class UserManager {
             }
     }
     
-    //MARK: - 회원 탈퇴
-    func unregisterUser(completion: @escaping ((Bool) -> Void)) {
-        
-        let headers: HTTPHeaders = [
-            .contentType("application/x-www-form-urlencoded"),
-            .authorization(User.shared.accessToken)
-        ]
-        
-        AF.request(unregisterRequestURL,
-                   method: .delete,
-                   encoding: URLEncoding.httpBody,
-                   headers: headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                
-                case 200:
-                    completion(true)
-                    
-                default:
-                    completion(false)
-                }
-            }
-    }
-    
     //MARK: - 토큰 갱신
     // Interceptor 부분에 이 함수 있는데 굳이 필요한지 고민해보기 지우는거 생각
     func refreshToken(completion: @escaping ((Bool) -> Void)) {

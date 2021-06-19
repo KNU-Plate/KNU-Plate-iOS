@@ -148,7 +148,8 @@ extension MyPageViewController {
     
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
         
-        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
+        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?",
+                                          message: "") { selectedOk in
             
             if selectedOk {
                 
