@@ -4,7 +4,6 @@ import Alamofire
 import SnackBar_swift
 
 protocol ReviewTableViewCellDelegate {
-    
     func goToReportReviewVC(reviewID: Int)
 }
 
@@ -32,6 +31,7 @@ class ReviewTableViewCell: UITableViewCell {
     }
 
     func resetValues() {
+        
         userProfileImageView.image = nil
         userNicknameLabel.text = nil
         userMedalImageView.image = nil

@@ -290,6 +290,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyPageViewController: EasyTipViewDelegate {
     
     func easyTipViewDidTap(_ tipView: EasyTipView) {
+        
     }
     
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {

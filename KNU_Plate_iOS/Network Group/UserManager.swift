@@ -472,6 +472,30 @@ class UserManager {
             }
         }
     }
+    
+    //MARK: - 회원 탈퇴
+    func unregisterUser(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        AF.request(unregisterRequestURL,
+                   method: .delete,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200:
+                    completion(.success(true))
+                
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("UserManager - unregisterUser error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
 }
 
 
