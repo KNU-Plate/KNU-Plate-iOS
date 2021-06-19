@@ -56,20 +56,23 @@ class ReportManager {
     func sendSuggestion(content: String,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
+        //let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
         
         AF.upload(multipartFormData: { multipartFormData in
             
+            multipartFormData.append("..".data(using: .utf8)!,
+                                     withName: "title")
             multipartFormData.append("\(content)".data(using: .utf8)!,
                                      withName: "contents")
-      
+        
         }, to: suggestURL,
-        headers: headers,
         interceptor: interceptor)
         .validate()
         .responseJSON { response in
             
             guard let statusCode = response.response?.statusCode else { return }
+            
+          
             
             switch statusCode {
             

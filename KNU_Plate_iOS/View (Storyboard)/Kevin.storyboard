@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1148,10 +1148,10 @@
             </objects>
             <point key="canvasLocation" x="-348" y="1634"/>
         </scene>
-        <!--건의사항-->
+        <!--Send Developer Message View Controller-->
         <scene sceneID="w0q-AI-vnf">
             <objects>
-                <viewController storyboardIdentifier="SendDeveloperMessageViewController" hidesBottomBarWhenPushed="YES" id="X6o-QE-28v" customClass="SendDeveloperMessageViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SendDeveloperMessageViewController" title="Send Developer Message View Controller" hidesBottomBarWhenPushed="YES" id="X6o-QE-28v" customClass="SendDeveloperMessageViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jwx-Fu-klh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1182,12 +1182,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAp-Rd-EWJ">
+                                <rect key="frame" x="137.5" y="586" width="100" height="40"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ymu-LV-lEe"/>
+                                    <constraint firstAttribute="width" constant="100" id="fX0-fg-UTb"/>
+                                </constraints>
+                                <state key="normal" title="건의하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedSendButton:" destination="X6o-QE-28v" eventType="touchUpInside" id="n4O-Sz-7LU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jex-w7-TPm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DAp-Rd-EWJ" firstAttribute="centerX" secondItem="Jwx-Fu-klh" secondAttribute="centerX" id="EDi-X0-poA"/>
                             <constraint firstAttribute="trailing" secondItem="gqB-R8-HRp" secondAttribute="trailing" constant="15" id="HnC-8x-aBv"/>
                             <constraint firstItem="ILg-xr-vks" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="LTK-IM-7Nm"/>
+                            <constraint firstItem="DAp-Rd-EWJ" firstAttribute="top" secondItem="ILg-xr-vks" secondAttribute="bottom" constant="15" id="Lcq-3X-BjZ"/>
                             <constraint firstItem="eTN-7f-w79" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="WDI-mK-WQN"/>
                             <constraint firstItem="eTN-7f-w79" firstAttribute="top" secondItem="Jex-w7-TPm" secondAttribute="top" constant="20" id="Ya8-SZ-rTg"/>
                             <constraint firstItem="gqB-R8-HRp" firstAttribute="leading" secondItem="Jex-w7-TPm" secondAttribute="leading" constant="15" id="cYj-28-msQ"/>
@@ -1203,6 +1219,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="messageTextView" destination="ILg-xr-vks" id="Bzj-Qz-78V"/>
+                        <outlet property="sendButton" destination="DAp-Rd-EWJ" id="N18-Bf-ekR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aph-bM-sZf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

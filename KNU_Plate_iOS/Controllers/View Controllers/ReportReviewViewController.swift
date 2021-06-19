@@ -11,7 +11,6 @@ class ReportReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
         initialize()
     }
     
@@ -36,7 +35,6 @@ class ReportReviewViewController: UIViewController {
                               duration: .lengthLong).show()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    
                     self.dismiss(animated: true)
                 }
                 
