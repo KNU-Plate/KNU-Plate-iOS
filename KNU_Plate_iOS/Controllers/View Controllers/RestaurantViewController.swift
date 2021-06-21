@@ -3,11 +3,11 @@ import SnapKit
 
 class RestaurantViewController: UIViewController {
 
-    let restaurantView = RestaurantView()
+    lazy var restaurantView = RestaurantView(frame: self.view.safeAreaLayoutGuide.layoutFrame)
     
-    var reviewVC: ExampleViewController?
-    var locationVC: LocationViewController?
-    var menuVC: MenuViewController?
+    weak var reviewVC: ExampleViewController?
+    weak var locationVC: LocationViewController?
+    weak var menuVC: MenuViewController?
     
     var currentView: UIView?
     var currentButton: UIButton?
@@ -20,9 +20,13 @@ class RestaurantViewController: UIViewController {
         print("+++++ safeAreaLayoutGuide height: \(self.view.safeAreaLayoutGuide.layoutFrame.height)")
         
         restaurantView.scrollView.delegate = self
-//        restaurantView.scrollView.bounces = false
+        restaurantView.scrollView.contentInsetAdjustmentBehavior = .never
         
         self.view.addSubview(restaurantView)
+        
+        // 위에서 lazy로 frame 잡아줬어도 autolayout 안하면
+        // contentInsetAdjustmentBehavior = .never로 했을때 inset이 이상해진다.
+        
         let safeArea = self.view.safeAreaLayoutGuide
         restaurantView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
@@ -137,17 +141,18 @@ extension RestaurantViewController: UIScrollViewDelegate {
               let menuVC = self.menuVC
         else { return }
         
-        let yPosition = scrollView.contentOffset.y
+        let contentOffsetY = scrollView.contentOffset.y
         let topContentViewHeight: CGFloat = restaurantView.topContentView.frame.height
         
-        print("+++++ RestaurantViewController - scrollViewDidScroll - topContentViewHeight: \(topContentViewHeight)")
+        print("***** safeArea y: \(self.view.safeAreaLayoutGuide.layoutFrame.origin.y)")
+        print("+++++ RestaurantViewController - scrollViewDidScroll - contentOffsetY: \(contentOffsetY)")
+//        print("+++++ RestaurantViewController - scrollViewDidScroll - topContentViewHeight: \(topContentViewHeight)")
         if topContentViewHeight == 0 { return }
         
         switch currentView {
         case reviewVC.view:
-            if yPosition >= topContentViewHeight {
-                reviewVC.tableView.isScrollEnabled = true
-                restaurantView.scrollView.isScrollEnabled = false
+            if contentOffsetY >= topContentViewHeight {
+                scrollView.contentOffset.y = topContentViewHeight
             }
         case menuVC.view:
 //            if yPosition >= topContentViewHeight {

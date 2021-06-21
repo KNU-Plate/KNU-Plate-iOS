@@ -12,7 +12,7 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    var parentVC: RestaurantViewController?
+    weak var parentVC: RestaurantViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,7 @@ class ExampleViewController: UIViewController {
  
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInsetAdjustmentBehavior = .never
         
         
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
@@ -36,23 +37,20 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
-        
-        tableView.isScrollEnabled = false
-//        tableView.bounces = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("+++++ ExampleViewController viewWillAppear")
         
-        viewModel.fetchReviewList(of: 3)
+        viewModel.fetchReviewList(of: 2)
     }
 
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 3)
+        viewModel.fetchReviewList(of: 2)
     }
     
     override func didMove(toParent parent: UIViewController?) {
@@ -196,15 +194,15 @@ extension ExampleViewController: UIScrollViewDelegate {
                 tableView.tableFooterView = createSpinnerFooter()
                 
                 let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
                 
                 tableView.tableFooterView = nil
             } else { return }
         }
         
-        if position <= 0 {
-            tableView.isScrollEnabled = false
-            parentVC?.restaurantView.scrollView.isScrollEnabled = true
-        }
+//        if position <= 0 {
+//            tableView.isScrollEnabled = false
+//            parentVC?.restaurantView.scrollView.isScrollEnabled = true
+//        }
     }
 }

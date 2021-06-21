@@ -161,6 +161,9 @@ class RestaurantView: UIView {
         scrollView.addSubview(contentView)
 
         self.addSubview(scrollView)
+        
+        layoutRestaurantViews(frame: frame)
+//        print("***** RestaurantView Init - frame: \(frame)")
     }
     
     // MARK: - View Layout
@@ -168,7 +171,13 @@ class RestaurantView: UIView {
         super.layoutSubviews()
         print("+++++ RestaurantView layoutSubviews")
         // 여기서(layoutSubviews) 이렇게 많이 오토레이아웃 잡아도 괜찮을까
-        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func layoutRestaurantViews(frame: CGRect) {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -272,7 +281,7 @@ class RestaurantView: UIView {
             make.width.centerX.equalToSuperview()
         }
         
-        let lowerContentViewHeight:CGFloat = lineHeight*2 + selectStackViewHeight
+        let lowerContentViewHeight: CGFloat = lineHeight*2 + selectStackViewHeight
         let sumOfUpperPadding: CGFloat = padding*6
 
         bottomContentView.snp.makeConstraints { make in
@@ -280,12 +289,7 @@ class RestaurantView: UIView {
             make.left.right.width.bottom.equalToSuperview()
             make.height.equalTo(frame.height-lowerContentViewHeight-sumOfUpperPadding)
         }
-        
-        print("in RestaurantView -> bottomContentsView height: \(bottomContentView.frame.height)")
-        print("in RestaurantView -> frame height: \(frame.height)")
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+//        print("***** layoutRestaurantViews frame height: \(frame.height)")
+//        print("***** layoutRestaurantViews bottomContentView height: \(bottomContentView.frame.height)")
     }
 }
