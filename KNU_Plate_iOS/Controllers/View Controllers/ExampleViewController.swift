@@ -12,12 +12,16 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    weak var parentVC: RestaurantViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("+++++ ExampleViewController viewDidLoad")
         
  
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInsetAdjustmentBehavior = .never
         
         
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
@@ -33,25 +37,24 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("+++++ ExampleViewController viewWillAppear")
         
+        viewModel.fetchReviewList(of: 2)
+    }
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.fetchReviewList(of: 3)
-        
-    }
-    
-       
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
         viewModel.needToFetchMoreData = true
         viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 3)
-
-
+        viewModel.fetchReviewList(of: 2)
+    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        parentVC = parent as? RestaurantViewController
     }
 }
 
@@ -60,6 +63,7 @@ class ExampleViewController: UIViewController {
 extension ExampleViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
+        print("+++++ ExampleViewController didFetchReviewListResults")
         
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -81,6 +85,14 @@ extension ExampleViewController: ReviewListViewModelDelegate {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 330
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -182,10 +194,15 @@ extension ExampleViewController: UIScrollViewDelegate {
                 tableView.tableFooterView = createSpinnerFooter()
                 
                 let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 3, at: indexToFetch)
+                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
                 
                 tableView.tableFooterView = nil
             } else { return }
         }
+        
+//        if position <= 0 {
+//            tableView.isScrollEnabled = false
+//            parentVC?.restaurantView.scrollView.isScrollEnabled = true
+//        }
     }
 }
