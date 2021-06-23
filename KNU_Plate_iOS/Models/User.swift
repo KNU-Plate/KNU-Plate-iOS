@@ -95,6 +95,7 @@ class User {
         self.displayName = ""
         self.email = ""
         self.dateCreated = ""
+        self.password = ""
         
         self.savedAccessToken = false
         self.savedRefreshToken = false
