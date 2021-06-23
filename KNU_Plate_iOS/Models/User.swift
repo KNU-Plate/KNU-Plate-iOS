@@ -88,6 +88,16 @@ class User {
     
     var profileImage: UIImage?
     
+    var isLoggedIn: Bool {
+        
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+    }
+    
     func resetAllUserInfo() {
         
         self.id = ""
@@ -96,6 +106,7 @@ class User {
         self.email = ""
         self.dateCreated = ""
         self.password = ""
+        self.isLoggedIn = false
         
         self.savedAccessToken = false
         self.savedRefreshToken = false
