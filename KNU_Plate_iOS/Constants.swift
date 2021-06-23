@@ -72,8 +72,11 @@ struct Constants {
     struct UserDefaultsKey {
         
         static let isLoggedIn = "isLoggedIn"
+        static let userID = "userID"
         static let username = "username"
-        static let password = "password"
+        static let displayName = "displayName"
+        static let email = "email"
+        static let medal = "medal"
         
     }
     
@@ -84,12 +87,9 @@ struct Constants {
         static let password                     = "password"
     }
     
-    
-    
     static let gateNames: [String] = ["북문", "정/쪽문", "동문", "서문"]
+    
     static let heightPerWidthRestaurantCell: CGFloat = 1.1
-    
-    
     
     struct Kakao {
         

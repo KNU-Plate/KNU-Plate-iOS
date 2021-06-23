@@ -37,6 +37,8 @@ class ReviewTableViewCell: UITableViewCell {
         userMedalImageView.image = nil
         rating.setStarsRating(rating: 3)
         reviewLabel.text = nil
+        
+        viewModel.resetValues()
     }
     
     func configure(with model: ReviewListResponseModel) {
@@ -162,10 +164,14 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getProfileImageDownloadURL() -> URL? {
         
-        if let url = viewModel.userProfileImageURL {
-            return url
+        guard let path = viewModel.userProfileImagePath else {
+            return nil
         }
-        return nil
+        guard let url = URL(string: path) else {
+            return nil
+        }
+        return url
+        
     }
     
 }

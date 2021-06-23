@@ -47,7 +47,7 @@ class ExampleViewController: UIViewController {
        
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
-        viewModel.needToFetchMoreData = true
+        viewModel.needsToFetchMoreData = true
         viewModel.isPaginating = false
         viewModel.fetchReviewList(of: 2)
 
@@ -104,7 +104,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
 
             let reviewImageURL = reviewCell.getReviewImageDownloadURL()
             let profileImageURL = reviewCell.getProfileImageDownloadURL()
-            
+        
             reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
                                                    placeholderImage: nil,
@@ -116,25 +116,26 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
                                                         completed: nil)
             
             return reviewCell
-
-            
         }
         
         // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
         else {
             
-            guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
+            guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
-            let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
+            let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
             
-            reviewCellWithoutReviewImages.delegate = self
-            reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
-            reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
+            print("profileImageURL for no image cell : \(profileImageURL)")
+            print("for index: \(indexPath.row)")
+            
+            reviewCellNoImages.delegate = self
+            reviewCellNoImages.configure(with: reviewLists[indexPath.row])
+            reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
                                                                            placeholderImage: UIImage(named: "default profile image"),
                                                                            options: .continueInBackground,
                                                                            completed: nil)
             
-            return reviewCellWithoutReviewImages
+            return reviewCellNoImages
         }
     }
     
@@ -196,7 +197,7 @@ extension ExampleViewController: UIScrollViewDelegate {
             
             guard !viewModel.isPaginating else { return }
             
-            if viewModel.needToFetchMoreData {
+            if viewModel.needsToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
                 
                 let indexToFetch = viewModel.reviewList.count

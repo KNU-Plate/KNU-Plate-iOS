@@ -62,13 +62,13 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     }
     
     override func getReviewDetails() -> ReviewDetail {
-        
-        let profileImage = viewModel.userProfileImage
+
+        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating
         let review = viewModel.review
-        
+
         let reviewDetails = ReviewDetail(profileImage: profileImage,
                                          nickname: nickname,
                                          medal: medal,
@@ -76,8 +76,20 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
                                          rating: rating,
                                          review: review)
         return reviewDetails
+
+    }
+    
+    override func getProfileImageDownloadURL() -> URL? {
+        
+        guard let path = viewModel.userProfileImagePath else {
+            return nil
+        }
+        guard let url = URL(string: path) else {
+            return nil
+        }
+        return url
         
     }
-   
+
 }
 

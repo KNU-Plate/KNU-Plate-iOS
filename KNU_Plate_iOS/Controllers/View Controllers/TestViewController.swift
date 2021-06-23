@@ -65,7 +65,7 @@ class TestViewController: UIViewController, ReviewListViewModelDelegate {
     
     @objc func refreshTable() {
         viewModel.reviewList.removeAll()
-        viewModel.needToFetchMoreData = true
+        viewModel.needsToFetchMoreData = true
         viewModel.isPaginating = false
         viewModel.fetchReviewList(of: 2)
     }
@@ -142,7 +142,7 @@ extension TestViewController: UIScrollViewDelegate {
             
             guard !viewModel.isPaginating else { return }
             
-            if viewModel.needToFetchMoreData {
+            if viewModel.needsToFetchMoreData {
                 tableView.tableFooterView = createSpinnerFooter()
                 let indexToFetch = viewModel.reviewList.count
                 viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)

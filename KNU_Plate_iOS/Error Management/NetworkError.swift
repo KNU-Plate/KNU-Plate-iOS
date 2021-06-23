@@ -5,13 +5,15 @@ import SwiftyJSON
 
 enum NetworkError: Int, Error {
     
-    case success = 200
+    case success        = 200
 
-    case badRequest = 400
-    case unauthorized = 401
-    case notFound = 404
+    // 잘못된 접근 or 요청
+    case badRequest     = 400
+    case unauthorized   = 401
+    case notFound       = 404
     
-    case internalError = 500
+    // Server 문제
+    case internalError  = 500
     
     var errorDescription: String {
         
@@ -33,7 +35,6 @@ enum NetworkError: Int, Error {
     static func returnError(statusCode: Int) -> NetworkError {
         return NetworkError(rawValue: statusCode) ?? .internalError
     }
-
 }
 
 //MARK: - 회원가입 Error Message 관리

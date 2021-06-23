@@ -8,16 +8,10 @@ class ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImagePath: String? {
-        didSet {
-            guard let path = userProfileImagePath else { return }
-            self.userProfileImageURL = URL(string: path)
-        }
-    }
+    var userProfileImagePath: String?
     
     var userProfileImageURL: URL?
     
-    var userProfileImage: UIImage = UIImage(named: "default profile image")!
     
     var userNickname: String = ""
     
@@ -40,9 +34,17 @@ class ReviewTableViewModel {
         }
     }
     
-
-
-    
-
+    func resetValues() {
+        
+        reviewID = 0
+        userID = ""
+        userProfileImagePath = nil
+        userProfileImageURL = nil
+        userNickname = ""
+        medal = 1
+        rating = 0
+        review = ""
+        reviewImagesFileFolder = nil
+    }
 
 }

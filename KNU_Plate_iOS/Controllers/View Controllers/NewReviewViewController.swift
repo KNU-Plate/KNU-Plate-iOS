@@ -25,8 +25,6 @@ class NewReviewViewController: UIViewController {
         
         initialize()
         
-        Test.shared.login()
-        print("USER ACCESS TOKEN: \(User.shared.accessToken)")
 
     }
     
@@ -96,12 +94,13 @@ class NewReviewViewController: UIViewController {
              
             if !selectedOk { return }
             else {
+                showProgressBar()
                 do {
                     try self.viewModel.validateUserInputs()
                     
                     self.viewModel.rating = self.starRating.starsRating
                     
-                    showProgressBar()
+                    
                    
                     self.viewModel.startUploading()
 
@@ -229,6 +228,7 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     }
     
     func failedUploadingReview(with error: NetworkError) {
+        dismissProgressBar()
         SnackBar.make(in: self.view,
                       message: error.errorDescription,
                       duration: .lengthLong).show()
