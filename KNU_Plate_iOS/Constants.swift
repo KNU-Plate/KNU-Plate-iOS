@@ -4,30 +4,37 @@ import UIKit
 struct Constants {
     
     static let API_BASE_URL = "http://3.35.58.40:4100/api/"
-    
 
     struct Color {
         
-        static let appDefaultColor = "AppDefaultColor"
+        static let appDefaultColor  = "AppDefaultColor"
     }
     
     struct StoryboardID {
         
-        static let restaurantCollectionViewController = "RestaurantCollectionViewController"
-        static let restaurantViewController = "RestaurantViewController"
-        static let welcomeViewController = "WelcomeViewController"
-        static let loginViewController = "LoginViewController"
-        static let registerViewController = "RegisterViewController"
-        static let verifyEmailViewController = "VerifyEmailViewController"
-        static let newRestaurantViewController = "NewRestaurantViewController"
-        static let reviewViewController = "ReviewViewController"
-        static let locationViewController = "LocationViewController"
-        static let menuViewController = "MenuViewController"
-        static let sendDeveloperMessageViewController = "SendDeveloperMessageViewController"
-        static let settingsViewController = "SettingsViewController"
-        static let termsAndConditionsViewController = "TermsAndConditionViewController"
-        static let menuRecommendationViewController = "MenuRecommendationViewController"
-        static let reportReviewViewController = "ReportReviewViewController"
+        // Register & Login
+        static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
+        static let restaurantViewController                 = "RestaurantViewController"
+        static let welcomeViewController                    = "WelcomeViewController"
+        static let loginViewController                      = "LoginViewController"
+        static let registerViewController                   = "RegisterViewController"
+        static let verifyEmailViewController                = "VerifyEmailViewController"
+        
+        // Home Tab
+        static let newRestaurantViewController              = "NewRestaurantViewController"
+        static let reviewViewController                     = "ReviewViewController"
+        static let locationViewController                   = "LocationViewController"
+        static let menuViewController                       = "MenuViewController"
+        static let menuRecommendationViewController         = "MenuRecommendationViewController"
+        
+        // Favorites Tab
+        
+        
+        // My Page Tab
+        static let sendDeveloperMessageViewController       = "SendDeveloperMessageViewController"
+        static let settingsViewController                   = "SettingsViewController"
+        static let termsAndConditionsViewController         = "TermsAndConditionViewController"
+        static let reportReviewViewController               = "ReportReviewViewController"
     }
     
     struct Layer {
@@ -39,44 +46,44 @@ struct Constants {
     
     struct CellIdentifier {
         
-        static let newMenuTableViewCell = "newMenuTableViewCell"
-        static let addFoodImageCell = "addFoodImageCell"
-        static let newUserPickedFoodImageCell = "userPickedFoodImageCell"
-        static let searchedRestaurantResultCell = "searchedRestaurantResultCell"
-        static let reviewTableViewCell = "reviewTableViewCell"
-        static let reviewWithoutImageTableViewCell = "reviewWithoutImageTableViewCell"
-        static let myPageCell = "myPageCell"
-        static let menuRecommendCell = "menuRecommendCell"
+        static let newMenuTableViewCell                 = "newMenuTableViewCell"
+        static let addFoodImageCell                     = "addFoodImageCell"
+        static let newUserPickedFoodImageCell           = "userPickedFoodImageCell"
+        static let searchedRestaurantResultCell         = "searchedRestaurantResultCell"
+        static let reviewTableViewCell                  = "reviewTableViewCell"
+        static let reviewWithoutImageTableViewCell      = "reviewWithoutImageTableViewCell"
+        static let myPageCell                           = "myPageCell"
+        static let menuRecommendCell                    = "menuRecommendCell"
     
     }
     
     struct SegueIdentifier {
         
-        static let goToNewRestaurantVC = "goToNewRestaurantVC"
-        static let goSeeDetailReview = "goSeeDetailReview"
-        static let goToSendMessage = "goToSendMessage"
-        static let goToSettings = "goToSettings"
-        static let goToTermsAndConditions = "goToTermsAndConditions"
-        static let goChangeDisplayName = "goChangeDisplayName"
-        static let goChangePassword = "goChangePassword"
+        static let goToNewRestaurantVC          = "goToNewRestaurantVC"
+        static let goSeeDetailReview            = "goSeeDetailReview"
+        static let goToSendMessage              = "goToSendMessage"
+        static let goToSettings                 = "goToSettings"
+        static let goToTermsAndConditions       = "goToTermsAndConditions"
+        static let goChangeDisplayName          = "goChangeDisplayName"
+        static let goChangePassword             = "goChangePassword"
     }
     
     
     struct XIB {
         
-        static let newMenuTableViewCell = "NewMenuTableViewCell"
-        static let reviewTableViewCell = "ReviewTableViewCell"
-        static let reviewWithoutImageTableViewCell = "ReviewWithoutImageTableViewCell"
+        static let newMenuTableViewCell             = "NewMenuTableViewCell"
+        static let reviewTableViewCell              = "ReviewTableViewCell"
+        static let reviewWithoutImageTableViewCell  = "ReviewWithoutImageTableViewCell"
     }
     
     struct UserDefaultsKey {
         
-        static let isLoggedIn = "isLoggedIn"
-        static let userID = "userID"
-        static let username = "username"
-        static let displayName = "displayName"
-        static let email = "email"
-        static let medal = "medal"
+        static let isLoggedIn                   = "isLoggedIn"
+        static let userID                       = "userID"
+        static let username                     = "username"
+        static let displayName                  = "displayName"
+        static let email                        = "email"
+        static let medal                        = "medal"
         
     }
     
@@ -87,18 +94,16 @@ struct Constants {
         static let password                     = "password"
     }
     
-    static let gateNames: [String] = ["북문", "정/쪽문", "동문", "서문"]
+    static let gateNames: [String]              = ["북문", "정/쪽문", "동문", "서문"]
     
     static let heightPerWidthRestaurantCell: CGFloat = 1.1
     
     struct Kakao {
         
-        static let App_Key = "6536c927cc48b7eef60d77d79f1a2d85"
-        static let API_Key = "8c416c51ef363c393c842ad3a1ec79da"
-        static let JS_Key = "0ec64d2e6e745c47c3816e69ed3caf5a"
-        static let Admin_Key = "41f6c290aeeebf1584538be2eb0c3379"
+        static let App_Key                      = "6536c927cc48b7eef60d77d79f1a2d85"
+        static let API_Key                      = "8c416c51ef363c393c842ad3a1ec79da"
+        static let JS_Key                       = "0ec64d2e6e745c47c3816e69ed3caf5a"
+        static let Admin_Key                    = "41f6c290aeeebf1584538be2eb0c3379"
     }
-    
-    
     
 }

@@ -98,6 +98,9 @@ class UserManager {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                    from: response.data!)
                         self.saveAccessToken(with: decodedData)
+                        User.shared.isLoggedIn = true
+                        
+                        
                         print("Access Token in Keychain: \(User.shared.accessToken)")
                         completion(.success(true))
                         
@@ -116,7 +119,7 @@ class UserManager {
     
     //MARK: - 이메일 인증 코드 발급
     // 수정 필요
-    func sendEmailVerificationCode(completion: @escaping ((Bool) -> Void)) {
+    func sendEmailVerificationCode(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(sendEmailVerificationCodeURL,
                    method: .post,
@@ -129,10 +132,12 @@ class UserManager {
                 
                 switch statusCode {
                 case 200:
-                    completion(true)
+                    
+                    completion(.success(true))
                     
                 default:
-                    completion(false)
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    completion(.failure(error))
                 }
             }
     }

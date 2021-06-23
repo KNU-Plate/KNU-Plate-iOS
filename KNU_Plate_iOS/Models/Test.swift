@@ -15,7 +15,10 @@ struct Test {
         
         let loginInfoModel = LoginInfoModel(username: username, password: password)
         
-        UserManager.shared.logIn(with: loginInfoModel)
+        UserManager.shared.logIn(with: loginInfoModel) { result in
+            
+            
+        }
         
     }
     
