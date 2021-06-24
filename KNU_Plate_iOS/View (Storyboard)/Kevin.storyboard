@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="orY-fZ-A5Z">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -326,14 +326,14 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs up(selected,edited)" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-vc-1kO">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs up(selected,edited2)" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-vc-1kO">
                                                     <rect key="frame" x="116" y="49" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="6Zw-sX-1Cu"/>
                                                         <constraint firstAttribute="height" constant="24" id="6mk-Wv-L4w"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs down(selected,edited)" translatesAutoresizingMaskIntoConstraints="NO" id="rWj-Pw-ji9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs down(selected,edited2)" translatesAutoresizingMaskIntoConstraints="NO" id="rWj-Pw-ji9">
                                                     <rect key="frame" x="335" y="49" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="e8r-nn-u8v"/>
@@ -399,8 +399,8 @@
                                             <outlet property="likeTitleLabel" destination="bcj-1N-Sus" id="ytE-99-yBq"/>
                                             <outlet property="menuLabel" destination="XHc-Tf-kOd" id="3cJ-72-3nY"/>
                                             <outlet property="progressBar" destination="aLg-Zx-VU5" id="Hj0-Ch-n5B"/>
-                                            <outlet property="totalDislikeLabel" destination="vNN-ed-3rQ" id="B9r-3B-GO7"/>
-                                            <outlet property="totalLikeLabel" destination="eyh-vs-f1c" id="w5O-gb-qmx"/>
+                                            <outlet property="totalDislikeNumberLabel" destination="vNN-ed-3rQ" id="B9r-3B-GO7"/>
+                                            <outlet property="totalLikeNumberLabel" destination="eyh-vs-f1c" id="w5O-gb-qmx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1707,8 +1707,8 @@
         <image name="pick profile pic(black)" width="199" height="199"/>
         <image name="star rating (filled)" width="123" height="123"/>
         <image name="star rating (unfilled)" width="123" height="123"/>
-        <image name="thumbs down(selected,edited)" width="140" height="140"/>
-        <image name="thumbs up(selected,edited)" width="140" height="140"/>
+        <image name="thumbs down(selected,edited2)" width="140" height="140"/>
+        <image name="thumbs up(selected,edited2)" width="140" height="140"/>
         <image name="write review icon" width="100" height="100"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

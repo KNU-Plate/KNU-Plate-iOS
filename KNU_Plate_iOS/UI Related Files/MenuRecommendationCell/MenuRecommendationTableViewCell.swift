@@ -7,9 +7,9 @@ class MenuRecommendationTableViewCell: UITableViewCell {
     @IBOutlet var progressBar: GTProgressBar!
     
     @IBOutlet var likeTitleLabel: UILabel!
-    @IBOutlet var totalLikeLabel: UILabel!
+    @IBOutlet var totalLikeNumberLabel: UILabel!
     @IBOutlet var dislikeTitleLabel: UILabel!
-    @IBOutlet var totalDislikeLabel: UILabel!
+    @IBOutlet var totalDislikeNumberLabel: UILabel!
     
     @IBOutlet var likeImageView: UIImageView!
     @IBOutlet var dislikeImageView: UIImageView!
@@ -20,19 +20,11 @@ class MenuRecommendationTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func resetValues() {
-        
-        menuLabel.text = ""
-        totalLikeLabel.text = ""
-        likeTitleLabel.text = ""
-        
-        totalDislikeLabel.text = ""
-        dislikeTitleLabel.text = ""
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
-    
+
     func configure(with model: ExistingMenuModel) {
-        
-        resetValues()
         
         viewModel.menuName = model.menuName
         viewModel.likes = model.likes
@@ -71,8 +63,8 @@ class MenuRecommendationTableViewCell: UITableViewCell {
     func configureLabels() {
     
         menuLabel.text = viewModel.menuName
-        totalLikeLabel.text = "(\(String(viewModel.likes)))"
-        totalDislikeLabel.text = "(\(String(viewModel.dislikes)))"
+        totalLikeNumberLabel.text = "(\(String(viewModel.likes)))"
+        totalDislikeNumberLabel.text = "(\(String(viewModel.dislikes)))"
         
         if viewModel.totalLikes == 0 {
             
@@ -81,8 +73,8 @@ class MenuRecommendationTableViewCell: UITableViewCell {
             dislikeImageView.image = UIImage(named: "thumbs down(gray2)")
             likeTitleLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
             dislikeTitleLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
-            totalLikeLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
-            totalDislikeLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
+            totalLikeNumberLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
+            totalDislikeNumberLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
         
         } else {
             

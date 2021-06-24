@@ -29,14 +29,19 @@ class ReviewTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetValues()
+    }
 
     func resetValues() {
         
         userProfileImageView.image = nil
-        userNicknameLabel.text = nil
+        userNicknameLabel.text?.removeAll()
         userMedalImageView.image = nil
         rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
+        reviewLabel.text?.removeAll()
         
         viewModel.resetValues()
     }

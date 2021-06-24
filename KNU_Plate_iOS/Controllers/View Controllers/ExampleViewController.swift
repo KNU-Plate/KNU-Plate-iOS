@@ -91,15 +91,14 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let reviewLists = viewModel.reviewList
-
         //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
-        if reviewLists[indexPath.row].reviewImageFileFolder != nil {
+        if viewModel.reviewList[indexPath.row].reviewImageFileFolder != nil {
             
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
             reviewCell.delegate = self
-            reviewCell.configure(with: reviewLists[indexPath.row])
+            reviewCell.resetValues()
+            reviewCell.configure(with: viewModel.reviewList[indexPath.row])
             
 
             let reviewImageURL = reviewCell.getReviewImageDownloadURL()
@@ -123,13 +122,14 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
+            reviewCellNoImages.delegate = self
+            reviewCellNoImages.resetValues()
+            reviewCellNoImages.configure(with: viewModel.reviewList[indexPath.row])
+        
+            
             let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
             
-            print("profileImageURL for no image cell : \(profileImageURL)")
-            print("for index: \(indexPath.row)")
             
-            reviewCellNoImages.delegate = self
-            reviewCellNoImages.configure(with: reviewLists[indexPath.row])
             reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
                                                                            placeholderImage: UIImage(named: "default profile image"),
                                                                            options: .continueInBackground,

@@ -22,6 +22,8 @@ class MyPageViewController: UIViewController {
     
         initialize()
         loadUserProfileInfo()
+        
+     
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {

@@ -225,6 +225,10 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     func didCompleteReviewUpload(_ success: Bool) {
         dismissProgressBar()
         print("NEW REVIEW UPLOAD COMPLETE")
+        
+        SnackBar.make(in: self.view,
+                      message: "리뷰 업로드 성공! 🎉",
+                      duration: .lengthLong).show()
     }
     
     func failedUploadingReview(with error: NetworkError) {

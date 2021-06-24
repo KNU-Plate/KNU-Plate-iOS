@@ -14,6 +14,12 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetValues()
+    }
+
+    
     override func configure(with model: ReviewListResponseModel) {
         
         //Reset Every Content-Related attributes
@@ -37,11 +43,8 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     }
     
     override func configureUI() {
-        
+    
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-//        userProfileImageView.layer.borderWidth = 1
-//        userProfileImageView.layer.borderColor = UIColor.lightGray.cgColor
-        
         reviewImageView?.layer.cornerRadius = 10
     }
     
