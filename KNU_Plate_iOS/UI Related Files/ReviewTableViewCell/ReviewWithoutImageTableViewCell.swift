@@ -16,14 +16,11 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        resetValues()
+
+        viewModel.resetValues()
     }
 
-    
     override func configure(with model: ReviewListResponseModel) {
-        
-        //Reset Every Content-Related attributes
-        resetValues()
     
         // Configure View Model
         viewModel.reviewID = model.reviewID
@@ -36,10 +33,10 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         // Check if a user profile image exists
         
         if let profileImagePath = model.userInfo.fileFolder?.files?[0].path {
+            
             viewModel.userProfileImagePath = profileImagePath
         }
         initialize()
-      
     }
     
     override func configureUI() {

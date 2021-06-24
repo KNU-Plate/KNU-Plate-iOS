@@ -12,7 +12,6 @@ class ReviewTableViewModel {
     
     var userProfileImageURL: URL?
     
-    
     var userNickname: String = ""
     
     var medal: Int = 3

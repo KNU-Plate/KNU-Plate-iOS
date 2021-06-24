@@ -97,7 +97,6 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
             reviewCell.delegate = self
-            reviewCell.resetValues()
             reviewCell.configure(with: viewModel.reviewList[indexPath.row])
             
 
@@ -123,13 +122,11 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
             reviewCellNoImages.delegate = self
-            reviewCellNoImages.resetValues()
             reviewCellNoImages.configure(with: viewModel.reviewList[indexPath.row])
         
-            
+        
             let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
-            
-            
+
             reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
                                                                            placeholderImage: UIImage(named: "default profile image"),
                                                                            options: .continueInBackground,

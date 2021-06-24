@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="orY-fZ-A5Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="crA-ja-4ef">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -157,7 +157,7 @@
                                                             <constraint firstAttribute="width" constant="15" id="Fz5-dh-LTh"/>
                                                             <constraint firstAttribute="height" constant="28" id="Xgx-IP-jvy"/>
                                                         </constraints>
-                                                        <color key="textColor" name="KNU_Plate Color"/>
+                                                        <color key="textColor" name="AppDefaultColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -512,7 +512,7 @@
                                                 <rect key="frame" x="0.5" y="137" width="374" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Hk-u8-0mr" userLabel="Food Pic Label Stack View">
-                                                <rect key="frame" x="15" y="101" width="104" height="21"/>
+                                                <rect key="frame" x="15" y="101" width="159" height="21"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image icon" translatesAutoresizingMaskIntoConstraints="NO" id="sXu-j3-H7y">
                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
@@ -528,8 +528,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZa-b3-gFR">
-                                                        <rect key="frame" x="100" y="0.0" width="4" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" (최대 5장)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZa-b3-gFR">
+                                                        <rect key="frame" x="100" y="0.0" width="59" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -686,7 +686,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데..아 진짜 맛있긴한데.." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="리뷰" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
                                                 <rect key="frame" x="15" y="552" width="345" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -1712,9 +1712,6 @@
         <image name="write review icon" width="100" height="100"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="KNU_Plate Color">
-            <color red="0.93725490196078431" green="0.30980392156862746" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

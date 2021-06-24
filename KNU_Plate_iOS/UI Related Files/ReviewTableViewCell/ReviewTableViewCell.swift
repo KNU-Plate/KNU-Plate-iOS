@@ -28,29 +28,18 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+     
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        resetValues()
-    }
-
-    func resetValues() {
-        
-        userProfileImageView.image = nil
-        userNicknameLabel.text?.removeAll()
-        userMedalImageView.image = nil
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text?.removeAll()
         
         viewModel.resetValues()
     }
-    
+
     func configure(with model: ReviewListResponseModel) {
         
-        //Reset Every Content-Related attributes
-        resetValues()
-
         // Configure View Model
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
