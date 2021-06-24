@@ -12,12 +12,16 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
+    weak var parentVC: RestaurantViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("+++++ ExampleViewController viewDidLoad")
         
  
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInsetAdjustmentBehavior = .never
         
         
         let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
@@ -33,7 +37,6 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,11 +45,18 @@ class ExampleViewController: UIViewController {
         viewModel.fetchReviewList()
     }
     
-       
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("+++++ ExampleViewController viewWillAppear")
+        
+        viewModel.fetchReviewList()
+    }
+
     @objc func refreshTable() {
         viewModel.resetValues()
         viewModel.fetchReviewList()
     }
+    
 }
 
 //MARK: - ReviewListViewModelDelegate
@@ -54,6 +64,7 @@ class ExampleViewController: UIViewController {
 extension ExampleViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
+        print("+++++ ExampleViewController didFetchReviewListResults")
         
         tableView.reloadData()
         refreshControl.endRefreshing()

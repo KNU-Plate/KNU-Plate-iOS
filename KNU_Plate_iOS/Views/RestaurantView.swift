@@ -9,6 +9,9 @@ class RestaurantView: UIView {
     // MARK: - Content View Declaration
     let contentView = UIView()
     
+    // MARK: - Top Content View Declaration
+    let topContentView = UIView()
+    
     // MARK: - Image Related View Declaration
     let imageContentsView = UIView()
     
@@ -120,7 +123,7 @@ class RestaurantView: UIView {
     }
     
     // MARK: - Bottom Content View Declaration
-    let bottomContentsView = UIView()
+    let bottomContentView = UIView()
     
     // MARK: - View Initialization
     override init(frame: CGRect) {
@@ -144,24 +147,37 @@ class RestaurantView: UIView {
         selectStackView.addArrangedSubview(locationButton)
         selectStackView.addArrangedSubview(menuButton)
 
-        contentView.addSubview(imageContentsView)
-        contentView.addSubview(stackView1)
-        contentView.addSubview(stackView2)
-        contentView.addSubview(stackView3)
+        topContentView.addSubview(imageContentsView)
+        topContentView.addSubview(stackView1)
+        topContentView.addSubview(stackView2)
+        topContentView.addSubview(stackView3)
+        
+        contentView.addSubview(topContentView)
         contentView.addSubview(topLine)
         contentView.addSubview(selectStackView)
         contentView.addSubview(bottomLine)
-        contentView.addSubview(bottomContentsView)
+        contentView.addSubview(bottomContentView)
         
         scrollView.addSubview(contentView)
 
         self.addSubview(scrollView)
+        
+        layoutRestaurantViews(frame: frame)
+//        print("***** RestaurantView Init - frame: \(frame)")
     }
     
     // MARK: - View Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        print("+++++ RestaurantView layoutSubviews")
+        // 여기서(layoutSubviews) 이렇게 많이 오토레이아웃 잡아도 괜찮을까
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func layoutRestaurantViews(frame: CGRect) {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -169,6 +185,10 @@ class RestaurantView: UIView {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
+        }
+        
+        topContentView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
         }
         
         let imageContentsViewHeight: CGFloat = 250
@@ -235,40 +255,41 @@ class RestaurantView: UIView {
 
         stackView3.snp.makeConstraints { make in
             make.top.equalTo(stackView2.snp.bottom).offset(padding*2)
-            make.left.right.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalTo(stackViewHeight)
         }
+        
+        let lineHeight: CGFloat = 1
+        let selectStackViewHeight: CGFloat = 70
 
         topLine.snp.makeConstraints { make in
-            make.top.equalTo(stackView3.snp.bottom).offset(padding*4)
-            make.height.equalTo(1)
+            make.top.equalTo(topContentView.snp.bottom).offset(padding*4)
+            make.height.equalTo(lineHeight)
             make.width.centerX.equalToSuperview()
         }
 
         selectStackView.snp.makeConstraints { make in
             make.top.equalTo(topLine.snp.bottom).offset(padding*2)
-            make.height.equalTo(70)
+            make.height.equalTo(selectStackViewHeight)
             make.width.centerX.equalToSuperview()
         }
 
         bottomLine.snp.makeConstraints { make in
             make.top.equalTo(selectStackView.snp.bottom).offset(padding*2)
-            make.height.equalTo(1)
+            make.height.equalTo(lineHeight)
             make.width.centerX.equalToSuperview()
         }
+        
+        let lowerContentViewHeight: CGFloat = lineHeight*2 + selectStackViewHeight
+        let sumOfUpperPadding: CGFloat = padding*6
 
-        bottomContentsView.snp.makeConstraints { make in
+        bottomContentView.snp.makeConstraints { make in
             make.top.equalTo(bottomLine.snp.bottom).offset(padding*2)
             make.left.right.width.bottom.equalToSuperview()
+            make.height.equalTo(frame.height-lowerContentViewHeight-sumOfUpperPadding)
         }
-        
-        print("-> layoutSubviews")
-        print("--> contentView height: \(contentView.frame.height)")
-        print("--> frame height: \(frame.height)")
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+//        print("***** layoutRestaurantViews frame height: \(frame.height)")
+//        print("***** layoutRestaurantViews bottomContentView height: \(bottomContentView.frame.height)")
     }
 }

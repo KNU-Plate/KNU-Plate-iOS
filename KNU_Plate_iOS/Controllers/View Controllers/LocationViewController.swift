@@ -3,7 +3,6 @@ import SnapKit
 
 class LocationViewController: UIViewController, MTMapViewDelegate {
 
-    var parentVC: RestaurantViewController?
     let mapView = MTMapView()
     
     override func viewDidLoad() {
