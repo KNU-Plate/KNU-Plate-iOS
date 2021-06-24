@@ -10,7 +10,7 @@ struct Test {
     
     func login() {
         
-        let username = "kevinkim"
+        let username = "alexding"
         let password = "123456789"
         
         let loginInfoModel = LoginInfoModel(username: username, password: password)

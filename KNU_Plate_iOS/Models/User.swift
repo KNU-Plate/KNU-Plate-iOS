@@ -112,6 +112,8 @@ class User {
         self.savedRefreshToken = false
         self.profileImage = nil
         self.profileImageLink = ""
+        
+        print("User - resetAllUserInfo activated")
     }
     
 }

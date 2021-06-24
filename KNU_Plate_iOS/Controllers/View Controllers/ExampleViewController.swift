@@ -40,18 +40,18 @@ class ExampleViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchReviewList(of: 2)
-        
+        //viewModel.fetchReviewList(of: 2)
+        viewModel.fetchReviewList()
     }
     
        
     @objc func refreshTable() {
-        viewModel.reviewList.removeAll()
-        viewModel.needsToFetchMoreData = true
-        viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 2)
+        viewModel.resetValues()
+//        viewModel.needsToFetchMoreData = true
+//        viewModel.isPaginating = false
+        //viewModel.fetchReviewList(of: 2)
 
-
+        viewModel.fetchReviewList()
     }
 }
 
@@ -191,17 +191,32 @@ extension ExampleViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
    
         if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-            
-            guard !viewModel.isPaginating else { return }
-            
-            if viewModel.needsToFetchMoreData {
+        
+            if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooter()
-                
-                let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
-                
-                tableView.tableFooterView = nil
-            } else { return }
+                viewModel.fetchReviewList()
+            }
         }
     }
 }
+
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
+//        let position = scrollView.contentOffset.y
+//
+//        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+//
+//            guard !viewModel.isPaginating else { return }
+//
+//            if viewModel.needsToFetchMoreData {
+//                tableView.tableFooterView = createSpinnerFooter()
+//
+//                let indexToFetch = viewModel.reviewList.count
+//                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
+//
+//                tableView.tableFooterView = nil
+//            } else { return }
+//        }
+//    }
+

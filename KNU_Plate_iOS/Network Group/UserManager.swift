@@ -81,6 +81,8 @@ class UserManager {
     func logIn(with model: LoginInfoModel,
                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
+        User.shared.resetAllUserInfo()
+        
         AF.request(logInRequestURL,
                    method: .post,
                    parameters: model.parameters,
