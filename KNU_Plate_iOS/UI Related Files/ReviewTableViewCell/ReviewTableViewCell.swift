@@ -4,7 +4,7 @@ import Alamofire
 import SnackBar_swift
 
 protocol ReviewTableViewCellDelegate {
-    func goToReportReviewVC(reviewID: Int)
+    func goToReportReviewVC(reviewID: Int, displayName: String)
 }
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
@@ -110,10 +110,12 @@ class ReviewTableViewCell: UITableViewCell {
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
+        
         let reportReview = UIAlertAction(title: "게시글 신고하기",
                                          style: .default) { alert in
             
-            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID)
+            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+                                              displayName: self.viewModel.userNickname)
         }
         
         let cancelAction = UIAlertAction(title: "취소",

@@ -72,9 +72,14 @@ extension ExampleViewController: ReviewListViewModelDelegate {
     }
     
     func failedFetchingReviewListResults() {
+        
         SnackBar.make(in: self.view,
                       message: "데이터 가져오기 실패. 잠시 후 다시 시도해주세요 🥲",
-                      duration: .lengthLong).show()
+                      duration: .lengthLong).setAction(with: "재시도", action: {
+                        
+                        self.viewModel.fetchReviewList()
+                        
+                      }).show()
     }
 }
 
@@ -158,8 +163,13 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ExampleViewController: ReviewTableViewCellDelegate {
     
-    func goToReportReviewVC(reviewID: Int) {
-
+    func goToReportReviewVC(reviewID: Int, displayName: String) {
+    
+        guard displayName != User.shared.displayName else {
+            self.presentSimpleAlert(title: "본인 게시글을 본인이 신고할 수는 없습니다 🤔", message: "")
+            return
+        }
+   
         let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
             fatalError()

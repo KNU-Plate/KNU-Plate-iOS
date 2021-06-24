@@ -58,8 +58,33 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         reviewLabel.attributedText = NSAttributedString(string: viewModel.review,
                                                         attributes: attributes)
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
-
     }
+    
+    
+    @objc override func showMoreOptions() {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let reportReview = UIAlertAction(title: "게시글 신고하기",
+                                         style: .default) { alert in
+            
+            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+                                              displayName: self.viewModel.userNickname)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        actionSheet.addAction(reportReview)
+        actionSheet.addAction(cancelAction)
+        
+        let vc = self.window?.rootViewController
+        vc?.present(actionSheet, animated: true)
+    }
+    
+    
     
     override func getReviewDetails() -> ReviewDetail {
 
@@ -80,7 +105,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     }
     
     override func getProfileImageDownloadURL() -> URL? {
-        
+
         guard let path = viewModel.userProfileImagePath else {
             return nil
         }
@@ -88,7 +113,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
             return nil
         }
         return url
-        
+
     }
 
 }
