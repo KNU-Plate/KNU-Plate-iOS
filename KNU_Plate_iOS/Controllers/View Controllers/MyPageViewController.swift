@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import SnackBar_swift
 import SPIndicator
+import EasyTipView
 
 class MyPageViewController: UIViewController {
     
@@ -9,22 +10,35 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userNickname: UILabel!
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var logOutButton: UIButton!
+    @IBOutlet var infoButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
+    lazy var preferences = EasyTipView.Preferences()
     
-    var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         initialize()
         loadUserProfileInfo()
+        
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
         presentActionSheet()
+    }
+    
+    @IBAction func pressedInfoButton(sender: UIButton) {
+        
+        infoButton.isUserInteractionEnabled = false
+        initializeTipViewPreferences()
+        
+        let tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성 은메달: 리뷰 10개 이상 작성 동메달: 리뷰 0회 이상",
+                              preferences: preferences,
+                              delegate: self)
+        tipView.show(forView: self.infoButton,
+                     withinSuperview: self.view)
     }
 
     func presentActionSheet() {
@@ -58,14 +72,9 @@ class MyPageViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+
     
     
-    func popToWelcomeViewController() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
-    }
 }
 
 //MARK: - API Networking
@@ -93,9 +102,9 @@ extension MyPageViewController {
                         self.profileImageButton.setImage(profileImage, for: .normal)
                     }
                 }
-            case .failure(_):
-                //수정 필요 
-                self.loadUserProfileInfo()
+            case .failure(let error):
+                print("\(error.errorDescription)")
+                //self.loadUserProfileInfo()
                 SnackBar.make(in: self.view,
                               message: "프로필 정보 불러오기에 실패하였습니다 🥲",
                               duration: .lengthLong).setAction(with: "재시도", action: {
@@ -118,7 +127,7 @@ extension MyPageViewController {
                               message: "프로필 사진 제거 성공 🎉",
                               duration: .lengthLong).show()
                 DispatchQueue.main.async {
-                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+                    self.profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage)!, for: .normal)
                     self.initializeProfileImageButton()
                     User.shared.profileImage = nil
                 }
@@ -129,37 +138,7 @@ extension MyPageViewController {
             }
         }
     }
-    
-    @IBAction func pressedLogOutButton(_ sender: UIButton) {
-        
-        self.presentAlertWithCancelAction(title: "로그아웃 하시겠습니까?", message: "") { selectedOk in
-            
-            if selectedOk {
-                
-                UserManager.shared.logOut { result in
-                    
-                    switch result {
-                    
-                    case .success(_):
-                        
-                        DispatchQueue.main.async {
-                            self.popToWelcomeViewController()
-                        }
-                        
-                    case .failure(let error):
-                        SnackBar.make(in: self.view,
-                                      message: error.errorDescription,
-                                      duration: .lengthLong).setAction(with: "재시도", action: {
-                                        DispatchQueue.main.async {
-                                            self.pressedLogOutButton(self.logOutButton)
-                                        }
-                                      }).show()
-                    }
-                }
-            }
-        }
-    }
-    
+
     func updateProfileImage(with image: UIImage) {
         
         let imageData = image.jpegData(compressionQuality: 1.0)!
@@ -238,11 +217,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         
         case 0:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         case 1:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         case 2:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         default: break
         }
         return cell
@@ -269,8 +248,19 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func pushViewController(with vc: UIViewController) {
         navigationController?.pushViewController(vc, animated: true)
     }
-   
 }
+
+extension MyPageViewController: EasyTipViewDelegate {
+    
+    func easyTipViewDidTap(_ tipView: EasyTipView) {
+        
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        infoButton.isUserInteractionEnabled = true
+    }
+}
+
 
 //MARK: - UI Configuration
 
@@ -319,6 +309,12 @@ extension MyPageViewController {
         imagePicker.allowsEditing = true
     }
     
-    
-    
+    func initializeTipViewPreferences() {
+        
+
+        preferences.drawing.font = UIFont.boldSystemFont(ofSize: 15)
+        preferences.drawing.foregroundColor = .white
+        preferences.drawing.backgroundColor = .lightGray
+        preferences.drawing.arrowPosition = .top
+    }
 }

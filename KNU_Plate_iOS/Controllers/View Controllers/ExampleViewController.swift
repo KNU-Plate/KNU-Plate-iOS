@@ -8,7 +8,7 @@ class ExampleViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
-    private var viewModel = ReviewListViewModel()
+    var viewModel = ReviewListViewModel()
     
     private let refreshControl = UIRefreshControl()
     
@@ -16,17 +16,16 @@ class ExampleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("+++++ ExampleViewController viewDidLoad")
+
         
- 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInsetAdjustmentBehavior = .never
         
         
-        let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
+        let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
         let cellID = Constants.CellIdentifier.reviewTableViewCell
-        let reviewWithoutImageNib = UINib(nibName: "ReviewWithoutImageTableViewCell", bundle: nil)
+        let reviewWithoutImageNib = UINib(nibName: Constants.XIB.reviewWithoutImageTableViewCell, bundle: nil)
         let cellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
         tableView.register(reviewNib, forCellReuseIdentifier: cellID)
         tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: cellID2)
@@ -39,23 +38,28 @@ class ExampleViewController: UIViewController {
         viewModel.reviewList.removeAll()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        viewModel.fetchReviewList()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("+++++ ExampleViewController viewWillAppear")
         
-        viewModel.fetchReviewList(of: 2)
+        viewModel.fetchReviewList()
     }
 
     @objc func refreshTable() {
-        viewModel.reviewList.removeAll()
-        viewModel.needToFetchMoreData = true
-        viewModel.isPaginating = false
-        viewModel.fetchReviewList(of: 2)
+        viewModel.resetValues()
+        viewModel.fetchReviewList()
     }
     
     override func didMove(toParent parent: UIViewController?) {
         parentVC = parent as? RestaurantViewController
     }
+    
 }
 
 //MARK: - ReviewListViewModelDelegate
@@ -76,23 +80,20 @@ extension ExampleViewController: ReviewListViewModelDelegate {
     }
     
     func failedFetchingReviewListResults() {
+        
         SnackBar.make(in: self.view,
                       message: "데이터 가져오기 실패. 잠시 후 다시 시도해주세요 🥲",
-                      duration: .lengthLong).show()
+                      duration: .lengthLong).setAction(with: "재시도", action: {
+                        
+                        self.viewModel.fetchReviewList()
+                        
+                      }).show()
     }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//    
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 330
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -103,48 +104,48 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let reviewLists = viewModel.reviewList
-
         //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
-        if reviewLists[indexPath.row].reviewImageFileFolder != nil {
+        if viewModel.reviewList[indexPath.row].reviewImageFileFolder != nil {
             
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
-            reviewCell.configure(with: reviewLists[indexPath.row])
+            reviewCell.delegate = self
+            reviewCell.configure(with: viewModel.reviewList[indexPath.row])
             
-   
+
             let reviewImageURL = reviewCell.getReviewImageDownloadURL()
             let profileImageURL = reviewCell.getProfileImageDownloadURL()
-            
+        
             reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
                                                    placeholderImage: nil,
                                                    options: .continueInBackground,
                                                    completed: nil)
             reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
-                                                        placeholderImage: UIImage(named: "default profile image"),
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                         options: .continueInBackground,
                                                         completed: nil)
             
             return reviewCell
-
-            
         }
         
         // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
         else {
             
-            guard let reviewCellWithoutReviewImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
+            guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
             
-            let profileImageURL = reviewCellWithoutReviewImages.getProfileImageDownloadURL()
-            
-            reviewCellWithoutReviewImages.configure(with: reviewLists[indexPath.row])
-            reviewCellWithoutReviewImages.userProfileImageView.sd_setImage(with: profileImageURL,
-                                                                           placeholderImage: UIImage(named: "default profile image"),
+            reviewCellNoImages.delegate = self
+            reviewCellNoImages.configure(with: viewModel.reviewList[indexPath.row])
+        
+        
+            let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
+
+            reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
+                                                                placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                                            options: .continueInBackground,
                                                                            completed: nil)
             
-            return reviewCellWithoutReviewImages
+            return reviewCellNoImages
         }
     }
     
@@ -164,7 +165,29 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.configure(with: reviewDetails)
     }
+}
+
+//MARK: - ReviewTableViewCellDelegate
+
+extension ExampleViewController: ReviewTableViewCellDelegate {
     
+    func goToReportReviewVC(reviewID: Int, displayName: String) {
+    
+        guard displayName != User.shared.displayName else {
+            
+            SnackBar.make(in: self.view,
+                          message: "본인 게시글을 본인이 신고할 수는 없습니다 🤔",
+                          duration: .lengthLong).show()
+            return
+        }
+   
+        let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
+            fatalError()
+        }
+        vc.reviewID = reviewID
+        self.present(vc, animated: true)
+    }
 }
 
 //MARK: - UIScrollViewDelegate
@@ -187,22 +210,11 @@ extension ExampleViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
    
         if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-            
-            guard !viewModel.isPaginating else { return }
-            
-            if viewModel.needToFetchMoreData {
-                tableView.tableFooterView = createSpinnerFooter()
-                
-                let indexToFetch = viewModel.reviewList.count
-                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
-                
-                tableView.tableFooterView = nil
-            } else { return }
-        }
         
-//        if position <= 0 {
-//            tableView.isScrollEnabled = false
-//            parentVC?.restaurantView.scrollView.isScrollEnabled = true
-//        }
+            if !viewModel.isFetchingData {
+                tableView.tableFooterView = createSpinnerFooter()
+                viewModel.fetchReviewList()
+            }
+        }
     }
 }

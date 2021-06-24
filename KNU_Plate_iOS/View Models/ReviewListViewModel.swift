@@ -15,23 +15,20 @@ class ReviewListViewModel {
     
     var selectedIndex: IndexPath?
     
-    var isPaginating: Bool = false
+    var mallID: Int = 2
     
-    var needToFetchMoreData: Bool = true
+    var isFetchingData: Bool = false
     
+    var indexToFetch: Int = 0
     
     //MARK: - Object Methods
     
-    func fetchReviewList(pagination: Bool = false, of mallID: Int, at index: Int = 0) {
-  
-        if pagination {
-            isPaginating = true
-        }
+    func fetchReviewList() {
         
-        print("REVIEWLIST COUNT: \(reviewList.count)")
+        isFetchingData = true
         
-        let model = FetchReviewListModel(mallID: mallID, page: index)
-    
+        let model = FetchReviewListModel(mallID: mallID, page: indexToFetch)
+        
         RestaurantManager.shared.fetchReviewList(with: model) { [weak self] result in
             
             guard let self = self else { return }
@@ -40,44 +37,28 @@ class ReviewListViewModel {
             
             case .success(let responseModel):
                 
-                // empty 이거나 같은 값이 반환 ㅇㅇ?
                 if responseModel.isEmpty {
-                    self.needToFetchMoreData = false
                     self.delegate?.didFetchEmptyReviewListResults()
                     return
                 }
                 
-                
-                let firstMallID = responseModel[0].mallID
-                
-                for existingReviews in self.reviewList {
-                    
-                    if existingReviews.mallID == firstMallID {
-                        self.needToFetchMoreData = false
-                        self.delegate?.didFetchEmptyReviewListResults()
-                        return
-                    }
-                }
-            
-                
+                self.indexToFetch = responseModel[responseModel.count - 1].reviewID
                 self.reviewList.append(contentsOf: responseModel)
-    
-                if pagination {
-                    self.isPaginating = false
-                }
-                
+                self.isFetchingData = false
                 self.delegate?.didFetchReviewListResults()
                 
-        
-            case .failure(let error):
-                print("ReviewListViewModel - fetchReviewList() error")
-                print(error.localizedDescription)
+            case .failure(_):
                 self.delegate?.failedFetchingReviewListResults()
-                
-                
             }
-            
         }
     }
     
+    func resetValues() {
+        
+        reviewList.removeAll()
+        indexToFetch = 0
+        isFetchingData = false
+    }
 }
+    
+

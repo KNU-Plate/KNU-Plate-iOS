@@ -6,9 +6,6 @@ class RatingController: UIStackView {
     
     var starsRating = 3                                             // 기본 별점은 3점으로 시작
     
-    var starsEmptyPicName = "star rating (unfilled)"                // Empty star name (SF Symbol)
-    var starsFilledPicName = "star rating (filled)"                 // Filled star name (SF Symbol)
-    
     override func draw(_ rect: CGRect) {
         
         let starButtons = self.subviews.filter{$0 is UIButton}
@@ -17,7 +14,7 @@ class RatingController: UIStackView {
             
             if let button = button as? UIButton {
                 
-                let buttonImage = UIImage(named: starsEmptyPicName)
+                let buttonImage = UIImage(named: Constants.Images.starsUnfilled)
                 
                 button.setImage(buttonImage, for: .normal)
                 button.addTarget(self,
@@ -40,11 +37,11 @@ class RatingController: UIStackView {
             if let button = subView as? UIButton {
                 
                 if button.tag > starsRating {
-                    button.setImage(UIImage(named: starsEmptyPicName),
+                    button.setImage(UIImage(named: Constants.Images.starsUnfilled),
                                     for: .normal)
                     
                 } else {
-                    button.setImage(UIImage(named: starsFilledPicName),
+                    button.setImage(UIImage(named: Constants.Images.starsFilled),
                                     for: .normal)
                 }
             }

@@ -207,8 +207,9 @@ extension SearchRestaurantViewController {
     func initializeUIComponents() {
         
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
-        var buttonImage: UIImage = UIImage(named: "arrow_right")!
-        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
+        var buttonImage: UIImage = UIImage(named: Constants.Images.rightArrow)!
+        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30,
+                                                                                height: 30))
         nextButton.setImage(buttonImage, for: .normal)
         nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
     }

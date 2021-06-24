@@ -15,7 +15,21 @@ struct Test {
         
         let loginInfoModel = LoginInfoModel(username: username, password: password)
         
-        UserManager.shared.logIn(with: loginInfoModel)
+        UserManager.shared.logIn(with: loginInfoModel) { result in
+            
+            switch result {
+            
+            case .success(_):
+                
+                UserManager.shared.loadUserProfileInfo() { result in }
+                
+            case .failure(let error):
+                print("Test - Error in logging user in with error: \(error.errorDescription)")
+                
+            }
+            
+            
+        }
         
     }
     

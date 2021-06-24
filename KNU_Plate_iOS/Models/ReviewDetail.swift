@@ -8,7 +8,6 @@ struct ReviewDetail {
     var nickname: String = ""
     var medal: Int = 3
     var reviewImageFiles: [Files]?
-    //var reviewImagesFileFolder: FileFolder?
     var rating: Int = 0
     var review: String = ""
 }

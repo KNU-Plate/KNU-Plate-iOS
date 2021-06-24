@@ -5,20 +5,50 @@ class User {
     
     static var shared: User = User()
     
-    /// user unique ID
-    var id: String = ""
+    private init() {}
     
-    var username: String = ""
+    /// user unique ID
+    var id: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.userID)
+        }
+    }
+    
+    var username: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.username) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.username)
+        }
+    }
     
     var password: String = ""
     
     var savedPassword: Bool = false
     
-    /// nickname
-    var displayName: String = ""
+    /// 닉네임
+    var displayName: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.displayName) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.displayName)
+        }
+    }
     
     /// user email address (...@knu.ac.kr)
-    var email: String = ""
+    var email: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.email) ?? "표시 에러"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.email)
+        }
+    }
     
     /// registered date
     var dateCreated: String = ""
@@ -37,7 +67,6 @@ class User {
             }
             return accessToken
         }
-    
     }
     
     var refreshToken: String {
@@ -59,6 +88,16 @@ class User {
     
     var profileImage: UIImage?
     
+    var isLoggedIn: Bool {
+        
+        get {
+            return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.isLoggedIn)
+        }
+    }
+    
     func resetAllUserInfo() {
         
         self.id = ""
@@ -66,18 +105,15 @@ class User {
         self.displayName = ""
         self.email = ""
         self.dateCreated = ""
+        self.password = ""
+        self.isLoggedIn = false
         
         self.savedAccessToken = false
         self.savedRefreshToken = false
         self.profileImage = nil
         self.profileImageLink = ""
-    
         
-        
-        
+        print("User - resetAllUserInfo activated")
     }
-    
-    
-    private init() {}
     
 }

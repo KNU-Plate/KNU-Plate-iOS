@@ -25,8 +25,6 @@ class NewReviewViewController: UIViewController {
         
         initialize()
         
-        Test.shared.login()
-        print("USER ACCESS TOKEN: \(User.shared.accessToken)")
 
     }
     
@@ -96,12 +94,13 @@ class NewReviewViewController: UIViewController {
              
             if !selectedOk { return }
             else {
+                showProgressBar()
                 do {
                     try self.viewModel.validateUserInputs()
                     
                     self.viewModel.rating = self.starRating.starsRating
                     
-                    showProgressBar()
+                    
                    
                     self.viewModel.startUploading()
 
@@ -226,9 +225,14 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     func didCompleteReviewUpload(_ success: Bool) {
         dismissProgressBar()
         print("NEW REVIEW UPLOAD COMPLETE")
+        
+        SnackBar.make(in: self.view,
+                      message: "리뷰 업로드 성공! 🎉",
+                      duration: .lengthLong).show()
     }
     
     func failedUploadingReview(with error: NetworkError) {
+        dismissProgressBar()
         SnackBar.make(in: self.view,
                       message: error.errorDescription,
                       duration: .lengthLong).show()

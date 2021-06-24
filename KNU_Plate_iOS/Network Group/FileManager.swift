@@ -18,7 +18,7 @@ class FileManager {
         
         let parameters: Parameters = ["file_folder_id": fileFolderID]
         let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
-       
+        
         AF.request(searchFileFolderRequestURL,
                    method: .get,
                    parameters: parameters,
@@ -27,7 +27,7 @@ class FileManager {
                     guard let statusCode = response.response?.statusCode else { return }
                     
                     switch statusCode {
-                    
+                
                     case 200:
                         do {
                             let decodedData = try JSONDecoder().decode([Files].self, from: response.data!)

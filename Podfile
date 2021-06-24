@@ -18,6 +18,7 @@ target 'KNU_Plate_iOS' do
   pod 'SPIndicator'
   pod 'SnackBar.swift'
   pod "GTProgressBar"
-
+  pod "ViewAnimator"
+  pod 'EasyTipView', '~> 2.1'
 
 end

@@ -30,7 +30,7 @@ class ProfileImageView: UIImageView {
                 
                 DispatchQueue.main.async {
                     
-                    self.image = UIImage(named: "default profile image")
+                    self.image = UIImage(named: Constants.Images.defaultProfileImage)
                     self.removeSpinner()
                 }
                 return

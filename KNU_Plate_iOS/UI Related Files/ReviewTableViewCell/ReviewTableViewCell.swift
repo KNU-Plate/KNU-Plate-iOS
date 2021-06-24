@@ -1,6 +1,11 @@
 import UIKit
 import SDWebImage
 import Alamofire
+import SnackBar_swift
+
+protocol ReviewTableViewCellDelegate {
+    func goToReportReviewVC(reviewID: Int, displayName: String)
+}
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
 
@@ -19,23 +24,22 @@ class ReviewTableViewCell: UITableViewCell {
     
     private var viewModel = ReviewTableViewModel()
 
+    var delegate: ReviewTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    func resetValues() {
-        userProfileImageView.image = nil
-        userNicknameLabel.text = nil
-        userMedalImageView.image = nil
-        rating.setStarsRating(rating: 3)
-        reviewLabel.text = nil
+        
+     
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        viewModel.resetValues()
+    }
+
     func configure(with model: ReviewListResponseModel) {
         
-        //Reset Every Content-Related attributes
-        resetValues()
-
         // Configure View Model
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
@@ -89,11 +93,10 @@ class ReviewTableViewCell: UITableViewCell {
         }
         
         if imageCount >= 2 {
-            multipleImageView.image = UIImage(named: "multiple images")
+            multipleImageView.image = UIImage(named: Constants.Images.multipleImageExistsIcon)
         } else {
             multipleImageView.image = nil
         }
-        
     }
 
     func configureShowMoreButton() {
@@ -107,19 +110,18 @@ class ReviewTableViewCell: UITableViewCell {
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
-        let reportUser = UIAlertAction(title: "사용자 신고하기",
-                                       style: .default) { alert in
-            
-            let userIDToReport = self.viewModel.userID
         
+        let reportReview = UIAlertAction(title: "게시글 신고하기",
+                                         style: .default) { alert in
             
-            // 신고하기 action 을 여기서 취해야함
-            //UserManager.shared.report(userID: viewModel.userID) 이런 식으로 해야할듯
+            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+                                              displayName: self.viewModel.userNickname)
         }
+        
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
-        actionSheet.addAction(reportUser)
+        actionSheet.addAction(reportReview)
         actionSheet.addAction(cancelAction)
         
         let vc = self.window?.rootViewController
@@ -128,7 +130,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getReviewDetails() -> ReviewDetail {
         
-        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
+        let profileImage = userProfileImageView.image ?? UIImage(named: Constants.Images.defaultProfileImage)!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating
@@ -158,10 +160,15 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getProfileImageDownloadURL() -> URL? {
         
-        if let url = viewModel.userProfileImageURL {
-            return url
+        guard let path = viewModel.userProfileImagePath else {
+            return nil
         }
-        return nil
+        guard let url = URL(string: path) else {
+            return nil
+        }
+        return url
+        
     }
     
 }
+

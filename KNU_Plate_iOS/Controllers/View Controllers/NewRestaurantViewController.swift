@@ -30,10 +30,7 @@ class NewRestaurantViewController: UIViewController {
         viewModel.categoryName = details.category
         viewModel.latitude = details.latitude
         viewModel.longitude = details.longitude
-        
-    
-        print("configure longitude: \(details.longitude)")
-        print("configure latitude: \(details.latitude)")
+ 
     }
     
     @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {

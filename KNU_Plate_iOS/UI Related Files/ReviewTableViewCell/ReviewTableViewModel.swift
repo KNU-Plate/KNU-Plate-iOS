@@ -8,16 +8,9 @@ class ReviewTableViewModel {
     
     var userID: String = ""
     
-    var userProfileImagePath: String? {
-        didSet {
-            guard let path = userProfileImagePath else { return }
-            self.userProfileImageURL = URL(string: path)
-        }
-    }
+    var userProfileImagePath: String?
     
     var userProfileImageURL: URL?
-    
-    var userProfileImage: UIImage = UIImage(named: "default profile image")!
     
     var userNickname: String = ""
     
@@ -30,6 +23,7 @@ class ReviewTableViewModel {
     var reviewImagesFileFolder: FileFolder?
     
 
+    // 아래 함수 쓰이는 곳이 없는데 지우는거 고민
     func fetchProfileImageURL(with folderID: String) {
         
         FileManager.shared.searchFileFolder(fileFolderID: folderID) { file in
@@ -38,8 +32,18 @@ class ReviewTableViewModel {
             
         }
     }
-
     
-
+    func resetValues() {
+        
+        reviewID = 0
+        userID = ""
+        userProfileImagePath = nil
+        userProfileImageURL = nil
+        userNickname = ""
+        medal = 1
+        rating = 0
+        review = ""
+        reviewImagesFileFolder = nil
+    }
 
 }
