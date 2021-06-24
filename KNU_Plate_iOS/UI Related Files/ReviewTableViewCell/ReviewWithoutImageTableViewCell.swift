@@ -63,7 +63,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
     
     override func getReviewDetails() -> ReviewDetail {
 
-        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
+        let profileImage = userProfileImageView.image ?? UIImage(named: Constants.Images.defaultProfileImage)!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating

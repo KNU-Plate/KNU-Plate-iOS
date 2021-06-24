@@ -93,7 +93,7 @@ class ReviewTableViewCell: UITableViewCell {
         }
         
         if imageCount >= 2 {
-            multipleImageView.image = UIImage(named: "multiple images")
+            multipleImageView.image = UIImage(named: Constants.Images.multipleImageExistsIcon)
         } else {
             multipleImageView.image = nil
         }
@@ -128,7 +128,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     func getReviewDetails() -> ReviewDetail {
         
-        let profileImage = userProfileImageView.image ?? UIImage(named: "default profile image")!
+        let profileImage = userProfileImageView.image ?? UIImage(named: Constants.Images.defaultProfileImage)!
         let nickname = viewModel.userNickname
         let medal = viewModel.medal
         let rating = viewModel.rating

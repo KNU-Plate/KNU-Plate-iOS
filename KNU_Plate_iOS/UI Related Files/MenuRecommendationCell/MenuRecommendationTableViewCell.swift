@@ -69,8 +69,8 @@ class MenuRecommendationTableViewCell: UITableViewCell {
         if viewModel.totalLikes == 0 {
             
             progressBar.barBackgroundColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
-            likeImageView.image = UIImage(named: "thumbs up(gray2)")
-            dislikeImageView.image = UIImage(named: "thumbs down(gray2)")
+            likeImageView.image = UIImage(named: Constants.Images.thumbsUpInGray)
+            dislikeImageView.image = UIImage(named: Constants.Images.thumbsDownInGray)
             likeTitleLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
             dislikeTitleLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
             totalLikeNumberLabel.textColor = #colorLiteral(red: 0.7530117035, green: 0.753121376, blue: 0.7529876828, alpha: 1)
@@ -78,8 +78,8 @@ class MenuRecommendationTableViewCell: UITableViewCell {
         
         } else {
             
-            likeImageView.image = UIImage(named: "thumbs up(selected,edited2)")
-            dislikeImageView.image = UIImage(named: "thumbs down(selected,edited2)")
+            likeImageView.image = UIImage(named: Constants.Images.thumbsUpInBlue)
+            dislikeImageView.image = UIImage(named: Constants.Images.thumbsDownInRed)
         }
     
     }

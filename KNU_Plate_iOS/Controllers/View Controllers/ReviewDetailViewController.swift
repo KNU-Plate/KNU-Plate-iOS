@@ -68,7 +68,7 @@ class ReviewDetailViewController: UIViewController {
         
         // 리뷰 이미지가 없으면
         if !reviewImageExists {
-            reviewImageView.image = UIImage(named: "default review image")
+            reviewImageView.image = UIImage(named: Constants.Images.defaultReviewImage)
             return
         }
         

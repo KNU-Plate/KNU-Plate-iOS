@@ -5,10 +5,10 @@ import ProgressHUD
 public func setUserMedalImage(medalRank: Int) -> UIImage {
     
     switch medalRank {
-    case 1: return UIImage(named: "first medal")!
-    case 2: return UIImage(named: "second medal")!
-    case 3: return UIImage(named: "third medal")!
-    default: return UIImage(named: "third medal")!
+    case 1: return UIImage(named: Constants.Images.firstMedal)!
+    case 2: return UIImage(named: Constants.Images.secondMedal)!
+    case 3: return UIImage(named: Constants.Images.thirdMedal)!
+    default: return UIImage(named: Constants.Images.thirdMedal)!
     }
 }
 

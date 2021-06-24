@@ -15,7 +15,6 @@ class MyPageViewController: UIViewController {
     lazy var imagePicker = UIImagePickerController()
     lazy var preferences = EasyTipView.Preferences()
     
-    var tableViewOptions: [String] = ["개발자에게 건의사항 보내기","설정","서비스 이용약관"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,6 @@ class MyPageViewController: UIViewController {
         initialize()
         loadUserProfileInfo()
         
-     
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
@@ -129,7 +127,7 @@ extension MyPageViewController {
                               message: "프로필 사진 제거 성공 🎉",
                               duration: .lengthLong).show()
                 DispatchQueue.main.async {
-                    self.profileImageButton.setImage(UIImage(named: "pick profile pic(black)")!, for: .normal)
+                    self.profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage)!, for: .normal)
                     self.initializeProfileImageButton()
                     User.shared.profileImage = nil
                 }
@@ -219,11 +217,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         
         case 0:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         case 1:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         case 2:
-            cell.textLabel?.text = tableViewOptions[indexPath.row]
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         default: break
         }
         return cell

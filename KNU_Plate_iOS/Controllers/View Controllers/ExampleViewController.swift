@@ -20,9 +20,9 @@ class ExampleViewController: UIViewController {
         tableView.dataSource = self
         
         
-        let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
+        let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
         let cellID = Constants.CellIdentifier.reviewTableViewCell
-        let reviewWithoutImageNib = UINib(nibName: "ReviewWithoutImageTableViewCell", bundle: nil)
+        let reviewWithoutImageNib = UINib(nibName: Constants.XIB.reviewWithoutImageTableViewCell, bundle: nil)
         let cellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
         tableView.register(reviewNib, forCellReuseIdentifier: cellID)
         tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: cellID2)
@@ -109,7 +109,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
                                                    options: .continueInBackground,
                                                    completed: nil)
             reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
-                                                        placeholderImage: UIImage(named: "default profile image"),
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                         options: .continueInBackground,
                                                         completed: nil)
             
@@ -128,7 +128,7 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
             let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
 
             reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
-                                                                           placeholderImage: UIImage(named: "default profile image"),
+                                                                placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                                            options: .continueInBackground,
                                                                            completed: nil)
             

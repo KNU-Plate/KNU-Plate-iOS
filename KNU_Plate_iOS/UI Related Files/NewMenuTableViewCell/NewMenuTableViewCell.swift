@@ -49,12 +49,7 @@ class NewMenuTableViewCell: UITableViewCell {
         thumbsDownSelected = thumbsDownSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
         thumbsDownNotSelected = thumbsDownNotSelected.scalePreservingAspectRatio(targetSize: CGSize(width: buttonImageSize, height: buttonImageSize))
         
-        
-        
-        let font = UIFont.systemFont(ofSize: 25)
-        let configuration = UIImage.SymbolConfiguration(font: font)
-        let deleteImage = UIImage(named: "delete button")
-        //let deleteImage = UIImage(systemName: "x.circle", withConfiguration: configuration)
+        let deleteImage = UIImage(named: Constants.Images.deleteButton)
         deleteButton.setImage(deleteImage, for: .normal)
         
     }
