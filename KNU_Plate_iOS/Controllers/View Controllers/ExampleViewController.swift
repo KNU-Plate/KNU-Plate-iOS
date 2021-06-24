@@ -57,6 +57,10 @@ class ExampleViewController: UIViewController {
         viewModel.fetchReviewList()
     }
     
+    override func didMove(toParent parent: UIViewController?) {
+        parentVC = parent as? RestaurantViewController
+    }
+    
 }
 
 //MARK: - ReviewListViewModelDelegate
