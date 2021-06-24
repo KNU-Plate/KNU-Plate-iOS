@@ -8,7 +8,7 @@ class ExampleViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
-    private var viewModel = ReviewListViewModel()
+    var viewModel = ReviewListViewModel()
     
     private let refreshControl = UIRefreshControl()
     
@@ -33,24 +33,18 @@ class ExampleViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.reviewList.removeAll()
-        
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //viewModel.fetchReviewList(of: 2)
+
         viewModel.fetchReviewList()
     }
     
        
     @objc func refreshTable() {
         viewModel.resetValues()
-//        viewModel.needsToFetchMoreData = true
-//        viewModel.isPaginating = false
-        //viewModel.fetchReviewList(of: 2)
-
         viewModel.fetchReviewList()
     }
 }
@@ -166,7 +160,10 @@ extension ExampleViewController: ReviewTableViewCellDelegate {
     func goToReportReviewVC(reviewID: Int, displayName: String) {
     
         guard displayName != User.shared.displayName else {
-            self.presentSimpleAlert(title: "본인 게시글을 본인이 신고할 수는 없습니다 🤔", message: "")
+            
+            SnackBar.make(in: self.view,
+                          message: "본인 게시글을 본인이 신고할 수는 없습니다 🤔",
+                          duration: .lengthLong).show()
             return
         }
    
@@ -209,24 +206,3 @@ extension ExampleViewController: UIScrollViewDelegate {
         }
     }
 }
-
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        let position = scrollView.contentOffset.y
-//
-//        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-//
-//            guard !viewModel.isPaginating else { return }
-//
-//            if viewModel.needsToFetchMoreData {
-//                tableView.tableFooterView = createSpinnerFooter()
-//
-//                let indexToFetch = viewModel.reviewList.count
-//                viewModel.fetchReviewList(pagination: true, of: 2, at: indexToFetch)
-//
-//                tableView.tableFooterView = nil
-//            } else { return }
-//        }
-//    }
-
