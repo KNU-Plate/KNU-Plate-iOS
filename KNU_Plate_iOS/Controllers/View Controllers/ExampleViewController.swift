@@ -16,9 +16,8 @@ class ExampleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("+++++ ExampleViewController viewDidLoad")
+
         
- 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInsetAdjustmentBehavior = .never
@@ -186,9 +185,7 @@ extension ExampleViewController: ReviewTableViewCellDelegate {
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
             fatalError()
         }
-        
         vc.reviewID = reviewID
-    
         self.present(vc, animated: true)
     }
 }
