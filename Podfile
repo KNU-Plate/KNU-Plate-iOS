@@ -20,5 +20,6 @@ target 'KNU_Plate_iOS' do
   pod "GTProgressBar"
   pod "ViewAnimator"
   pod 'EasyTipView', '~> 2.1'
+  pod 'PanModal'
 
 end
