@@ -77,7 +77,6 @@ class UserManager {
     }
     
     //MARK: - 로그인
-    //TODO: - multipartFormData 로 되어있던데 확인해보기
     func logIn(with model: LoginInfoModel,
                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
@@ -99,9 +98,8 @@ class UserManager {
                     do {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                    from: response.data!)
-                        self.saveAccessToken(with: decodedData)
+                        self.saveLoginInfo(with: decodedData)
                         User.shared.isLoggedIn = true
-                        
                         
                         print("Access Token in Keychain: \(User.shared.accessToken)")
                         completion(.success(true))
@@ -424,12 +422,12 @@ class UserManager {
     }
 }
 
+//MARK: - 사용자 정보를 로컬에 저장하는 메서드 모음
 
 extension UserManager {
     
     func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
-        
-        //TODO: - 추후 Password 같은 민감한 정보는 Key Chain 에 저장하도록 변경 -> KeyChainWrapper 이용하기
+
         User.shared.id = model.userID
         User.shared.username = model.username
         User.shared.displayName = model.displayName
@@ -466,16 +464,24 @@ extension UserManager {
         }
     }
     
-    func saveAccessToken(with model: LoginResponseModel) {
+    func saveLoginInfo(with model: LoginResponseModel) {
         
         User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
                                                                     forKey: Constants.KeyChainKey.accessToken)
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
+    
+        User.shared.id = model.user.userID
+        User.shared.username = model.user.username
+        User.shared.displayName = model.user.displayName
+        User.shared.email = model.user.mailAddress
+        User.shared.medal = model.user.medal
+        //User.shared.profileImageLink = model.user.userProfileImageFolderID
         
-        print("UserManager - saveAccessToken success ")
+        
+        
+        print("UserManager - saveLoginInfo success ")
         print("New accessToken: \(User.shared.accessToken)")
-        print("New refreshToken: \(User.shared.refreshToken)")
     }
     
     

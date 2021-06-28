@@ -110,7 +110,7 @@ extension Interceptor {
                     case 200:
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
-                            UserManager.shared.saveAccessToken(with: decodedData)
+                            UserManager.shared.saveLoginInfo(with: decodedData)
                             print("successfully refreshed NEW token: \(User.shared.accessToken)")
                             completion(.success(true))
                         } catch {

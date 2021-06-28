@@ -201,7 +201,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return Constants.myPageTableViewOptions.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -221,6 +221,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         case 2:
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
+        case 3:
+            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
+        case 4:
             cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         default: break
         }

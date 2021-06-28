@@ -3,7 +3,8 @@ import UIKit
 
 struct Constants {
     
-    static let API_BASE_URL = "http://3.35.58.40:4100/api/"
+    //static let API_BASE_URL = "http://3.35.58.40:4100/api/"
+    static let API_BASE_URL = "http://222.104.199.114:4100/api/"
     
     
     //MARK: - Identifiers
@@ -61,6 +62,15 @@ struct Constants {
         static let goChangePassword             = "goChangePassword"
     }
     
+    //MARK: - Keys
+    
+    struct KeyChainKey {
+        
+        static let accessToken                  = "accessToken"
+        static let refreshToken                 = "refreshToken"
+        static let password                     = "password"
+    }
+    
     struct UserDefaultsKey {
         
         static let isLoggedIn                   = "isLoggedIn"
@@ -70,15 +80,6 @@ struct Constants {
         static let email                        = "email"
         static let medal                        = "medal"
         
-    }
-    
-    //MARK: - Keys
-    
-    struct KeyChainKey {
-        
-        static let accessToken                  = "accessToken"
-        static let refreshToken                 = "refreshToken"
-        static let password                     = "password"
     }
     
     
@@ -154,7 +155,7 @@ struct Constants {
         "🌎 세계음식","☕️ 카페", "🍹 술집"
     ]
     
-    static let myPageTableViewOptions: [String] = ["개발자에게 건의사항 보내기", "설정", "서비스 이용약관"]
+    static let myPageTableViewOptions: [String] = ["개발자에게 건의사항 보내기", "설정", "서비스 이용약관", "개발자 정보", "오픈 소스 라이센스"]
     
     
     

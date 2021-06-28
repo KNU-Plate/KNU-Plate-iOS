@@ -89,7 +89,6 @@ class User {
     var profileImage: UIImage?
     
     var isLoggedIn: Bool {
-        
         get {
             return UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLoggedIn)
         }
@@ -106,7 +105,14 @@ class User {
         self.email = ""
         self.dateCreated = ""
         self.password = ""
-        self.isLoggedIn = false
+   
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.username)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.displayName)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.email)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.medal)
+        
         
         self.savedAccessToken = false
         self.savedRefreshToken = false

@@ -12,6 +12,7 @@ class SearchListViewController: UITableViewController {
     
     var placeName: [String] = [String]()
     var address: [String] = [String]()
+    var searchResultCount: Int = 0
     
     var delegate: SearchListDelegate?
     
@@ -32,6 +33,7 @@ class SearchListViewController: UITableViewController {
 extension SearchListViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return placeName.count
     }
  
@@ -43,11 +45,18 @@ extension SearchListViewController {
             fatalError()
         }
         
+        print("✏️ searchResultCount: \(searchResultCount)")
+        
         /// 검색된 결과가 있을 경우
         if placeName.count != 0 {
             
             cell.textLabel?.text = placeName[indexPath.row]
             cell.detailTextLabel?.text = address[indexPath.row]
+        }
+        
+        else {
+            cell.textLabel?.text = "검색 결과가 없습니다 🤔"
+            cell.detailTextLabel?.text = "매장명을 다시 확인해주세요."
         }
         return cell
     }
@@ -69,5 +78,13 @@ extension SearchListViewController: PanModalPresentable {
     
     var panScrollable: UIScrollView? {
         return searchResultTableView
+    }
+    
+    var shortFormHeight: PanModalHeight {
+        return .contentHeight(300)
+    }
+    
+    var longFormHeight: PanModalHeight {
+        return .maxHeightWithTopInset(50)
     }
 }

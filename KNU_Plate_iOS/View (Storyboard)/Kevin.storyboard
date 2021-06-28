@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3CD-QF-9Ve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -894,7 +894,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBk-g4-AKJ" userLabel="Map View" customClass="MTMapView">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="115" width="375" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-b6-h2U" userLabel="Next Button">
@@ -921,7 +921,7 @@
                             <constraint firstAttribute="bottom" secondItem="TBk-g4-AKJ" secondAttribute="bottom" id="M2i-8u-G8c"/>
                             <constraint firstItem="hgJ-n8-Bee" firstAttribute="trailing" secondItem="TBk-g4-AKJ" secondAttribute="trailing" id="OqC-9d-ftJ"/>
                             <constraint firstItem="8Mz-6L-egV" firstAttribute="leading" secondItem="hgJ-n8-Bee" secondAttribute="leading" id="Pbp-lc-vMl"/>
-                            <constraint firstItem="TBk-g4-AKJ" firstAttribute="top" secondItem="8Mz-6L-egV" secondAttribute="bottom" constant="10" id="Q9Q-Dx-jah"/>
+                            <constraint firstItem="TBk-g4-AKJ" firstAttribute="top" secondItem="8Mz-6L-egV" secondAttribute="bottom" id="Q9Q-Dx-jah"/>
                             <constraint firstItem="TBk-g4-AKJ" firstAttribute="leading" secondItem="hgJ-n8-Bee" secondAttribute="leading" id="cKD-Wy-b4z"/>
                             <constraint firstItem="8Mz-6L-egV" firstAttribute="trailing" secondItem="hgJ-n8-Bee" secondAttribute="trailing" id="kPV-iN-jcV"/>
                         </constraints>
@@ -1697,12 +1697,9 @@
                                     <constraint firstAttribute="width" constant="25" id="uQS-SL-gIl"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QVo-TS-4Ii">
-                                <rect key="frame" x="0.0" y="190" width="375" height="220"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QVo-TS-4Ii">
+                                <rect key="frame" x="0.0" y="190" width="375" height="477"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="220" id="WQU-lO-HpT"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="myPageCell" textLabel="lcs-Ii-eMj" rowHeight="56" style="IBUITableViewCellStyleDefault" id="GSp-Xd-NcW">
                                         <rect key="frame" x="0.0" y="24.5" width="375" height="56"/>
@@ -1747,6 +1744,7 @@
                             <constraint firstItem="7G2-8S-Y4J" firstAttribute="leading" secondItem="QYK-HP-QV1" secondAttribute="trailing" constant="15" id="Mve-Nv-whL"/>
                             <constraint firstItem="7BU-FE-vVV" firstAttribute="trailing" secondItem="QVo-TS-4Ii" secondAttribute="trailing" id="O05-ea-dfZ"/>
                             <constraint firstItem="dpC-T1-xTk" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="10" id="TFX-8g-vu2"/>
+                            <constraint firstItem="7BU-FE-vVV" firstAttribute="bottom" secondItem="QVo-TS-4Ii" secondAttribute="bottom" id="XcV-A6-Zr8"/>
                             <constraint firstItem="QYK-HP-QV1" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="40" id="b5T-U9-hko"/>
                             <constraint firstItem="QVo-TS-4Ii" firstAttribute="leading" secondItem="brH-jB-qJ9" secondAttribute="leading" id="lKB-yd-Cf0"/>
                             <constraint firstItem="TXK-Fy-VqP" firstAttribute="leading" secondItem="dpC-T1-xTk" secondAttribute="trailing" constant="25" id="oIQ-KL-MZg"/>

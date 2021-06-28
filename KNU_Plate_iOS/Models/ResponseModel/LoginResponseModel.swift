@@ -8,4 +8,5 @@ struct LoginResponseModel: Decodable {
     let refreshToken: String
     let expires: Double
     let expires_refresh: Double
+    let user: UserDisplayModel
 }

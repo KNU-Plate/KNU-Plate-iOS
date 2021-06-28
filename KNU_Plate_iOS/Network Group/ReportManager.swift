@@ -75,6 +75,7 @@ class ReportManager {
             switch statusCode {
             
             case 200:
+                print("✏️ ReportManager - sendSuggestion success")
                 completion(.success(true))
             
             default:

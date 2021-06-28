@@ -294,15 +294,13 @@ class SearchRestaurantViewController: UIViewController {
 extension SearchRestaurantViewController: SearchRestaurantViewModelDelegate {
 
     func didFetchSearchResults() {
-        //searchResultTableView.reloadData()
-    
-        print("✏️ didFetchSearchResults")
         
         guard let searchModalVC = self.storyboard?.instantiateViewController(identifier: "SearchListViewController")
                 as? SearchListViewController else { return }
 
         searchModalVC.placeName = viewModel.placeName
         searchModalVC.address = viewModel.address
+        searchModalVC.searchResultCount = viewModel.placeName.count
         searchModalVC.delegate = self
         
         presentPanModal(searchModalVC)
