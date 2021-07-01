@@ -44,7 +44,7 @@ class ReviewTableViewCell: UITableViewCell {
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
-        viewModel.medal = model.userInfo.medal ?? 3
+        viewModel.medal = model.userInfo.medal
         viewModel.review = model.review
         viewModel.rating = model.rating
         
@@ -105,6 +105,7 @@ class ReviewTableViewCell: UITableViewCell {
                                  for: .touchUpInside)
     }
     
+    // 더보기 버튼
     @objc func showMoreOptions() {
         
         let actionSheet = UIAlertController(title: nil,
@@ -128,6 +129,7 @@ class ReviewTableViewCell: UITableViewCell {
         vc?.present(actionSheet, animated: true)
     }
     
+    // ReviewDetailVC 로 넘아갈때 필요한 정보 전달용 함수
     func getReviewDetails() -> ReviewDetail {
         
         let profileImage = userProfileImageView.image ?? UIImage(named: Constants.Images.defaultProfileImage)!
@@ -145,7 +147,7 @@ class ReviewTableViewCell: UITableViewCell {
                                          review: review)
         return reviewDetails
     }
-    
+
     func getReviewImageDownloadURL() -> URL? {
         
         let path = viewModel.reviewImagesFileFolder?.files?[0].path

@@ -161,6 +161,7 @@ extension ChangeNicknameViewController {
     
     func initializeTextField() {
         
+        nicknameTextField.placeholder = User.shared.displayName
         nicknameTextField.delegate = self
     }
     

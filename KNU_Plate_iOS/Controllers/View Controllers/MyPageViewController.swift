@@ -18,6 +18,8 @@ class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+ 
     
         initialize()
         loadUserProfileInfo()
