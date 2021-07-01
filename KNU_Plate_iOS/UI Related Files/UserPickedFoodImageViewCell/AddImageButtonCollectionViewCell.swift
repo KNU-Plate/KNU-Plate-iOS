@@ -29,8 +29,6 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
         
         vc?.presentImagePicker(imagePicker, select: { (asset) in
             
-            
-            
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
    
         }, deselect: { (asset) in

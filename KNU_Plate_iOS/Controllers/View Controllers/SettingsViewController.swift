@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func pressedLogOutButton(_ sender: UIButton) {
      
-        self.presentAlertWithCancelAction(title: "정말 로그아웃 하시겠습니까?",
+        self.presentAlertWithConfirmAction(title: "정말 로그아웃 하시겠습니까?",
                                           message: "") { selectedOk in
             
             if selectedOk {
@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func pressedUnregisterButton(_ sender: UIButton) {
         
-        self.presentAlertWithCancelAction(title: "정말 회원 탈퇴를 하시겠습니까?",
+        self.presentAlertWithConfirmAction(title: "정말 회원 탈퇴를 하시겠습니까?",
                                           message: "다시 한 번만 더 생각해주세요 😥") { selectedOk in
             
             if selectedOk {

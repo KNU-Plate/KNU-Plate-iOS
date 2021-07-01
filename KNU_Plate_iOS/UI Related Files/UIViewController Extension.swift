@@ -1,8 +1,10 @@
 import Foundation
+import SnackBar_swift
 
 extension UIViewController {
     
-    func presentAlertWithCancelAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
+    // 확인 버튼을 누를 수 있는 Alert 띄우기
+    func presentAlertWithConfirmAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
         
         let alertController = UIAlertController(title: title,
                                                 message: message,
@@ -23,6 +25,7 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    // 가장 기본적인 Alert 띄우기
     func presentSimpleAlert(title: String, message: String) {
         
         let alertController = UIAlertController(title: title,
@@ -36,6 +39,7 @@ extension UIViewController {
         self.present(alertController, animated: true)
     }
     
+    // 가장 첫 번째 화면으로 돌아가기 - 로그아웃, 회원탈퇴, refreshToken 만료 시에 쓰임
     func popToWelcomeViewController() {
         
         UserManager.shared.resetAllUserInfo()
@@ -73,5 +77,26 @@ extension UIViewController {
                        completion: { isCompleted in
                         toastLabel.removeFromSuperview()
                        })
+    }
+    
+    // SnackBar 라이브러리의 message 띄우기
+    func showSimpleBottomAlert(with message: String) {
+        SnackBar.make(in: self.view,
+                      message: message,
+                      duration: .lengthLong).show()
+    }
+    
+    // SnackBar 라이브러리의 액션이 추가된 message 띄우기
+    func showSimpleBottomAlertWithAction(message: String,
+                                         buttonTitle: String,
+                                         action: (() -> Void)? = nil) {
+        SnackBar.make(in: self.view,
+                      message: message,
+                      duration: .lengthLong).setAction(
+                        with: buttonTitle,
+                        action: {
+                            action?()
+                        }).show()
+        
     }
 }

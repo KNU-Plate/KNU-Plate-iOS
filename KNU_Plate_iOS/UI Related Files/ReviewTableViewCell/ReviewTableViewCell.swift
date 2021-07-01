@@ -147,7 +147,8 @@ class ReviewTableViewCell: UITableViewCell {
                                          review: review)
         return reviewDetails
     }
-
+    
+    // 리뷰 이미지 다운로드 URL 반환
     func getReviewImageDownloadURL() -> URL? {
         
         let path = viewModel.reviewImagesFileFolder?.files?[0].path
@@ -160,6 +161,7 @@ class ReviewTableViewCell: UITableViewCell {
         return nil
     }
     
+    // 프로필 이미지 다운로드 URL 반환
     func getProfileImageDownloadURL() -> URL? {
         
         guard let path = viewModel.userProfileImagePath else {

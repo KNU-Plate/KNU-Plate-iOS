@@ -15,7 +15,7 @@ class MapManager {
     
     //MARK: - 키워드로 장소 검색
     func searchByKeyword(with model: SearchRestaurantByKeywordModel,
-                         completion: @escaping ((SearchRestaurantByKeywordResponseModel) -> Void)) {
+                         completion: @escaping ((Result<SearchRestaurantByKeywordResponseModel,NetworkError>) -> Void)) {
         
         AF.request(searchByKeywordRequestURL,
                    method: .get,
@@ -30,16 +30,16 @@ class MapManager {
                         do {
                             let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
                                                                        from: response.data!)
-                            completion(decodedData)
+                            completion(.success(decodedData))
                             
                         } catch {
+                            completion(.failure(.internalError))
                             print("There was an error decoding JSON Data (KakaoMap)")
                         }
                     default:
+                        completion(.failure(.internalError))
                         print("default activated in MAPMANAGER")
                     }
                    }
     }
-    
-    
 }

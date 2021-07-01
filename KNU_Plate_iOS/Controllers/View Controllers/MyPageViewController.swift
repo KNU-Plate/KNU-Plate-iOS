@@ -19,8 +19,6 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
-    
         initialize()
         loadUserProfileInfo()
         
@@ -57,7 +55,7 @@ class MyPageViewController: UIViewController {
         let remove = UIAlertAction(title: "프로필 사진 제거",
                                    style: .default) { _ in
             
-            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+            self.presentAlertWithConfirmAction(title: "프로필 사진 제거",
                                               message: "정말로 제거하시겠습니까?") { selectedOk in
                 
                 if selectedOk { self.removeProfileImage() }
@@ -106,7 +104,6 @@ extension MyPageViewController {
                 }
             case .failure(let error):
                 print("\(error.errorDescription)")
-                //self.loadUserProfileInfo()
                 SnackBar.make(in: self.view,
                               message: "프로필 정보 불러오기에 실패하였습니다 🥲",
                               duration: .lengthLong).setAction(with: "재시도", action: {
@@ -178,7 +175,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
             dismiss(animated: true) {
-                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                self.presentAlertWithConfirmAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
                 
                     if selectedOk {
                         showProgressBar()

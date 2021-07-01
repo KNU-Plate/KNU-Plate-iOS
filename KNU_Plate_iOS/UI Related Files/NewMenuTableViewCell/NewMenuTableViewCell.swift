@@ -18,11 +18,11 @@ class NewMenuTableViewCell: UITableViewCell {
     var menuIsGood: Bool = true
     var indexPath: Int = 0
     
-    var thumbsUpSelected: UIImage = UIImage(named: "thumbs up(selected)")!
-    var thumbsUpNotSelected: UIImage = UIImage(named: "thumbs up(not_selected)")!
+    var thumbsUpSelected: UIImage = UIImage(named: Constants.Images.thumbsUpSelected)!
+    var thumbsUpNotSelected: UIImage = UIImage(named: Constants.Images.thumbsUpNotSelected)!
     
-    var thumbsDownSelected: UIImage = UIImage(named: "thumbs down(selected)")!
-    var thumbsDownNotSelected: UIImage = UIImage(named: "thumbs down(not_selected)")!
+    var thumbsDownSelected: UIImage = UIImage(named: Constants.Images.thumbsDownSelected)!
+    var thumbsDownNotSelected: UIImage = UIImage(named: Constants.Images.thumbsDownNotSelected)!
     
     var buttonImageSize: Int = 25
     

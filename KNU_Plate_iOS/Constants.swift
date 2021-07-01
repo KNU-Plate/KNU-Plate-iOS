@@ -106,6 +106,12 @@ struct Constants {
         static let thumbsUpInBlue                           = "thumbs up(selected,edited2)"
         static let thumbsDownInRed                          = "thumbs down(selected,edited2)"
         
+        // NewMenuTableViewCell
+        static let thumbsUpSelected                         = "thumbs up(selected)"
+        static let thumbsUpNotSelected                      = "thumbs up(not_selected)"
+        static let thumbsDownSelected                       = "thumbs down(selected)"
+        static let thumbsDownNotSelected                    = "thumbs down(not_selected)"
+         
         // ReviewTableViewCell
         static let multipleImageExistsIcon                  = "multiple images"
         

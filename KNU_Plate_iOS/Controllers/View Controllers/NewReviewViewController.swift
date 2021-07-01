@@ -90,7 +90,7 @@ class NewReviewViewController: UIViewController {
         
         self.view.endEditing(true)
         
-        self.presentAlertWithCancelAction(title: "리뷰를 업로드 하시겠습니까?", message: "") { selectedOk in
+        self.presentAlertWithConfirmAction(title: "리뷰를 업로드 하시겠습니까?", message: "") { selectedOk in
              
             if !selectedOk { return }
             else {
