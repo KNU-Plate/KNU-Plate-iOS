@@ -77,7 +77,7 @@ final class Interceptor: RequestInterceptor {
             }
         default:
             
-            if request.retryCount > 5 {
+            if request.retryCount > 3 {
                 print("Interceptor retry() error: \(error)")
                 completion(.doNotRetry)
             }

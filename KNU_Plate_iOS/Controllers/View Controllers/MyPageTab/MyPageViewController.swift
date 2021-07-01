@@ -15,10 +15,11 @@ class MyPageViewController: UIViewController {
     lazy var imagePicker = UIImagePickerController()
     lazy var preferences = EasyTipView.Preferences()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        Test.shared.login()
         initialize()
         loadUserProfileInfo()
         
@@ -205,21 +206,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
         
         cell.textLabel?.font = .systemFont(ofSize: 17)
+        cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         
-        switch indexPath.row {
-        
-        case 0:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 1:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 2:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 3:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 4:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        default: break
-        }
         return cell
     }
     
@@ -229,13 +217,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.noticeViewController) else { return }
             pushViewController(with: vc)
         case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
             pushViewController(with: vc)
         case 2:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
+            pushViewController(with: vc)
+        case 3:
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsViewController) else { return }
+            pushViewController(with: vc)
+        case 4:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.developerInfoViewController) else { return }
+            pushViewController(with: vc)
+        case 5:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.openSourceInfoViewController) else { return }
             pushViewController(with: vc)
         default: return
         }
@@ -245,6 +242,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+//MARK: - EasyTipViewDelegate
 
 extension MyPageViewController: EasyTipViewDelegate {
     

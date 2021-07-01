@@ -24,7 +24,7 @@ enum NetworkError: Int, Error {
         case .badRequest:
             return "일시적인 오류입니다. 잠시 후 다시 시도해주세요😢"
         case .internalError:
-            return "개발팀도 예상치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요😢"
+            return "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요😢"
         case .notFound:
             return "요청히신 작업을 처리할 수 없습니다. 잠시 후 다시 시도해주세요😢 "
         case .unauthorized:

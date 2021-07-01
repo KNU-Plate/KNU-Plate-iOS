@@ -94,23 +94,23 @@ class UserManager {
                 switch statusCode {
                 
                 case 200:
-                    print("UserManager - login SUCCESS")
+                    print("✏️ UserManager - login SUCCESS")
                     do {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                    from: response.data!)
                         self.saveLoginInfo(with: decodedData)
                         User.shared.isLoggedIn = true
                         
-                        print("Access Token in Keychain: \(User.shared.accessToken)")
+                        print("✏️ Access Token in Keychain: \(User.shared.accessToken)")
                         completion(.success(true))
                         
                     } catch {
-                        print("UserManager - logIn catch ERROR: \(error)")
+                        print("✏️ UserManager - logIn catch ERROR: \(error)")
                         completion(.failure(.internalError))
                     }
                     
                 default:
-                    print("UserManager - login FAILED with statusCode: \(statusCode)")
+                    print("✏️ UserManager - login FAILED with statusCode: \(statusCode)")
                     let error = NetworkError.returnError(statusCode: statusCode)
                     completion(.failure(error))
                 }
@@ -191,7 +191,7 @@ class UserManager {
                 default:
                     
                     let error = NetworkError.returnError(statusCode: statusCode)
-                    print("UserManager - 이미 존재하는 닉네임: \(error.errorDescription)")
+                    print("✏️ UserManager - 이미 존재하는 닉네임: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
@@ -230,15 +230,18 @@ class UserManager {
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
+        let name: Parameters = ["name": User.shared.displayName]
+        
         AF.request(loadUserProfileInfoURL,
                    method: .get,
+                   parameters: name,
                    interceptor: interceptor)
             .validate()
             .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
-                print("loadUserProfileInfo statusCode: \(statusCode)")
+                print("✏️ loadUserProfileInfo statusCode: \(statusCode)")
                 
                 switch statusCode {
                 
@@ -249,13 +252,13 @@ class UserManager {
                         completion(.success(true))
                         
                     } catch {
-                        print("UserManager - loadUserProfileInfo() catch ERROR: \(error)")
+                        print("❗️ UserManager - loadUserProfileInfo() catch ERROR: \(error)")
                         completion(.failure(.internalError))
                     }
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
                     
-                    print("UserManager - loadUserProfileInfo() default activated with error: \(error.errorDescription)")
+                    print("❗️ UserManager - loadUserProfileInfo() default activated with error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
@@ -285,11 +288,11 @@ class UserManager {
             case 200:
                 
                 User.shared.displayName = model.nickname!
-                print("UserManager - 닉네임 변경 성공")
+                print("✏️ UserManager - 닉네임 변경 성공")
                 completion(.success(true))
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
-                print("UserManager - updateNickname error: \(error.errorDescription)")
+                print("❗️ UserManager - updateNickname error: \(error.errorDescription)")
                 completion(.failure(error))
             }
         }

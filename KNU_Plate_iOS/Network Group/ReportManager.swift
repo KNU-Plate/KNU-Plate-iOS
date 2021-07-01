@@ -56,8 +56,6 @@ class ReportManager {
     func sendSuggestion(content: String,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        //let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
-        
         AF.upload(multipartFormData: { multipartFormData in
             
             multipartFormData.append("..".data(using: .utf8)!,
