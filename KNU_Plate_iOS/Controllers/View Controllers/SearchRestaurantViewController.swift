@@ -155,6 +155,7 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
 }
 
 //MARK: - UITableViewDelegate & UITableViewDataSource
+//TODO: - 아래는 지우는거 고민
 
 extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -180,6 +181,8 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("✏️ viewModel.totalCount == \(viewModel.totalCount)")
         
         mapView.removeAllPOIItems()
         let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
@@ -233,12 +236,7 @@ extension SearchRestaurantViewController {
         searchBar.delegate = self
         searchBar.placeholder = "방문하신 매장을 검색해 주세요."
     }
-    
-//    func initializeTableView() {
-//
-//        searchResultTableView.dataSource = self
-//        searchResultTableView.delegate = self
-//    }
+
     
     func initializeButton() {
         

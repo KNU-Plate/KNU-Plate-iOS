@@ -64,6 +64,12 @@ extension SearchListViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if searchResultCount == 0 {
+            return
+        }
+        
         self.delegate?.didChoosePlace(index: indexPath.row)
         self.dismiss(animated: true, completion: nil)
         return
