@@ -22,10 +22,7 @@ class SearchListViewController: UITableViewController {
 
         searchResultTableView.delegate = self
         searchResultTableView.dataSource = self
-  
     }
-    
-    
 }
 
 //MARK: - SearchListViewController
@@ -34,7 +31,11 @@ extension SearchListViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return placeName.count
+        if placeName.count > 0 {
+            return placeName.count
+        } else {
+            return 1
+        }
     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

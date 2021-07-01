@@ -28,14 +28,10 @@ class ChangePasswordViewController: UIViewController {
             
             switch result {
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "비밀번호 변경 성공 🎉",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "비밀번호 변경 성공 🎉")
          
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
             }
         }
     }
@@ -49,16 +45,12 @@ class ChangePasswordViewController: UIViewController {
         
         guard !password.isEmpty,
               !checkPassword.isEmpty else {
-            SnackBar.make(in: self.view,
-                          message: "빈 칸이 없는지 확인해주세요 🥲",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해주세요 🥲")
             return false
         }
         
         guard password == checkPassword else {
-            SnackBar.make(in: self.view,
-                          message: "비밀번호가 일치하지 않습니다 🥲",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "비밀번호가 일치하지 않습니다 🥲")
             return false
         }
         
@@ -66,9 +58,7 @@ class ChangePasswordViewController: UIViewController {
               password.count < 30,
               checkPassword.count >= 4,
               checkPassword.count < 30 else {
-            SnackBar.make(in: self.view,
-                          message: "비밀번호는 4자 이상, 30자 미만으로 입력해주세요 🥲",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "비밀번호는 4자 이상, 30자 미만으로 입력해주세요 🥲")
             return false
         }
         return true

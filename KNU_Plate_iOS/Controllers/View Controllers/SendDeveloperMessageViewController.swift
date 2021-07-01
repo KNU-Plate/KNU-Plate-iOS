@@ -29,9 +29,7 @@ class SendDeveloperMessageViewController: UIViewController {
             switch result {
             
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "건의사항을 성공적으로 전송하였습니다😁",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "건의사항을 성공적으로 전송하였습니다 😁")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
@@ -78,9 +76,7 @@ extension SendDeveloperMessageViewController {
         
         if content.count >= 3 { return true }
         else {
-            SnackBar.make(in: self.view,
-                          message: "건의 내용을 3글자 이상 적어주세요 👀",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "건의 내용을 3글자 이상 적어주세요 👀")
             return false
         }
     }

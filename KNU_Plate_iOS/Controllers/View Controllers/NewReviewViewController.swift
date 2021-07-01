@@ -63,23 +63,20 @@ class NewReviewViewController: UIViewController {
             
             switch error {
             
+            // 메뉴 개수가 너무 많은 경우
             case NewReviewInputError.tooMuchMenusAdded:
-                SnackBar.make(in: self.view,
-                              message: "\(NewReviewInputError.tooMuchMenusAdded.errorDescription) 🥲",
-                              duration: .lengthLong).show()
+                showSimpleBottomAlert(with: "\(NewReviewInputError.tooMuchMenusAdded.errorDescription) 🥲")
+                
+            // 메뉴 이름이 너무 짧은 경우
             case NewReviewInputError.menuNameTooShort:
-                SnackBar.make(in: self.view,
-                              message: "\(NewReviewInputError.menuNameTooShort.errorDescription) 🥲",
-                              duration: .lengthLong).show()
+                showSimpleBottomAlert(with: "\(NewReviewInputError.menuNameTooShort.errorDescription) 🥲")
+
+            // 똑같은 메뉴를 이미 입력한 경우 (DB가 아닌 사용자 입력)
             case NewReviewInputError.alreadyExistingMenu:
-                SnackBar.make(in: self.view,
-                              message: "\(NewReviewInputError.alreadyExistingMenu.errorDescription) 🥲",
-                              duration: .lengthLong).show()
+                showSimpleBottomAlert(with: "\(NewReviewInputError.alreadyExistingMenu.errorDescription) 🥲")
+ 
             default:
-                SnackBar.make(in: self.view,
-                              message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
-                              duration: .lengthLong).show()
-            
+                showSimpleBottomAlert(with: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥")
             }
         }
         menuInputTextField.text?.removeAll()
@@ -100,31 +97,27 @@ class NewReviewViewController: UIViewController {
                     
                     self.viewModel.rating = self.starRating.starsRating
                     
-                    
-                   
                     self.viewModel.startUploading()
 
                 } catch {
                     
                     switch error {
                     
+                    // 메뉴를 하나도 입력하지 않은 경우 - 먹은 메뉴를 하나도 입력하지 않으면 리뷰 자체를 업로드하지 못함
                     case NewReviewInputError.insufficientMenuError:
-                        SnackBar.make(in: self.view,
-                                      message: "\(NewReviewInputError.insufficientMenuError.errorDescription) 🥲",
-                                      duration: .lengthLong).show()
+                        self.showSimpleBottomAlert(with: NewReviewInputError.insufficientMenuError.errorDescription)
                         
+                    // 작성 리뷰가 너무 짧은 경우
                     case NewReviewInputError.insufficientReviewError:
-                        SnackBar.make(in: self.view,
-                                      message: "\(NewReviewInputError.insufficientReviewError.errorDescription) 🥲",
-                                      duration: .lengthLong).show()
+                        self.showSimpleBottomAlert(with: NewReviewInputError.insufficientReviewError.errorDescription)
+    
+                    // 메뉴 이름이 비어있는 경우
                     case NewReviewInputError.blankMenuNameError:
-                        SnackBar.make(in: self.view,
-                                      message: "\(NewReviewInputError.blankMenuNameError.errorDescription) 🥲",
-                                      duration: .lengthLong).show()
+                        self.showSimpleBottomAlert(with: NewReviewInputError.blankMenuNameError.errorDescription)
+                        
                     default:
-                        SnackBar.make(in: self.view,
-                                      message: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥 ",
-                                      duration: .lengthLong).show()
+                        self.showSimpleBottomAlert(with: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥")
+
                     }
                 }
                 
@@ -138,7 +131,8 @@ class NewReviewViewController: UIViewController {
 extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.userSelectedImages.count + 1     /// Add Button 이 항상 있어야하므로 + 1
+        // Add Button 이 항상 있어야하므로 + 1
+        viewModel.userSelectedImages.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -225,17 +219,12 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     func didCompleteReviewUpload(_ success: Bool) {
         dismissProgressBar()
         print("NEW REVIEW UPLOAD COMPLETE")
-        
-        SnackBar.make(in: self.view,
-                      message: "리뷰 업로드 성공! 🎉",
-                      duration: .lengthLong).show()
+        showSimpleBottomAlert(with: "리뷰 업로드 성공! 🎉")
     }
     
     func failedUploadingReview(with error: NetworkError) {
         dismissProgressBar()
-        SnackBar.make(in: self.view,
-                      message: error.errorDescription,
-                      duration: .lengthLong).show()
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
     func didCompleteMenuUpload() {
@@ -243,9 +232,7 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
     }
     
     func failedUploadingMenu(with error: NetworkError) {
-        SnackBar.make(in: self.view,
-                      message: error.errorDescription,
-                      duration: .lengthLong).show()
+        showSimpleBottomAlert(with: error.errorDescription)
     }
     
 }

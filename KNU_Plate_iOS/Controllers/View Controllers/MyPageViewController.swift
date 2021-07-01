@@ -104,11 +104,9 @@ extension MyPageViewController {
                 }
             case .failure(let error):
                 print("\(error.errorDescription)")
-                SnackBar.make(in: self.view,
-                              message: "프로필 정보 불러오기에 실패하였습니다 🥲",
-                              duration: .lengthLong).setAction(with: "재시도", action: {
-                                self.loadUserProfileInfo()
-                              }).show()
+                self.showSimpleBottomAlertWithAction(message: "프로필 정보 불러오기에 실패하였습니다 🥲",
+                                                buttonTitle: "재시도",
+                                                action: self.loadUserProfileInfo)
             }
         }
     }
@@ -131,9 +129,8 @@ extension MyPageViewController {
                     User.shared.profileImage = nil
                 }
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
+
             }
         }
     }
@@ -149,18 +146,14 @@ extension MyPageViewController {
             
             switch result {
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 변경 성공 🎉",
-                              duration: .lengthLong).show()
                 
+                self.showSimpleBottomAlert(with: "프로필 사진 변경 성공 🎉")
                 DispatchQueue.main.async {
                     self.updateProfileImageButton(with: image)
                     User.shared.profileImage = image
                 }
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲")
             }
         }
     }

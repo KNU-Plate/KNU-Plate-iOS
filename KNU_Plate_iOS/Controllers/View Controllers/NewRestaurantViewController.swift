@@ -50,42 +50,36 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         dismissProgressBar()
         
-        SnackBar.make(in: self.view,
-                      message: "매장 등록 성공 🎉",
-                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
-                        
-                        
-                        //Go To MainViewController 해야
-                        
-                      }).show()
+        showSimpleBottomAlertWithAction(message: "매장 등록 성공 🎉",
+                                        buttonTitle: "홈으로 돌아가기") {
+            //Go To MainViewController 해야
+        }
     }
     
     func failedToUpload(with error: NetworkError) {
         
         dismissProgressBar()
         
-        SnackBar.make(in: self.view,
-                      message: error.errorDescription,
-                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
-                        
-                        
-                        //popToRoot 맞는지 확인
-                        //self.navigationController?.popToRootViewController(animated: true)
-                      }).show()
+        showSimpleBottomAlertWithAction(message: error.errorDescription,
+                                        buttonTitle: "홈으로 돌아가기") {
+            
+            //popToRoot 맞는지 확인
+            //self.navigationController?.popToRootViewController(animated: true)
+        }
+        
     }
     
     func alreadyRegisteredRestaurant(){
         
         dismissProgressBar()
         
-        SnackBar.make(in: self.view,
-                      message: "이미 등록된 매장입니다 🥲",
-                      duration: .lengthLong).setAction(with: "홈으로 돌아가기", action: {
-                        
-                        
-                        //popToRoot 맞는지 확인
-                        //self.navigationController?.popToRootViewController(animated: true)
-                      }).show()
+        showSimpleBottomAlertWithAction(message: "이미 등록된 매장입니다 🥲",
+                                        buttonTitle: "홈으로 돌아가기") {
+            
+            //popToRoot 맞는지 확인
+            //self.navigationController?.popToRootViewController(animated: true)
+        }
+    
         
     }
 }
