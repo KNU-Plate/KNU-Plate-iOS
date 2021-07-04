@@ -9,26 +9,26 @@ class RestaurantView: UIView {
     // MARK: - Content View Declaration
     let contentView = UIView()
     
-    // MARK: - Top Content View Declaration
+    // MARK: - Top Content View Declaration (Not Includeing Page Select Related View)
     let topContentView = UIView()
     
     // MARK: - Image Related View Declaration
     let imageContentsView = UIView()
     
     let imageButton1 = UIButton().then {
-        $0.backgroundColor = UIColor.red
+        $0.backgroundColor = .red
     }
     let imageButton2 = UIButton().then {
-        $0.backgroundColor = UIColor.blue
+        $0.backgroundColor = .blue
     }
     let imageButton3 = UIButton().then {
-        $0.backgroundColor = UIColor.yellow
+        $0.backgroundColor = .yellow
     }
     let imageButton4 = UIButton().then {
-        $0.backgroundColor = UIColor.green
+        $0.backgroundColor = .green
         $0.alpha = 0.5
         $0.setTitle("이미지 더보기", for: .normal)
-        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
     }
     
     // MARK: - Store Info Related View Declaration
@@ -66,7 +66,7 @@ class RestaurantView: UIView {
     }
     
     let foodCategoryLabel = UILabel().then {
-        $0.textColor = UIColor.lightGray
+        $0.textColor = .lightGray
         $0.font = UIFont.systemFont(ofSize: 20)
     }
     let numberLabel = UILabel().then {
@@ -75,7 +75,7 @@ class RestaurantView: UIView {
     
     // MARK: - Page Select Related View Declaration
     let topLine = UIView().then {
-        $0.backgroundColor = UIColor.lightGray
+        $0.backgroundColor = .lightGray
     }
     
     let selectStackView = UIStackView().then {
@@ -119,7 +119,7 @@ class RestaurantView: UIView {
     }
     
     let bottomLine = UIView().then {
-        $0.backgroundColor = UIColor.lightGray
+        $0.backgroundColor = .lightGray
     }
     
     // MARK: - Bottom Content View Declaration
@@ -171,6 +171,16 @@ class RestaurantView: UIView {
         super.layoutSubviews()
         print("+++++ RestaurantView layoutSubviews")
         // 여기서(layoutSubviews) 이렇게 많이 오토레이아웃 잡아도 괜찮을까
+        
+        let padding: CGFloat = 3
+        let lineHeight: CGFloat = 1
+        let selectStackViewHeight: CGFloat = 70
+        let middleContentViewHeight: CGFloat = lineHeight*2 + selectStackViewHeight
+        let sumOfUpperPadding: CGFloat = padding*4
+
+        bottomContentView.snp.makeConstraints { make in
+            make.height.equalTo(self.frame.height-middleContentViewHeight-sumOfUpperPadding)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -281,15 +291,13 @@ class RestaurantView: UIView {
             make.width.centerX.equalToSuperview()
         }
         
-        let lowerContentViewHeight: CGFloat = lineHeight*2 + selectStackViewHeight
+        let middleContentViewHeight: CGFloat = lineHeight*2 + selectStackViewHeight
         let sumOfUpperPadding: CGFloat = padding*6
 
         bottomContentView.snp.makeConstraints { make in
-            make.top.equalTo(bottomLine.snp.bottom).offset(padding*2)
+            make.top.equalTo(bottomLine.snp.bottom)
             make.left.right.width.bottom.equalToSuperview()
-            make.height.equalTo(frame.height-lowerContentViewHeight-sumOfUpperPadding)
+            make.height.equalTo(frame.height-middleContentViewHeight-sumOfUpperPadding)
         }
-//        print("***** layoutRestaurantViews frame height: \(frame.height)")
-//        print("***** layoutRestaurantViews bottomContentView height: \(bottomContentView.frame.height)")
     }
 }

@@ -21,8 +21,6 @@ class ExampleViewController: UIViewController {
  
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInsetAdjustmentBehavior = .never
-        
         
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
         let cellID = Constants.CellIdentifier.reviewTableViewCell
@@ -199,10 +197,5 @@ extension ExampleViewController: UIScrollViewDelegate {
                 tableView.tableFooterView = nil
             } else { return }
         }
-        
-//        if position <= 0 {
-//            tableView.isScrollEnabled = false
-//            parentVC?.restaurantView.scrollView.isScrollEnabled = true
-//        }
     }
 }
