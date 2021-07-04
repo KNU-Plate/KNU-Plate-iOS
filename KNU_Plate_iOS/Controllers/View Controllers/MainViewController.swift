@@ -193,10 +193,11 @@ extension MainViewController {
 extension MainViewController {
     /// Execute next view controller
     @objc func gateButtonWasTapped(_ sender: UIButton) {
-        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) as? RestaurantCollectionViewController else {
             fatalError()
         }
         nextViewController.navigationItem.title = Constants.gateNames[sender.tag]
+        nextViewController.gate = Gate.gateFromInt(number: sender.tag)
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

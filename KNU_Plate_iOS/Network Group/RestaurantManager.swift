@@ -18,6 +18,7 @@ class RestaurantManager {
     let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
     let fetchDetailInfoRequestURL       = "\(Constants.API_BASE_URL)mall"
     let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
+    let fetchRestaurantListRequestURL   = "\(Constants.API_BASE_URL)mall"
     
     private init() {}
     
@@ -260,5 +261,37 @@ class RestaurantManager {
                   
                 }
             }
+    }
+    
+    // MARK: - 매장 목록 조회
+    func fetchRestaurantList(with model: FetchRestaurantListModel,
+                             completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)) {
+        AF.request(fetchRestaurantListRequestURL,
+                   method: .get,
+                   parameters: model.parameters,
+                   headers: model.headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    do {
+                        guard let data = value as? Data else { return }
+                        let decodedData = try JSONDecoder().decode([RestaurantListResponseModel].self, from: data)
+                        completion(.success(decodedData))
+                    } catch {
+                        print("RESTAURANT MANAGER - FAILED DECODING DATA with error: \(error)")
+                    }
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let custumError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custum error\n: \(custumError.errorDescription)")
+                    completion(.failure(custumError))
+                }
+            }
+            
     }
 }
