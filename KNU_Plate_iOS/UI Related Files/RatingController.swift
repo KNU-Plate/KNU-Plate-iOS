@@ -9,7 +9,8 @@ class RatingController: UIStackView {
     var starsEmptyPicName = "star rating (unfilled)"                // Empty star name (SF Symbol)
     var starsFilledPicName = "star rating (filled)"                 // Filled star name (SF Symbol)
     
-    override func draw(_ rect: CGRect) {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         let starButtons = self.subviews.filter{$0 is UIButton}
         var starTag = 1
@@ -29,6 +30,10 @@ class RatingController: UIStackView {
             }
         }
         setStarsRating(rating: starsRating)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setStarsRating(rating: Int) {
