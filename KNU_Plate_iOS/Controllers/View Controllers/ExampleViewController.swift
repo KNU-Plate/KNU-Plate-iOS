@@ -12,7 +12,7 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    weak var parentVC: RestaurantViewController?
+    weak var parentVC: RestaurantInfoViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class ExampleViewController: UIViewController {
     }
     
     override func didMove(toParent parent: UIViewController?) {
-        parentVC = parent as? RestaurantViewController
+        parentVC = parent as? RestaurantInfoViewController
     }
 }
 

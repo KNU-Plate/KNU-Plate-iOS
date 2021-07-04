@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class RestaurantViewController: UIViewController {
+class RestaurantInfoViewController: UIViewController {
 
     lazy var customTableView = RestaurantTableView(frame: self.view.frame)
     let tabBarView = RestaurantTabBarView()
@@ -61,7 +61,7 @@ class RestaurantViewController: UIViewController {
     }
 }
 
-extension RestaurantViewController: UITableViewDelegate, UITableViewDataSource {
+extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

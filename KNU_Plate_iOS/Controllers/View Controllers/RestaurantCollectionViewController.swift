@@ -78,7 +78,7 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantViewController) else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) else {
             fatalError("fail to instantiate view controller")
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else {
