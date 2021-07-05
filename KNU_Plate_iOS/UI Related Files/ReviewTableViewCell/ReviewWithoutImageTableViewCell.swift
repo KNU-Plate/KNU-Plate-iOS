@@ -26,7 +26,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
         viewModel.reviewID = model.reviewID
         viewModel.userID = model.userID
         viewModel.userNickname = model.userInfo.displayName
-        viewModel.medal = model.userInfo.medal ?? 3
+        viewModel.medal = model.userInfo.medal
         viewModel.review = model.review
         viewModel.rating = model.rating
        

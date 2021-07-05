@@ -30,18 +30,13 @@ class ReportReviewViewController: UIViewController {
             switch result {
             
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "신고해주셔서 감사합니다. 검토 후 처리할게요! 😁",
-                              duration: .lengthLong).show()
-                
+                self.showSimpleBottomAlert(with: "신고해주셔서 감사합니다. 검토 후 처리할게요! 😁")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.dismiss(animated: true)
                 }
                 
             case .failure(let error):
-                SnackBar.make(in: self.view,
-                              message: error.errorDescription,
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
         
@@ -85,9 +80,7 @@ extension ReportReviewViewController {
         
         if content.count >= 3 { return true }
         else {
-            SnackBar.make(in: self.view,
-                          message: "신고 내용을 3글자 이상 적어주세요 👀",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "신고 내용을 3글자 이상 적어주세요 👀")
             return false
         }
     }

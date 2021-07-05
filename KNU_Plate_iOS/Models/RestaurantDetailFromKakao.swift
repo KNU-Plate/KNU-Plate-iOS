@@ -1,6 +1,6 @@
 import Foundation
 
-//MARK: - 카카오 지도에서 매장 검색 후 매장 등록 화면으로 넘어가기 위해 필요한 정보를 모아둔 구조체
+//MARK: - 카카오 지도에서 매장 검색 후 신규 매장 등록 화면으로 넘어가기 위해 필요한 정보를 모아둔 구조체
 
 struct RestaurantDetailFromKakao {
     

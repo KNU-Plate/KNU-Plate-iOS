@@ -7,7 +7,6 @@ protocol NewReviewViewModelDelegate {
     
     func didCompleteMenuUpload()
     func failedUploadingMenu(with error: NetworkError)
-    
 }
 
 class NewReviewViewModel {

@@ -8,7 +8,7 @@ struct UserDisplayModel: Decodable {
     let username: String
     let displayName: String
     let mailAddress: String
-    let medal: Int?
+    let medal: Int
     let userProfileImageFolderID: String?
     let fileFolder: FileFolder?
     
@@ -25,7 +25,6 @@ struct UserDisplayModel: Decodable {
 }
 
 struct FileFolder: Decodable {
-    
     
     let fileFolderID: String
     let dateCreated: String

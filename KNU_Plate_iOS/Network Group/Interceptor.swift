@@ -42,6 +42,8 @@ final class Interceptor: RequestInterceptor {
         case 401:
             guard !isRefreshing else { return }
             
+            print("✏️ accessToken 이 만료되어 새로 발급 받는 중입니다..")
+            
             refreshToken() { [weak self] refreshResult in
                 
                 guard let self = self else { return }
@@ -52,7 +54,6 @@ final class Interceptor: RequestInterceptor {
                 
                 case .success(_):
 
-                    
                     if request.retryCount < self.retryLimit {
                         completion(.retry)
                     } else {
@@ -60,12 +61,13 @@ final class Interceptor: RequestInterceptor {
                     }
                 case .failure(let error):
                     
+                    print("❗️ 토큰을 새로 발급받는 과정에 문제가 있었습니다")
+                    
                     if error == .unauthorized {
                         
-                        print("Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
+                        print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
                         // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
-                        
-                        
+                
                     } else {
                         print("Interceptor - 이건 뭔 에러지?")
                         completion(.doNotRetry)
@@ -75,7 +77,7 @@ final class Interceptor: RequestInterceptor {
             }
         default:
             
-            if request.retryCount > 5 {
+            if request.retryCount > 3 {
                 print("Interceptor retry() error: \(error)")
                 completion(.doNotRetry)
             }
@@ -110,7 +112,7 @@ extension Interceptor {
                     case 200:
                         do {
                             let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
-                            UserManager.shared.saveAccessToken(with: decodedData)
+                            UserManager.shared.saveLoginInfo(with: decodedData)
                             print("successfully refreshed NEW token: \(User.shared.accessToken)")
                             completion(.success(true))
                         } catch {

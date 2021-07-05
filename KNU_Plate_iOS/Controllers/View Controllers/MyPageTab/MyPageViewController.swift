@@ -15,10 +15,11 @@ class MyPageViewController: UIViewController {
     lazy var imagePicker = UIImagePickerController()
     lazy var preferences = EasyTipView.Preferences()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        
+        Test.shared.login()
         initialize()
         loadUserProfileInfo()
         
@@ -55,7 +56,7 @@ class MyPageViewController: UIViewController {
         let remove = UIAlertAction(title: "프로필 사진 제거",
                                    style: .default) { _ in
             
-            self.presentAlertWithCancelAction(title: "프로필 사진 제거",
+            self.presentAlertWithConfirmAction(title: "프로필 사진 제거",
                                               message: "정말로 제거하시겠습니까?") { selectedOk in
                 
                 if selectedOk { self.removeProfileImage() }
@@ -104,12 +105,9 @@ extension MyPageViewController {
                 }
             case .failure(let error):
                 print("\(error.errorDescription)")
-                //self.loadUserProfileInfo()
-                SnackBar.make(in: self.view,
-                              message: "프로필 정보 불러오기에 실패하였습니다 🥲",
-                              duration: .lengthLong).setAction(with: "재시도", action: {
-                                self.loadUserProfileInfo()
-                              }).show()
+                self.showSimpleBottomAlertWithAction(message: "프로필 정보 불러오기에 실패하였습니다 🥲",
+                                                buttonTitle: "재시도",
+                                                action: self.loadUserProfileInfo)
             }
         }
     }
@@ -132,9 +130,8 @@ extension MyPageViewController {
                     User.shared.profileImage = nil
                 }
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
+
             }
         }
     }
@@ -150,18 +147,14 @@ extension MyPageViewController {
             
             switch result {
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 변경 성공 🎉",
-                              duration: .lengthLong).show()
                 
+                self.showSimpleBottomAlert(with: "프로필 사진 변경 성공 🎉")
                 DispatchQueue.main.async {
                     self.updateProfileImageButton(with: image)
                     User.shared.profileImage = image
                 }
             case .failure(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 사진 변경에 실패하였습니다. 다시 시도해주세요 🥲")
             }
         }
     }
@@ -176,7 +169,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let originalImage: UIImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
             dismiss(animated: true) {
-                self.presentAlertWithCancelAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
+                self.presentAlertWithConfirmAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
                 
                     if selectedOk {
                         showProgressBar()
@@ -201,7 +194,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return Constants.myPageTableViewOptions.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -213,17 +206,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
         
         cell.textLabel?.font = .systemFont(ofSize: 17)
+        cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
         
-        switch indexPath.row {
-        
-        case 0:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 1:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        case 2:
-            cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
-        default: break
-        }
         return cell
     }
     
@@ -233,13 +217,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.noticeViewController) else { return }
             pushViewController(with: vc)
         case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
             pushViewController(with: vc)
         case 2:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
+            pushViewController(with: vc)
+        case 3:
             guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsViewController) else { return }
+            pushViewController(with: vc)
+        case 4:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.developerInfoViewController) else { return }
+            pushViewController(with: vc)
+        case 5:
+            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.openSourceInfoViewController) else { return }
             pushViewController(with: vc)
         default: return
         }
@@ -249,6 +242,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+//MARK: - EasyTipViewDelegate
 
 extension MyPageViewController: EasyTipViewDelegate {
     

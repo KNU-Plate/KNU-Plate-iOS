@@ -2,6 +2,7 @@ import Foundation
 
 protocol SearchRestaurantViewModelDelegate {
     func didFetchSearchResults()
+    func failedFetchingSearchResults(with error: NetworkError)
 }
 
 class SearchRestaurantViewModel {
@@ -35,16 +36,24 @@ class SearchRestaurantViewModel {
             
             guard let self = self else { return }
             
-            self.documents = result.documents
+            switch result {
             
-            ///수정 좀 하기 -> append 말고 한 방에 value assign 
-            for result in result.documents {
+            case .success(let result):
                 
-                self.placeName.append(result.placeName)
-                self.address.append(result.address)
+                self.documents = result.documents
+                
+                ///수정 좀 하기 -> append 말고 한 방에 value assign
+                for result in result.documents {
+                    
+                    self.placeName.append(result.placeName)
+                    self.address.append(result.address)
+                }
+                self.totalCount = self.placeName.count
+                self.delegate?.didFetchSearchResults()
+                
+            case .failure(let error):
+                self.delegate?.failedFetchingSearchResults(with: error)
             }
-            self.totalCount = self.placeName.count
-            self.delegate?.didFetchSearchResults()
         }
     }
     
@@ -56,8 +65,6 @@ class SearchRestaurantViewModel {
         if let x = Double(documents[index].x), let y = Double(documents[index].y) {
             restaurantDetails.longitude = x
             restaurantDetails.latitude = y
-            print("restaurantDetails longitude: \(restaurantDetails.longitude)")
-            print("restaurantDetails latitude: \(restaurantDetails.latitude)")
             return (x, y, placeName)
         }
         
@@ -76,7 +83,6 @@ class SearchRestaurantViewModel {
         placeName.removeAll()
         address.removeAll()
     }
-    
     
     func getRestaurantDetails(for index: Int) -> RestaurantDetailFromKakao {
         

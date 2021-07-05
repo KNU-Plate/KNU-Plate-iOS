@@ -28,18 +28,13 @@ class ChangeNicknameViewController: UIViewController {
         self.view.endEditing(true)
     
         if !didCheckNicknameDuplicate {
-            SnackBar.make(in: self.view,
-                          message: "🤔 닉네임 중복 확인을 먼저해주세요.",
-                          duration: .lengthLong).show()
-
+            showSimpleBottomAlert(with: "🤔 닉네임 중복 확인을 먼저해주세요.")
             dismissProgressBar()
             return
         }
         
         guard let nickname = self.nickname else {
-            SnackBar.make(in: self.view,
-                          message: "🤔 빈 칸이 없는지 확인해주세요.",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "🤔 빈 칸이 없는지 확인해주세요.")
             return
         }
         
@@ -56,11 +51,8 @@ class ChangeNicknameViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
                 
             case .failure(_):
-                
                 DispatchQueue.main.async {
-                    SnackBar.make(in: self.view,
-                                  message: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲",
-                                  duration: .lengthLong).show()
+                    self.showSimpleBottomAlert(with: "닉네임 변경 실패. 잠시 후 다시 시도해주세요 🥲")
                 }
             }
             dismissProgressBar()
@@ -102,11 +94,8 @@ class ChangeNicknameViewController: UIViewController {
                 }
                 
             case .failure(let error):
-                
                 DispatchQueue.main.async {
-                    SnackBar.make(in: self.view,
-                                  message: error.errorDescription,
-                                  duration: .lengthLong).show()
+                    self.showSimpleBottomAlert(with: error.errorDescription)
                 }
             }
         }
@@ -118,15 +107,11 @@ class ChangeNicknameViewController: UIViewController {
             return false
         }
         guard !nickname.isEmpty else {
-            SnackBar.make(in: self.view,
-                          message: "빈 칸이 없는지 확인해주세요 🥲",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "빈 칸이 없는지 확인해주세요 🥲")
             return false
         }
         guard nickname.count >= 2, nickname.count <= 10 else {
-            SnackBar.make(in: self.view,
-                          message: "닉네임은 2자 이상, 10자 이하로 작성해주세요❗️ ",
-                          duration: .lengthLong).show()
+            showSimpleBottomAlert(with: "닉네임은 2자 이상, 10자 이하로 작성해주세요❗️")
             return false
         }
         self.nickname = nickname
@@ -161,6 +146,7 @@ extension ChangeNicknameViewController {
     
     func initializeTextField() {
         
+        nicknameTextField.placeholder = User.shared.displayName
         nicknameTextField.delegate = self
     }
     

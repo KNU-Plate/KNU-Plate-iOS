@@ -22,17 +22,6 @@ class ReviewTableViewModel {
 
     var reviewImagesFileFolder: FileFolder?
     
-
-    // 아래 함수 쓰이는 곳이 없는데 지우는거 고민
-    func fetchProfileImageURL(with folderID: String) {
-        
-        FileManager.shared.searchFileFolder(fileFolderID: folderID) { file in
-            
-            self.userProfileImageURL = URL(string: file[0].path)
-            
-        }
-    }
-    
     func resetValues() {
         
         reviewID = 0

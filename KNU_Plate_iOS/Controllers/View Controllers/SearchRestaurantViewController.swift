@@ -1,4 +1,6 @@
 import UIKit
+import PanModal
+import SnackBar_swift
 
 //MARK: - 신규 맛집 등록 시 위치 검색하는 화면
 
@@ -6,7 +8,6 @@ class SearchRestaurantViewController: UIViewController {
     
     @IBOutlet var mapView: MTMapView!
     @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var searchResultTableView: UITableView!
     @IBOutlet var nextButton: UIButton!
     
     var mapPoint: MTMapPoint?
@@ -31,10 +32,10 @@ class SearchRestaurantViewController: UIViewController {
         guard let placeSelected = viewModel.currentlySelectedIndex else {
             return
         }
-        let alertMessage = viewModel.placeName[placeSelected]
+        let placeName = viewModel.placeName[placeSelected]
         
         let alert = UIAlertController(title: "위치가 여기 맞나요?",
-                                      message: alertMessage,
+                                      message: placeName,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "다시 고를래요",
                                       style: .default,
@@ -57,8 +58,7 @@ class SearchRestaurantViewController: UIViewController {
         
         if segue.identifier == Constants.SegueIdentifier.goToNewRestaurantVC {
             
-            let newRestaurantVC = segue.destination as! NewRestaurantViewController
-            
+            guard let newRestaurantVC = segue.destination as? NewRestaurantViewController else { return }
             guard let indexSelected = viewModel.currentlySelectedIndex else { return }
             
             let restaurantDetails = viewModel.getRestaurantDetails(for: indexSelected)
@@ -70,9 +70,38 @@ class SearchRestaurantViewController: UIViewController {
 //MARK: - SearchRestaurantViewModelDelegate
 
 extension SearchRestaurantViewController: SearchRestaurantViewModelDelegate {
-    
+
     func didFetchSearchResults() {
-        searchResultTableView.reloadData()
+        
+        guard let searchModalVC = self.storyboard?.instantiateViewController(identifier: "SearchListViewController")
+                as? SearchListViewController else { return }
+
+        searchModalVC.placeName = viewModel.placeName
+        searchModalVC.address = viewModel.address
+        searchModalVC.searchResultCount = viewModel.placeName.count
+        searchModalVC.delegate = self
+        
+        presentPanModal(searchModalVC)
+    }
+    
+    func failedFetchingSearchResults(with error: NetworkError) {
+        print("❗️ failedFetchingSearchResults")
+        SnackBar.make(in: self.view,
+                      message: error.errorDescription,
+                      duration: .lengthLong).show()
+    }
+}
+
+//MARK: - SearchListDelegate
+
+extension SearchRestaurantViewController: SearchListDelegate {
+    
+    func didChoosePlace(index: Int) {
+        
+        
+        mapView.removeAllPOIItems()
+        let (longitude, latitude, placeName) = viewModel.fetchLocation(of: index)
+        updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
     }
 }
 
@@ -90,6 +119,10 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
                                                                 longitude: 128.6104881544238)),
                              zoomLevel: 1,
                              animated: true)
+        
+        mapView.layer.cornerRadius = 30
+        mapView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
     }
     
     func updateMapWithMarker(longitude: Double, latitude: Double, placeName: String) {
@@ -122,6 +155,7 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
 }
 
 //MARK: - UITableViewDelegate & UITableViewDataSource
+//TODO: - 아래는 지우는거 고민
 
 extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -148,6 +182,8 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        print("✏️ viewModel.totalCount == \(viewModel.totalCount)")
+        
         mapView.removeAllPOIItems()
         let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
         updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
@@ -167,9 +203,12 @@ extension SearchRestaurantViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    
-        let searchKeyword = searchBar.text!
+        
+        guard let searchKeyword = searchBar.text else { return }
+   
+        
         viewModel.search(with: searchKeyword)
+    
         searchBar.resignFirstResponder()
     }
     
@@ -187,9 +226,8 @@ extension SearchRestaurantViewController {
         viewModel.delegate = self
         
         initializeSearchBar()
-        initializeTableView()
         initializeMapView()
-        initializeUIComponents()
+        initializeButton()
     }
     
     func initializeSearchBar() {
@@ -198,13 +236,7 @@ extension SearchRestaurantViewController {
         searchBar.placeholder = "방문하신 매장을 검색해 주세요."
     }
     
-    func initializeTableView() {
-        
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-    }
-    
-    func initializeUIComponents() {
+    func initializeButton() {
         
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
         var buttonImage: UIImage = UIImage(named: Constants.Images.rightArrow)!
@@ -213,8 +245,6 @@ extension SearchRestaurantViewController {
         nextButton.setImage(buttonImage, for: .normal)
         nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
     }
-    
-    
 }
 
 
