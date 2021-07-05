@@ -9,7 +9,7 @@ struct FetchRestaurantListModel {
         "accept": "application/json"
     ]
     
-    init(mallName: String? = nil, categoryName: String? = nil, gateLocation: String? = nil, cursor: Int? = nil) {
+    init(mallName: String?, categoryName: String?, gateLocation: String?, cursor: Int?) {
         // Initialize parameters
         parameters["mall_name"] = mallName
         parameters["category_name"] = categoryName

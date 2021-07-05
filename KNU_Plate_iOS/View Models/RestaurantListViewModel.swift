@@ -2,14 +2,12 @@ import Foundation
 
 class RestaurantListViewModel {
     var restaurants: [RestaurantListResponseModel] = []
+    var hasMore: Bool = true
+    var isFetchingData: Bool = false
 }
 
 extension RestaurantListViewModel {
-    var numberOfSections: Int {
-        return 1
-    }
-    
-    func numberOfItemsInSection(_ section: Int) -> Int {
+    var numberOfItems: Int {
         return self.restaurants.count
     }
     
@@ -21,11 +19,17 @@ extension RestaurantListViewModel {
 
 extension RestaurantListViewModel {
     func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil, cursor: Int? = nil) {
+        isFetchingData = true
         let model = FetchRestaurantListModel(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: cursor)
-        RestaurantManager.shared.fetchRestaurantList(with: model) { result in
+        RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
             switch result {
             case .success(let data):
-                self.restaurants.append(contentsOf: data)
+                if data.count == 0 {
+                    self?.hasMore = false
+                    return
+                }
+                self?.restaurants.append(contentsOf: data)
+                self?.isFetchingData = false
             case .failure(let error):
                 return
             }

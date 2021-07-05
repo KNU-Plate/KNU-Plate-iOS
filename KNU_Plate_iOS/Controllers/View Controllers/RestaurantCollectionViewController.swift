@@ -30,6 +30,7 @@ class RestaurantCollectionViewController: UIViewController {
         restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
     }
 }
+
 //MARK: - Basic Set Up
 extension RestaurantCollectionViewController {
     func setupCollectionView() {
@@ -46,23 +47,20 @@ extension RestaurantCollectionViewController {
         }
     }
 }
+
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.restaurantListVM.numberOfSections
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.restaurantListVM.numberOfItemsInSection(section)
+        return self.restaurantListVM.numberOfItems
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RestaurantCollectionViewCell else {
             fatalError("fail to dequeue cell or cast cell as RestaurantCollectionViewCell")
         }
-        
+
         let restaurantVM = self.restaurantListVM.restaurantAtIndex(indexPath.item)
-        
+
         // Configure the cell
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
                                    placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
@@ -70,8 +68,8 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
         cell.ratingStackView.averageRating = restaurantVM.averageRating
         return cell
     }
-
 }
+
 // MARK: - UICollectionViewDelegate
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
@@ -120,9 +118,19 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let contentHeight = collectionView.contentSize.height
+        let frameHeight = scrollView.frame.height
         
+        if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantListVM.hasMore && !restaurantListVM.isFetchingData {
+            // fetch more
+            guard let gate = gate else { return }
+            let lastIndexOfPage = restaurantListVM.numberOfItems - 1
+            restaurantListVM.fetchRestaurantList(gate: gate.rawValue, cursor: lastIndexOfPage)
+        }
     }
 }
+
 //MARK: - Collection View Flow Layout Delegate
 extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -33,6 +33,7 @@ class RestaurantInfoViewController: UIViewController {
     func setupTableView() {
         customTableView.tableView.dataSource = self
         customTableView.tableView.delegate = self
+        customTableView.tableView.bounces = false
         customTableView.tableView.tableHeaderView?.frame.size.height = 355 + 3*6
         
         customTableView.nameLabel.text = "반미리코"

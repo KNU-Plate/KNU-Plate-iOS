@@ -14,7 +14,7 @@ struct Constants {
     struct StoryboardID {
         
         static let restaurantCollectionViewController = "RestaurantCollectionViewController"
-        static let restaurantInfoViewController = "RestaurantViewController"
+        static let restaurantInfoViewController = "RestaurantInfoViewController"
         static let welcomeViewController = "WelcomeViewController"
         static let loginViewController = "LoginViewController"
         static let registerViewController = "RegisterViewController"
