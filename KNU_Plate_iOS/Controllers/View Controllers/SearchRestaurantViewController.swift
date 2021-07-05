@@ -226,7 +226,6 @@ extension SearchRestaurantViewController {
         viewModel.delegate = self
         
         initializeSearchBar()
-//        initializeTableView()
         initializeMapView()
         initializeButton()
     }
@@ -236,7 +235,6 @@ extension SearchRestaurantViewController {
         searchBar.delegate = self
         searchBar.placeholder = "방문하신 매장을 검색해 주세요."
     }
-
     
     func initializeButton() {
         
