@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import SDWebImage
 
 /// Shows restaurant list according to gate
 class RestaurantCollectionViewController: UIViewController {
@@ -7,6 +8,10 @@ class RestaurantCollectionViewController: UIViewController {
     private let reuseIdentifier = "Cell"
     private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 2
+    
+    private let restaurantListVM = RestaurantListViewModel()
+    
+    var gate: Gate?
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -20,8 +25,12 @@ class RestaurantCollectionViewController: UIViewController {
         self.view.addSubview(collectionView)
         setupCollectionView()
         setCollectionViewLayout()
+        
+        guard let gate = gate else { return }
+        restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
     }
 }
+
 //MARK: - Basic Set Up
 extension RestaurantCollectionViewController {
     func setupCollectionView() {
@@ -33,44 +42,41 @@ extension RestaurantCollectionViewController {
     }
     
     func setCollectionViewLayout() {
-        collectionView.snp.makeConstraints { (make) in
+        collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
 }
+
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 7
+        return self.restaurantListVM.numberOfItems
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RestaurantCollectionViewCell else {
             fatalError("fail to dequeue cell or cast cell as RestaurantCollectionViewCell")
         }
-    
+
+        let restaurantVM = self.restaurantListVM.restaurantAtIndex(indexPath.item)
+
         // Configure the cell
-        let rating: Double = 4.2
-        cell.imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
-        cell.nameLabel.text = "배터지는깐풍기"
-        cell.ratingStackView.setAverageRating(rating: rating)
+        cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
+                                   placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+        cell.nameLabel.text = restaurantVM.mallName
+        cell.ratingStackView.averageRating = restaurantVM.averageRating
         return cell
     }
-
 }
+
 // MARK: - UICollectionViewDelegate
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantViewController) else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) else {
             fatalError("fail to instantiate view controller")
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else {
@@ -110,7 +116,21 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let contentHeight = collectionView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        
+        if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantListVM.hasMore && !restaurantListVM.isFetchingData {
+            // fetch more
+            guard let gate = gate else { return }
+            let lastIndexOfPage = restaurantListVM.numberOfItems - 1
+            restaurantListVM.fetchRestaurantList(gate: gate.rawValue, cursor: lastIndexOfPage)
+        }
+    }
 }
+
 //MARK: - Collection View Flow Layout Delegate
 extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

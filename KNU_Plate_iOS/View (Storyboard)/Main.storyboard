@@ -63,10 +63,10 @@
             </objects>
             <point key="canvasLocation" x="5244" y="146"/>
         </scene>
-        <!--Restaurant View Controller-->
+        <!--Restaurant Info View Controller-->
         <scene sceneID="dhV-WQ-3BK">
             <objects>
-                <viewController storyboardIdentifier="RestaurantViewController" id="obV-VK-3on" customClass="RestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RestaurantInfoViewController" id="obV-VK-3on" customClass="RestaurantInfoViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BYt-oI-7E2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -13,11 +13,11 @@ struct Constants {
         
         // Register & Login
         static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
-        static let restaurantViewController                 = "RestaurantViewController"
         static let welcomeViewController                    = "WelcomeViewController"
         static let loginViewController                      = "LoginViewController"
         static let registerViewController                   = "RegisterViewController"
         static let verifyEmailViewController                = "VerifyEmailViewController"
+        static let restaurantInfoViewController = "RestaurantInfoViewController"
         
         // Home Tab
         static let newRestaurantViewController              = "NewRestaurantViewController"

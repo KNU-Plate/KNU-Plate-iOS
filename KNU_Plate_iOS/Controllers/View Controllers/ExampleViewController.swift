@@ -12,7 +12,7 @@ class ExampleViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    weak var parentVC: RestaurantViewController?
+    weak var parentVC: RestaurantInfoViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,6 @@ class ExampleViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInsetAdjustmentBehavior = .never
-        
         
         let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
         let cellID = Constants.CellIdentifier.reviewTableViewCell
@@ -57,7 +55,7 @@ class ExampleViewController: UIViewController {
     }
     
     override func didMove(toParent parent: UIViewController?) {
-        parentVC = parent as? RestaurantViewController
+        parentVC = parent as? RestaurantInfoViewController
     }
     
 }

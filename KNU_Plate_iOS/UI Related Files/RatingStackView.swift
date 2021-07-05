@@ -7,14 +7,19 @@ class RatingStackView: UIStackView {
     let starImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        $0.image = UIImage(named: "star rating (filled)")
+        $0.image = UIImage(named: "star rating (unfilled)")
     }
     
     let averageRatingLabel = UILabel()
     
-    var averageRating: Double = 0 {
+    var averageRating: Double = 0.0 {
         didSet {
             averageRatingLabel.text = String(averageRating)
+            if averageRating != 0.0 {
+                starImage.image = UIImage(named: "star rating (filled)")
+            } else {
+                starImage.image = UIImage(named: "star rating (unfilled)")
+            }
         }
     }
     
@@ -29,10 +34,5 @@ class RatingStackView: UIStackView {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    /// Set starts rating
-    func setAverageRating(rating: Double){
-        averageRating = rating
     }
 }
