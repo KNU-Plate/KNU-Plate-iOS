@@ -71,7 +71,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(nameLabelHeight)
             make.top.equalTo(imageView.snp.bottom).offset(inset*2)
-            make.left.right.equalToSuperview().inset(inset)
+            make.left.right.equalToSuperview().inset(inset*2)
         }
         
         ratingStackView.snp.makeConstraints { (make) in
