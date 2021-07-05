@@ -7,7 +7,7 @@ class RatingStackView: UIStackView {
     let starImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        $0.image = UIImage(named: "star rating (unfilled)")
+        $0.image = UIImage(named: Constants.Images.starsUnfilled)
     }
     
     let averageRatingLabel = UILabel()
@@ -16,9 +16,9 @@ class RatingStackView: UIStackView {
         didSet {
             averageRatingLabel.text = String(averageRating)
             if averageRating != 0.0 {
-                starImage.image = UIImage(named: "star rating (filled)")
+                starImage.image = UIImage(named: Constants.Images.starsFilled)
             } else {
-                starImage.image = UIImage(named: "star rating (unfilled)")
+                starImage.image = UIImage(named: Constants.Images.starsUnfilled)
             }
         }
     }

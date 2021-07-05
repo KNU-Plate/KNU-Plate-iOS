@@ -12,14 +12,14 @@ struct Constants {
     struct StoryboardID {
         
         // Register & Login
-        static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
         static let welcomeViewController                    = "WelcomeViewController"
         static let loginViewController                      = "LoginViewController"
         static let registerViewController                   = "RegisterViewController"
         static let verifyEmailViewController                = "VerifyEmailViewController"
-        static let restaurantInfoViewController = "RestaurantInfoViewController"
         
         // Home Tab
+        static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
+        static let restaurantInfoViewController             = "RestaurantInfoViewController"
         static let newRestaurantViewController              = "NewRestaurantViewController"
         static let searchListViewController                 = "SearchListViewController" 
         static let reviewViewController                     = "ReviewViewController"
