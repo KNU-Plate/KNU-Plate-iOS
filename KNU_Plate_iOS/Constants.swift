@@ -149,6 +149,13 @@ struct Constants {
         
         // Other
         static let rightArrow                               = "arrow_right"
+        static let myPageVCImageOptions                     = [ "bell.badge",
+                                                                "gear",
+                                                                "paperplane",
+                                                                "doc.text",
+                                                                "hammer",
+                                                                "book.closed"
+                                                                ]
     }
     
     struct XIB {

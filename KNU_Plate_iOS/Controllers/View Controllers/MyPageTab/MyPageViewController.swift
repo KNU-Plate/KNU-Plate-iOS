@@ -130,9 +130,7 @@ extension MyPageViewController {
             switch result {
             
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 제거 성공 🎉",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
                 DispatchQueue.main.async {
                     self.profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage)!, for: .normal)
                     self.initializeProfileImageButton()
@@ -156,7 +154,6 @@ extension MyPageViewController {
             
             switch result {
             case .success(_):
-                
                 self.showSimpleBottomAlert(with: "프로필 사진 변경 성공 🎉")
                 DispatchQueue.main.async {
                     self.updateProfileImageButton(with: image)
@@ -212,10 +209,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath) as? MyPageTableViewCell else {
+            fatalError()
+        }
         
-        cell.textLabel?.font = .systemFont(ofSize: 17)
-        cell.textLabel?.text = Constants.StoryboardID.myPageVCOptions[indexPath.row]
+        cell.settingsTitleLabel.text = Constants.StoryboardID.myPageVCOptions[indexPath.row]
+        cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageVCImageOptions[indexPath.row])
+        cell.leftImageView.tintColor = .black
         
         return cell
     }
@@ -296,7 +296,6 @@ extension MyPageViewController {
     
     func initializeTipViewPreferences() {
         
-
         preferences.drawing.font = UIFont.boldSystemFont(ofSize: 15)
         preferences.drawing.foregroundColor = .white
         preferences.drawing.backgroundColor = .lightGray
