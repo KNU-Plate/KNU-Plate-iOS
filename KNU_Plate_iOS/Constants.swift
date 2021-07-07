@@ -36,6 +36,7 @@ struct Constants {
         static let termsAndConditionsViewController         = "TermsAndConditionViewController"
         static let reportReviewViewController               = "ReportReviewViewController"
         static let noticeViewController                     = "NoticeViewController"
+        static let noticeDetailViewController               = "NoticeDetailViewController"
         static let developerInfoViewController              = "DeveloperInformationViewController"
         static let openSourceInfoViewController             = "OpenSourceInfoViewController"
         

@@ -98,13 +98,26 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
         let date = formatDate(timestamp: noticeList[indexPath.row].dateCreated)
         cell.noticeDateLabel.text = date
         
+        if indexPath.row == 0 {
+            cell.noticeImageView.image = UIImage(systemName: "bell.badge")
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.noticeDetailViewController) as? NoticeDetailViewController else {
+            fatalError()
+        }
+        vc.noticeTitle = noticeList[indexPath.row].title
+        let date = formatDate(timestamp: noticeList[indexPath.row].dateCreated)
+        vc.noticeDate = date
+        vc.noticeContent = noticeList[indexPath.row].contents
+    
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
