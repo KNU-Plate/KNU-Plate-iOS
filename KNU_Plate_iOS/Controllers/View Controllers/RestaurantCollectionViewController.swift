@@ -23,6 +23,8 @@ class RestaurantCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(collectionView)
+        
+        restaurantListVM.delegate = self
         setupCollectionView()
         setCollectionViewLayout()
         
@@ -66,23 +68,33 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
                                    placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
         cell.nameLabel.text = restaurantVM.mallName
         cell.ratingStackView.averageRating = restaurantVM.averageRating
+        cell.mallID = restaurantVM.mallID
+        
         return cell
     }
 }
 
-// MARK: - UICollectionViewDelegate
+//MARK: - RestaurantListViewModelDelegate
+extension RestaurantCollectionViewController: RestaurantListViewModelDelegate {
+    func didFetchRestaurantList() {
+        collectionView.reloadData()
+    }
+}
+
+//MARK: - UICollectionViewDelegate
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) else {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) as? RestaurantInfoViewController else {
             fatalError("fail to instantiate view controller")
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else {
             fatalError("fail to get cell for indexpath or cast cell as RestaurantCollectionViewCell")
         }
         nextViewController.navigationItem.title = cell.nameLabel.text
+        nextViewController.mallID = cell.mallID
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -125,8 +137,7 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
         if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantListVM.hasMore && !restaurantListVM.isFetchingData {
             // fetch more
             guard let gate = gate else { return }
-            let lastIndexOfPage = restaurantListVM.numberOfItems - 1
-            restaurantListVM.fetchRestaurantList(gate: gate.rawValue, cursor: lastIndexOfPage)
+            restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
         }
     }
 }
