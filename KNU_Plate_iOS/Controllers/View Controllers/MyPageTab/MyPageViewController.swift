@@ -246,7 +246,6 @@ extension MyPageViewController: EasyTipViewDelegate {
     }
 }
 
-
 //MARK: - UI Configuration
 
 extension MyPageViewController {

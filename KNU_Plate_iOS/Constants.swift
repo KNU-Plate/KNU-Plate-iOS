@@ -153,7 +153,7 @@ struct Constants {
                                                                 "gear",
                                                                 "paperplane",
                                                                 "doc.text",
-                                                                "hammer",
+                                                                "info.circle",
                                                                 "book.closed"
                                                                 ]
     }

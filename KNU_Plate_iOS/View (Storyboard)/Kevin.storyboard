@@ -1513,10 +1513,10 @@
             </objects>
             <point key="canvasLocation" x="-1391" y="4638"/>
         </scene>
-        <!--Notice View Controller-->
+        <!--공지사항-->
         <scene sceneID="hrz-xp-FiI">
             <objects>
-                <viewController storyboardIdentifier="NoticeViewController" title="Notice View Controller" id="1tK-b8-fvJ" customClass="NoticeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoticeViewController" title="공지사항" id="1tK-b8-fvJ" customClass="NoticeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QVC-dc-vbC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1525,39 +1525,39 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeCell" rowHeight="70" id="KCN-6U-A8E" customClass="NoticeTableViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="375" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeCell" rowHeight="63" id="KCN-6U-A8E" customClass="NoticeTableViewCell" customModule="KNU_Plate_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KCN-6U-A8E" id="Ivl-cg-aaZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지 타이틀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2u-LD-HMN">
-                                                    <rect key="frame" x="76" y="11" width="78" height="20"/>
+                                                    <rect key="frame" x="51" y="11" width="78" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜 표시" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Tl-ni-iel">
-                                                    <rect key="frame" x="76" y="41" width="49" height="16"/>
+                                                    <rect key="frame" x="51" y="41" width="49" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell.badge" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="278-Rc-klp">
-                                                    <rect key="frame" x="16" y="11" width="50" height="49.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="278-Rc-klp">
+                                                    <rect key="frame" x="16" y="19" width="25" height="24.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="8fM-pb-fDv"/>
-                                                        <constraint firstAttribute="width" constant="50" id="Pyb-Br-B59"/>
+                                                        <constraint firstAttribute="height" constant="25" id="8fM-pb-fDv"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Pyb-Br-B59"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="278-Rc-klp" firstAttribute="top" secondItem="Ivl-cg-aaZ" secondAttribute="topMargin" id="4is-Aq-OFT"/>
                                                 <constraint firstItem="E2u-LD-HMN" firstAttribute="leading" secondItem="278-Rc-klp" secondAttribute="trailing" constant="10" id="O4l-5W-TD2"/>
                                                 <constraint firstItem="E2u-LD-HMN" firstAttribute="top" secondItem="Ivl-cg-aaZ" secondAttribute="topMargin" id="SdF-eM-Xyk"/>
                                                 <constraint firstItem="0Tl-ni-iel" firstAttribute="top" secondItem="E2u-LD-HMN" secondAttribute="bottom" constant="10" id="fDv-Fg-wva"/>
+                                                <constraint firstItem="278-Rc-klp" firstAttribute="centerY" secondItem="Ivl-cg-aaZ" secondAttribute="centerY" id="gwp-Na-p4j"/>
                                                 <constraint firstItem="0Tl-ni-iel" firstAttribute="leading" secondItem="278-Rc-klp" secondAttribute="trailing" constant="10" id="uk6-yM-RgY"/>
                                                 <constraint firstItem="278-Rc-klp" firstAttribute="leading" secondItem="Ivl-cg-aaZ" secondAttribute="leadingMargin" id="yaE-TN-5TC"/>
                                             </constraints>
@@ -1841,7 +1841,7 @@
     </scenes>
     <resources>
         <image name="add button" width="226" height="226"/>
-        <image name="bell.badge" catalog="system" width="128" height="124"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="default profile image" width="73" height="73"/>
         <image name="delete button" width="79" height="79"/>
         <image name="first medal" width="41" height="41"/>
