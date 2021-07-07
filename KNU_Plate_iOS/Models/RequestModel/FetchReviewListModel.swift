@@ -5,26 +5,18 @@ import Alamofire
 
 struct FetchReviewListModel {
     
-    let mallID: Int
-    let page: Int
-    
+
+    var parameters: Parameters = [:]
+    let headers: HTTPHeaders = [
+        "accept": "application/json",
+        "Authorization": User.shared.accessToken
+    ]
+
     init(mallID: Int, page: Int = 0) {
-        
-        self.mallID = mallID
-        self.page = page
-        
-        /// Initialize parameters
+    
         parameters["mall_id"] = mallID
         parameters["cursor"] = page
     }
     
-    /// API Parameters
-    var parameters: Parameters = [:]
-    
-    /// HTTP Headers
-    let headers: HTTPHeaders = [
-  
-        "accept": "application/json",
-        "Authorization": User.shared.accessToken
-    ]
+
 }
