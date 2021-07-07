@@ -23,7 +23,7 @@ class RestaurantManager {
     private init() {}
     
     //MARK: - 신규 매장 등록
-    func uploadNewRestaurant(with model: NewRestaurantModel,
+    func uploadNewRestaurant(with model: NewRestaurantRequestDTO,
                              completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         print("✏️ \(model.name)")
@@ -78,7 +78,7 @@ class RestaurantManager {
     }
     
     //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
-    func uploadNewMenu(with model: RegisterNewMenuModel,
+    func uploadNewMenu(with model: RegisterNewMenuRequestDTO,
                        completion: @escaping ((Result<[MenuRegisterResponseModel], NetworkError>) -> Void)) {
         
         AF.request(uploadNewMenuRequestURL,
@@ -121,7 +121,7 @@ class RestaurantManager {
     }
     
     //MARK: - 신규 리뷰 등록 
-    func uploadNewReview(with model: NewReviewModel,
+    func uploadNewReview(with model: NewReviewRequestDTO,
                          completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
@@ -206,7 +206,7 @@ class RestaurantManager {
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
     
-    func fetchReviewList(with model: FetchReviewListModel,
+    func fetchReviewList(with model: FetchReviewListRequestDTO,
                          completion: @escaping ((Result<[ReviewListResponseModel], NetworkError>) -> Void)) {
         
         AF.request(fetchReviewListRequestURL,
@@ -270,7 +270,7 @@ class RestaurantManager {
     }
     
     // MARK: - 매장 목록 조회
-    func fetchRestaurantList(with model: FetchRestaurantListModel,
+    func fetchRestaurantList(with model: FetchRestaurantListRequestDTO,
                              completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)) {
         AF.request(fetchRestaurantListRequestURL,
                    method: .get,

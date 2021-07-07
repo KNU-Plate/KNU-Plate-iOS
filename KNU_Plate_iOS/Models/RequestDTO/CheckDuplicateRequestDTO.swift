@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 아이디 중복 체크용 Model -> UserManager.shared.checkDuplication()
 
-struct CheckDuplicateModel {
+struct CheckDuplicateRequestDTO {
     
     let userName: String?
     let displayName: String?

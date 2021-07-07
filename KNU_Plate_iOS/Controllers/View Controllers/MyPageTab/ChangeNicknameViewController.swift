@@ -40,7 +40,7 @@ class ChangeNicknameViewController: UIViewController {
         
         showProgressBar()
         
-        let editUserModel = EditUserInfoModel(nickname: nickname)
+        let editUserModel = EditUserInfoRequestDTO(nickname: nickname)
         
         UserManager.shared.updateNickname(with: editUserModel) { result in
             
@@ -66,7 +66,7 @@ class ChangeNicknameViewController: UIViewController {
         if !validateUserInput() { return }
         
         let requestURL = UserManager.shared.checkDisplayNameDuplicateURL
-        let checkDuplicateModel = CheckDuplicateModel(displayName: nickname!)
+        let checkDuplicateModel = CheckDuplicateRequestDTO(displayName: nickname!)
         
         UserManager.shared.checkDuplication(with: checkDuplicateModel,
                                             requestURL: requestURL) { [weak self] result in

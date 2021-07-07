@@ -20,7 +20,7 @@ extension RestaurantListViewModel {
 extension RestaurantListViewModel {
     func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil, cursor: Int? = nil) {
         isFetchingData = true
-        let model = FetchRestaurantListModel(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: cursor)
+        let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: cursor)
         RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
             switch result {
             case .success(let data):

@@ -20,7 +20,7 @@ class ChangePasswordViewController: UIViewController {
         
         if !validateUserInput() { return }
         
-        let model = EditUserInfoModel(password: passwordTextField.text!)
+        let model = EditUserInfoRequestDTO(password: passwordTextField.text!)
         
         UserManager.shared.updatePassword(with: model) { [weak self] result in
             

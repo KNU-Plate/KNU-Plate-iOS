@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 새로운 사용자 회원가입용 Model -> UserManager.shared.signUp(with model: RegisterInfoModel)
 
-struct RegisterInfoModel {
+struct RegisterRequestDTO {
     
     /// 로그인 아이디. 4자 이상 20자 제한. 영어, 숫자 입력가능
     let username: String

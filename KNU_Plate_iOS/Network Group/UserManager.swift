@@ -28,7 +28,7 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
-    func signUp(with model: RegisterInfoModel,
+    func signUp(with model: RegisterRequestDTO,
                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -77,7 +77,7 @@ class UserManager {
     }
     
     //MARK: - 로그인    
-    func logIn(with model: LoginInfoModel,
+    func logIn(with model: LoginRequestDTO,
                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         User.shared.resetAllUserInfo()
@@ -124,7 +124,7 @@ class UserManager {
         AF.request(sendEmailVerificationCodeURL,
                    method: .post,
                    encoding: URLEncoding.httpBody,
-                   headers: RequestEmailVerifyCodeModel().headers,
+                   headers: EmailVerifyCodeRequestDTO().headers,
                    interceptor: interceptor)
             .responseJSON { (response) in
                 
@@ -143,7 +143,7 @@ class UserManager {
     }
     
     //MARK: - 인증 코드 확인 (메일 인증)
-    func verifyEmail(with model: VerifyMailModel,
+    func verifyEmail(with model: VerifyMailRequestDTO,
                      completion: @escaping ((Bool) -> Void)) {
         
         AF.request(emailAuthenticationURL,
@@ -165,7 +165,7 @@ class UserManager {
     }
     
     //MARK: - 아이디 or 닉네임 중복 체크
-    func checkDuplication(with model: CheckDuplicateModel,
+    func checkDuplication(with model: CheckDuplicateRequestDTO,
                           requestURL: String,
                           completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
@@ -265,7 +265,7 @@ class UserManager {
     }
     
     //MARK: - 시용자 닉네임 수정
-    func updateNickname(with model: EditUserInfoModel,
+    func updateNickname(with model: EditUserInfoRequestDTO,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -299,7 +299,7 @@ class UserManager {
     }
     
     //MARK: - 사용자 비밀번호 수정
-    func updatePassword(with model: EditUserInfoModel,
+    func updatePassword(with model: EditUserInfoRequestDTO,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -332,7 +332,7 @@ class UserManager {
     }
     
     //MARK: - 사용자 프로필 이미지 업데이트
-    func updateProfileImage(with model: EditUserInfoModel,
+    func updateProfileImage(with model: EditUserInfoRequestDTO,
                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -372,7 +372,7 @@ class UserManager {
     //MARK: - 사용자 프로필 이미지 제거
     func removeProfileImage(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let model = EditUserInfoModel(removeUserProfileImage: true)
+        let model = EditUserInfoRequestDTO(removeUserProfileImage: true)
         
         AF.upload(multipartFormData: { multipartFormData in
             

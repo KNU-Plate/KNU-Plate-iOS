@@ -65,7 +65,7 @@ class NewRestaurantViewModel {
     // 신규 매장 등록
     func upload() {
         
-        let newRestaurantModel = NewRestaurantModel(name: restaurantName,
+        let newRestaurantModel = NewRestaurantRequestDTO(name: restaurantName,
                                                     contact: contact,
                                                     foodCategory: foodCategory,
                                                     address: address,

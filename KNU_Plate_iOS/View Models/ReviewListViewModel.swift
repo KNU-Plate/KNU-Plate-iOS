@@ -27,7 +27,7 @@ class ReviewListViewModel {
         
         isFetchingData = true
         
-        let model = FetchReviewListModel(mallID: mallID, page: indexToFetch)
+        let model = FetchReviewListRequestDTO(mallID: mallID, page: indexToFetch)
         
         RestaurantManager.shared.fetchReviewList(with: model) { [weak self] result in
             

@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 카카오맵 화면에서 키워드로 식당 검색 시 사용하는 Model -> MapManager.shared.searchByKeyword()
 
-struct SearchRestaurantByKeywordModel {
+struct SearchRestaurantRequestDTO {
     
     /// X 좌표값, 경위도인 경우 longitude (경도)
     let x: String = "128.6104881544238"
