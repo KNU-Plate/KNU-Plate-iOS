@@ -40,6 +40,8 @@ class NoticeViewController: UIViewController {
         
         noticeList.removeAll()
         refreshControl.endRefreshing()
+        isFetchingData = false
+        indexToFetch = 0
         fetchNoticeList()
     }
     
@@ -53,7 +55,7 @@ class NoticeViewController: UIViewController {
             
             switch result {
             case .success(let model):
-                
+
                 if model.isEmpty {
                     DispatchQueue.main.async {
                         self.tableView.tableFooterView = nil
