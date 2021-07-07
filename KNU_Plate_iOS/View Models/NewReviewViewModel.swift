@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol NewReviewViewModelDelegate {
+protocol NewReviewViewModelDelegate: AnyObject {
     func didCompleteReviewUpload(_ success: Bool)
     func failedUploadingReview(with error: NetworkError)
     
@@ -12,7 +12,7 @@ protocol NewReviewViewModelDelegate {
 class NewReviewViewModel {
     
     //MARK: - Object Properties
-    var delegate: NewReviewViewModelDelegate?
+    weak var delegate: NewReviewViewModelDelegate?
     
     var mallID: Int
     

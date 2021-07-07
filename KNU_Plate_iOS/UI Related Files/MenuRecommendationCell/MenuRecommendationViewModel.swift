@@ -20,5 +20,4 @@ struct MenuRecommendationViewModel {
             return likes + dislikes
         }
     }
-
 }

@@ -1,13 +1,13 @@
 import Foundation
 
-protocol MenuListViewModelDelegate {
+protocol MenuListViewModelDelegate: AnyObject {
     func didFetchMenuList()
     func failedFetchingMenuList(with error: NetworkError)
 }
 
 class MenuListViewModel {
     
-    var delegate: MenuListViewModelDelegate?
+    weak var delegate: MenuListViewModelDelegate?
     
     var menuList: [ExistingMenuModel] = []
     
