@@ -275,11 +275,11 @@ class RestaurantManager {
                 switch response.result {
                 case .success(let value):
                     do {
-                        guard let data = value as? Data else { return }
-                        let decodedData = try JSONDecoder().decode([RestaurantListResponseModel].self, from: data)
+                        let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let decodedData = try JSONDecoder().decode([RestaurantListResponseModel].self, from: dataJSON)
                         completion(.success(decodedData))
                     } catch {
-                        print("RESTAURANT MANAGER - FAILED DECODING DATA with error: \(error)")
+                        print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
                     }
                 case .failure(let error):
                     print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
@@ -287,11 +287,10 @@ class RestaurantManager {
                         print("🥲 RESTAURANT MANAGER - Empty responseCode")
                         return
                     }
-                    let custumError = NetworkError.returnError(statusCode: responseCode)
-                    print("RESTAURANT MANAGER - FAILED REQEUST with custum error\n: \(custumError.errorDescription)")
-                    completion(.failure(custumError))
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
                 }
             }
-            
     }
 }
