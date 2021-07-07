@@ -19,6 +19,8 @@
 		3CA704DE268DA35200943DC1 /* RestaurantListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */; };
 		3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */; };
 		3CB6C3EB268D994F00F7515A /* RestaurantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */; };
+		3CB6F97F26957E9F001324BB /* RestaurantInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */; };
+		3CB6F9812695879E001324BB /* RestaurantInfoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */; };
 		3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */; };
 		3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */; };
 		3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */; };
@@ -160,6 +162,8 @@
 		3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListResponseModel.swift; sourceTree = "<group>"; };
 		3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRestaurantListRequestDTO.swift; sourceTree = "<group>"; };
 		3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListViewModel.swift; sourceTree = "<group>"; };
+		3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewModel.swift; sourceTree = "<group>"; };
+		3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoResponseModel.swift; sourceTree = "<group>"; };
 		3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 				7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */,
 				7C6D2532268D9B010030F9A1 /* NoticeListModel.swift */,
 				3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */,
+				3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */,
 			);
 			path = ResponseModel;
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				7CB8DF6B264D473C0001CC6D /* ReviewListViewModel.swift */,
 				7C38F22226723FA8007D8313 /* MenuListViewModel.swift */,
 				3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */,
+				3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -842,6 +848,8 @@
 				7C1F79E12633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */,
 				3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */,
+				3CAFEACA26900A1F00F0899E /* FetchRestaurantListModel.swift in Sources */,
+				3CB6F9812695879E001324BB /* RestaurantInfoResponseModel.swift in Sources */,
 				3CC2847726921F2D0075399E /* GateName.swift in Sources */,
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantRequestDTO.swift in Sources */,
 				7CA6621B26412203000E0B7A /* RegisterNewMenuRequestDTO.swift in Sources */,
@@ -918,6 +926,7 @@
 				7C99FB9E2648FFD60063C967 /* FetchReviewListRequestDTO.swift in Sources */,
 				7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */,
 				3C8AB202268A376500D51AC8 /* RestaurantTableView.swift in Sources */,
+				3CB6F97F26957E9F001324BB /* RestaurantInfoViewModel.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 				7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */,
 				7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */,
@@ -1063,7 +1072,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1093,7 +1102,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

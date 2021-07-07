@@ -31,10 +31,14 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    var mallID: Int?
+    
     //MARK: - Initialization Of The Cell
     override init(frame: CGRect) {
         super.init(frame: frame)
         setCell()
+        makeCornerRound(self)
+        makeCornerRound(self.imageView)
     }
     
     required init?(coder: NSCoder) {
@@ -42,12 +46,11 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     }
     
     // make corner round
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = Constants.Layer.cornerRadius
-        self.layer.borderWidth = Constants.Layer.borderWidth
-        self.layer.borderColor = Constants.Layer.borderColor
-        self.layer.masksToBounds = true
+    func makeCornerRound(_ view: UIView) {
+        view.layer.cornerRadius = Constants.Layer.cornerRadius
+        view.layer.borderWidth = Constants.Layer.borderWidth
+        view.layer.borderColor = Constants.Layer.borderColor
+        view.layer.masksToBounds = true
     }
     
     //MARK: - Basic Set Up For Cell

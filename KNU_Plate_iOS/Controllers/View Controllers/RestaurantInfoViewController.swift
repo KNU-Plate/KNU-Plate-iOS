@@ -8,6 +8,8 @@ class RestaurantInfoViewController: UIViewController {
     
     lazy var currentButton: UIButton = self.tabBarView.reviewButton
     
+    var mallID: Int?
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

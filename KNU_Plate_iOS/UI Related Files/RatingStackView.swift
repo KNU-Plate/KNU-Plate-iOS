@@ -14,7 +14,7 @@ class RatingStackView: UIStackView {
     
     var averageRating: Double = 0.0 {
         didSet {
-            averageRatingLabel.text = String(averageRating)
+            averageRatingLabel.text = String(format: "%.1f", averageRating)
             if averageRating != 0.0 {
                 starImage.image = UIImage(named: Constants.Images.starsFilled)
             } else {

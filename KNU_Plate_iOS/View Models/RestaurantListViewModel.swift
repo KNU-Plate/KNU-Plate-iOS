@@ -1,9 +1,15 @@
 import Foundation
 
+protocol RestaurantListViewModelDelegate: AnyObject {
+    func didFetchRestaurantList()
+}
+
 class RestaurantListViewModel {
+    weak var delegate: RestaurantListViewModelDelegate?
     var restaurants: [RestaurantListResponseModel] = []
     var hasMore: Bool = true
     var isFetchingData: Bool = false
+    var lastMallID: Int?
 }
 
 extension RestaurantListViewModel {
@@ -18,19 +24,23 @@ extension RestaurantListViewModel {
 }
 
 extension RestaurantListViewModel {
-    func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil, cursor: Int? = nil) {
+    func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil) {
         isFetchingData = true
         let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: cursor)
+        let model = FetchRestaurantListModel(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
         RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
             switch result {
             case .success(let data):
+                guard let self = self else { return }
                 if data.count == 0 {
-                    self?.hasMore = false
+                    self.hasMore = false
                     return
                 }
-                self?.restaurants.append(contentsOf: data)
-                self?.isFetchingData = false
-            case .failure(let error):
+                self.restaurants.append(contentsOf: data)
+                self.lastMallID = data.last?.mallID
+                self.isFetchingData = false
+                self.delegate?.didFetchRestaurantList()
+            case .failure:
                 return
             }
         }
@@ -48,6 +58,10 @@ class RestaurantViewModel {
 extension RestaurantViewModel {
     var mallName: String {
         return self.restaurant.mallName
+    }
+    
+    var mallID: Int {
+        return self.restaurant.mallID
     }
     
     var averageRating: Double {
