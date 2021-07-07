@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ReviewListViewModelDelegate {
+protocol ReviewListViewModelDelegate: AnyObject {
     func didFetchReviewListResults()
     func didFetchEmptyReviewListResults()
     func failedFetchingReviewListResults()
@@ -9,7 +9,7 @@ protocol ReviewListViewModelDelegate {
 class ReviewListViewModel {
     
     //MARK: - Object Properties
-    var delegate: ReviewListViewModelDelegate?
+    weak var delegate: ReviewListViewModelDelegate?
     
     var reviewList: [ReviewListResponseModel] = []
     
