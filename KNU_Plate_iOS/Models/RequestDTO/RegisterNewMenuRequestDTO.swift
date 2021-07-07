@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 새 메뉴 등록할 때 사용하는 Model -> RestaurantManager.shared.uploadNewMenu(with model: RegisterNewMenuModel)
 
-struct RegisterNewMenuModel {
+struct RegisterNewMenuRequestDTO {
     
     let mallID: Int
     let menuName: [String]

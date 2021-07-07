@@ -102,7 +102,7 @@ class NewReviewViewModel {
         for eachMenu in menusToUpload {
             menuNames.append(eachMenu.menuName)
         }
-        let model = RegisterNewMenuModel(mallID: self.mallID,
+        let model = RegisterNewMenuRequestDTO(mallID: self.mallID,
                                          menuName: menuNames)
     
         RestaurantManager.shared.uploadNewMenu(with: model) { [weak self] result in
@@ -127,7 +127,7 @@ class NewReviewViewModel {
     // 신규 리뷰 등록
     func uploadReview() {
     
-        let newReviewModel = NewReviewModel(mallID: mallID,
+        let newReviewModel = NewReviewRequestDTO(mallID: mallID,
                                             menus: menuInfoInJSONString,
                                             review: review,
                                             rating: rating,

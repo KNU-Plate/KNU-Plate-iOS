@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 한 매장에 대한 신규 리뷰 작성을 위한 Model
 
-class NewReviewModel: Encodable {
+class NewReviewRequestDTO: Encodable {
     
     /// 매장 아이디
     var mallID: Int

@@ -30,7 +30,7 @@ class SearchRestaurantViewModel {
     func search(with keyword: String) {
 
         resetSearchResults()
-        let searchModel = SearchRestaurantByKeywordModel(query: keyword)
+        let searchModel = SearchRestaurantRequestDTO(query: keyword)
         
         MapManager.shared.searchByKeyword(with: searchModel) { [weak self] result in
             

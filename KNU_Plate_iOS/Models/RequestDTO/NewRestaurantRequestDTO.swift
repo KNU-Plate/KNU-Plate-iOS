@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 신규 매장 등록할 때 필요한 Model
 
-class NewRestaurantModel {
+class NewRestaurantRequestDTO {
     
     /// 매장명
     let name: String

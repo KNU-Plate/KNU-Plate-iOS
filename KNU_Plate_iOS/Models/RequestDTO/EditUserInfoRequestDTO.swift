@@ -3,7 +3,7 @@ import Alamofire
 
 //MARK: - 프로필 정보 수정용 Model
 
-struct EditUserInfoModel {
+struct EditUserInfoRequestDTO {
     
     var password: String? = nil
     var nickname: String? = nil

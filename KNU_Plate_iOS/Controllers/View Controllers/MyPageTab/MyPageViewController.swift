@@ -139,7 +139,7 @@ extension MyPageViewController {
     func updateProfileImage(with image: UIImage) {
         
         let imageData = image.jpegData(compressionQuality: 1.0)!
-        let model = EditUserInfoModel(userProfileImage: imageData)
+        let model = EditUserInfoRequestDTO(userProfileImage: imageData)
         
         UserManager.shared.updateProfileImage(with: model) { [weak self] result in
             

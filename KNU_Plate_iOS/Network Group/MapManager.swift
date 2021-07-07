@@ -14,7 +14,7 @@ class MapManager {
     private init() {}
     
     //MARK: - 키워드로 장소 검색
-    func searchByKeyword(with model: SearchRestaurantByKeywordModel,
+    func searchByKeyword(with model: SearchRestaurantRequestDTO,
                          completion: @escaping ((Result<SearchRestaurantByKeywordResponseModel,NetworkError>) -> Void)) {
         
         AF.request(searchByKeywordRequestURL,

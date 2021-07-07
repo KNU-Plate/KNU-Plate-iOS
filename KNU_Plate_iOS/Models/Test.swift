@@ -13,7 +13,7 @@ struct Test {
         let username = "alexding"
         let password = "123456789"
         
-        let loginInfoModel = LoginInfoModel(username: username, password: password)
+        let loginInfoModel = LoginRequestDTO(username: username, password: password)
         
         UserManager.shared.logIn(with: loginInfoModel) { result in
             
