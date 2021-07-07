@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NewRestaurantViewModelDelegate {
+protocol NewRestaurantViewModelDelegate: AnyObject {
     func didCompleteUpload(_ success: Bool)
     func alreadyRegisteredRestaurant()
     func failedToUpload(with error: NetworkError)
@@ -9,7 +9,7 @@ protocol NewRestaurantViewModelDelegate {
 class NewRestaurantViewModel {
     
     //MARK: - Object Properties
-    var delegate: NewRestaurantViewModelDelegate?
+    weak var delegate: NewRestaurantViewModelDelegate?
     
     var restaurantName: String
     

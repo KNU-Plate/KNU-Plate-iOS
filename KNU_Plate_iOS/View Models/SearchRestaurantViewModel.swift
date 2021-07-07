@@ -1,6 +1,6 @@
 import Foundation
 
-protocol SearchRestaurantViewModelDelegate {
+protocol SearchRestaurantViewModelDelegate: AnyObject {
     func didFetchSearchResults()
     func failedFetchingSearchResults(with error: NetworkError)
 }
@@ -8,7 +8,7 @@ protocol SearchRestaurantViewModelDelegate {
 class SearchRestaurantViewModel {
     
     //MARK: - Object Properties
-    var delegate: SearchRestaurantViewModelDelegate?
+    weak var delegate: SearchRestaurantViewModelDelegate?
     
     /// 검색어에 검색된 문서 수
     var totalCount: Int = 0

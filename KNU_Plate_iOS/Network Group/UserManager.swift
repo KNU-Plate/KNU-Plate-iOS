@@ -76,7 +76,7 @@ class UserManager {
         }
     }
     
-    //MARK: - 로그인
+    //MARK: - 로그인    
     func logIn(with model: LoginInfoModel,
                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         

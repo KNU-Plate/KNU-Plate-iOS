@@ -26,6 +26,12 @@ class RestaurantManager {
     func uploadNewRestaurant(with model: NewRestaurantModel,
                              completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
+        print("✏️ \(model.name)")
+        print("✏️ \(model.categoryName)")
+        print("✏️ \(model.address)")
+        print("✏️ \(model.latitude)")
+        print("✏️ \(model.longitude)")
+        
         AF.upload(multipartFormData: { (multipartFormData) in
             
             multipartFormData.append(Data(model.name.utf8),
