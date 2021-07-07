@@ -29,7 +29,7 @@ struct Constants {
         
         // Favorites Tab
         
-        
+         
         // My Page Tab
         static let sendDeveloperMessageViewController       = "SendDeveloperMessageViewController"
         static let settingsViewController                   = "SettingsViewController"
@@ -39,6 +39,21 @@ struct Constants {
         static let developerInfoViewController              = "DeveloperInformationViewController"
         static let openSourceInfoViewController             = "OpenSourceInfoViewController"
         
+        static let myPageVCStoryBoardID                     = [
+                                                                noticeViewController,
+                                                                settingsViewController,
+                                                                sendDeveloperMessageViewController,
+                                                                termsAndConditionsViewController,
+                                                                developerInfoViewController,
+                                                                openSourceInfoViewController,
+                                                                ]
+        static let myPageVCOptions                          = [ "공지사항",
+                                                                "설정",
+                                                                "개발자에게 건의사항 보내기",
+                                                                "서비스 이용약관",
+                                                                "개발자 정보",
+                                                                "오픈 소스 라이센스"
+                                                                ]
     }
     
 
@@ -165,14 +180,5 @@ struct Constants {
         "🇰🇷 한식", "🇯🇵 일식", "🇨🇳 중식", "🇺🇸 양식",
         "🌎 세계음식","☕️ 카페", "🍹 술집"
     ]
-    
-    static let myPageTableViewOptions: [String] = ["공지사항",
-                                                   "개발자에게 건의사항 보내기",
-                                                   "설정",
-                                                   "서비스 이용약관",
-                                                   "개발자 정보",
-                                                   "오픈 소스 라이센스"]
-    
-    
     
 }

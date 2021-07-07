@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3CD-QF-9Ve">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1K8-kI-w1k">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1544,8 +1544,9 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="278-Rc-klp">
-                                                    <rect key="frame" x="16" y="11" width="50" height="50"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell.badge" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="278-Rc-klp">
+                                                    <rect key="frame" x="16" y="11" width="50" height="49.5"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="8fM-pb-fDv"/>
                                                         <constraint firstAttribute="width" constant="50" id="Pyb-Br-B59"/>
@@ -1767,7 +1768,17 @@
                             <constraint firstItem="QYK-HP-QV1" firstAttribute="leading" secondItem="7BU-FE-vVV" secondAttribute="leading" constant="15" id="pKm-zZ-ifd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="마이페이지" id="VlU-aN-b5g"/>
+                    <navigationItem key="navigationItem" id="VlU-aN-b5g">
+                        <barButtonItem key="leftBarButtonItem" title="마이페이지" style="done" id="DrB-a6-hjo">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="i1o-Ky-KOn">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="pressedSettingsButton:" destination="pZm-rV-DhB" id="jQW-6X-SiM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="infoButton" destination="TXK-Fy-VqP" id="5WJ-Tb-QKe"/>
                         <outlet property="profileImageButton" destination="QYK-HP-QV1" id="Qqw-RV-3iH"/>
@@ -1810,9 +1821,11 @@
     </scenes>
     <resources>
         <image name="add button" width="226" height="226"/>
+        <image name="bell.badge" catalog="system" width="128" height="124"/>
         <image name="default profile image" width="73" height="73"/>
         <image name="delete button" width="79" height="79"/>
         <image name="first medal" width="41" height="41"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="image icon" width="100" height="100"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="line divider (gray)" width="374" height="1"/>
