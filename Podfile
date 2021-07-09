@@ -21,5 +21,7 @@ target 'KNU_Plate_iOS' do
   pod "ViewAnimator"
   pod 'EasyTipView', '~> 2.1'
   pod 'PanModal'
+  pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/SDWebImage"
 
 end
