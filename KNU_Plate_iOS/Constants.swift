@@ -23,6 +23,7 @@ struct Constants {
         static let newRestaurantViewController              = "NewRestaurantViewController"
         static let searchListViewController                 = "SearchListViewController" 
         static let reviewViewController                     = "ReviewViewController"
+        static let reviewDetailViewController               = "ReviewDetailViewController"
         static let locationViewController                   = "LocationViewController"
         static let menuViewController                       = "MenuViewController"
         static let menuRecommendationViewController         = "MenuRecommendationViewController"

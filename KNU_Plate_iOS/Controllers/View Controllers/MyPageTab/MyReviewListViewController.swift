@@ -98,6 +98,11 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row > viewModel.reviewList.count - 1 {
+            print("❗️ Index Out Of Range -- indexPathRow: \(indexPath.row), reviewList count: \(viewModel.reviewList.count)")
+            return UITableViewCell()
+        }
  
         if viewModel.reviewList[indexPath.row].reviewImageFileFolder != nil {
             
@@ -143,6 +148,25 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
             
             return reviewCellNoImages
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        viewModel.selectedIndex = indexPath
+        
+        guard let vc = self.storyboard?.instantiateViewController(
+                identifier: Constants.StoryboardID.reviewDetailViewController
+        ) as? ReviewDetailViewController else { return }
+        
+        guard let cell = tableView.cellForRow(
+                at: viewModel.selectedIndex!
+        ) as? ReviewTableViewCell else { return }
+        
+        let reviewDetails = cell.getReviewDetails()
+        vc.configure(with: reviewDetails)
+    
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
