@@ -33,6 +33,7 @@
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
+		7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB92698164700F6C29B /* MyReviewListViewController.swift */; };
 		7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1C2621590800AA8239 /* UserInputError.swift */; };
 		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
 		7C16DF232621810700AA8239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF222621810700AA8239 /* User.swift */; };
@@ -177,6 +178,7 @@
 		3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
+		7C036AB92698164700F6C29B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
 		7C16DF1C2621590800AA8239 /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7C16DF222621810700AA8239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */,
 				7C6D252D268D93AB0030F9A1 /* NoticeViewController.swift */,
 				7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */,
+				7C036AB92698164700F6C29B /* MyReviewListViewController.swift */,
 			);
 			path = MyPageTab;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
+				7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7C38F22126723A8E007D8313 /* MenuRecommendationViewModel.swift in Sources */,
 				7C6D2533268D9B010030F9A1 /* NoticeListModel.swift in Sources */,

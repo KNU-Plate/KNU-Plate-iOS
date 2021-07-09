@@ -32,6 +32,7 @@ struct Constants {
          
         // My Page Tab
         static let sendDeveloperMessageViewController       = "SendDeveloperMessageViewController"
+        static let myReviewListViewController               = "MyReviewListViewController"
         static let settingsViewController                   = "SettingsViewController"
         static let termsAndConditionsViewController         = "TermsAndConditionViewController"
         static let reportReviewViewController               = "ReportReviewViewController"
@@ -42,6 +43,7 @@ struct Constants {
         
         static let myPageVCStoryBoardID                     = [
                                                                 noticeViewController,
+                                                                myReviewListViewController,
                                                                 settingsViewController,
                                                                 sendDeveloperMessageViewController,
                                                                 termsAndConditionsViewController,
@@ -49,6 +51,7 @@ struct Constants {
                                                                 openSourceInfoViewController,
                                                                 ]
         static let myPageVCOptions                          = [ "공지사항",
+                                                                "내가 쓴 리뷰",
                                                                 "설정",
                                                                 "개발자에게 건의사항 보내기",
                                                                 "서비스 이용약관",
@@ -151,6 +154,7 @@ struct Constants {
         // Other
         static let rightArrow                               = "arrow_right"
         static let myPageVCImageOptions                     = [ "bell.badge",
+                                                                "tray.full",
                                                                 "gear",
                                                                 "paperplane",
                                                                 "doc.text",
