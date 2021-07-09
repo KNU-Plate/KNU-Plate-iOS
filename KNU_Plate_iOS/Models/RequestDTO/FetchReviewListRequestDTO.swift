@@ -12,10 +12,11 @@ struct FetchReviewListRequestDTO {
         "Authorization": User.shared.accessToken
     ]
 
-    init(mallID: Int, page: Int = 0) {
+    init(mallID: Int, page: Int = 0, myReview: String = "N") {
     
         parameters["mall_id"] = mallID
         parameters["cursor"] = page
+        parameters["myReview"] = myReview
     }
     
 

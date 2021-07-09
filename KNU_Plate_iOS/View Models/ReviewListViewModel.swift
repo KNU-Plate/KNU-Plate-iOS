@@ -23,7 +23,7 @@ class ReviewListViewModel {
     
     //MARK: - Object Methods
     
-    func fetchReviewList() {
+    func fetchReviewList(myReview: String = "N") {
         
         isFetchingData = true
         

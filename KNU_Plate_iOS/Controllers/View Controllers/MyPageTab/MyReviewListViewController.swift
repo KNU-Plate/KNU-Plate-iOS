@@ -19,7 +19,7 @@ class MyReviewListViewController: UIViewController  {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchReviewList()
+        viewModel.fetchReviewList(myReview: "Y")
     }
 }
 
@@ -56,8 +56,6 @@ extension MyReviewListViewController {
         
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
-    
-    
 }
 
 //MARK: - ReviewListViewModelDelegate
@@ -65,6 +63,7 @@ extension MyReviewListViewController {
 extension MyReviewListViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
+        print("✏️ MyReviewListVC - didFetchReviewListResults")
         tableView.reloadData()
         refreshControl.endRefreshing()
         dismissProgressBar()
@@ -72,6 +71,7 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
     }
     
     func didFetchEmptyReviewListResults() {
+        print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
         tableView.tableFooterView = nil
     }
     
@@ -79,7 +79,7 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: NetworkError.internalError.localizedDescription,
                                         buttonTitle: "재시도") {
-            self.viewModel.fetchReviewList()
+            self.viewModel.fetchReviewList(myReview: "Y")
         }
     }
 }
@@ -90,13 +90,12 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     
     @objc func refreshTable() {
         viewModel.resetValues()
-        viewModel.fetchReviewList()
+        viewModel.fetchReviewList(myReview: "Y")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.reviewList.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
  
@@ -152,22 +151,20 @@ extension MyReviewListViewController: ReviewTableViewCellDelegate {
     func goToReportReviewVC(reviewID: Int, displayName: String) {
         //
     }
-    
-    
 }
 
 //MARK: - UIScrollViewDelegate
 
 extension MyReviewListViewController: UIScrollViewDelegate {
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
-        
+            
             if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchReviewList()
+                viewModel.fetchReviewList(myReview: "Y")
             }
         }
     }
