@@ -82,6 +82,19 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
             self.viewModel.fetchReviewList(myReview: "Y")
         }
     }
+    
+    func didDeleteMyReview() {
+        
+        showSimpleBottomAlert(with: "리뷰 삭제 완료 🎉")
+        let indexPath = NSIndexPath(row: NSNotFound, section: 0)
+        self.tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
+        refreshTable()
+    }
+    
+    func failedDeletingMyReview(with error: NetworkError) {
+        showSimpleBottomAlert(with: error.errorDescription)
+    }
+    
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
@@ -170,10 +183,23 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
+//MARK: - ReviewTableViewCellDelegate
+
 extension MyReviewListViewController: ReviewTableViewCellDelegate {
     
     func goToReportReviewVC(reviewID: Int, displayName: String) {
-        //
+        // 사실 내 글 불러오기인데 이건 없어도 될듯
+        return
+    }
+    
+    func presentDeleteActionAlert(reviewID: Int) {
+        
+        self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
+                                           message: "") { selectedOk in
+            if selectedOk {
+                self.viewModel.deleteMyReview(reviewID: reviewID)
+            }
+        }
     }
 }
 

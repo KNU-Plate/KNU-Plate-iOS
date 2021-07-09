@@ -63,6 +63,14 @@ class ExampleViewController: UIViewController {
 //MARK: - ReviewListViewModelDelegate
 
 extension ExampleViewController: ReviewListViewModelDelegate {
+    func didDeleteMyReview() {
+        //
+    }
+    
+    func failedDeletingMyReview(with error: NetworkError) {
+        //
+    }
+    
     
     func didFetchReviewListResults() {
         print("+++++ ExampleViewController didFetchReviewListResults")
@@ -168,6 +176,11 @@ extension ExampleViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - ReviewTableViewCellDelegate
 
 extension ExampleViewController: ReviewTableViewCellDelegate {
+    
+    func presentDeleteActionAlert(reviewID: Int) {
+        //
+    }
+    
     
     func goToReportReviewVC(reviewID: Int, displayName: String) {
     

@@ -24,6 +24,7 @@ class UserManager {
     let checkDisplayNameDuplicateURL    = "\(Constants.API_BASE_URL)check-display-name"
     let modifyUserInfoURL               = "\(Constants.API_BASE_URL)auth/modify"
     let loadUserProfileInfoURL          = "\(Constants.API_BASE_URL)auth"
+    let deleteReviewURL                 = "\(Constants.API_BASE_URL)review/"
     
     private init() {}
     
@@ -419,6 +420,34 @@ class UserManager {
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
                     print("UserManager - unregisterUser error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    //MARK: - 내가 쓴 리뷰 삭제
+    func deleteMyReview(reviewID: Int,
+                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let url = deleteReviewURL + "/\(reviewID)"
+        
+        AF.request(url,
+                   method: .delete,
+                   interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                
+                case 200:
+                    print("✏️ UserManager - deleteMyReview SUCCESS")
+                    completion(.success(true))
+                
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("❗️ UserManager - deleteMyReview FAILED error :\(error.errorDescription)")
                     completion(.failure(error))
                 }
             }

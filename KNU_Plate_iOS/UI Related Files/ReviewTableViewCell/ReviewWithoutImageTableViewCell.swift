@@ -59,7 +59,7 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
                                                         attributes: attributes)
         reviewLabel.font = UIFont.systemFont(ofSize: 14)
     }
-    
+
     
     @objc override func showMoreOptions() {
         
@@ -67,23 +67,35 @@ class ReviewWithoutImageTableViewCell: ReviewTableViewCell {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let reportReview = UIAlertAction(title: "게시글 신고하기",
-                                         style: .default) { alert in
+        print("✏️ viewModel.usernickname: \(viewModel.userNickname)")
+        print("✏️ user.shared.displayname: \(User.shared.displayName)")
+        
+        if viewModel.userNickname == User.shared.displayName {
             
-            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
-                                              displayName: self.viewModel.userNickname)
+            let deleteAction = UIAlertAction(title: "리뷰 삭제하기",
+                                             style: .destructive) { onPress in
+                
+                self.delegate?.presentDeleteActionAlert(reviewID: self.viewModel.reviewID)
+            }
+            actionSheet.addAction(deleteAction)
+        }
+        else {
+            let reportAction = UIAlertAction(title: "게시글 신고하기",
+                                             style: .default) { onPress in
+                self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+                                                  displayName: self.viewModel.userNickname)
+            }
+            actionSheet.addAction(reportAction)
         }
         
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
-        actionSheet.addAction(reportReview)
         actionSheet.addAction(cancelAction)
         
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
     }
-    
     
     
     override func getReviewDetails() -> ReviewDetail {
