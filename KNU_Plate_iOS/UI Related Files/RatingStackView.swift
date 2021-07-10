@@ -10,7 +10,9 @@ class RatingStackView: UIStackView {
         $0.image = UIImage(named: Constants.Images.starsUnfilled)
     }
     
-    let averageRatingLabel = UILabel()
+    let averageRatingLabel = UILabel().then {
+        $0.textAlignment = .center
+    }
     
     var averageRating: Double = 0.0 {
         didSet {
@@ -30,6 +32,10 @@ class RatingStackView: UIStackView {
         self.distribution = .fillEqually
         self.addArrangedSubview(starImage)
         self.addArrangedSubview(averageRatingLabel)
+        
+        starImage.snp.makeConstraints { make in
+            make.width.height.equalTo(25)
+        }
     }
     
     required init(coder: NSCoder) {
