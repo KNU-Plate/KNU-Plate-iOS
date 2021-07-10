@@ -1,12 +1,20 @@
 import UIKit
 import SnapKit
+import SDWebImage
 
 class RestaurantInfoViewController: UIViewController {
 
     lazy var customTableView = RestaurantTableView(frame: self.view.frame)
     let tabBarView = RestaurantTabBarView()
     
-    lazy var currentButton: UIButton = self.tabBarView.reviewButton
+    lazy var currentButton: UIButton = self.tabBarView.reviewButton {
+        didSet {
+            oldValue.isSelected = false
+            currentButton.isSelected = true
+        }
+    }
+    
+    var restaurantInfoViewModel = RestaurantInfoViewModel()
     
     var mallID: Int?
     
@@ -21,9 +29,14 @@ class RestaurantInfoViewController: UIViewController {
         }
         
         setupTableView()
+        setButtonTarget()
         
         currentButton.isSelected = true
-        setButtonTarget()
+        
+//        restaurantInfoViewModel.delegate = self
+//        restaurantInfoViewModel.setMallID(mallID: mallID)
+//        restaurantInfoViewModel.fetchRestaurantInfo()
+//        restaurantInfoViewModel.fetchTitleImages()
     }
     
     func setButtonTarget() {
@@ -36,7 +49,7 @@ class RestaurantInfoViewController: UIViewController {
         customTableView.tableView.dataSource = self
         customTableView.tableView.delegate = self
         customTableView.tableView.bounces = false
-        customTableView.tableView.tableHeaderView?.frame.size.height = 355 + 3*6
+        customTableView.tableView.tableHeaderView?.frame.size.height = 320 + 3*4
         
         customTableView.nameLabel.text = "반미리코"
         customTableView.gateNameLabel.text = "북문"
@@ -46,8 +59,6 @@ class RestaurantInfoViewController: UIViewController {
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
-        currentButton.isSelected = false
-        
         switch sender.tag {
         case 0:
             currentButton = tabBarView.reviewButton
@@ -59,7 +70,6 @@ class RestaurantInfoViewController: UIViewController {
             return
         }
         
-        currentButton.isSelected = true
         customTableView.tableView.reloadData()
     }
 }
@@ -100,5 +110,31 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+}
+
+extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
+    func didFetchRestaurantInfo() {
+        customTableView.nameLabel.text = restaurantInfoViewModel.mallName
+        customTableView.gateNameLabel.text = restaurantInfoViewModel.gate
+        customTableView.ratingStackView.averageRating = restaurantInfoViewModel.rating
+        customTableView.foodCategoryLabel.text = restaurantInfoViewModel.category
+//        customTableView.favoriteButton.isSelected = restaurantInfoViewModel.isFavorite
+//        customTableView.numberLabel.text = "\(39)명 참여"
+    }
+    
+    func didFetchRestaurantImages() {
+        customTableView.imageButton1.sd_setImage(with: restaurantInfoViewModel.image1URL,
+                                                 for: .normal,
+                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+        customTableView.imageButton2.sd_setImage(with: restaurantInfoViewModel.image2URL,
+                                                 for: .normal,
+                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+        customTableView.imageButton3.sd_setImage(with: restaurantInfoViewModel.image3URL,
+                                                 for: .normal,
+                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+        customTableView.imageButton4.sd_setImage(with: restaurantInfoViewModel.image4URL,
+                                                 for: .normal,
+                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
     }
 }

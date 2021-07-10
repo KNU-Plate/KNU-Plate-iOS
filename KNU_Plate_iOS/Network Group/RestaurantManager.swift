@@ -19,6 +19,8 @@ class RestaurantManager {
     let fetchDetailInfoRequestURL       = "\(Constants.API_BASE_URL)mall"
     let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
     let fetchRestaurantListRequestURL   = "\(Constants.API_BASE_URL)mall"
+    let fetchRestaurantInfoRequestURL   = "\(Constants.API_BASE_URL)mall/"
+    let fetchRestaurantImagesRequestURL = "\(Constants.API_BASE_URL)mall/review-images"
     
     private init() {}
     
@@ -283,6 +285,77 @@ class RestaurantManager {
                     do {
                         let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let decodedData = try JSONDecoder().decode([RestaurantListResponseModel].self, from: dataJSON)
+                        completion(.success(decodedData))
+                    } catch {
+                        print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
+                    }
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
+                }
+            }
+    }
+    
+    // MARK: - 매장 상세 조회
+    func fetchRestaurantInfo(of mallID: Int,
+                             completion: @escaping ((Result<RestaurantInfoResponseModel, NetworkError>) -> Void)) {
+        let requestURL = fetchRestaurantInfoRequestURL + String(mallID)
+        let headers: HTTPHeaders = [
+            "accept": "application/json"
+        ]
+        AF.request(requestURL,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let decodedData = try JSONDecoder().decode(RestaurantInfoResponseModel.self, from: dataJSON)
+                        completion(.success(decodedData))
+                    } catch {
+                        print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
+                    }
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
+                }
+            }
+    }
+    
+    // MARK: - 매장 상세보기의 이미지 조회
+    func fetchRestaurantImages(of mallID: Int,
+                               completion: @escaping ((Result<[RestaurantImageResponseModel], NetworkError>) -> Void)) {
+        let parameters: Parameters = [
+            "mall_id":String(mallID)
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "application/json"
+        ]
+        AF.request(fetchRestaurantImagesRequestURL,
+                   method: .get,
+                   parameters: parameters,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let decodedData = try JSONDecoder().decode([RestaurantImageResponseModel].self, from: dataJSON)
                         completion(.success(decodedData))
                     } catch {
                         print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")

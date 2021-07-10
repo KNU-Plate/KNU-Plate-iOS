@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-// MARK: - 매장 목록 조회시 사용되는 Request Model
+// MARK: - 매장 목록 조회시 사용되는 Model
 struct FetchRestaurantListRequestDTO {
     /// API Parameters
     var parameters: Parameters = [:]
