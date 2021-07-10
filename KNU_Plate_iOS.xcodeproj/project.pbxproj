@@ -27,6 +27,7 @@
 		3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */; };
 		3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */; };
 		3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */; };
+		3CBFB587269815EC00E7EB30 /* RestaurantImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */; };
 		3CC2847726921F2D0075399E /* GateName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2847626921F2D0075399E /* GateName.swift */; };
 		3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */; };
 		3CC2A4E5264ACA2B00F5E392 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */; };
@@ -170,6 +171,7 @@
 		3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
 		3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
+		3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageResponseModel.swift; sourceTree = "<group>"; };
 		3CC2847626921F2D0075399E /* GateName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateName.swift; sourceTree = "<group>"; };
 		3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AlignTextBelow.swift"; sourceTree = "<group>"; };
 		3CC2A4E4264ACA2B00F5E392 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				7C6D2532268D9B010030F9A1 /* NoticeListModel.swift */,
 				3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */,
 				3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */,
+				3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */,
 			);
 			path = ResponseModel;
 			sourceTree = "<group>";
@@ -848,7 +851,7 @@
 				7C1F79E12633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */,
 				3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */,
-				3CAFEACA26900A1F00F0899E /* FetchRestaurantListModel.swift in Sources */,
+				3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */,
 				3CB6F9812695879E001324BB /* RestaurantInfoResponseModel.swift in Sources */,
 				3CC2847726921F2D0075399E /* GateName.swift in Sources */,
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantRequestDTO.swift in Sources */,
@@ -880,6 +883,7 @@
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
+				3CBFB587269815EC00E7EB30 /* RestaurantImageResponseModel.swift in Sources */,
 				7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */,
 				7C38F22126723A8E007D8313 /* MenuRecommendationViewModel.swift in Sources */,
 				7C6D2533268D9B010030F9A1 /* NoticeListModel.swift in Sources */,

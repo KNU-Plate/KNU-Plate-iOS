@@ -30,6 +30,11 @@ class RestaurantCollectionViewController: UIViewController {
         
         guard let gate = gate else { return }
         restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+        print("👌 RestaurantCollectionViewController viewDidLoad")
+    }
+    
+    deinit {
+        print("👌 RestaurantCollectionViewController deinit")
     }
 }
 
