@@ -104,6 +104,7 @@ struct Constants {
         static let defaultProfileImage                      = "default profile image"
         static let defaultReviewImage                       = "default review image"
         static let pickProfileImage                         = "pick profile pic(black)"
+        static let defaultRestaurantTitleImage              = "restaurant title image placeholder"
         
         // MenuRecommendationTableViewCell
         static let thumbsUpInGray                           = "thumbs up(gray2)"
