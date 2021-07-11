@@ -33,10 +33,10 @@ class RestaurantInfoViewController: UIViewController {
         
         currentButton.isSelected = true
         
-//        restaurantInfoViewModel.delegate = self
-//        restaurantInfoViewModel.setMallID(mallID: mallID)
-//        restaurantInfoViewModel.fetchRestaurantInfo()
-//        restaurantInfoViewModel.fetchTitleImages()
+        restaurantInfoViewModel.delegate = self
+        restaurantInfoViewModel.setMallID(mallID: mallID)
+        restaurantInfoViewModel.fetchRestaurantInfo()
+        restaurantInfoViewModel.fetchTitleImages()
     }
     
     func setButtonTarget() {
@@ -51,10 +51,10 @@ class RestaurantInfoViewController: UIViewController {
         customTableView.tableView.bounces = false
         customTableView.tableView.tableHeaderView?.frame.size.height = 320 + 3*4
         
-        customTableView.nameLabel.text = "반미리코"
-        customTableView.gateNameLabel.text = "북문"
-        customTableView.ratingStackView.averageRating = 4.7
-        customTableView.foodCategoryLabel.text = "세계 음식"
+//        customTableView.nameLabel.text = "반미리코"
+//        customTableView.gateNameLabel.text = "북문"
+//        customTableView.ratingStackView.averageRating = 4.7
+//        customTableView.foodCategoryLabel.text = "세계 음식"
         customTableView.numberLabel.text = "\(39)명 참여"
     }
     
@@ -124,17 +124,13 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
     
     func didFetchRestaurantImages() {
-        customTableView.imageButton1.sd_setImage(with: restaurantInfoViewModel.image1URL,
-                                                 for: .normal,
-                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
-        customTableView.imageButton2.sd_setImage(with: restaurantInfoViewModel.image2URL,
-                                                 for: .normal,
-                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
-        customTableView.imageButton3.sd_setImage(with: restaurantInfoViewModel.image3URL,
-                                                 for: .normal,
-                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
-        customTableView.imageButton4.sd_setImage(with: restaurantInfoViewModel.image4URL,
-                                                 for: .normal,
-                                                 placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+        customTableView.imageView1.sd_setImage(with: restaurantInfoViewModel.image1URL,
+                                               placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
+        customTableView.imageView2.sd_setImage(with: restaurantInfoViewModel.image2URL,
+                                               placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
+        customTableView.imageView3.sd_setImage(with: restaurantInfoViewModel.image3URL,
+                                               placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
+        customTableView.imageView4.sd_setImage(with: restaurantInfoViewModel.image4URL,
+                                               placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
     }
 }
