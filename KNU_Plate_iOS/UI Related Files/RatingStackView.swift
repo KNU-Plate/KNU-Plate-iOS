@@ -28,13 +28,13 @@ class RatingStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.axis = .horizontal
-        self.alignment = .fill
+        self.alignment = .center
         self.distribution = .fillEqually
         self.addArrangedSubview(starImage)
         self.addArrangedSubview(averageRatingLabel)
         
         starImage.snp.makeConstraints { make in
-            make.width.height.equalTo(25)
+            make.height.equalTo(25)
         }
     }
     
