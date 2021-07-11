@@ -70,7 +70,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 
         // Configure the cell
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
-                                   placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+                                   placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
         cell.ratingStackView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID
