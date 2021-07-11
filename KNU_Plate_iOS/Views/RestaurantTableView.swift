@@ -7,22 +7,18 @@ class RestaurantTableView: UIView {
     let imageContentsView = UIView()
     
     let imageView1 = UIImageView().then {
-        $0.backgroundColor = .yellow
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
     let imageView2 = UIImageView().then {
-        $0.backgroundColor = .green
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
     let imageView3 = UIImageView().then {
-        $0.backgroundColor = .brown
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
     let imageView4 = UIImageView().then {
-        $0.backgroundColor = .cyan
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.alpha = 0.5
@@ -126,21 +122,21 @@ class RestaurantTableView: UIView {
 
         imageView1.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
             make.top.left.equalToSuperview().inset(padding)
             make.right.equalTo(imageView2.snp.left).offset(-padding)
         }
 
         imageView2.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
             make.top.equalToSuperview().inset(padding)
             make.right.equalToSuperview().inset(padding).priority(.low)
         }
 
         imageView3.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
             make.top.equalTo(imageView1.snp.bottom).offset(padding)
             make.left.bottom.equalToSuperview().inset(padding)
             make.right.equalTo(imageView4.snp.left).offset(-padding)
@@ -148,7 +144,7 @@ class RestaurantTableView: UIView {
 
         imageView4.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
             make.top.equalTo(imageView2.snp.bottom).offset(padding)
             make.bottom.equalToSuperview().inset(padding)
             make.right.equalToSuperview().inset(padding).priority(.low)

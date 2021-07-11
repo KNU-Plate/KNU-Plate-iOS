@@ -55,7 +55,7 @@ class RestaurantInfoViewController: UIViewController {
 //        customTableView.gateNameLabel.text = "북문"
 //        customTableView.ratingStackView.averageRating = 4.7
 //        customTableView.foodCategoryLabel.text = "세계 음식"
-        customTableView.numberLabel.text = "\(39)명 참여"
+//        customTableView.numberLabel.text = "\(39)명 참여"
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
@@ -120,7 +120,7 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
         customTableView.ratingStackView.averageRating = restaurantInfoViewModel.rating
         customTableView.foodCategoryLabel.text = restaurantInfoViewModel.category
 //        customTableView.favoriteButton.isSelected = restaurantInfoViewModel.isFavorite
-//        customTableView.numberLabel.text = "\(39)명 참여"
+        customTableView.numberLabel.text = "\(0)명 참여"
     }
     
     func didFetchRestaurantImages() {
