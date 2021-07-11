@@ -1,10 +1,3 @@
-//
-//  RestaurantTableView.swift
-//  KNU_Plate_iOS
-//
-//  Created by Jinyoung Kim on 2021/06/29.
-//
-
 import UIKit
 import Then
 
@@ -13,20 +6,33 @@ class RestaurantTableView: UIView {
     // MARK: - Image Related View
     let imageContentsView = UIView()
     
-    let imageButton1 = UIButton()
-    let imageButton2 = UIButton()
-    let imageButton3 = UIButton()
-    let imageButton4 = UIButton().then {
+    let imageView1 = UIImageView().then {
+        $0.backgroundColor = .yellow
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
+    let imageView2 = UIImageView().then {
+        $0.backgroundColor = .green
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
+    let imageView3 = UIImageView().then {
+        $0.backgroundColor = .brown
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
+    let imageView4 = UIImageView().then {
+        $0.backgroundColor = .cyan
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         $0.alpha = 0.5
-        $0.setTitle("이미지 더보기", for: .normal)
-        $0.setTitleColor(.systemGray, for: .normal)
     }
     
     // MARK: - Store Info Related View
     let stackView1 = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
-        $0.distribution = .fill
+        $0.distribution = .fill // .fillEqually는 안됨!!
         $0.spacing = 10
     }
     
@@ -44,7 +50,7 @@ class RestaurantTableView: UIView {
         $0.axis = .horizontal
         $0.alignment = .center
         $0.distribution = .fillEqually
-        $0.spacing = 10
+        $0.spacing = 5
     }
     
     let gateNameLabel = UILabel().then {
@@ -85,10 +91,10 @@ class RestaurantTableView: UIView {
     }
     
     func addSubviewAndLayout(frame: CGRect) {
-        imageContentsView.addSubview(imageButton1)
-        imageContentsView.addSubview(imageButton2)
-        imageContentsView.addSubview(imageButton3)
-        imageContentsView.addSubview(imageButton4)
+        imageContentsView.addSubview(imageView1)
+        imageContentsView.addSubview(imageView2)
+        imageContentsView.addSubview(imageView3)
+        imageContentsView.addSubview(imageView4)
 
         stackView1.addArrangedSubview(nameLabel)
         stackView1.addArrangedSubview(foodCategoryLabel)
@@ -108,9 +114,9 @@ class RestaurantTableView: UIView {
         let imageContentsViewWidth: CGFloat = frame.width
 
         imageContentsView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview().labeled("error label: 1")
-            make.height.equalTo(imageContentsViewHeight).labeled("error label: 2")
-            make.width.equalTo(imageContentsViewWidth).labeled("error label: 3")
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(imageContentsViewHeight)
+            make.width.equalTo(imageContentsViewWidth).priority(.low)
         }
 
         let padding: CGFloat = 3
@@ -118,32 +124,34 @@ class RestaurantTableView: UIView {
         let imageButtonHeight: CGFloat = (imageContentsViewHeight-paddingSpace)/2
         let imageButtonWidth: CGFloat = (imageContentsViewWidth-paddingSpace)/2
 
-        imageButton1.snp.makeConstraints { make in
-            make.height.equalTo(imageButtonHeight).labeled("error label: 4")
-            make.width.equalTo(imageButtonWidth).labeled("error label: 5")
-            make.top.left.equalToSuperview().inset(padding).labeled("error label: 6")
-            make.right.equalTo(imageButton2.snp.left).offset(-padding)
+        imageView1.snp.makeConstraints { make in
+            make.height.equalTo(imageButtonHeight)
+            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.top.left.equalToSuperview().inset(padding)
+            make.right.equalTo(imageView2.snp.left).offset(-padding)
         }
 
-        imageButton2.snp.makeConstraints { make in
+        imageView2.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.right.equalToSuperview().inset(padding)
+            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.top.equalToSuperview().inset(padding)
+            make.right.equalToSuperview().inset(padding).priority(.low)
         }
 
-        imageButton3.snp.makeConstraints { make in
+        imageView3.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.equalTo(imageButton1.snp.bottom).offset(padding)
+            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.top.equalTo(imageView1.snp.bottom).offset(padding)
             make.left.bottom.equalToSuperview().inset(padding)
-            make.right.equalTo(imageButton4.snp.left).offset(-padding)
+            make.right.equalTo(imageView4.snp.left).offset(-padding)
         }
 
-        imageButton4.snp.makeConstraints { make in
+        imageView4.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.equalTo(imageButton2.snp.bottom).offset(padding)
-            make.right.bottom.equalToSuperview().inset(padding)
+            make.width.equalTo(imageButtonWidth).priority(.low)
+            make.top.equalTo(imageView2.snp.bottom).offset(padding)
+            make.bottom.equalToSuperview().inset(padding)
+            make.right.equalToSuperview().inset(padding).priority(.low)
         }
         
         let stackViewHeight: CGFloat = 35
@@ -172,8 +180,8 @@ class RestaurantTableView: UIView {
         
         favoriteButton.snp.makeConstraints { make in
             make.centerY.equalTo(stackView2)
-            make.left.equalTo(stackView2.snp.right)
-            make.right.equalToSuperview()
+            make.left.equalTo(stackView2.snp.right).priority(.low)
+            make.right.equalToSuperview().priority(.low)
         }
         
         tableView.snp.makeConstraints { make in
