@@ -1,10 +1,3 @@
-//
-//  RestaurantTabBarView.swift
-//  KNU_Plate_iOS
-//
-//  Created by Jinyoung Kim on 2021/06/29.
-//
-
 import UIKit
 import Then
 
@@ -14,7 +7,7 @@ class RestaurantTabBarView: UIView {
     
     // MARK: - Page Select Related View
     let topLine = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .systemGray4
     }
     
     let selectStackView = UIStackView().then {
@@ -25,7 +18,7 @@ class RestaurantTabBarView: UIView {
     
     let reviewButton = UIButton(type: .custom).then {
         $0.tag = 0
-        $0.setImage(UIImage(named: "review"), for: .normal)
+        $0.setImage(UIImage(named: "review (unselected)"), for: .normal)
         $0.setImage(UIImage(named: "review (selected)"), for: .selected)
         $0.setImage(UIImage(named: "review (selected)"), for: .highlighted)
         $0.setTitle("리뷰", for: .normal)
@@ -36,7 +29,7 @@ class RestaurantTabBarView: UIView {
     }
     let locationButton = UIButton(type: .custom).then {
         $0.tag = 1
-        $0.setImage(UIImage(named: "location"), for: .normal)
+        $0.setImage(UIImage(named: "location (unselected)"), for: .normal)
         $0.setImage(UIImage(named: "location (selected)"), for: .selected)
         $0.setImage(UIImage(named: "location (selected)"), for: .highlighted)
         $0.setTitle("위치", for: .normal)
@@ -47,7 +40,7 @@ class RestaurantTabBarView: UIView {
     }
     let menuButton = UIButton().then {
         $0.tag = 2
-        $0.setImage(UIImage(named: "menu"), for: .normal)
+        $0.setImage(UIImage(named: "menu (unselected)"), for: .normal)
         $0.setImage(UIImage(named: "menu (selected)"), for: .selected)
         $0.setImage(UIImage(named: "menu (selected)"), for: .highlighted)
         $0.setTitle("메뉴", for: .normal)
@@ -58,7 +51,7 @@ class RestaurantTabBarView: UIView {
     }
     
     let bottomLine = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .systemGray4
     }
 
     override init(frame: CGRect) {
