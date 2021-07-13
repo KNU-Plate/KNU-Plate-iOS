@@ -13,7 +13,7 @@ class RestaurantListViewModel {
 }
 
 extension RestaurantListViewModel {
-    var numberOfItems: Int {
+    var numberOfRestaurants: Int {
         return self.restaurants.count
     }
     

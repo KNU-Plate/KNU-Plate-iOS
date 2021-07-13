@@ -1,20 +1,21 @@
 import UIKit
 import SnapKit
 import SDWebImage
+import SnackBar_swift
 
 class RestaurantInfoViewController: UIViewController {
 
-    lazy var customTableView = RestaurantTableView(frame: self.view.frame)
-    let tabBarView = RestaurantTabBarView()
+    private lazy var customTableView = RestaurantTableView(frame: self.view.frame)
+    private let tabBarView = RestaurantTabBarView()
     
-    lazy var currentButton: UIButton = self.tabBarView.reviewButton {
+    private lazy var currentButton: UIButton = self.tabBarView.reviewButton {
         didSet {
             oldValue.isSelected = false
             currentButton.isSelected = true
         }
     }
     
-    var restaurantInfoViewModel = RestaurantInfoViewModel()
+    private var restaurantInfoVM = RestaurantInfoViewModel()
     
     var mallID: Int?
     
@@ -30,22 +31,23 @@ class RestaurantInfoViewController: UIViewController {
         
         setupTableView()
         setButtonTarget()
+        registerCells()
         
         currentButton.isSelected = true
         
-        restaurantInfoViewModel.delegate = self
-        restaurantInfoViewModel.setMallID(mallID: mallID)
-        restaurantInfoViewModel.fetchRestaurantInfo()
-        restaurantInfoViewModel.fetchTitleImages()
+        restaurantInfoVM.delegate = self
+        restaurantInfoVM.setMallID(mallID: mallID)
+        restaurantInfoVM.fetchRestaurantInfo()
+        restaurantInfoVM.fetchTitleImages()
     }
     
-    func setButtonTarget() {
+    private func setButtonTarget() {
         tabBarView.reviewButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
         tabBarView.locationButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
         tabBarView.menuButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         customTableView.tableView.dataSource = self
         customTableView.tableView.delegate = self
         customTableView.tableView.bounces = false
@@ -56,6 +58,15 @@ class RestaurantInfoViewController: UIViewController {
 //        customTableView.ratingStackView.averageRating = 4.7
 //        customTableView.foodCategoryLabel.text = "세계 음식"
 //        customTableView.numberLabel.text = "\(39)명 참여"
+    }
+    
+    private func registerCells() {
+        let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
+        let reviewWithoutImageNib = UINib(nibName: Constants.XIB.reviewWithoutImageTableViewCell, bundle: nil)
+        let reivewCellID = Constants.CellIdentifier.reviewTableViewCell
+        let reviewCellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
+        customTableView.tableView.register(reviewNib, forCellReuseIdentifier: reivewCellID)
+        customTableView.tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: reviewCellID2)
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
@@ -69,12 +80,12 @@ class RestaurantInfoViewController: UIViewController {
         default:
             return
         }
-        
         customTableView.tableView.reloadData()
     }
 }
 
-extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+extension RestaurantInfoViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -98,39 +109,152 @@ extension RestaurantInfoViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentButton.tag {
         case 0:
-            return 5
+            return self.restaurantInfoVM.numberOfReviews
         case 1:
-            return 1
+            return self.restaurantInfoVM.numberOfLocations
         case 2:
-            return 5
+            return self.restaurantInfoVM.numberOfMenus
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch currentButton.tag {
+        case 0:
+            return getReusableReviewCell(tableView, cellForRowAt: indexPath)
+        case 1:
+            return getReusableLocationCell(tableView, cellForRowAt: indexPath)
+        case 2:
+            return getReusableMenuCell(tableView, cellForRowAt: indexPath)
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func getReusableReviewCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
+        
+        //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
+        if reviewVM.hasReviewImage {
+            
+            guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
+            
+            reviewCell.delegate = self
+            
+            reviewCell.reviewID = reviewVM.reviewID
+            reviewCell.userNickname = reviewVM.userNickname
+            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
+            reviewCell.rating.setStarsRating(rating: reviewVM.rating)
+            reviewCell.userNicknameLabel.text = reviewVM.userNickname
+            reviewCell.reviewLabel.text = reviewVM.reviewContent
+            reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageCount)
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.reviewContent, attributes: attributes)
+            reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+        
+            reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            reviewCell.reviewImageView.sd_setImage(with: reviewVM.reviewImageURL,
+                                                   placeholderImage: nil,
+                                                   completed: nil)
+            reviewCell.userProfileImageView.sd_setImage(with: reviewVM.profileImageURL,
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                        completed: nil)
+            return reviewCell
+        }
+        
+        // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
+        else {
+            
+            guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
+            
+            reviewCellNoImages.delegate = self
+            
+            reviewCellNoImages.reviewID = reviewVM.reviewID
+            reviewCellNoImages.userNickname = reviewVM.userNickname
+            reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
+            reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
+            reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
+            reviewCellNoImages.reviewLabel.text = reviewVM.reviewContent
+            reviewCellNoImages.configureUI()
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCellNoImages.reviewLabel.attributedText = NSAttributedString(string: reviewVM.reviewContent, attributes: attributes)
+            reviewCellNoImages.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            
+            reviewCellNoImages.userProfileImageView.sd_setImage(with: reviewVM.profileImageURL,
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                        completed: nil)
+            
+            return reviewCellNoImages
+        }
+    }
+    
+    func getReusableLocationCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func getReusableMenuCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
 }
 
+// MARK: - ReviewTableViewCellDelegate
+extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
+    func goToReportReviewVC(reviewID: Int?, displayName: String?) {
+        guard let reviewID = reviewID, let displayName = displayName else {
+            SnackBar.make(in: self.view,
+                          message: "정보를 불러올 수 없습니다. 다시 시도해주세요.",
+                          duration: .lengthLong).show()
+            return
+        }
+        
+        guard displayName != User.shared.displayName else {
+            
+            SnackBar.make(in: self.view,
+                          message: "본인 게시글을 본인이 신고할 수는 없습니다 🤔",
+                          duration: .lengthLong).show()
+            return
+        }
+   
+        let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
+            fatalError()
+        }
+        vc.reviewID = reviewID
+        self.present(vc, animated: true)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension RestaurantInfoViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - RestaurantInfoViewModelDelegate
 extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didFetchRestaurantInfo() {
-        customTableView.nameLabel.text = restaurantInfoViewModel.mallName
-        customTableView.gateNameLabel.text = restaurantInfoViewModel.gate
-        customTableView.ratingStackView.averageRating = restaurantInfoViewModel.rating
-        customTableView.foodCategoryLabel.text = restaurantInfoViewModel.category
-//        customTableView.favoriteButton.isSelected = restaurantInfoViewModel.isFavorite
-        customTableView.numberLabel.text = "\(0)명 참여"
+        customTableView.nameLabel.text = restaurantInfoVM.mallName
+        customTableView.gateNameLabel.text = restaurantInfoVM.gate
+        customTableView.ratingStackView.averageRating = restaurantInfoVM.rating
+        customTableView.foodCategoryLabel.text = restaurantInfoVM.category
+        customTableView.favoriteButton.isSelected = restaurantInfoVM.isFavorite
+        customTableView.numberLabel.text = "\(restaurantInfoVM.reviewCount)명 참여"
     }
     
     func didFetchRestaurantImages() {
-        customTableView.imageView1.sd_setImage(with: restaurantInfoViewModel.image1URL,
+        customTableView.imageView1.sd_setImage(with: restaurantInfoVM.image1URL,
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
-        customTableView.imageView2.sd_setImage(with: restaurantInfoViewModel.image2URL,
+        customTableView.imageView2.sd_setImage(with: restaurantInfoVM.image2URL,
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
-        customTableView.imageView3.sd_setImage(with: restaurantInfoViewModel.image3URL,
+        customTableView.imageView3.sd_setImage(with: restaurantInfoVM.image3URL,
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
-        customTableView.imageView4.sd_setImage(with: restaurantInfoViewModel.image4URL,
+        customTableView.imageView4.sd_setImage(with: restaurantInfoVM.image4URL,
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
     }
 }

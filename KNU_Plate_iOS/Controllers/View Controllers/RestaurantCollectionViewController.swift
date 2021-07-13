@@ -58,7 +58,7 @@ extension RestaurantCollectionViewController {
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.restaurantListVM.numberOfItems
+        return self.restaurantListVM.numberOfRestaurants
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
