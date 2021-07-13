@@ -48,21 +48,6 @@
             </objects>
             <point key="canvasLocation" x="4426" y="-607"/>
         </scene>
-        <!--Review View Controller-->
-        <scene sceneID="Mqf-zm-4FM">
-            <objects>
-                <viewController storyboardIdentifier="ReviewViewController" id="96Z-Xc-UCd" customClass="ReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="im7-5u-8WO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Fi-9K-uOF"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mNq-nd-mPY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5244" y="146"/>
-        </scene>
         <!--Restaurant Info View Controller-->
         <scene sceneID="dhV-WQ-3BK">
             <objects>
@@ -229,36 +214,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZJ-VM-jpZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2664.8000000000002" y="-606.74662668665667"/>
-        </scene>
-        <!--Location View Controller-->
-        <scene sceneID="9zc-Z6-iFl">
-            <objects>
-                <viewController storyboardIdentifier="LocationViewController" id="a92-9c-Xwq" customClass="LocationViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="teA-LR-LvD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="GMR-Eu-5Cs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HHb-Sh-F0I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6111" y="146"/>
-        </scene>
-        <!--Menu View Controller-->
-        <scene sceneID="DIx-Of-4cF">
-            <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="hsB-wb-wb4" customClass="MenuViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="m0v-h0-afA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="9Cv-MZ-kui"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rkb-VH-vso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6978" y="146"/>
         </scene>
     </scenes>
     <resources>
