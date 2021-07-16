@@ -6,14 +6,14 @@ protocol RestaurantListViewModelDelegate: AnyObject {
 
 class RestaurantListViewModel {
     weak var delegate: RestaurantListViewModelDelegate?
-    var restaurants: [RestaurantListResponseModel] = []
+    private var restaurants: [RestaurantListResponseModel] = []
     var hasMore: Bool = true
     var isFetchingData: Bool = false
-    var lastMallID: Int?
+    private var lastMallID: Int?
 }
 
 extension RestaurantListViewModel {
-    var numberOfItems: Int {
+    var numberOfRestaurants: Int {
         return self.restaurants.count
     }
     
@@ -27,12 +27,11 @@ extension RestaurantListViewModel {
     func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil) {
         isFetchingData = true
         let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
-        //let model = FetchRestaurantListModel(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
         RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let self = self else { return }
-                if data.count == 0 {
+                if data.isEmpty {
                     self.hasMore = false
                     return
                 }

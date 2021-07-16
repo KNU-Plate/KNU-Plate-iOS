@@ -30,6 +30,11 @@ class RestaurantCollectionViewController: UIViewController {
         
         guard let gate = gate else { return }
         restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+        print("👌 RestaurantCollectionViewController viewDidLoad")
+    }
+    
+    deinit {
+        print("👌 RestaurantCollectionViewController deinit")
     }
 }
 
@@ -53,7 +58,7 @@ extension RestaurantCollectionViewController {
 //MARK: - UICollectionViewDataSource
 extension RestaurantCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.restaurantListVM.numberOfItems
+        return self.restaurantListVM.numberOfRestaurants
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +70,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
 
         // Configure the cell
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
-                                   placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"))
+                                   placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
         cell.ratingStackView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID

@@ -22,10 +22,7 @@ struct Constants {
         static let restaurantInfoViewController             = "RestaurantInfoViewController"
         static let newRestaurantViewController              = "NewRestaurantViewController"
         static let searchListViewController                 = "SearchListViewController" 
-        static let reviewViewController                     = "ReviewViewController"
         static let reviewDetailViewController               = "ReviewDetailViewController"
-        static let locationViewController                   = "LocationViewController"
-        static let menuViewController                       = "MenuViewController"
         static let menuRecommendationViewController         = "MenuRecommendationViewController"
         
         // Favorites Tab
@@ -73,7 +70,7 @@ struct Constants {
         static let myPageCell                           = "myPageCell"
         static let noticeCell                           = "noticeCell"
         static let menuRecommendCell                    = "menuRecommendCell"
-    
+        static let locationTableViewCell                = "locationTableViewCell"
     }
     
     struct SegueIdentifier {
@@ -124,6 +121,7 @@ struct Constants {
         static let defaultProfileImage                      = "default profile image"
         static let defaultReviewImage                       = "default review image"
         static let pickProfileImage                         = "pick profile pic(black)"
+        static let defaultRestaurantTitleImage              = "restaurant title image placeholder"
         
         // MenuRecommendationTableViewCell
         static let thumbsUpInGray                           = "thumbs up(gray2)"

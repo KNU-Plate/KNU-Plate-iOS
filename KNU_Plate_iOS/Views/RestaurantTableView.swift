@@ -1,10 +1,3 @@
-//
-//  RestaurantTableView.swift
-//  KNU_Plate_iOS
-//
-//  Created by Jinyoung Kim on 2021/06/29.
-//
-
 import UIKit
 import Then
 
@@ -13,62 +6,69 @@ class RestaurantTableView: UIView {
     // MARK: - Image Related View
     let imageContentsView = UIView()
     
-    let imageButton1 = UIButton().then {
-        $0.backgroundColor = .red
+    let imageView1 = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
-    let imageButton2 = UIButton().then {
-        $0.backgroundColor = .blue
+    let imageView2 = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
-    let imageButton3 = UIButton().then {
-        $0.backgroundColor = .yellow
+    let imageView3 = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
-    let imageButton4 = UIButton().then {
-        $0.backgroundColor = .green
+    let imageView4 = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         $0.alpha = 0.5
-        $0.setTitle("이미지 더보기", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
     }
     
     // MARK: - Store Info Related View
     let stackView1 = UIStackView().then {
         $0.axis = .horizontal
-        $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        $0.alignment = .center
+        $0.distribution = .fill // .fillEqually는 안됨!!
+        $0.spacing = 10
     }
     
     let nameLabel = UILabel().then {
+        $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 25)
     }
+    let foodCategoryLabel = UILabel().then {
+        $0.textAlignment = .center
+        $0.textColor = .lightGray
+        $0.font = UIFont.systemFont(ofSize: 20)
+    }
+    
+    let stackView2 = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.distribution = .fillEqually
+        $0.spacing = 5
+    }
+    
+    let gateNameLabel = UILabel().then {
+        $0.textAlignment = .center
+        $0.textColor = .white
+        $0.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
+        $0.layer.cornerRadius = 5
+        $0.clipsToBounds = true
+        $0.font = UIFont.systemFont(ofSize: 17)
+    }
+    let ratingStackView = RatingStackView()
+    let numberLabel = UILabel().then {
+        $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.textColor = .lightGray
+    }
+    
     let favoriteButton = UIButton().then {
         $0.setImage(UIImage(named: "favorite tab bar icon"), for: .normal)
         $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .highlighted)
         $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .selected)
         $0.addBounceReactionWithoutFeedback()
-    }
-    
-    let stackView2 = UIStackView().then {
-        $0.axis = .horizontal
-        $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    }
-    
-    let gateNameLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 20)
-    }
-    let ratingStackView = RatingStackView()
-    
-    let stackView3 = UIStackView().then {
-        $0.axis = .horizontal
-        $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    }
-    
-    let foodCategoryLabel = UILabel().then {
-        $0.textColor = .lightGray
-        $0.font = UIFont.systemFont(ofSize: 20)
-    }
-    let numberLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 15)
     }
     
     // MARK: - Table Header View
@@ -87,24 +87,22 @@ class RestaurantTableView: UIView {
     }
     
     func addSubviewAndLayout(frame: CGRect) {
-        imageContentsView.addSubview(imageButton1)
-        imageContentsView.addSubview(imageButton2)
-        imageContentsView.addSubview(imageButton3)
-        imageContentsView.addSubview(imageButton4)
+        imageContentsView.addSubview(imageView1)
+        imageContentsView.addSubview(imageView2)
+        imageContentsView.addSubview(imageView3)
+        imageContentsView.addSubview(imageView4)
 
         stackView1.addArrangedSubview(nameLabel)
-        stackView1.addArrangedSubview(favoriteButton)
-
+        stackView1.addArrangedSubview(foodCategoryLabel)
+        
         stackView2.addArrangedSubview(gateNameLabel)
         stackView2.addArrangedSubview(ratingStackView)
-
-        stackView3.addArrangedSubview(foodCategoryLabel)
-        stackView3.addArrangedSubview(numberLabel)
+        stackView2.addArrangedSubview(numberLabel)
         
         headerView.addSubview(imageContentsView)
         headerView.addSubview(stackView1)
         headerView.addSubview(stackView2)
-        headerView.addSubview(stackView3)
+        headerView.addSubview(favoriteButton)
         
         self.addSubview(tableView)
         
@@ -114,7 +112,7 @@ class RestaurantTableView: UIView {
         imageContentsView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(imageContentsViewHeight)
-            make.width.equalTo(imageContentsViewWidth)
+            make.width.equalTo(imageContentsViewWidth).priority(.low)
         }
 
         let padding: CGFloat = 3
@@ -122,59 +120,64 @@ class RestaurantTableView: UIView {
         let imageButtonHeight: CGFloat = (imageContentsViewHeight-paddingSpace)/2
         let imageButtonWidth: CGFloat = (imageContentsViewWidth-paddingSpace)/2
 
-        imageButton1.snp.makeConstraints { make in
+        imageView1.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
             make.top.left.equalToSuperview().inset(padding)
-            make.right.equalTo(imageButton2.snp.left).offset(-padding)
+            make.right.equalTo(imageView2.snp.left).offset(-padding)
         }
 
-        imageButton2.snp.makeConstraints { make in
+        imageView2.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.right.equalToSuperview().inset(padding)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
+            make.top.equalToSuperview().inset(padding)
+            make.right.equalToSuperview().inset(padding).priority(.low)
         }
 
-        imageButton3.snp.makeConstraints { make in
+        imageView3.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.equalTo(imageButton1.snp.bottom).offset(padding)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
+            make.top.equalTo(imageView1.snp.bottom).offset(padding)
             make.left.bottom.equalToSuperview().inset(padding)
-            make.right.equalTo(imageButton4.snp.left).offset(-padding)
+            make.right.equalTo(imageView4.snp.left).offset(-padding)
         }
 
-        imageButton4.snp.makeConstraints { make in
+        imageView4.snp.makeConstraints { make in
             make.height.equalTo(imageButtonHeight)
-            make.width.equalTo(imageButtonWidth)
-            make.top.equalTo(imageButton2.snp.bottom).offset(padding)
-            make.right.bottom.equalToSuperview().inset(padding)
+            make.width.lessThanOrEqualTo(imageButtonWidth)
+            make.top.equalTo(imageView2.snp.bottom).offset(padding)
+            make.bottom.equalToSuperview().inset(padding)
+            make.right.equalToSuperview().inset(padding).priority(.low)
         }
         
         let stackViewHeight: CGFloat = 35
+        
+        nameLabel.snp.makeConstraints { make in
+            make.width.lessThanOrEqualTo(frame.width*0.8)
+        }
 
         stackView1.snp.makeConstraints { make in
             make.top.equalTo(imageContentsView.snp.bottom).offset(padding*2)
-            make.left.right.equalToSuperview()
-            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.height.equalTo(stackViewHeight)
+            make.width.lessThanOrEqualTo(frame.width)
         }
 
+        gateNameLabel.snp.makeConstraints { make in
+            make.height.equalTo(25)
+            make.width.equalTo(70)
+        }
+        
         stackView2.snp.makeConstraints { make in
             make.top.equalTo(stackView1.snp.bottom).offset(padding*2)
-            make.left.right.equalToSuperview()
-            make.width.equalToSuperview()
+            make.centerX.bottom.equalToSuperview()
             make.height.equalTo(stackViewHeight)
         }
-
-        ratingStackView.snp.makeConstraints { make in
-            make.width.equalTo(frame.width/6)
-        }
-
-        stackView3.snp.makeConstraints { make in
-            make.top.equalTo(stackView2.snp.bottom).offset(padding*2)
-            make.left.right.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(stackViewHeight)
+        
+        favoriteButton.snp.makeConstraints { make in
+            make.centerY.equalTo(stackView2)
+            make.left.equalTo(stackView2.snp.right).priority(.low)
+            make.right.equalToSuperview().priority(.low)
         }
         
         tableView.snp.makeConstraints { make in

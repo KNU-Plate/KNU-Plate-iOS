@@ -3,7 +3,7 @@ import Foundation
 struct RestaurantInfoResponseModel: Decodable {
     let mallID: Int
     let userID: String
-    let dateCreated: TimeInterval
+    let dateCreated: String
     let mallName: String
     let contact: String?
     let categoryName: String?
@@ -17,6 +17,8 @@ struct RestaurantInfoResponseModel: Decodable {
     let gateLocation: String?
     let fileFolder: FileFolder?
     let menus: [ExistingMenuModel]
+    let reviewCount: Int
+    let myRecommend: String
     
     enum CodingKeys: String, CodingKey {
         case mallID = "mall_id"
@@ -31,6 +33,7 @@ struct RestaurantInfoResponseModel: Decodable {
         case isActive = "is_active"
         case gateLocation = "gate_location"
         case fileFolder = "file_folder"
-        case menus
+        case menus, reviewCount
+        case myRecommend = "my_recommend"
     }
 }
