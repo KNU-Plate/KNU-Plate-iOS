@@ -64,21 +64,28 @@ class RestaurantInfoViewController: UIViewController {
     private func registerCells() {
         let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
         let reviewWithoutImageNib = UINib(nibName: Constants.XIB.reviewWithoutImageTableViewCell, bundle: nil)
+        let menuNib = UINib(nibName: Constants.XIB.menuRecommendTableViewCell, bundle: nil)
         let reviewCellID = Constants.CellIdentifier.reviewTableViewCell
         let reviewCellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
+        let locationCellID = Constants.CellIdentifier.locationTableViewCell
+        let menuCellID = Constants.CellIdentifier.menuRecommendCell
         customTableView.tableView.register(reviewNib, forCellReuseIdentifier: reviewCellID)
         customTableView.tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: reviewCellID2)
-        customTableView.tableView.register(LocationTableViewCell.self, forCellReuseIdentifier: Constants.CellIdentifier.locationTableViewCell)
+        customTableView.tableView.register(LocationTableViewCell.self, forCellReuseIdentifier: locationCellID)
+        customTableView.tableView.register(menuNib, forCellReuseIdentifier: menuCellID)
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
         switch sender.tag {
         case 0:
             currentButton = tabBarView.reviewButton
+            customTableView.tableView.allowsSelection = true
         case 1:
             currentButton = tabBarView.locationButton
+            customTableView.tableView.allowsSelection = false
         case 2:
             currentButton = tabBarView.menuButton
+            customTableView.tableView.allowsSelection = false
         default:
             return
         }
@@ -105,6 +112,15 @@ extension RestaurantInfoViewController: UITableViewDataSource {
             return tabBarView
         } else {
             return UIView()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch currentButton.tag {
+        case 2:
+            return 80
+        default:
+            return UITableView.automaticDimension // tableView.rowHeight
         }
     }
     
@@ -217,7 +233,18 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     }
     
     func getReusableMenuCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let menuCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.menuRecommendCell, for: indexPath) as? MenuRecommendationTableViewCell else { fatalError() }
+        
+        let menuVM = self.restaurantInfoVM.menuAtIndex(indexPath.row)
+        
+        menuCell.menuLabel.text = menuVM.menuName
+        menuCell.totalLikeNumberLabel.text = "\(menuVM.likes)"
+        menuCell.totalDislikeNumberLabel.text = "\(menuVM.dislikes)"
+        
+        menuCell.initializeProgressBar(likePercentage: menuVM.likePercentage)
+        menuCell.configureLabels(totalLikes: menuVM.totalLikes)
+        
+        return menuCell
     }
 }
 
@@ -246,6 +273,7 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         vc.reviewID = reviewID
         self.present(vc, animated: true)
     }
+    
     func presentDeleteActionAlert(reviewID: Int) {
         
     }
@@ -264,10 +292,6 @@ extension RestaurantInfoViewController: UITableViewDelegate {
                 // fetch more
                 restaurantInfoVM.fetchReviews()
             }
-        case 1:
-            return
-        case 2:
-            return
         default:
             return
         }
@@ -297,6 +321,10 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
     
     func didFetchReview() {
+        customTableView.tableView.reloadData()
+    }
+    
+    func didFetchMenu() {
         customTableView.tableView.reloadData()
     }
 }

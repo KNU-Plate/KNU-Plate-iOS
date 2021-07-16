@@ -159,8 +159,8 @@
         <image name="default profile image" width="73" height="73"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="first medal" width="41" height="41"/>
-        <image name="star rating (filled)" width="36" height="34.5"/>
-        <image name="star rating (unfilled)" width="35.5" height="34"/>
+        <image name="star rating (filled)" width="123" height="123"/>
+        <image name="star rating (unfilled)" width="123" height="123"/>
         <namedColor name="AppDefaultColor">
             <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

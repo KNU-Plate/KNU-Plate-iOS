@@ -4,6 +4,7 @@ protocol RestaurantInfoViewModelDelegate: AnyObject {
     func didFetchRestaurantInfo()
     func didFetchRestaurantImages()
     func didFetchReview()
+    func didFetchMenu()
 }
 
 // MARK: - Main Body
@@ -14,6 +15,7 @@ class RestaurantInfoViewModel {
         didSet {
             if let restaurant = restaurant {
                 self.menus = restaurant.menus
+                self.delegate?.didFetchMenu()
             }
         }
     }
@@ -48,6 +50,11 @@ extension RestaurantInfoViewModel {
     func reviewAtIndex(_ index: Int) -> RestaurantReviewViewModel {
         let review = self.reviews[index]
         return RestaurantReviewViewModel(review)
+    }
+    
+    func menuAtIndex(_ index: Int) -> RestaurantMenuViewModel {
+        let menu = self.menus[index]
+        return RestaurantMenuViewModel(menu)
     }
 }
 
@@ -288,5 +295,38 @@ extension RestaurantReviewViewModel {
     
     var reviewImageCount: Int? {
         return self.review.reviewImageFileFolder?.files?.count
+    }
+}
+
+// MARK: - RestaurantMenuViewModel
+/// Only used in tableView(cellForRowAt:) method
+class RestaurantMenuViewModel {
+    private let menu: ExistingMenuModel
+    
+    init(_ menu: ExistingMenuModel) {
+        self.menu = menu
+    }
+}
+
+extension RestaurantMenuViewModel {
+    var menuName: String {
+        return self.menu.menuName
+    }
+    
+    var likes: Int {
+        return self.menu.likes
+    }
+    
+    var dislikes: Int {
+        return self.menu.dislikes
+    }
+    
+    var totalLikes: Int {
+        return likes + dislikes
+    }
+    
+    var likePercentage: Double {
+        if totalLikes == 0 { return 0.0 }
+        else { return Double(likes) / Double(totalLikes) }
     }
 }
