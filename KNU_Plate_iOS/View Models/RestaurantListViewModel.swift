@@ -9,7 +9,7 @@ class RestaurantListViewModel {
     private var restaurants: [RestaurantListResponseModel] = []
     var hasMore: Bool = true
     var isFetchingData: Bool = false
-    var lastMallID: Int?
+    private var lastMallID: Int?
 }
 
 extension RestaurantListViewModel {

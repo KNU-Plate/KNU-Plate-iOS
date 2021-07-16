@@ -214,27 +214,27 @@ class RestaurantManager {
         AF.request(fetchReviewListRequestURL,
                    method: .get,
                    parameters: model.parameters,
-                   encoding: URLEncoding.queryString,
-                   headers: model.headers,
-                   interceptor: interceptor)
-            .validate()
+                   headers: model.headers)
+            .validate(statusCode: 200..<300)
             .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                case 200:
+                switch response.result {
+                case .success(let value):
                     do {
-                        let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: response.data!)
+                        let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let decodedData = try JSONDecoder().decode([ReviewListResponseModel].self, from: dataJSON)
                         completion(.success(decodedData))
-                        
                     } catch {
-                        print("Restaurant Manager - fetchReviewList ERROR: \(error)")
+                        print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
                     }
-                default:
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    print("RestaurantManager - fetchReviewList() error : \(error.errorDescription) and statusCode: \(statusCode)")
-                    completion(.failure(error))
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
                 }
             }
     }

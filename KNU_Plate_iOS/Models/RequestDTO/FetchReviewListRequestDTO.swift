@@ -5,18 +5,16 @@ import Alamofire
 
 struct FetchReviewListRequestDTO {
     
-
     var parameters: Parameters = [:]
     let headers: HTTPHeaders = [
         "accept": "application/json",
         "Authorization": User.shared.accessToken
     ]
 
-    init(mallID: Int, page: Int = 0) {
+    init(mallID: Int, cursor: Int?, isMyReview: String) {
     
         parameters["mall_id"] = mallID
-        parameters["cursor"] = page
+        parameters["cursor"] = cursor
+        parameters["myReview"] = isMyReview
     }
-    
-
 }

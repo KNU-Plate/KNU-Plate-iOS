@@ -3,6 +3,7 @@ import Foundation
 protocol RestaurantInfoViewModelDelegate: AnyObject {
     func didFetchRestaurantInfo()
     func didFetchRestaurantImages()
+    func didFetchReview()
 }
 
 // MARK: - Main Body
@@ -22,12 +23,15 @@ class RestaurantInfoViewModel {
     
     private var mallID: Int?
     
+    var hasMoreReview: Bool = true
+    var isFetchingReview: Bool = false
+    private var lastReviewID: Int?
+    
     func setMallID(mallID: Int?) {
         self.mallID = mallID
     }
 }
 
-// MARK: -
 extension RestaurantInfoViewModel {
     var numberOfReviews: Int {
         return self.reviews.count
@@ -63,6 +67,21 @@ extension RestaurantInfoViewModel {
     
     var gate: String {
         return self.restaurant?.gateLocation ?? "위치"
+    }
+    
+    var address: String {
+        // 기본값: 경북대학교 중앙(대학원동)
+        return self.restaurant?.address ?? "대구 북구 대학로 80"
+    }
+    
+    var latitude: Double {
+        // 기본값: 경북대학교 중앙 위도
+        return self.restaurant?.latitude ?? 35.889529
+    }
+    
+    var longitude: Double {
+        // 기본값: 경북대학교 중앙 경도
+        return self.restaurant?.longitude ?? 128.609971
     }
     
     var isFavorite: Bool {
@@ -175,11 +194,35 @@ extension RestaurantInfoViewModel {
 // MARK: - Related To Fetch Reviews
 extension RestaurantInfoViewModel {
     func fetchReviews() {
+        guard let mallID = self.mallID else {
+            print("RestaurantInfoViewModel: mallID is empty")
+            return
+        }
         
+        isFetchingReview = true
+        
+        let model = FetchReviewListRequestDTO(mallID: mallID, cursor: lastReviewID, isMyReview: "N")
+        RestaurantManager.shared.fetchReviewList(with: model) { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let self = self else { return }
+                if data.isEmpty {
+                    self.hasMoreReview = false
+                    return
+                }
+                self.reviews.append(contentsOf: data)
+                self.lastReviewID = data.last?.reviewID
+                self.isFetchingReview = false
+                self.delegate?.didFetchReview()
+            case .failure:
+                return
+            }
+        }
     }
 }
 
-
+// MARK: - RestaurantReviewViewModel
+/// Only used in tableView(cellForRowAt:) method
 class RestaurantReviewViewModel {
     private let review: ReviewListResponseModel
     

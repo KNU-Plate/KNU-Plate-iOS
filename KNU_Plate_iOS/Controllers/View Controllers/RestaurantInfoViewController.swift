@@ -39,6 +39,7 @@ class RestaurantInfoViewController: UIViewController {
         restaurantInfoVM.setMallID(mallID: mallID)
         restaurantInfoVM.fetchRestaurantInfo()
         restaurantInfoVM.fetchTitleImages()
+        restaurantInfoVM.fetchReviews()
     }
     
     private func setButtonTarget() {
@@ -63,10 +64,11 @@ class RestaurantInfoViewController: UIViewController {
     private func registerCells() {
         let reviewNib = UINib(nibName: Constants.XIB.reviewTableViewCell, bundle: nil)
         let reviewWithoutImageNib = UINib(nibName: Constants.XIB.reviewWithoutImageTableViewCell, bundle: nil)
-        let reivewCellID = Constants.CellIdentifier.reviewTableViewCell
+        let reviewCellID = Constants.CellIdentifier.reviewTableViewCell
         let reviewCellID2 = Constants.CellIdentifier.reviewWithoutImageTableViewCell
-        customTableView.tableView.register(reviewNib, forCellReuseIdentifier: reivewCellID)
+        customTableView.tableView.register(reviewNib, forCellReuseIdentifier: reviewCellID)
         customTableView.tableView.register(reviewWithoutImageNib, forCellReuseIdentifier: reviewCellID2)
+        customTableView.tableView.register(LocationTableViewCell.self, forCellReuseIdentifier: Constants.CellIdentifier.locationTableViewCell)
     }
     
     @objc func buttonWasTapped(_ sender: UIButton) {
@@ -149,6 +151,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
             reviewCell.userNicknameLabel.text = reviewVM.userNickname
             reviewCell.reviewLabel.text = reviewVM.reviewContent
             reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageCount)
+            reviewCell.configureShowMoreButton()
             
             let textViewStyle = NSMutableParagraphStyle()
             textViewStyle.lineSpacing = 2
@@ -180,6 +183,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
             reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
             reviewCellNoImages.reviewLabel.text = reviewVM.reviewContent
             reviewCellNoImages.configureUI()
+            reviewCellNoImages.configureShowMoreButton()
             
             let textViewStyle = NSMutableParagraphStyle()
             textViewStyle.lineSpacing = 2
@@ -196,7 +200,20 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     }
     
     func getReusableLocationCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.locationTableViewCell, for: indexPath) as? LocationTableViewCell else { fatalError() }
+        
+        let mapPoint = MTMapPoint(geoCoord: MTMapPointGeo(latitude: restaurantInfoVM.latitude, longitude: restaurantInfoVM.longitude))
+        
+        cell.mapView.setMapCenter(mapPoint, zoomLevel: 1, animated: true)
+        cell.poiItem.markerType = .bluePin
+        cell.poiItem.mapPoint = mapPoint
+        cell.poiItem.itemName = restaurantInfoVM.mallName
+        cell.mapView.add(cell.poiItem)
+        cell.mapView.select(cell.poiItem, animated: true)
+        
+        cell.addressLabel.text = restaurantInfoVM.address
+        
+        return cell
     }
     
     func getReusableMenuCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -233,7 +250,25 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
 
 // MARK: - UITableViewDelegate
 extension RestaurantInfoViewController: UITableViewDelegate {
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let contentHeight = customTableView.tableView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        
+        switch currentButton.tag {
+        case 0:
+            if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantInfoVM.hasMoreReview && !restaurantInfoVM.isFetchingReview {
+                // fetch more
+                restaurantInfoVM.fetchReviews()
+            }
+        case 1:
+            return
+        case 2:
+            return
+        default:
+            return
+        }
+    }
 }
 
 // MARK: - RestaurantInfoViewModelDelegate
@@ -256,5 +291,9 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
         customTableView.imageView4.sd_setImage(with: restaurantInfoVM.image4URL,
                                                placeholderImage: UIImage(named: Constants.Images.defaultRestaurantTitleImage))
+    }
+    
+    func didFetchReview() {
+        customTableView.tableView.reloadData()
     }
 }

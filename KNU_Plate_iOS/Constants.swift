@@ -50,7 +50,7 @@ struct Constants {
         static let myPageCell                           = "myPageCell"
         static let noticeCell                           = "noticeCell"
         static let menuRecommendCell                    = "menuRecommendCell"
-    
+        static let locationTableViewCell                = "locationTableViewCell"
     }
     
     struct SegueIdentifier {

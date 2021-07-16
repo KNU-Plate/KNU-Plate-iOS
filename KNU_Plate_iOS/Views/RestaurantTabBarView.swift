@@ -3,7 +3,9 @@ import Then
 
 class RestaurantTabBarView: UIView {
     
-    let contentView = UIView()
+    let contentView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
     // MARK: - Page Select Related View
     let topLine = UIView().then {
