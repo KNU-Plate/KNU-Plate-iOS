@@ -58,11 +58,28 @@
                         <viewLayoutGuide key="safeArea" id="Jcn-ns-hOS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="n0L-de-hkY"/>
+                    <navigationItem key="navigationItem" id="n0L-de-hkY">
+                        <barButtonItem key="rightBarButtonItem" image="pencil" catalog="system" id="1xE-nQ-5Na">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <segue destination="FJA-jb-0m6" kind="show" id="TQ3-cM-gZn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeD-Qm-sE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5244" y="-607"/>
+        </scene>
+        <!--NewReviewViewController-->
+        <scene sceneID="Zcw-1k-L9j">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Kevin" referencedIdentifier="NewReviewViewController" id="FJA-jb-0m6" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ymt-Kx-9xM"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KQi-lG-AIg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5938" y="-607"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8GN-R7-e3H">
@@ -94,7 +111,6 @@
         <!--View Controller-->
         <scene sceneID="z68-we-k5N">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5fM-70-oqp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="NRn-iN-Yc0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ib2-su-pfl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -118,6 +134,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="my page tab bar icon" id="AaV-h7-lvx"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5fM-70-oqp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2665" y="992"/>
         </scene>
@@ -242,6 +259,10 @@
         <image name="favorite tab bar icon" width="30.5" height="30.5"/>
         <image name="home tab bar icon" width="28.5" height="28.5"/>
         <image name="my page tab bar icon" width="28.5" height="28.5"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <namedColor name="AppDefaultColor">
+            <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="KNU_Plate Color">
             <color red="0.93725490196078431" green="0.30980392156862746" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
