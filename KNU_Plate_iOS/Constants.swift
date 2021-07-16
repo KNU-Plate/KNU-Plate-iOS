@@ -167,6 +167,7 @@ struct Constants {
         static let newMenuTableViewCell             = "NewMenuTableViewCell"
         static let reviewTableViewCell              = "ReviewTableViewCell"
         static let reviewWithoutImageTableViewCell  = "ReviewWithoutImageTableViewCell"
+        static let menuRecommendTableViewCell       = "MenuRecommendationTableViewCell"
     }
     
     struct Color {
