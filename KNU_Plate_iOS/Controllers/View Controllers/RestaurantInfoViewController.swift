@@ -246,6 +246,9 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         vc.reviewID = reviewID
         self.present(vc, animated: true)
     }
+    func presentDeleteActionAlert(reviewID: Int) {
+        
+    }
 }
 
 // MARK: - UITableViewDelegate

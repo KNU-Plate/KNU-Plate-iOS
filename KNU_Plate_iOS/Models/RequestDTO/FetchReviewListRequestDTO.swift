@@ -11,7 +11,7 @@ struct FetchReviewListRequestDTO {
         "Authorization": User.shared.accessToken
     ]
 
-    init(mallID: Int, cursor: Int?, isMyReview: String) {
+    init(mallID: Int?, cursor: Int?, isMyReview: String) {
     
         parameters["mall_id"] = mallID
         parameters["cursor"] = cursor
