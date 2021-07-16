@@ -6,6 +6,7 @@ class RatingController: UIStackView {
     
     var starsRating = 3                                             // 기본 별점은 3점으로 시작
     
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         let starButtons = self.subviews.filter{$0 is UIButton}
