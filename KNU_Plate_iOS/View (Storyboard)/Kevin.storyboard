@@ -17,14 +17,14 @@
             <objects>
                 <viewController restorationIdentifier="NewRestaurantViewController" storyboardIdentifier="NewRestaurantViewController" title="NewRestaurantViewController" id="UEI-g0-ezW" customClass="NewRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="snB-Uu-lBl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="880"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdE-Pu-A5t">
-                                <rect key="frame" x="0.0" y="44" width="375" height="856"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="880"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-kX-rDV" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="856"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="880"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line divider (gray)" translatesAutoresizingMaskIntoConstraints="NO" id="xtf-pe-g5w" userLabel="Divider Line">
                                                 <rect key="frame" x="0.0" y="59" width="375" height="1"/>
@@ -429,16 +429,16 @@
         <!--리뷰 등록-->
         <scene sceneID="IT7-cX-3JL">
             <objects>
-                <viewController id="IOZ-J2-vp7" customClass="NewReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewReviewViewController" id="IOZ-J2-vp7" customClass="NewReviewViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayX-SX-ydV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-WO-v7Q">
-                                <rect key="frame" x="0.0" y="44" width="375" height="1056"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puI-3v-0ML" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1056"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pf4-lN-svS" userLabel="Star Rating Stack View" customClass="RatingController" customModule="KNU_Plate_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="75" y="20" width="225" height="45"/>
@@ -805,7 +805,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBk-g4-AKJ" userLabel="Map View" customClass="MTMapView">
-                                <rect key="frame" x="0.0" y="115" width="375" height="552"/>
+                                <rect key="frame" x="0.0" y="71" width="375" height="596"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-b6-h2U" userLabel="Next Button">
@@ -819,7 +819,7 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8Mz-6L-egV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="51"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -1110,54 +1110,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzC-al-4Wi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1369" y="2919"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ahY-8s-sFi">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2bF-tq-S23" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cFa-KU-yZI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IOZ-J2-vp7" kind="relationship" relationship="rootViewController" id="O9j-Ed-ANV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9ML-7H-gZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-348" y="600"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Krh-dP-Cgl">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3CD-QF-9Ve" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7JS-KD-iKI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IOi-Tn-fy0" kind="relationship" relationship="rootViewController" id="bh6-gV-Z8N"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S3R-5a-y2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-348" y="1504"/>
         </scene>
         <!--Send Developer Message View Controller-->
         <scene sceneID="w0q-AI-vnf">

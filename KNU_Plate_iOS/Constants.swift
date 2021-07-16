@@ -24,6 +24,7 @@ struct Constants {
         static let searchListViewController                 = "SearchListViewController" 
         static let reviewDetailViewController               = "ReviewDetailViewController"
         static let menuRecommendationViewController         = "MenuRecommendationViewController"
+        static let newReviewViewController                  = "NewReviewViewController"
         
         // Favorites Tab
         
