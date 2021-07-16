@@ -16,29 +16,23 @@ class NewReviewViewController: UIViewController {
     
     lazy var existingMenusPickerView = UIPickerView()
     
-    
     // 수정 필요 mallIID
-    private let viewModel: NewReviewViewModel = NewReviewViewModel(mallID: 2)
+    private var viewModel: NewReviewViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
-        
-
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //reset viewmodel 하기
     }
     
     // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
     func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
-        viewModel.mallID = mallID
-        viewModel.existingMenus.append(contentsOf: existingMenus)
+        viewModel = NewReviewViewModel(mallID: mallID, existingMenus: existingMenus)
     }
     
     @IBAction func pressedAddMenuButton(_ sender: Any) {
