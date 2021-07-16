@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C1A95DE26A13EB7001966F9 /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A95DD26A13EB7001966F9 /* ReviewListViewModel.swift */; };
+		3C1A95DE26A13EB7001966F9 /* MyReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */; };
 		3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F4531260B8866008E8AA7 /* MainViewController.swift */; };
 		3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F4537260B88B3008E8AA7 /* Main.storyboard */; };
 		3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */; };
@@ -154,7 +154,7 @@
 
 /* Begin PBXFileReference section */
 		2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		3C1A95DD26A13EB7001966F9 /* ReviewListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
+		3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReviewListViewModel.swift; sourceTree = "<group>"; };
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -661,7 +661,7 @@
 				7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */,
 				7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */,
 				7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */,
-				3C1A95DD26A13EB7001966F9 /* ReviewListViewModel.swift */,
+				3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */,
 				7C38F22226723FA8007D8313 /* MenuListViewModel.swift */,
 				3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */,
 				3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */,
@@ -897,7 +897,7 @@
 				7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,
 				3CA8D44626A02E2200B9E434 /* LocationTableViewCell.swift in Sources */,
-				3C1A95DE26A13EB7001966F9 /* ReviewListViewModel.swift in Sources */,
+				3C1A95DE26A13EB7001966F9 /* MyReviewListViewModel.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
@@ -1094,7 +1094,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1124,7 +1124,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

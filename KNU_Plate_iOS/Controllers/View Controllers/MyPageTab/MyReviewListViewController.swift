@@ -8,7 +8,7 @@ class MyReviewListViewController: UIViewController  {
     
     private let refreshControl = UIRefreshControl()
     
-    var viewModel = ReviewListViewModel()
+    var viewModel = MyReviewListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class MyReviewListViewController: UIViewController  {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchReviewList(myReview: "Y")
+        viewModel.fetchReviewList()
     }
 }
 
@@ -79,7 +79,7 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: NetworkError.internalError.localizedDescription,
                                         buttonTitle: "재시도") {
-            self.viewModel.fetchReviewList(myReview: "Y")
+            self.viewModel.fetchReviewList()
         }
     }
     
@@ -103,7 +103,7 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     
     @objc func refreshTable() {
         viewModel.resetValues()
-        viewModel.fetchReviewList(myReview: "Y")
+        viewModel.fetchReviewList()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,34 +112,49 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // 아래 코드 수정 고민
         if indexPath.row > viewModel.reviewList.count - 1 {
             print("❗️ Index Out Of Range -- indexPathRow: \(indexPath.row), reviewList count: \(viewModel.reviewList.count)")
             return UITableViewCell()
         }
+        
+        let reviewVM = viewModel.reviewList[indexPath.row]
  
         if viewModel.reviewList[indexPath.row].reviewImageFileFolder != nil {
             
             let reviewCell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.CellIdentifier.reviewTableViewCell,
-                for: indexPath
-            ) as! ReviewTableViewCell
+                for: indexPath) as! ReviewTableViewCell
     
             reviewCell.delegate = self
-            reviewCell.configure(with: viewModel.reviewList[indexPath.row])
             
-            let reviewImageURL = reviewCell.getReviewImageDownloadURL()
-            let profileImageURL = reviewCell.getProfileImageDownloadURL()
-        
+            reviewCell.reviewID                 = reviewVM.reviewID
+            reviewCell.userNickname             = reviewVM.userInfo.displayName
+            reviewCell.userNicknameLabel.text   = reviewVM.userInfo.displayName
+            reviewCell.reviewLabel.text         = reviewVM.review
+            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
+            reviewCell.rating.setStarsRating(rating: reviewVM.rating)
+            reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
+            reviewCell.configureShowMoreButton()
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
+                                                                       attributes: attributes)
+            reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            
+            
             reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            reviewCell.reviewImageView.sd_setImage(with: reviewImageURL,
+            reviewCell.reviewImageView.sd_setImage(with: viewModel.getReviewImageURL(index: indexPath.row),
                                                    placeholderImage: nil,
-                                                   options: .continueInBackground,
                                                    completed: nil)
-            reviewCell.userProfileImageView.sd_setImage(with: profileImageURL,
+
+            reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
                                                         placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                        options: .continueInBackground,
                                                         completed: nil)
             return reviewCell
+
         }
         
         else {
@@ -150,11 +165,26 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
             ) as! ReviewWithoutImageTableViewCell
             
             reviewCellNoImages.delegate = self
-            reviewCellNoImages.configure(with: viewModel.reviewList[indexPath.row])
             
-            let profileImageURL = reviewCellNoImages.getProfileImageDownloadURL()
+            reviewCellNoImages.reviewID                 = reviewVM.reviewID
+            reviewCellNoImages.userNickname             = reviewVM.userInfo.displayName
+            reviewCellNoImages.userNicknameLabel.text   = reviewVM.userInfo.displayName
+            reviewCellNoImages.reviewLabel.text         = reviewVM.review
+            reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
+            reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
 
-            reviewCellNoImages.userProfileImageView.sd_setImage(with: profileImageURL,
+            reviewCellNoImages.configureUI()
+            reviewCellNoImages.configureShowMoreButton()
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCellNoImages.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
+                                                                               attributes: attributes)
+            reviewCellNoImages.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            
+
+            reviewCellNoImages.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
                                                                 placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
                                                                            options: .continueInBackground,
                                                                            completed: nil)
@@ -163,33 +193,33 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        viewModel.selectedIndex = indexPath
-        
-        guard let vc = self.storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.reviewDetailViewController
-        ) as? ReviewDetailViewController else { return }
-        
-        guard let cell = tableView.cellForRow(
-                at: viewModel.selectedIndex!
-        ) as? ReviewTableViewCell else { return }
-        
-        let reviewDetails = cell.getReviewDetails()
-        vc.configure(with: reviewDetails)
-    
-        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//        viewModel.selectedIndex = indexPath
+//
+//        guard let vc = self.storyboard?.instantiateViewController(
+//                identifier: Constants.StoryboardID.reviewDetailViewController
+//        ) as? ReviewDetailViewController else { return }
+//
+//        guard let cell = tableView.cellForRow(
+//                at: viewModel.selectedIndex!
+//        ) as? ReviewTableViewCell else { return }
+//
+//        let reviewDetails = cell.getReviewDetails()
+//        vc.configure(with: reviewDetails)
+//
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
 }
 
 //MARK: - ReviewTableViewCellDelegate
 
 extension MyReviewListViewController: ReviewTableViewCellDelegate {
     
-    func goToReportReviewVC(reviewID: Int, displayName: String) {
-        // 사실 내 글 불러오기인데 이건 없어도 될듯
-        return
+    // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
+    func goToReportReviewVC(reviewID: Int?, displayName: String?) {
+        
     }
     
     func presentDeleteActionAlert(reviewID: Int) {
@@ -214,7 +244,7 @@ extension MyReviewListViewController: UIScrollViewDelegate {
             
             if !viewModel.isFetchingData {
                 tableView.tableFooterView = createSpinnerFooterView()
-                viewModel.fetchReviewList(myReview: "Y")
+                viewModel.fetchReviewList()
             }
         }
     }
