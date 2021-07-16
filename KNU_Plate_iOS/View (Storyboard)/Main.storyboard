@@ -62,7 +62,7 @@
                         <barButtonItem key="rightBarButtonItem" image="pencil" catalog="system" id="1xE-nQ-5Na">
                             <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
-                                <segue destination="FJA-jb-0m6" kind="show" id="TQ3-cM-gZn"/>
+                                <segue destination="FJA-jb-0m6" kind="show" identifier="RestaurantInfoSegue" id="TQ3-cM-gZn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
