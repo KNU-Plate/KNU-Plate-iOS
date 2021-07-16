@@ -23,6 +23,10 @@ class NoticeTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
+    func convert() {
+        
+    }
+    
     
 
 }

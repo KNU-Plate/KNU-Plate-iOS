@@ -23,22 +23,42 @@ struct Constants {
         static let newRestaurantViewController              = "NewRestaurantViewController"
         static let searchListViewController                 = "SearchListViewController" 
         static let reviewViewController                     = "ReviewViewController"
+        static let reviewDetailViewController               = "ReviewDetailViewController"
         static let locationViewController                   = "LocationViewController"
         static let menuViewController                       = "MenuViewController"
         static let menuRecommendationViewController         = "MenuRecommendationViewController"
         
         // Favorites Tab
         
-        
+         
         // My Page Tab
         static let sendDeveloperMessageViewController       = "SendDeveloperMessageViewController"
+        static let myReviewListViewController               = "MyReviewListViewController"
         static let settingsViewController                   = "SettingsViewController"
         static let termsAndConditionsViewController         = "TermsAndConditionViewController"
         static let reportReviewViewController               = "ReportReviewViewController"
         static let noticeViewController                     = "NoticeViewController"
+        static let noticeDetailViewController               = "NoticeDetailViewController"
         static let developerInfoViewController              = "DeveloperInformationViewController"
         static let openSourceInfoViewController             = "OpenSourceInfoViewController"
         
+        static let myPageVCStoryBoardID                     = [
+                                                                noticeViewController,
+                                                                myReviewListViewController,
+                                                                settingsViewController,
+                                                                sendDeveloperMessageViewController,
+                                                                termsAndConditionsViewController,
+                                                                developerInfoViewController,
+                                                                openSourceInfoViewController,
+                                                                ]
+        static let myPageVCOptions                          = [ "공지사항",
+                                                                "내가 쓴 리뷰",
+                                                                "설정",
+                                                                "개발자에게 건의사항 보내기",
+                                                                "서비스 이용약관",
+                                                                "개발자 정보",
+                                                                "오픈 소스 라이센스"
+                                                                ]
     }
     
 
@@ -134,6 +154,14 @@ struct Constants {
         
         // Other
         static let rightArrow                               = "arrow_right"
+        static let myPageVCImageOptions                     = [ "bell.badge",
+                                                                "tray.full",
+                                                                "gear",
+                                                                "paperplane",
+                                                                "doc.text",
+                                                                "info.circle",
+                                                                "book.closed"
+                                                                ]
     }
     
     struct XIB {
@@ -165,14 +193,5 @@ struct Constants {
         "🇰🇷 한식", "🇯🇵 일식", "🇨🇳 중식", "🇺🇸 양식",
         "🌎 세계음식","☕️ 카페", "🍹 술집"
     ]
-    
-    static let myPageTableViewOptions: [String] = ["공지사항",
-                                                   "개발자에게 건의사항 보내기",
-                                                   "설정",
-                                                   "서비스 이용약관",
-                                                   "개발자 정보",
-                                                   "오픈 소스 라이센스"]
-    
-    
     
 }

@@ -10,6 +10,9 @@ class NoticeViewController: UIViewController {
     
     var noticeList: [NoticeListModel] = [NoticeListModel]()
     
+    private var isFetchingData: Bool = false
+    private var indexToFetch: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,22 +40,36 @@ class NoticeViewController: UIViewController {
         
         noticeList.removeAll()
         refreshControl.endRefreshing()
+        isFetchingData = false
+        indexToFetch = 0
+        fetchNoticeList()
     }
     
     func fetchNoticeList() {
         
-        NoticeManager.shared.fetchNoticeList(index: 0) { result in
+        isFetchingData = true
+        
+        NoticeManager.shared.fetchNoticeList(index: indexToFetch) { [weak self] result in
+            
+            guard let self = self else { return }
             
             switch result {
-            
             case .success(let model):
-                
-                self.noticeList = model
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+
+                if model.isEmpty {
+                    DispatchQueue.main.async {
+                        self.tableView.tableFooterView = nil
+                    }
+                    return
                 }
                 
+                self.indexToFetch = model[model.count - 1].noticeID
+                self.noticeList.append(contentsOf: model)
+                self.isFetchingData = false
+                DispatchQueue.main.async {
+                    self.tableView.tableFooterView = nil
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
@@ -78,20 +95,65 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.noticeCell) as? NoticeTableViewCell else { fatalError() }
         
         cell.noticeTitleLabel.text = noticeList[indexPath.row].title
-        cell.noticeDateLabel.text = String(noticeList[indexPath.row].dateCreated)
+        let date = formatDate(timestamp: noticeList[indexPath.row].dateCreated)
+        cell.noticeDateLabel.text = date
         
+        if indexPath.row == 0 {
+            cell.noticeImageView.image = UIImage(systemName: "bell.badge")
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.noticeDetailViewController) as? NoticeDetailViewController else {
+            fatalError()
+        }
+        vc.noticeTitle = noticeList[indexPath.row].title
+        let date = formatDate(timestamp: noticeList[indexPath.row].dateCreated)
+        vc.noticeDate = date
+        vc.noticeContent = noticeList[indexPath.row].contents
+    
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+}
+
+//MARK: - UIScrollViewDelegate
+
+extension NoticeViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let position = scrollView.contentOffset.y
+   
+        if position > (tableView.contentSize.height - 80 - scrollView.frame.size.height) {
+        
+            if !isFetchingData {
+                tableView.tableFooterView = createSpinnerFooterView()
+                self.fetchNoticeList()
+            }
+        }
+    }
+}
+
+//MARK: - Other Methods
+
+extension NoticeViewController {
+    
+    func formatDate(timestamp: TimeInterval) -> String {
+        
+        let date = Date(timeIntervalSince1970: timestamp/1000)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let result = formatter.string(from: date)
+        return result
     }
 }

@@ -20,7 +20,9 @@ class NoticeManager {
     func fetchNoticeList(index: Int,
                        completion: @escaping ((Result<[NoticeListModel], NetworkError>) -> Void)) {
         
-        AF.request(getNoticeURL,
+        let requestURL = getNoticeURL + "?cursor=\(index)"
+        
+        AF.request(requestURL,
                    method: .get)
             .responseJSON { response in
                 
@@ -37,10 +39,9 @@ class NoticeManager {
                         
                     } catch {
                         print("❗️ NoticeManager - getNoticeList error in parsing data, error: \(error)")
+                        completion(.failure(.internalError))
                     }
-               
                 default:
-                    
                     completion(.failure(.internalError))
                 }
             }

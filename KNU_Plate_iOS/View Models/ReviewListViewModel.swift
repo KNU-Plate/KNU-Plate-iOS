@@ -3,7 +3,10 @@ import Foundation
 protocol ReviewListViewModelDelegate: AnyObject {
     func didFetchReviewListResults()
     func didFetchEmptyReviewListResults()
+    func didDeleteMyReview()
+    
     func failedFetchingReviewListResults()
+    func failedDeletingMyReview(with error: NetworkError)
 }
 
 class ReviewListViewModel {
@@ -23,7 +26,7 @@ class ReviewListViewModel {
     
     //MARK: - Object Methods
     
-    func fetchReviewList() {
+    func fetchReviewList(myReview: String = "N") {
         
         isFetchingData = true
         
@@ -52,6 +55,30 @@ class ReviewListViewModel {
             }
         }
     }
+    
+    func deleteMyReview(reviewID: Int) {
+        
+        
+        UserManager.shared.deleteMyReview(reviewID: reviewID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            
+            case .success(_):
+                self.delegate?.didDeleteMyReview()
+                
+            case .failure(let error):
+                self.delegate?.failedDeletingMyReview(with: error)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     func resetValues() {
         

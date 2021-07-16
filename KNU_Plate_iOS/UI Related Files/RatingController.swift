@@ -6,9 +6,8 @@ class RatingController: UIStackView {
     
     var starsRating = 3                                             // 기본 별점은 3점으로 시작
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override func draw(_ frame: CGRect) {
+    
         let starButtons = self.subviews.filter{$0 is UIButton}
         var starTag = 1
         for button in starButtons {
@@ -29,9 +28,6 @@ class RatingController: UIStackView {
         setStarsRating(rating: starsRating)
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func setStarsRating(rating: Int) {
         

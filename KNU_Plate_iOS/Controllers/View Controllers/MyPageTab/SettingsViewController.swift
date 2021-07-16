@@ -41,13 +41,6 @@ class SettingsViewController: UIViewController {
                                                              buttonTitle: "재시도") {
                             self.pressedLogOutButton(self.logOutButton)
                         }
-//                        SnackBar.make(in: self.view,
-//                                      message: error.errorDescription,
-//                                      duration: .lengthLong).setAction(with: "재시도", action: {
-//                                        DispatchQueue.main.async {
-//                                            self.pressedLogOutButton(self.logOutButton)
-//                                        }
-//                                      }).show()
                     }
                 }
                 
@@ -76,13 +69,6 @@ class SettingsViewController: UIViewController {
                                                              action: {
                                                                 self.pressedUnregisterButton(self.unregisterButton)
                                                              })
-//                        SnackBar.make(in: self.view,
-//                                      message: error.errorDescription,
-//                                      duration: .lengthLong).setAction(with: "재시도", action: {
-//                                        DispatchQueue.main.async {
-//                                            self.pressedUnregisterButton(self.unregisterButton)
-//                                        }
-//                                      }).show()
                     }
                 }
             }

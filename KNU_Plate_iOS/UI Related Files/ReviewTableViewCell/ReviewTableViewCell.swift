@@ -5,6 +5,7 @@ import SnackBar_swift
 
 protocol ReviewTableViewCellDelegate {
     func goToReportReviewVC(reviewID: Int, displayName: String)
+    func presentDeleteActionAlert(reviewID: Int)
 }
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
@@ -106,23 +107,59 @@ class ReviewTableViewCell: UITableViewCell {
     }
     
     // 더보기 버튼
+//    @objc func showMoreOptions() {
+//
+//        let actionSheet = UIAlertController(title: nil,
+//                                            message: nil,
+//                                            preferredStyle: .actionSheet)
+//
+//        let reportReview = UIAlertAction(title: "게시글 신고하기",
+//                                         style: .default) { alert in
+//
+//            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+//                                              displayName: self.viewModel.userNickname)
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "취소",
+//                                         style: .cancel,
+//                                         handler: nil)
+//        actionSheet.addAction(reportReview)
+//        actionSheet.addAction(cancelAction)
+//
+//        let vc = self.window?.rootViewController
+//        vc?.present(actionSheet, animated: true)
+//    }
+    
     @objc func showMoreOptions() {
         
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let reportReview = UIAlertAction(title: "게시글 신고하기",
-                                         style: .default) { alert in
+        print("✏️ viewModel.usernickname: \(viewModel.userNickname)")
+        print("✏️ user.shared.displayname: \(User.shared.displayName)")
+        
+        if viewModel.userNickname == User.shared.displayName {
             
-            self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
-                                              displayName: self.viewModel.userNickname)
+            let deleteAction = UIAlertAction(title: "리뷰 삭제하기",
+                                             style: .destructive) { onPress in
+                
+                self.delegate?.presentDeleteActionAlert(reviewID: self.viewModel.reviewID)
+            }
+            actionSheet.addAction(deleteAction)
+        }
+        else {
+            let reportAction = UIAlertAction(title: "게시글 신고하기",
+                                             style: .default) { onPress in
+                self.delegate?.goToReportReviewVC(reviewID: self.viewModel.reviewID,
+                                                  displayName: self.viewModel.userNickname)
+            }
+            actionSheet.addAction(reportAction)
         }
         
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
-        actionSheet.addAction(reportReview)
         actionSheet.addAction(cancelAction)
         
         let vc = self.window?.rootViewController

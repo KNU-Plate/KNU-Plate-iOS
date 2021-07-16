@@ -6,7 +6,7 @@ struct NoticeListModel: Decodable {
     
     let noticeID: Int
     let userID: String
-    let dateCreated: Int
+    let dateCreated: TimeInterval
     let title: String
     let contents: String
     

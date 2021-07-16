@@ -41,6 +41,15 @@ class MyPageViewController: UIViewController {
         tipView.show(forView: self.infoButton,
                      withinSuperview: self.view)
     }
+    
+    @IBAction func pressedSettingsButton(_ sender: UIBarButtonItem) {
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) as? SettingsViewController else {
+            fatalError()
+        }
+        pushViewController(with: vc)
+    }
+    
 
     func presentActionSheet() {
         
@@ -121,9 +130,7 @@ extension MyPageViewController {
             switch result {
             
             case .success(_):
-                SnackBar.make(in: self.view,
-                              message: "프로필 사진 제거 성공 🎉",
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
                 DispatchQueue.main.async {
                     self.profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage)!, for: .normal)
                     self.initializeProfileImageButton()
@@ -147,7 +154,6 @@ extension MyPageViewController {
             
             switch result {
             case .success(_):
-                
                 self.showSimpleBottomAlert(with: "프로필 사진 변경 성공 🎉")
                 DispatchQueue.main.async {
                     self.updateProfileImageButton(with: image)
@@ -194,7 +200,7 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.myPageTableViewOptions.count
+        return Constants.StoryboardID.myPageVCOptions.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -203,10 +209,13 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath) as? MyPageTableViewCell else {
+            fatalError()
+        }
         
-        cell.textLabel?.font = .systemFont(ofSize: 17)
-        cell.textLabel?.text = Constants.myPageTableViewOptions[indexPath.row]
+        cell.settingsTitleLabel.text = Constants.StoryboardID.myPageVCOptions[indexPath.row]
+        cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageVCImageOptions[indexPath.row])
+        cell.leftImageView.tintColor = .black
         
         return cell
     }
@@ -215,27 +224,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch indexPath.row {
-        case 0:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.noticeViewController) else { return }
-            pushViewController(with: vc)
-        case 1:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.sendDeveloperMessageViewController) else { return }
-            pushViewController(with: vc)
-        case 2:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) else { return }
-            pushViewController(with: vc)
-        case 3:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.termsAndConditionsViewController) else { return }
-            pushViewController(with: vc)
-        case 4:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.developerInfoViewController) else { return }
-            pushViewController(with: vc)
-        case 5:
-            guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.openSourceInfoViewController) else { return }
-            pushViewController(with: vc)
-        default: return
-        }
+        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageVCStoryBoardID[indexPath.row]) else { return }
+        pushViewController(with: vc)
     }
     
     func pushViewController(with vc: UIViewController) {
@@ -255,7 +245,6 @@ extension MyPageViewController: EasyTipViewDelegate {
         infoButton.isUserInteractionEnabled = true
     }
 }
-
 
 //MARK: - UI Configuration
 
@@ -306,7 +295,6 @@ extension MyPageViewController {
     
     func initializeTipViewPreferences() {
         
-
         preferences.drawing.font = UIFont.boldSystemFont(ofSize: 15)
         preferences.drawing.foregroundColor = .white
         preferences.drawing.backgroundColor = .lightGray
