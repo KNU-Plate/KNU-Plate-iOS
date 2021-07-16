@@ -92,7 +92,6 @@
 		7C3517CF267C63D100BD9A88 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517CE267C63D100BD9A88 /* ReportManager.swift */; };
 		7C3517D1267C76F000BD9A88 /* ReportReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */; };
 		7C38F21C2670CCFD007D8313 /* MenuRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F21B2670CCFD007D8313 /* MenuRecommendationViewController.swift */; };
-		7C38F21F2670CEC2007D8313 /* MenuRecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F21E2670CEC2007D8313 /* MenuRecommendationTableViewCell.swift */; };
 		7C38F22126723A8E007D8313 /* MenuRecommendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F22026723A8D007D8313 /* MenuRecommendationViewModel.swift */; };
 		7C38F22326723FA8007D8313 /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F22226723FA8007D8313 /* MenuListViewModel.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
@@ -131,6 +130,8 @@
 		7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */; };
 		7CB8DF6C264D473C0001CC6D /* ReviewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF6B264D473C0001CC6D /* ReviewListViewModel.swift */; };
 		7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */; };
+		7CBA9A3826A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */; };
+		7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */; };
 		7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
 		7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */; };
 		7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */; };
@@ -247,7 +248,6 @@
 		7C3517CE267C63D100BD9A88 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReviewViewController.swift; sourceTree = "<group>"; };
 		7C38F21B2670CCFD007D8313 /* MenuRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewController.swift; sourceTree = "<group>"; };
-		7C38F21E2670CEC2007D8313 /* MenuRecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		7C38F22026723A8D007D8313 /* MenuRecommendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewModel.swift; sourceTree = "<group>"; };
 		7C38F22226723FA8007D8313 /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -286,6 +286,8 @@
 		7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDisplayModel.swift; sourceTree = "<group>"; };
 		7CB8DF6B264D473C0001CC6D /* ReviewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListViewModel.swift; sourceTree = "<group>"; };
 		7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationTableViewCell.swift; sourceTree = "<group>"; };
+		7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuRecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		7CBE745126208366002E1FF7 /* UploadMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadMenuModel.swift; sourceTree = "<group>"; };
 		7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailFromKakao.swift; sourceTree = "<group>"; };
 		7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
@@ -450,8 +452,9 @@
 		7C38F21D2670CEA4007D8313 /* MenuRecommendationCell */ = {
 			isa = PBXGroup;
 			children = (
-				7C38F21E2670CEC2007D8313 /* MenuRecommendationTableViewCell.swift */,
 				7C38F22026723A8D007D8313 /* MenuRecommendationViewModel.swift */,
+				7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */,
+				7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */,
 			);
 			path = MenuRecommendationCell;
 			sourceTree = "<group>";
@@ -793,6 +796,7 @@
 				7C1F78F32632DE3500C7B41D /* map_present.png in Resources */,
 				7C1F78E72632DE3500C7B41D /* map_pin_red@3x.png in Resources */,
 				7C1F78E02632DE3500C7B41D /* map_pinup.png in Resources */,
+				7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */,
 				7C1F78F22632DE3500C7B41D /* map_pin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -859,6 +863,7 @@
 				7C16DF232621810700AA8239 /* User.swift in Sources */,
 				7C1C1D08265E190300C08C66 /* LoadUserInfoModel.swift in Sources */,
 				7C1F79062632E04700C7B41D /* ExampleViewController.swift in Sources */,
+				7CBA9A3826A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift in Sources */,
 				7C99FB9C2648FE520063C967 /* ReviewListResponseModel.swift in Sources */,
 				7C5EDD552642C22500B79178 /* CheckDuplicateRequestDTO.swift in Sources */,
 				7C38F21C2670CCFD007D8313 /* MenuRecommendationViewController.swift in Sources */,
@@ -928,7 +933,6 @@
 				7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */,
 				7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */,
 				7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */,
-				7C38F21F2670CEC2007D8313 /* MenuRecommendationTableViewCell.swift in Sources */,
 				3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */,
 				7C6D2531268D9A0D0030F9A1 /* NoticeManager.swift in Sources */,
 				3CA704DE268DA35200943DC1 /* RestaurantListResponseModel.swift in Sources */,
