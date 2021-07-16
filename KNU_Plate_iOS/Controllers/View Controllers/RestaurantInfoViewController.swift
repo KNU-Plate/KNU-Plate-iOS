@@ -37,9 +37,12 @@ class RestaurantInfoViewController: UIViewController {
         
         restaurantInfoVM.delegate = self
         restaurantInfoVM.setMallID(mallID: mallID)
-        restaurantInfoVM.fetchRestaurantInfo()
-        restaurantInfoVM.fetchTitleImages()
-        restaurantInfoVM.fetchReviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        restaurantInfoVM.refreshViewModel()
     }
     
     private func setButtonTarget() {
@@ -53,12 +56,6 @@ class RestaurantInfoViewController: UIViewController {
         customTableView.tableView.delegate = self
         customTableView.tableView.bounces = false
         customTableView.tableView.tableHeaderView?.frame.size.height = 320 + 3*4
-        
-//        customTableView.nameLabel.text = "반미리코"
-//        customTableView.gateNameLabel.text = "북문"
-//        customTableView.ratingStackView.averageRating = 4.7
-//        customTableView.foodCategoryLabel.text = "세계 음식"
-//        customTableView.numberLabel.text = "\(39)명 참여"
     }
     
     private func registerCells() {
@@ -90,6 +87,18 @@ class RestaurantInfoViewController: UIViewController {
             return
         }
         customTableView.tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifier.restaurantInfoSegue {
+            guard let nextVC = segue.destination as? NewReviewViewController else { fatalError() }
+            guard let mallID = self.mallID else {
+                print("RestaurantInfoViewController - prepare(for segue:) - mallID is empty")
+                return
+            }
+//            nextVC.delegate = self
+            nextVC.configure(mallID: mallID, existingMenus: restaurantInfoVM.menusForNextVC)
+        }
     }
 }
 

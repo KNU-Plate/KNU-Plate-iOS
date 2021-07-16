@@ -32,6 +32,21 @@ class RestaurantInfoViewModel {
     func setMallID(mallID: Int?) {
         self.mallID = mallID
     }
+    
+    func fetch() {
+        self.fetchRestaurantInfo()
+        self.fetchTitleImages()
+        self.fetchReviews()
+    }
+    
+    func refreshViewModel() {
+        self.restaurant = nil
+        self.titleImages.removeAll()
+        self.reviews.removeAll()
+        self.menus.removeAll()
+        self.lastReviewID = nil
+        self.fetch()
+    }
 }
 
 extension RestaurantInfoViewModel {
@@ -45,6 +60,10 @@ extension RestaurantInfoViewModel {
     
     var numberOfMenus: Int {
         return self.menus.count
+    }
+    
+    var menusForNextVC: [ExistingMenuModel] {
+        return self.menus
     }
     
     func reviewAtIndex(_ index: Int) -> RestaurantReviewViewModel {

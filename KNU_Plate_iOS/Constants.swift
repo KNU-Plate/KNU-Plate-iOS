@@ -83,6 +83,7 @@ struct Constants {
         static let goToTermsAndConditions       = "goToTermsAndConditions"
         static let goChangeDisplayName          = "goChangeDisplayName"
         static let goChangePassword             = "goChangePassword"
+        static let restaurantInfoSegue          = "RestaurantInfoSegue"
     }
     
     //MARK: - Keys
