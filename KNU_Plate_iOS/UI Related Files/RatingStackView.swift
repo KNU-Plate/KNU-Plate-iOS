@@ -32,7 +32,7 @@ class RatingStackView: UIStackView {
         self.distribution = .fillEqually
         self.addArrangedSubview(starImage)
         self.addArrangedSubview(averageRatingLabel)
-        
+        self.spacing = -15
         starImage.snp.makeConstraints { make in
             make.height.equalTo(25)
         }

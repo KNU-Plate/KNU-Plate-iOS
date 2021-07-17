@@ -5,11 +5,15 @@ protocol RestaurantInfoViewModelDelegate: AnyObject {
     func didFetchRestaurantImages()
     func didFetchReview()
     func didFetchMenu()
+    func didMarkFavorite()
+    func didFailedMarkFavorite()
 }
 
 // MARK: - Main Body
 class RestaurantInfoViewModel {
     weak var delegate: RestaurantInfoViewModelDelegate?
+    
+    private var mallID: Int?
     
     private var restaurant: RestaurantInfoResponseModel? {
         didSet {
@@ -22,8 +26,6 @@ class RestaurantInfoViewModel {
     private var titleImages: [RestaurantImageResponseModel] = []
     private var reviews: [ReviewListResponseModel] = []
     private var menus: [ExistingMenuModel] = []
-    
-    private var mallID: Int?
     
     var hasMoreReview: Bool = true
     var isFetchingReview: Bool = false
@@ -41,9 +43,11 @@ class RestaurantInfoViewModel {
     
     func refreshViewModel() {
         self.restaurant = nil
-        self.titleImages.removeAll()
-        self.reviews.removeAll()
-        self.menus.removeAll()
+        self.titleImages.removeAll(keepingCapacity: true)
+        self.reviews.removeAll(keepingCapacity: true)
+        self.menus.removeAll(keepingCapacity: true)
+        self.hasMoreReview = true
+        self.isFetchingReview = false
         self.lastReviewID = nil
         self.fetch()
     }
@@ -55,6 +59,11 @@ extension RestaurantInfoViewModel {
     }
     
     var numberOfLocations: Int {
+        if self.restaurant?.address == nil &&
+           self.restaurant?.latitude == nil &&
+           self.restaurant?.longitude == nil {
+            return 0
+        }
         return 1
     }
     
@@ -241,6 +250,27 @@ extension RestaurantInfoViewModel {
                 self.isFetchingReview = false
                 self.delegate?.didFetchReview()
             case .failure:
+                return
+            }
+        }
+    }
+}
+
+// MARK: - Related To Mark Favorite
+extension RestaurantInfoViewModel {
+    func markFavorite(markMyFavorite: Bool) {
+        guard let mallID = self.mallID else {
+            print("RestaurantInfoViewModel: mallID is empty")
+            return
+        }
+        
+        RestaurantManager.shared.markFavorite(mallID: mallID, markMyFavorite: markMyFavorite) { result in
+            switch result {
+            case .success:
+                self.delegate?.didMarkFavorite()
+                return
+            case .failure:
+                self.delegate?.didFailedMarkFavorite()
                 return
             }
         }

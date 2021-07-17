@@ -21,7 +21,14 @@ class RestaurantTableView: UIView {
     let imageView4 = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+    }
+    let innerView = UIView().then {
+        $0.backgroundColor = .black
         $0.alpha = 0.5
+    }
+    let innerLabel = UILabel().then {
+        $0.text = "이미지 더보기"
+        $0.textColor = .white
     }
     
     // MARK: - Store Info Related View
@@ -34,12 +41,12 @@ class RestaurantTableView: UIView {
     
     let nameLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 25)
+        $0.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
     }
     let foodCategoryLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = .lightGray
-        $0.font = UIFont.systemFont(ofSize: 20)
+        $0.font = UIFont.systemFont(ofSize: 13)
     }
     
     let stackView2 = UIStackView().then {
@@ -64,12 +71,12 @@ class RestaurantTableView: UIView {
         $0.textColor = .lightGray
     }
     
-    let favoriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "favorite tab bar icon"), for: .normal)
-        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .highlighted)
-        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .selected)
-        $0.addBounceReactionWithoutFeedback()
-    }
+//    let favoriteButton = UIButton().then {
+//        $0.setImage(UIImage(named: "favorite tab bar icon"), for: .normal)
+//        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .highlighted)
+//        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .selected)
+//        $0.addBounceReactionWithoutFeedback()
+//    }
     
     // MARK: - Table Header View
     let headerView = UIView()
@@ -87,6 +94,9 @@ class RestaurantTableView: UIView {
     }
     
     func addSubviewAndLayout(frame: CGRect) {
+        imageView4.addSubview(innerView)
+        imageView4.addSubview(innerLabel)
+        
         imageContentsView.addSubview(imageView1)
         imageContentsView.addSubview(imageView2)
         imageContentsView.addSubview(imageView3)
@@ -102,7 +112,7 @@ class RestaurantTableView: UIView {
         headerView.addSubview(imageContentsView)
         headerView.addSubview(stackView1)
         headerView.addSubview(stackView2)
-        headerView.addSubview(favoriteButton)
+//        headerView.addSubview(favoriteButton)
         
         self.addSubview(tableView)
         
@@ -150,6 +160,14 @@ class RestaurantTableView: UIView {
             make.right.equalToSuperview().inset(padding).priority(.low)
         }
         
+        innerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        innerLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         let stackViewHeight: CGFloat = 35
         
         nameLabel.snp.makeConstraints { make in
@@ -174,11 +192,11 @@ class RestaurantTableView: UIView {
             make.height.equalTo(stackViewHeight)
         }
         
-        favoriteButton.snp.makeConstraints { make in
-            make.centerY.equalTo(stackView2)
-            make.left.equalTo(stackView2.snp.right).priority(.low)
-            make.right.equalToSuperview().priority(.low)
-        }
+//        favoriteButton.snp.makeConstraints { make in
+//            make.centerY.equalTo(stackView2)
+//            make.left.equalTo(stackView2.snp.right).priority(.low)
+//            make.right.equalToSuperview().priority(.low)
+//        }
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

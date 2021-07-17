@@ -68,28 +68,28 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         self.addSubview(favoriteButton)
         
         imageView.snp.makeConstraints { (make) in
-            make.height.equalTo(imageViewHeight).labeled("error label: 1")
-            make.top.left.right.equalToSuperview().labeled("error label: 2")
+            make.height.equalTo(imageViewHeight)
+            make.top.left.right.equalToSuperview()
         }
         
         nameLabel.snp.makeConstraints { (make) in
-            make.height.equalTo(nameLabelHeight).labeled("error label: 3")
-            make.top.equalTo(imageView.snp.bottom).offset(inset*2).labeled("error label: 4")
-            make.left.right.equalToSuperview().inset(inset*2).labeled("error label: 5")
+            make.height.equalTo(nameLabelHeight)
+            make.top.equalTo(imageView.snp.bottom).offset(inset*2)
+            make.left.right.equalToSuperview().inset(inset*2)
         }
         
         ratingStackView.snp.makeConstraints { (make) in
-            make.width.equalTo(ratingStackViewWidth).labeled("error label: 6")
-            make.top.equalTo(nameLabel.snp.bottom).offset(inset).labeled("error label: 7")
-            make.left.equalToSuperview().inset(inset).labeled("error label: 8")
-            make.bottom.equalToSuperview().inset(inset*2).labeled("error label: 9")
+            make.width.equalTo(ratingStackViewWidth)
+            make.top.equalTo(nameLabel.snp.bottom).offset(inset)
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview().inset(inset*2)
         }
         
         favoriteButton.snp.makeConstraints { (make) in
-            make.width.equalTo(favoriteButton.snp.height).labeled("error label: 10")
-            make.top.equalTo(nameLabel.snp.bottom).offset(inset/2).labeled("error label: 11")
-            make.right.equalToSuperview().inset(inset*2).labeled("error label: 12")
-            make.bottom.equalToSuperview().inset(inset*2).labeled("error label: 13")
+            make.width.equalTo(favoriteButton.snp.height)
+            make.top.equalTo(nameLabel.snp.bottom).offset(inset/2)
+            make.right.equalToSuperview().inset(inset*2)
+            make.bottom.equalToSuperview().inset(inset*2)
         }
     }
 }

@@ -75,11 +75,11 @@ class MainViewController: UIViewController {
         self.navigationItem.title = "크슐랭가이드"
         // set title color
         if var textAttributes = navigationController?.navigationBar.titleTextAttributes {
-            textAttributes[NSAttributedString.Key.foregroundColor] = UIColor(named: Constants.Color.appDefaultColor)
+            textAttributes[NSAttributedString.Key.foregroundColor] = UIColor.black
             navigationController?.navigationBar.titleTextAttributes = textAttributes
         }
         // set backbutton color
-        self.navigationController?.navigationBar.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         setupAllButtons()
         setupView()
         setButtonTarget()
