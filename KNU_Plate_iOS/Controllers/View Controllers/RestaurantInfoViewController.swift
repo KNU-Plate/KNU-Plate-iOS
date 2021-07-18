@@ -47,12 +47,14 @@ class RestaurantInfoViewController: UIViewController {
         
         restaurantInfoVM.delegate = self
         restaurantInfoVM.setMallID(mallID: mallID)
+        
+        restaurantInfoVM.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        restaurantInfoVM.refreshViewModel()
+        print("👌 RestaurantInfoViewController - viewWillAppear")
+//        restaurantInfoVM.refreshViewModel()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -385,13 +387,44 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             return
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch currentButton.tag {
+        case 0:
+            let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
+            guard let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.reviewDetailViewController) as? ReviewDetailViewController else { fatalError() }
+            let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
+            
+            let profileImageURL = reviewVM.profileImageURL
+            let nickname = reviewVM.userNickname
+            let medal = reviewVM.medal
+            let rating = reviewVM.rating
+            let review = reviewVM.reviewContent
+            let reviewImageFiles = reviewVM.reviewImageFiles
+            
+            let reviewDetails = ReviewDetail(profileImageURL: profileImageURL,
+                                             nickname: nickname,
+                                             medal: medal,
+                                             reviewImageFiles: reviewImageFiles,
+                                             rating: rating,
+                                             review: review)
+            nextVC.configure(with: reviewDetails)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            tableView.deselectRow(at: indexPath, animated: false)
+        default:
+            return
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        print("didDeselectRowAt")
+    }
 }
 
 // MARK: - RestaurantInfoViewModelDelegate
 extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didMarkFavorite() {
         restaurantInfoVM.fetchRestaurantInfo()
-        favoriteButton?.isEnabled = true
     }
     
     func didFailedMarkFavorite() {
@@ -407,8 +440,8 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
         customTableView.ratingStackView.averageRating = restaurantInfoVM.rating
         customTableView.foodCategoryLabel.text = restaurantInfoVM.category
         customTableView.numberLabel.text = "\(restaurantInfoVM.reviewCount)명 참여"
-        setFavoriteButton(restaurantInfoVM.isFavorite)
         favoriteButton?.isEnabled = true
+        setFavoriteButton(restaurantInfoVM.isFavorite)
     }
     
     func didFetchRestaurantImages() {
@@ -423,10 +456,12 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
     
     func didFetchReview() {
+        print("didFetchReview reloadData")
         customTableView.tableView.reloadData()
     }
     
     func didFetchMenu() {
+        print("didFetchMenu reloadData")
         customTableView.tableView.reloadData()
     }
 }
