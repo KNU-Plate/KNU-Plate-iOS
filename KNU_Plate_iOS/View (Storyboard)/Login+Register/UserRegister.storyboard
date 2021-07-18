@@ -435,7 +435,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
                                         <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -451,8 +451,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwF-Uf-dqU">
-                                <rect key="frame" x="160" y="351.5" width="94" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwF-Uf-dqU">
+                                <rect key="frame" x="20" y="351.5" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="다시 보내기">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -464,21 +465,22 @@
                         <viewLayoutGuide key="safeArea" id="QLD-oI-glD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="MwF-Uf-dqU" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="160" id="AQo-sD-Fec"/>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="InV-i6-OXJ"/>
                             <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="FSD-mM-uCS" secondAttribute="trailing" constant="190" id="P1L-l8-VH1"/>
-                            <constraint firstItem="MwF-Uf-dqU" firstAttribute="top" secondItem="FSD-mM-uCS" secondAttribute="bottom" constant="20" id="RhZ-aC-WaO"/>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="trailing" secondItem="QLD-oI-glD" secondAttribute="trailing" constant="20" id="RwH-LU-gCa"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="top" secondItem="aVd-bF-IK7" secondAttribute="bottom" constant="30" id="UDw-34-mQZ"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="XTE-fa-9eb"/>
                             <constraint firstItem="MCe-p4-CY1" firstAttribute="top" secondItem="QLD-oI-glD" secondAttribute="top" constant="60" id="apC-yf-TxP"/>
-                            <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="MwF-Uf-dqU" secondAttribute="trailing" constant="160" id="cSU-TF-DX1"/>
                             <constraint firstItem="MCe-p4-CY1" firstAttribute="trailing" secondItem="QLD-oI-glD" secondAttribute="trailing" constant="20" id="gVF-Zx-UZg"/>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="top" secondItem="MCe-p4-CY1" secondAttribute="bottom" constant="60" id="k5H-fH-u8G"/>
                             <constraint firstItem="MCe-p4-CY1" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="qPM-Re-oJU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZiN-6S-vjJ"/>
+                    <navigationItem key="navigationItem" id="ZiN-6S-vjJ">
+                        <barButtonItem key="rightBarButtonItem" title="완료" style="done" id="FhO-1f-blr">
+                            <color key="tintColor" name="AppDefaultColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="firstLineLabel" destination="MCe-p4-CY1" id="hZo-Ip-pZR"/>
                         <outlet property="resendButton" destination="MwF-Uf-dqU" id="fKJ-5M-7ra"/>
