@@ -32,6 +32,8 @@ class RestaurantInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.delegate = self
+        
         self.view.addSubview(customTableView)
         
         customTableView.snp.makeConstraints { make in
@@ -49,12 +51,6 @@ class RestaurantInfoViewController: UIViewController {
         restaurantInfoVM.setMallID(mallID: mallID)
         
         restaurantInfoVM.fetch()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("👌 RestaurantInfoViewController - viewWillAppear")
-//        restaurantInfoVM.refreshViewModel()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -463,5 +459,12 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didFetchMenu() {
         print("didFetchMenu reloadData")
         customTableView.tableView.reloadData()
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+extension RestaurantInfoViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        restaurantInfoVM.refreshViewModel()
     }
 }
