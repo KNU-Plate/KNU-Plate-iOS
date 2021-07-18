@@ -21,6 +21,7 @@ PODS:
   - SPIndicator (1.1.4)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
+  - TextFieldEffects (1.6.0)
   - Then (2.7.0)
   - ViewAnimator (3.0.2)
 
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - SPIndicator
   - SwiftKeychainWrapper
   - SwiftyJSON (~> 4.0)
+  - TextFieldEffects
   - Then
   - ViewAnimator
 
@@ -59,6 +61,7 @@ SPEC REPOS:
     - SPIndicator
     - SwiftKeychainWrapper
     - SwiftyJSON
+    - TextFieldEffects
     - Then
     - ViewAnimator
 
@@ -77,9 +80,10 @@ SPEC CHECKSUMS:
   SPIndicator: b702acd5374e2ca51e31660f454b6506402d7049
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: c776e14bdcd9fa3e9ed5dd51224c7ef56c8cd88d
+PODFILE CHECKSUM: 750411488afaa101211058fbf731b4bf2d2470d6
 
 COCOAPODS: 1.10.1

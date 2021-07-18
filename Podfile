@@ -23,5 +23,6 @@ target 'KNU_Plate_iOS' do
   pod 'PanModal'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/SDWebImage"
+  pod 'TextFieldEffects'
 
 end

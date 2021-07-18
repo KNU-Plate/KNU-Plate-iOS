@@ -75,7 +75,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYd-U1-2ur" userLabel="Add Button">
-                                                                    <rect key="frame" x="5" y="5" width="97" height="88"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="98"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="80" id="1iy-em-I7g"/>
                                                                         <constraint firstAttribute="height" constant="80" id="Ch3-La-7Nw"/>
@@ -88,10 +88,10 @@
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="rYd-U1-2ur" firstAttribute="top" secondItem="uhv-LJ-ebo" secondAttribute="top" constant="5" id="4lE-gi-GcO"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rYd-U1-2ur" secondAttribute="trailing" constant="5" id="RcC-1e-3sx"/>
-                                                                <constraint firstItem="rYd-U1-2ur" firstAttribute="leading" secondItem="uhv-LJ-ebo" secondAttribute="leading" constant="5" id="VBV-dc-xg6"/>
-                                                                <constraint firstAttribute="bottom" secondItem="rYd-U1-2ur" secondAttribute="bottom" constant="5" id="nbI-9i-Eqw"/>
+                                                                <constraint firstItem="rYd-U1-2ur" firstAttribute="top" secondItem="uhv-LJ-ebo" secondAttribute="top" id="4lE-gi-GcO"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rYd-U1-2ur" secondAttribute="trailing" id="RcC-1e-3sx"/>
+                                                                <constraint firstItem="rYd-U1-2ur" firstAttribute="leading" secondItem="uhv-LJ-ebo" secondAttribute="leading" id="VBV-dc-xg6"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rYd-U1-2ur" secondAttribute="bottom" id="nbI-9i-Eqw"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <size key="customSize" width="107" height="98"/>
@@ -805,7 +805,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBk-g4-AKJ" userLabel="Map View" customClass="MTMapView">
-                                <rect key="frame" x="0.0" y="71" width="375" height="596"/>
+                                <rect key="frame" x="0.0" y="51" width="375" height="616"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-b6-h2U" userLabel="Next Button">
@@ -819,14 +819,14 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8Mz-6L-egV">
-                                <rect key="frame" x="0.0" y="20" width="375" height="51"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hgJ-n8-Bee"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Mz-6L-egV" firstAttribute="top" secondItem="hgJ-n8-Bee" secondAttribute="top" constant="20" id="19l-ur-J39"/>
+                            <constraint firstItem="8Mz-6L-egV" firstAttribute="top" secondItem="hgJ-n8-Bee" secondAttribute="top" id="19l-ur-J39"/>
                             <constraint firstItem="hgJ-n8-Bee" firstAttribute="trailing" secondItem="aqN-b6-h2U" secondAttribute="trailing" constant="20" id="6UF-OY-ozb"/>
                             <constraint firstAttribute="bottomMargin" secondItem="aqN-b6-h2U" secondAttribute="bottom" constant="20" id="7kv-Ow-PEP"/>
                             <constraint firstAttribute="bottom" secondItem="TBk-g4-AKJ" secondAttribute="bottom" id="M2i-8u-G8c"/>
