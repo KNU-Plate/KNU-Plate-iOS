@@ -38,7 +38,6 @@ class RestaurantCollectionViewController: UIViewController {
         
         restaurantListVM.delegate = self
         setupCollectionView()
-        setCollectionViewLayout()
         setFloatingButton()
         
         guard let gate = gate else { return }
@@ -58,9 +57,7 @@ extension RestaurantCollectionViewController {
         self.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = .white
         self.collectionView.alwaysBounceVertical = true
-    }
-    
-    func setCollectionViewLayout() {
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
