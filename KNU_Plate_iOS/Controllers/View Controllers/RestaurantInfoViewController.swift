@@ -3,6 +3,10 @@ import SnapKit
 import SDWebImage
 import SnackBar_swift
 
+protocol NewReviewDelegate {
+    func didCompleteReviewUpload()
+}
+
 class RestaurantInfoViewController: UIViewController {
 
     private lazy var customTableView = RestaurantTableView(frame: self.view.frame)
@@ -32,8 +36,6 @@ class RestaurantInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.delegate = self
-        
         self.view.addSubview(customTableView)
         
         customTableView.snp.makeConstraints { make in
@@ -60,6 +62,7 @@ class RestaurantInfoViewController: UIViewController {
                 print("RestaurantInfoViewController - prepare(for segue:) - mallID is empty")
                 return
             }
+            nextVC.delegate = self
             nextVC.configure(mallID: mallID, existingMenus: restaurantInfoVM.menusForNextVC)
         }
     }
@@ -462,9 +465,9 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
 }
 
-// MARK: - UINavigationControllerDelegate
-extension RestaurantInfoViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+// MARK: - NewReviewDelegate
+extension RestaurantInfoViewController: NewReviewDelegate {
+    func didCompleteReviewUpload() {
         restaurantInfoVM.refreshViewModel()
     }
 }
