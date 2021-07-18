@@ -15,7 +15,7 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var reviewTextView: UITextView!
     
     var reviewDetails = ReviewDetail()
-    var reviewImageFiles = [Files]()
+    private var reviewImageFiles = [Files]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ReviewDetailViewController: UIViewController {
     // 객체 생성 전 초기화
     func configure(with model: ReviewDetail) {
         
-        reviewDetails.profileImage = model.profileImage
+        reviewDetails.profileImageURL = model.profileImageURL
         reviewDetails.nickname = model.nickname
         reviewDetails.medal = model.medal
         reviewDetails.rating = model.rating
@@ -37,7 +37,8 @@ class ReviewDetailViewController: UIViewController {
     // Review Cell
     func initialize() {
          
-        userProfileImageView.image = reviewDetails.profileImage
+        userProfileImageView.sd_setImage(with: reviewDetails.profileImageURL,
+                                         placeholderImage: UIImage(named: Constants.Images.defaultProfileImage))
         userNicknameLabel.text = reviewDetails.nickname
         userMedalImageView.image = setUserMedalImage(medalRank: reviewDetails.medal)
         rating.setStarsRating(rating: Int(exactly: reviewDetails.rating)!)

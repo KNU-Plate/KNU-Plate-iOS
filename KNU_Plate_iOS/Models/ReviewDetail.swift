@@ -4,7 +4,7 @@ import Foundation
 
 struct ReviewDetail {
     
-    var profileImage: UIImage = UIImage()
+    var profileImageURL: URL?
     var nickname: String = ""
     var medal: Int = 3
     var reviewImageFiles: [Files]?
