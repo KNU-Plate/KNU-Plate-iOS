@@ -92,7 +92,6 @@
 		7C3517CF267C63D100BD9A88 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517CE267C63D100BD9A88 /* ReportManager.swift */; };
 		7C3517D1267C76F000BD9A88 /* ReportReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */; };
 		7C38F22126723A8E007D8313 /* MenuRecommendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F22026723A8D007D8313 /* MenuRecommendationViewModel.swift */; };
-		7C38F22326723FA8007D8313 /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38F22226723FA8007D8313 /* MenuListViewModel.swift */; };
 		7C44321D261D7D1500A0D83F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44321C261D7D1500A0D83F /* UserManager.swift */; };
 		7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */; };
 		7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */; };
@@ -130,6 +129,7 @@
 		7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */; };
 		7CBA9A3826A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */; };
 		7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */; };
+		7CBA9A3C26A179C1002F5BCB /* UserRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */; };
 		7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
 		7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */; };
 		7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */; };
@@ -247,7 +247,6 @@
 		7C3517CE267C63D100BD9A88 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReviewViewController.swift; sourceTree = "<group>"; };
 		7C38F22026723A8D007D8313 /* MenuRecommendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationViewModel.swift; sourceTree = "<group>"; };
-		7C38F22226723FA8007D8313 /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 		7C44321C261D7D1500A0D83F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7C443228261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -285,6 +284,7 @@
 		7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuRecommendationTableViewCell.xib; sourceTree = "<group>"; };
+		7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserRegister.storyboard; sourceTree = "<group>"; };
 		7CBE745126208366002E1FF7 /* UploadMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadMenuModel.swift; sourceTree = "<group>"; };
 		7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailFromKakao.swift; sourceTree = "<group>"; };
 		7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
@@ -534,6 +534,14 @@
 			path = MenuModel;
 			sourceTree = "<group>";
 		};
+		7CBA9A3A26A179A1002F5BCB /* Login+Register */ = {
+			isa = PBXGroup;
+			children = (
+				7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */,
+			);
+			path = "Login+Register";
+			sourceTree = "<group>";
+		};
 		7CC96309263052EA00AA71E1 /* ResponseModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,7 +667,6 @@
 				7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */,
 				7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */,
 				3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */,
-				7C38F22226723FA8007D8313 /* MenuListViewModel.swift */,
 				3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */,
 				3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */,
 			);
@@ -686,6 +693,7 @@
 			children = (
 				3C1F4537260B88B3008E8AA7 /* Main.storyboard */,
 				7CD74B8C260B38C000D05B84 /* Kevin.storyboard */,
+				7CBA9A3A26A179A1002F5BCB /* Login+Register */,
 				7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */,
 			);
 			path = "View (Storyboard)";
@@ -789,6 +797,7 @@
 				7C1F78DE2632DE3500C7B41D /* map_pin_custom.png in Resources */,
 				7C1F78E92632DE3500C7B41D /* map_pin@3x.png in Resources */,
 				7C1F78E12632DE3500C7B41D /* detail_button.png in Resources */,
+				7CBA9A3C26A179C1002F5BCB /* UserRegister.storyboard in Resources */,
 				7C1F78F32632DE3500C7B41D /* map_present.png in Resources */,
 				7C1F78E72632DE3500C7B41D /* map_pin_red@3x.png in Resources */,
 				7C1F78E02632DE3500C7B41D /* map_pinup.png in Resources */,
@@ -933,7 +942,6 @@
 				3CA704DE268DA35200943DC1 /* RestaurantListResponseModel.swift in Sources */,
 				3C3898B126429868007E26DF /* RestaurantView.swift in Sources */,
 				7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */,
-				7C38F22326723FA8007D8313 /* MenuListViewModel.swift in Sources */,
 				7C3517D1267C76F000BD9A88 /* ReportReviewViewController.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
