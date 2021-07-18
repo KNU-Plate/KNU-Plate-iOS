@@ -1,9 +1,10 @@
 import UIKit
+import SDWebImage
 
 class RestaurantImageViewController: UIViewController {
     
     private let reuseIdentifier = "RestaurantImageCell"
-    private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
+    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     private let itemsPerRow: CGFloat = 2
     
     var mallID: Int?
@@ -17,10 +18,13 @@ class RestaurantImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addSubview(collectionView)
 
         setupCollectionView()
         restaurantImageVM.delegate = self
         restaurantImageVM.setMallID(mallID)
+        restaurantImageVM.fetchImages()
     }
 }
 
@@ -31,6 +35,10 @@ extension RestaurantImageViewController {
         collectionView.register(RestaurantImageCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
+        
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 
@@ -107,6 +115,7 @@ extension RestaurantImageViewController: UICollectionViewDelegate {
 //MARK: - RestaurantImageViewModelDelegate
 extension RestaurantImageViewController: RestaurantImageViewModelDelegate {
     func didFetchImage() {
+        print("didFetchImage count: \(restaurantImageVM.numberOfImages)")
         collectionView.reloadData()
     }
 }
@@ -117,7 +126,7 @@ extension RestaurantImageViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        return CGSize(width: widthPerItem, height: widthPerItem * Constants.heightPerWidthRestaurantCell)
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

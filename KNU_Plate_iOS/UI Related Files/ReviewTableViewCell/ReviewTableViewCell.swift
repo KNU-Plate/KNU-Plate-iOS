@@ -74,24 +74,5 @@ class ReviewTableViewCell: UITableViewCell {
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
     }
-    
-//    // ReviewDetailVC 로 넘아갈때 필요한 정보 전달용 함수
-//    func getReviewDetails() -> ReviewDetail {
-//
-//        let profileImage = userProfileImageView.image ?? UIImage(named: Constants.Images.defaultProfileImage)!
-//        let nickname = viewModel.userNickname
-//        let medal = viewModel.medal
-//        let rating = viewModel.rating
-//        let review = viewModel.review
-//        let reviewImageFiles = viewModel.reviewImagesFileFolder?.files
-//
-//        let reviewDetails = ReviewDetail(profileImage: profileImage,
-//                                         nickname: nickname,
-//                                         medal: medal,
-//                                         reviewImageFiles: reviewImageFiles,
-//                                         rating: rating,
-//                                         review: review)
-//        return reviewDetails
-//    }
 }
 
