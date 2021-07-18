@@ -113,8 +113,9 @@ class NewReviewViewController: UIViewController {
                         self.showSimpleBottomAlert(with: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥")
 
                     }
+                    dismissProgressBar()
                 }
-                
+
             }
         }
     }
@@ -214,6 +215,10 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
         dismissProgressBar()
         print("NEW REVIEW UPLOAD COMPLETE")
         showSimpleBottomAlert(with: "리뷰 업로드 성공! 🎉")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func failedUploadingReview(with error: NetworkError) {

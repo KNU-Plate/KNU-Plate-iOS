@@ -170,42 +170,7 @@ class RestaurantManager {
             }
         }
     }
-    
-    //MARK: - 매장 상세보기 정보 불러오기
-    func fetchRestaurantDetailInfo(of mallID: Int,
-                                   completion: @escaping ((Result<RestaurantDetailInfoResponseModel, NetworkError>) -> Void)) {
-        
-        let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
-        let requestURL = "\(fetchDetailInfoRequestURL)/\(mallID)"
-        
-        AF.request(requestURL,
-                   method: .get,
-                   headers: headers,
-                   interceptor: interceptor)
-            .validate()
-            .responseJSON { response in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                case 200:
-                    
-                    do {
-                        let decodedData = try JSONDecoder().decode(RestaurantDetailInfoResponseModel.self, from: response.data!)
-                        completion(.success(decodedData))
-                        
-                    } catch {
-                        print("RestaurantManager - fetchRestaurantDetailInfo() error while decoding response model")
-                        completion(.failure(.internalError))
-                    }
-                default:
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    print("RestaurantManager - fetchRestaurantDetailInfo() error : \(error.errorDescription) and statusCode: \(statusCode)")
-                    completion(.failure(error))
-                }
-            }
-    }
-    
+
     //MARK: - 특정 매장 리뷰 목록 불러오기
     
     func fetchReviewList(with model: FetchReviewListRequestDTO,
