@@ -137,6 +137,12 @@
 		7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */; };
 		7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */; };
 		7CC96307263051CC00AA71E1 /* RegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */; };
+		7CCDB1F526A3EAC50092F28D /* IDInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */; };
+		7CCDB1F726A3F0AA0092F28D /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */; };
+		7CCDB1F926A3FAFE0092F28D /* NicknameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */; };
+		7CCDB1FB26A3FB090092F28D /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */; };
+		7CCDB1FD26A401400092F28D /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */; };
+		7CCDB1FF26A4044F0092F28D /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */; };
@@ -294,6 +300,12 @@
 		7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
 		7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantManager.swift; sourceTree = "<group>"; };
 		7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponseModel.swift; sourceTree = "<group>"; };
+		7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewController.swift; sourceTree = "<group>"; };
+		7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
+		7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInputViewController.swift; sourceTree = "<group>"; };
+		7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
+		7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
+		7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantRequestDTO.swift; sourceTree = "<group>"; };
@@ -354,6 +366,7 @@
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
 				7C6D2534268DAD950030F9A1 /* NoticeTableViewCell.swift */,
+				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,
 			);
 			path = "UI Related Files";
 			sourceTree = "<group>";
@@ -563,9 +576,22 @@
 			path = ResponseModel;
 			sourceTree = "<group>";
 		};
+		7CCDB1F326A3EA900092F28D /* User Register */ = {
+			isa = PBXGroup;
+			children = (
+				7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */,
+				7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */,
+				7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */,
+				7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */,
+				7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */,
+			);
+			path = "User Register";
+			sourceTree = "<group>";
+		};
 		7CE10470260C446500E18C00 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7CCDB1F326A3EA900092F28D /* User Register */,
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */,
@@ -925,9 +951,11 @@
 				7CB8DF65264D37090001CC6D /* UIViewController Extension.swift in Sources */,
 				7C1F77892632A9B800C7B41D /* SearchRestaurantViewController.swift in Sources */,
 				3C8AB204268A3C1700D51AC8 /* RestaurantTabBarView.swift in Sources */,
+				7CCDB1FF26A4044F0092F28D /* EmailVerificationViewController.swift in Sources */,
 				7C16DF26262183C900AA8239 /* RegisterRequestDTO.swift in Sources */,
 				3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */,
 				7CA6621726400698000E0B7A /* Test.swift in Sources */,
+				7CCDB1FB26A3FB090092F28D /* PasswordInputViewController.swift in Sources */,
 				7C6D252E268D93AB0030F9A1 /* NoticeViewController.swift in Sources */,
 				7C1F774A26314A1E00C7B41D /* LoginResponseModel.swift in Sources */,
 				7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */,
@@ -936,6 +964,7 @@
 				7C5EDD4F26427A8700B79178 /* FinalMenuModel.swift in Sources */,
 				7CB8DF67264D3AB40001CC6D /* FileManager.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
+				7CCDB1F726A3F0AA0092F28D /* UILabel Extension.swift in Sources */,
 				7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */,
 				7C6D2535268DAD950030F9A1 /* NoticeTableViewCell.swift in Sources */,
 				3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */,
@@ -953,14 +982,17 @@
 				7C3517D1267C76F000BD9A88 /* ReportReviewViewController.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
+				7CCDB1F926A3FAFE0092F28D /* NicknameInputViewController.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */,
 				7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */,
 				7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */,
 				3C9B2BD426143C9900CC010F /* RatingStackView.swift in Sources */,
 				7C99FB9E2648FFD60063C967 /* FetchReviewListRequestDTO.swift in Sources */,
 				7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */,
+				7CCDB1F526A3EAC50092F28D /* IDInputViewController.swift in Sources */,
 				3C8AB202268A376500D51AC8 /* RestaurantTableView.swift in Sources */,
 				3CB6F97F26957E9F001324BB /* RestaurantInfoViewModel.swift in Sources */,
+				7CCDB1FD26A401400092F28D /* EmailInputViewController.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 				7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */,
 				7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */,
