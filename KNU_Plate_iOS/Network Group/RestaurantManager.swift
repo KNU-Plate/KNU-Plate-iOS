@@ -12,15 +12,16 @@ class RestaurantManager {
     let interceptor = Interceptor()
     
     //MARK: - API Request URLs
-    let uploadNewRestaurantRequestURL   = "\(Constants.API_BASE_URL)mall"
-    let uploadNewMenuRequestURL         = "\(Constants.API_BASE_URL)menu"
-    let uploadNewReviewRequestURL       = "\(Constants.API_BASE_URL)review"
-    let fetchReviewListRequestURL       = "\(Constants.API_BASE_URL)review"
-    let fetchDetailInfoRequestURL       = "\(Constants.API_BASE_URL)mall"
-    let markFavoriteRequestURL          = "\(Constants.API_BASE_URL)mall/recommend/"
-    let fetchRestaurantListRequestURL   = "\(Constants.API_BASE_URL)mall"
-    let fetchRestaurantInfoRequestURL   = "\(Constants.API_BASE_URL)mall/"
-    let fetchRestaurantImagesRequestURL = "\(Constants.API_BASE_URL)mall/review-images"
+    let uploadNewRestaurantRequestURL               = "\(Constants.API_BASE_URL)mall"
+    let uploadNewMenuRequestURL                     = "\(Constants.API_BASE_URL)menu"
+    let uploadNewReviewRequestURL                   = "\(Constants.API_BASE_URL)review"
+    let fetchReviewListRequestURL                   = "\(Constants.API_BASE_URL)review"
+    let fetchDetailInfoRequestURL                   = "\(Constants.API_BASE_URL)mall"
+    let markFavoriteRequestURL                      = "\(Constants.API_BASE_URL)mall/recommend/"
+    let fetchRestaurantListRequestURL               = "\(Constants.API_BASE_URL)mall"
+    let fetchRestaurantInfoRequestURL               = "\(Constants.API_BASE_URL)mall/"
+    let fetchRestaurantImagesRequestURL             = "\(Constants.API_BASE_URL)mall/review-images"
+    let fetchFavoriteRestaurantListRequestURL       = "\(Constants.API_BASE_URL)mall/my-recommend"
     
     private init() {}
     
@@ -170,7 +171,7 @@ class RestaurantManager {
             }
         }
     }
-
+    
     //MARK: - 특정 매장 리뷰 목록 불러오기
     
     func fetchReviewList(with model: FetchReviewListRequestDTO,
@@ -182,6 +183,7 @@ class RestaurantManager {
                    headers: model.headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     do {
@@ -208,30 +210,34 @@ class RestaurantManager {
     
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
-                      httpMethod: HTTPMethod,
+                      markMyFavorite: Bool,
                       completion: @escaping ((Result<Bool,NetworkError>) -> Void)) {
         
-        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
+        var headers: HTTPHeaders = [:]
+        if User.shared.accessToken != "Invalid AccessToken" {
+            headers["Authorization"] = User.shared.accessToken
+        }
+        let httpMethod: HTTPMethod = markMyFavorite ? .post : .delete
         
         AF.request(markFavoriteRequestURL + String(mallID),
                    method: httpMethod,
-                   headers: headers,
-                   interceptor: interceptor)
+                   headers: headers)
             .validate()
             .responseJSON { response in
                 
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
-                case 200:
-                    print("RESTAURANT MANAGER - SUCCESS IN MARKING FAVORITE")
+                switch response.result {
+                case .success(_):
+                    print("RESTAURANT MANAGER - SUCCESS IN \(markMyFavorite ? "Marking":"Unmarking") FAVORITE")
                     completion(.success(true))
-            
-                default:
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    print("RESTAURANT MANAGER - mark favorite error: \(error.errorDescription)")
-                    completion(.failure(error))
-                  
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
                 }
             }
     }
@@ -245,6 +251,46 @@ class RestaurantManager {
                    headers: model.headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let decodedData = try JSONDecoder().decode([RestaurantListResponseModel].self, from: dataJSON)
+                        completion(.success(decodedData))
+                    } catch {
+                        print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
+                    }
+                case .failure(let error):
+                    print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 RESTAURANT MANAGER - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("RESTAURANT MANAGER - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
+                }
+            }
+    }
+    
+    // MARK: - 좋아하는 매장 목록 조회
+    func fetchFavoriteRestaurantList(cursor: Int?,
+                                     completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)) {
+        var headers: HTTPHeaders = [:]
+        var parameters: Parameters = [:]
+        if User.shared.accessToken != "Invalid AccessToken" {
+            headers["Authorization"] = User.shared.accessToken
+        }
+        parameters["cursor"] = cursor
+        
+        AF.request(fetchFavoriteRestaurantListRequestURL,
+                   method: .get,
+                   parameters: parameters,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     do {
@@ -271,14 +317,19 @@ class RestaurantManager {
     func fetchRestaurantInfo(of mallID: Int,
                              completion: @escaping ((Result<RestaurantInfoResponseModel, NetworkError>) -> Void)) {
         let requestURL = fetchRestaurantInfoRequestURL + String(mallID)
-        let headers: HTTPHeaders = [
-            "accept": "application/json"
+        var headers: HTTPHeaders = [
+            "accept":"application/json",
         ]
+        if User.shared.accessToken != "Invalid AccessToken" {
+            headers["Authorization"] = User.shared.accessToken
+        }
+        
         AF.request(requestURL,
                    method: .get,
                    headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     do {
@@ -303,19 +354,19 @@ class RestaurantManager {
     
     // MARK: - 매장 상세보기의 이미지 조회
     func fetchRestaurantImages(of mallID: Int,
+                               cursor: Int? = nil,
                                completion: @escaping ((Result<[RestaurantImageResponseModel], NetworkError>) -> Void)) {
-        let parameters: Parameters = [
-            "mall_id":String(mallID)
-        ]
-        let headers: HTTPHeaders = [
-            "accept": "application/json"
-        ]
+        var parameters: Parameters = ["mall_id":String(mallID)]
+        let headers: HTTPHeaders = ["accept": "application/json"]
+        parameters["cursor"] = cursor
+        
         AF.request(fetchRestaurantImagesRequestURL,
                    method: .get,
                    parameters: parameters,
                    headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     do {

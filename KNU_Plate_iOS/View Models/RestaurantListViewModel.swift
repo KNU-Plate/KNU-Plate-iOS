@@ -17,6 +17,14 @@ extension RestaurantListViewModel {
         return self.restaurants.count
     }
     
+    func refreshFavoriteRestaurantList() {
+        self.restaurants.removeAll(keepingCapacity: true)
+        self.hasMore = true
+        self.isFetchingData = false
+        self.lastMallID = nil
+        self.fetchFavoriteRestaurantList()
+    }
+    
     func restaurantAtIndex(_ index: Int) -> RestaurantViewModel {
         let restaurant = self.restaurants[index]
         return RestaurantViewModel(restaurant)
@@ -28,6 +36,26 @@ extension RestaurantListViewModel {
         isFetchingData = true
         let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
         RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let self = self else { return }
+                if data.isEmpty {
+                    self.hasMore = false
+                    return
+                }
+                self.restaurants.append(contentsOf: data)
+                self.lastMallID = data.last?.mallID
+                self.isFetchingData = false
+                self.delegate?.didFetchRestaurantList()
+            case .failure:
+                return
+            }
+        }
+    }
+    
+    func fetchFavoriteRestaurantList() {
+        isFetchingData = true
+        RestaurantManager.shared.fetchFavoriteRestaurantList(cursor: lastMallID) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let self = self else { return }

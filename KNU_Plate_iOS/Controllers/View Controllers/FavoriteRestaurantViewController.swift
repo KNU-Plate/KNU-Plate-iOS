@@ -3,16 +3,13 @@ import SnapKit
 import SDWebImage
 import Then
 
-/// Shows restaurant list according to gate
-class RestaurantCollectionViewController: UIViewController {
+class FavoriteRestaurantViewController: UIViewController {
     
-    private let reuseIdentifier = "Cell"
+    private let reuseIdentifier = "FavoriteCell"
     private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 2
     
     private let restaurantListVM = RestaurantListViewModel()
-    
-    var gate: Gate?
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -20,38 +17,31 @@ class RestaurantCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    let floatingButton = UIButton().then {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 30))
-        $0.setImage(UIImage(systemName: "plus", withConfiguration: configuration), for: .normal)
-        $0.addBounceReaction()
-        $0.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
-        $0.tintColor = .white
-    }
-
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("👌 RestaurantCollectionViewController viewDidLoad")
-        
         self.view.addSubview(collectionView)
-        self.view.addSubview(floatingButton)
         
         restaurantListVM.delegate = self
+        self.navigationItem.title = "좋아하는 매장"
+        self.navigationController?.navigationBar.tintColor = UIColor.black // set backbutton color
+        
         setupCollectionView()
         setCollectionViewLayout()
-        setFloatingButton()
         
-        guard let gate = gate else { return }
-        restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+//        restaurantListVM.fetchFavoriteRestaurantList() // viewWillAppear마다 refresh를해주므로 일단은 필요 없음
     }
     
-    deinit {
-        print("👌 RestaurantCollectionViewController deinit")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("👌 FavoriteRestaurantViewController - viewWillAppear")
+        restaurantListVM.refreshFavoriteRestaurantList()
     }
 }
 
 //MARK: - Basic Set Up
-extension RestaurantCollectionViewController {
+extension FavoriteRestaurantViewController {
     func setupCollectionView() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -65,28 +55,17 @@ extension RestaurantCollectionViewController {
             make.edges.equalToSuperview()
         }
     }
-    
-    func setFloatingButton() {
-        let safeArea = self.view.safeAreaLayoutGuide
-        let buttonHeight: CGFloat = 60
-        
-        floatingButton.snp.makeConstraints { make in
-            make.right.bottom.equalTo(safeArea).inset(10)
-            make.height.width.equalTo(buttonHeight)
-        }
-        floatingButton.layer.cornerRadius = buttonHeight/2
-        floatingButton.addTarget(self, action: #selector(floatingButtonWasTapped), for: .touchUpInside)
-    }
-    
-    @objc func floatingButtonWasTapped(_ sender: UIButton) {
-        let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
-        let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.searchRestaurantViewController)
-        self.navigationController?.pushViewController(nextVC, animated: true)
+}
+
+//MARK: - RestaurantListViewModelDelegate
+extension FavoriteRestaurantViewController: RestaurantListViewModelDelegate {
+    func didFetchRestaurantList() {
+        collectionView.reloadData()
     }
 }
 
 //MARK: - UICollectionViewDataSource
-extension RestaurantCollectionViewController: UICollectionViewDataSource {
+extension FavoriteRestaurantViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.restaurantListVM.numberOfRestaurants
     }
@@ -109,15 +88,8 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
     }
 }
 
-//MARK: - RestaurantListViewModelDelegate
-extension RestaurantCollectionViewController: RestaurantListViewModelDelegate {
-    func didFetchRestaurantList() {
-        collectionView.reloadData()
-    }
-}
-
 //MARK: - UICollectionViewDelegate
-extension RestaurantCollectionViewController: UICollectionViewDelegate {
+extension FavoriteRestaurantViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected, indexPath: \(indexPath.item)")
@@ -171,14 +143,13 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
         
         if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantListVM.hasMore && !restaurantListVM.isFetchingData {
             // fetch more
-            guard let gate = gate else { return }
-            restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+            restaurantListVM.fetchFavoriteRestaurantList()
         }
     }
 }
 
 //MARK: - Collection View Flow Layout Delegate
-extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension FavoriteRestaurantViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
