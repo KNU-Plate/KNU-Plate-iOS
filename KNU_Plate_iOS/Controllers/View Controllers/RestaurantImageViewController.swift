@@ -15,7 +15,6 @@ class RestaurantImageViewController: UIViewController {
         return collectionView
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
