@@ -7,7 +7,7 @@ class EmailInputViewController: UIViewController {
     @IBOutlet var secondLineLabel: UILabel!
     @IBOutlet var thirdLineLabel: UILabel!
     @IBOutlet var emailTextField: HoshiTextField!
-    
+    @IBOutlet var errorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,14 +15,38 @@ class EmailInputViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedNext(_ sender: UIBarButtonItem) {
+        
+        if !checkIfValidEmail() { return }
+        performSegue(withIdentifier: Constants.SegueIdentifier.goToEmailVerificationVC, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        UserRegisterValues.shared.registerEmail = emailTextField.text!
+    }
+}
+
+//MARK: - UI Configuration & Initialization
+
+extension EmailInputViewController {
     
     func initialize() {
         
         initializeLabels()
+        initializeTextFields()
+    }
+    
+    func initializeTextFields() {
+        
+        emailTextField.addTarget(self,
+                              action: #selector(textFieldDidChange(_:)),
+                              for: .editingChanged)
     }
     
     func initializeLabels() {
         
+        errorLabel.isHidden = true
         
         firstLineLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         firstLineLabel.textColor = .gray
@@ -40,4 +64,48 @@ class EmailInputViewController: UIViewController {
         thirdLineLabel.changeTextAttributeColor(fullText: thirdLineLabel.text!, changeText: "크슐랭가이드")
     }
 
+}
+
+//MARK: - User Input Validation
+
+extension EmailInputViewController {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        dismissErrorMessage()
+        
+        guard let text = emailTextField.text else { return }
+    }
+    
+    func checkIfValidEmail() -> Bool {
+        
+        guard let email = emailTextField.text else {
+            showErrorMessage(message: "빈 칸이 없는지 확인해 주세요. 🤔")
+            return false
+        }
+        
+        guard email.contains("@knu.ac.kr") else {
+            showErrorMessage(message: "경북대학교 이메일이 맞는지 확인해 주세요. 🧐")
+            return false
+        }
+        
+        guard email.count > 11 else {
+            showErrorMessage(message: "유효한 이메일인지 확인해 주세요. 👀")
+            return false
+        }
+        return true
+    }
+    
+    func dismissErrorMessage() {
+        errorLabel.isHidden = true
+    }
+    
+    func showErrorMessage(message: String) {
+        
+        errorLabel.isHidden = false
+        errorLabel.text = message
+        errorLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        errorLabel.textColor = UIColor(named: Constants.Color.appDefaultColor)
+        
+    }
 }

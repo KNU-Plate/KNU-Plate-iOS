@@ -68,8 +68,7 @@ class ChangeNicknameViewController: UIViewController {
         let requestURL = UserManager.shared.checkDisplayNameDuplicateURL
         let checkDuplicateModel = CheckDuplicateRequestDTO(displayName: nickname!)
         
-        UserManager.shared.checkDuplication(with: checkDuplicateModel,
-                                            requestURL: requestURL) { [weak self] result in
+        UserManager.shared.checkDuplication(requestURL: requestURL, model: checkDuplicateModel) { [weak self] result in
             
             guard let self = self else { return }
             

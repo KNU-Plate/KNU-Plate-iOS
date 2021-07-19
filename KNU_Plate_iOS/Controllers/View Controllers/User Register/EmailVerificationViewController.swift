@@ -8,6 +8,10 @@ class EmailVerificationViewController: UIViewController {
     @IBOutlet var verificationCodeTextField: HoshiTextField!
     @IBOutlet var resendButton: UIButton!
     
+    var id: String = ""
+    var nickname: String = ""
+    var password: String = ""
+    var email: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

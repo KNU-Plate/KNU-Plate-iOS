@@ -216,7 +216,7 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
         print("NEW REVIEW UPLOAD COMPLETE")
         showSimpleBottomAlert(with: "리뷰 업로드 성공! 🎉")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             self.navigationController?.popViewController(animated: true)
         }
     }

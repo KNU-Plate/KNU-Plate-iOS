@@ -78,6 +78,14 @@ struct Constants {
     
     struct SegueIdentifier {
         
+        // Register
+        static let goToNicknameVC               = "goToNicknameVC"
+        static let goToPasswordVC               = "goToPasswordVC"
+        static let goToEmailVC                  = "goToEmailVC"
+        static let goToEmailVerificationVC      = "goToEmailVerificationVC"
+        
+        
+        
         static let goToNewRestaurantVC          = "goToNewRestaurantVC"
         static let goSeeDetailReview            = "goSeeDetailReview"
         static let goToSendMessage              = "goToSendMessage"

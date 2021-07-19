@@ -166,33 +166,29 @@ class UserManager {
     }
     
     //MARK: - 아이디 or 닉네임 중복 체크
-    func checkDuplication(with model: CheckDuplicateRequestDTO,
-                          requestURL: String,
+    func checkDuplication(requestURL: String,
+                          model: CheckDuplicateRequestDTO,
                           completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(requestURL,
                    method: .get,
                    parameters: model.parameters,
                    encoding: URLEncoding.queryString,
-                   headers: model.headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
+                   headers: model.headers)
+        .responseJSON { (response) in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
                 
                 case 200:
                     completion(.success(true))
-                    
                 case 400:
-                    // 중복
+                    // 중복일 경우 아래 수행
                     completion(.success(false))
-                    
                 default:
-                    
                     let error = NetworkError.returnError(statusCode: statusCode)
-                    print("✏️ UserManager - 이미 존재하는 닉네임: \(error.errorDescription)")
+                    print("✏️ UserManager - checkDuplication error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }

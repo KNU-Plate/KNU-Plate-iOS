@@ -143,6 +143,7 @@
 		7CCDB1FB26A3FB090092F28D /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */; };
 		7CCDB1FD26A401400092F28D /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */; };
 		7CCDB1FF26A4044F0092F28D /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */; };
+		7CCDB20126A5390B0092F28D /* UserRegisterValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */; };
@@ -306,6 +307,7 @@
 		7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
 		7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
 		7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterValues.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantRequestDTO.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */,
+				7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */,
 			);
 			path = "Login+Register";
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				3C1A95DE26A13EB7001966F9 /* MyReviewListViewModel.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
+				7CCDB20126A5390B0092F28D /* UserRegisterValues.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
 				7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */,
 				3CBFB587269815EC00E7EB30 /* RestaurantImageResponseModel.swift in Sources */,
@@ -1138,7 +1142,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1168,7 +1172,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Input View Controller-->
+        <!--ID Input View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" userLabel="ID Input View Controller" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,6 +58,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHi-AQ-dnD">
+                                <rect key="frame" x="20" y="314" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -65,10 +71,13 @@
                             <constraint firstItem="84U-uw-xhg" firstAttribute="top" secondItem="udR-sF-si9" secondAttribute="bottom" constant="30" id="0wW-BD-YsB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="84U-uw-xhg" secondAttribute="trailing" constant="150" id="AYJ-MQ-aAr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="udR-sF-si9" secondAttribute="trailing" constant="20" id="AeS-wT-B4q"/>
+                            <constraint firstItem="KHi-AQ-dnD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="DaT-8G-jnd"/>
                             <constraint firstItem="udR-sF-si9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="FSk-Xa-xh0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KHi-AQ-dnD" secondAttribute="trailing" constant="100" id="LaY-dq-5AP"/>
                             <constraint firstItem="udR-sF-si9" firstAttribute="top" secondItem="XN3-RF-YDm" secondAttribute="bottom" constant="10" id="OP9-P4-hW9"/>
                             <constraint firstItem="84U-uw-xhg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="PM3-Od-QKl"/>
                             <constraint firstItem="XN3-RF-YDm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ia0-tt-jxz"/>
+                            <constraint firstItem="KHi-AQ-dnD" firstAttribute="top" secondItem="84U-uw-xhg" secondAttribute="bottom" constant="20" id="jYg-T3-3Ay"/>
                             <constraint firstAttribute="trailing" secondItem="XN3-RF-YDm" secondAttribute="trailing" constant="20" id="jc7-PZ-sSV"/>
                             <constraint firstItem="XN3-RF-YDm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="mMC-rD-grc"/>
                         </constraints>
@@ -77,16 +86,18 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="6sQ-e6-T24">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="jhS-bd-saI" kind="show" id="zdk-mo-rpZ"/>
+                                <action selector="pressedNext:" destination="Y6W-OH-hqX" id="QbO-Pa-SCc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="KHi-AQ-dnD" id="XVt-nr-v7h"/>
                         <outlet property="firstLineLabel" destination="XN3-RF-YDm" id="1Uc-hJ-BgU"/>
                         <outlet property="idTextField" destination="84U-uw-xhg" id="cTj-ov-T0j"/>
                         <outlet property="secondLineLabel" destination="udR-sF-si9" id="qHG-XX-8s3"/>
                         <outletCollection property="labels" destination="XN3-RF-YDm" collectionClass="NSMutableArray" id="Jiy-By-vit"/>
                         <outletCollection property="labels" destination="udR-sF-si9" collectionClass="NSMutableArray" id="DKz-SB-fnM"/>
+                        <segue destination="jhS-bd-saI" kind="show" identifier="goToNicknameVC" id="BgE-GR-tRx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -147,6 +158,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5H-Et-ezW">
+                                <rect key="frame" x="20" y="358.5" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pqg-2G-smE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -155,7 +172,10 @@
                             <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="GRC-JV-FQl" secondAttribute="trailing" constant="150" id="3Ss-Ks-el8"/>
                             <constraint firstItem="GRC-JV-FQl" firstAttribute="top" secondItem="lkt-KI-Wxd" secondAttribute="bottom" constant="30" id="8ag-S7-ygo"/>
                             <constraint firstItem="LcR-o9-Te5" firstAttribute="top" secondItem="Pqg-2G-smE" secondAttribute="top" constant="60" id="Jaj-SP-pbg"/>
+                            <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="a5H-Et-ezW" secondAttribute="trailing" constant="100" id="RZt-l9-f8B"/>
+                            <constraint firstItem="a5H-Et-ezW" firstAttribute="top" secondItem="GRC-JV-FQl" secondAttribute="bottom" constant="20" id="S4h-QC-hz8"/>
                             <constraint firstItem="lkt-KI-Wxd" firstAttribute="top" secondItem="yml-g3-Cby" secondAttribute="bottom" constant="25" id="UIA-yi-bi3"/>
+                            <constraint firstItem="a5H-Et-ezW" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="Zgy-a3-dsB"/>
                             <constraint firstItem="GRC-JV-FQl" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="aNa-j7-dDB"/>
                             <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="yml-g3-Cby" secondAttribute="trailing" constant="20" id="fy5-9R-cp1"/>
                             <constraint firstItem="lkt-KI-Wxd" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="n3k-dc-Bwh"/>
@@ -169,17 +189,19 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="5Bw-a5-BSW">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="9zE-u7-nPB" kind="show" id="NVr-tW-Tqv"/>
+                                <action selector="pressedNext:" destination="jhS-bd-saI" id="lkL-Ee-5QU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="a5H-Et-ezW" id="vMM-H1-eNP"/>
                         <outlet property="firstLineLabel" destination="LcR-o9-Te5" id="uQa-9d-Kp7"/>
                         <outlet property="nicknameTextField" destination="GRC-JV-FQl" id="nKj-by-nkd"/>
                         <outlet property="secondLineLabel" destination="yml-g3-Cby" id="V43-XK-Fya"/>
                         <outlet property="thirdLineLabel" destination="lkt-KI-Wxd" id="RKV-lG-WYD"/>
                         <outletCollection property="labels" destination="LcR-o9-Te5" collectionClass="NSMutableArray" id="I2T-wt-QV7"/>
                         <outletCollection property="labels" destination="yml-g3-Cby" collectionClass="NSMutableArray" id="lls-fd-EvK"/>
+                        <segue destination="9zE-u7-nPB" kind="show" identifier="goToPasswordVC" id="tDk-XV-bKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2p-FN-rX5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -293,7 +315,7 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="Rne-cP-Ogg">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="dEr-u4-Ehi" kind="show" id="ivy-5d-S0x"/>
+                                <action selector="pressedNext:" destination="9zE-u7-nPB" id="hiN-FE-Pm0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -305,6 +327,7 @@
                         <outlet property="thirdLineLabel" destination="zTK-ld-Pwk" id="0U8-xa-mr4"/>
                         <outletCollection property="labels" destination="FZu-jw-Oo7" collectionClass="NSMutableArray" id="pPj-fB-FKX"/>
                         <outletCollection property="labels" destination="jLu-dV-2he" collectionClass="NSMutableArray" id="ks5-bt-CHO"/>
+                        <segue destination="dEr-u4-Ehi" kind="show" identifier="goToEmailVC" id="cKq-AK-Zls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inP-GZ-oNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -365,6 +388,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bsg-w8-IE2">
+                                <rect key="frame" x="20" y="367.5" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mex-Rg-v2g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -372,14 +401,17 @@
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="mv1-ta-O1J" secondAttribute="trailing" constant="20" id="0ra-ew-VS5"/>
                             <constraint firstItem="1bx-vG-iVy" firstAttribute="top" secondItem="mv1-ta-O1J" secondAttribute="bottom" constant="25" id="2Ae-kM-gtw"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="pEW-OG-Dxe" secondAttribute="trailing" constant="100" id="34x-ia-vGM"/>
+                            <constraint firstItem="Bsg-w8-IE2" firstAttribute="leading" secondItem="EO0-Ng-s6X" secondAttribute="leading" constant="20" id="8dR-4v-xRt"/>
                             <constraint firstItem="mv1-ta-O1J" firstAttribute="top" secondItem="YDs-e0-DE5" secondAttribute="bottom" constant="20" id="A2P-LA-Pqb"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="YDs-e0-DE5" secondAttribute="trailing" constant="20" id="CQM-LL-8Yp"/>
                             <constraint firstItem="pEW-OG-Dxe" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="HLx-JP-ZBV"/>
+                            <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="Bsg-w8-IE2" secondAttribute="trailing" constant="100" id="I0o-wd-FC4"/>
                             <constraint firstItem="mv1-ta-O1J" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="Idx-Vx-h2Y"/>
                             <constraint firstItem="YDs-e0-DE5" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="XKD-WV-Am1"/>
                             <constraint firstItem="1bx-vG-iVy" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="pOI-jg-X8M"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="1bx-vG-iVy" secondAttribute="trailing" constant="20" id="rvY-nF-kTM"/>
                             <constraint firstItem="pEW-OG-Dxe" firstAttribute="top" secondItem="1bx-vG-iVy" secondAttribute="bottom" constant="30" id="tqP-VD-Etl"/>
+                            <constraint firstItem="Bsg-w8-IE2" firstAttribute="top" secondItem="pEW-OG-Dxe" secondAttribute="bottom" constant="20" id="tse-SQ-llF"/>
                             <constraint firstItem="YDs-e0-DE5" firstAttribute="top" secondItem="mex-Rg-v2g" secondAttribute="top" constant="40" id="xXH-YV-DYC"/>
                         </constraints>
                     </view>
@@ -387,15 +419,17 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="1UB-Fc-KON">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="t3B-Af-h25" kind="show" id="fgJ-cD-SLT"/>
+                                <action selector="pressedNext:" destination="dEr-u4-Ehi" id="re6-FM-HWW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pEW-OG-Dxe" id="yRS-go-YIG"/>
+                        <outlet property="errorLabel" destination="Bsg-w8-IE2" id="6KW-Z1-ZJe"/>
                         <outlet property="firstLineLabel" destination="YDs-e0-DE5" id="q6t-pg-i4o"/>
                         <outlet property="secondLineLabel" destination="mv1-ta-O1J" id="f2I-8f-baz"/>
                         <outlet property="thirdLineLabel" destination="1bx-vG-iVy" id="p98-bG-bFd"/>
+                        <segue destination="t3B-Af-h25" kind="show" identifier="goToEmailVerificationVC" id="Nxg-A2-loR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QH2-Za-MvS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -518,6 +552,12 @@
         </designable>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
+        </designable>
+        <designable name="84U-uw-xhg">
+            <size key="intrinsicContentSize" width="82.5" height="23"/>
+        </designable>
+        <designable name="FSD-mM-uCS">
+            <size key="intrinsicContentSize" width="98" height="23"/>
         </designable>
         <designable name="GRC-JV-FQl">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
