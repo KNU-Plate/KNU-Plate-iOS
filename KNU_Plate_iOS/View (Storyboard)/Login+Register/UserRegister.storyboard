@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U2R-tw-6Kg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mFW-cK-zOs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -495,13 +495,34 @@
                                     <action selector="pressedResendButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="fDC-V4-cmC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-mA-JzD">
+                                <rect key="frame" x="150" y="772" width="114" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="지금은 건너뛰기">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="systemGrayColor"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="pressedResendButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="GsS-lx-gh6"/>
+                                    <action selector="pressedSkipButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="0l5-IM-v2K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QLD-oI-glD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="InV-i6-OXJ"/>
+                            <constraint firstItem="Adq-mA-JzD" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="150" id="J7g-Ou-s0O"/>
+                            <constraint firstItem="QLD-oI-glD" firstAttribute="bottom" secondItem="Adq-mA-JzD" secondAttribute="bottom" constant="60" id="LKo-O4-lVD"/>
                             <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="FSD-mM-uCS" secondAttribute="trailing" constant="190" id="P1L-l8-VH1"/>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="trailing" secondItem="QLD-oI-glD" secondAttribute="trailing" constant="20" id="RwH-LU-gCa"/>
+                            <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="Adq-mA-JzD" secondAttribute="trailing" constant="150" id="TcT-RU-xMI"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="top" secondItem="aVd-bF-IK7" secondAttribute="bottom" constant="30" id="UDw-34-mQZ"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="XTE-fa-9eb"/>
                             <constraint firstItem="MCe-p4-CY1" firstAttribute="top" secondItem="QLD-oI-glD" secondAttribute="top" constant="60" id="apC-yf-TxP"/>
@@ -513,18 +534,39 @@
                     <navigationItem key="navigationItem" id="ZiN-6S-vjJ">
                         <barButtonItem key="rightBarButtonItem" title="완료" style="done" id="FhO-1f-blr">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedFinish:" destination="t3B-Af-h25" id="a6l-0x-VT1"/>
+                                <segue destination="mFW-cK-zOs" kind="show" id="9yS-Yy-46a"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="firstLineLabel" destination="MCe-p4-CY1" id="hZo-Ip-pZR"/>
                         <outlet property="resendButton" destination="MwF-Uf-dqU" id="fKJ-5M-7ra"/>
                         <outlet property="secondLineLabel" destination="aVd-bF-IK7" id="a2z-9r-zgv"/>
+                        <outlet property="skipButton" destination="Adq-mA-JzD" id="MIH-HM-CAJ"/>
                         <outlet property="verificationCodeTextField" destination="FSD-mM-uCS" id="NZA-oP-9z6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBu-aq-3tb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5166.666666666667" y="65.625"/>
+        </scene>
+        <!--Congratulate Register View Controller-->
+        <scene sceneID="ZaX-so-b7p">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="mFW-cK-zOs" customClass="CongratulateRegisterViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b7v-ZX-uZb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="E2k-R6-CAA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7du-2b-CMZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bde-z1-gKb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6030" y="66"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OAc-Sq-Utp">
@@ -572,6 +614,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

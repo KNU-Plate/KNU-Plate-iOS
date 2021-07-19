@@ -10,6 +10,7 @@ PODS:
     - ImageSlideshow/Core
     - SDWebImage (>= 3.7)
   - IQKeyboardManagerSwift (6.5.6)
+  - lottie-ios (3.2.3)
   - PanModal (1.2.7)
   - ProgressHUD (13.6)
   - SDWebImage (5.11.1):
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - ImageSlideshow (~> 1.9.0)
   - ImageSlideshow/SDWebImage
   - IQKeyboardManagerSwift
+  - lottie-ios
   - PanModal
   - ProgressHUD
   - SDWebImage (~> 5.0)
@@ -53,6 +55,7 @@ SPEC REPOS:
     - GTProgressBar
     - ImageSlideshow
     - IQKeyboardManagerSwift
+    - lottie-ios
     - PanModal
     - ProgressHUD
     - SDWebImage
@@ -72,6 +75,7 @@ SPEC CHECKSUMS:
   GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
   ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 750411488afaa101211058fbf731b4bf2d2470d6
+PODFILE CHECKSUM: 4f57be94687d112053be1af5a5ada92f2afa72ce
 
 COCOAPODS: 1.10.1

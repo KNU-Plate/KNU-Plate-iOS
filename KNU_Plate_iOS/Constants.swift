@@ -18,6 +18,7 @@ struct Constants {
         static let verifyEmailViewController                = "VerifyEmailViewController"
         
         // Home Tab
+        static let mainTabBarController                     = "mainTabBarController"
         static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
         static let restaurantInfoViewController             = "RestaurantInfoViewController"
         static let restaurantImageViewController            = "RestaurantImageViewController"
@@ -83,7 +84,7 @@ struct Constants {
         static let goToPasswordVC               = "goToPasswordVC"
         static let goToEmailVC                  = "goToEmailVC"
         static let goToEmailVerificationVC      = "goToEmailVerificationVC"
-        
+        static let goToHomeVC                   = "goToHomeVC"
         
         
         static let goToNewRestaurantVC          = "goToNewRestaurantVC"

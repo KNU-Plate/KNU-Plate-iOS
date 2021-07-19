@@ -7,11 +7,7 @@ class EmailVerificationViewController: UIViewController {
     @IBOutlet var secondLineLabel: UILabel!
     @IBOutlet var verificationCodeTextField: HoshiTextField!
     @IBOutlet var resendButton: UIButton!
-    
-    var id: String = ""
-    var nickname: String = ""
-    var password: String = ""
-    var email: String = ""
+    @IBOutlet var skipButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +15,34 @@ class EmailVerificationViewController: UIViewController {
         initialize()
     }
     
+    @IBAction func pressedFinish(_ sender: UIBarButtonItem) {
+        
+        // 인증
+        
+    
+    }
+    
+    
     @IBAction func pressedResendButton(_ sender: UIButton) {
         
         
     }
+    
+    @IBAction func pressedSkipButton(_ sender: UIButton) {
+        
+        
+        
+        
+    }
+    
+    
+
+
+}
+
+//MARK: - UI Configuration & Initialization
+
+extension EmailVerificationViewController {
     
     func initialize() {
         
