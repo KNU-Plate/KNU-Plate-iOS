@@ -17,7 +17,13 @@ class EmailVerificationViewController: UIViewController {
     
     @IBAction func pressedFinish(_ sender: UIBarButtonItem) {
         
-        // 인증
+        showProgressBar()
+        
+        verificationCodeTextField.resignFirstResponder()
+        
+        // 이메일 인증을 했는지 안 했는지 확인하는 API 실행
+        
+        registerUser()
         
     
     }
@@ -31,7 +37,41 @@ class EmailVerificationViewController: UIViewController {
     @IBAction func pressedSkipButton(_ sender: UIButton) {
         
         
+        registerUser()
         
+    }
+    
+    func registerUser() {
+        
+        let model = RegisterRequestDTO(username: UserRegisterValues.shared.registerID,
+                                       displayName: UserRegisterValues.shared.registerNickname,
+                                       password: UserRegisterValues.shared.registerPassword,
+                                       email: UserRegisterValues.shared.registerEmail,
+                                       profileImage: nil)
+        
+        UserManager.shared.register(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            dismissProgressBar()
+            
+            switch result {
+            
+            case .success(_):
+                
+                DispatchQueue.main.async {
+                    
+                    let nextVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.congratulateViewController) as! CongratulateRegisterViewController
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+                
+            case .failure(let error):
+                
+                self.showSimpleBottomAlert(with: error.errorDescription)
+
+            }
+        
+        }
         
     }
     

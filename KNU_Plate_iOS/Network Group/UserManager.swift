@@ -29,7 +29,7 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
-    func signUp(with model: RegisterRequestDTO,
+    func register(with model: RegisterRequestDTO,
                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -65,7 +65,7 @@ class UserManager {
                     completion(.success(true))
                     
                 } catch {
-                    print("UserManager - signUP catch ERROR: \(error)")
+                    print("❗️ UserManager - signUP catch ERROR: \(error)")
                     completion(.failure(.internalError))
                 }
                 
