@@ -3,6 +3,10 @@ import SnapKit
 import SDWebImage
 import SnackBar_swift
 
+protocol NewReviewDelegate: AnyObject {
+    func didCompleteReviewUpload()
+}
+
 class RestaurantInfoViewController: UIViewController {
 
     private lazy var customTableView = RestaurantTableView(frame: self.view.frame)
@@ -24,15 +28,13 @@ class RestaurantInfoViewController: UIViewController {
     private var returnEmptyLocationCell: Bool = false
     private var returnEmptyMenuCell: Bool = true
     
-    var favoriteButton: UIBarButtonItem?
+    private var favoriteButton: UIBarButtonItem?
     
     var mallID: Int?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.delegate = self
         
         self.view.addSubview(customTableView)
         
@@ -60,6 +62,7 @@ class RestaurantInfoViewController: UIViewController {
                 print("RestaurantInfoViewController - prepare(for segue:) - mallID is empty")
                 return
             }
+            nextVC.delegate = self
             nextVC.configure(mallID: mallID, existingMenus: restaurantInfoVM.menusForNextVC)
         }
     }
@@ -121,7 +124,7 @@ extension RestaurantInfoViewController {
             customTableView.tableView.allowsSelection = true
         case 1:
             currentButton = tabBarView.locationButton
-            customTableView.tableView.allowsSelection = false
+            customTableView.tableView.allowsSelection = true
         case 2:
             currentButton = tabBarView.menuButton
             customTableView.tableView.allowsSelection = false
@@ -407,6 +410,35 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             nextVC.configure(with: reviewDetails)
             self.navigationController?.pushViewController(nextVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: false)
+        case 1:
+            let url: String
+            if let kakaoMallID = restaurantInfoVM.kakaoMallID {
+                url = "kakaomap://place?id=\(kakaoMallID)"
+            } else {
+                url = "kakaomap://look?p=\(restaurantInfoVM.latitude),\(restaurantInfoVM.longitude)"
+            }
+            
+            guard let url = URL(string: url) else { return }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                print("open URL: \(url)")
+                self.presentAlertWithConfirmAction(title: "카카오맵 열기",
+                                                   message: "카카오맵으로 연결하시겠습니까?") { isOKAction in
+                    if isOKAction {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            } else {
+                guard let baseURL = URL(string: "https://itunes.apple.com/us/app/id304608425?mt=8") else { return }
+                print("open baseURL: \(baseURL)")
+                self.presentAlertWithConfirmAction(title: "카카오맵 설치",
+                                                   message: "카카오맵 설치 화면으로 이동하시겠습니까?") { isOKAction in
+                    if isOKAction {
+                        UIApplication.shared.open(baseURL, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+            tableView.deselectRow(at: indexPath, animated: false)
         default:
             return
         }
@@ -462,9 +494,9 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
 }
 
-// MARK: - UINavigationControllerDelegate
-extension RestaurantInfoViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+// MARK: - NewReviewDelegate
+extension RestaurantInfoViewController: NewReviewDelegate {
+    func didCompleteReviewUpload() {
         restaurantInfoVM.refreshViewModel()
     }
 }

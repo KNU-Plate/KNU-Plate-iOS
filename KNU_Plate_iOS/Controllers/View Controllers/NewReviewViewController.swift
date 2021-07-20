@@ -16,6 +16,8 @@ class NewReviewViewController: UIViewController {
     
     lazy var existingMenusPickerView = UIPickerView()
     
+    weak var delegate: NewReviewDelegate?
+    
     // 수정 필요 mallIID
     private var viewModel: NewReviewViewModel!
     
@@ -217,6 +219,7 @@ extension NewReviewViewController: NewReviewViewModelDelegate {
         showSimpleBottomAlert(with: "리뷰 업로드 성공! 🎉")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.delegate?.didCompleteReviewUpload()
             self.navigationController?.popViewController(animated: true)
         }
     }
