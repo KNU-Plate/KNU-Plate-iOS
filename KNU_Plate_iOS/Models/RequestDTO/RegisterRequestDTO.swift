@@ -33,7 +33,6 @@ struct RegisterRequestDTO {
     
     /// HTTP Headers
     let headers: HTTPHeaders = [
-        
 
         .accept("application/json"),
         .contentType("multipart/form-data")

@@ -29,13 +29,14 @@ class RestaurantManager {
     func uploadNewRestaurant(with model: NewRestaurantRequestDTO,
                              completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        print("✏️ \(model.name)")
-        print("✏️ \(model.categoryName)")
-        print("✏️ \(model.address)")
-        print("✏️ \(model.latitude)")
-        print("✏️ \(model.longitude)")
-        
         AF.upload(multipartFormData: { (multipartFormData) in
+            
+            print("✏️ \(model.name)")
+            print("✏️ \(model.categoryName)")
+            print("✏️ \(model.address)")
+            print("✏️ \(model.latitude)")
+            print("✏️ \(model.longitude)")
+            print("✏️ \(model.placeID)")
             
             multipartFormData.append(Data(model.name.utf8),
                                      withName: "mall_name")
@@ -47,6 +48,8 @@ class RestaurantManager {
                                      withName: "latitude")
             multipartFormData.append(Data(String(model.longitude).utf8),
                                      withName: "longitude")
+            multipartFormData.append(Data(String(model.placeID).utf8),
+                                     withName: "kakao_mall_id")
             
             if let imageArray = model.images {
                 for images in imageArray {

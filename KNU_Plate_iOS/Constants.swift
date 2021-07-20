@@ -15,9 +15,11 @@ struct Constants {
         static let welcomeViewController                    = "WelcomeViewController"
         static let loginViewController                      = "LoginViewController"
         static let registerViewController                   = "RegisterViewController"
-        static let verifyEmailViewController                = "VerifyEmailViewController"
+        static let emailVerificationViewController          = "EmailVerificationViewController"
+        static let congratulateViewController               = "CongratulateViewController"
         
         // Home Tab
+        static let mainTabBarController                     = "mainTabBarController"
         static let restaurantCollectionViewController       = "RestaurantCollectionViewController"
         static let restaurantInfoViewController             = "RestaurantInfoViewController"
         static let restaurantImageViewController            = "RestaurantImageViewController"
@@ -77,6 +79,14 @@ struct Constants {
     }
     
     struct SegueIdentifier {
+        
+        // Register
+        static let goToNicknameVC               = "goToNicknameVC"
+        static let goToPasswordVC               = "goToPasswordVC"
+        static let goToEmailVC                  = "goToEmailVC"
+        static let goToEmailVerificationVC      = "goToEmailVerificationVC"
+        static let goToHomeVC                   = "goToHomeVC"
+        
         
         static let goToNewRestaurantVC          = "goToNewRestaurantVC"
         static let goSeeDetailReview            = "goSeeDetailReview"

@@ -24,5 +24,6 @@ target 'KNU_Plate_iOS' do
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/SDWebImage"
   pod 'TextFieldEffects'
+  pod 'lottie-ios'
 
 end

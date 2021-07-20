@@ -18,11 +18,9 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        Test.shared.login()
         initialize()
         loadUserProfileInfo()
-        
+    
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {

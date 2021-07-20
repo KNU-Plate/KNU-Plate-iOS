@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Input View Controller-->
+        <!--ID Input View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" userLabel="ID Input View Controller" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,6 +58,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHi-AQ-dnD">
+                                <rect key="frame" x="20" y="314" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -65,10 +71,13 @@
                             <constraint firstItem="84U-uw-xhg" firstAttribute="top" secondItem="udR-sF-si9" secondAttribute="bottom" constant="30" id="0wW-BD-YsB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="84U-uw-xhg" secondAttribute="trailing" constant="150" id="AYJ-MQ-aAr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="udR-sF-si9" secondAttribute="trailing" constant="20" id="AeS-wT-B4q"/>
+                            <constraint firstItem="KHi-AQ-dnD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="DaT-8G-jnd"/>
                             <constraint firstItem="udR-sF-si9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="FSk-Xa-xh0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KHi-AQ-dnD" secondAttribute="trailing" constant="100" id="LaY-dq-5AP"/>
                             <constraint firstItem="udR-sF-si9" firstAttribute="top" secondItem="XN3-RF-YDm" secondAttribute="bottom" constant="10" id="OP9-P4-hW9"/>
                             <constraint firstItem="84U-uw-xhg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="PM3-Od-QKl"/>
                             <constraint firstItem="XN3-RF-YDm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ia0-tt-jxz"/>
+                            <constraint firstItem="KHi-AQ-dnD" firstAttribute="top" secondItem="84U-uw-xhg" secondAttribute="bottom" constant="20" id="jYg-T3-3Ay"/>
                             <constraint firstAttribute="trailing" secondItem="XN3-RF-YDm" secondAttribute="trailing" constant="20" id="jc7-PZ-sSV"/>
                             <constraint firstItem="XN3-RF-YDm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="mMC-rD-grc"/>
                         </constraints>
@@ -77,16 +86,18 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="6sQ-e6-T24">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="jhS-bd-saI" kind="show" id="zdk-mo-rpZ"/>
+                                <action selector="pressedNext:" destination="Y6W-OH-hqX" id="QbO-Pa-SCc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="KHi-AQ-dnD" id="XVt-nr-v7h"/>
                         <outlet property="firstLineLabel" destination="XN3-RF-YDm" id="1Uc-hJ-BgU"/>
                         <outlet property="idTextField" destination="84U-uw-xhg" id="cTj-ov-T0j"/>
                         <outlet property="secondLineLabel" destination="udR-sF-si9" id="qHG-XX-8s3"/>
                         <outletCollection property="labels" destination="XN3-RF-YDm" collectionClass="NSMutableArray" id="Jiy-By-vit"/>
                         <outletCollection property="labels" destination="udR-sF-si9" collectionClass="NSMutableArray" id="DKz-SB-fnM"/>
+                        <segue destination="jhS-bd-saI" kind="show" identifier="goToNicknameVC" id="BgE-GR-tRx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -147,6 +158,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5H-Et-ezW">
+                                <rect key="frame" x="20" y="358.5" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pqg-2G-smE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -155,7 +172,10 @@
                             <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="GRC-JV-FQl" secondAttribute="trailing" constant="150" id="3Ss-Ks-el8"/>
                             <constraint firstItem="GRC-JV-FQl" firstAttribute="top" secondItem="lkt-KI-Wxd" secondAttribute="bottom" constant="30" id="8ag-S7-ygo"/>
                             <constraint firstItem="LcR-o9-Te5" firstAttribute="top" secondItem="Pqg-2G-smE" secondAttribute="top" constant="60" id="Jaj-SP-pbg"/>
+                            <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="a5H-Et-ezW" secondAttribute="trailing" constant="100" id="RZt-l9-f8B"/>
+                            <constraint firstItem="a5H-Et-ezW" firstAttribute="top" secondItem="GRC-JV-FQl" secondAttribute="bottom" constant="20" id="S4h-QC-hz8"/>
                             <constraint firstItem="lkt-KI-Wxd" firstAttribute="top" secondItem="yml-g3-Cby" secondAttribute="bottom" constant="25" id="UIA-yi-bi3"/>
+                            <constraint firstItem="a5H-Et-ezW" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="Zgy-a3-dsB"/>
                             <constraint firstItem="GRC-JV-FQl" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="aNa-j7-dDB"/>
                             <constraint firstItem="Pqg-2G-smE" firstAttribute="trailing" secondItem="yml-g3-Cby" secondAttribute="trailing" constant="20" id="fy5-9R-cp1"/>
                             <constraint firstItem="lkt-KI-Wxd" firstAttribute="leading" secondItem="Pqg-2G-smE" secondAttribute="leading" constant="20" id="n3k-dc-Bwh"/>
@@ -169,17 +189,19 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="5Bw-a5-BSW">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="9zE-u7-nPB" kind="show" id="NVr-tW-Tqv"/>
+                                <action selector="pressedNext:" destination="jhS-bd-saI" id="lkL-Ee-5QU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="a5H-Et-ezW" id="vMM-H1-eNP"/>
                         <outlet property="firstLineLabel" destination="LcR-o9-Te5" id="uQa-9d-Kp7"/>
                         <outlet property="nicknameTextField" destination="GRC-JV-FQl" id="nKj-by-nkd"/>
                         <outlet property="secondLineLabel" destination="yml-g3-Cby" id="V43-XK-Fya"/>
                         <outlet property="thirdLineLabel" destination="lkt-KI-Wxd" id="RKV-lG-WYD"/>
                         <outletCollection property="labels" destination="LcR-o9-Te5" collectionClass="NSMutableArray" id="I2T-wt-QV7"/>
                         <outletCollection property="labels" destination="yml-g3-Cby" collectionClass="NSMutableArray" id="lls-fd-EvK"/>
+                        <segue destination="9zE-u7-nPB" kind="show" identifier="goToPasswordVC" id="tDk-XV-bKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2p-FN-rX5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -293,7 +315,7 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="Rne-cP-Ogg">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="dEr-u4-Ehi" kind="show" id="ivy-5d-S0x"/>
+                                <action selector="pressedNext:" destination="9zE-u7-nPB" id="hiN-FE-Pm0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -305,6 +327,7 @@
                         <outlet property="thirdLineLabel" destination="zTK-ld-Pwk" id="0U8-xa-mr4"/>
                         <outletCollection property="labels" destination="FZu-jw-Oo7" collectionClass="NSMutableArray" id="pPj-fB-FKX"/>
                         <outletCollection property="labels" destination="jLu-dV-2he" collectionClass="NSMutableArray" id="ks5-bt-CHO"/>
+                        <segue destination="dEr-u4-Ehi" kind="show" identifier="goToEmailVC" id="cKq-AK-Zls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inP-GZ-oNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -365,6 +388,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bsg-w8-IE2">
+                                <rect key="frame" x="20" y="367.5" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mex-Rg-v2g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -372,14 +401,17 @@
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="mv1-ta-O1J" secondAttribute="trailing" constant="20" id="0ra-ew-VS5"/>
                             <constraint firstItem="1bx-vG-iVy" firstAttribute="top" secondItem="mv1-ta-O1J" secondAttribute="bottom" constant="25" id="2Ae-kM-gtw"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="pEW-OG-Dxe" secondAttribute="trailing" constant="100" id="34x-ia-vGM"/>
+                            <constraint firstItem="Bsg-w8-IE2" firstAttribute="leading" secondItem="EO0-Ng-s6X" secondAttribute="leading" constant="20" id="8dR-4v-xRt"/>
                             <constraint firstItem="mv1-ta-O1J" firstAttribute="top" secondItem="YDs-e0-DE5" secondAttribute="bottom" constant="20" id="A2P-LA-Pqb"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="YDs-e0-DE5" secondAttribute="trailing" constant="20" id="CQM-LL-8Yp"/>
                             <constraint firstItem="pEW-OG-Dxe" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="HLx-JP-ZBV"/>
+                            <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="Bsg-w8-IE2" secondAttribute="trailing" constant="100" id="I0o-wd-FC4"/>
                             <constraint firstItem="mv1-ta-O1J" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="Idx-Vx-h2Y"/>
                             <constraint firstItem="YDs-e0-DE5" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="XKD-WV-Am1"/>
                             <constraint firstItem="1bx-vG-iVy" firstAttribute="leading" secondItem="mex-Rg-v2g" secondAttribute="leading" constant="20" id="pOI-jg-X8M"/>
                             <constraint firstItem="mex-Rg-v2g" firstAttribute="trailing" secondItem="1bx-vG-iVy" secondAttribute="trailing" constant="20" id="rvY-nF-kTM"/>
                             <constraint firstItem="pEW-OG-Dxe" firstAttribute="top" secondItem="1bx-vG-iVy" secondAttribute="bottom" constant="30" id="tqP-VD-Etl"/>
+                            <constraint firstItem="Bsg-w8-IE2" firstAttribute="top" secondItem="pEW-OG-Dxe" secondAttribute="bottom" constant="20" id="tse-SQ-llF"/>
                             <constraint firstItem="YDs-e0-DE5" firstAttribute="top" secondItem="mex-Rg-v2g" secondAttribute="top" constant="40" id="xXH-YV-DYC"/>
                         </constraints>
                     </view>
@@ -387,15 +419,17 @@
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="1UB-Fc-KON">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="t3B-Af-h25" kind="show" id="fgJ-cD-SLT"/>
+                                <action selector="pressedNext:" destination="dEr-u4-Ehi" id="re6-FM-HWW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="pEW-OG-Dxe" id="yRS-go-YIG"/>
+                        <outlet property="errorLabel" destination="Bsg-w8-IE2" id="6KW-Z1-ZJe"/>
                         <outlet property="firstLineLabel" destination="YDs-e0-DE5" id="q6t-pg-i4o"/>
                         <outlet property="secondLineLabel" destination="mv1-ta-O1J" id="f2I-8f-baz"/>
                         <outlet property="thirdLineLabel" destination="1bx-vG-iVy" id="p98-bG-bFd"/>
+                        <segue destination="t3B-Af-h25" kind="show" identifier="goToEmailVerificationVC" id="Nxg-A2-loR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QH2-Za-MvS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -405,7 +439,7 @@
         <!--Email Verification View Controller-->
         <scene sceneID="Ov5-nA-lRv">
             <objects>
-                <viewController id="t3B-Af-h25" customClass="EmailVerificationViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailVerificationViewController" id="t3B-Af-h25" customClass="EmailVerificationViewController" customModule="KNU_Plate_iOS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FX1-Ls-0vV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -422,7 +456,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증코드 입력" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSD-mM-uCS" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증코드 입력" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSD-mM-uCS" customClass="HoshiTextField" customModule="KNU_Plate_iOS">
                                 <rect key="frame" x="20" y="281.5" width="204" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dqt-Ng-gGP"/>
@@ -461,13 +495,34 @@
                                     <action selector="pressedResendButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="fDC-V4-cmC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-mA-JzD">
+                                <rect key="frame" x="120" y="772" width="174" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="지금은 건너뛰기">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="systemGrayColor"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="pressedResendButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="GsS-lx-gh6"/>
+                                    <action selector="pressedSkipButton:" destination="t3B-Af-h25" eventType="touchUpInside" id="0l5-IM-v2K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QLD-oI-glD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="InV-i6-OXJ"/>
+                            <constraint firstItem="Adq-mA-JzD" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="120" id="J7g-Ou-s0O"/>
+                            <constraint firstItem="QLD-oI-glD" firstAttribute="bottom" secondItem="Adq-mA-JzD" secondAttribute="bottom" constant="60" id="LKo-O4-lVD"/>
                             <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="FSD-mM-uCS" secondAttribute="trailing" constant="190" id="P1L-l8-VH1"/>
                             <constraint firstItem="aVd-bF-IK7" firstAttribute="trailing" secondItem="QLD-oI-glD" secondAttribute="trailing" constant="20" id="RwH-LU-gCa"/>
+                            <constraint firstItem="QLD-oI-glD" firstAttribute="trailing" secondItem="Adq-mA-JzD" secondAttribute="trailing" constant="120" id="TcT-RU-xMI"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="top" secondItem="aVd-bF-IK7" secondAttribute="bottom" constant="30" id="UDw-34-mQZ"/>
                             <constraint firstItem="FSD-mM-uCS" firstAttribute="leading" secondItem="QLD-oI-glD" secondAttribute="leading" constant="20" id="XTE-fa-9eb"/>
                             <constraint firstItem="MCe-p4-CY1" firstAttribute="top" secondItem="QLD-oI-glD" secondAttribute="top" constant="60" id="apC-yf-TxP"/>
@@ -479,18 +534,85 @@
                     <navigationItem key="navigationItem" id="ZiN-6S-vjJ">
                         <barButtonItem key="rightBarButtonItem" title="완료" style="done" id="FhO-1f-blr">
                             <color key="tintColor" name="AppDefaultColor"/>
+                            <connections>
+                                <action selector="pressedFinish:" destination="t3B-Af-h25" id="a6l-0x-VT1"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="firstLineLabel" destination="MCe-p4-CY1" id="hZo-Ip-pZR"/>
                         <outlet property="resendButton" destination="MwF-Uf-dqU" id="fKJ-5M-7ra"/>
                         <outlet property="secondLineLabel" destination="aVd-bF-IK7" id="a2z-9r-zgv"/>
+                        <outlet property="skipButton" destination="Adq-mA-JzD" id="MIH-HM-CAJ"/>
                         <outlet property="verificationCodeTextField" destination="FSD-mM-uCS" id="NZA-oP-9z6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBu-aq-3tb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5166.666666666667" y="65.625"/>
+        </scene>
+        <!--Congratulate Register View Controller-->
+        <scene sceneID="ZaX-so-b7p">
+            <objects>
+                <viewController storyboardIdentifier="CongratulateViewController" hidesBottomBarWhenPushed="YES" id="mFW-cK-zOs" customClass="CongratulateRegisterViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b7v-ZX-uZb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크슐랭가이드 회원가입을 축하합니다!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oD-e8-ZLE">
+                                <rect key="frame" x="30" y="732" width="354" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2sr-Ou-u0C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYi-vP-YPo">
+                                <rect key="frame" x="122" y="777" width="170" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="TJN-lC-NXu"/>
+                                    <constraint firstAttribute="height" constant="50" id="X5Y-n5-Soo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="맛집 탐방하러 가기!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedGoHomeButton:" destination="mFW-cK-zOs" eventType="touchUpInside" id="bc4-w5-fZm"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="22W-bZ-kdH" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="44" width="414" height="638"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="E2k-R6-CAA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" id="Htr-8J-pk5"/>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="trailing" secondItem="E2k-R6-CAA" secondAttribute="trailing" id="Lrf-U3-mM6"/>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="top" secondItem="E2k-R6-CAA" secondAttribute="top" id="TtP-qD-7N6"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" constant="30" id="VLh-FN-Y3s"/>
+                            <constraint firstItem="E2k-R6-CAA" firstAttribute="bottom" secondItem="jYi-vP-YPo" secondAttribute="bottom" constant="35" id="ZNq-D8-eCv"/>
+                            <constraint firstItem="jYi-vP-YPo" firstAttribute="top" secondItem="0oD-e8-ZLE" secondAttribute="bottom" constant="25" id="eWe-KM-6yK"/>
+                            <constraint firstItem="E2k-R6-CAA" firstAttribute="trailing" secondItem="0oD-e8-ZLE" secondAttribute="trailing" constant="30" id="g1K-UW-Jyh"/>
+                            <constraint firstItem="jYi-vP-YPo" firstAttribute="centerX" secondItem="b7v-ZX-uZb" secondAttribute="centerX" id="pT2-hI-Gc3"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="centerX" secondItem="b7v-ZX-uZb" secondAttribute="centerX" id="t2A-I6-S5r"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="top" secondItem="22W-bZ-kdH" secondAttribute="bottom" constant="50" id="vwr-oi-XIK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7du-2b-CMZ"/>
+                    <connections>
+                        <outlet property="animationView" destination="22W-bZ-kdH" id="LaM-Gz-Aox"/>
+                        <outlet property="congratulateLabel" destination="0oD-e8-ZLE" id="cEf-Tr-Re8"/>
+                        <outlet property="goHomeButton" destination="jYi-vP-YPo" id="xHR-ns-zQA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bde-z1-gKb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6028.985507246377" y="65.625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OAc-Sq-Utp">
@@ -516,8 +638,15 @@
         <designable name="0KQ-8u-Hvt">
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
+        <designable name="22W-bZ-kdH"/>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
+        </designable>
+        <designable name="84U-uw-xhg">
+            <size key="intrinsicContentSize" width="82.5" height="23"/>
+        </designable>
+        <designable name="FSD-mM-uCS">
+            <size key="intrinsicContentSize" width="98" height="23"/>
         </designable>
         <designable name="GRC-JV-FQl">
             <size key="intrinsicContentSize" width="82.5" height="23"/>
@@ -532,6 +661,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

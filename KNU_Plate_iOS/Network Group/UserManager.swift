@@ -29,7 +29,7 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
-    func signUp(with model: RegisterRequestDTO,
+    func register(with model: RegisterRequestDTO,
                 completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
@@ -61,11 +61,14 @@ class UserManager {
                 do {
                     let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                from: response.data!)
+                    
+                    print("✏️ UserManager - register SUCCESS ")
+                    print("✏️ NEW ACCESS TOKEN: \(decodedData.accessToken)")
                     self.saveUserRegisterInfoToDevice(with: decodedData)
                     completion(.success(true))
                     
                 } catch {
-                    print("UserManager - signUP catch ERROR: \(error)")
+                    print("❗️ UserManager - register catch ERROR: \(error)")
                     completion(.failure(.internalError))
                 }
                 
@@ -119,25 +122,25 @@ class UserManager {
     }
     
     //MARK: - 이메일 인증 코드 발급
-    // 수정 필요
     func sendEmailVerificationCode(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
         
         AF.request(sendEmailVerificationCodeURL,
                    method: .post,
-                   encoding: URLEncoding.httpBody,
-                   headers: EmailVerifyCodeRequestDTO().headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
+                   headers: headers)
+            .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
                 case 200:
-                    
+                    print("✏️ UserManager - sendEmailVerificationCode SUCCESS")
                     completion(.success(true))
                     
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
+                    print("❗️ UserManager - sendEmailVerification FAILED in default with error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
@@ -166,33 +169,29 @@ class UserManager {
     }
     
     //MARK: - 아이디 or 닉네임 중복 체크
-    func checkDuplication(with model: CheckDuplicateRequestDTO,
-                          requestURL: String,
+    func checkDuplication(requestURL: String,
+                          model: CheckDuplicateRequestDTO,
                           completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(requestURL,
                    method: .get,
                    parameters: model.parameters,
                    encoding: URLEncoding.queryString,
-                   headers: model.headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
-                
-                guard let statusCode = response.response?.statusCode else { return }
-                
-                switch statusCode {
+                   headers: model.headers)
+        .responseJSON { (response) in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
                 
                 case 200:
                     completion(.success(true))
-                    
                 case 400:
-                    // 중복
+                    // 중복일 경우 아래 수행
                     completion(.success(false))
-                    
                 default:
-                    
                     let error = NetworkError.returnError(statusCode: statusCode)
-                    print("✏️ UserManager - 이미 존재하는 닉네임: \(error.errorDescription)")
+                    print("✏️ UserManager - checkDuplication error: \(error.errorDescription)")
                     completion(.failure(error))
                 }
             }
@@ -363,7 +362,7 @@ class UserManager {
                 completion(.success(true))
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
-                print("UserManager - updateNickname error: \(error.errorDescription)")
+                print("UserManager - updateProfileImage error: \(error.errorDescription)")
                 completion(.failure(error))
             }
         }
@@ -459,18 +458,20 @@ class UserManager {
 extension UserManager {
     
     func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
-
-        User.shared.id = model.userID
-        User.shared.username = model.username
-        User.shared.displayName = model.displayName
-        User.shared.email = model.email
-        User.shared.dateCreated = model.dateCreated
-        User.shared.isActive = model.isActive
-        User.shared.medal = model.medal
         
-        if let profileImageLink = model.userProfileImage {
-            User.shared.profileImageLink = profileImageLink
-        }
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
+                                                                    forKey: Constants.KeyChainKey.accessToken)
+        User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
+                                                                     forKey: Constants.KeyChainKey.refreshToken)
+    
+        User.shared.id = model.user.userID
+        User.shared.username = model.user.username
+        User.shared.displayName = model.user.displayName
+        User.shared.email = model.user.mailAddress
+        User.shared.medal = model.user.medal
+        
+        print("UserManager - saveUserRegisterInfoToDevice success ")
+        print("New accessToken: \(User.shared.accessToken)")
     }
     
     func saveUserInfoToDevice(with model: LoadUserInfoModel) {
@@ -508,9 +509,8 @@ extension UserManager {
         User.shared.displayName = model.user.displayName
         User.shared.email = model.user.mailAddress
         User.shared.medal = model.user.medal
-        //User.shared.profileImageLink = model.user.userProfileImageFolderID
         
-        
+        User.shared.isLoggedIn = true
         
         print("UserManager - saveLoginInfo success ")
         print("New accessToken: \(User.shared.accessToken)")

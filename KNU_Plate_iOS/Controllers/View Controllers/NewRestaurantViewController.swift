@@ -30,6 +30,7 @@ class NewRestaurantViewController: UIViewController {
         viewModel.categoryName = details.category
         viewModel.latitude = details.latitude
         viewModel.longitude = details.longitude
+        viewModel.placeID = details.placeID
  
     }
     
@@ -52,6 +53,9 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: "매장 등록 성공 🎉",
                                         buttonTitle: "홈으로 돌아가기") {
+            
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
             //Go To MainViewController 해야
         }
     }
