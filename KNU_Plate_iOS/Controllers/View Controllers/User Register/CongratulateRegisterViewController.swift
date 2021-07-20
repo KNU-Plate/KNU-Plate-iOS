@@ -5,17 +5,58 @@ class CongratulateRegisterViewController: UIViewController {
     
     @IBOutlet var congratulateLabel: UILabel!
     @IBOutlet var animationView: AnimationView!
+    @IBOutlet var goHomeButton: UIButton!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initializeLabel()
+        
+ 
+        initialize()
         playAnimation()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.changeRootViewControllerToMain()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            self.goHomeButton.isHidden = false
+            self.goHomeButton.isUserInteractionEnabled = true
         }
+    }
+    
+    @IBAction func pressedGoHomeButton(_ sender: UIButton) {
+        
+        showProgressBar()
+        
+        let model = LoginRequestDTO(username: UserRegisterValues.shared.registerID,
+                                    password: UserRegisterValues.shared.registerPassword)
+        
+        UserManager.shared.logIn(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            dismissProgressBar()
+            
+            switch result {
+            case .success(_):
+                
+                self.changeRootViewControllerToMain()
+                
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
+    }
+    
+    func initialize() {
+        
+        initializeButton()
+        initializeLabel()
+    }
+    
+    func initializeButton() {
+        
+        goHomeButton.isHidden = true
+        goHomeButton.isUserInteractionEnabled = false
+        goHomeButton.layer.cornerRadius = goHomeButton.frame.height / 2
+
     }
     
     func initializeLabel() {

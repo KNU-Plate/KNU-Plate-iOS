@@ -4,6 +4,7 @@ import Foundation
 
 struct RestaurantDetailFromKakao {
     
+    var placeID: String = ""
     var name: String = ""
     var address: String = ""
     var contact: String = ""

@@ -18,6 +18,8 @@ class SearchRestaurantViewModel {
     
     var address: [String] = []
     
+    var placeID: [String] = []
+    
     var documents: [SearchedRestaurantInfo] = []
     
     /// 현재 선택된 장소
@@ -44,10 +46,12 @@ class SearchRestaurantViewModel {
                 
                 ///수정 좀 하기 -> append 말고 한 방에 value assign
                 for result in result.documents {
-                    
+
                     self.placeName.append(result.placeName)
                     self.address.append(result.address)
+                    self.placeID.append(result.id)
                 }
+                
                 self.totalCount = self.placeName.count
                 self.delegate?.didFetchSearchResults()
                 
@@ -86,6 +90,7 @@ class SearchRestaurantViewModel {
     
     func getRestaurantDetails(for index: Int) -> RestaurantDetailFromKakao {
         
+        restaurantDetails.placeID = placeID[index]
         restaurantDetails.name = placeName[index]
         restaurantDetails.address = documents[index].address
         restaurantDetails.contact = documents[index].contact

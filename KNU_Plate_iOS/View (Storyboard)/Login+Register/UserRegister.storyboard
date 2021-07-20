@@ -439,7 +439,7 @@
         <!--Email Verification View Controller-->
         <scene sceneID="Ov5-nA-lRv">
             <objects>
-                <viewController id="t3B-Af-h25" customClass="EmailVerificationViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailVerificationViewController" id="t3B-Af-h25" customClass="EmailVerificationViewController" customModule="KNU_Plate_iOS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FX1-Ls-0vV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -456,7 +456,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증코드 입력" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSD-mM-uCS" customClass="HoshiTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증코드 입력" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FSD-mM-uCS" customClass="HoshiTextField" customModule="KNU_Plate_iOS">
                                 <rect key="frame" x="20" y="281.5" width="204" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dqt-Ng-gGP"/>
@@ -559,38 +559,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22W-bZ-kdH" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="0.0" y="44" width="414" height="727"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크슐랭가이드 회원가입을 축하합니다!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oD-e8-ZLE">
-                                <rect key="frame" x="10" y="781" width="394" height="21"/>
+                                <rect key="frame" x="30" y="732" width="354" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2sr-Ou-u0C"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYi-vP-YPo">
+                                <rect key="frame" x="122" y="777" width="170" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="TJN-lC-NXu"/>
+                                    <constraint firstAttribute="height" constant="50" id="X5Y-n5-Soo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="맛집 탐방하러 가기!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedGoHomeButton:" destination="mFW-cK-zOs" eventType="touchUpInside" id="bc4-w5-fZm"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="22W-bZ-kdH" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="44" width="414" height="638"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E2k-R6-CAA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="E2k-R6-CAA" firstAttribute="trailing" secondItem="0oD-e8-ZLE" secondAttribute="trailing" constant="10" id="JtN-Vc-yqg"/>
-                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="top" secondItem="22W-bZ-kdH" secondAttribute="bottom" constant="10" id="akQ-mI-slK"/>
-                            <constraint firstItem="22W-bZ-kdH" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" id="ehf-Oz-Zks"/>
-                            <constraint firstItem="E2k-R6-CAA" firstAttribute="trailing" secondItem="22W-bZ-kdH" secondAttribute="trailing" id="fU7-tA-YFd"/>
-                            <constraint firstItem="E2k-R6-CAA" firstAttribute="bottom" secondItem="0oD-e8-ZLE" secondAttribute="bottom" constant="60" id="peq-4U-0nw"/>
-                            <constraint firstItem="22W-bZ-kdH" firstAttribute="top" secondItem="E2k-R6-CAA" secondAttribute="top" id="qRr-bc-nmv"/>
-                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" constant="10" id="rbY-Fa-pOr"/>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" id="Htr-8J-pk5"/>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="trailing" secondItem="E2k-R6-CAA" secondAttribute="trailing" id="Lrf-U3-mM6"/>
+                            <constraint firstItem="22W-bZ-kdH" firstAttribute="top" secondItem="E2k-R6-CAA" secondAttribute="top" id="TtP-qD-7N6"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="leading" secondItem="E2k-R6-CAA" secondAttribute="leading" constant="30" id="VLh-FN-Y3s"/>
+                            <constraint firstItem="E2k-R6-CAA" firstAttribute="bottom" secondItem="jYi-vP-YPo" secondAttribute="bottom" constant="35" id="ZNq-D8-eCv"/>
+                            <constraint firstItem="jYi-vP-YPo" firstAttribute="top" secondItem="0oD-e8-ZLE" secondAttribute="bottom" constant="25" id="eWe-KM-6yK"/>
+                            <constraint firstItem="E2k-R6-CAA" firstAttribute="trailing" secondItem="0oD-e8-ZLE" secondAttribute="trailing" constant="30" id="g1K-UW-Jyh"/>
+                            <constraint firstItem="jYi-vP-YPo" firstAttribute="centerX" secondItem="b7v-ZX-uZb" secondAttribute="centerX" id="pT2-hI-Gc3"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="centerX" secondItem="b7v-ZX-uZb" secondAttribute="centerX" id="t2A-I6-S5r"/>
+                            <constraint firstItem="0oD-e8-ZLE" firstAttribute="top" secondItem="22W-bZ-kdH" secondAttribute="bottom" constant="50" id="vwr-oi-XIK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7du-2b-CMZ"/>
                     <connections>
                         <outlet property="animationView" destination="22W-bZ-kdH" id="LaM-Gz-Aox"/>
                         <outlet property="congratulateLabel" destination="0oD-e8-ZLE" id="cEf-Tr-Re8"/>
+                        <outlet property="goHomeButton" destination="jYi-vP-YPo" id="xHR-ns-zQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bde-z1-gKb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6030" y="66"/>
+            <point key="canvasLocation" x="6028.985507246377" y="65.625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OAc-Sq-Utp">
@@ -616,6 +638,7 @@
         <designable name="0KQ-8u-Hvt">
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
+        <designable name="22W-bZ-kdH"/>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
         </designable>

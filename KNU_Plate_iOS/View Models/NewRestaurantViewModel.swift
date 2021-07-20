@@ -13,6 +13,8 @@ class NewRestaurantViewModel {
     
     var restaurantName: String
     
+    var placeID: String = ""
+    
     /// 학교 문
     var gate: String = ""
     
@@ -52,7 +54,7 @@ class NewRestaurantViewModel {
     public init(restaurantName: String) {
         
         self.restaurantName = restaurantName
-  
+        
     }
     
     //MARK: - Object Methods
@@ -66,13 +68,14 @@ class NewRestaurantViewModel {
     func upload() {
         
         let newRestaurantModel = NewRestaurantRequestDTO(name: restaurantName,
-                                                    contact: contact,
-                                                    foodCategory: foodCategory,
-                                                    address: address,
-                                                    categoryName: categoryName,
-                                                    latitude: latitude,
-                                                    longitude: longitude,
-                                                    images: userSelectedImagesInDataFormat)
+                                                         placeID: placeID,
+                                                         contact: contact,
+                                                         foodCategory: foodCategory,
+                                                         address: address,
+                                                         categoryName: categoryName,
+                                                         latitude: latitude,
+                                                         longitude: longitude,
+                                                         images: userSelectedImagesInDataFormat)
         
         RestaurantManager.shared.uploadNewRestaurant(with: newRestaurantModel) { [weak self] result in
             

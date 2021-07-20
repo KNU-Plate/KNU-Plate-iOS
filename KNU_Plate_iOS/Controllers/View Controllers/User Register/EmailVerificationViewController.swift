@@ -13,71 +13,45 @@ class EmailVerificationViewController: UIViewController {
         super.viewDidLoad()
 
         initialize()
+        sendVerificationCode()
     }
     
     @IBAction func pressedFinish(_ sender: UIBarButtonItem) {
         
-        showProgressBar()
-        
         verificationCodeTextField.resignFirstResponder()
-        
-        // 이메일 인증을 했는지 안 했는지 확인하는 API 실행
-        
-        registerUser()
-        
-    
     }
-    
     
     @IBAction func pressedResendButton(_ sender: UIButton) {
         
+        sendVerificationCode()
         
+        // 버튼 막 누르는거 방지하기 위해 한 번 누르고 비활성화 시키고 타이머 작동? 10초?
     }
     
     @IBAction func pressedSkipButton(_ sender: UIButton) {
         
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.congratulateViewController)
+                as? CongratulateRegisterViewController else { fatalError() }
         
-        registerUser()
-        
+        nextVC.modalPresentationStyle = .overFullScreen
+        self.present(nextVC, animated: true, completion: nil)
     }
     
-    func registerUser() {
+    func sendVerificationCode() {
         
-        let model = RegisterRequestDTO(username: UserRegisterValues.shared.registerID,
-                                       displayName: UserRegisterValues.shared.registerNickname,
-                                       password: UserRegisterValues.shared.registerPassword,
-                                       email: UserRegisterValues.shared.registerEmail,
-                                       profileImage: nil)
-        
-        UserManager.shared.register(with: model) { [weak self] result in
+        UserManager.shared.sendEmailVerificationCode { [weak self] result in
             
             guard let self = self else { return }
-            
-            dismissProgressBar()
             
             switch result {
             
             case .success(_):
-                
-                DispatchQueue.main.async {
-                    
-                    let nextVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.congratulateViewController) as! CongratulateRegisterViewController
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-                
+                return
             case .failure(let error):
-                
                 self.showSimpleBottomAlert(with: error.errorDescription)
-
             }
-        
         }
-        
     }
-    
-    
-
-
 }
 
 //MARK: - UI Configuration & Initialization

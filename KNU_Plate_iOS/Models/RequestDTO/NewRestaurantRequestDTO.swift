@@ -8,6 +8,9 @@ class NewRestaurantRequestDTO {
     /// 매장명
     let name: String
     
+    /// 매장 고유 ID
+    let placeID: String
+    
     /// 매장 연락처
     let contact: String?
     
@@ -32,9 +35,10 @@ class NewRestaurantRequestDTO {
     /// 매장이 위치한 문
     //var gate: String
     
-    init(name: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double, images: [Data]?) {
+    init(name: String, placeID: String, contact: String, foodCategory: String, address: String, categoryName: String, latitude: Double, longitude: Double, images: [Data]?) {
         
         self.name = name
+        self.placeID = placeID
         self.contact = contact
         self.foodCategory = foodCategory
         self.address = address

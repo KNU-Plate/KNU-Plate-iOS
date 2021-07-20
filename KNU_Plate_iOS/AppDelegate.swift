@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        Test.shared.login()
+//        Test.shared.login()
         
         return true
     }

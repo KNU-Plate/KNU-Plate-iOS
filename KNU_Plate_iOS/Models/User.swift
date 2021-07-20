@@ -26,7 +26,19 @@ class User {
         }
     }
     
-    var password: String = ""
+    var password: String {
+        get {
+            let retrievedPassword: String? = KeychainWrapper.standard.string(forKey: Constants.KeyChainKey.password)
+            guard let password = retrievedPassword else {
+                return "❗️ Invalid Password"
+            }
+            print("✏️ Password: \(password)")
+            return password
+        }
+        set {
+            self.savedPassword = KeychainWrapper.standard.set(newValue, forKey: Constants.KeyChainKey.password)
+        }
+    }
     
     var savedPassword: Bool = false
     
@@ -50,10 +62,10 @@ class User {
         }
     }
     
-    /// registered date
+
     var dateCreated: String = ""
     
-    /// 활성화 상태 여부 (Y/N)
+
     var isActive: String = ""
      
     var medal: Int = 3
@@ -112,7 +124,11 @@ class User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.displayName)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.email)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.medal)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
+        let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.password)
         
         self.savedAccessToken = false
         self.savedRefreshToken = false

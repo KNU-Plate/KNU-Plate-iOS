@@ -2,7 +2,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-
 final class Interceptor: RequestInterceptor {
     
     private var isRefreshing: Bool = false

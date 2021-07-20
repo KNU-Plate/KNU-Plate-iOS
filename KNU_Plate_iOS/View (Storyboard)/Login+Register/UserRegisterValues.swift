@@ -10,5 +10,4 @@ class UserRegisterValues {
     var registerNickname: String = ""
     var registerPassword: String = ""
     var registerEmail: String = ""
-    
 }

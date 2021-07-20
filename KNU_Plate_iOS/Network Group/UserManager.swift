@@ -61,11 +61,14 @@ class UserManager {
                 do {
                     let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
                                                                from: response.data!)
+                    
+                    print("✏️ UserManager - register SUCCESS ")
+                    print("✏️ NEW ACCESS TOKEN: \(decodedData.accessToken)")
                     self.saveUserRegisterInfoToDevice(with: decodedData)
                     completion(.success(true))
                     
                 } catch {
-                    print("❗️ UserManager - signUP catch ERROR: \(error)")
+                    print("❗️ UserManager - register catch ERROR: \(error)")
                     completion(.failure(.internalError))
                 }
                 
@@ -119,25 +122,25 @@ class UserManager {
     }
     
     //MARK: - 이메일 인증 코드 발급
-    // 수정 필요
     func sendEmailVerificationCode(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+        
+        let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
         
         AF.request(sendEmailVerificationCodeURL,
                    method: .post,
-                   encoding: URLEncoding.httpBody,
-                   headers: EmailVerifyCodeRequestDTO().headers,
-                   interceptor: interceptor)
-            .responseJSON { (response) in
+                   headers: headers)
+            .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
                 case 200:
-                    
+                    print("✏️ UserManager - sendEmailVerificationCode SUCCESS")
                     completion(.success(true))
                     
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
+                    print("❗️ UserManager - sendEmailVerification FAILED in default with error: \(error.errorDescription) and statusCode: \(statusCode)")
                     completion(.failure(error))
                 }
             }
@@ -359,7 +362,7 @@ class UserManager {
                 completion(.success(true))
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
-                print("UserManager - updateNickname error: \(error.errorDescription)")
+                print("UserManager - updateProfileImage error: \(error.errorDescription)")
                 completion(.failure(error))
             }
         }
@@ -455,18 +458,20 @@ class UserManager {
 extension UserManager {
     
     func saveUserRegisterInfoToDevice(with model: RegisterResponseModel) {
-
-        User.shared.id = model.userID
-        User.shared.username = model.username
-        User.shared.displayName = model.displayName
-        User.shared.email = model.email
-        User.shared.dateCreated = model.dateCreated
-        User.shared.isActive = model.isActive
-        User.shared.medal = model.medal
         
-        if let profileImageLink = model.userProfileImage {
-            User.shared.profileImageLink = profileImageLink
-        }
+        User.shared.savedAccessToken = KeychainWrapper.standard.set(model.accessToken,
+                                                                    forKey: Constants.KeyChainKey.accessToken)
+        User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
+                                                                     forKey: Constants.KeyChainKey.refreshToken)
+    
+        User.shared.id = model.user.userID
+        User.shared.username = model.user.username
+        User.shared.displayName = model.user.displayName
+        User.shared.email = model.user.mailAddress
+        User.shared.medal = model.user.medal
+        
+        print("UserManager - saveUserRegisterInfoToDevice success ")
+        print("New accessToken: \(User.shared.accessToken)")
     }
     
     func saveUserInfoToDevice(with model: LoadUserInfoModel) {
@@ -504,9 +509,8 @@ extension UserManager {
         User.shared.displayName = model.user.displayName
         User.shared.email = model.user.mailAddress
         User.shared.medal = model.user.medal
-        //User.shared.profileImageLink = model.user.userProfileImageFolderID
         
-        
+        User.shared.isLoggedIn = true
         
         print("UserManager - saveLoginInfo success ")
         print("New accessToken: \(User.shared.accessToken)")
