@@ -25,18 +25,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
+    
         if User.shared.isLoggedIn == true {
             
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
             window?.rootViewController = mainTabBarController
         
         } else {
             
             //TODO: 아래 수정
-//            let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-//            window?.rootViewController = initialController
+            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+            let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.registerNavigationController)
+            window?.rootViewController = initialController
         }
     }
     

@@ -13,7 +13,7 @@
         <!--ID Input View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" userLabel="ID Input View Controller" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDInputViewController" id="Y6W-OH-hqX" userLabel="ID Input View Controller" customClass="IDInputViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -617,7 +617,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OAc-Sq-Utp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U2R-tw-6Kg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RegisterNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="U2R-tw-6Kg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gfH-DY-wf7">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -638,7 +638,6 @@
         <designable name="0KQ-8u-Hvt">
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
-        <designable name="22W-bZ-kdH"/>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
         </designable>
