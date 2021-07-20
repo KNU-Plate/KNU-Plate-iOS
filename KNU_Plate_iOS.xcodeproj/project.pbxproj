@@ -17,7 +17,6 @@
 		3C88A4A526A204D600E7FC75 /* RestaurantImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */; };
 		3C88A4A726A207C400E7FC75 /* RestaurantImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A626A207C400E7FC75 /* RestaurantImageViewModel.swift */; };
 		3C88A4A926A210E300E7FC75 /* RestaurantImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A826A210E300E7FC75 /* RestaurantImageCollectionViewCell.swift */; };
-		3C8AA2D826A04D56002D6451 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8AA2D726A04D56002D6451 /* Metal.framework */; };
 		3C8AA2D926A05D92002D6451 /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1F78DC2632DE3500C7B41D /* DaumMap.framework */; };
 		3C8AB202268A376500D51AC8 /* RestaurantTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AB201268A376500D51AC8 /* RestaurantTableView.swift */; };
 		3C8AB204268A3C1700D51AC8 /* RestaurantTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AB203268A3C1700D51AC8 /* RestaurantTabBarView.swift */; };
@@ -37,6 +36,7 @@
 		3CBFB587269815EC00E7EB30 /* RestaurantImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */; };
 		3CC2847726921F2D0075399E /* GateName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2847626921F2D0075399E /* GateName.swift */; };
 		3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */; };
+		3CCA722526A58E2100D88B06 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCA722426A58E2100D88B06 /* Metal.framework */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
@@ -174,7 +174,6 @@
 		3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageViewController.swift; sourceTree = "<group>"; };
 		3C88A4A626A207C400E7FC75 /* RestaurantImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageViewModel.swift; sourceTree = "<group>"; };
 		3C88A4A826A210E300E7FC75 /* RestaurantImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		3C8AA2D726A04D56002D6451 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		3C8AB201268A376500D51AC8 /* RestaurantTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableView.swift; sourceTree = "<group>"; };
 		3C8AB203268A3C1700D51AC8 /* RestaurantTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTabBarView.swift; sourceTree = "<group>"; };
 		3C9B2BD326143C9900CC010F /* RatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStackView.swift; sourceTree = "<group>"; };
@@ -193,6 +192,7 @@
 		3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageResponseModel.swift; sourceTree = "<group>"; };
 		3CC2847626921F2D0075399E /* GateName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateName.swift; sourceTree = "<group>"; };
 		3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AlignTextBelow.swift"; sourceTree = "<group>"; };
+		3CCA722426A58E2100D88B06 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
 		7C036AB92698164700F6C29B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
@@ -249,7 +249,6 @@
 		7C1F790B2632E1F400C7B41D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7C1F790D2632E1FB00C7B41D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7C1F790F2632E20200C7B41D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		7C1F79112632E20800C7B41D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		7C1F79DC2633025900C7B41D /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		7C1F79DE26330ACF00C7B41D /* SearchRestaurantRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantRequestDTO.swift; sourceTree = "<group>"; };
 		7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantByKeywordResponseModel.swift; sourceTree = "<group>"; };
@@ -338,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1F79102632E20200C7B41D /* SystemConfiguration.framework in Frameworks */,
-				3C8AA2D826A04D56002D6451 /* Metal.framework in Frameworks */,
+				3CCA722526A58E2100D88B06 /* Metal.framework in Frameworks */,
 				7C1F790E2632E1FB00C7B41D /* CoreLocation.framework in Frameworks */,
 				7C1F790C2632E1F500C7B41D /* QuartzCore.framework in Frameworks */,
 				7C1F790A2632E1ED00C7B41D /* libc++.tbd in Frameworks */,
@@ -390,8 +389,7 @@
 		3F955F326C60DB233DE0AFBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C8AA2D726A04D56002D6451 /* Metal.framework */,
-				7C1F79112632E20800C7B41D /* OpenGLES.framework */,
+				3CCA722426A58E2100D88B06 /* Metal.framework */,
 				7C1F790F2632E20200C7B41D /* SystemConfiguration.framework */,
 				7C1F790D2632E1FB00C7B41D /* CoreLocation.framework */,
 				7C1F790B2632E1F400C7B41D /* QuartzCore.framework */,

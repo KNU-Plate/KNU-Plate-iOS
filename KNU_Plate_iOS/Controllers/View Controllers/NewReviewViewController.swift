@@ -16,6 +16,8 @@ class NewReviewViewController: UIViewController {
     
     lazy var existingMenusPickerView = UIPickerView()
     
+    weak var delegate: NewReviewDelegate?
+    
     // 수정 필요 mallIID
     private var viewModel: NewReviewViewModel!
     

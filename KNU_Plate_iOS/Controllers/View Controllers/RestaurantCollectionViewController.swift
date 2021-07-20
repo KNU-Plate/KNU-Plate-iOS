@@ -14,13 +14,13 @@ class RestaurantCollectionViewController: UIViewController {
     
     var gate: Gate?
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
     
-    let floatingButton = UIButton().then {
+    private let floatingButton = UIButton().then {
         let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 30))
         $0.setImage(UIImage(systemName: "plus", withConfiguration: configuration), for: .normal)
         $0.addBounceReaction()

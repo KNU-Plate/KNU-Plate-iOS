@@ -119,6 +119,10 @@ extension RestaurantInfoViewModel {
         return self.restaurant?.longitude ?? 128.609971
     }
     
+    var kakaoMallID: Int? {
+        return self.restaurant?.kakaoMallID
+    }
+    
     var isFavorite: Bool {
         if let restaurant = self.restaurant {
             if restaurant.myRecommend == "Y" {

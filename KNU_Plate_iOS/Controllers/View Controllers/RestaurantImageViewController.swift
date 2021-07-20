@@ -10,7 +10,7 @@ class RestaurantImageViewController: UIViewController {
     var mallID: Int?
     private var restaurantImageVM = RestaurantImageViewModel()
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView

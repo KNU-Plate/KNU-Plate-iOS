@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class LocationTableViewCell: UITableViewCell, MTMapViewDelegate {
+class LocationTableViewCell: UITableViewCell {
     
     let mapView = MTMapView()
     let poiItem = MTMapPOIItem()
@@ -12,7 +12,6 @@ class LocationTableViewCell: UITableViewCell, MTMapViewDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         print("👌 LocationTableViewCell - init")
         
-        mapView.delegate = self
         mapView.baseMapType = .standard
         
         self.addSubview(mapView)
