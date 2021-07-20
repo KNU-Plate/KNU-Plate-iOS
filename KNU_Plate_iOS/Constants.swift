@@ -15,6 +15,8 @@ struct Constants {
         static let welcomeViewController                    = "WelcomeViewController"
         static let loginViewController                      = "LoginViewController"
         static let registerViewController                   = "RegisterViewController"
+        static let registerNavigationController             = "RegisterNavigationController"
+        static let IDInputViewController                    = "IDInputViewController"
         static let emailVerificationViewController          = "EmailVerificationViewController"
         static let congratulateViewController               = "CongratulateViewController"
         
