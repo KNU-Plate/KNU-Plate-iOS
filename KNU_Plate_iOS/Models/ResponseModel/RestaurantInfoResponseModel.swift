@@ -19,6 +19,7 @@ struct RestaurantInfoResponseModel: Decodable {
     let menus: [ExistingMenuModel]
     let reviewCount: Int
     let myRecommend: String
+    let kakaoMallID: Int?
     
     enum CodingKeys: String, CodingKey {
         case mallID = "mall_id"
@@ -35,5 +36,6 @@ struct RestaurantInfoResponseModel: Decodable {
         case fileFolder = "file_folder"
         case menus, reviewCount
         case myRecommend = "my_recommend"
+        case kakaoMallID = "kakao_mall_id"
     }
 }
