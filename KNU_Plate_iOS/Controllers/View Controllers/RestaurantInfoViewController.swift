@@ -3,7 +3,7 @@ import SnapKit
 import SDWebImage
 import SnackBar_swift
 
-protocol NewReviewDelegate {
+protocol NewReviewDelegate: AnyObject {
     func didCompleteReviewUpload()
 }
 
@@ -28,7 +28,7 @@ class RestaurantInfoViewController: UIViewController {
     private var returnEmptyLocationCell: Bool = false
     private var returnEmptyMenuCell: Bool = true
     
-    var favoriteButton: UIBarButtonItem?
+    private var favoriteButton: UIBarButtonItem?
     
     var mallID: Int?
     
@@ -124,7 +124,7 @@ extension RestaurantInfoViewController {
             customTableView.tableView.allowsSelection = true
         case 1:
             currentButton = tabBarView.locationButton
-            customTableView.tableView.allowsSelection = false
+            customTableView.tableView.allowsSelection = true
         case 2:
             currentButton = tabBarView.menuButton
             customTableView.tableView.allowsSelection = false
@@ -409,6 +409,35 @@ extension RestaurantInfoViewController: UITableViewDelegate {
                                              review: review)
             nextVC.configure(with: reviewDetails)
             self.navigationController?.pushViewController(nextVC, animated: true)
+            tableView.deselectRow(at: indexPath, animated: false)
+        case 1:
+            let url: String
+            if let kakaoMallID = restaurantInfoVM.kakaoMallID {
+                url = "kakaomap://place?id=\(kakaoMallID)"
+            } else {
+                url = "kakaomap://look?p=\(restaurantInfoVM.latitude),\(restaurantInfoVM.longitude)"
+            }
+            
+            guard let url = URL(string: url) else { return }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                print("open URL: \(url)")
+                self.presentAlertWithConfirmAction(title: "카카오맵 열기",
+                                                   message: "카카오맵으로 연결하시겠습니까?") { isOKAction in
+                    if isOKAction {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            } else {
+                guard let baseURL = URL(string: "https://itunes.apple.com/us/app/id304608425?mt=8") else { return }
+                print("open baseURL: \(baseURL)")
+                self.presentAlertWithConfirmAction(title: "카카오맵 설치",
+                                                   message: "카카오맵 설치 화면으로 이동하시겠습니까?") { isOKAction in
+                    if isOKAction {
+                        UIApplication.shared.open(baseURL, options: [:], completionHandler: nil)
+                    }
+                }
+            }
             tableView.deselectRow(at: indexPath, animated: false)
         default:
             return
