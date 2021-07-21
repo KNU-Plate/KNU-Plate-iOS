@@ -7,6 +7,8 @@ protocol RestaurantInfoViewModelDelegate: AnyObject {
     func didFetchMenu()
     func didMarkFavorite()
     func didFailedMarkFavorite()
+    func didDeleteMyReview()
+    func didFailedDeletingMyReview()
 }
 
 // MARK: - Main Body
@@ -281,6 +283,23 @@ extension RestaurantInfoViewModel {
     }
 }
 
+//MARK: - Related To Deleting My Review
+extension RestaurantInfoViewModel {
+    
+    func deleteMyReview(reviewID: Int) {
+        
+        UserManager.shared.deleteMyReview(reviewID: reviewID) { [weak self] result in
+            guard let self = self else { return}
+            switch result {
+            case .success:
+                self.delegate?.didDeleteMyReview()
+            case .failure:
+                self.delegate?.didFailedDeletingMyReview()
+            }
+        }
+    }
+}
+
 // MARK: - RestaurantReviewViewModel
 /// Only used in tableView(cellForRowAt:) method
 class RestaurantReviewViewModel {
@@ -294,6 +313,10 @@ class RestaurantReviewViewModel {
 extension RestaurantReviewViewModel {
     var hasReviewImage: Bool {
         return self.review.reviewImageFileFolder != nil
+    }
+    
+    var userID: String {
+        return self.review.userID
     }
     
     var reviewID: Int {

@@ -5,7 +5,7 @@ import SnackBar_swift
 
 protocol ReviewTableViewCellDelegate {
     func goToReportReviewVC(reviewID: Int?, displayName: String?)
-    func presentDeleteActionAlert(reviewID: Int)
+    func presentDeleteActionAlert(reviewID: Int?)
 }
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
@@ -27,6 +27,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     var reviewID: Int?
     var userNickname: String?
+    var userID: String?
     
     func configureUI(reviewImageCount: Int?) {
         
@@ -58,19 +59,30 @@ class ReviewTableViewCell: UITableViewCell {
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
-        let reportReview = UIAlertAction(title: "게시글 신고하기",
-                                         style: .default) { alert in
+        // 현재 리뷰가 내가 쓴 리뷰라면
+        if self.userID == User.shared.id {
             
-            self.delegate?.goToReportReviewVC(reviewID: self.reviewID,
-                                              displayName: self.userNickname)
+            let deleteAction = UIAlertAction(title: "리뷰 삭제하기",
+                                             style: .destructive) { alert in
+                self.delegate?.presentDeleteActionAlert(reviewID: self.reviewID!)
+            }
+            actionSheet.addAction(deleteAction)
+        }
+        // 남이 쓴 리뷰라면
+        else {
+            let reportAction = UIAlertAction(title: "게시글 신고하기",
+                                             style: .default) { alert in
+                
+                self.delegate?.goToReportReviewVC(reviewID: self.reviewID,
+                                                  displayName: self.userNickname)
+            }
+            actionSheet.addAction(reportAction)
         }
         
         let cancelAction = UIAlertAction(title: "취소",
                                          style: .cancel,
                                          handler: nil)
-        actionSheet.addAction(reportReview)
         actionSheet.addAction(cancelAction)
-        
         let vc = self.window?.rootViewController
         vc?.present(actionSheet, animated: true)
     }

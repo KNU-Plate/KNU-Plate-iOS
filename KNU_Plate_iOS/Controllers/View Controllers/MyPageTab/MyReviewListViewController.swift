@@ -229,9 +229,16 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
 
 extension MyReviewListViewController: ReviewTableViewCellDelegate {
     
+    func presentDeleteActionAlert(reviewID: Int?) {
+        
+        guard let reviewID = reviewID else { return }
+        self.viewModel.deleteMyReview(reviewID: reviewID)
+    }
+    
+    
     // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
-        
+        //
     }
     
     func presentDeleteActionAlert(reviewID: Int) {

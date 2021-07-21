@@ -243,6 +243,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
                 
                 reviewCell.reviewID = reviewVM.reviewID
                 reviewCell.userNickname = reviewVM.userNickname
+                reviewCell.userID = reviewVM.userID
                 reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
                 reviewCell.rating.setStarsRating(rating: reviewVM.rating)
                 reviewCell.userNicknameLabel.text = reviewVM.userNickname
@@ -340,22 +341,13 @@ extension RestaurantInfoViewController: UITableViewDataSource {
 
 // MARK: - ReviewTableViewCellDelegate
 extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
+    
+    // 게시글 신고하기
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
         guard let reviewID = reviewID, let displayName = displayName else {
-            SnackBar.make(in: self.view,
-                          message: "정보를 불러올 수 없습니다. 다시 시도해주세요.",
-                          duration: .lengthLong).show()
+            self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
             return
         }
-        
-        guard displayName != User.shared.displayName else {
-            
-            SnackBar.make(in: self.view,
-                          message: "본인 게시글을 본인이 신고할 수는 없습니다 🤔",
-                          duration: .lengthLong).show()
-            return
-        }
-   
         let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
             fatalError()
@@ -364,7 +356,21 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         self.present(vc, animated: true)
     }
     
-    func presentDeleteActionAlert(reviewID: Int) {
+    // 내가 쓴 리뷰 삭제
+    func presentDeleteActionAlert(reviewID: Int?) {
+        guard let reviewID = reviewID else {
+            self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
+            return
+        }
+        self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
+                                           message: "") { selectedOk in
+            if selectedOk {
+                 //
+                self.restaurantInfoVM.deleteMyReview(reviewID: reviewID)
+            }
+            
+        }
+        
         
     }
 }
@@ -456,9 +462,7 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
     
     func didFailedMarkFavorite() {
-        SnackBar.make(in: self.view,
-                      message: "매장 좋아요에 실패하였습니다. 잠시 후 다시 시도해주세요",
-                      duration: .lengthLong).show()
+        self.showSimpleBottomAlert(with: "매장 좋아요에 실패하였습니다. 잠시 후 다시 시도해주세요")
         favoriteButton?.isEnabled = true
     }
     
@@ -491,6 +495,16 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didFetchMenu() {
         print("didFetchMenu reloadData")
         customTableView.tableView.reloadData()
+    }
+    
+    func didDeleteMyReview() {
+        print("✏️ didDeleteMyReview")
+        restaurantInfoVM.refreshViewModel()
+    }
+    
+    func didFailedDeletingMyReview() {
+        print("❗️ didFailedDeletiangMyReview")
+        self.showSimpleBottomAlert(with: "리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요 😥")
     }
 }
 
