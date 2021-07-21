@@ -4,8 +4,6 @@ import ImageSlideshow
 
 class ReviewDetailViewController: UIViewController {
     
-    
-    
     @IBOutlet var userProfileImageView: UIImageView!
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var userMedalImageView: UIImageView!
