@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import SPIndicator
 
 /// Shows the main screen of the app
 class MainViewController: UIViewController {
@@ -83,6 +84,7 @@ class MainViewController: UIViewController {
         setupAllButtons()
         setupView()
         setButtonTarget()
+        welcomeUser()
     }
 }
 
@@ -199,5 +201,17 @@ extension MainViewController {
         nextViewController.navigationItem.title = Constants.gateNames[sender.tag]
         nextViewController.gate = Gate.gateFromInt(number: sender.tag)
         self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+}
+
+//MARK: - Other Methods
+extension MainViewController {
+    
+    func welcomeUser() {
+        
+        SPIndicator.present(title: "\(User.shared.displayName)님",
+                            message: "환영합니다 🎉",
+                            preset: .custom(UIImage(systemName: "face.smiling")!))
+        
     }
 }
