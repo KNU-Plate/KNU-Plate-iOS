@@ -14,6 +14,10 @@ class RestaurantCollectionViewController: UIViewController {
     
     var gate: Gate?
     
+    private let searchController = UISearchController(searchResultsController: nil).then {
+        $0.searchBar.placeholder = "식당 검색"
+    }
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -38,8 +42,9 @@ class RestaurantCollectionViewController: UIViewController {
         
         restaurantListVM.delegate = self
         setupCollectionView()
-        setFloatingButton()
-        
+        setupSearchController()
+        setupFloatingButton()
+                
         guard let gate = gate else { return }
         restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
     }
@@ -63,7 +68,15 @@ extension RestaurantCollectionViewController {
         }
     }
     
-    func setFloatingButton() {
+    func setupSearchController() {
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.enablesReturnKeyAutomatically = false
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    func setupFloatingButton() {
         let safeArea = self.view.safeAreaLayoutGuide
         let buttonHeight: CGFloat = 60
         
@@ -79,6 +92,33 @@ extension RestaurantCollectionViewController {
         let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
         let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.searchRestaurantViewController)
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension RestaurantCollectionViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let gate = gate else { return }
+        guard let text = searchBar.text else { return }
+        restaurantListVM.resetRestaurantList()
+        if text != "" {
+            restaurantListVM.fetchRestaurantList(mall: text, gate: gate.rawValue)
+            self.searchController.isActive = false
+            searchBar.text = text
+        } else {
+            self.searchController.isActive = false
+        }
+    }
+}
+
+//MARK: - UISearchControllerDelegate
+extension RestaurantCollectionViewController: UISearchControllerDelegate {
+    func willDismissSearchController(_ searchController: UISearchController) {
+        guard let gate = gate else { return }
+        if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
+            restaurantListVM.resetRestaurantList()
+            restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+        }
     }
 }
 
@@ -99,6 +139,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
                                    placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
+        cell.countLabel.text = "10"
         cell.ratingStackView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID
         
