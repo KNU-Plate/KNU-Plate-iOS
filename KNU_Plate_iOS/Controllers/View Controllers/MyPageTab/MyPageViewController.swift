@@ -91,32 +91,32 @@ extension MyPageViewController {
     
     func loadUserProfileInfo() {
         
-        UserManager.shared.loadUserProfileInfo { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(_):
-                DispatchQueue.main.async {
-                    
-                    SPIndicator.present(title: "\(User.shared.displayName)님",
-                                        message: "환영합니다",
-                                        preset: .custom(UIImage(systemName: "face.smiling")!))
-                    
-                    self.userNickname.text = User.shared.displayName
-                    self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
-                    
-                    if let profileImage = User.shared.profileImage {
-                        self.profileImageButton.setImage(profileImage, for: .normal)
-                    }
-                }
-            case .failure(let error):
-                print("\(error.errorDescription)")
-                self.showSimpleBottomAlertWithAction(message: "프로필 정보 불러오기에 실패하였습니다 🥲",
-                                                buttonTitle: "재시도",
-                                                action: self.loadUserProfileInfo)
-            }
-        }
+//        UserManager.shared.loadUserProfileInfo { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(_):
+//                DispatchQueue.main.async {
+//
+//                    SPIndicator.present(title: "\(User.shared.displayName)님",
+//                                        message: "환영합니다",
+//                                        preset: .custom(UIImage(systemName: "face.smiling")!))
+//
+//                    self.userNickname.text = User.shared.displayName
+//                    self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+//
+//                    if let profileImage = User.shared.profileImage {
+//                        self.profileImageButton.setImage(profileImage, for: .normal)
+//                    }
+//                }
+//            case .failure(let error):
+//                print("\(error.errorDescription)")
+//                self.showSimpleBottomAlertWithAction(message: "프로필 정보 불러오기에 실패하였습니다 🥲",
+//                                                buttonTitle: "재시도",
+//                                                action: self.loadUserProfileInfo)
+//            }
+//        }
     }
     
     func removeProfileImage() {
@@ -252,7 +252,7 @@ extension MyPageViewController {
         
         initializeTableView()
         initializeProfileImageButton()
-        initializeMedalImage()
+        initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
     }
     
@@ -270,11 +270,18 @@ extension MyPageViewController {
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
     }
     
-    func initializeMedalImage() {
+    func initializeUserInfoRelatedUIComponents() {
         
         userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+        self.userNickname.text = User.shared.displayName
+        self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+
+        if let profileImage = User.shared.profileImage {
+            self.profileImageButton.setImage(profileImage, for: .normal)
+        }
+
     }
-    
+
     func updateProfileImageButton(with image: UIImage) {
         
         profileImageButton.setImage(image, for: .normal)

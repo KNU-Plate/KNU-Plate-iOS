@@ -193,33 +193,52 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        viewModel.selectedIndex = indexPath
-//
-//        guard let vc = self.storyboard?.instantiateViewController(
-//                identifier: Constants.StoryboardID.reviewDetailViewController
-//        ) as? ReviewDetailViewController else { return }
-//
-//        guard let cell = tableView.cellForRow(
-//                at: viewModel.selectedIndex!
-//        ) as? ReviewTableViewCell else { return }
-//
-//        let reviewDetails = cell.getReviewDetails()
-//        vc.configure(with: reviewDetails)
-//
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let vc = self.storyboard?.instantiateViewController(
+                identifier: Constants.StoryboardID.reviewDetailViewController
+        ) as? ReviewDetailViewController else { return }
+        
+        viewModel.selectedIndex = indexPath
+        let reviewDetailVM = viewModel.reviewList[indexPath.row]
+
+        
+        let profileImageURL = viewModel.getProfileImageURL(index: indexPath.row)
+        let reviewImageFiles = reviewDetailVM.reviewImageFileFolder?.files
+        let nickname = reviewDetailVM.userInfo.displayName
+        let medal = reviewDetailVM.userInfo.medal
+        let rating = reviewDetailVM.rating
+        let review = reviewDetailVM.review
+        
+        let reviewDetails = ReviewDetail(profileImageURL: profileImageURL,
+                                         nickname: nickname,
+                                         medal: medal,
+                                         reviewImageFiles: reviewImageFiles,
+                                         rating: rating,
+                                         review: review)
+        
+        vc.configure(with: reviewDetails)
+        navigationController?.pushViewController(vc, animated: true)
+        
+
+    }
 }
 
 //MARK: - ReviewTableViewCellDelegate
 
 extension MyReviewListViewController: ReviewTableViewCellDelegate {
     
+    func presentDeleteActionAlert(reviewID: Int?) {
+        
+        guard let reviewID = reviewID else { return }
+        self.viewModel.deleteMyReview(reviewID: reviewID)
+    }
+    
+    
     // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
-        
+        //
     }
     
     func presentDeleteActionAlert(reviewID: Int) {
