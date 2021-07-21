@@ -47,9 +47,10 @@ extension RestaurantImageViewModel {
                 guard let self = self else { return }
                 if data.isEmpty {
                     self.hasMore = false
+                } else {
+                    self.lastFileIdx = data.last?.index
                 }
                 self.images.append(contentsOf: data)
-                self.lastFileIdx = data.last?.index
                 self.isFetchingData = false
                 self.delegate?.didFetchImage()
             case .failure:

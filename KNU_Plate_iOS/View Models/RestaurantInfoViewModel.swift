@@ -249,10 +249,10 @@ extension RestaurantInfoViewModel {
                 guard let self = self else { return }
                 if data.isEmpty {
                     self.hasMoreReview = false
-                    return
+                } else {
+                    self.lastReviewID = data.last?.reviewID
                 }
                 self.reviews.append(contentsOf: data)
-                self.lastReviewID = data.last?.reviewID
                 self.isFetchingReview = false
                 self.delegate?.didFetchReview()
             case .failure:
