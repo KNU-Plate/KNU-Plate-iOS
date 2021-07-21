@@ -25,6 +25,13 @@ extension RestaurantListViewModel {
         self.fetchFavoriteRestaurantList()
     }
     
+    func resetRestaurantList() {
+        self.restaurants.removeAll()
+        self.hasMore = true
+        self.isFetchingData = false
+        self.lastMallID = nil
+    }
+    
     func restaurantAtIndex(_ index: Int) -> RestaurantViewModel {
         let restaurant = self.restaurants[index]
         return RestaurantViewModel(restaurant)
@@ -41,10 +48,10 @@ extension RestaurantListViewModel {
                 guard let self = self else { return }
                 if data.isEmpty {
                     self.hasMore = false
-                    return
+                } else {
+                    self.lastMallID = data.last?.mallID
                 }
                 self.restaurants.append(contentsOf: data)
-                self.lastMallID = data.last?.mallID
                 self.isFetchingData = false
                 self.delegate?.didFetchRestaurantList()
             case .failure:
@@ -61,10 +68,10 @@ extension RestaurantListViewModel {
                 guard let self = self else { return }
                 if data.isEmpty {
                     self.hasMore = false
-                    return
+                } else {
+                    self.lastMallID = data.last?.mallID
                 }
                 self.restaurants.append(contentsOf: data)
-                self.lastMallID = data.last?.mallID
                 self.isFetchingData = false
                 self.delegate?.didFetchRestaurantList()
             case .failure:
