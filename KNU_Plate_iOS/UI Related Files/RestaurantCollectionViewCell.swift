@@ -17,18 +17,30 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let countStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    let pencilImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "square.and.pencil")
+        imageView.tintColor = UIColor.systemGray
+        return imageView
+    }()
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.systemGray
+        return label
+    }()
+    
+    
     let ratingStackView: RatingStackView = {
         let stackView = RatingStackView()
         return stackView
-    }()
-    
-    let favoriteButton: UIButton = {
-        let button = UIButton()
-        button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-        button.setImage(UIImage(named: "favorite"), for: .normal)
-        button.addBounceReaction()
-        return button
     }()
     
     var mallID: Int?
@@ -59,13 +71,16 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     func setCell() {
         let inset: CGFloat = 3
         let imageViewHeight: CGFloat = self.frame.height*(0.7/Constants.heightPerWidthRestaurantCell)
-        let ratingStackViewWidth: CGFloat = self.frame.width*(1/3)
+        let stackViewWidth: CGFloat = self.frame.width*(0.35)
         let nameLabelHeight: CGFloat = (self.frame.height - imageViewHeight)*(2/5)
+        
+        countStackView.addArrangedSubview(pencilImageView)
+        countStackView.addArrangedSubview(countLabel)
         
         self.addSubview(imageView)
         self.addSubview(nameLabel)
+        self.addSubview(countStackView)
         self.addSubview(ratingStackView)
-        self.addSubview(favoriteButton)
         
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(imageViewHeight)
@@ -78,17 +93,17 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
             make.left.right.equalToSuperview().inset(inset*2)
         }
         
-        ratingStackView.snp.makeConstraints { (make) in
-            make.width.equalTo(ratingStackViewWidth)
+        countStackView.snp.makeConstraints { make in
+            make.width.equalTo(stackViewWidth)
             make.top.equalTo(nameLabel.snp.bottom).offset(inset)
             make.left.equalToSuperview()
             make.bottom.equalToSuperview().inset(inset*2)
         }
         
-        favoriteButton.snp.makeConstraints { (make) in
-            make.width.equalTo(favoriteButton.snp.height)
-            make.top.equalTo(nameLabel.snp.bottom).offset(inset/2)
-            make.right.equalToSuperview().inset(inset*2)
+        ratingStackView.snp.makeConstraints { (make) in
+            make.width.equalTo(stackViewWidth)
+            make.top.equalTo(nameLabel.snp.bottom).offset(inset)
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview().inset(inset*2)
         }
     }
