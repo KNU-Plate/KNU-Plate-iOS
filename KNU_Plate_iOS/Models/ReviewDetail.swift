@@ -10,4 +10,5 @@ struct ReviewDetail {
     var reviewImageFiles: [Files]?
     var rating: Int = 0
     var review: String = ""
+    var date: String = ""
 }

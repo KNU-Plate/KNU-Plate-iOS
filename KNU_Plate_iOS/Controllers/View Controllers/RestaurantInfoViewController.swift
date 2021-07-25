@@ -408,13 +408,15 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             let rating = reviewVM.rating
             let review = reviewVM.reviewContent
             let reviewImageFiles = reviewVM.reviewImageFiles
+            let date = reviewVM.getFormattedDate()
             
             let reviewDetails = ReviewDetail(profileImageURL: profileImageURL,
                                              nickname: nickname,
                                              medal: medal,
                                              reviewImageFiles: reviewImageFiles,
                                              rating: rating,
-                                             review: review)
+                                             review: review,
+                                             date: date)
             nextVC.configure(with: reviewDetails)
             self.navigationController?.pushViewController(nextVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: false)
