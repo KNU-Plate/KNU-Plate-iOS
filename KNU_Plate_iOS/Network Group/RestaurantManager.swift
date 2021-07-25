@@ -31,13 +31,6 @@ class RestaurantManager {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
-            print("✏️ \(model.name)")
-            print("✏️ \(model.categoryName)")
-            print("✏️ \(model.address)")
-            print("✏️ \(model.latitude)")
-            print("✏️ \(model.longitude)")
-            print("✏️ \(model.placeID)")
-            
             multipartFormData.append(Data(model.name.utf8),
                                      withName: "mall_name")
             multipartFormData.append(Data(model.categoryName.utf8),

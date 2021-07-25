@@ -248,7 +248,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
                 reviewCell.rating.setStarsRating(rating: reviewVM.rating)
                 reviewCell.userNicknameLabel.text = reviewVM.userNickname
                 reviewCell.reviewLabel.text = reviewVM.reviewContent
-                reviewCell.dateLabel.text = reviewVM.date
+                reviewCell.dateLabel.text = reviewVM.getFormattedDate()
                 reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageCount)
                 reviewCell.configureShowMoreButton()
                 
@@ -281,7 +281,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
                 reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
                 reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
                 reviewCellNoImages.reviewLabel.text = reviewVM.reviewContent
-                reviewCellNoImages.dateLabel.text = reviewVM.date
+                reviewCellNoImages.dateLabel.text = reviewVM.getFormattedDate()
                 reviewCellNoImages.configureUI()
                 reviewCellNoImages.configureShowMoreButton()
                 
