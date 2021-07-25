@@ -13,13 +13,20 @@ class MyPageViewController: UIViewController {
     @IBOutlet var infoButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
+    
     lazy var preferences = EasyTipView.Preferences()
+    var tipView: EasyTipView?
+    var tipViewIsVisible: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
         loadUserProfileInfo()
+        
+        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
+                                  preferences: preferences,
+                                  delegate: self)
     
     }
     
@@ -35,14 +42,15 @@ class MyPageViewController: UIViewController {
     
     @IBAction func pressedInfoButton(sender: UIButton) {
         
-        infoButton.isUserInteractionEnabled = false
-        initializeTipViewPreferences()
-        
-        let tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성 은메달: 리뷰 10개 이상 작성 동메달: 리뷰 0회 이상",
-                              preferences: preferences,
-                              delegate: self)
-        tipView.show(forView: self.infoButton,
-                     withinSuperview: self.view)
+        if tipViewIsVisible {
+            tipView?.dismiss()
+            tipViewIsVisible = false
+        } else {
+            tipView?.show(forView: self.infoButton,
+                          withinSuperview: self.view)
+            tipViewIsVisible = true
+            
+        }
     }
     
     @IBAction func pressedSettingsButton(_ sender: UIBarButtonItem) {
@@ -259,6 +267,7 @@ extension MyPageViewController {
         initializeProfileImageButton()
         initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
+        initializeTipViewPreferences()
     }
     
     func initializeTableView() {
