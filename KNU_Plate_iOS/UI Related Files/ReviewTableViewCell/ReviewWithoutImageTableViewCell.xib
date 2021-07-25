@@ -119,17 +119,25 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자가 작성한 리뷰사용자가 작성한 리뷰사용자가 작성한 리뷰사용자" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XqR-Mi-iUW">
-                        <rect key="frame" x="15" y="75" width="339" height="82"/>
+                        <rect key="frame" x="15" y="75" width="339" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="2021-07-31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYA-wf-MVn" userLabel="Date Label">
+                        <rect key="frame" x="15" y="113.5" width="71" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iYA-wf-MVn" firstAttribute="top" secondItem="XqR-Mi-iUW" secondAttribute="bottom" constant="5" id="5Ep-8E-O0Q"/>
+                    <constraint firstAttribute="bottom" secondItem="iYA-wf-MVn" secondAttribute="bottom" constant="10" id="7fw-tT-tBa"/>
+                    <constraint firstItem="iYA-wf-MVn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Diq-uP-1ac"/>
                     <constraint firstItem="f7v-4X-YQM" firstAttribute="top" secondItem="TdZ-j1-5yW" secondAttribute="bottom" constant="10" id="GxS-Ne-UOJ"/>
                     <constraint firstItem="TdZ-j1-5yW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Qsu-Jw-AT8"/>
                     <constraint firstItem="f7v-4X-YQM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="T0C-oj-DSv"/>
-                    <constraint firstAttribute="bottom" secondItem="XqR-Mi-iUW" secondAttribute="bottom" constant="10" id="Viw-PD-gGq"/>
                     <constraint firstItem="TdZ-j1-5yW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Ygk-G1-5Ws"/>
                     <constraint firstItem="0Ao-Rj-VLI" firstAttribute="leading" secondItem="TdZ-j1-5yW" secondAttribute="trailing" constant="10" id="dwJ-Rj-Rmf"/>
                     <constraint firstItem="XqR-Mi-iUW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fXM-gi-obM"/>
@@ -145,6 +153,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="dateLabel" destination="iYA-wf-MVn" id="aQH-f8-FbN"/>
                 <outlet property="rating" destination="f7v-4X-YQM" id="zGJ-Qd-Wzd"/>
                 <outlet property="reviewLabel" destination="XqR-Mi-iUW" id="WWH-De-3wW"/>
                 <outlet property="showMoreButton" destination="Pji-Pv-0oY" id="5CM-PO-rYR"/>

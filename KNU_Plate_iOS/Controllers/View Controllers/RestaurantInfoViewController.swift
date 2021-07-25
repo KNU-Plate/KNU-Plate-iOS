@@ -281,6 +281,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
                 reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
                 reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
                 reviewCellNoImages.reviewLabel.text = reviewVM.reviewContent
+                reviewCellNoImages.dateLabel.text = reviewVM.date
                 reviewCellNoImages.configureUI()
                 reviewCellNoImages.configureShowMoreButton()
                 
