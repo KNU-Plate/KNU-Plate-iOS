@@ -301,7 +301,7 @@ extension RestaurantInfoViewModel {
 }
 
 // MARK: - RestaurantReviewViewModel
-/// Only used in tableView(cellForRowAt:) method
+/// Only used in tableView(cellForRowAt:) method 
 class RestaurantReviewViewModel {
     private let review: ReviewListResponseModel
     

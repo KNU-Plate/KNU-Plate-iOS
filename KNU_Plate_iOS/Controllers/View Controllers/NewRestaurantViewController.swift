@@ -15,10 +15,13 @@ class NewRestaurantViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    
         initialize()
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
     }
     
     // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화

@@ -25,15 +25,20 @@ class NewReviewViewModel {
     }
     
     /// 이미 매장에 등록되어 있는 메뉴 배열
-    var existingMenus: [ExistingMenuModel] = [] {
-        didSet {
-            self.existingMenus.append(ExistingMenuModel(menuID: 0,
-                                                        mallID: 0,
-                                                        menuName: "직접 입력",
-                                                        likes: 0,
-                                                        dislikes: 0))
-        }
-    }
+//    var existingMenus: [ExistingMenuModel] = [] {
+//        didSet {
+//            self.existingMenus.append(ExistingMenuModel(menuID: 0,
+//                                                        mallID: 0,
+//                                                        menuName: "직접 입력",
+//                                                        likes: 0,
+//                                                        dislikes: 0))
+//        }
+//    }
+    var existingMenus: [ExistingMenuModel] = [ExistingMenuModel(menuID: 0,
+                                                                mallID: 0,
+                                                                menuName: "직접 입력",
+                                                                likes: 0,
+                                                                dislikes: 0)]
     
     /// 사용자가 추가한 메뉴
     var userAddedMenus = [UserAddedMenuModel]()
@@ -54,7 +59,8 @@ class NewReviewViewModel {
     public init(mallID: Int, existingMenus: [ExistingMenuModel]) {
         
         self.mallID = mallID
-        self.existingMenus = existingMenus
+        self.existingMenus.insert(contentsOf: existingMenus, at: 0)
+//        self.existingMenus = existingMenus
     }
     
     //MARK: - Object Methods

@@ -17,6 +17,11 @@ class ChangeNicknameViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     
     @IBAction func pressedCheckDuplicateButton(_ sender: UIButton) {
         

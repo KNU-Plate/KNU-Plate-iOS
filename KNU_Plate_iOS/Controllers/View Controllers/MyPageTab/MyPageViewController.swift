@@ -23,6 +23,11 @@ class MyPageViewController: UIViewController {
     
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
         
         presentActionSheet()

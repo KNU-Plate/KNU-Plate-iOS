@@ -14,6 +14,11 @@ class ReportReviewViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     @IBAction func pressedSendButton(_ sender: UIButton) {
         
         self.view.endEditing(true)

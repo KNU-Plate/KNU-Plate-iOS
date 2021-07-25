@@ -614,10 +614,10 @@
             </objects>
             <point key="canvasLocation" x="6028.985507246377" y="65.625"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Register Navigation Controller-->
         <scene sceneID="OAc-Sq-Utp">
             <objects>
-                <navigationController storyboardIdentifier="RegisterNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="U2R-tw-6Kg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RegisterNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="U2R-tw-6Kg" customClass="RegisterNavigationController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gfH-DY-wf7">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
