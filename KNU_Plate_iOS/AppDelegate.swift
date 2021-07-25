@@ -16,18 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
 //        Test.shared.login()
-        
-        
+    
         //TEST
+        print("✏️ User.shared.isLoggedIn : \(User.shared.isLoggedIn)")
         if User.shared.isLoggedIn == true {
-            
+
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
             window?.rootViewController = mainTabBarController
-            
-            
+
+
             UserManager.shared.loadUserProfileInfo { [weak self] result in
-                
+
                 switch result {
                 case .success(_):
                     break
@@ -35,10 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("\(error.errorDescription)")
                 }
             }
-        
-            
+
+
         } else {
-            
+
             //TODO: 아래 수정
             let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
             let initialController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.registerNavigationController)

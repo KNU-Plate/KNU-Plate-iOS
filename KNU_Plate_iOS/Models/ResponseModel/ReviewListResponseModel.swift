@@ -10,6 +10,7 @@ struct ReviewListResponseModel: Decodable {
     let mallID: Int
     let review: String
     let rating: Int
+    let dateCreated: String
     let userInfo: UserDisplayModel
     let reviewImageFileFolder: FileFolder?
     
@@ -20,6 +21,7 @@ struct ReviewListResponseModel: Decodable {
         case mallID = "mall_id"
         case review = "contents"
         case rating = "evaluate"
+        case dateCreated = "date_create"
         case reviewImageFileFolder = "file_folder"
         case userInfo = "user"
     }
