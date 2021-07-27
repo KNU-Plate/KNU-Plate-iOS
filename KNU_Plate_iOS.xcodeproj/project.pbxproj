@@ -37,6 +37,7 @@
 		3CC2847726921F2D0075399E /* GateName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2847626921F2D0075399E /* GateName.swift */; };
 		3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */; };
 		3CCA722526A58E2100D88B06 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCA722426A58E2100D88B06 /* Metal.framework */; };
+		3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
 		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
@@ -194,6 +195,7 @@
 		3CC2847626921F2D0075399E /* GateName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateName.swift; sourceTree = "<group>"; };
 		3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AlignTextBelow.swift"; sourceTree = "<group>"; };
 		3CCA722426A58E2100D88B06 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
 		7C036AB92698164700F6C29B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
 				3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */,
 				3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */,
+				3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */,
 				3C88A4A226A1D8D400E7FC75 /* FavoriteRestaurantViewController.swift */,
 				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
 				7C311423261AE37200392742 /* NewReviewViewController.swift */,
@@ -986,6 +989,7 @@
 				7C5EDD4F26427A8700B79178 /* FinalMenuModel.swift in Sources */,
 				7CB8DF67264D3AB40001CC6D /* FileManager.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
+				3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */,
 				7CCDB1F726A3F0AA0092F28D /* UILabel Extension.swift in Sources */,
 				7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */,
 				7C6D2535268DAD950030F9A1 /* NoticeTableViewCell.swift in Sources */,
