@@ -4,6 +4,8 @@ import Foundation
 
 struct ReviewDetail {
     
+    var userID: String = ""
+    var reviewID: Int = 0
     var profileImageURL: URL?
     var nickname: String = ""
     var medal: Int = 3

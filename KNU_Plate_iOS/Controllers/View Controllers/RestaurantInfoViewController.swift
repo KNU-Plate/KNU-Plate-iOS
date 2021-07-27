@@ -277,6 +277,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
                 
                 reviewCellNoImages.reviewID = reviewVM.reviewID
                 reviewCellNoImages.userNickname = reviewVM.userNickname
+                reviewCellNoImages.userID = reviewVM.userID
                 reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
                 reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
                 reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
@@ -402,6 +403,8 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             guard let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.reviewDetailViewController) as? ReviewDetailViewController else { fatalError() }
             let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
             
+            let userID = reviewVM.userID
+            let reviewID = reviewVM.reviewID
             let profileImageURL = reviewVM.profileImageURL
             let nickname = reviewVM.userNickname
             let medal = reviewVM.medal
@@ -410,7 +413,9 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             let reviewImageFiles = reviewVM.reviewImageFiles
             let date = reviewVM.getFormattedDate()
             
-            let reviewDetails = ReviewDetail(profileImageURL: profileImageURL,
+            let reviewDetails = ReviewDetail(userID: userID,
+                                             reviewID: reviewID,
+                                             profileImageURL: profileImageURL,
                                              nickname: nickname,
                                              medal: medal,
                                              reviewImageFiles: reviewImageFiles,

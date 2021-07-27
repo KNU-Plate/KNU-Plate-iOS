@@ -59,6 +59,7 @@ class NoticeViewController: UIViewController {
                 if model.isEmpty {
                     DispatchQueue.main.async {
                         self.tableView.tableFooterView = nil
+                        self.tableView.tableFooterView = UIView(frame: .zero)
                     }
                     return
                 }
@@ -67,8 +68,10 @@ class NoticeViewController: UIViewController {
                 self.noticeList.append(contentsOf: model)
                 self.isFetchingData = false
                 DispatchQueue.main.async {
-                    self.tableView.tableFooterView = nil
                     self.tableView.reloadData()
+                    self.tableView.tableFooterView = nil
+//                    self.tableView.tableFooterView = UIView(frame: .zero)
+                
                 }
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
