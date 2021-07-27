@@ -63,18 +63,15 @@ extension RestaurantImageViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        /*
-                이미지 줌 뷰 컨트롤러 구현하기
-        */
-//        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) as? RestaurantInfoViewController else {
-//            fatalError("fail to instantiate view controller")
-//        }
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else {
-//            fatalError("fail to get cell for indexpath or cast cell as RestaurantCollectionViewCell")
-//        }
-//        nextViewController.navigationItem.title = cell.nameLabel.text
-//        nextViewController.mallID = cell.mallID
-//        self.navigationController?.pushViewController(nextViewController, animated: true)
+
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.imageZoomViewController) as? ImageZoomViewController else {
+            fatalError("fail to instantiate view controller")
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantImageCollectionViewCell else {
+            fatalError("fail to get cell for indexpath or cast cell as RestaurantCollectionViewCell")
+        }
+        nextVC.imageView.image = cell.imageView.image
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     // touch animation when cell is highlighted
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

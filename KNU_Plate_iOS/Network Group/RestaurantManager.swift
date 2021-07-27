@@ -349,6 +349,9 @@ class RestaurantManager {
                         print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
                     }
                 case .failure(let error):
+//                    if let jsonData = response.data {
+//                        print(String(data: jsonData, encoding: .utf8))
+//                    }
                     print("RESTAURANT MANAGER - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
                     guard let responseCode = error.responseCode else {
                         print("🥲 RESTAURANT MANAGER - Empty responseCode")

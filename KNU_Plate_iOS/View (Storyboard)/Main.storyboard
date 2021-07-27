@@ -95,10 +95,29 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Pyp-Ti-1J2"/>
+                    <connections>
+                        <segue destination="RD4-4e-oHr" kind="show" identifier="NotUsingSegue5" id="QAY-Ey-HPs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Osx-2Z-Dw5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6265" y="-245"/>
+        </scene>
+        <!--Image Zoom View Controller-->
+        <scene sceneID="A6D-2B-WyR">
+            <objects>
+                <viewController storyboardIdentifier="ImageZoomViewController" id="RD4-4e-oHr" customClass="ImageZoomViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jTV-s0-L2V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="TBx-Ef-DxV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YOV-9k-pFd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MNm-Pm-UJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7166" y="-245"/>
         </scene>
         <!--Favorite Restaurant View Controller-->
         <scene sceneID="8GN-R7-e3H">
