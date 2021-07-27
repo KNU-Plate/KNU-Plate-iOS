@@ -132,6 +132,7 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
             reviewCell.userNickname             = reviewVM.userInfo.displayName
             reviewCell.userNicknameLabel.text   = reviewVM.userInfo.displayName
             reviewCell.reviewLabel.text         = reviewVM.review
+            reviewCell.userID                   = reviewVM.userID
             reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
             reviewCell.rating.setStarsRating(rating: reviewVM.rating)
             reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
@@ -169,6 +170,7 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
             reviewCellNoImages.reviewID                 = reviewVM.reviewID
             reviewCellNoImages.userNickname             = reviewVM.userInfo.displayName
             reviewCellNoImages.userNicknameLabel.text   = reviewVM.userInfo.displayName
+            reviewCellNoImages.userID                   = reviewVM.userID
             reviewCellNoImages.reviewLabel.text         = reviewVM.review
             reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
             reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
@@ -203,7 +205,8 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         viewModel.selectedIndex = indexPath
         let reviewDetailVM = viewModel.reviewList[indexPath.row]
 
-        
+        let reviewID = reviewDetailVM.reviewID
+        let userID = reviewDetailVM.userID
         let profileImageURL = viewModel.getProfileImageURL(index: indexPath.row)
         let reviewImageFiles = reviewDetailVM.reviewImageFileFolder?.files
         let nickname = reviewDetailVM.userInfo.displayName
@@ -211,7 +214,9 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         let rating = reviewDetailVM.rating
         let review = reviewDetailVM.review
         
-        let reviewDetails = ReviewDetail(profileImageURL: profileImageURL,
+        let reviewDetails = ReviewDetail(userID: userID,
+                                         reviewID: reviewID,
+                                         profileImageURL: profileImageURL,
                                          nickname: nickname,
                                          medal: medal,
                                          reviewImageFiles: reviewImageFiles,

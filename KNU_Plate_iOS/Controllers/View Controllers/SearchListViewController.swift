@@ -16,7 +16,6 @@ class SearchListViewController: UITableViewController {
     
     var delegate: SearchListDelegate?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

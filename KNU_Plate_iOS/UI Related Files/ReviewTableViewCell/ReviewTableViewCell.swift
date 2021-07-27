@@ -63,7 +63,7 @@ class ReviewTableViewCell: UITableViewCell {
         // 현재 리뷰가 내가 쓴 리뷰라면
         if self.userID == User.shared.id {
             
-            let deleteAction = UIAlertAction(title: "리뷰 삭제하기",
+            let deleteAction = UIAlertAction(title: "내 리뷰 삭제하기",
                                              style: .destructive) { alert in
                 self.delegate?.presentDeleteActionAlert(reviewID: self.reviewID!)
             }

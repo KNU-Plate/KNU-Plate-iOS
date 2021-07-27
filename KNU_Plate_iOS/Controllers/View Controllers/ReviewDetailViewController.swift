@@ -26,16 +26,7 @@ class ReviewDetailViewController: UIViewController {
     
     // 객체 생성 전 초기화
     func configure(with model: ReviewDetail) {
-        
         reviewDetails = model
-        
-//        reviewDetails.profileImageURL = model.profileImageURL
-//        reviewDetails.nickname = model.nickname
-//        reviewDetails.medal = model.medal
-//        reviewDetails.rating = model.rating
-//        reviewDetails.review = model.review
-//        reviewDetails.reviewImageFiles = model.reviewImageFiles
-     
     }
     
     // Review Cell
@@ -67,13 +58,54 @@ class ReviewDetailViewController: UIViewController {
             configureImageSlideShow(imageExists: false)
         }
 
+        // 내가 쓴 리뷰면 삭제 UIBarButton 추가하기
+        if reviewDetails.userID == User.shared.id {
+            
+            let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteReview))
+            self.navigationItem.rightBarButtonItem = trashButton
+        }
         configureUI()
     }
-    
+       
     func configureUI() {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         slideShow.layer.cornerRadius = 10
+    }
+    
+    @objc func deleteReview() {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "내 리뷰 삭제하기",
+                                         style: .destructive) { alert in
+            
+            UserManager.shared.deleteMyReview(reviewID: self.reviewDetails.reviewID) { [weak self] result in
+                
+                guard let self = self else { return }
+                
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
+                case .failure(let error):
+                    self.showSimpleBottomAlert(with: error.errorDescription)
+                }
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     func convertURLsToImageSource() {
@@ -106,7 +138,7 @@ extension ReviewDetailViewController {
             let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.pressedImage))
             slideShow.addGestureRecognizer(recognizer)
         } else {
-            slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultReviewImage)!)])
+            slideShow.setImageInputs([ImageSource(image: UIImage(named: Constants.Images.defaultReviewCellPlaceHolder)!)])
         }
         
         slideShow.contentScaleMode = .scaleAspectFill
