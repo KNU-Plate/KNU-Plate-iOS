@@ -27,6 +27,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        if User.shared.isLoggedIn == true {
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
+            window?.rootViewController = mainTabBarController
+
+
+            UserManager.shared.loadUserProfileInfo { result in
+
+                switch result {
+                case .success(_):
+                    break
+                case .failure(let error):
+                    print("\(error.errorDescription)")
+                }
+            }
+
+
+        } else {
+            
+            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as! IDInputViewController
+            
+
+            var navigationController: UINavigationController = UINavigationController()
+            navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+            navigationController.viewControllers = [rootViewController]
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        }
+        
+        
+        
+        
 
     }
     

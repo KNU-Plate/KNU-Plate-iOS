@@ -15,10 +15,13 @@ class NewRestaurantViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    
         initialize()
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
     }
     
     // SearchRestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
@@ -40,6 +43,14 @@ class NewRestaurantViewController: UIViewController {
         viewModel.upload()
        
     }
+    
+    func goBackToHomeVC() {
+        
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+    }
+    
+    
 
 }
 
@@ -53,10 +64,7 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: "매장 등록 성공 🎉",
                                         buttonTitle: "홈으로 돌아가기") {
-            
-            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-            //Go To MainViewController 해야
+            self.goBackToHomeVC()
         }
     }
     
@@ -66,11 +74,8 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "홈으로 돌아가기") {
-            
-            //popToRoot 맞는지 확인
-            //self.navigationController?.popToRootViewController(animated: true)
+            self.goBackToHomeVC()
         }
-        
     }
     
     func alreadyRegisteredRestaurant(){
@@ -79,12 +84,8 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         
         showSimpleBottomAlertWithAction(message: "이미 등록된 매장입니다 🥲",
                                         buttonTitle: "홈으로 돌아가기") {
-            
-            //popToRoot 맞는지 확인
-            //self.navigationController?.popToRootViewController(animated: true)
+            self.goBackToHomeVC()
         }
-    
-        
     }
 }
 

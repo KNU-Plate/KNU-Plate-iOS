@@ -15,6 +15,11 @@ class EmailInputViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     @IBAction func pressedNext(_ sender: UIBarButtonItem) {
         
         if !checkIfValidEmail() { return }

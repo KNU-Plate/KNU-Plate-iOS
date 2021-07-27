@@ -27,6 +27,11 @@ class NewReviewViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
@@ -320,6 +325,15 @@ extension NewReviewViewController: UITextViewDelegate {
     }
 }
 
+//MARK: - UITextFieldDelegate
+
+extension NewReviewViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.existingMenusPickerView.delegate?.pickerView?(existingMenusPickerView, didSelectRow: 0, inComponent: 0)
+    }
+}
+
 //MARK: - UI Configuration
 
 extension NewReviewViewController {
@@ -388,9 +402,11 @@ extension NewReviewViewController {
                                                      width: 25,
                                                      height: 25))
         expandButton.background = UIImage(named: "expand button")
+        expandButton.delegate = self
         expandButton.isUserInteractionEnabled = true
         expandButton.inputView = existingMenusPickerView
         expandButton.tintColor = .clear
+        expandButton.addTarget(self, action: #selector(pickerViewDidPresent), for: .touchUpInside)
 
         let rightView = UIView(frame: CGRect(x: 0,
                                              y: 0,
@@ -401,6 +417,11 @@ extension NewReviewViewController {
         menuInputTextField.rightViewMode = .always
         initializePickerViewForMenuTextField()
         menuInputTextField.inputAccessoryView = initializeToolbar()
+    }
+    
+    @objc func pickerViewDidPresent() {
+        print("✏️ menuName: \(viewModel.existingMenus[0].menuName)")
+        menuInputTextField.text = viewModel.existingMenus[0].menuName
     }
     
     func initializePickerViewForMenuTextField() {

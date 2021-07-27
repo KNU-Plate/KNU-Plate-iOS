@@ -20,6 +20,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var rating: RatingController!
     @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     
     @IBOutlet var multipleImageView: UIImageView!
 

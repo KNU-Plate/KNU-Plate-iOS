@@ -21,6 +21,11 @@ class CongratulateRegisterViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
     @IBAction func pressedGoHomeButton(_ sender: UIButton) {
         
         showProgressBar()

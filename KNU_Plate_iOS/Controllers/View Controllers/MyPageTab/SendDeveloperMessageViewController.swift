@@ -12,6 +12,11 @@ class SendDeveloperMessageViewController: UIViewController {
         
         initialize()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
  
     
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
@@ -35,9 +40,7 @@ class SendDeveloperMessageViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                 }
             case .failure(let error):
-                SnackBar.make(in: self.view,
-                              message: error.errorDescription,
-                              duration: .lengthLong).show()
+                self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
         

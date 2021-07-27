@@ -301,7 +301,7 @@ extension RestaurantInfoViewModel {
 }
 
 // MARK: - RestaurantReviewViewModel
-/// Only used in tableView(cellForRowAt:) method
+/// Only used in tableView(cellForRowAt:) method 
 class RestaurantReviewViewModel {
     private let review: ReviewListResponseModel
     
@@ -371,6 +371,29 @@ extension RestaurantReviewViewModel {
     
     var reviewImageCount: Int? {
         return self.review.reviewImageFileFolder?.files?.count
+    }
+    
+    func getFormattedDate() -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.locale = Locale(identifier:"ko_KR")
+        
+        guard let convertedDate = dateFormatter.date(from: self.review.dateCreated) else {
+            return "날짜 표시 에러"
+        }
+        
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(convertedDate) {
+            return "오늘"
+        } else if calendar.isDateInYesterday(convertedDate) {
+            return "어제"
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let finalDate = dateFormatter.string(from: convertedDate)
+            return finalDate
+        }
     }
 }
 
