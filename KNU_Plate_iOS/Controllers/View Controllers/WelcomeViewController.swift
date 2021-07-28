@@ -42,11 +42,30 @@ class WelcomeViewController: UIViewController {
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
-        
     }
     
     @IBAction func pressedRegisterLabel(_ sender: UIButton) {
+        
+        //            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+        //            let rootViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as! IDInputViewController
+        //
+        //
+        //            var navigationController: UINavigationController = UINavigationController()
+        //            navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        //            navigationController.viewControllers = [rootViewController]
+        //            self.window?.rootViewController = navigationController
+        //            self.window?.makeKeyAndVisible()
+        
+        let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+        let navController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.registerNavigationController) as! RegisterNavigationController
+        navController.modalPresentationStyle = .overFullScreen
+        self.present(navController, animated: true, completion: nil)
+        
+//        guard let registerVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as? IDInputViewController else { return }
+        
+//        registerVC.modalPresentationStyle = .overFullScreen
+//        self.present(registerVC, animated: true, completion: nil)
+        
     }
 }
 
