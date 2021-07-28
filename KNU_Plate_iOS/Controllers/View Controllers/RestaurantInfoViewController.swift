@@ -344,7 +344,6 @@ extension RestaurantInfoViewController: UITableViewDataSource {
 
 // MARK: - ReviewTableViewCellDelegate
 extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
-    
     // 게시글 신고하기
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
         guard let reviewID = reviewID, let displayName = displayName else {
@@ -368,13 +367,10 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
                                            message: "") { selectedOk in
             if selectedOk {
-                 //
+                //
                 self.restaurantInfoVM.deleteMyReview(reviewID: reviewID)
             }
-            
         }
-        
-        
     }
 }
 
