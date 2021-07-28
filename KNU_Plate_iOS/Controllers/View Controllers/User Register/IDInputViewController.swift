@@ -24,6 +24,11 @@ class IDInputViewController: UIViewController {
         checkIDDuplication()
     }
     
+    @IBAction func dismissVC(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //guard let nextVC = segue.destination as? NicknameInputViewController else { fatalError() }

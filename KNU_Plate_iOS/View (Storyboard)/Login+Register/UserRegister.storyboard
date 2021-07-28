@@ -83,6 +83,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="APO-Yg-8Ah">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Rf8-M4-SLb"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="4JE-DN-WVb">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="dismissVC:" destination="Y6W-OH-hqX" id="EMg-nT-Uic"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="6sQ-e6-T24">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -186,6 +193,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zBs-R6-Rev">
+                        <barButtonItem key="backBarButtonItem" title=" " id="m81-RL-Mie"/>
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="5Bw-a5-BSW">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -312,6 +320,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yH8-oW-eQd">
+                        <barButtonItem key="backBarButtonItem" title=" " id="g1d-21-oXZ"/>
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="Rne-cP-Ogg">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -416,6 +425,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XAd-N1-cst">
+                        <barButtonItem key="backBarButtonItem" title=" " id="CEa-VL-bKN"/>
                         <barButtonItem key="rightBarButtonItem" title="다음" style="done" id="1UB-Fc-KON">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -638,7 +648,6 @@
         <designable name="0KQ-8u-Hvt">
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
-        <designable name="22W-bZ-kdH"/>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
         </designable>

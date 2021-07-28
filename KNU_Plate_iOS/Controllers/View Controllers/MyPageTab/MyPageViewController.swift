@@ -11,6 +11,7 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var infoButton: UIButton!
+    @IBOutlet var verificationIndicatorButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -27,9 +28,8 @@ class MyPageViewController: UIViewController {
         tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
                                   preferences: preferences,
                                   delegate: self)
-    
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         dismissProgressBar()
@@ -93,8 +93,6 @@ class MyPageViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
-    
     
 }
 
@@ -293,7 +291,32 @@ extension MyPageViewController {
         if let profileImage = User.shared.profileImage {
             self.profileImageButton.setImage(profileImage, for: .normal)
         }
-
+        
+        // 인증 버튼
+        if User.shared.isVerified {
+            
+            verificationIndicatorButton.setTitle(nil, for: .normal)
+            verificationIndicatorButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            verificationIndicatorButton.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+            verificationIndicatorButton.isUserInteractionEnabled = false
+            verificationIndicatorButton.backgroundColor = .clear
+            
+            NSLayoutConstraint.activate([
+                verificationIndicatorButton.widthAnchor.constraint(equalToConstant: 20),
+                verificationIndicatorButton.heightAnchor.constraint(equalToConstant: 20)
+            ])
+  
+            
+            
+        } else {
+            
+            verificationIndicatorButton.isUserInteractionEnabled = true
+            verificationIndicatorButton.layer.cornerRadius = 3
+            
+            //TODO: - addTarget 해서 uiviewcontroller extension 에 정의할 present verification screen
+            
+            
+        }
     }
 
     func updateProfileImageButton(with image: UIImage) {

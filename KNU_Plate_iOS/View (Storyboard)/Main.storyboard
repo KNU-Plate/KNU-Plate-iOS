@@ -177,9 +177,105 @@
             <point key="canvasLocation" x="3658" y="991"/>
         </scene>
         <!--Welcome View Controller-->
+        <scene sceneID="Wxh-fN-wGM">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeViewController" id="MOk-Ty-CEG" customClass="WelcomeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hiv-CJ-WER">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1UR-yU-JU1">
+                                <rect key="frame" x="70" y="430" width="235" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UIw-Oz-MqT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App_Logo_Detail" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-aT-pbi">
+                                <rect key="frame" x="107.5" y="90" width="160" height="210"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="210" id="1pQ-hC-wWa"/>
+                                    <constraint firstAttribute="width" constant="160" id="OkM-Jx-Lfo"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTb-4T-T4T">
+                                <rect key="frame" x="70" y="495" width="235" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gfi-eX-RvA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKR-1F-jnc">
+                                <rect key="frame" x="70" y="560" width="235" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="em6-9q-BFr"/>
+                                </constraints>
+                                <state key="normal" title="로그인">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedLoginButton:" destination="MOk-Ty-CEG" eventType="touchUpInside" id="t5R-fn-Hvz"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-Gt-Z5E" userLabel="Bottom Stack View">
+                                <rect key="frame" x="86" y="625" width="203.5" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 회원이 아니신가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bl-Vn-6Ca">
+                                        <rect key="frame" x="0.0" y="0.0" width="145.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4So-Uq-SlP">
+                                        <rect key="frame" x="151.5" y="0.0" width="52" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="회원가입">
+                                            <color key="titleColor" name="AppDefaultColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedRegisterLabel:" destination="MOk-Ty-CEG" eventType="touchUpInside" id="Sl3-sm-FF2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hDi-bV-rGb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1UR-yU-JU1" firstAttribute="top" secondItem="Zd2-aT-pbi" secondAttribute="bottom" constant="130" id="1As-I9-Sqw"/>
+                            <constraint firstItem="hDi-bV-rGb" firstAttribute="trailing" secondItem="RKR-1F-jnc" secondAttribute="trailing" constant="70" id="Cmp-eq-5eZ"/>
+                            <constraint firstItem="aRh-Gt-Z5E" firstAttribute="leading" secondItem="hDi-bV-rGb" secondAttribute="leading" constant="86" id="G7e-hn-DOP"/>
+                            <constraint firstItem="hTb-4T-T4T" firstAttribute="top" secondItem="1UR-yU-JU1" secondAttribute="bottom" constant="15" id="KxE-CH-o80"/>
+                            <constraint firstItem="hDi-bV-rGb" firstAttribute="trailing" secondItem="hTb-4T-T4T" secondAttribute="trailing" constant="70" id="Lpl-cM-PGb"/>
+                            <constraint firstItem="hTb-4T-T4T" firstAttribute="leading" secondItem="hDi-bV-rGb" secondAttribute="leading" constant="70" id="Sik-h1-1kK"/>
+                            <constraint firstItem="Zd2-aT-pbi" firstAttribute="centerX" secondItem="hiv-CJ-WER" secondAttribute="centerX" id="TdE-4f-1nd"/>
+                            <constraint firstItem="Zd2-aT-pbi" firstAttribute="top" secondItem="hDi-bV-rGb" secondAttribute="top" constant="90" id="azd-i7-B08"/>
+                            <constraint firstItem="RKR-1F-jnc" firstAttribute="top" secondItem="hTb-4T-T4T" secondAttribute="bottom" constant="15" id="jS0-zQ-I6p"/>
+                            <constraint firstItem="aRh-Gt-Z5E" firstAttribute="top" secondItem="RKR-1F-jnc" secondAttribute="bottom" constant="15" id="n7X-JW-UpJ"/>
+                            <constraint firstItem="1UR-yU-JU1" firstAttribute="leading" secondItem="hDi-bV-rGb" secondAttribute="leading" constant="70" id="rSJ-tC-HxM"/>
+                            <constraint firstItem="RKR-1F-jnc" firstAttribute="leading" secondItem="hDi-bV-rGb" secondAttribute="leading" constant="70" id="zYx-DT-IfI"/>
+                            <constraint firstItem="hDi-bV-rGb" firstAttribute="trailing" secondItem="1UR-yU-JU1" secondAttribute="trailing" constant="70" id="zul-gc-G4S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="idTextField" destination="1UR-yU-JU1" id="spd-t1-XtE"/>
+                        <outlet property="loginButton" destination="RKR-1F-jnc" id="wQc-Ae-y23"/>
+                        <outlet property="logoImageView" destination="Zd2-aT-pbi" id="uiM-a3-Ace"/>
+                        <outlet property="passwordTextField" destination="hTb-4T-T4T" id="RxF-9i-38b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LoE-A6-FxN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1615.2" y="472.71364317841085"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="0Fz-i7-9Tm">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="edp-Ev-ni1" customClass="WelcomeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="edp-Ev-ni1" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XYZ-Br-MwG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -308,6 +404,7 @@
         <segue reference="ImL-SQ-ATb"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="App_Logo_Detail" width="567" height="729"/>
         <image name="favorite tab bar icon" width="30.5" height="30.5"/>
         <image name="home tab bar icon" width="28.5" height="28.5"/>
         <image name="my page tab bar icon" width="28.5" height="28.5"/>
@@ -320,6 +417,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

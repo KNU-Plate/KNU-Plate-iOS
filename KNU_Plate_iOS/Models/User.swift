@@ -61,10 +61,10 @@ class User {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.email)
         }
     }
-    
 
     var dateCreated: String = ""
-    
+
+    var isVerified: Bool = false
 
     var isActive: String = ""
      
