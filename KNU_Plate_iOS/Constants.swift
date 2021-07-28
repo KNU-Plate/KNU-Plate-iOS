@@ -134,6 +134,9 @@ struct Constants {
     
     struct Images {
         
+        // App Logo Images
+        static let appLogoDetail                            = "App_Logo_Detail"
+        
         // PlaceHolder & Default images
         static let defaultProfileImage                      = "default profile image"
         static let defaultReviewImage                       = "default review image"

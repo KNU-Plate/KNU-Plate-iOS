@@ -1,6 +1,8 @@
 import Foundation
 import SnackBar_swift
 
+//MARK: - Alert Methods
+
 extension UIViewController {
     
     // 확인 버튼을 누를 수 있는 Alert 띄우기
@@ -37,16 +39,6 @@ extension UIViewController {
         
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
-    }
-    
-    // 가장 첫 번째 화면으로 돌아가기 - 로그아웃, 회원탈퇴, refreshToken 만료 시에 쓰임
-    func popToWelcomeViewController() {
-        
-        UserManager.shared.resetAllUserInfo()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
     
     
@@ -114,3 +106,26 @@ extension UIViewController {
     
 }
 
+//MARK: - VC Router
+
+extension UIViewController {
+    
+    
+    // 가장 첫 번째 화면으로 돌아가기 - 로그아웃, 회원탈퇴, refreshToken 만료 시에 쓰임
+    func popToWelcomeViewController() {
+        
+        UserManager.shared.resetAllUserInfo()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+    }
+    
+    func goToHomeScreen() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
+        
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+    }
+}

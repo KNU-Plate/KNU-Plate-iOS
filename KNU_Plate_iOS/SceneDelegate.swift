@@ -47,15 +47,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         } else {
             
-            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
-            let rootViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as! IDInputViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let welcomeVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController) as? WelcomeViewController else { return }
             
-
-            var navigationController: UINavigationController = UINavigationController()
-            navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-            navigationController.viewControllers = [rootViewController]
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
+            window?.rootViewController = welcomeVC
+            
+//            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
+//            let rootViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as! IDInputViewController
+//
+//
+//            var navigationController: UINavigationController = UINavigationController()
+//            navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+//            navigationController.viewControllers = [rootViewController]
+//            self.window?.rootViewController = navigationController
+//            self.window?.makeKeyAndVisible()
         }
         
         
