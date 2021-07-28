@@ -15,6 +15,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     let insideLabel = UILabel().then {
         $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 30)
     }
     
     let titleLabel = UILabel().then {
