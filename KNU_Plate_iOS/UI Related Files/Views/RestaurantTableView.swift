@@ -71,13 +71,6 @@ class RestaurantTableView: UIView {
         $0.textColor = .lightGray
     }
     
-//    let favoriteButton = UIButton().then {
-//        $0.setImage(UIImage(named: "favorite tab bar icon"), for: .normal)
-//        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .highlighted)
-//        $0.setImage(UIImage(named: "favorite tab bar icon (filled)"), for: .selected)
-//        $0.addBounceReactionWithoutFeedback()
-//    }
-    
     // MARK: - Table Header View
     let headerView = UIView()
     
