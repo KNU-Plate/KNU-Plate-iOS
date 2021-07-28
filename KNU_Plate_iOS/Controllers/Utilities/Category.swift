@@ -13,7 +13,7 @@ func gateKoreanToEnglish(gate: String) -> String {
     switch gate {
     case "북문":
         return "NORTH"
-    case "정문":
+    case "정/쪽문":
         return "MAIN"
     case "동문":
         return "EAST"

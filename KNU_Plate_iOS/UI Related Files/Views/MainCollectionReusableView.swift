@@ -32,7 +32,6 @@ class MainCollectionReusableView: UICollectionReusableView {
     let rightArrow = UIImageView().then {
         $0.image = UIImage(systemName: "chevron.compact.right")
         $0.contentMode = .scaleAspectFit
-//        $0.backgroundColor = .green
         $0.tintColor = .systemGray3
     }
     

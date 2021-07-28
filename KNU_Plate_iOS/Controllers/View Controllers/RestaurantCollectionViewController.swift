@@ -225,7 +225,7 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
             // fetch more
             guard let category = category else { return }
             if let gate = category.gate {
-                restaurantListVM.fetchRestaurantList(gate: gate)
+                restaurantListVM.fetchRestaurantList(gate: gateKoreanToEnglish(gate: gate))
             } else if let foodCategory = category.foodCategory {
                 restaurantListVM.fetchRestaurantList(category: foodCategory)
             }
