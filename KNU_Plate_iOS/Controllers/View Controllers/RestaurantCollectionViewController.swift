@@ -12,7 +12,7 @@ class RestaurantCollectionViewController: UIViewController {
     
     private let restaurantListVM = RestaurantListViewModel()
     
-    var gate: Gate?
+    var category: Category?
     
     private let searchController = UISearchController(searchResultsController: nil).then {
         $0.searchBar.placeholder = "식당 검색"
@@ -44,9 +44,15 @@ class RestaurantCollectionViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         setupFloatingButton()
-                
-        guard let gate = gate else { return }
-        restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+        
+        guard let category = category else { return }
+        if let gate = category.gate {
+            self.navigationItem.title = gate
+            restaurantListVM.fetchRestaurantList(gate: gateKoreanToEnglish(gate: gate))
+        } else if let foodCategory = category.foodCategory {
+            self.navigationItem.title = foodCategory
+            restaurantListVM.fetchRestaurantList(category: foodCategory)
+        }
     }
     
     deinit {
@@ -98,11 +104,15 @@ extension RestaurantCollectionViewController {
 //MARK: - UISearchBarDelegate
 extension RestaurantCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let gate = gate else { return }
+        guard let category = category else { return }
         guard let text = searchBar.text else { return }
         restaurantListVM.resetRestaurantList()
         if text != "" {
-            restaurantListVM.fetchRestaurantList(mall: text, gate: gate.rawValue)
+            if let gate = category.gate {
+                restaurantListVM.fetchRestaurantList(mall: text, gate: gateKoreanToEnglish(gate: gate))
+            } else if let foodCategory = category.foodCategory {
+                restaurantListVM.fetchRestaurantList(mall: text, category: foodCategory)
+            }
             self.searchController.isActive = false
             searchBar.text = text
         } else {
@@ -114,10 +124,14 @@ extension RestaurantCollectionViewController: UISearchBarDelegate {
 //MARK: - UISearchControllerDelegate
 extension RestaurantCollectionViewController: UISearchControllerDelegate {
     func willDismissSearchController(_ searchController: UISearchController) {
-        guard let gate = gate else { return }
+        guard let category = category else { return }
         if searchController.searchBar.text == nil || searchController.searchBar.text == "" {
             restaurantListVM.resetRestaurantList()
-            restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+            if let gate = category.gate {
+                restaurantListVM.fetchRestaurantList(gate: gateKoreanToEnglish(gate: gate))
+            } else if let foodCategory = category.foodCategory {
+                restaurantListVM.fetchRestaurantList(category: foodCategory)
+            }
         }
     }
 }
@@ -209,8 +223,12 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
         
         if contentHeight > frameHeight + 100 && contentOffsetY > contentHeight - frameHeight - 100 && restaurantListVM.hasMore && !restaurantListVM.isFetchingData {
             // fetch more
-            guard let gate = gate else { return }
-            restaurantListVM.fetchRestaurantList(gate: gate.rawValue)
+            guard let category = category else { return }
+            if let gate = category.gate {
+                restaurantListVM.fetchRestaurantList(gate: gate)
+            } else if let foodCategory = category.foodCategory {
+                restaurantListVM.fetchRestaurantList(category: foodCategory)
+            }
         }
     }
 }

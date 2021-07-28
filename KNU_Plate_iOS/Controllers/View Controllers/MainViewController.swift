@@ -3,6 +3,10 @@ import SnapKit
 import Then
 import SPIndicator
 
+protocol MainCollectionReusableViewDelegate: AnyObject {
+    func pushVC(category: Category)
+}
+
 /// Shows the main screen of the app
 class MainViewController: UIViewController {
     
@@ -25,6 +29,8 @@ class MainViewController: UIViewController {
         }
         // set backbutton color
         self.navigationController?.navigationBar.tintColor = UIColor.black
+        // set prefersLargeTitles
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupCollectionView()
         welcomeUser()
@@ -38,6 +44,7 @@ extension MainViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(MainCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView.snp.makeConstraints { make in
@@ -50,7 +57,8 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath)
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as? MainCollectionReusableView else { fatalError() }
+            headerView.delegate = self
             return headerView
         default:
             assert(false, "Nope")
@@ -79,7 +87,7 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width: CGFloat = collectionView.frame.width
-        let height: CGFloat = 10.0*6 + 20.0*3 + 150.0*2
+        let height: CGFloat = 60.0 + 60.0 + 300.0
         return CGSize(width: width, height: height)
     }
     
@@ -103,18 +111,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-////MARK: - Prepare For Next View
-//extension MainViewController {
-//    /// Execute next view controller
-//    @objc func gateButtonWasTapped(_ sender: UIButton) {
-//        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) as? RestaurantCollectionViewController else {
-//            fatalError()
-//        }
-//        nextViewController.navigationItem.title = Constants.gateNames[sender.tag]
-//        nextViewController.gate = Gate.gateFromInt(number: sender.tag)
-//        self.navigationController?.pushViewController(nextViewController, animated: true)
-//    }
-//}
+//MARK: - MainCollectionReusableViewDelegate
+extension MainViewController: MainCollectionReusableViewDelegate {
+    func pushVC(category: Category) {
+        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) as? RestaurantCollectionViewController else {
+            fatalError()
+        }
+        nextViewController.category = category
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+}
 
 //MARK: - Other Methods
 extension MainViewController {

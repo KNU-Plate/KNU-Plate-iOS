@@ -3,10 +3,14 @@ import Then
 
 class MainCollectionReusableView: UICollectionReusableView {
     
-    private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    private let sectionInsets = UIEdgeInsets(top: 7.0, left: 7.0, bottom: 7.0, right: 7.0)
+    private let collectionViewHeight: CGFloat = 150
     private let itemsPerColumn: CGFloat = 1
+    private let itemsPerRow: CGFloat = 4
     private let reuseID1 = "MainCollectionViewCell1"
     private let reuseID2 = "MainCollectionViewCell2"
+    
+    weak var delegate: MainCollectionReusableViewDelegate?
     
     //MARK: - Description Label
     let categoryLabel = UILabel().then {
@@ -22,6 +26,14 @@ class MainCollectionReusableView: UICollectionReusableView {
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
         $0.backgroundColor = .white
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let rightArrow = UIImageView().then {
+        $0.image = UIImage(systemName: "chevron.compact.right")
+        $0.contentMode = .scaleAspectFit
+//        $0.backgroundColor = .green
+        $0.tintColor = .systemGray3
     }
     
     //MARK: - Description Label
@@ -58,10 +70,11 @@ class MainCollectionReusableView: UICollectionReusableView {
         self.addSubview(gateLabel)
         self.addSubview(gateCollectionView)
         self.addSubview(recommendLabel)
+        self.addSubview(rightArrow)
         
         let spacing: CGFloat = 10
         let labelHeight: CGFloat = 20
-        let collectionViewHeight: CGFloat = 150
+        
         categoryLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(spacing)
             make.leading.trailing.equalToSuperview().inset(spacing)
@@ -87,6 +100,13 @@ class MainCollectionReusableView: UICollectionReusableView {
             make.leading.trailing.equalToSuperview().inset(spacing)
             make.height.equalTo(labelHeight)
             make.bottom.equalToSuperview().offset(-spacing).priority(.low)
+        }
+        
+        rightArrow.snp.makeConstraints { make in
+            make.centerY.equalTo(categoryCollectionView)
+            make.width.equalTo(sectionInsets.right*2)
+            make.height.equalTo(collectionViewHeight*0.67)
+            make.right.equalToSuperview()
         }
         // sum of height: 10*6 + 20*3 + 150*2
     }
@@ -137,13 +157,40 @@ extension MainCollectionReusableView: UICollectionViewDataSource {
     }
 }
 
+//MARK: - UICollectionViewDelegate
+extension MainCollectionReusableView: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x >= 5 {
+            rightArrow.isHidden = true
+        }
+        if scrollView.contentOffset.x < 5 {
+            rightArrow.isHidden = false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            let foodCategoryName = Constants.footCategoryArray[indexPath.item]
+            let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
+            let foodCategory = String(foodCategoryName[startIdx...])
+            
+            self.delegate?.pushVC(category: Category(foodCategory: foodCategory))
+        } else {
+            let gateName = Constants.gateNames[indexPath.item]
+            
+            self.delegate?.pushVC(category: Category(gate: gateName))
+        }
+    }
+}
+
 //MARK: - Collection View Flow Layout Delegate
 extension MainCollectionReusableView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.top * (itemsPerColumn + 1)
-        let availableHeight = self.categoryCollectionView.frame.height - paddingSpace
-        let heightPerItem = availableHeight / itemsPerColumn
-        return CGSize(width: heightPerItem*0.67, height: heightPerItem)
+        let horizontalPaddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = self.categoryCollectionView.frame.width - horizontalPaddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem*1.3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

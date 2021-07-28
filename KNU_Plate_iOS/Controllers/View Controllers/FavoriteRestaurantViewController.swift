@@ -25,6 +25,7 @@ class FavoriteRestaurantViewController: UIViewController {
         restaurantListVM.delegate = self
         self.navigationItem.title = "좋아하는 매장"
         self.navigationController?.navigationBar.tintColor = UIColor.black // set backbutton color
+        self.navigationController?.navigationBar.barTintColor = .white
         
         setupCollectionView()
         setCollectionViewLayout()
