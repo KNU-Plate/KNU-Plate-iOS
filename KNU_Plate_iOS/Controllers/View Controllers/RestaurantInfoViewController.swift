@@ -474,7 +474,7 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didFetchRestaurantInfo() {
         customTableView.nameLabel.text = restaurantInfoVM.mallName
         customTableView.gateNameLabel.text = restaurantInfoVM.gate
-        customTableView.ratingStackView.averageRating = restaurantInfoVM.rating
+        customTableView.ratingView.averageRating = restaurantInfoVM.rating
         customTableView.foodCategoryLabel.text = restaurantInfoVM.category
         customTableView.numberLabel.text = "\(restaurantInfoVM.reviewCount)명 참여"
         favoriteButton?.isEnabled = true

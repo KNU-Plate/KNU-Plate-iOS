@@ -154,7 +154,7 @@ extension RestaurantCollectionViewController: UICollectionViewDataSource {
                                    placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
         cell.countLabel.text = "10"
-        cell.ratingStackView.averageRating = restaurantVM.averageRating
+        cell.ratingView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID
         
         return cell

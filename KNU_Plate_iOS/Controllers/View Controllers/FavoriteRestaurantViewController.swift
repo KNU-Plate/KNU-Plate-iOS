@@ -82,7 +82,7 @@ extension FavoriteRestaurantViewController: UICollectionViewDataSource {
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
                                    placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
-        cell.ratingStackView.averageRating = restaurantVM.averageRating
+        cell.ratingView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID
         
         return cell

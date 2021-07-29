@@ -198,9 +198,9 @@ struct Constants {
     
     struct Layer {
         
-        static let borderWidth: CGFloat = 1
-        static let cornerRadius: CGFloat = 15.0
-        static let borderColor: CGColor = UIColor.lightGray.cgColor
+        static let borderWidth: CGFloat = 0.5
+        static let cornerRadius: CGFloat = 10.0
+        static let borderColor: CGColor = UIColor.systemGray4.cgColor
     }
     
     static let heightPerWidthRestaurantCell: CGFloat = 1.1

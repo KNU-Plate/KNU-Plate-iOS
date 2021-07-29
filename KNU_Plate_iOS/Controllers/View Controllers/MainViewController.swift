@@ -77,7 +77,7 @@ extension MainViewController: UICollectionViewDataSource {
         // Configure the cell
         cell.nameLabel.text = "반미리코"
         cell.countLabel.text = "10"
-        cell.ratingStackView.averageRating = 4.7
+        cell.ratingView.averageRating = 4.7
         
         return cell
     }

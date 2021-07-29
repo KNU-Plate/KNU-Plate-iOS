@@ -3,7 +3,7 @@ import Then
 import SnapKit
 
 /// Shows stars rating using ImageView
-class RatingStackView: UIStackView {
+class RatingView: UIView {
     let starImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.tintColor = UIColor(named: Constants.Color.appDefaultColor)
@@ -27,14 +27,18 @@ class RatingStackView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.axis = .horizontal
-        self.alignment = .center
-        self.distribution = .fillEqually
-        self.addArrangedSubview(starImage)
-        self.addArrangedSubview(averageRatingLabel)
-        self.spacing = -15
+        self.addSubview(starImage)
+        self.addSubview(averageRatingLabel)
         starImage.snp.makeConstraints { make in
-            make.height.equalTo(25)
+            make.top.left.bottom.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
+        
+        averageRatingLabel.snp.makeConstraints { make in
+            make.left.equalTo(starImage.snp.right)
+            make.top.right.bottom.equalToSuperview()
+            make.width.equalTo(30).priority(.low)
+            make.height.equalTo(20)
         }
     }
     

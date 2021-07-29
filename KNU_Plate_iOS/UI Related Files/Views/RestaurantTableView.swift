@@ -52,8 +52,8 @@ class RestaurantTableView: UIView {
     let stackView2 = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
-        $0.distribution = .fillEqually
-        $0.spacing = 5
+        $0.distribution = .fill
+        $0.spacing = 10
     }
     
     let gateNameLabel = UILabel().then {
@@ -64,7 +64,7 @@ class RestaurantTableView: UIView {
         $0.clipsToBounds = true
         $0.font = UIFont.systemFont(ofSize: 17)
     }
-    let ratingStackView = RatingStackView()
+    let ratingView = RatingView()
     let numberLabel = UILabel().then {
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 15)
@@ -99,13 +99,12 @@ class RestaurantTableView: UIView {
         stackView1.addArrangedSubview(foodCategoryLabel)
         
         stackView2.addArrangedSubview(gateNameLabel)
-        stackView2.addArrangedSubview(ratingStackView)
+        stackView2.addArrangedSubview(ratingView)
         stackView2.addArrangedSubview(numberLabel)
         
         headerView.addSubview(imageContentsView)
         headerView.addSubview(stackView1)
         headerView.addSubview(stackView2)
-//        headerView.addSubview(favoriteButton)
         
         self.addSubview(tableView)
         
@@ -184,12 +183,6 @@ class RestaurantTableView: UIView {
             make.centerX.bottom.equalToSuperview()
             make.height.equalTo(stackViewHeight)
         }
-        
-//        favoriteButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(stackView2)
-//            make.left.equalTo(stackView2.snp.right).priority(.low)
-//            make.right.equalToSuperview().priority(.low)
-//        }
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

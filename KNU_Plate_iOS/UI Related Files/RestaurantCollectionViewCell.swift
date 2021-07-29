@@ -38,9 +38,9 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     }()
     
     
-    let ratingStackView: RatingStackView = {
-        let stackView = RatingStackView()
-        return stackView
+    let ratingView: RatingView = {
+        let ratingView = RatingView()
+        return ratingView
     }()
     
     var mallID: Int?
@@ -80,7 +80,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         self.addSubview(imageView)
         self.addSubview(nameLabel)
         self.addSubview(countStackView)
-        self.addSubview(ratingStackView)
+        self.addSubview(ratingView)
         
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(imageViewHeight)
@@ -100,11 +100,9 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview().inset(inset*2)
         }
         
-        ratingStackView.snp.makeConstraints { (make) in
-            make.width.equalTo(stackViewWidth)
-            make.top.equalTo(nameLabel.snp.bottom).offset(inset)
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(inset*2)
+        ratingView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(countStackView)
+            make.right.equalToSuperview().inset(inset)
         }
     }
 }
