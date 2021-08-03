@@ -38,6 +38,8 @@
 		3CC2847726921F2D0075399E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2847626921F2D0075399E /* Category.swift */; };
 		3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */; };
 		3CCA722526A58E2100D88B06 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCA722426A58E2100D88B06 /* Metal.framework */; };
+		3CD96BA626B91D77007E3A53 /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CD96BA526B91D77007E3A53 /* empty.json */; };
+		3CD96BA826B92063007E3A53 /* EmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD96BA726B92063007E3A53 /* EmptyStateTableViewCell.swift */; };
 		3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
@@ -197,6 +199,8 @@
 		3CC2847626921F2D0075399E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AlignTextBelow.swift"; sourceTree = "<group>"; };
 		3CCA722426A58E2100D88B06 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		3CD96BA526B91D77007E3A53 /* empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty.json; sourceTree = "<group>"; };
+		3CD96BA726B92063007E3A53 /* EmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateTableViewCell.swift; sourceTree = "<group>"; };
 		3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 				3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */,
 				3C88A4A826A210E300E7FC75 /* RestaurantImageCollectionViewCell.swift */,
 				3CA8D44526A02E2200B9E434 /* LocationTableViewCell.swift */,
+				3CD96BA726B92063007E3A53 /* EmptyStateTableViewCell.swift */,
 				3C9B2BD326143C9900CC010F /* RatingView.swift */,
 				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
 				3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */,
@@ -554,6 +559,7 @@
 		7C8F622926A56BF800BB0703 /* Lottie Files */ = {
 			isa = PBXGroup;
 			children = (
+				3CD96BA526B91D77007E3A53 /* empty.json */,
 				7C8F622726A56B8500BB0703 /* congratulate.json */,
 			);
 			path = "Lottie Files";
@@ -830,6 +836,7 @@
 				7C1F78EA2632DE3500C7B41D /* map_present_tracking.png in Resources */,
 				7C1F78E22632DE3500C7B41D /* map_pin_custom@3x.png in Resources */,
 				7C1F78E52632DE3500C7B41D /* copyright.png in Resources */,
+				3CD96BA626B91D77007E3A53 /* empty.json in Resources */,
 				7C1F78E32632DE3500C7B41D /* map_pinup@3x.png in Resources */,
 				7CE4D7A52608DD2E002FCC2D /* LaunchScreen.storyboard in Resources */,
 				7C1F78F42632DE3500C7B41D /* noimage.png in Resources */,
@@ -942,6 +949,7 @@
 				7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
+				3CD96BA826B92063007E3A53 /* EmptyStateTableViewCell.swift in Sources */,
 				7C5EDD532642BF1F00B79178 /* VerifyMailRequestDTO.swift in Sources */,
 				7CCDB20326A564F50092F28D /* CongratulateRegisterViewController.swift in Sources */,
 				7C1F79DD2633025900C7B41D /* MapManager.swift in Sources */,

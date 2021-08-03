@@ -102,6 +102,10 @@ extension RestaurantViewModel {
         return self.restaurant.evaluateAverage ?? 0.0
     }
     
+    var reviewCount: Int {
+        return self.restaurant.reviewCount
+    }
+    
     var thumbnailURL: URL? {
         guard let files = self.restaurant.fileFolder?.files, files.count > 0 else {
             return nil
