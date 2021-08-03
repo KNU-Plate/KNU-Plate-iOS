@@ -13,6 +13,9 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var rating: RatingController!
     
+    
+    @IBOutlet var imageViewHeight: NSLayoutConstraint!
+    
     var reviewDetails = ReviewDetail()
     
     private var reviewImageFiles = [Files]()
@@ -55,6 +58,7 @@ class ReviewDetailViewController: UIViewController {
             configureImageSlideShow(imageExists: true)
             
         } else {
+            imageViewHeight.constant = 0
             configureImageSlideShow(imageExists: false)
         }
 
@@ -70,7 +74,7 @@ class ReviewDetailViewController: UIViewController {
     func configureUI() {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
-        slideShow.layer.cornerRadius = 10
+        slideShow.layer.cornerRadius = 5
     }
     
     @objc func deleteReview() {
