@@ -3,7 +3,7 @@ import SDWebImage
 import Alamofire
 import SnackBar_swift
 
-protocol ReviewTableViewCellDelegate {
+protocol ReviewTableViewCellDelegate: AnyObject {
     func goToReportReviewVC(reviewID: Int?, displayName: String?)
     func presentDeleteActionAlert(reviewID: Int?)
 }
@@ -24,7 +24,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     @IBOutlet var multipleImageView: UIImageView!
 
-    var delegate: ReviewTableViewCellDelegate?
+    weak var delegate: ReviewTableViewCellDelegate?
     
     var reviewID: Int?
     var userNickname: String?
@@ -34,7 +34,7 @@ class ReviewTableViewCell: UITableViewCell {
         
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         
-        reviewImageView?.layer.cornerRadius = 10
+        reviewImageView?.layer.cornerRadius = 5
         
         guard let imageCount = reviewImageCount else {
             return

@@ -60,9 +60,9 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     
     // make corner round
     func makeCornerRound(_ view: UIView) {
-        view.layer.cornerRadius = Constants.Layer.cornerRadius
-        view.layer.borderWidth = Constants.Layer.borderWidth
-        view.layer.borderColor = Constants.Layer.borderColor
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.systemGray4.cgColor
         view.layer.masksToBounds = true
     }
     

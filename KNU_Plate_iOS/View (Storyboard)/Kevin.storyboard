@@ -963,6 +963,7 @@
                     <navigationItem key="navigationItem" id="Oaj-gf-W2B"/>
                     <connections>
                         <outlet property="dateLabel" destination="ucQ-9X-yba" id="QIg-oM-9XH"/>
+                        <outlet property="imageViewHeight" destination="gvn-oM-weS" id="xb8-OR-mA9"/>
                         <outlet property="rating" destination="Nxy-6b-Kaq" id="mlm-eM-dCn"/>
                         <outlet property="reviewLabel" destination="PIL-9T-R6X" id="Bad-Iz-bKi"/>
                         <outlet property="slideShow" destination="zVI-7E-qEK" id="UAO-6A-ATp"/>
