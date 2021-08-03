@@ -16,6 +16,7 @@ struct RestaurantListResponseModel: Decodable {
     let isActive: String?
     let gateLocation: String?
     let fileFolder: FileFolder?
+    let reviewCount: Int
     
     enum CodingKeys: String, CodingKey {
         case mallID = "mall_id"
@@ -30,5 +31,6 @@ struct RestaurantListResponseModel: Decodable {
         case isActive = "is_active"
         case gateLocation = "gate_location"
         case fileFolder = "file_folder"
+        case reviewCount
     }
 }

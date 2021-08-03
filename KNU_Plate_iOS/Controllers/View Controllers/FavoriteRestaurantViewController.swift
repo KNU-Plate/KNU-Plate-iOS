@@ -49,6 +49,7 @@ extension FavoriteRestaurantViewController {
         self.collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = .white
         self.collectionView.alwaysBounceVertical = true
+        self.collectionView.showsVerticalScrollIndicator = false
     }
     
     func setCollectionViewLayout() {
@@ -82,6 +83,7 @@ extension FavoriteRestaurantViewController: UICollectionViewDataSource {
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
                                    placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"))
         cell.nameLabel.text = restaurantVM.mallName
+        cell.countLabel.text = String(restaurantVM.reviewCount)
         cell.ratingView.averageRating = restaurantVM.averageRating
         cell.mallID = restaurantVM.mallID
         

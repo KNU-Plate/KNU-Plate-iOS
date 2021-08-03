@@ -24,10 +24,6 @@ class RestaurantInfoViewController: UIViewController {
     private let tableHeaderViewHeight: CGFloat = 320 + 3*4
     private let sectionHeaderViewHeight: CGFloat = 72 + 3*4
     
-    private var returnEmptyReviewCell: Bool = true
-    private var returnEmptyLocationCell: Bool = false
-    private var returnEmptyMenuCell: Bool = true
-    
     private var favoriteButton: UIBarButtonItem?
     
     var mallID: Int?
@@ -75,8 +71,17 @@ extension RestaurantInfoViewController {
         tabBarView.locationButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
         tabBarView.menuButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageView4Tapped))
-        customTableView.imageView4.addGestureRecognizer(tapGesture)
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        let tapGesture4 = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        customTableView.imageView1.addGestureRecognizer(tapGesture1)
+        customTableView.imageView2.addGestureRecognizer(tapGesture2)
+        customTableView.imageView3.addGestureRecognizer(tapGesture3)
+        customTableView.imageView4.addGestureRecognizer(tapGesture4)
+        customTableView.imageView1.isUserInteractionEnabled = true
+        customTableView.imageView2.isUserInteractionEnabled = true
+        customTableView.imageView3.isUserInteractionEnabled = true
         customTableView.imageView4.isUserInteractionEnabled = true
     }
     
@@ -98,7 +103,7 @@ extension RestaurantInfoViewController {
     private func setupTableView() {
         customTableView.tableView.dataSource = self
         customTableView.tableView.delegate = self
-        customTableView.tableView.bounces = true
+        customTableView.tableView.showsVerticalScrollIndicator = false
         customTableView.tableView.tableHeaderView?.frame.size.height = tableHeaderViewHeight
         customTableView.tableView.separatorStyle = .none
     }
@@ -145,7 +150,7 @@ extension RestaurantInfoViewController {
         }
     }
     
-    @objc func imageView4Tapped() {
+    @objc func imageViewTapped() {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantImageViewController) as? RestaurantImageViewController else { fatalError() }
         nextVC.navigationItem.title = "리뷰 사진"
         nextVC.mallID = self.mallID
@@ -176,11 +181,10 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch currentButton.tag {
-        case 2:
+        if currentButton.tag == 2 && restaurantInfoVM.numberOfMenus > 0 {
             return 80
-        default:
-            return UITableView.automaticDimension // tableView.rowHeight
+        } else {
+            return UITableView.automaticDimension
         }
     }
     
@@ -188,26 +192,20 @@ extension RestaurantInfoViewController: UITableViewDataSource {
         switch currentButton.tag {
         case 0:
             if restaurantInfoVM.numberOfReviews == 0 {
-                returnEmptyReviewCell = true
                 return 1
             } else {
-                returnEmptyReviewCell = false
                 return restaurantInfoVM.numberOfReviews
             }
         case 1:
             if restaurantInfoVM.numberOfLocations == 0 {
-                returnEmptyLocationCell = true
                 return 1
             } else {
-                returnEmptyLocationCell = false
                 return restaurantInfoVM.numberOfLocations
             }
         case 2:
             if restaurantInfoVM.numberOfMenus == 0 {
-                returnEmptyMenuCell = true
                 return 1
             } else {
-                returnEmptyMenuCell = false
                 return restaurantInfoVM.numberOfMenus
             }
         default:
@@ -218,11 +216,11 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch currentButton.tag {
         case 0:
-            return getReusableReviewCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: returnEmptyReviewCell)
+            return getReusableReviewCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: restaurantInfoVM.numberOfReviews == 0)
         case 1:
-            return getReusableLocationCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: returnEmptyLocationCell)
+            return getReusableLocationCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: restaurantInfoVM.numberOfLocations == 0)
         case 2:
-            return getReusableMenuCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: returnEmptyMenuCell)
+            return getReusableMenuCell(tableView, cellForRowAt: indexPath, returnPlaceholderCell: restaurantInfoVM.numberOfMenus == 0)
         default:
             return UITableViewCell()
         }
@@ -230,7 +228,10 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     
     func getReusableReviewCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, returnPlaceholderCell: Bool) -> UITableViewCell {
         if returnPlaceholderCell {
-            return UITableViewCell()
+            let cell = EmptyStateTableViewCell()
+            cell.update(titleText: "아직 작성된 리뷰가 없어요.\n첫 리뷰를 작성해보세요!", animationName: "empty")
+            cell.animationView.play()
+            return cell
         } else {
             let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
             
@@ -303,7 +304,10 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     
     func getReusableLocationCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, returnPlaceholderCell: Bool) -> UITableViewCell {
         if returnPlaceholderCell {
-            return UITableViewCell()
+            let cell = EmptyStateTableViewCell()
+            cell.update(titleText: "아직 위치가 등록되지 않았어요.", animationName: "empty")
+            cell.animationView.play()
+            return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.locationTableViewCell, for: indexPath) as? LocationTableViewCell else { fatalError() }
             
@@ -324,7 +328,10 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     
     func getReusableMenuCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, returnPlaceholderCell: Bool) -> UITableViewCell {
         if returnPlaceholderCell {
-            return UITableViewCell()
+            let cell = EmptyStateTableViewCell()
+            cell.update(titleText: "아직 작성된 리뷰가 없어요.\n첫 리뷰를 작성해보세요!", animationName: "empty")
+            cell.animationView.play()
+            return cell
         } else {
             guard let menuCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.menuRecommendCell, for: indexPath) as? MenuRecommendationTableViewCell else { fatalError() }
             
@@ -395,6 +402,11 @@ extension RestaurantInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch currentButton.tag {
         case 0:
+            if restaurantInfoVM.numberOfReviews == 0 {
+                tableView.deselectRow(at: indexPath, animated: false)
+                return
+            }
+            
             let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
             guard let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.reviewDetailViewController) as? ReviewDetailViewController else { fatalError() }
             let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
@@ -422,6 +434,11 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(nextVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: false)
         case 1:
+            if restaurantInfoVM.numberOfLocations == 0 {
+                tableView.deselectRow(at: indexPath, animated: false)
+                return
+            }
+            
             let url: String
             if let kakaoMallID = restaurantInfoVM.kakaoMallID {
                 url = "kakaomap://place?id=\(kakaoMallID)"
@@ -453,10 +470,6 @@ extension RestaurantInfoViewController: UITableViewDelegate {
         default:
             return
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        print("didDeselectRowAt")
     }
 }
 
