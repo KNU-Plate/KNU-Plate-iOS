@@ -155,6 +155,7 @@
 		7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */; };
 		7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */; };
 		7CD74B8D260B38C000D05B84 /* Kevin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CD74B8C260B38C000D05B84 /* Kevin.storyboard */; };
+		7CDAD9FE26BAB78000F7F58F /* NotificationName Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */; };
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
 		7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */; };
@@ -325,6 +326,7 @@
 		7CD74B6A260B020A00D05B84 /* NewRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantRequestDTO.swift; sourceTree = "<group>"; };
 		7CD74B8C260B38C000D05B84 /* Kevin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Kevin.storyboard; sourceTree = "<group>"; };
+		7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName Extension.swift"; sourceTree = "<group>"; };
 		7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewModel.swift; sourceTree = "<group>"; };
@@ -380,11 +382,8 @@
 				3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */,
 				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
-				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
-				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
 				7C6D2534268DAD950030F9A1 /* NoticeTableViewCell.swift */,
-				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,
 			);
 			path = "UI Related Files";
 			sourceTree = "<group>";
@@ -617,6 +616,17 @@
 			path = "User Register";
 			sourceTree = "<group>";
 		};
+		7CDAD9FC26BAB75D00F7F58F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
+				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
+				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,
+				7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7CE10470260C446500E18C00 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,6 +695,7 @@
 				7CE4D7AF2609B17C002FCC2D /* Network Group */,
 				7CE775002641724C0032558F /* Error Management */,
 				3C2DDBE22611FB1C0075F25E /* UI Related Files */,
+				7CDAD9FC26BAB75D00F7F58F /* Extensions */,
 				7CE4D7B02609B183002FCC2D /* View Models */,
 				7CE4D7AE2609B175002FCC2D /* Controllers */,
 				7C8F622926A56BF800BB0703 /* Lottie Files */,
@@ -1011,6 +1022,7 @@
 				7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */,
 				7C60DC7B2695B27B001DEA9A /* MyPageTableViewCell.swift in Sources */,
 				7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */,
+				7CDAD9FE26BAB78000F7F58F /* NotificationName Extension.swift in Sources */,
 				7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */,
 				7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */,
 				3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */,
