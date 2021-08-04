@@ -34,6 +34,7 @@ class MainViewController: UIViewController {
         
         setupCollectionView()
         welcomeUser()
+        createObservers()
     }
 }
 
@@ -128,5 +129,13 @@ extension MainViewController {
         SPIndicator.present(title: "\(User.shared.displayName)님",
                             message: "환영합니다 🎉",
                             preset: .custom(UIImage(systemName: "face.smiling")!))
+    }
+    
+    func createObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(popToWelcomeViewController),
+                                               name: Notification.Name.refreshTokenExpired,
+                                               object: nil)
     }
 }

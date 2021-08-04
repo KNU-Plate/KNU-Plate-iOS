@@ -112,7 +112,7 @@ extension UIViewController {
     
     
     // 가장 첫 번째 화면으로 돌아가기 - 로그아웃, 회원탈퇴, refreshToken 만료 시에 쓰임
-    func popToWelcomeViewController() {
+    @objc func popToWelcomeViewController() {
         
         UserManager.shared.resetAllUserInfo()
         

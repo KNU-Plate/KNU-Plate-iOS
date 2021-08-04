@@ -67,11 +67,10 @@ final class Interceptor: RequestInterceptor {
                         print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
                         // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
                         
-                        
-                        
-                        
-                        
                 
+                        NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
+                                                        object: nil)
+                        
                     } else {
                         print("Interceptor - 이건 뭔 에러지?")
                         completion(.doNotRetry)
