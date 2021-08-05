@@ -66,6 +66,11 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func pressedFindPWButton(_ sender: UIButton) {
         
+        let storyboard = UIStoryboard(name: "Find_PW+ID", bundle: nil)
+        
+        guard let findPWVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.findPWViewController) as? FindPasswordViewController else { return }
+        
+        presentPanModal(findPWVC)
         
     }
     

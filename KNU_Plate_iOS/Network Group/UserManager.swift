@@ -456,11 +456,44 @@ class UserManager {
     
     //MARK: - 아이디 찾기
     func findMyID(email: String,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+                  completion: @escaping (Result<String, NetworkError>) -> Void) {
         
-//        AF.upload(mul)
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(email.utf8),
+                                     withName: "mail_address")
+            
+        }, to: findIDURL)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            
+            case 200:
+                
+                do {
+                    let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                    
+                    print("✏️ UserManager - findMyID SUCCESS")
+                    
+                    let userID = decodedData.username
+                    completion(.success(userID))
+                    
+                } catch {
+                    print("❗️ UserManager - findMyID decoding catch error: \(error)")
+                    completion(.failure(.internalError))
+                }
+                
+            default:
+                
+                let error = NetworkError.returnError(statusCode: statusCode)
+                print("❗️ UserManager - findMyID error statusCode: \(statusCode), with error: \(error.errorDescription)")
+                completion(.failure(error))
+            }
+        }
         
-    }
+        }
 }
 
 //MARK: - 사용자 정보를 로컬에 저장하는 메서드 모음
