@@ -7,8 +7,7 @@ class WelcomeViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var loginButton: UIButton!
     
-    let fontSize: CGFloat = 16
-    
+    let fontSize: CGFloat = 16.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,7 @@ class WelcomeViewController: UIViewController {
             switch result {
             case .success:
                 self.goToHomeScreen()
-//                UserManager.shared.loadUserProfileInfo
+                UserManager.shared.loadUserProfileInfo { _ in }
                 
             case .failure(let error):
                 // 이 부분은 로그인 어떤 에러인지 정확하게 표기하는게 좋을듯
@@ -46,27 +45,26 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func pressedRegisterLabel(_ sender: UIButton) {
         
-        //            let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
-        //            let rootViewController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as! IDInputViewController
-        //
-        //
-        //            var navigationController: UINavigationController = UINavigationController()
-        //            navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        //            navigationController.viewControllers = [rootViewController]
-        //            self.window?.rootViewController = navigationController
-        //            self.window?.makeKeyAndVisible()
-        
         let storyboard = UIStoryboard(name: "UserRegister", bundle: nil)
         let navController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.registerNavigationController) as! RegisterNavigationController
         navController.modalPresentationStyle = .overFullScreen
         self.present(navController, animated: true, completion: nil)
         
-//        guard let registerVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.IDInputViewController) as? IDInputViewController else { return }
-        
-//        registerVC.modalPresentationStyle = .overFullScreen
-//        self.present(registerVC, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func pressedFindIDButton(_ sender: UIButton) {
         
     }
+    
+    
+    @IBAction func pressedFindPWButton(_ sender: UIButton) {
+        
+        
+    }
+    
+    
+    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -115,109 +113,3 @@ extension WelcomeViewController {
     }
     
 }
-
-
-
-
-
-//import UIKit
-//import SnapKit
-//
-///// Shows welcome screen of the app
-//class WelcomeViewController: UIViewController {
-//
-//    let titleLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "크슐랭가이드"
-//        label.font = UIFont.systemFont(ofSize: 45)
-//        label.textColor = UIColor(named: Constants.Color.appDefaultColor)
-//        return label
-//    }()
-//
-//    let loginButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("로그인", for: .normal)
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-//        button.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
-//        button.addBounceReactionWithoutFeedback()
-//        return button
-//    }()
-//
-//    let registerButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("아직 회원이 아니신가요?", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-//        button.addBounceReactionWithoutFeedback()
-//        return button
-//    }()
-//
-//    //MARK: - View Lifecycle
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupView()
-//        setButtonTarget()
-//    }
-//}
-//
-////MARK: - Basic UI Set Up
-//extension WelcomeViewController {
-//    /// Set up views
-//    func setupView() {
-//        // local constants
-//        let loginButtonWidth: CGFloat = 200
-//        let loginButtonHeight: CGFloat = 50
-//
-//        // add labels and button
-//        self.view.addSubview(titleLabel)
-//        self.view.addSubview(loginButton)
-//        self.view.addSubview(registerButton)
-//
-//        // titleLabel snapkit layout
-//        titleLabel.snp.makeConstraints { (make) in
-//            make.centerX.equalToSuperview()
-//            make.centerY.equalToSuperview().multipliedBy(0.7)
-//        }
-//
-//        // loginButton layer
-//        loginButton.layer.cornerRadius = 0.5*loginButtonHeight
-//
-//        // loginButton snapkit layout
-//        loginButton.snp.makeConstraints { (make) in
-//            make.width.equalTo(loginButtonWidth)
-//            make.height.equalTo(loginButtonHeight)
-//            make.centerX.equalToSuperview()
-//            make.centerY.equalTo(self.view.snp.bottom).multipliedBy(0.8)
-//        }
-//
-//        // registerButton snapkit layout
-//        registerButton.snp.makeConstraints { (make) in
-//            make.top.equalTo(loginButton.snp.bottom).offset(10)
-//            make.centerX.equalToSuperview()
-//        }
-//    }
-//
-//    /// Set target of the buttons
-//    func setButtonTarget() {
-//        loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
-//        registerButton.addTarget(self, action: #selector(registerButtonTapped(_:)), for: .touchUpInside)
-//    }
-//
-//    @objc func loginButtonTapped(_ sender: UIButton) {
-//        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.loginViewController) else {
-//            fatalError()
-//        }
-//        nextViewController.modalPresentationStyle = .fullScreen
-//        nextViewController.modalTransitionStyle = .crossDissolve
-//        self.present(nextViewController, animated: true, completion: nil)
-//    }
-//
-//    @objc func registerButtonTapped(_ sender: UIButton) {
-//        guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.registerViewController) else {
-//            fatalError()
-//        }
-//        nextViewController.modalPresentationStyle = .fullScreen
-//        nextViewController.modalTransitionStyle = .crossDissolve
-//        self.present(nextViewController, animated: true, completion: nil)
-//    }
-//}

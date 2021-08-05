@@ -112,7 +112,7 @@ extension UIViewController {
     
     
     // 가장 첫 번째 화면으로 돌아가기 - 로그아웃, 회원탈퇴, refreshToken 만료 시에 쓰임
-    func popToWelcomeViewController() {
+    @objc func popToWelcomeViewController() {
         
         UserManager.shared.resetAllUserInfo()
         
@@ -125,7 +125,6 @@ extension UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
-        
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
 }

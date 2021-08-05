@@ -25,6 +25,8 @@ class UserManager {
     let modifyUserInfoURL               = "\(Constants.API_BASE_URL)auth/modify"
     let loadUserProfileInfoURL          = "\(Constants.API_BASE_URL)auth"
     let deleteReviewURL                 = "\(Constants.API_BASE_URL)review/"
+    let findIDURL                       = "\(Constants.API_BASE_URL)search/username"
+    let findPasswordURL                 = "\(Constants.API_BASE_URL)search/password"
     
     private init() {}
     
@@ -450,6 +452,14 @@ class UserManager {
                     completion(.failure(error))
                 }
             }
+    }
+    
+    //MARK: - 아이디 찾기
+    func findMyID(email: String,
+                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        
+//        AF.upload(mul)
+        
     }
 }
 
