@@ -16,12 +16,15 @@ class RestaurantImageViewController: UIViewController {
         return collectionView
     }()
     
+    private let backgroundView = EmptyStateView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.addSubview(collectionView)
 
         setupCollectionView()
+        setupCollectionViewBackgroundView()
         restaurantImageVM.delegate = self
         restaurantImageVM.setMallID(mallID)
         restaurantImageVM.fetchImages()
@@ -40,11 +43,30 @@ extension RestaurantImageViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    func setupCollectionViewBackgroundView() {
+        backgroundView.update(titleText: "아직 등록된 리뷰 사진이 없습니다.\n첫 리뷰를 작성해보세요!", animationName: "food_prepared")
+        self.view.addSubview(backgroundView)
+        let safeArea = self.view.safeAreaLayoutGuide
+        backgroundView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(safeArea)
+            make.leading.trailing.equalToSuperview()
+        }
+        backgroundView.animationView.play()
+    }
 }
 
 //MARK: - UICollectionViewDataSource
 extension RestaurantImageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if restaurantImageVM.numberOfImages > 0 {
+            // fade out backgroundView when numberOfImages is more than zero
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0,
+                           options: .curveEaseOut,
+                           animations: { self.backgroundView.alpha = 0.0 },
+                           completion: nil)
+        }
         return restaurantImageVM.numberOfImages
     }
 
