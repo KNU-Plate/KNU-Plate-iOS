@@ -1716,7 +1716,7 @@
         <!--My Page View Controller-->
         <scene sceneID="a3a-g2-Jy2">
             <objects>
-                <viewController title="My Page View Controller" id="pZm-rV-DhB" customClass="MyPageViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyPageViewController" title="My Page View Controller" id="pZm-rV-DhB" customClass="MyPageViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="brH-jB-qJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1857,6 +1857,7 @@
                         <outlet property="userMedal" destination="dpC-T1-xTk" id="w37-34-mcl"/>
                         <outlet property="userNickname" destination="7G2-8S-Y4J" id="HlI-aw-9Sr"/>
                         <outlet property="verificationIndicatorButton" destination="DwM-IS-mAX" id="56T-BF-gKQ"/>
+                        <segue destination="Dsa-QD-GWe" kind="show" identifier="NotUsingSegue" id="NbU-fH-dMO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aT-mJ-uLv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
