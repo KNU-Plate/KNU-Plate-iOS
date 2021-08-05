@@ -17,6 +17,8 @@ class FavoriteRestaurantViewController: UIViewController {
         return collectionView
     }()
     
+    private let backgroundView = EmptyStateView()
+    
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,7 @@ class FavoriteRestaurantViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .white
         
         setupCollectionView()
-        setCollectionViewLayout()
-        
+        setupCollectionViewBackgroundView()
 //        restaurantListVM.fetchFavoriteRestaurantList() // viewWillAppear마다 refresh를해주므로 일단은 필요 없음
     }
     
@@ -38,6 +39,7 @@ class FavoriteRestaurantViewController: UIViewController {
         
         print("👌 FavoriteRestaurantViewController - viewWillAppear")
         restaurantListVM.refreshFavoriteRestaurantList()
+        backgroundView.animationView.play()
     }
 }
 
@@ -50,11 +52,19 @@ extension FavoriteRestaurantViewController {
         self.collectionView.backgroundColor = .white
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.showsVerticalScrollIndicator = false
-    }
-    
-    func setCollectionViewLayout() {
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func setupCollectionViewBackgroundView() {
+        backgroundView.update(titleText: "아직 좋아요 한 매장이 없습니다.", animationName: "restaurant_animation")
+        self.view.addSubview(backgroundView)
+        let safeArea = self.view.safeAreaLayoutGuide
+        backgroundView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(safeArea)
+            make.leading.trailing.equalToSuperview()
         }
     }
 }
@@ -62,6 +72,7 @@ extension FavoriteRestaurantViewController {
 //MARK: - RestaurantListViewModelDelegate
 extension FavoriteRestaurantViewController: RestaurantListViewModelDelegate {
     func didFetchRestaurantList() {
+        print("👌 FavoriteRestaurantViewController - didFetchRestaurantList")
         collectionView.reloadData()
     }
 }
@@ -69,7 +80,21 @@ extension FavoriteRestaurantViewController: RestaurantListViewModelDelegate {
 //MARK: - UICollectionViewDataSource
 extension FavoriteRestaurantViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.restaurantListVM.numberOfRestaurants
+        if restaurantListVM.numberOfRestaurants > 0 {
+            // fade out backgroundView when numberOfImages is more than zero
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0,
+                           options: .curveEaseOut,
+                           animations: { self.backgroundView.alpha = 0.0 },
+                           completion: nil)
+        } else {
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.0,
+                           options: .curveEaseIn,
+                           animations: { self.backgroundView.alpha = 1.0 },
+                           completion: nil)
+        }
+        return restaurantListVM.numberOfRestaurants
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,7 +102,7 @@ extension FavoriteRestaurantViewController: UICollectionViewDataSource {
             fatalError("fail to dequeue cell or cast cell as RestaurantCollectionViewCell")
         }
 
-        let restaurantVM = self.restaurantListVM.restaurantAtIndex(indexPath.item)
+        let restaurantVM = restaurantListVM.restaurantAtIndex(indexPath.item)
 
         // Configure the cell
         cell.imageView.sd_setImage(with: restaurantVM.thumbnailURL,
