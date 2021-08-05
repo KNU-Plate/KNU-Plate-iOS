@@ -55,6 +55,12 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func pressedFindIDButton(_ sender: UIButton) {
         
+        let storyboard = UIStoryboard(name: "Find_PW+ID", bundle: nil)
+        
+        guard let findIDVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.findIDViewController) as? FindIDViewController else { return }
+        
+        presentPanModal(findIDVC)
+        
     }
     
     

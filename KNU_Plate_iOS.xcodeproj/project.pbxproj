@@ -159,6 +159,9 @@
 		7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */; };
 		7CD74B8D260B38C000D05B84 /* Kevin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CD74B8C260B38C000D05B84 /* Kevin.storyboard */; };
 		7CDAD9FE26BAB78000F7F58F /* NotificationName Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */; };
+		7CDADA0026BBD60E00F7F58F /* Find_PW+ID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */; };
+		7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */; };
+		7CDADA0526BBDB2B00F7F58F /* FindIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */; };
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
 		7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */; };
@@ -333,6 +336,9 @@
 		7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantRequestDTO.swift; sourceTree = "<group>"; };
 		7CD74B8C260B38C000D05B84 /* Kevin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Kevin.storyboard; sourceTree = "<group>"; };
 		7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName Extension.swift"; sourceTree = "<group>"; };
+		7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Find_PW+ID.storyboard"; sourceTree = "<group>"; };
+		7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDViewController.swift; sourceTree = "<group>"; };
 		7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewModel.swift; sourceTree = "<group>"; };
@@ -589,6 +595,7 @@
 			children = (
 				7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */,
 				7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */,
+				7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */,
 			);
 			path = "Login+Register";
 			sourceTree = "<group>";
@@ -636,9 +643,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7CDADA0126BBDAC900F7F58F /* Find PW & ID */ = {
+			isa = PBXGroup;
+			children = (
+				7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */,
+				7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */,
+			);
+			path = "Find PW & ID";
+			sourceTree = "<group>";
+		};
 		7CE10470260C446500E18C00 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7CDADA0126BBDAC900F7F58F /* Find PW & ID */,
 				7CCDB1F326A3EA900092F28D /* User Register */,
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
@@ -867,6 +884,7 @@
 				7C1F78F52632DE3500C7B41D /* map_present_background_update.png in Resources */,
 				7C1F78EF2632DE3500C7B41D /* info_box_tail.png in Resources */,
 				7C1F78F72632DE3500C7B41D /* map_pin_shadow.png in Resources */,
+				7CDADA0026BBD60E00F7F58F /* Find_PW+ID.storyboard in Resources */,
 				7C1F78E42632DE3500C7B41D /* map_pin_shadow@3x.png in Resources */,
 				7C1F78F02632DE3500C7B41D /* noimage256.png in Resources */,
 				3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */,
@@ -971,6 +989,7 @@
 				3CB6C3EB268D994F00F7515A /* RestaurantListViewModel.swift in Sources */,
 				7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
+				7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
 				3CD96BA826B92063007E3A53 /* EmptyStateTableViewCell.swift in Sources */,
 				7C5EDD532642BF1F00B79178 /* VerifyMailRequestDTO.swift in Sources */,
@@ -998,6 +1017,7 @@
 				3C1A95DE26A13EB7001966F9 /* MyReviewListViewModel.swift in Sources */,
 				7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */,
 				3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */,
+				7CDADA0526BBDB2B00F7F58F /* FindIDViewController.swift in Sources */,
 				7CCDB20126A5390B0092F28D /* UserRegisterValues.swift in Sources */,
 				7CB8DF6A264D3E820001CC6D /* UserDisplayModel.swift in Sources */,
 				7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */,
@@ -1200,7 +1220,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1230,7 +1250,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2W776SPR4X;
+				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

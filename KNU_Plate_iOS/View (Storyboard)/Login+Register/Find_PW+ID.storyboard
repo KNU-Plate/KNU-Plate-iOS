@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="J2z-Rn-N0b">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--FindID View Controller-->
+        <scene sceneID="anc-QM-oZB">
+            <objects>
+                <viewController storyboardIdentifier="FindIDViewController" id="J2z-Rn-N0b" customClass="FindIDViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="INQ-PH-tEp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G36-K2-cou" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="94" width="374" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2EV-tx-z6n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입 시 사용한 이메일 주소를 입력해 주세요.                                                                                         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZa-9A-VjJ">
+                                <rect key="frame" x="20" y="174" width="374" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNG-Zy-mY9">
+                                <rect key="frame" x="50" y="210" width="314" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zhc-hd-Sq4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="아이디 찾기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedFindIDButton:" destination="J2z-Rn-N0b" eventType="touchUpInside" id="D46-5n-KHY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Q3g-NP-Yk4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="G36-K2-cou" firstAttribute="top" secondItem="Q3g-NP-Yk4" secondAttribute="top" constant="50" id="45F-Mn-RZV"/>
+                            <constraint firstItem="G36-K2-cou" firstAttribute="leading" secondItem="Q3g-NP-Yk4" secondAttribute="leading" constant="20" id="KeB-Ox-5Ye"/>
+                            <constraint firstItem="aNG-Zy-mY9" firstAttribute="top" secondItem="uZa-9A-VjJ" secondAttribute="bottom" constant="20" id="MbJ-Au-a4Q"/>
+                            <constraint firstItem="uZa-9A-VjJ" firstAttribute="leading" secondItem="Q3g-NP-Yk4" secondAttribute="leading" constant="20" id="aft-ap-dDf"/>
+                            <constraint firstItem="Q3g-NP-Yk4" firstAttribute="trailing" secondItem="uZa-9A-VjJ" secondAttribute="trailing" constant="20" id="bZW-6r-fRH"/>
+                            <constraint firstItem="Q3g-NP-Yk4" firstAttribute="trailing" secondItem="G36-K2-cou" secondAttribute="trailing" constant="20" id="oda-rs-EKA"/>
+                            <constraint firstItem="Q3g-NP-Yk4" firstAttribute="trailing" secondItem="aNG-Zy-mY9" secondAttribute="trailing" constant="50" id="quZ-KE-CiI"/>
+                            <constraint firstItem="uZa-9A-VjJ" firstAttribute="top" secondItem="G36-K2-cou" secondAttribute="bottom" constant="20" id="xJ4-Ah-mhV"/>
+                            <constraint firstItem="aNG-Zy-mY9" firstAttribute="leading" secondItem="Q3g-NP-Yk4" secondAttribute="leading" constant="50" id="zxR-85-Ra1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="uZa-9A-VjJ" id="G2n-dG-kMv"/>
+                        <outlet property="emailTextField" destination="G36-K2-cou" id="46b-wm-HbH"/>
+                        <outlet property="findIDButton" destination="aNG-Zy-mY9" id="2aQ-Lf-sku"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lki-J6-RBf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-603" y="70"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="awe-MG-lIL">
+            <objects>
+                <viewController storyboardIdentifier="FindPWViewController" id="ZWJ-Am-236" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sny-u7-Xtr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="학교 이메일 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7gZ-Le-Ufh" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="20" y="94" width="374" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="8FS-a5-Isv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" name="AppDefaultColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입 시 사용한 이메일 주소를 입력해 주세요.                                                                                         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3x-Wk-FXc">
+                                <rect key="frame" x="20" y="174" width="374" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBI-ru-LsQ">
+                                <rect key="frame" x="50" y="210" width="314" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="mG5-xa-DZI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="아이디 찾기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bc9-tb-8m2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7gZ-Le-Ufh" firstAttribute="top" secondItem="Bc9-tb-8m2" secondAttribute="top" constant="50" id="J8W-tz-gdg"/>
+                            <constraint firstItem="uBI-ru-LsQ" firstAttribute="leading" secondItem="Bc9-tb-8m2" secondAttribute="leading" constant="50" id="Mtq-h0-rXi"/>
+                            <constraint firstItem="Bc9-tb-8m2" firstAttribute="trailing" secondItem="e3x-Wk-FXc" secondAttribute="trailing" constant="20" id="OQy-aB-sYV"/>
+                            <constraint firstItem="7gZ-Le-Ufh" firstAttribute="leading" secondItem="Bc9-tb-8m2" secondAttribute="leading" constant="20" id="Tab-lb-ioX"/>
+                            <constraint firstItem="uBI-ru-LsQ" firstAttribute="top" secondItem="e3x-Wk-FXc" secondAttribute="bottom" constant="20" id="eqO-Bj-3it"/>
+                            <constraint firstItem="e3x-Wk-FXc" firstAttribute="top" secondItem="7gZ-Le-Ufh" secondAttribute="bottom" constant="20" id="erM-el-5JD"/>
+                            <constraint firstItem="Bc9-tb-8m2" firstAttribute="trailing" secondItem="7gZ-Le-Ufh" secondAttribute="trailing" constant="20" id="fjW-7f-STM"/>
+                            <constraint firstItem="e3x-Wk-FXc" firstAttribute="leading" secondItem="Bc9-tb-8m2" secondAttribute="leading" constant="20" id="hxj-vO-gcJ"/>
+                            <constraint firstItem="Bc9-tb-8m2" firstAttribute="trailing" secondItem="uBI-ru-LsQ" secondAttribute="trailing" constant="50" id="mmy-ni-Q4p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WdD-qI-2Sv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="239" y="70"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="7gZ-Le-Ufh">
+            <size key="intrinsicContentSize" width="118" height="23"/>
+        </designable>
+        <designable name="G36-K2-cou">
+            <size key="intrinsicContentSize" width="118" height="23"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="AppDefaultColor">
+            <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

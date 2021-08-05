@@ -19,6 +19,9 @@ struct Constants {
         static let IDInputViewController                    = "IDInputViewController"
         static let emailVerificationViewController          = "EmailVerificationViewController"
         static let congratulateViewController               = "CongratulateViewController"
+        static let findIDViewController                     = "FindIDViewController"
+        static let findPWViewController                     = "FindPWViewController"
+        
         
         // Home Tab
         static let mainTabBarController                     = "mainTabBarController"
