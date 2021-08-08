@@ -430,7 +430,9 @@ class UserManager {
     func deleteMyReview(reviewID: Int,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let url = deleteReviewURL + "/\(reviewID)"
+        let url = deleteReviewURL + "\(reviewID)"
+        
+        print("✏️ url: \(url)")
         
         AF.request(url,
                    method: .delete,

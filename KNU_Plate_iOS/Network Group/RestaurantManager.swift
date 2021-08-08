@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 import ProgressHUD
+import SwiftyJSON
 
 //MARK: - 매장 관련 로직을 처리하는 클래스 -> i.e 매장 등록, 매장 목록 조회, 매장 주소 검색, 매장 삭제 등
 
@@ -27,7 +28,7 @@ class RestaurantManager {
     
     //MARK: - 신규 매장 등록
     func uploadNewRestaurant(with model: NewRestaurantRequestDTO,
-                             completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+                             completion: @escaping ((Result<Bool, Error>) -> Void)) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -67,11 +68,21 @@ class RestaurantManager {
                 completion(.success(true))
                 
             default:
-                let error = NetworkError.returnError(statusCode: statusCode)
                 
-                print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                let errorJSON = JSON(response.data!)
                 
-                completion(.failure(error))
+                if errorJSON["error"] == "already enrolled mall" {
+                    
+                    print("❗️ RestaurantManager - Already Enrolled Mall")
+                    completion(.failure(UploadError.alreadyEnrolledMall))
+                    
+                } else {
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                     
+                    print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                    
+                    completion(.failure(error))
+                }
             }
         }
     }

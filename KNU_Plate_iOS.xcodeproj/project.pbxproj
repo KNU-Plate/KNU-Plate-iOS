@@ -31,7 +31,6 @@
 		3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */; };
 		3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */; };
 		3CBA75D2261AE77E00D6CCCE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */; };
-		3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */; };
 		3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */; };
 		3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */; };
 		3CBFB587269815EC00E7EB30 /* RestaurantImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */; };
@@ -162,6 +161,8 @@
 		7CDADA0026BBD60E00F7F58F /* Find_PW+ID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */; };
 		7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */; };
 		7CDADA0526BBDB2B00F7F58F /* FindIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */; };
+		7CDADA0926BFB74300F7F58F /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */; };
+		7CDADA0C26BFB86700F7F58F /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */; };
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
 		7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */; };
@@ -199,7 +200,6 @@
 		3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
 		3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
 		3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageResponseModel.swift; sourceTree = "<group>"; };
@@ -339,6 +339,8 @@
 		7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Find_PW+ID.storyboard"; sourceTree = "<group>"; };
 		7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDViewController.swift; sourceTree = "<group>"; };
+		7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
+		7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewModel.swift; sourceTree = "<group>"; };
@@ -652,9 +654,18 @@
 			path = "Find PW & ID";
 			sourceTree = "<group>";
 		};
+		7CDADA0A26BFB85300F7F58F /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
 		7CE10470260C446500E18C00 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7CDADA0A26BFB85300F7F58F /* Others */,
 				7CDADA0126BBDAC900F7F58F /* Find PW & ID */,
 				7CCDB1F326A3EA900092F28D /* User Register */,
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
@@ -668,7 +679,6 @@
 				3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */,
 				3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */,
 				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
-				3CBA75D4261AE78600D6CCCE /* VerifyEmailViewController.swift */,
 				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
 				7C8152242685A6A20041EC47 /* SearchListViewController.swift */,
 				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
@@ -794,6 +804,7 @@
 				7CD74B8C260B38C000D05B84 /* Kevin.storyboard */,
 				7CBA9A3A26A179A1002F5BCB /* Login+Register */,
 				7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */,
+				7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */,
 			);
 			path = "View (Storyboard)";
 			sourceTree = "<group>";
@@ -904,6 +915,7 @@
 				3CBFD24426BAE2300056B27A /* food_prepared.json in Resources */,
 				7C1F78F32632DE3500C7B41D /* map_present.png in Resources */,
 				7C1F78E72632DE3500C7B41D /* map_pin_red@3x.png in Resources */,
+				7CDADA0926BFB74300F7F58F /* VerifyEmail.storyboard in Resources */,
 				7C1F78E02632DE3500C7B41D /* map_pinup.png in Resources */,
 				7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */,
 				7C1F78F22632DE3500C7B41D /* map_pin.png in Resources */,
@@ -1005,10 +1017,10 @@
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
 				7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */,
 				7C65869D26494D34004B8584 /* ReviewDetail.swift in Sources */,
+				7CDADA0C26BFB86700F7F58F /* VerifyEmailViewController.swift in Sources */,
 				7CA66219264113CF000E0B7A /* MenuRegisterResponseModel.swift in Sources */,
 				7C8152252685A6A20041EC47 /* SearchListViewController.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
-				3CBA75D5261AE78600D6CCCE /* VerifyEmailViewController.swift in Sources */,
 				7C3D985C26AD2FEC005DFAE0 /* RegisterNavigationController.swift in Sources */,
 				7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				3C8E581A26B1408A00A08290 /* MainCollectionViewCell.swift in Sources */,

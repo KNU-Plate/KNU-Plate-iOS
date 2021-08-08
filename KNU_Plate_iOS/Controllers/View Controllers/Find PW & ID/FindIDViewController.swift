@@ -43,7 +43,7 @@ class FindIDViewController: UIViewController {
             
             case .failure(_):
                 
-                self.showResult(with: "아이디를 찾디 못했습니다. 😥", username: nil)
+                self.showResult(with: "아이디를 찾지 못했습니다. 😥", username: nil)
            
             }
         }

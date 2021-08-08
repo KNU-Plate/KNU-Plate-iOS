@@ -2,7 +2,7 @@ import Foundation
 
 protocol NewRestaurantViewModelDelegate: AnyObject {
     func didCompleteUpload(_ success: Bool)
-    func alreadyRegisteredRestaurant()
+    func alreadyRegisteredRestaurant(with error: UploadError)
     func failedToUpload(with error: NetworkError)
 }
 
@@ -81,7 +81,7 @@ class NewRestaurantViewModel {
             
             guard let self = self else { return }
             
-            print("NewRestaurantViewModel - upload() RESULT: \(result)")
+            print("✏️ NewRestaurantViewModel - upload() RESULT: \(result)")
             
             switch result {
             
@@ -89,10 +89,18 @@ class NewRestaurantViewModel {
                 self.delegate?.didCompleteUpload(true)
                 
             case .failure(let error):
-            
                 
-                // if 추가해서 어느게 매장 이미 등록된거고 어느게 그냥 서버 오류인지 확인
-                self.delegate?.failedToUpload(with: error)
+                if let uploadError = error as? UploadError {
+                
+                    self.delegate?.alreadyRegisteredRestaurant(with: uploadError)
+                    return
+                }
+                
+                if let error = error as? NetworkError {
+                 
+                    self.delegate?.failedToUpload(with: error)
+                }
+            
             }
         }
     }

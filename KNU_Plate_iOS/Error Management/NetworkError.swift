@@ -37,6 +37,23 @@ enum NetworkError: Int, Error {
     }
 }
 
+//MARK: - 업로드 상황에서 마주할 수 있는 다양한 에러 처리 enum
+
+enum UploadError: Error {
+    
+    case alreadyEnrolledMall
+    
+    var errorDescription: String {
+        
+        switch self {
+        
+        case .alreadyEnrolledMall:
+            return "이미 등록된 매장입니다. 🤔"
+        }
+    }
+    
+}
+
 //MARK: - 회원가입 Error Message 관리
 
 enum SignUpError: String, Error {
@@ -112,20 +129,4 @@ enum RestaurantError: Error {
 }
 
 
-
-//MARK: - 신규 매장 등록 Error Message 관리
-
-enum NewRestaurantUploadError: String, Error {
-    
-    case mallAlreadyExists = "already enrolled mall"
-    
-    func returnErrorMessage() -> String {
-        
-        switch self {
-        
-        case .mallAlreadyExists:
-            return "이미 등록된 매장입니다. 홈화면으로 돌아가시겠습니까?"
-        }
-    }
-}
 

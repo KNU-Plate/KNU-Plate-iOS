@@ -78,11 +78,11 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         }
     }
     
-    func alreadyRegisteredRestaurant(){
+    func alreadyRegisteredRestaurant(with error: UploadError){
         
         dismissProgressBar()
         
-        showSimpleBottomAlertWithAction(message: "이미 등록된 매장입니다 🥲",
+        showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "홈으로 돌아가기") {
             self.goBackToHomeVC()
         }

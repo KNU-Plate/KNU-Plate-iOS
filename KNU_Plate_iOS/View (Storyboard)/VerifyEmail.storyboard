@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Verify Email-->
+        <scene sceneID="Vw7-Lb-hgF">
+            <objects>
+                <viewController storyboardIdentifier="VerifyEmailViewController" hidesBottomBarWhenPushed="YES" id="oY3-A7-iZy" userLabel="Verify Email" customClass="VerifyEmailViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gQx-MR-IEK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 인증을 먼저 해주세요. 👀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWK-NB-fow">
+                                <rect key="frame" x="15" y="124" width="244.5" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjg-KF-v90">
+                                <rect key="frame" x="15" y="177" width="384" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjr-fH-QNK">
+                                <rect key="frame" x="100" y="267.5" width="214" height="50"/>
+                                <color key="backgroundColor" name="AppDefaultColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sTr-M4-at1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="이메일 다시 보내기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ye6-0X-OIj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ye6-0X-OIj" firstAttribute="trailing" secondItem="tjg-KF-v90" secondAttribute="trailing" constant="15" id="6Ei-Z9-3uN"/>
+                            <constraint firstItem="YWK-NB-fow" firstAttribute="top" secondItem="Ye6-0X-OIj" secondAttribute="top" constant="80" id="GqF-vN-BEY"/>
+                            <constraint firstItem="Ye6-0X-OIj" firstAttribute="trailing" secondItem="Rjr-fH-QNK" secondAttribute="trailing" constant="100" id="HRn-zd-FZx"/>
+                            <constraint firstItem="Rjr-fH-QNK" firstAttribute="leading" secondItem="Ye6-0X-OIj" secondAttribute="leading" constant="100" id="MXl-73-49f"/>
+                            <constraint firstItem="Rjr-fH-QNK" firstAttribute="top" secondItem="tjg-KF-v90" secondAttribute="bottom" constant="70" id="lvv-Lv-P8M"/>
+                            <constraint firstItem="tjg-KF-v90" firstAttribute="top" secondItem="YWK-NB-fow" secondAttribute="bottom" constant="30" id="n33-xf-nJl"/>
+                            <constraint firstItem="tjg-KF-v90" firstAttribute="leading" secondItem="Ye6-0X-OIj" secondAttribute="leading" constant="15" id="nRH-cR-rh4"/>
+                            <constraint firstItem="YWK-NB-fow" firstAttribute="leading" secondItem="Ye6-0X-OIj" secondAttribute="leading" constant="15" id="rCN-GJ-mfR"/>
+                            <constraint firstItem="Rjr-fH-QNK" firstAttribute="centerX" secondItem="gQx-MR-IEK" secondAttribute="centerX" id="rMR-IY-vtx"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="건의사항" id="YPT-ZE-9a6"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="detailLabel" destination="tjg-KF-v90" id="PoH-OF-CHt"/>
+                        <outlet property="resendEmailButton" destination="Rjr-fH-QNK" id="4AV-4S-xXr"/>
+                        <outlet property="titleLabel" destination="YWK-NB-fow" id="Yga-gd-A8L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRr-VI-geM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1423" y="-99"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AppDefaultColor">
+            <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

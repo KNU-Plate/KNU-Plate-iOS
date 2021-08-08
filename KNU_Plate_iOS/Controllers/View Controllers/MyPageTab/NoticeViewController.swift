@@ -105,6 +105,8 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.noticeImageView.image = UIImage(systemName: "bell.badge")
         }
         
+        tableView.tableFooterView = UIView(frame: .zero)
+        
         return cell
     }
     
