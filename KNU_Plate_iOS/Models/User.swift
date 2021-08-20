@@ -32,7 +32,6 @@ class User {
             guard let password = retrievedPassword else {
                 return "❗️ Invalid Password"
             }
-            print("✏️ Password: \(password)")
             return password
         }
         set {
@@ -103,8 +102,6 @@ class User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.username)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.displayName)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.email)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.medal)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         

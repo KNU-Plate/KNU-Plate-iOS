@@ -5,6 +5,7 @@ class IDInputViewController: UIViewController {
 
     @IBOutlet var firstLineLabel: UILabel!
     @IBOutlet var secondLineLabel: UILabel!
+    @IBOutlet var detailLabel: UILabel!
     @IBOutlet var labels: [UILabel]!
     @IBOutlet var idTextField: HoshiTextField!
     @IBOutlet var errorLabel: UILabel!
@@ -17,10 +18,7 @@ class IDInputViewController: UIViewController {
     
     @IBAction func pressedNext(_ sender: UIBarButtonItem) {
         
-        if !checkIDLengthIsValid() {
-            print("❗️ id length error")
-            return
-        }
+        if !checkIDLengthIsValid() { return }
         checkIDDuplication()
     }
     
@@ -69,6 +67,10 @@ extension IDInputViewController {
         firstLineLabel.changeTextAttributeColor(fullText: firstLineLabel.text!, changeText: "크슐랭가이드")
         secondLineLabel.text = "로그인할 때 사용할 아이디를 입력해주세요!"
         secondLineLabel.changeTextAttributeColor(fullText: secondLineLabel.text!, changeText: "아이디")
+        
+        detailLabel.text = "아이디는 다른 사용자에게도 표시되는 용도로 쓰입니다"
+        detailLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        detailLabel.textColor = .lightGray
     }
 }
 

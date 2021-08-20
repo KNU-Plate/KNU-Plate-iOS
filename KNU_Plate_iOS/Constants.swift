@@ -61,7 +61,7 @@ struct Constants {
                                                                 ]
         static let myPageVCOptions                          = [ "공지사항",
                                                                 "내가 쓴 리뷰",
-                                                                "설정",
+                                                                "계정 정보 관리",
                                                                 "개발자에게 건의사항 보내기",
                                                                 "서비스 이용약관",
                                                                 "개발자 정보",
@@ -118,8 +118,6 @@ struct Constants {
         static let isLoggedIn                   = "isLoggedIn"
         static let userID                       = "userID"
         static let username                     = "username"
-        static let displayName                  = "displayName"
-        static let email                        = "email"
         static let medal                        = "medal"
         
     }

@@ -43,10 +43,10 @@ extension VerifyEmailViewController {
     
     func initializeDetailLabel() {
         
-        detailLabel.text = "\(User.shared.email)로 발송된 인증 메일을 확인해주세요. 이메일의 인증 버튼을 누르면 인증이 완료됩니다."
+//        detailLabel.text = "\(User.shared.email)로 발송된 인증 메일을 확인해주세요. 이메일의 인증 버튼을 누르면 인증이 완료됩니다."
         
         detailLabel.adjustsFontSizeToFitWidth = true
-        detailLabel.changeTextAttributeColor(fullText: detailLabel.text!, changeText: User.shared.email)
+//        detailLabel.changeTextAttributeColor(fullText: detailLabel.text!, changeText: User.shared.email)
         
     }
     
