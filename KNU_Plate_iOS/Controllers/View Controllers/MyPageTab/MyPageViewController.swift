@@ -1,7 +1,6 @@
 import UIKit
 import Alamofire
 import SnackBar_swift
-import SPIndicator
 import EasyTipView
 
 class MyPageViewController: UIViewController {
@@ -11,7 +10,6 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var infoButton: UIButton!
-    @IBOutlet var verificationIndicatorButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -285,38 +283,14 @@ extension MyPageViewController {
     func initializeUserInfoRelatedUIComponents() {
         
         userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
-        self.userNickname.text = User.shared.displayName
+        self.userNickname.text = User.shared.username
         self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
 
         if let profileImage = User.shared.profileImage {
             self.profileImageButton.setImage(profileImage, for: .normal)
         }
         
-        // 인증 버튼
-        if User.shared.isVerified {
-            
-            verificationIndicatorButton.setTitle(nil, for: .normal)
-            verificationIndicatorButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            verificationIndicatorButton.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-            verificationIndicatorButton.isUserInteractionEnabled = false
-            verificationIndicatorButton.backgroundColor = .clear
-            
-            NSLayoutConstraint.activate([
-                verificationIndicatorButton.widthAnchor.constraint(equalToConstant: 20),
-                verificationIndicatorButton.heightAnchor.constraint(equalToConstant: 20)
-            ])
-  
-            
-            
-        } else {
-            
-            verificationIndicatorButton.isUserInteractionEnabled = true
-            verificationIndicatorButton.layer.cornerRadius = 3
-            
-            //TODO: - addTarget 해서 uiviewcontroller extension 에 정의할 present verification screen
-            
-            
-        }
+
     }
 
     func updateProfileImageButton(with image: UIImage) {

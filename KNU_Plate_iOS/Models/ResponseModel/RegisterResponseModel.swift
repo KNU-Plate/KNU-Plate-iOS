@@ -11,28 +11,3 @@ struct RegisterResponseModel: Decodable {
     let user: UserDisplayModel
 }
 
-//struct RegisterResponseModel: Decodable {
-//
-//    let userID: String
-//    let username: String
-//    let displayName: String
-//    let email: String
-//    let dateCreated: String
-//    let isActive: String
-//    let medal: Int
-//    let userProfileImage: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//
-//        case userID = "user_id"
-//        case username = "user_name"
-//        case displayName = "display_name"
-//        case email = "mail_address"
-//        case dateCreated = "date_create"
-//        case isActive = "is_active"
-//        case medal = "medal_id"
-//        case userProfileImage = "user_thumbnail"
-//    }
-//
-//}
-

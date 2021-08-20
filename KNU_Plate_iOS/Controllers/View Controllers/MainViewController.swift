@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupCollectionView()
-        welcomeUser()
         createObservers()
     }
 }
@@ -125,18 +124,12 @@ extension MainViewController: MainCollectionReusableViewDelegate {
 
 //MARK: - Other Methods
 extension MainViewController {
-    func welcomeUser() {
-        SPIndicator.present(title: "\(User.shared.displayName)님",
-                            message: "환영합니다 🎉",
-                            preset: .custom(UIImage(systemName: "face.smiling")!))
-        
-    }
     
     func createObservers() {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(popToWelcomeViewController),
-                                               name: Notification.Name.refreshTokenExpired,
+                                               name: .refreshTokenExpired,
                                                object: nil)
     }
 }

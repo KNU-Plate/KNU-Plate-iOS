@@ -63,7 +63,7 @@ class ReviewDetailViewController: UIViewController {
         }
 
         // 내가 쓴 리뷰면 삭제 UIBarButton 추가하기
-        if reviewDetails.userID == User.shared.id {
+        if reviewDetails.userID == User.shared.userUID {
             
             let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteReview))
             self.navigationItem.rightBarButtonItem = trashButton

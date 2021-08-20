@@ -41,8 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
         }
-        
-        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

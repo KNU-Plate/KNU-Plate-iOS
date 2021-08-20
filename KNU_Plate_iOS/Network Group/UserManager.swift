@@ -233,7 +233,7 @@ class UserManager {
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let name: Parameters = ["name": User.shared.displayName]
+        let name: Parameters = ["user_name": User.shared.username]
         
         AF.request(loadUserProfileInfoURL,
                    method: .get,
@@ -290,7 +290,6 @@ class UserManager {
             switch statusCode {
             case 200:
                 
-                User.shared.displayName = model.nickname!
                 print("✏️ UserManager - 닉네임 변경 성공")
                 completion(.success(true))
             default:
@@ -509,10 +508,9 @@ extension UserManager {
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
     
-        User.shared.id = model.user.userID
+        User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
-        User.shared.displayName = model.user.displayName
-        User.shared.email = model.user.mailAddress
+
         User.shared.medal = model.user.medal
         
         print("UserManager - saveUserRegisterInfoToDevice success ")
@@ -521,10 +519,8 @@ extension UserManager {
     
     func saveUserInfoToDevice(with model: LoadUserInfoModel) {
         
-        User.shared.id = model.userID
+        User.shared.userUID = model.userID
         User.shared.username = model.username
-        User.shared.displayName = model.displayName
-        User.shared.email = model.email
         User.shared.medal = model.medal
         
         if let fileFolder = model.fileFolder {
@@ -551,10 +547,8 @@ extension UserManager {
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
     
-        User.shared.id = model.user.userID
+        User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
-        User.shared.displayName = model.user.displayName
-        User.shared.email = model.user.mailAddress
         User.shared.medal = model.user.medal
         
         User.shared.isLoggedIn = true
