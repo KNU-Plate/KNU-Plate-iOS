@@ -147,10 +147,7 @@
 		7CC96307263051CC00AA71E1 /* RegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */; };
 		7CCDB1F526A3EAC50092F28D /* IDInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */; };
 		7CCDB1F726A3F0AA0092F28D /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */; };
-		7CCDB1F926A3FAFE0092F28D /* NicknameInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */; };
 		7CCDB1FB26A3FB090092F28D /* PasswordInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */; };
-		7CCDB1FD26A401400092F28D /* EmailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */; };
-		7CCDB1FF26A4044F0092F28D /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */; };
 		7CCDB20126A5390B0092F28D /* UserRegisterValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */; };
 		7CCDB20326A564F50092F28D /* CongratulateRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCDB20226A564F50092F28D /* CongratulateRegisterViewController.swift */; };
 		7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD74B67260AE06E00D05B84 /* RatingController.swift */; };
@@ -161,7 +158,7 @@
 		7CDADA0026BBD60E00F7F58F /* Find_PW+ID.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */; };
 		7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */; };
 		7CDADA0526BBDB2B00F7F58F /* FindIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */; };
-		7CDADA0926BFB74300F7F58F /* VerifyEmail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */; };
+		7CDADA0926BFB74300F7F58F /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDADA0826BFB74300F7F58F /* Welcome.storyboard */; };
 		7CDADA0C26BFB86700F7F58F /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */; };
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
@@ -325,10 +322,7 @@
 		7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponseModel.swift; sourceTree = "<group>"; };
 		7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDInputViewController.swift; sourceTree = "<group>"; };
 		7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
-		7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameInputViewController.swift; sourceTree = "<group>"; };
 		7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputViewController.swift; sourceTree = "<group>"; };
-		7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInputViewController.swift; sourceTree = "<group>"; };
-		7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterValues.swift; sourceTree = "<group>"; };
 		7CCDB20226A564F50092F28D /* CongratulateRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulateRegisterViewController.swift; sourceTree = "<group>"; };
 		7CD74B67260AE06E00D05B84 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
@@ -339,7 +333,7 @@
 		7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Find_PW+ID.storyboard"; sourceTree = "<group>"; };
 		7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDViewController.swift; sourceTree = "<group>"; };
-		7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerifyEmail.storyboard; sourceTree = "<group>"; };
+		7CDADA0826BFB74300F7F58F /* Welcome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -625,10 +619,7 @@
 			children = (
 				7C3D985B26AD2FEC005DFAE0 /* RegisterNavigationController.swift */,
 				7CCDB1F426A3EAC50092F28D /* IDInputViewController.swift */,
-				7CCDB1F826A3FAFE0092F28D /* NicknameInputViewController.swift */,
 				7CCDB1FA26A3FB090092F28D /* PasswordInputViewController.swift */,
-				7CCDB1FC26A401400092F28D /* EmailInputViewController.swift */,
-				7CCDB1FE26A4044F0092F28D /* EmailVerificationViewController.swift */,
 				7CCDB20226A564F50092F28D /* CongratulateRegisterViewController.swift */,
 			);
 			path = "User Register";
@@ -804,7 +795,7 @@
 				7CD74B8C260B38C000D05B84 /* Kevin.storyboard */,
 				7CBA9A3A26A179A1002F5BCB /* Login+Register */,
 				7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */,
-				7CDADA0826BFB74300F7F58F /* VerifyEmail.storyboard */,
+				7CDADA0826BFB74300F7F58F /* Welcome.storyboard */,
 			);
 			path = "View (Storyboard)";
 			sourceTree = "<group>";
@@ -915,7 +906,7 @@
 				3CBFD24426BAE2300056B27A /* food_prepared.json in Resources */,
 				7C1F78F32632DE3500C7B41D /* map_present.png in Resources */,
 				7C1F78E72632DE3500C7B41D /* map_pin_red@3x.png in Resources */,
-				7CDADA0926BFB74300F7F58F /* VerifyEmail.storyboard in Resources */,
+				7CDADA0926BFB74300F7F58F /* Welcome.storyboard in Resources */,
 				7C1F78E02632DE3500C7B41D /* map_pinup.png in Resources */,
 				7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */,
 				7C1F78F22632DE3500C7B41D /* map_pin.png in Resources */,
@@ -1044,7 +1035,6 @@
 				7CB8DF65264D37090001CC6D /* UIViewController Extension.swift in Sources */,
 				7C1F77892632A9B800C7B41D /* SearchRestaurantViewController.swift in Sources */,
 				3C8AB204268A3C1700D51AC8 /* RestaurantTabBarView.swift in Sources */,
-				7CCDB1FF26A4044F0092F28D /* EmailVerificationViewController.swift in Sources */,
 				7C16DF26262183C900AA8239 /* RegisterRequestDTO.swift in Sources */,
 				3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */,
 				7CA6621726400698000E0B7A /* Test.swift in Sources */,
@@ -1076,7 +1066,6 @@
 				7C3517D1267C76F000BD9A88 /* ReportReviewViewController.swift in Sources */,
 				3CBA75CF261AE76700D6CCCE /* LoginViewController.swift in Sources */,
 				7C99FBA126490B010063C967 /* ReviewWithoutImageTableViewCell.swift in Sources */,
-				7CCDB1F926A3FAFE0092F28D /* NicknameInputViewController.swift in Sources */,
 				7CD74B72260B11CC00D05B84 /* NewRestaurantRequestDTO.swift in Sources */,
 				7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */,
 				7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */,
@@ -1086,7 +1075,6 @@
 				7CCDB1F526A3EAC50092F28D /* IDInputViewController.swift in Sources */,
 				3C8AB202268A376500D51AC8 /* RestaurantTableView.swift in Sources */,
 				3CB6F97F26957E9F001324BB /* RestaurantInfoViewModel.swift in Sources */,
-				7CCDB1FD26A401400092F28D /* EmailInputViewController.swift in Sources */,
 				3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */,
 				7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */,
 				7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */,

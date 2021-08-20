@@ -39,12 +39,9 @@ class UserManager {
             
             multipartFormData.append(Data(model.username.utf8),
                                      withName: "user_name")
-            multipartFormData.append(Data(model.displayName.utf8),
-                                     withName: "display_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
-            multipartFormData.append(Data(model.email.utf8),
-                                     withName: "mail_address")
+ 
             
             if let profileImage = model.profileImage {
                 

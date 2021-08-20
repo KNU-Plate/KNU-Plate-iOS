@@ -67,6 +67,9 @@ struct Constants {
                                                                 "개발자 정보",
                                                                 "오픈 소스 라이센스"
                                                                 ]
+        
+        // Others
+        static let welcomeUserViewController            = "WelcomeViewController"
     }
     
 

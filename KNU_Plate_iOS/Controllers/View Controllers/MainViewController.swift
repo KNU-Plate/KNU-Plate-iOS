@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupCollectionView()
-        createObservers()
     }
 }
 
@@ -119,17 +118,5 @@ extension MainViewController: MainCollectionReusableViewDelegate {
         }
         nextViewController.category = category
         self.navigationController?.pushViewController(nextViewController, animated: true)
-    }
-}
-
-//MARK: - Other Methods
-extension MainViewController {
-    
-    func createObservers() {
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(popToWelcomeViewController),
-                                               name: .refreshTokenExpired,
-                                               object: nil)
     }
 }

@@ -29,6 +29,7 @@ extension MyReviewListViewController {
     
     func initialize() {
         
+        createWelcomeVCObservers()
         initializeViewModel()
         initializeTableView()
     }

@@ -32,39 +32,7 @@ class EmailInputViewController: UIViewController {
         UserRegisterValues.shared.registerEmail = emailTextField.text!
     }
     
-    func registerUser() {
-        
-        showProgressBar()
-        
-        let model = RegisterRequestDTO(username: UserRegisterValues.shared.registerID,
-                                       displayName: UserRegisterValues.shared.registerNickname,
-                                       password: UserRegisterValues.shared.registerPassword,
-                                       email: UserRegisterValues.shared.registerEmail,
-                                       profileImage: nil)
-        
-        UserManager.shared.register(with: model) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            dismissProgressBar()
-            
-            switch result {
-            case .success(_):
-                
-                DispatchQueue.main.async {
-                    let nextVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.emailVerificationViewController) as! EmailVerificationViewController
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-                
-            case .failure(let error):
-                
-                self.showSimpleBottomAlert(with: error.errorDescription)
 
-            }
-        
-        }
-        
-    }
     
 }
 

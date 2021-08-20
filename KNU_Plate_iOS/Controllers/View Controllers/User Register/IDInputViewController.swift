@@ -26,10 +26,7 @@ class IDInputViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        //guard let nextVC = segue.destination as? NicknameInputViewController else { fatalError() }
         UserRegisterValues.shared.registerID = idTextField.text!
     }
 }

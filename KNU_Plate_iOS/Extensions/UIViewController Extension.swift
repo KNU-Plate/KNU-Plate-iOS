@@ -127,4 +127,27 @@ extension UIViewController {
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
+    
+    @objc func presentWelcomeVC() {
+        
+        let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
+        
+        guard let welcomeVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController) as? WelcomeViewController else { return }
+        
+        welcomeVC.modalPresentationStyle = .overFullScreen
+        self.present(welcomeVC, animated: true)
+    }
+}
+
+//MARK: - Observers
+
+extension UIViewController {
+    
+    func createWelcomeVCObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(presentWelcomeVC),
+                                               name: .presentWelcomeVC,
+                                               object: nil)
+    }
 }
