@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 import SwiftKeychainWrapper
+import SwiftyJSON
 
 //MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
 
@@ -432,8 +433,6 @@ class UserManager {
         
         let url = deleteReviewURL + "\(reviewID)"
         
-        print("✏️ url: \(url)")
-        
         AF.request(url,
                    method: .delete,
                    interceptor: interceptor)
@@ -450,6 +449,7 @@ class UserManager {
                 
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
+                    print("error: \(JSON(response.data!))")
                     print("❗️ UserManager - deleteMyReview FAILED error :\(error.errorDescription)")
                     completion(.failure(error))
                 }

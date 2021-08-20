@@ -1,6 +1,4 @@
 import UIKit
-import ProgressHUD
-import SnackBar_swift
 
 // 맛집 올리기 View Controller
 
@@ -49,9 +47,6 @@ class NewRestaurantViewController: UIViewController {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
         self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
-    
-    
-
 }
 
 //MARK: - NewRestaurantViewModelDelegate

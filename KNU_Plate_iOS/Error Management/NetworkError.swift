@@ -118,15 +118,3 @@ enum MailVerificationIssuanceError: String, Error {
     }
 
 }
-
-
-
-enum RestaurantError: Error {
-    
-    
-    
-    
-}
-
-
-

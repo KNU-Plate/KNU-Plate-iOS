@@ -129,6 +129,7 @@ extension MainViewController {
         SPIndicator.present(title: "\(User.shared.displayName)님",
                             message: "환영합니다 🎉",
                             preset: .custom(UIImage(systemName: "face.smiling")!))
+        
     }
     
     func createObservers() {
