@@ -273,10 +273,12 @@ extension RestaurantInfoViewModel {
         RestaurantManager.shared.markFavorite(mallID: mallID, markMyFavorite: markMyFavorite) { result in
             switch result {
             case .success:
-                self.delegate?.didMarkFavorite()
+//                self.delegate?.didMarkFavorite()
+                NotificationCenter.default.post(name: Notification.Name.didMarkFavorite, object: nil)
                 return
             case .failure:
-                self.delegate?.didFailedMarkFavorite()
+//                self.delegate?.didFailedMarkFavorite()
+                NotificationCenter.default.post(name: Notification.Name.didFailedMarkFavorite, object: nil)
                 return
             }
         }
