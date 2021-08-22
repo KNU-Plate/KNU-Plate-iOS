@@ -19,6 +19,9 @@ struct Constants {
         static let IDInputViewController                    = "IDInputViewController"
         static let emailVerificationViewController          = "EmailVerificationViewController"
         static let congratulateViewController               = "CongratulateViewController"
+        static let findIDViewController                     = "FindIDViewController"
+        static let findPWViewController                     = "FindPWViewController"
+        
         
         // Home Tab
         static let mainTabBarController                     = "mainTabBarController"
@@ -58,12 +61,15 @@ struct Constants {
                                                                 ]
         static let myPageVCOptions                          = [ "공지사항",
                                                                 "내가 쓴 리뷰",
-                                                                "설정",
+                                                                "계정 정보 관리",
                                                                 "개발자에게 건의사항 보내기",
                                                                 "서비스 이용약관",
                                                                 "개발자 정보",
                                                                 "오픈 소스 라이센스"
                                                                 ]
+        
+        // Others
+        static let welcomeUserViewController            = "WelcomeViewController"
     }
     
 
@@ -115,8 +121,6 @@ struct Constants {
         static let isLoggedIn                   = "isLoggedIn"
         static let userID                       = "userID"
         static let username                     = "username"
-        static let displayName                  = "displayName"
-        static let email                        = "email"
         static let medal                        = "medal"
         
     }

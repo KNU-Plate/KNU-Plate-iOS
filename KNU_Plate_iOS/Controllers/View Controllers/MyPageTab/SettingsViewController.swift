@@ -76,7 +76,7 @@ class SettingsViewController: UIViewController {
     }
     func initialize() {
         
-        userNicknameLabel.text = User.shared.displayName
+        userNicknameLabel.text = User.shared.username
     }
 
 

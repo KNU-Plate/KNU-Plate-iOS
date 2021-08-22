@@ -21,16 +21,46 @@ class PasswordInputViewController: UIViewController {
         
         if !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         
-        performSegue(withIdentifier: Constants.SegueIdentifier.goToEmailVC, sender: self)
+        
+        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func registerUser() {
         
-        //guard let nextVC = segue.destination as? EmailInputViewController else { fatalError() }
+        showProgressBar()
+        
+        let model = RegisterRequestDTO(username: UserRegisterValues.shared.registerID,
+                                       password: UserRegisterValues.shared.registerPassword,
+                                       profileImage: nil)
+        
+        UserManager.shared.register(with: model) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            dismissProgressBar()
+            
+            switch result {
+            case .success(_):
+                self.presentCongratulateVC()
+                                
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
 
-        UserRegisterValues.shared.registerPassword = passwordTextField.text!
+            }
+        
+        }
         
     }
+    
+    func presentCongratulateVC() {
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.congratulateViewController)
+                as? CongratulateRegisterViewController else { fatalError() }
+        
+        nextVC.modalPresentationStyle = .overFullScreen
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    
 }
 
 //MARK: - UI Configuration & Initialization

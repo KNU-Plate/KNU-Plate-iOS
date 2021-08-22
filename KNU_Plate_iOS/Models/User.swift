@@ -8,7 +8,7 @@ class User {
     private init() {}
     
     /// user unique ID
-    var id: String {
+    var userUID: String {
         get {
             return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userID) ?? "표시 에러"
         }
@@ -19,7 +19,7 @@ class User {
     
     var username: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.username) ?? "표시 에러"
+            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.username) ?? "로그인 필요"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.username)
@@ -32,7 +32,6 @@ class User {
             guard let password = retrievedPassword else {
                 return "❗️ Invalid Password"
             }
-            print("✏️ Password: \(password)")
             return password
         }
         set {
@@ -42,25 +41,9 @@ class User {
     
     var savedPassword: Bool = false
     
-    /// 닉네임
-    var displayName: String {
-        get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.displayName) ?? "표시 에러"
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.displayName)
-        }
-    }
+
     
-    /// user email address (...@knu.ac.kr)
-    var email: String {
-        get {
-            return UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.email) ?? "표시 에러"
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.email)
-        }
-    }
+
 
     var dateCreated: String = ""
 
@@ -111,18 +94,14 @@ class User {
     
     func resetAllUserInfo() {
         
-        self.id = ""
+        self.userUID = ""
         self.username = ""
-        self.displayName = ""
-        self.email = ""
         self.dateCreated = ""
         self.password = ""
    
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.username)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.displayName)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.email)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.medal)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         

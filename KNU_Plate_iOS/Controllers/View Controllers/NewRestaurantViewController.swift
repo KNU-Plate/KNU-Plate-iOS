@@ -1,6 +1,4 @@
 import UIKit
-import ProgressHUD
-import SnackBar_swift
 
 // 맛집 올리기 View Controller
 
@@ -49,9 +47,6 @@ class NewRestaurantViewController: UIViewController {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
         self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
-    
-    
-
 }
 
 //MARK: - NewRestaurantViewModelDelegate
@@ -78,11 +73,11 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
         }
     }
     
-    func alreadyRegisteredRestaurant(){
+    func alreadyRegisteredRestaurant(with error: UploadError){
         
         dismissProgressBar()
         
-        showSimpleBottomAlertWithAction(message: "이미 등록된 매장입니다 🥲",
+        showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "홈으로 돌아가기") {
             self.goBackToHomeVC()
         }
@@ -187,6 +182,7 @@ extension NewRestaurantViewController {
         initializeRestaurantName()
         initializeCollectionView()
         createPickerView()
+        createWelcomeVCObservers()
     }
     
     func initializeRestaurantName() {

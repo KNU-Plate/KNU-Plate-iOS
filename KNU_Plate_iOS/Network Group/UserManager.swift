@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 import SwiftKeychainWrapper
+import SwiftyJSON
 
 //MARK: - 회원가입, 로그인 등 User와 직접적인 연관있는 로직을 처리하는 클래스
 
@@ -38,12 +39,9 @@ class UserManager {
             
             multipartFormData.append(Data(model.username.utf8),
                                      withName: "user_name")
-            multipartFormData.append(Data(model.displayName.utf8),
-                                     withName: "display_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
-            multipartFormData.append(Data(model.email.utf8),
-                                     withName: "mail_address")
+ 
             
             if let profileImage = model.profileImage {
                 
@@ -232,7 +230,7 @@ class UserManager {
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let name: Parameters = ["name": User.shared.displayName]
+        let name: Parameters = ["user_name": User.shared.username]
         
         AF.request(loadUserProfileInfoURL,
                    method: .get,
@@ -289,7 +287,6 @@ class UserManager {
             switch statusCode {
             case 200:
                 
-                User.shared.displayName = model.nickname!
                 print("✏️ UserManager - 닉네임 변경 성공")
                 completion(.success(true))
             default:
@@ -430,7 +427,7 @@ class UserManager {
     func deleteMyReview(reviewID: Int,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
-        let url = deleteReviewURL + "/\(reviewID)"
+        let url = deleteReviewURL + "\(reviewID)"
         
         AF.request(url,
                    method: .delete,
@@ -448,6 +445,7 @@ class UserManager {
                 
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode)
+                    print("error: \(JSON(response.data!))")
                     print("❗️ UserManager - deleteMyReview FAILED error :\(error.errorDescription)")
                     completion(.failure(error))
                 }
@@ -456,11 +454,44 @@ class UserManager {
     
     //MARK: - 아이디 찾기
     func findMyID(email: String,
-                  completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+                  completion: @escaping (Result<String, NetworkError>) -> Void) {
         
-//        AF.upload(mul)
+        AF.upload(multipartFormData: { multipartFormData in
+            
+            multipartFormData.append(Data(email.utf8),
+                                     withName: "mail_address")
+            
+        }, to: findIDURL)
+        .responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            
+            case 200:
+                
+                do {
+                    let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                    
+                    print("✏️ UserManager - findMyID SUCCESS")
+                    
+                    let userID = decodedData.username
+                    completion(.success(userID))
+                    
+                } catch {
+                    print("❗️ UserManager - findMyID decoding catch error: \(error)")
+                    completion(.failure(.internalError))
+                }
+                
+            default:
+                
+                let error = NetworkError.returnError(statusCode: statusCode)
+                print("❗️ UserManager - findMyID error statusCode: \(statusCode), with error: \(error.errorDescription)")
+                completion(.failure(error))
+            }
+        }
         
-    }
+        }
 }
 
 //MARK: - 사용자 정보를 로컬에 저장하는 메서드 모음
@@ -474,10 +505,9 @@ extension UserManager {
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
     
-        User.shared.id = model.user.userID
+        User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
-        User.shared.displayName = model.user.displayName
-        User.shared.email = model.user.mailAddress
+
         User.shared.medal = model.user.medal
         
         print("UserManager - saveUserRegisterInfoToDevice success ")
@@ -486,10 +516,8 @@ extension UserManager {
     
     func saveUserInfoToDevice(with model: LoadUserInfoModel) {
         
-        User.shared.id = model.userID
+        User.shared.userUID = model.userID
         User.shared.username = model.username
-        User.shared.displayName = model.displayName
-        User.shared.email = model.email
         User.shared.medal = model.medal
         
         if let fileFolder = model.fileFolder {
@@ -516,10 +544,8 @@ extension UserManager {
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
     
-        User.shared.id = model.user.userID
+        User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
-        User.shared.displayName = model.user.displayName
-        User.shared.email = model.user.mailAddress
         User.shared.medal = model.user.medal
         
         User.shared.isLoggedIn = true

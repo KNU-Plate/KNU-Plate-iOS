@@ -1,10 +1,8 @@
 import Foundation
 
 extension Notification.Name {
-    
 
-    static let presentVerifyEmailVC = Notification.Name("co.kuchelin.presentVerifyEmailVC")
-    
+    static let presentWelcomeVC = Notification.Name("co.kuchelin.presentWelcomeVC")
     static let refreshTokenExpired = Notification.Name("co.kuchelin.refreshTokenExpired")
 
 }

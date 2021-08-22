@@ -1,7 +1,6 @@
 import UIKit
 import Alamofire
 import SnackBar_swift
-import SPIndicator
 import EasyTipView
 
 class MyPageViewController: UIViewController {
@@ -11,7 +10,6 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var infoButton: UIButton!
-    @IBOutlet var verificationIndicatorButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -23,8 +21,6 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        loadUserProfileInfo()
-        
         tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
                                   preferences: preferences,
                                   delegate: self)
@@ -53,15 +49,6 @@ class MyPageViewController: UIViewController {
         }
     }
     
-    @IBAction func pressedSettingsButton(_ sender: UIBarButtonItem) {
-        
-        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.settingsViewController) as? SettingsViewController else {
-            fatalError()
-        }
-        pushViewController(with: vc)
-    }
-    
-
     func presentActionSheet() {
         
         let alert = UIAlertController(title: "프로필 사진 변경",
@@ -99,36 +86,6 @@ class MyPageViewController: UIViewController {
 //MARK: - API Networking
 
 extension MyPageViewController {
-    
-    func loadUserProfileInfo() {
-        
-//        UserManager.shared.loadUserProfileInfo { [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(_):
-//                DispatchQueue.main.async {
-//
-//                    SPIndicator.present(title: "\(User.shared.displayName)님",
-//                                        message: "환영합니다",
-//                                        preset: .custom(UIImage(systemName: "face.smiling")!))
-//
-//                    self.userNickname.text = User.shared.displayName
-//                    self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
-//
-//                    if let profileImage = User.shared.profileImage {
-//                        self.profileImageButton.setImage(profileImage, for: .normal)
-//                    }
-//                }
-//            case .failure(let error):
-//                print("\(error.errorDescription)")
-//                self.showSimpleBottomAlertWithAction(message: "프로필 정보 불러오기에 실패하였습니다 🥲",
-//                                                buttonTitle: "재시도",
-//                                                action: self.loadUserProfileInfo)
-//            }
-//        }
-    }
     
     func removeProfileImage() {
         
@@ -261,6 +218,7 @@ extension MyPageViewController {
     
     func initialize() {
         
+        createWelcomeVCObservers()
         initializeTableView()
         initializeProfileImageButton()
         initializeUserInfoRelatedUIComponents()
@@ -285,38 +243,14 @@ extension MyPageViewController {
     func initializeUserInfoRelatedUIComponents() {
         
         userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
-        self.userNickname.text = User.shared.displayName
+        self.userNickname.text = User.shared.username
         self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
 
         if let profileImage = User.shared.profileImage {
             self.profileImageButton.setImage(profileImage, for: .normal)
         }
         
-        // 인증 버튼
-        if User.shared.isVerified {
-            
-            verificationIndicatorButton.setTitle(nil, for: .normal)
-            verificationIndicatorButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            verificationIndicatorButton.tintColor = UIColor(named: Constants.Color.appDefaultColor)
-            verificationIndicatorButton.isUserInteractionEnabled = false
-            verificationIndicatorButton.backgroundColor = .clear
-            
-            NSLayoutConstraint.activate([
-                verificationIndicatorButton.widthAnchor.constraint(equalToConstant: 20),
-                verificationIndicatorButton.heightAnchor.constraint(equalToConstant: 20)
-            ])
-  
-            
-            
-        } else {
-            
-            verificationIndicatorButton.isUserInteractionEnabled = true
-            verificationIndicatorButton.layer.cornerRadius = 3
-            
-            //TODO: - addTarget 해서 uiviewcontroller extension 에 정의할 present verification screen
-            
-            
-        }
+
     }
 
     func updateProfileImageButton(with image: UIImage) {

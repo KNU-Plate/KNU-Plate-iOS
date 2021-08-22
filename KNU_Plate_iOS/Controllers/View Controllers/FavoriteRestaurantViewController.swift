@@ -29,6 +29,7 @@ class FavoriteRestaurantViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.black // set backbutton color
         self.navigationController?.navigationBar.barTintColor = .white
         
+        createWelcomeVCObservers()
         setupCollectionView()
         setupCollectionViewBackgroundView()
 //        restaurantListVM.fetchFavoriteRestaurantList() // viewWillAppear마다 refresh를해주므로 일단은 필요 없음
