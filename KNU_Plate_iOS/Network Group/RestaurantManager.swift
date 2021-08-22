@@ -221,7 +221,7 @@ class RestaurantManager {
     //MARK: - 매장 좋아요하기 API
     func markFavorite(mallID: Int,
                       markMyFavorite: Bool,
-                      completion: @escaping ((Result<Bool,NetworkError>) -> Void)) {
+                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         var headers: HTTPHeaders = [:]
         if User.shared.accessToken != "Invalid AccessToken" {
@@ -231,7 +231,8 @@ class RestaurantManager {
         
         AF.request(markFavoriteRequestURL + String(mallID),
                    method: httpMethod,
-                   headers: headers)
+                   headers: headers,
+                   interceptor: interceptor)
             .validate()
             .responseJSON { response in
                 
@@ -303,7 +304,8 @@ class RestaurantManager {
         AF.request(fetchFavoriteRestaurantListRequestURL,
                    method: .get,
                    parameters: parameters,
-                   headers: headers)
+                   headers: headers,
+                   interceptor: interceptor)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 

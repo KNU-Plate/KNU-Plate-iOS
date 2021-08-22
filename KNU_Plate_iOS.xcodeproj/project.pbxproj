@@ -386,9 +386,6 @@
 				3CA8D44526A02E2200B9E434 /* LocationTableViewCell.swift */,
 				3CD96BA726B92063007E3A53 /* EmptyStateTableViewCell.swift */,
 				3C9B2BD326143C9900CC010F /* RatingView.swift */,
-				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
-				3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */,
-				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				3CBA75D7261B301B00D6CCCE /* TextFieldStackView.swift */,
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 				7C6D2534268DAD950030F9A1 /* NoticeTableViewCell.swift */,
@@ -628,6 +625,9 @@
 		7CDAD9FC26BAB75D00F7F58F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */,
+				3CC2A4E02649891D00F5E392 /* UIButton+AlignTextBelow.swift */,
+				3CBA75DA261B374600D6CCCE /* UITextField+Padding.swift */,
 				7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */,
 				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
 				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,

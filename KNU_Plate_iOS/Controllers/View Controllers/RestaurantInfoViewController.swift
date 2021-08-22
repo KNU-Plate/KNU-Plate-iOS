@@ -43,6 +43,7 @@ class RestaurantInfoViewController: UIViewController {
         setButtonTarget()
         registerCells()
         configureFavoriteButton()
+        createObservers()
         
         currentButton.isSelected = true
         
@@ -65,7 +66,7 @@ class RestaurantInfoViewController: UIViewController {
     }
 }
 
-// MARK: Private Functions & Selector Functions
+// MARK: - Private Functions & Selector Functions
 extension RestaurantInfoViewController {
     private func setButtonTarget() {
         tabBarView.reviewButton.addTarget(self, action: #selector(buttonWasTapped(_:)), for: .touchUpInside)
@@ -143,7 +144,7 @@ extension RestaurantInfoViewController {
     @objc func favoriteButtonTapped(_ sender: UIBarButtonItem) {
         sender.isEnabled = false
         if !restaurantInfoVM.isFavorite {
-            // not marked favorite yet
+            // not marked favorite
             restaurantInfoVM.markFavorite(markMyFavorite: true)
         } else {
             // already marked favorite
@@ -156,6 +157,18 @@ extension RestaurantInfoViewController {
         nextVC.navigationItem.title = "리뷰 사진"
         nextVC.mallID = self.mallID
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    private func createObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didMarkFavorite),
+                                               name: NSNotification.Name.didMarkFavorite,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didFailedMarkFavorite),
+                                               name: NSNotification.Name.didFailedMarkFavorite,
+                                               object: nil)
     }
 }
 
@@ -474,17 +487,20 @@ extension RestaurantInfoViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - RestaurantInfoViewModelDelegate
-extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
-    func didMarkFavorite() {
+// MARK: - Mark Favorite Functions
+extension RestaurantInfoViewController {
+    @objc func didMarkFavorite() {
         restaurantInfoVM.fetchRestaurantInfo()
     }
     
-    func didFailedMarkFavorite() {
+    @objc func didFailedMarkFavorite() {
         self.showSimpleBottomAlert(with: "매장 좋아요에 실패하였습니다. 잠시 후 다시 시도해주세요")
         favoriteButton?.isEnabled = true
     }
-    
+}
+
+// MARK: - RestaurantInfoViewModelDelegate
+extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     func didFetchRestaurantInfo() {
         customTableView.nameLabel.text = restaurantInfoVM.mallName
         customTableView.gateNameLabel.text = restaurantInfoVM.gate
