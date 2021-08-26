@@ -137,6 +137,10 @@ extension UIViewController {
         welcomeVC.modalPresentationStyle = .overFullScreen
         self.present(welcomeVC, animated: true)
     }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 //MARK: - Observers

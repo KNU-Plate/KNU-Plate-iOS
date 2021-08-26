@@ -41,15 +41,16 @@ class UserManager {
                                      withName: "user_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
- 
+
             
-            if let profileImage = model.profileImage {
-                
-                multipartFormData.append(profileImage,
-                                         withName: "user_thumbnail",
-                                         fileName: "\(UUID().uuidString).jpeg",
-                                         mimeType: "image/jpeg")
-            }
+//            if let profileImage = model.profileImage {
+//
+//                multipartFormData.append(profileImage,
+//                                         withName: "user_thumbnail",
+//                                         fileName: "\(UUID().uuidString).jpeg",
+//                                         mimeType: "image/jpeg")
+//            }
+            
         }, to: signUpRequestURL,
         headers: model.headers)
         .responseJSON { response in

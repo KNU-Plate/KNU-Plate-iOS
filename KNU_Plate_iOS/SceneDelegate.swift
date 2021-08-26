@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
         window?.rootViewController = mainTabBarController
         
+        
         if User.shared.isLoggedIn {
             
             UserManager.shared.loadUserProfileInfo { result in

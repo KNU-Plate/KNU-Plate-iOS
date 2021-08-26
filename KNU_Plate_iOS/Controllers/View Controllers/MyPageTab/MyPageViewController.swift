@@ -32,8 +32,9 @@ class MyPageViewController: UIViewController {
     }
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-        
-        presentActionSheet()
+    
+        User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")
+    
     }
     
     @IBAction func pressedInfoButton(sender: UIButton) {
@@ -45,7 +46,6 @@ class MyPageViewController: UIViewController {
             tipView?.show(forView: self.infoButton,
                           withinSuperview: self.view)
             tipViewIsVisible = true
-            
         }
     }
     

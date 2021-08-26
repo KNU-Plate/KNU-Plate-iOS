@@ -21,7 +21,7 @@ class PasswordInputViewController: UIViewController {
         
         if !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         
-        
+        registerUser()
         
     }
     

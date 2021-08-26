@@ -1327,7 +1327,7 @@
                                     <color key="titleColor" name="AppDefaultColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="pressedLogOutButton:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="Ejo-Ad-A3H"/>
+                                    <action selector="pressedLogInAndOutButton:" destination="Dsa-QD-GWe" eventType="touchUpInside" id="Ejo-Ad-A3H"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFs-FW-wte">
@@ -1363,7 +1363,7 @@
                     <navigationItem key="navigationItem" title="계정 정보 관리" id="pim-lv-5O5"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="logOutButton" destination="6Zd-WO-jrJ" id="WAM-Vx-TBd"/>
+                        <outlet property="logInAndOutButton" destination="6Zd-WO-jrJ" id="WAM-Vx-TBd"/>
                         <outlet property="unregisterButton" destination="mFs-FW-wte" id="8mB-86-NgX"/>
                         <outlet property="userNicknameLabel" destination="Kpa-No-yCt" id="Tm7-oY-E8f"/>
                     </connections>
