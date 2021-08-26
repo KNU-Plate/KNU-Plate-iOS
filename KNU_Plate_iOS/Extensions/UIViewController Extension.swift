@@ -89,7 +89,7 @@ extension UIViewController {
                         action: {
                             action?()
                         }).show()
-        
+
     }
     
     // 테이블뷰 Footer에 Activity Indicator 추가 -> 데이터 추가로 받아올 때 실행

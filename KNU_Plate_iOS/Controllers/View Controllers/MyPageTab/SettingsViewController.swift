@@ -6,7 +6,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet var userNicknameLabel: UILabel!
     @IBOutlet var logInAndOutButton: UIButton!
     @IBOutlet var unregisterButton: UIButton!
- 
+    @IBOutlet var changePasswordButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -70,12 +71,16 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
+
     func initialize() {
         
         userNicknameLabel.text = User.shared.username
         logInAndOutButton.setTitle(User.shared.isLoggedIn ? "로그아웃" : "로그인",
                                    for: .normal)
+        
+        
+
+        changePasswordButton.isHidden = User.shared.isLoggedIn ? false : true
     }
 
 

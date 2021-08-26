@@ -69,11 +69,13 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         refreshControl.endRefreshing()
         dismissProgressBar()
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func didFetchEmptyReviewListResults() {
         print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func failedFetchingReviewListResults() {

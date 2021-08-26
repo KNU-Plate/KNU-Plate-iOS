@@ -259,39 +259,7 @@ class UserManager {
                 }
             }
     }
-    
-    //MARK: - 시용자 닉네임 수정
-    func updateNickname(with model: EditUserInfoRequestDTO,
-                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
-        AF.upload(multipartFormData: { multipartFormData in
-            
-            multipartFormData.append(Data(model.nickname!.utf8),
-                                     withName: "display_name")
-            multipartFormData.append(Data(model.removeUserProfileImage.utf8),
-                                     withName: "force")
-            
-        }, to: modifyUserInfoURL,
-        method: .patch,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
-                
-                print("✏️ UserManager - 닉네임 변경 성공")
-                completion(.success(true))
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode)
-                print("❗️ UserManager - updateNickname error: \(error.errorDescription)")
-                completion(.failure(error))
-            }
-        }
-    }
+
     
     //MARK: - 사용자 비밀번호 수정
     func updatePassword(with model: EditUserInfoRequestDTO,
@@ -529,8 +497,6 @@ extension UserManager {
                 }
             }
         }
-        
-        
     }
     
     func saveLoginInfo(with model: LoginResponseModel) {

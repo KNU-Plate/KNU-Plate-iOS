@@ -47,11 +47,15 @@ class NoticeViewController: UIViewController {
     
     func fetchNoticeList() {
         
+        showProgressBar()
+        
         isFetchingData = true
         
         NoticeManager.shared.fetchNoticeList(index: indexToFetch) { [weak self] result in
             
             guard let self = self else { return }
+            
+            dismissProgressBar()
             
             switch result {
             case .success(let model):
@@ -70,8 +74,6 @@ class NoticeViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.tableView.tableFooterView = nil
-//                    self.tableView.tableFooterView = UIView(frame: .zero)
-                
                 }
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
@@ -87,8 +89,6 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        print("✏️ noticeList count: \(noticeList.count)")
         return noticeList.count
     }
     
