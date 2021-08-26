@@ -21,9 +21,6 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
-                                  preferences: preferences,
-                                  delegate: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -33,8 +30,13 @@ class MyPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         initializeUserInfoRelatedUIComponents()
     }
+
     
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
     
@@ -227,11 +229,18 @@ extension MyPageViewController {
     func initialize() {
         
         createWelcomeVCObservers()
+        initializeTipView()
         initializeTableView()
         initializeProfileImageButton()
         initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
         initializeTipViewPreferences()
+    }
+    
+    func initializeTipView() {
+        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
+                                  preferences: preferences,
+                                  delegate: self)
     }
     
     func initializeTableView() {
@@ -256,6 +265,9 @@ extension MyPageViewController {
 
         if let profileImage = User.shared.profileImage {
             profileImageButton.setImage(profileImage, for: .normal)
+        } else {
+            profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
+                                        for: .normal)
         }
     }
 

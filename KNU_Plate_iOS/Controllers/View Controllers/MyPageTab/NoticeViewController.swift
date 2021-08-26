@@ -55,7 +55,7 @@ class NoticeViewController: UIViewController {
             
             guard let self = self else { return }
             
-            dismissProgressBar()
+         
             
             switch result {
             case .success(let model):
@@ -72,6 +72,7 @@ class NoticeViewController: UIViewController {
                 self.noticeList.append(contentsOf: model)
                 self.isFetchingData = false
                 DispatchQueue.main.async {
+                    dismissProgressBar()
                     self.tableView.reloadData()
                     self.tableView.tableFooterView = nil
                 }

@@ -33,7 +33,8 @@ class WelcomeViewController: UIViewController {
             
             switch result {
             case .success:
-                self.goToHomeScreen()
+                
+                self.dismiss(animated: true)
                 UserManager.shared.loadUserProfileInfo { _ in }
                 
             case .failure(let error):

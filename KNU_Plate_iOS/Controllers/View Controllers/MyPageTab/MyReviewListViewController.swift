@@ -13,6 +13,7 @@ class MyReviewListViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("✏️ accessToken: \(User.shared.accessToken)")
         initialize()
     }
     
