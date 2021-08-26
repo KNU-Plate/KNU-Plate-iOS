@@ -41,7 +41,6 @@ class UserManager {
                                      withName: "user_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
-
             
 //            if let profileImage = model.profileImage {
 //
@@ -75,7 +74,7 @@ class UserManager {
                 
             default:
                 let error = NetworkError.returnError(statusCode: statusCode)
-                print("UserManager - signUp error: \(error.errorDescription)")
+                print("UserManager - signUp error: \(error.errorDescription), with statusCode: \(statusCode)")
                 completion(.failure(error))
             }
         }
@@ -171,14 +170,10 @@ class UserManager {
     
     //MARK: - 아이디 or 닉네임 중복 체크
     func checkDuplication(requestURL: String,
-                          model: CheckDuplicateRequestDTO,
                           completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.request(requestURL,
-                   method: .get,
-                   parameters: model.parameters,
-                   encoding: URLEncoding.queryString,
-                   headers: model.headers)
+                   method: .get)
         .responseJSON { (response) in
             
             guard let statusCode = response.response?.statusCode else { return }

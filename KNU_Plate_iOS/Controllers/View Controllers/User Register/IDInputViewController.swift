@@ -18,6 +18,7 @@ class IDInputViewController: UIViewController {
     
     @IBAction func pressedNext(_ sender: UIBarButtonItem) {
         
+        idTextField.resignFirstResponder()
         if !checkIDLengthIsValid() { return }
         checkIDDuplication()
     }
@@ -82,7 +83,7 @@ extension IDInputViewController {
         if id.count >= 4 && id.count <= 20 { return true }
         else {
        
-            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.")
+            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.\n아이디가 한글이 포함되면 안 됩니다.")
             return false
         }
     }
@@ -98,11 +99,9 @@ extension IDInputViewController {
     
     func checkIDDuplication() {
         
-        let url = UserManager.shared.checkUserNameDuplicateURL
-        let model = CheckDuplicateRequestDTO(username: idTextField.text!)
+        let url = UserManager.shared.checkUserNameDuplicateURL + "?user_name=\(idTextField.text!)"
         
-        UserManager.shared.checkDuplication(requestURL: url,
-                                            model: model) { [weak self] result in
+        UserManager.shared.checkDuplication(requestURL: url) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -110,6 +109,7 @@ extension IDInputViewController {
             case .success(let isNotDuplicate):
                 
                 if isNotDuplicate {
+                    UserRegisterValues.shared.registerID = self.idTextField.text!
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: Constants.SegueIdentifier.goToNicknameVC, sender: self)
                     }

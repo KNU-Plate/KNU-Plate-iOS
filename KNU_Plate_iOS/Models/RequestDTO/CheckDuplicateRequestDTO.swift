@@ -7,7 +7,6 @@ struct CheckDuplicateRequestDTO {
     
     var parameters: Parameters = [:]
     var headers: HTTPHeaders = [
-        
         "accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded",
     ]
@@ -17,12 +16,4 @@ struct CheckDuplicateRequestDTO {
         
         parameters["user_name"] = username
     }
-    
-    // 닉네임 중복 체크할 경우에는 아래 init 사용
-    init(displayName: String) {
-        
-        parameters["display_name"] = displayName
-    }
-    
-
 }

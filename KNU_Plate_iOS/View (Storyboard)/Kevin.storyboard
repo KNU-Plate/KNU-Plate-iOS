@@ -1279,7 +1279,7 @@
         <!--Settings View Controller-->
         <scene sceneID="FY1-Qz-PcD">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" id="Dsa-QD-GWe" customClass="SettingsViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" hidesBottomBarWhenPushed="YES" id="Dsa-QD-GWe" customClass="SettingsViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="heR-5g-5Vd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1444,7 +1444,7 @@
         <!--Open Source Info View Controller-->
         <scene sceneID="gJb-VN-PPO">
             <objects>
-                <viewController storyboardIdentifier="OpenSourceInfoViewController" title="Open Source Info View Controller" id="Bcf-JZ-srw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpenSourceInfoViewController" title="Open Source Info View Controller" hidesBottomBarWhenPushed="YES" id="Bcf-JZ-srw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dkH-EN-GOB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1459,7 +1459,7 @@
         <!--Developer Information View Controller-->
         <scene sceneID="8h3-mW-CdN">
             <objects>
-                <viewController storyboardIdentifier="DeveloperInformationViewController" title="Developer Information View Controller" id="nx2-76-s3S" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeveloperInformationViewController" title="Developer Information View Controller" hidesBottomBarWhenPushed="YES" id="nx2-76-s3S" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DkE-js-ifP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1531,7 +1531,7 @@
         <!--Notice View Controller-->
         <scene sceneID="hrz-xp-FiI">
             <objects>
-                <viewController storyboardIdentifier="NoticeViewController" title="공지사항" id="1tK-b8-fvJ" userLabel="Notice View Controller" customClass="NoticeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoticeViewController" title="공지사항" hidesBottomBarWhenPushed="YES" id="1tK-b8-fvJ" userLabel="Notice View Controller" customClass="NoticeViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QVC-dc-vbC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

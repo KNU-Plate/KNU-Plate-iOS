@@ -18,9 +18,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func pressedLogInAndOutButton(_ sender: UIButton) {
-     
         User.shared.isLoggedIn ? presentLogOutAlert() : presentWelcomeVC()
-
     }
     
     func presentLogOutAlert() {
@@ -46,8 +44,6 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
-    
     
     @IBAction func pressedUnregisterButton(_ sender: UIButton) {
         
