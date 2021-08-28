@@ -120,6 +120,10 @@ extension RestaurantCollectionViewController: UISearchBarDelegate {
             self.searchController.isActive = false
         }
     }
+    
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        <#code#>
+//    }
 }
 
 //MARK: - UISearchControllerDelegate

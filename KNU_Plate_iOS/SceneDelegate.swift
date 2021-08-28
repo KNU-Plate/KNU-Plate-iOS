@@ -6,6 +6,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
         
+        print("✏️ SceneDelegate - changeRootViewController")
         
         guard let window = self.window else {
             return
@@ -24,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        print("✏️ SceneDelegate - willConnectTo")
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
