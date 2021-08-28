@@ -4,49 +4,49 @@ import SnackBar_swift
 class SettingsViewController: UIViewController {
 
     @IBOutlet var userNicknameLabel: UILabel!
-    @IBOutlet var logOutButton: UIButton!
+    @IBOutlet var logInAndOutButton: UIButton!
     @IBOutlet var unregisterButton: UIButton!
- 
+    @IBOutlet var changePasswordButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         initialize()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        initialize()
-    
     }
     
-    @IBAction func pressedLogOutButton(_ sender: UIButton) {
-     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        initialize()
+    }
+    
+    @IBAction func pressedLogInAndOutButton(_ sender: UIButton) {
+        User.shared.isLoggedIn ? presentLogOutAlert() : presentWelcomeVC()
+    }
+    
+    func presentLogOutAlert() {
+        
         self.presentAlertWithConfirmAction(title: "정말 로그아웃 하시겠습니까?",
                                           message: "") { selectedOk in
-            
             if selectedOk {
-                
                 UserManager.shared.logOut { result in
-                    
                     switch result {
                     case .success(_):
-                        DispatchQueue.main.async {
-                            self.popToWelcomeViewController()
-                        }
+                        
+                        UserManager.shared.resetAllUserInfo()
+                        self.navigationController?.popViewController(animated: true)
+                        
                     case .failure(let error):
                         self.showSimpleBottomAlertWithAction(message: error.errorDescription,
                                                              buttonTitle: "재시도") {
-                            self.pressedLogOutButton(self.logOutButton)
+                            self.pressedLogInAndOutButton(self.logInAndOutButton)
                         }
                     }
                 }
-                
             }
         }
-        
     }
     
     @IBAction func pressedUnregisterButton(_ sender: UIButton) {
@@ -74,9 +74,16 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+
     func initialize() {
         
         userNicknameLabel.text = User.shared.username
+        logInAndOutButton.setTitle(User.shared.isLoggedIn ? "로그아웃" : "로그인",
+                                   for: .normal)
+        
+        
+
+        changePasswordButton.isHidden = User.shared.isLoggedIn ? false : true
     }
 
 

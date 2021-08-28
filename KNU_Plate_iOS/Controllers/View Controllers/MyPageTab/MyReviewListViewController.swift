@@ -13,6 +13,7 @@ class MyReviewListViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("✏️ accessToken: \(User.shared.accessToken)")
         initialize()
     }
     
@@ -69,11 +70,13 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         refreshControl.endRefreshing()
         dismissProgressBar()
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func didFetchEmptyReviewListResults() {
         print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
         tableView.tableFooterView = nil
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func failedFetchingReviewListResults() {

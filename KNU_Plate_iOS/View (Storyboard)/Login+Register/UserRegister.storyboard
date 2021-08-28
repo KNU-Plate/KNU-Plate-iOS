@@ -58,7 +58,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHi-AQ-dnD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHi-AQ-dnD">
                                 <rect key="frame" x="20" y="353.5" width="294" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -103,7 +103,6 @@
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="pressedNext:" destination="Y6W-OH-hqX" id="QbO-Pa-SCc"/>
-                                <segue destination="9zE-u7-nPB" kind="show" id="cNH-82-YW3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -115,6 +114,7 @@
                         <outlet property="secondLineLabel" destination="udR-sF-si9" id="qHG-XX-8s3"/>
                         <outletCollection property="labels" destination="XN3-RF-YDm" collectionClass="NSMutableArray" id="Jiy-By-vit"/>
                         <outletCollection property="labels" destination="udR-sF-si9" collectionClass="NSMutableArray" id="DKz-SB-fnM"/>
+                        <segue destination="9zE-u7-nPB" kind="show" identifier="goToNicknameVC" id="fd4-sB-pH0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

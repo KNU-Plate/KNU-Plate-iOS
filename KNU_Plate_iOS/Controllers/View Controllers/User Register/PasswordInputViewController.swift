@@ -19,10 +19,14 @@ class PasswordInputViewController: UIViewController {
 
     @IBAction func pressedNext(_ sender: UIBarButtonItem) {
         
+        passwordTextField.endEditing(true)
+        checkPasswordTextField.endEditing(true)
+        
         if !checkPasswordLengthIsValid() || !checkIfPasswordFieldsAreIdentical() { return }
         
+        UserRegisterValues.shared.registerPassword = passwordTextField.text!
         
-        
+        registerUser()
     }
     
     func registerUser() {
@@ -45,11 +49,8 @@ class PasswordInputViewController: UIViewController {
                                 
             case .failure(let error):
                 self.showSimpleBottomAlert(with: error.errorDescription)
-
             }
-        
         }
-        
     }
     
     func presentCongratulateVC() {

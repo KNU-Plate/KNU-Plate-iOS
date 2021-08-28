@@ -6,18 +6,12 @@ import Alamofire
 struct EditUserInfoRequestDTO {
     
     var password: String? = nil
-    var nickname: String? = nil
     var userProfileImage: Data? = nil
     var removeUserProfileImage: String = "N"
     
     init(password: String) {
         
         self.password = password
-    }
-    
-    init(nickname: String) {
-        
-        self.nickname = nickname
     }
     
     init(userProfileImage: Data) {

@@ -5,7 +5,6 @@ import Alamofire
 
 struct RegisterRequestDTO {
     
-
     let username: String
     let password: String
 

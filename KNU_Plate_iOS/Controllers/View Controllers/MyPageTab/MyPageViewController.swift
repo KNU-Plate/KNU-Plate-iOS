@@ -21,9 +21,6 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         initialize()
-        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
-                                  preferences: preferences,
-                                  delegate: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -31,9 +28,19 @@ class MyPageViewController: UIViewController {
         dismissProgressBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        initializeUserInfoRelatedUIComponents()
+    }
+
+    
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-        
-        presentActionSheet()
+    
+        User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")
     }
     
     @IBAction func pressedInfoButton(sender: UIButton) {
@@ -45,7 +52,6 @@ class MyPageViewController: UIViewController {
             tipView?.show(forView: self.infoButton,
                           withinSuperview: self.view)
             tipViewIsVisible = true
-            
         }
     }
     
@@ -111,10 +117,14 @@ extension MyPageViewController {
 
     func updateProfileImage(with image: UIImage) {
         
-        let imageData = image.jpegData(compressionQuality: 1.0)!
+        showProgressBar()
+        
+        let imageData = image.jpegData(compressionQuality: 0.8)!
         let model = EditUserInfoRequestDTO(userProfileImage: imageData)
         
         UserManager.shared.updateProfileImage(with: model) { [weak self] result in
+            
+            dismissProgressBar()
             
             guard let self = self else { return }
             
@@ -144,9 +154,9 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
                 self.presentAlertWithConfirmAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
                 
                     if selectedOk {
-                        showProgressBar()
+                        
                         self.updateProfileImage(with: originalImage)
-                        dismissProgressBar()
+           
 
                     } else {
                         self.imagePickerControllerDidCancel(self.imagePicker)
@@ -219,11 +229,18 @@ extension MyPageViewController {
     func initialize() {
         
         createWelcomeVCObservers()
+        initializeTipView()
         initializeTableView()
         initializeProfileImageButton()
         initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
         initializeTipViewPreferences()
+    }
+    
+    func initializeTipView() {
+        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
+                                  preferences: preferences,
+                                  delegate: self)
     }
     
     func initializeTableView() {
@@ -243,14 +260,15 @@ extension MyPageViewController {
     func initializeUserInfoRelatedUIComponents() {
         
         userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
-        self.userNickname.text = User.shared.username
-        self.userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
+        userNickname.text = User.shared.username
+        userMedal.image = setUserMedalImage(medalRank: User.shared.medal)
 
         if let profileImage = User.shared.profileImage {
-            self.profileImageButton.setImage(profileImage, for: .normal)
+            profileImageButton.setImage(profileImage, for: .normal)
+        } else {
+            profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
+                                        for: .normal)
         }
-        
-
     }
 
     func updateProfileImageButton(with image: UIImage) {

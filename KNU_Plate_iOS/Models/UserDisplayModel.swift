@@ -7,7 +7,7 @@ struct UserDisplayModel: Decodable {
     let userID: String
     let username: String
     let displayName: String
-    let mailAddress: String
+    let mailAddress: String?
     let medal: Int
     let userProfileImageFolderID: String?
     let fileFolder: FileFolder?

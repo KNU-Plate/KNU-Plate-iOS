@@ -89,7 +89,7 @@ extension UIViewController {
                         action: {
                             action?()
                         }).show()
-        
+
     }
     
     // 테이블뷰 Footer에 Activity Indicator 추가 -> 데이터 추가로 받아올 때 실행
@@ -121,12 +121,12 @@ extension UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
     
-    func goToHomeScreen() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-    }
+//    func goToHomeScreen() {
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
+//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+//    }
     
     @objc func presentWelcomeVC() {
         
@@ -136,6 +136,10 @@ extension UIViewController {
         
         welcomeVC.modalPresentationStyle = .overFullScreen
         self.present(welcomeVC, animated: true)
+    }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
