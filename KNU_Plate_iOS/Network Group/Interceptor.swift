@@ -13,6 +13,11 @@ final class Interceptor: RequestInterceptor {
         
         print("Interceptor - adapt() activated")
         
+        if !User.shared.isLoggedIn {
+            completion(.success(urlRequest))
+            return
+        }
+        
         var request = urlRequest
         request.headers.update(name: "Authorization", value: User.shared.accessToken)
         request.timeoutInterval = 10
@@ -25,6 +30,11 @@ final class Interceptor: RequestInterceptor {
                for session: Session,
                dueTo error: Error,
                completion: @escaping (RetryResult) -> Void) {
+        
+        if !User.shared.isLoggedIn {
+            completion(.doNotRetry)
+            return
+        }
         
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)

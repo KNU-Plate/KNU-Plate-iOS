@@ -344,10 +344,11 @@ class RestaurantManager {
         if User.shared.accessToken != "Invalid AccessToken" {
             headers["Authorization"] = User.shared.accessToken
         }
-        
+        print("➡️ fetchRestaurantInfo - accessToken: \(User.shared.accessToken)")
         AF.request(requestURL,
                    method: .get,
-                   headers: headers)
+                   headers: headers,
+                   interceptor: interceptor)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 
@@ -357,6 +358,7 @@ class RestaurantManager {
                         let dataJSON = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let decodedData = try JSONDecoder().decode(RestaurantInfoResponseModel.self, from: dataJSON)
                         completion(.success(decodedData))
+                        print("RESTAURANT MANAGER - SUCCESS")
                     } catch {
                         print("RESTAURANT MANAGER - FAILED PROCESS DATA with error: \(error)")
                     }
