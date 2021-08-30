@@ -21,7 +21,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     let titleLabel = UILabel().then {
         $0.textColor = .black
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     }
     
     override init(frame: CGRect) {
