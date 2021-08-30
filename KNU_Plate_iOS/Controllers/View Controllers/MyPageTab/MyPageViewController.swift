@@ -43,13 +43,22 @@ class MyPageViewController: UIViewController {
         User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")
     }
     
+    
     @IBAction func pressedInfoButton(sender: UIButton) {
+        showTipView(on: infoButton)
+    }
+    
+    @objc func pressedUserMedal(_ sender: UITapGestureRecognizer) {
+        showTipView(on: userMedal)
+    }
+    
+    func showTipView(on view: UIView) {
         
         if tipViewIsVisible {
             tipView?.dismiss()
             tipViewIsVisible = false
         } else {
-            tipView?.show(forView: self.infoButton,
+            tipView?.show(forView: view,
                           withinSuperview: self.view)
             tipViewIsVisible = true
         }
@@ -109,7 +118,7 @@ extension MyPageViewController {
                     User.shared.profileImage = nil
                 }
             case .failure(_):
-                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요 🥲")
+                self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요.🥲")
 
             }
         }
@@ -232,6 +241,7 @@ extension MyPageViewController {
         initializeTipView()
         initializeTableView()
         initializeProfileImageButton()
+        initializeMedalImageView()
         initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
         initializeTipViewPreferences()
@@ -256,6 +266,13 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
+    }
+    
+    func initializeMedalImageView() {
+        
+        userMedal.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(pressedUserMedal(_:)))
+        userMedal.addGestureRecognizer(tapRecognizer)
     }
     
     func initializeUserInfoRelatedUIComponents() {
