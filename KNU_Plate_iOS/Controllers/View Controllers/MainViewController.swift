@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupCollectionView()
+        createRefreshTokenExpirationObserver()
     }
 }
 

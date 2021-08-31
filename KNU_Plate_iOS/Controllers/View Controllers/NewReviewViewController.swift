@@ -343,7 +343,8 @@ extension NewReviewViewController {
         
         viewModel.delegate = self
         
-        createWelcomeVCObservers()
+        createWelcomeVCObserver()
+        createRefreshTokenExpirationObserver()
         
         initializeStarRating()
         initializeTextField()

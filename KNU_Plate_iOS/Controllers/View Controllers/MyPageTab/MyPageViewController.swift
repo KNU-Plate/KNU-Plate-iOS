@@ -237,7 +237,8 @@ extension MyPageViewController {
     
     func initialize() {
         
-        createWelcomeVCObservers()
+        createWelcomeVCObserver()
+        createRefreshTokenExpirationObserver()
         initializeTipView()
         initializeTableView()
         initializeProfileImageButton()

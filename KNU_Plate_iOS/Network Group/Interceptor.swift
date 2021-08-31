@@ -70,13 +70,11 @@ final class Interceptor: RequestInterceptor {
                     }
                 case .failure(let error):
                     
-                    print("❗️ 토큰을 새로 발급받는 과정에 문제가 있었습니다")
+                    print("❗️ Refresh 토큰을 새로 발급받는 과정에 문제가 있었습니다.")
                     
                     if error == .unauthorized {
                         
-                        print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망")
-                        // Refresh Token 을 했는데도 401 에러가 날라오면 그때는 로그인을 아예 다시 해야함
-                        
+                        print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 (refreshToken 만료)")
                 
                         NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
                                                         object: nil)

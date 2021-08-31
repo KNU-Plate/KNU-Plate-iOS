@@ -38,7 +38,8 @@ class RestaurantInfoViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        createWelcomeVCObservers()
+        createWelcomeVCObserver()
+        createRefreshTokenExpirationObserver()
         setupTableView()
         setButtonTarget()
         registerCells()

@@ -182,7 +182,8 @@ extension NewRestaurantViewController {
         initializeRestaurantName()
         initializeCollectionView()
         createPickerView()
-        createWelcomeVCObservers()
+        createWelcomeVCObserver()
+        createRefreshTokenExpirationObserver()
     }
     
     func initializeRestaurantName() {
