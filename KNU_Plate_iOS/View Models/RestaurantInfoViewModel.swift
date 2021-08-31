@@ -326,7 +326,7 @@ extension RestaurantReviewViewModel {
     }
     
     var userNickname: String {
-        return self.review.userInfo.displayName
+        return self.review.userInfo.username
     }
     
     var medal: Int {

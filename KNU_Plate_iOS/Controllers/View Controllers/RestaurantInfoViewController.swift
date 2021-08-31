@@ -241,78 +241,51 @@ extension RestaurantInfoViewController: UITableViewDataSource {
     }
     
     func getReusableReviewCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, returnPlaceholderCell: Bool) -> UITableViewCell {
+        
         if returnPlaceholderCell {
             let cell = EmptyStateTableViewCell()
             cell.update(titleText: "아직 작성된 리뷰가 없어요.\n첫 리뷰를 작성해보세요!", animationName: "empty")
             cell.animationView.play()
             return cell
         } else {
+            
             let reviewVM = self.restaurantInfoVM.reviewAtIndex(indexPath.row)
             
-            //리뷰 이미지에 대한 정보가 존재한다면 일반 reviewCell
-            if reviewVM.hasReviewImage {
-                
-                guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
-                
-                reviewCell.delegate = self
-                
-                reviewCell.reviewID = reviewVM.reviewID
-                reviewCell.userNickname = reviewVM.userNickname
-                reviewCell.userID = reviewVM.userID
-                reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
-                reviewCell.rating.setStarsRating(rating: reviewVM.rating)
-                reviewCell.userNicknameLabel.text = reviewVM.userNickname
-                reviewCell.reviewLabel.text = reviewVM.reviewContent
-                reviewCell.dateLabel.text = reviewVM.getFormattedDate()
-                reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageCount)
-                reviewCell.configureShowMoreButton()
-                
-                let textViewStyle = NSMutableParagraphStyle()
-                textViewStyle.lineSpacing = 2
-                let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
-                reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.reviewContent, attributes: attributes)
-                reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else { fatalError() }
             
+            reviewCell.delegate = self
+            
+            reviewCell.reviewID = reviewVM.reviewID
+            reviewCell.userNickname = reviewVM.userNickname
+            reviewCell.userID = reviewVM.userID
+            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
+            reviewCell.rating.setStarsRating(rating: reviewVM.rating)
+            reviewCell.userNicknameLabel.text = reviewVM.userNickname
+            reviewCell.reviewLabel.text = reviewVM.reviewContent
+            reviewCell.dateLabel.text = reviewVM.getFormattedDate()
+            reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageCount)
+            reviewCell.configureShowMoreButton()
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.reviewContent, attributes: attributes)
+            reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            
+            if reviewVM.hasReviewImage {
                 reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 reviewCell.reviewImageView.sd_setImage(with: reviewVM.reviewImageURL,
                                                        placeholderImage: nil,
                                                        completed: nil)
-                reviewCell.userProfileImageView.sd_setImage(with: reviewVM.profileImageURL,
-                                                            placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                            completed: nil)
-                return reviewCell
+            } else {
+                reviewCell.reviewImageHeight.constant = 0
             }
+    
+            reviewCell.userProfileImageView.sd_setImage(with: reviewVM.profileImageURL,
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                        completed: nil)
+            return reviewCell
             
-            // 리뷰 이미지가 아예 없으면 reviewCellWithoutReviewImages
-            else {
-                
-                guard let reviewCellNoImages = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell, for: indexPath) as? ReviewWithoutImageTableViewCell else { fatalError() }
-                
-                reviewCellNoImages.delegate = self
-                
-                reviewCellNoImages.reviewID = reviewVM.reviewID
-                reviewCellNoImages.userNickname = reviewVM.userNickname
-                reviewCellNoImages.userID = reviewVM.userID
-                reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.medal)
-                reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
-                reviewCellNoImages.userNicknameLabel.text = reviewVM.userNickname
-                reviewCellNoImages.reviewLabel.text = reviewVM.reviewContent
-                reviewCellNoImages.dateLabel.text = reviewVM.getFormattedDate()
-                reviewCellNoImages.configureUI()
-                reviewCellNoImages.configureShowMoreButton()
-                
-                let textViewStyle = NSMutableParagraphStyle()
-                textViewStyle.lineSpacing = 2
-                let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
-                reviewCellNoImages.reviewLabel.attributedText = NSAttributedString(string: reviewVM.reviewContent, attributes: attributes)
-                reviewCellNoImages.reviewLabel.font = UIFont.systemFont(ofSize: 14)
-                
-                reviewCellNoImages.userProfileImageView.sd_setImage(with: reviewVM.profileImageURL,
-                                                            placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                            completed: nil)
-                
-                return reviewCellNoImages
-            }
         }
     }
     

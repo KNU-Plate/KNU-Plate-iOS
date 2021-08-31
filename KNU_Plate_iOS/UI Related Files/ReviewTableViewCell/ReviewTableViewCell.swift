@@ -24,11 +24,18 @@ class ReviewTableViewCell: UITableViewCell {
     
     @IBOutlet var multipleImageView: UIImageView!
 
+    @IBOutlet var reviewImageHeight: NSLayoutConstraint!
+    
     weak var delegate: ReviewTableViewCellDelegate?
     
     var reviewID: Int?
     var userNickname: String?
     var userID: String?
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reviewImageHeight.constant = 240
+    }
     
     func configureUI(reviewImageCount: Int?) {
         
