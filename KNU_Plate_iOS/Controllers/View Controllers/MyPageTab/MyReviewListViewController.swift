@@ -91,9 +91,9 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
-    func failedFetchingReviewListResults() {
+    func failedFetchingReviewListResults(with error: NetworkError) {
         refreshControl.endRefreshing()
-        showSimpleBottomAlertWithAction(message: NetworkError.internalError.localizedDescription,
+        showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "재시도") {
             self.viewModel.fetchReviewList()
         }
