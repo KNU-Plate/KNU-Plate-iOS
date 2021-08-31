@@ -3,7 +3,7 @@ import SDWebImage
 
 
 class MyReviewListViewController: UIViewController  {
- 
+    
     @IBOutlet var tableView: UITableView!
     
     private let refreshControl = UIRefreshControl()
@@ -12,8 +12,6 @@ class MyReviewListViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("✏️ accessToken: \(User.shared.accessToken)")
         initialize()
     }
     
@@ -116,99 +114,65 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // 아래 코드 수정 고민
         if indexPath.row > viewModel.reviewList.count - 1 {
-            print("❗️ Index Out Of Range -- indexPathRow: \(indexPath.row), reviewList count: \(viewModel.reviewList.count)")
             return UITableViewCell()
         }
         
         let reviewVM = viewModel.reviewList[indexPath.row]
- 
-        if viewModel.reviewList[indexPath.row].reviewImageFileFolder != nil {
-            
-            let reviewCell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.CellIdentifier.reviewTableViewCell,
-                for: indexPath) as! ReviewTableViewCell
-    
-            reviewCell.delegate = self
-            
-            reviewCell.reviewID                 = reviewVM.reviewID
-            reviewCell.userNickname             = reviewVM.userInfo.displayName
-            reviewCell.userNicknameLabel.text   = reviewVM.userInfo.displayName
-            reviewCell.reviewLabel.text         = reviewVM.review
-            reviewCell.userID                   = reviewVM.userID
-            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
-            reviewCell.rating.setStarsRating(rating: reviewVM.rating)
-            reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
-            reviewCell.configureShowMoreButton()
-            
-            let textViewStyle = NSMutableParagraphStyle()
-            textViewStyle.lineSpacing = 2
-            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
-            reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
-                                                                       attributes: attributes)
-            reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
-            
-            
+        
+        let reviewCell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.CellIdentifier.reviewTableViewCell,
+            for: indexPath) as! ReviewTableViewCell
+        
+        reviewCell.delegate = self
+        
+        reviewCell.reviewID                 = reviewVM.reviewID
+        reviewCell.userNickname             = reviewVM.userInfo.username
+        reviewCell.userNicknameLabel.text   = reviewVM.userInfo.username
+        reviewCell.reviewLabel.text         = reviewVM.review
+        reviewCell.userID                   = reviewVM.userID
+        reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
+        reviewCell.rating.setStarsRating(rating: reviewVM.rating)
+        reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
+        reviewCell.configureShowMoreButton()
+        
+        let textViewStyle = NSMutableParagraphStyle()
+        textViewStyle.lineSpacing = 2
+        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+        reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
+                                                                   attributes: attributes)
+        reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        if reviewVM.reviewImageFileFolder != nil {
             reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             reviewCell.reviewImageView.sd_setImage(with: viewModel.getReviewImageURL(index: indexPath.row),
                                                    placeholderImage: nil,
                                                    completed: nil)
-
-            reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
-                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                        completed: nil)
-            return reviewCell
-
+        } else {
+            reviewCell.reviewImageHeight.constant = 0
         }
         
-        else {
-            
-            let reviewCellNoImages = tableView.dequeueReusableCell(
-                withIdentifier: Constants.CellIdentifier.reviewWithoutImageTableViewCell,
-                for: indexPath
-            ) as! ReviewWithoutImageTableViewCell
-            
-            reviewCellNoImages.delegate = self
-            
-            reviewCellNoImages.reviewID                 = reviewVM.reviewID
-            reviewCellNoImages.userNickname             = reviewVM.userInfo.displayName
-            reviewCellNoImages.userNicknameLabel.text   = reviewVM.userInfo.displayName
-            reviewCellNoImages.userID                   = reviewVM.userID
-            reviewCellNoImages.reviewLabel.text         = reviewVM.review
-            reviewCellNoImages.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
-            reviewCellNoImages.rating.setStarsRating(rating: reviewVM.rating)
-
-            reviewCellNoImages.configureUI()
-            reviewCellNoImages.configureShowMoreButton()
-            
-            let textViewStyle = NSMutableParagraphStyle()
-            textViewStyle.lineSpacing = 2
-            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
-            reviewCellNoImages.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
-                                                                               attributes: attributes)
-            reviewCellNoImages.reviewLabel.font = UIFont.systemFont(ofSize: 14)
-            
-
-            reviewCellNoImages.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
-                                                                placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                                           options: .continueInBackground,
-                                                                           completed: nil)
-            
-            return reviewCellNoImages
-        }
+        
+        
+        reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
+                                                    placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                    completed: nil)
+        return reviewCell
+        
     }
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         guard let vc = self.storyboard?.instantiateViewController(
-                identifier: Constants.StoryboardID.reviewDetailViewController
+            identifier: Constants.StoryboardID.reviewDetailViewController
         ) as? ReviewDetailViewController else { return }
         
         viewModel.selectedIndex = indexPath
         let reviewDetailVM = viewModel.reviewList[indexPath.row]
-
+        
         let reviewID = reviewDetailVM.reviewID
         let userID = reviewDetailVM.userID
         let profileImageURL = viewModel.getProfileImageURL(index: indexPath.row)
@@ -230,7 +194,6 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         vc.configure(with: reviewDetails)
         navigationController?.pushViewController(vc, animated: true)
         
-
     }
 }
 

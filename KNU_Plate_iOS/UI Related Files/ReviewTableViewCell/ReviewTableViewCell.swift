@@ -43,9 +43,7 @@ class ReviewTableViewCell: UITableViewCell {
         
         reviewImageView?.layer.cornerRadius = 5
         
-        guard let imageCount = reviewImageCount else {
-            return
-        }
+        guard let imageCount = reviewImageCount else { return }
         
         if imageCount >= 2 {
             multipleImageView.image = UIImage(named: Constants.Images.multipleImageExistsIcon)
