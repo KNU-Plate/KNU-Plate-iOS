@@ -1,6 +1,6 @@
 import UIKit
 import SDWebImage
-
+import SnapKit
 
 class MyReviewListViewController: UIViewController  {
     
@@ -10,6 +10,8 @@ class MyReviewListViewController: UIViewController  {
     
     var viewModel = MyReviewListViewModel()
     
+    private let backgroundView = EmptyStateView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -17,8 +19,18 @@ class MyReviewListViewController: UIViewController  {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         viewModel.fetchReviewList()
+    }
+    
+    func showEmptyView() {
+        backgroundView.update(titleText: "아직 작성하신 리뷰가 하나도 없어요.\n첫 리뷰를 작성해보세요!",
+                              animationName: "empty")
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
+        backgroundView.animationView.play()
     }
 }
 
@@ -64,7 +76,6 @@ extension MyReviewListViewController {
 extension MyReviewListViewController: ReviewListViewModelDelegate {
     
     func didFetchReviewListResults() {
-        print("✏️ MyReviewListVC - didFetchReviewListResults")
         tableView.reloadData()
         refreshControl.endRefreshing()
         dismissProgressBar()
@@ -74,12 +85,14 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
     
     func didFetchEmptyReviewListResults() {
         print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
+        showEmptyView()
+        refreshControl.endRefreshing()
         tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func failedFetchingReviewListResults() {
-        
+        refreshControl.endRefreshing()
         showSimpleBottomAlertWithAction(message: NetworkError.internalError.localizedDescription,
                                         buttonTitle: "재시도") {
             self.viewModel.fetchReviewList()
@@ -87,14 +100,13 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
     }
     
     func didDeleteMyReview() {
-        
+        dismissProgressBar()
         showSimpleBottomAlert(with: "리뷰 삭제 완료 🎉")
-        let indexPath = NSIndexPath(row: NSNotFound, section: 0)
-        self.tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: false)
         refreshTable()
     }
     
     func failedDeletingMyReview(with error: NetworkError) {
+        dismissProgressBar()
         showSimpleBottomAlert(with: error.errorDescription)
     }
     
@@ -117,48 +129,47 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         
         if indexPath.row > viewModel.reviewList.count - 1 {
             return UITableViewCell()
-        }
-        
-        let reviewVM = viewModel.reviewList[indexPath.row]
-        
-        let reviewCell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.CellIdentifier.reviewTableViewCell,
-            for: indexPath) as! ReviewTableViewCell
-        
-        reviewCell.delegate = self
-        
-        reviewCell.reviewID                 = reviewVM.reviewID
-        reviewCell.userNickname             = reviewVM.userInfo.username
-        reviewCell.userNicknameLabel.text   = reviewVM.userInfo.username
-        reviewCell.reviewLabel.text         = reviewVM.review
-        reviewCell.userID                   = reviewVM.userID
-        reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
-        reviewCell.rating.setStarsRating(rating: reviewVM.rating)
-        reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
-        reviewCell.configureShowMoreButton()
-        
-        let textViewStyle = NSMutableParagraphStyle()
-        textViewStyle.lineSpacing = 2
-        let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
-        reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
-                                                                   attributes: attributes)
-        reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
-        
-        if reviewVM.reviewImageFileFolder != nil {
-            reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            reviewCell.reviewImageView.sd_setImage(with: viewModel.getReviewImageURL(index: indexPath.row),
-                                                   placeholderImage: nil,
-                                                   completed: nil)
         } else {
-            reviewCell.reviewImageHeight.constant = 0
+            
+            let reviewVM = viewModel.reviewList[indexPath.row]
+            
+            let reviewCell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.CellIdentifier.reviewTableViewCell,
+                for: indexPath) as! ReviewTableViewCell
+            
+            reviewCell.delegate = self
+            
+            reviewCell.reviewID                 = reviewVM.reviewID
+            reviewCell.userNickname             = reviewVM.userInfo.username
+            reviewCell.userNicknameLabel.text   = reviewVM.userInfo.username
+            reviewCell.reviewLabel.text         = reviewVM.review
+            reviewCell.userID                   = reviewVM.userID
+            reviewCell.userMedalImageView.image = setUserMedalImage(medalRank: reviewVM.userInfo.medal)
+            reviewCell.rating.setStarsRating(rating: reviewVM.rating)
+            reviewCell.configureUI(reviewImageCount: reviewVM.reviewImageFileFolder?.files?.count)
+            reviewCell.configureShowMoreButton()
+            
+            let textViewStyle = NSMutableParagraphStyle()
+            textViewStyle.lineSpacing = 2
+            let attributes = [NSAttributedString.Key.paragraphStyle : textViewStyle]
+            reviewCell.reviewLabel.attributedText = NSAttributedString(string: reviewVM.review,
+                                                                       attributes: attributes)
+            reviewCell.reviewLabel.font = UIFont.systemFont(ofSize: 14)
+            
+            if reviewVM.reviewImageFileFolder != nil {
+                reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                reviewCell.reviewImageView.sd_setImage(with: viewModel.getReviewImageURL(index: indexPath.row),
+                                                       placeholderImage: nil,
+                                                       completed: nil)
+            } else {
+                reviewCell.reviewImageHeight.constant = 0
+            }
+            
+            reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
+                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                                                        completed: nil)
+            return reviewCell
         }
-        
-        
-        
-        reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
-                                                    placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                    completed: nil)
-        return reviewCell
         
     }
     
@@ -205,16 +216,7 @@ extension MyReviewListViewController: ReviewTableViewCellDelegate {
     func presentDeleteActionAlert(reviewID: Int?) {
         
         guard let reviewID = reviewID else { return }
-        self.viewModel.deleteMyReview(reviewID: reviewID)
-    }
-    
-    
-    // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
-    func goToReportReviewVC(reviewID: Int?, displayName: String?) {
-        //
-    }
-    
-    func presentDeleteActionAlert(reviewID: Int) {
+        showProgressBar()
         
         self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
                                            message: "") { selectedOk in
@@ -222,6 +224,11 @@ extension MyReviewListViewController: ReviewTableViewCellDelegate {
                 self.viewModel.deleteMyReview(reviewID: reviewID)
             }
         }
+    }
+
+    // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
+    func goToReportReviewVC(reviewID: Int?, displayName: String?) {
+        //
     }
 }
 

@@ -70,7 +70,7 @@ class ReviewTableViewCell: UITableViewCell {
             
             let deleteAction = UIAlertAction(title: "내 리뷰 삭제하기",
                                              style: .destructive) { alert in
-                self.delegate?.presentDeleteActionAlert(reviewID: self.reviewID!)
+                self.delegate?.presentDeleteActionAlert(reviewID: self.reviewID)
             }
             actionSheet.addAction(deleteAction)
         }
