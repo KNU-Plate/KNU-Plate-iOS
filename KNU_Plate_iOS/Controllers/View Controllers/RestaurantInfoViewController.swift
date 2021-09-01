@@ -341,7 +341,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
 extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
     // 게시글 신고하기
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
-        guard let reviewID = reviewID, let displayName = displayName else {
+        guard let reviewID = reviewID, let _ = displayName else {
             self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
             return
         }
