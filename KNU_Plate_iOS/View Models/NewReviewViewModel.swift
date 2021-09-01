@@ -24,16 +24,6 @@ class NewReviewViewModel {
         didSet { convertUIImagesToDataFormat() }
     }
     
-    /// 이미 매장에 등록되어 있는 메뉴 배열
-//    var existingMenus: [ExistingMenuModel] = [] {
-//        didSet {
-//            self.existingMenus.append(ExistingMenuModel(menuID: 0,
-//                                                        mallID: 0,
-//                                                        menuName: "직접 입력",
-//                                                        likes: 0,
-//                                                        dislikes: 0))
-//        }
-//    }
     var existingMenus: [ExistingMenuModel] = [ExistingMenuModel(menuID: 0,
                                                                 mallID: 0,
                                                                 menuName: "직접 입력",
@@ -60,7 +50,6 @@ class NewReviewViewModel {
         
         self.mallID = mallID
         self.existingMenus.insert(contentsOf: existingMenus, at: 0)
-//        self.existingMenus = existingMenus
     }
     
     //MARK: - Object Methods
@@ -224,8 +213,12 @@ class NewReviewViewModel {
         fatalError("NEW REVIEW VIEW MODEL - convertMenusToUploadToJSONString FAILED")
     }
 
-    
-    //MARK: - User Input Validation Methods
+
+}
+
+//MARK: - User Input Validation Methods
+
+extension NewReviewViewModel {
     
     func validateMenuName(menu: String) throws {
         
@@ -247,13 +240,15 @@ class NewReviewViewModel {
         /// 리뷰 글자수가 5 미만이면 Error
         if self.review.count < 5 { throw NewReviewInputError.insufficientReviewError }
         
-
+        if self.review.count > 300 { throw NewReviewInputError.reviewTooLong }
+        
         /// 입력한 메뉴 중 메뉴명이 비어있는게 하나라도 있으면 Error
         for eachMenu in userAddedMenus {
             guard eachMenu.menuName.count > 0 else {
                 throw NewReviewInputError.blankMenuNameError
             }
         }
+        
+
     }
 }
-

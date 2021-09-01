@@ -38,7 +38,6 @@ class NewReviewViewController: UIViewController {
     
     // RestaurantVC 에서 받은 매장 정보를 이용하여 viewModel 변수 초기화
     func configure(mallID: Int, existingMenus: [ExistingMenuModel]) {
-        
         viewModel = NewReviewViewModel(mallID: mallID, existingMenus: existingMenus)
     }
     
@@ -66,15 +65,15 @@ class NewReviewViewController: UIViewController {
             
             // 메뉴 개수가 너무 많은 경우
             case NewReviewInputError.tooMuchMenusAdded:
-                showSimpleBottomAlert(with: "\(NewReviewInputError.tooMuchMenusAdded.errorDescription) 🥲")
+                showSimpleBottomAlert(with: NewReviewInputError.tooMuchMenusAdded.errorDescription)
                 
             // 메뉴 이름이 너무 짧은 경우
             case NewReviewInputError.menuNameTooShort:
-                showSimpleBottomAlert(with: "\(NewReviewInputError.menuNameTooShort.errorDescription) 🥲")
+                showSimpleBottomAlert(with: NewReviewInputError.menuNameTooShort.errorDescription)
 
             // 똑같은 메뉴를 이미 입력한 경우 (DB가 아닌 사용자 입력)
             case NewReviewInputError.alreadyExistingMenu:
-                showSimpleBottomAlert(with: "\(NewReviewInputError.alreadyExistingMenu.errorDescription) 🥲")
+                showSimpleBottomAlert(with: NewReviewInputError.alreadyExistingMenu.errorDescription)
  
             default:
                 showSimpleBottomAlert(with: "개발자도 예기치 못한 오류가 발생했습니다. 불편을 드려 죄송합니다 😥")
@@ -97,7 +96,6 @@ class NewReviewViewController: UIViewController {
                     try self.viewModel.validateUserInputs()
                     
                     self.viewModel.rating = self.starRating.starsRating
-                    
                     self.viewModel.startUploading()
 
                 } catch {
@@ -111,6 +109,9 @@ class NewReviewViewController: UIViewController {
                     // 작성 리뷰가 너무 짧은 경우
                     case NewReviewInputError.insufficientReviewError:
                         self.showSimpleBottomAlert(with: NewReviewInputError.insufficientReviewError.errorDescription)
+                        
+                    case NewReviewInputError.reviewTooLong:
+                        self.showSimpleBottomAlert(with: NewReviewInputError.reviewTooLong.errorDescription)
     
                     // 메뉴 이름이 비어있는 경우
                     case NewReviewInputError.blankMenuNameError:
