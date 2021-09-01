@@ -6,6 +6,7 @@ import SnackBar_swift
 protocol ReviewTableViewCellDelegate: AnyObject {
     func goToReportReviewVC(reviewID: Int?, displayName: String?)
     func presentDeleteActionAlert(reviewID: Int?)
+    func didChooseToBlockUser(userID: String, userNickname: String)
 }
 
 //MARK: - 매장에 등록된 개별적인 리뷰를 위한 TableViewCell
@@ -82,7 +83,18 @@ class ReviewTableViewCell: UITableViewCell {
                 self.delegate?.goToReportReviewVC(reviewID: self.reviewID,
                                                   displayName: self.userNickname)
             }
+            
+            let blockAction = UIAlertAction(title: "이 사용자의 글 보지 않기",
+                                            style: .default) { alert in
+                
+                guard let userID = self.userID ,
+                      let nickname = self.userNickname else { return }
+                self.delegate?.didChooseToBlockUser(userID: userID, userNickname: nickname)
+            }
+            
+            
             actionSheet.addAction(reportAction)
+            actionSheet.addAction(blockAction)
         }
         
         let cancelAction = UIAlertAction(title: "취소",

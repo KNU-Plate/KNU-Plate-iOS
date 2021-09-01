@@ -122,6 +122,7 @@ struct Constants {
         static let userID                       = "userID"
         static let username                     = "username"
         static let medal                        = "medal"
+        static let blockedUserUIDList            = "blockedUserUIDList"
         
     }
     

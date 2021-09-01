@@ -342,7 +342,7 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
     // 게시글 신고하기
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
         guard let reviewID = reviewID, let _ = displayName else {
-            self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
+            showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
             return
         }
         let storyboard = UIStoryboard(name: "Kevin", bundle: nil)
@@ -359,11 +359,27 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
             self.showSimpleBottomAlert(with: "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요. 😥")
             return
         }
-        self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
+        presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
                                            message: "") { selectedOk in
             if selectedOk {
-                //
                 self.restaurantInfoVM.deleteMyReview(reviewID: reviewID)
+            }
+        }
+    }
+    
+    func didChooseToBlockUser(userID: String, userNickname: String) {
+        
+        presentAlertWithConfirmAction(title: "\(userNickname)님의 글 보지 않기",
+                                      message: "위 사용자의 게시글이 더는 보이지 않도록 설정하시겠습니까? 한 번 설정하면 해제할 수 없습니다.") { selectedOk in
+            
+            if selectedOk {
+                
+                guard !User.shared.blockedUserUIDList.contains(userID) else {
+                    self.showSimpleBottomAlert(with: "이미 \(userNickname)의 글을 안 보기 처리하였습니다.🧐")
+                    return
+                }
+                User.shared.blockedUserUIDList.append(userID)
+                self.restaurantInfoVM.refreshViewModel()
             }
         }
     }

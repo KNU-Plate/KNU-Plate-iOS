@@ -47,8 +47,6 @@ class NoticeViewController: UIViewController {
     
     func fetchNoticeList() {
         
-        showProgressBar()
-        
         isFetchingData = true
         
         NoticeManager.shared.fetchNoticeList(index: indexToFetch) { [weak self] result in
@@ -72,7 +70,6 @@ class NoticeViewController: UIViewController {
                 self.noticeList.append(contentsOf: model)
                 self.isFetchingData = false
                 DispatchQueue.main.async {
-                    dismissProgressBar()
                     self.tableView.reloadData()
                     self.tableView.tableFooterView = nil
                 }

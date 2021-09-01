@@ -230,6 +230,11 @@ extension MyReviewListViewController: ReviewTableViewCellDelegate {
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
         //
     }
+    
+    func didChooseToBlockUser(userID: String, userNickname: String) {
+        //
+    }
+    
 }
 
 //MARK: - UIScrollViewDelegate
