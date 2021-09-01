@@ -1,7 +1,6 @@
 import Foundation
 
 //MARK: - 특정 매장 리뷰 목록 불러오고 성공 시 반환되는 Model
-//NOTE: - 배열로 받아와야 함 -> [ReviewListResponseModel]
 
 struct ReviewListResponseModel: Decodable {
     

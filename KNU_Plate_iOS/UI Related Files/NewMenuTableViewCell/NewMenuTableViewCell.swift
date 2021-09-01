@@ -38,6 +38,7 @@ class NewMenuTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         indexPath = 0
         menuNameTextField.text = ""
     }

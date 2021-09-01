@@ -252,7 +252,14 @@ extension RestaurantInfoViewModel {
                 } else {
                     self.lastReviewID = data.last?.reviewID
                 }
-                self.reviews.append(contentsOf: data)
+        
+                for review in data {
+
+                    if User.shared.blockedUserUIDList.contains(review.userID) {
+                        continue
+                    }
+                    self.reviews.append(review)
+                }
                 self.isFetchingReview = false
                 self.delegate?.didFetchReview()
             case .failure:
@@ -326,7 +333,7 @@ extension RestaurantReviewViewModel {
     }
     
     var userNickname: String {
-        return self.review.userInfo.displayName
+        return self.review.userInfo.username
     }
     
     var medal: Int {

@@ -13,7 +13,7 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
+        label.font = .systemFont(ofSize: 17, weight: .medium)
         return label
     }()
     

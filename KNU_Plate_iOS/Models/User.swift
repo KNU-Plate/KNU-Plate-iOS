@@ -41,10 +41,6 @@ class User {
     
     var savedPassword: Bool = false
     
-
-    
-
-
     var dateCreated: String = ""
 
     var isVerified: Bool = false
@@ -92,6 +88,16 @@ class User {
         }
     }
     
+    var blockedUserUIDList: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: Constants.UserDefaultsKey.blockedUserUIDList) ?? [String]()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.UserDefaultsKey.blockedUserUIDList)
+        }
+    }
+    
+    
     func resetAllUserInfo() {
         
         self.userUID = ""
@@ -104,6 +110,7 @@ class User {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.username)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.medal)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.blockedUserUIDList)
         
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.accessToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)

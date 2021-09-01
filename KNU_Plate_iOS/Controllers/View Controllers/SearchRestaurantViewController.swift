@@ -155,7 +155,6 @@ extension SearchRestaurantViewController: MTMapViewDelegate {
 }
 
 //MARK: - UITableViewDelegate & UITableViewDataSource
-//TODO: - 아래는 지우는거 고민
 
 extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -181,9 +180,6 @@ extension SearchRestaurantViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("✏️ viewModel.totalCount == \(viewModel.totalCount)")
-        
         mapView.removeAllPOIItems()
         let (longitude, latitude, placeName) = viewModel.fetchLocation(of: indexPath.row)
         updateMapWithMarker(longitude: longitude, latitude: latitude, placeName: placeName)
@@ -233,15 +229,16 @@ extension SearchRestaurantViewController {
     func initializeSearchBar() {
 
         searchBar.delegate = self
-        searchBar.placeholder = "방문하신 매장을 검색해 주세요."
+        searchBar.placeholder = "방문 매장 검색.(경북대 주변 매장만 검색 가능)"
     }
     
     func initializeButton() {
         
+        let font = UIFont.systemFont(ofSize: 25)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let buttonImage = UIImage(systemName: "arrow.right", withConfiguration: configuration)
+
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
-        var buttonImage: UIImage = UIImage(named: Constants.Images.rightArrow)!
-        buttonImage = buttonImage.scalePreservingAspectRatio(targetSize: CGSize(width: 30,
-                                                                                height: 30))
         nextButton.setImage(buttonImage, for: .normal)
         nextButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
     }

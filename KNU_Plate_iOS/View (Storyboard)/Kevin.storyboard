@@ -37,8 +37,8 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="70" id="WSM-Ue-HqM"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="식당명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfI-7b-Rdh">
@@ -175,7 +175,8 @@
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 카테고리 선택" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uZw-Qd-csJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="127" height="22"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgW-fa-2Jr">
@@ -197,15 +198,16 @@
                                                 <rect key="frame" x="0.0" y="171" width="375" height="1"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1ie-rC-x84">
-                                                <rect key="frame" x="10" y="134" width="203.5" height="22"/>
+                                                <rect key="frame" x="10" y="134" width="202.5" height="22"/>
                                                 <subviews>
                                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="음식 / 매장 사진" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sjb-oh-epe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="22"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="106" height="22"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(선택/최대 5장)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-qt-gr8">
-                                                        <rect key="frame" x="122" y="0.0" width="81.5" height="22"/>
+                                                        <rect key="frame" x="121" y="0.0" width="81.5" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -216,9 +218,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="v3B-qt-gr8" secondAttribute="trailing" id="TSh-G9-S2I"/>
                                                 </constraints>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(i) 해당 매장만의 음식 사진 및 매장 관련 사진을 업로드하여 주시기 바랍니다. 관련 없는 사진으로 의심 또는 판단 시 예고없이 삭제될 수 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-NH-fLi">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✻ 해당 매장만의 음식 사진 및 매장 관련 사진을 업로드하여 주시기 바랍니다. 관련 없는 사진으로 의심 또는 판단 시 예고없이 삭제될 수 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc2-NH-fLi">
                                                 <rect key="frame" x="10" y="402" width="355" height="47"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -818,16 +820,16 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bL-bq-WWs">
-                                                <rect key="frame" x="55" y="25" width="44.5" height="20.5"/>
+                                                <rect key="frame" x="55" y="25" width="42" height="19.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="e5A-7U-jYH"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-Pm-8TH">
-                                                <rect key="frame" x="109.5" y="28" width="15" height="15"/>
+                                                <rect key="frame" x="107" y="28" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="15" id="Er1-QF-5nH"/>
                                                     <constraint firstAttribute="height" constant="15" id="jtf-aR-hLg"/>
@@ -979,7 +981,7 @@
         <!--식당 등록-->
         <scene sceneID="11h-uU-w6E">
             <objects>
-                <viewController storyboardIdentifier="SearchRestaurantViewController" id="IOi-Tn-fy0" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchRestaurantViewController" hidesBottomBarWhenPushed="YES" id="IOi-Tn-fy0" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PbF-dL-zBa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -989,11 +991,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-b6-h2U" userLabel="Next Button">
-                                <rect key="frame" x="285" y="577" width="70" height="70"/>
+                                <rect key="frame" x="295" y="587" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="2if-uv-5ug"/>
-                                    <constraint firstAttribute="height" constant="70" id="cb3-Nz-kc2"/>
+                                    <constraint firstAttribute="width" constant="60" id="2if-uv-5ug"/>
+                                    <constraint firstAttribute="height" constant="60" id="cb3-Nz-kc2"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="arrow.right" catalog="system"/>
                                 <connections>
                                     <action selector="pressedNextButton:" destination="IOi-Tn-fy0" eventType="touchUpInside" id="z9s-HW-ut1"/>
                                 </connections>
@@ -1724,10 +1728,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first medal" translatesAutoresizingMaskIntoConstraints="NO" id="dpC-T1-xTk">
-                                <rect key="frame" x="110" y="129" width="25" height="25"/>
+                                <rect key="frame" x="110" y="132" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="bh7-GR-HR3"/>
-                                    <constraint firstAttribute="width" constant="25" id="uQS-SL-gIl"/>
+                                    <constraint firstAttribute="height" constant="20" id="bh7-GR-HR3"/>
+                                    <constraint firstAttribute="width" constant="20" id="uQS-SL-gIl"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QVo-TS-4Ii">
@@ -1775,7 +1779,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-Fy-VqP">
-                                <rect key="frame" x="150" y="133" width="20" height="20"/>
+                                <rect key="frame" x="145" y="133" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="C44-Ek-T1u"/>
                                     <constraint firstAttribute="width" constant="20" id="aII-6J-XEa"/>
@@ -1797,7 +1801,7 @@
                             <constraint firstItem="05S-3l-tUd" firstAttribute="top" secondItem="QYK-HP-QV1" secondAttribute="bottom" constant="25" id="MRD-YN-N9h"/>
                             <constraint firstItem="7G2-8S-Y4J" firstAttribute="leading" secondItem="QYK-HP-QV1" secondAttribute="trailing" constant="15" id="Mve-Nv-whL"/>
                             <constraint firstItem="7BU-FE-vVV" firstAttribute="trailing" secondItem="QVo-TS-4Ii" secondAttribute="trailing" id="O05-ea-dfZ"/>
-                            <constraint firstItem="dpC-T1-xTk" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="10" id="TFX-8g-vu2"/>
+                            <constraint firstItem="dpC-T1-xTk" firstAttribute="top" secondItem="7G2-8S-Y4J" secondAttribute="bottom" constant="13" id="TFX-8g-vu2"/>
                             <constraint firstItem="7BU-FE-vVV" firstAttribute="bottom" secondItem="QVo-TS-4Ii" secondAttribute="bottom" id="XcV-A6-Zr8"/>
                             <constraint firstItem="QYK-HP-QV1" firstAttribute="top" secondItem="7BU-FE-vVV" secondAttribute="top" constant="40" id="b5T-U9-hko"/>
                             <constraint firstItem="QVo-TS-4Ii" firstAttribute="leading" secondItem="brH-jB-qJ9" secondAttribute="leading" id="lKB-yd-Cf0"/>
@@ -1884,6 +1888,7 @@
     </scenes>
     <resources>
         <image name="add button" width="226" height="226"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="default profile image" width="73" height="73"/>
         <image name="delete button" width="79" height="79"/>

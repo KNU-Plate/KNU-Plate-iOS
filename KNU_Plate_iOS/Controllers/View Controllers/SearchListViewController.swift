@@ -44,9 +44,7 @@ extension SearchListViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) else {
             fatalError()
         }
-        
-        print("✏️ searchResultCount: \(searchResultCount)")
-        
+    
         /// 검색된 결과가 있을 경우
         if placeName.count != 0 {
             
@@ -55,8 +53,10 @@ extension SearchListViewController {
         }
         
         else {
-            cell.textLabel?.text = "검색 결과가 없습니다 🤔"
-            cell.detailTextLabel?.text = "매장명을 다시 확인해주세요."
+            cell.textLabel?.text = "검색 결과가 없습니다.🤔"
+            cell.detailTextLabel?.text = "경북대학교 주변에 있는 매장이 맞는지 확인해주세요."
+            tableView.tableFooterView = UIView(frame: .zero)
+            
         }
         return cell
     }

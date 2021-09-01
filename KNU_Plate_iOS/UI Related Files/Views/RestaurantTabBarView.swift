@@ -2,7 +2,7 @@ import UIKit
 import Then
 
 class RestaurantTabBarView: UIView {
-    
+
     let contentView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -24,9 +24,10 @@ class RestaurantTabBarView: UIView {
         $0.setImage(UIImage(named: "review (selected)"), for: .selected)
         $0.setImage(UIImage(named: "review (selected)"), for: .highlighted)
         $0.setTitle("리뷰", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.setTitleColor(UIColor.darkGray, for: .normal)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .selected)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .highlighted)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         $0.alignTextBelow()
     }
     let locationButton = UIButton(type: .custom).then {
@@ -35,9 +36,10 @@ class RestaurantTabBarView: UIView {
         $0.setImage(UIImage(named: "location (selected)"), for: .selected)
         $0.setImage(UIImage(named: "location (selected)"), for: .highlighted)
         $0.setTitle("위치", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.setTitleColor(UIColor.darkGray, for: .normal)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .selected)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .highlighted)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         $0.alignTextBelow()
     }
     let menuButton = UIButton().then {
@@ -46,9 +48,10 @@ class RestaurantTabBarView: UIView {
         $0.setImage(UIImage(named: "menu (selected)"), for: .selected)
         $0.setImage(UIImage(named: "menu (selected)"), for: .highlighted)
         $0.setTitle("메뉴", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.setTitleColor(UIColor.darkGray, for: .normal)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .selected)
         $0.setTitleColor(UIColor(named: Constants.Color.appDefaultColor), for: .highlighted)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         $0.alignTextBelow()
     }
     

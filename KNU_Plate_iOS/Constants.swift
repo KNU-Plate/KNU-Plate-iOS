@@ -122,6 +122,7 @@ struct Constants {
         static let userID                       = "userID"
         static let username                     = "username"
         static let medal                        = "medal"
+        static let blockedUserUIDList            = "blockedUserUIDList"
         
     }
     
@@ -176,7 +177,6 @@ struct Constants {
         static let thirdMedal                               = "third medal"
         
         // Other
-        static let rightArrow                               = "arrow_right"
         static let myPageVCImageOptions                     = [ "bell.badge",
                                                                 "tray.full",
                                                                 "gear",

@@ -13,7 +13,6 @@ class ReviewDetailViewController: UIViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var rating: RatingController!
     
-    
     @IBOutlet var imageViewHeight: NSLayoutConstraint!
     
     var reviewDetails = ReviewDetail()

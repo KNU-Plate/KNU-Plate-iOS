@@ -187,7 +187,8 @@ class RestaurantManager {
         AF.request(fetchReviewListRequestURL,
                    method: .get,
                    parameters: model.parameters,
-                   headers: model.headers)
+                   headers: model.headers,
+                   interceptor: interceptor)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 

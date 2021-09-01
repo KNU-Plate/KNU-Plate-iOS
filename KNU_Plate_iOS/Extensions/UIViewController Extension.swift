@@ -4,7 +4,7 @@ import SnackBar_swift
 //MARK: - Alert Methods
 
 extension UIViewController {
-    
+        
     // 확인 버튼을 누를 수 있는 Alert 띄우기
     func presentAlertWithConfirmAction(title: String, message: String, completion: @escaping ((Bool) -> Void)) {
         
@@ -39,36 +39,6 @@ extension UIViewController {
         
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
-    }
-    
-    
-    func showToast(message : String, font: UIFont = .systemFont(ofSize: 14.0)) {
-
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
-                                               y: self.view.frame.size.height-150,
-                                               width: 150,
-                                               height: 35))
-        
-        toastLabel.backgroundColor = .white
-        toastLabel.textColor = UIColor.black
-        toastLabel.font = font
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        toastLabel.layer.borderWidth = 1
-        toastLabel.layer.borderColor = UIColor.black.cgColor
-        
-        self.view.addSubview(toastLabel)
-        
-        UIView.animate(withDuration: 4.0,
-                       delay: 0.1,
-                       options: .curveEaseOut,
-                       animations: { toastLabel.alpha = 0.0 },
-                       completion: { isCompleted in
-                        toastLabel.removeFromSuperview()
-                       })
     }
     
     // SnackBar 라이브러리의 message 띄우기
@@ -121,13 +91,6 @@ extension UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
     }
     
-//    func goToHomeScreen() {
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let mainTabBarController = storyboard.instantiateViewController(identifier: Constants.StoryboardID.mainTabBarController)
-//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-//    }
-    
     @objc func presentWelcomeVC() {
         
         let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
@@ -136,6 +99,24 @@ extension UIViewController {
         
         welcomeVC.modalPresentationStyle = .overFullScreen
         self.present(welcomeVC, animated: true)
+    }
+    
+    @objc func logOutUser() {
+        
+        UserManager.shared.logOut { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.presentSimpleAlert(title: "세션 만료", message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.")
+                    self.presentWelcomeVC()
+                }
+                
+            case .failure(let error):
+                self.showSimpleBottomAlert(with: error.errorDescription)
+            }
+        }
     }
     
     @objc func dismissVC() {
@@ -147,11 +128,20 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func createWelcomeVCObservers() {
+    func createWelcomeVCObserver() {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(presentWelcomeVC),
                                                name: .presentWelcomeVC,
                                                object: nil)
+    }
+    
+    func createRefreshTokenExpirationObserver() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logOutUser),
+                                               name: .refreshTokenExpired,
+                                               object: nil)
+        
     }
 }

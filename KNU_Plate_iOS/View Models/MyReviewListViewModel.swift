@@ -5,7 +5,7 @@ protocol ReviewListViewModelDelegate: AnyObject {
     func didFetchEmptyReviewListResults()
     func didDeleteMyReview()
     
-    func failedFetchingReviewListResults()
+    func failedFetchingReviewListResults(with error: NetworkError)
     func failedDeletingMyReview(with error: NetworkError)
 }
 
@@ -79,8 +79,8 @@ class MyReviewListViewModel {
                 self.isFetchingData = false
                 self.delegate?.didFetchReviewListResults()
                 
-            case .failure(_):
-                self.delegate?.failedFetchingReviewListResults()
+            case .failure(let error):
+                self.delegate?.failedFetchingReviewListResults(with: error)
             }
         }
     }
