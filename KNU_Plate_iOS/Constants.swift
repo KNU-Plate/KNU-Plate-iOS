@@ -176,7 +176,6 @@ struct Constants {
         static let thirdMedal                               = "third medal"
         
         // Other
-        static let rightArrow                               = "arrow_right"
         static let myPageVCImageOptions                     = [ "bell.badge",
                                                                 "tray.full",
                                                                 "gear",

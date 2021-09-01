@@ -979,7 +979,7 @@
         <!--식당 등록-->
         <scene sceneID="11h-uU-w6E">
             <objects>
-                <viewController storyboardIdentifier="SearchRestaurantViewController" id="IOi-Tn-fy0" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchRestaurantViewController" hidesBottomBarWhenPushed="YES" id="IOi-Tn-fy0" customClass="SearchRestaurantViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PbF-dL-zBa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -989,11 +989,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-b6-h2U" userLabel="Next Button">
-                                <rect key="frame" x="285" y="577" width="70" height="70"/>
+                                <rect key="frame" x="295" y="587" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="2if-uv-5ug"/>
-                                    <constraint firstAttribute="height" constant="70" id="cb3-Nz-kc2"/>
+                                    <constraint firstAttribute="width" constant="60" id="2if-uv-5ug"/>
+                                    <constraint firstAttribute="height" constant="60" id="cb3-Nz-kc2"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="arrow.right" catalog="system"/>
                                 <connections>
                                     <action selector="pressedNextButton:" destination="IOi-Tn-fy0" eventType="touchUpInside" id="z9s-HW-ut1"/>
                                 </connections>
@@ -1884,6 +1886,7 @@
     </scenes>
     <resources>
         <image name="add button" width="226" height="226"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="default profile image" width="73" height="73"/>
         <image name="delete button" width="79" height="79"/>
