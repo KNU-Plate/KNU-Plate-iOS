@@ -34,9 +34,8 @@ enum NetworkError: Int, Error {
     
     static func returnError(statusCode: Int, responseData: Data? = nil) -> NetworkError {
         
+        print("❗️ Network Error - status code : \(statusCode)")
         if let data = responseData {
-            
-            print("❗️ Network Error - status code : \(statusCode)")
             print("❗️ Network Error - error : \(String(data: data, encoding: .utf8) ?? "error encoding error")")
         }
         return NetworkError(rawValue: statusCode) ?? .internalError
