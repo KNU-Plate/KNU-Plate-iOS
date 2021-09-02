@@ -41,14 +41,7 @@ class UserManager {
                                      withName: "user_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
-            
-//            if let profileImage = model.profileImage {
-//
-//                multipartFormData.append(profileImage,
-//                                         withName: "user_thumbnail",
-//                                         fileName: "\(UUID().uuidString).jpeg",
-//                                         mimeType: "image/jpeg")
-//            }
+
             
         }, to: signUpRequestURL,
         headers: model.headers)
@@ -93,18 +86,16 @@ class UserManager {
                    headers: model.headers)
             .responseJSON { response in
                 
-                guard let statusCode = response.response?.statusCode else { return }
+                switch response.result {
                 
-                switch statusCode {
-                
-                case 200:
-                    print("✏️ UserManager - login SUCCESS")
+                case .success(_):
+           
                     do {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                    from: response.data!)
                         self.saveLoginInfo(with: decodedData)
                         User.shared.isLoggedIn = true
-                        
+                        print("✏️ UserManager - login SUCCESS")
                         print("✏️ Access Token in Keychain: \(User.shared.accessToken)")
                         completion(.success(true))
                         
@@ -112,11 +103,20 @@ class UserManager {
                         print("✏️ UserManager - logIn catch ERROR: \(error)")
                         completion(.failure(.internalError))
                     }
+                case .failure(let error):
                     
-                default:
-                    print("✏️ UserManager - login FAILED with statusCode: \(statusCode)")
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                    completion(.failure(error))
+                    if let jsonData = response.data {
+                        print("UserManager - FAILED REQEUST with server error:\(String(data: jsonData, encoding: .utf8) ?? "")")
+                    }
+                    print("UserManager - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
+                    guard let responseCode = error.responseCode else {
+                        print("🥲 UserManager - Empty responseCode")
+                        return
+                    }
+                    let customError = NetworkError.returnError(statusCode: responseCode)
+                    print("UserManager - FAILED REQEUST with custom error: \(customError.errorDescription)")
+                    completion(.failure(customError))
+                
                 }
             }
     }
@@ -356,7 +356,7 @@ class UserManager {
                 completion(.success(true))
                 
             default:
-                let error = NetworkError.returnError(statusCode: statusCode)
+                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
                 print("UserManager - updateNickname error: \(error.errorDescription)")
                 completion(.failure(error))
             }

@@ -32,7 +32,13 @@ enum NetworkError: Int, Error {
         }
     }
     
-    static func returnError(statusCode: Int) -> NetworkError {
+    static func returnError(statusCode: Int, responseData: Data? = nil) -> NetworkError {
+        
+        if let data = responseData {
+            
+            print("❗️ Network Error - status code : \(statusCode)")
+            print("❗️ Network Error - error : \(String(data: data, encoding: .utf8) ?? "error encoding error")")
+        }
         return NetworkError(rawValue: statusCode) ?? .internalError
     }
 }
@@ -93,28 +99,4 @@ enum LogInError: String, Error {
             return "비밀번호를 다시 한 번 확인해 주세요."
         }
     }
-}
-
-//MARK: - 메일 인증 Error Message 관리
-
-//enum MailVerificationError: String {
-//
-//
-//}
-
-//MARK: - 인증코드 발급 Error Message 관리
-
-enum MailVerificationIssuanceError: String, Error {
-    
-    case emptyToken = "token is empty"
-
-    func returnErrorMessage() -> String {
-        
-        switch self {
-        
-        case .emptyToken:
-            return "잘못된 요청입니다."
-        }
-    }
-
 }

@@ -10,17 +10,14 @@ struct EditUserInfoRequestDTO {
     var removeUserProfileImage: String = "N"
     
     init(password: String) {
-        
         self.password = password
     }
     
     init(userProfileImage: Data) {
-        
         self.userProfileImage = userProfileImage
     }
     
     init(removeUserProfileImage: Bool) {
-        
         self.removeUserProfileImage = "Y"
     }
     
