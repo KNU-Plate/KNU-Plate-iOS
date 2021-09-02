@@ -349,6 +349,8 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
             fatalError()
         }
+        
+        vc.modalPresentationStyle = .overFullScreen
         vc.reviewID = reviewID
         self.present(vc, animated: true)
     }

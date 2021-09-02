@@ -11,10 +11,12 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        dismissProgressBar()
+    }
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         

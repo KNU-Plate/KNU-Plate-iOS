@@ -81,7 +81,6 @@ class SettingsViewController: UIViewController {
         logInAndOutButton.setTitle(User.shared.isLoggedIn ? "로그아웃" : "로그인",
                                    for: .normal)
         
-        
 
         changePasswordButton.isHidden = User.shared.isLoggedIn ? false : true
     }
