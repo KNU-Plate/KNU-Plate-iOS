@@ -45,7 +45,7 @@ class ReportManager {
                 completion(.success(true))
             
             default:
-                let error = NetworkError.returnError(statusCode: statusCode)
+                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
                 print("ReportManager - reportReview() error \(error.errorDescription) and statusCode: \(statusCode)")
                 completion(.failure(error))
             }

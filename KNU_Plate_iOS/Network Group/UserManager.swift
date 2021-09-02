@@ -75,7 +75,7 @@ class UserManager {
     
     //MARK: - 로그인    
     func logIn(with model: LoginRequestDTO,
-               completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+               completion: @escaping ((Result<Bool, LogInError>) -> Void)) {
         
         User.shared.resetAllUserInfo()
         
@@ -86,10 +86,11 @@ class UserManager {
                    headers: model.headers)
             .responseJSON { response in
                 
-                switch response.result {
+                guard let statusCode = response.response?.statusCode else { return }
                 
-                case .success(_):
-           
+                switch statusCode {
+                
+                case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
                                                                    from: response.data!)
@@ -101,22 +102,13 @@ class UserManager {
                         
                     } catch {
                         print("✏️ UserManager - logIn catch ERROR: \(error)")
-                        completion(.failure(.internalError))
+                        completion(.failure(.unknownError))
                     }
-                case .failure(let error):
+                default:
                     
-                    if let jsonData = response.data {
-                        print("UserManager - FAILED REQEUST with server error:\(String(data: jsonData, encoding: .utf8) ?? "")")
-                    }
-                    print("UserManager - FAILED REQEUST with alamofire error: \(error.localizedDescription)")
-                    guard let responseCode = error.responseCode else {
-                        print("🥲 UserManager - Empty responseCode")
-                        return
-                    }
-                    let customError = NetworkError.returnError(statusCode: responseCode, responseData: response.data)
-                    print("UserManager - FAILED REQEUST with custom error: \(customError.errorDescription)")
-                    completion(.failure(customError))
-                
+                    let error = LogInError.returnError(responseData: response.data)
+
+                    completion(.failure(error))
                 }
             }
     }
@@ -160,7 +152,7 @@ class UserManager {
                    headers: headers,
                    interceptor: interceptor)
             .validate()
-            .responseJSON { (response) in
+            .responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
                 

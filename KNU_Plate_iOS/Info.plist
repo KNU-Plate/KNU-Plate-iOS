@@ -30,11 +30,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
+	<string>사용자 리뷰 등록 시 사진을 함께 업로드하기 위해 카메라에 대한 접근 권한이 필요합니다.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>사용자의 현재 위치를 받아와야 합니다.</string>
+	<string>매장 검색과 등록을 위해 위치 정보 접근 권한이 필요합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>프로필 이미지 등록을 위해 접근허가가 필요합니다</string>
+	<string>사용자 리뷰 등록 시 사진을 함께 업로드하기 위해 사진첩에 대한 접근 권한이 필요합니다.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

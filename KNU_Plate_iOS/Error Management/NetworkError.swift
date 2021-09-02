@@ -66,8 +66,6 @@ enum SignUpError: String, Error {
     case usernameLengthTooLong = "user_name length is too short or too long"
     case usernameAlreadyExists = "user_name is unique"
     
-    ///다른 에러는 준수씨한테 받기
-    
     func returnErrorMessage() -> String {
         
         switch self {
@@ -85,17 +83,36 @@ enum SignUpError: String, Error {
 
 enum LogInError: String, Error {
     
-    case userNotFound = "invalid password"
-    case invalidPassword = "user not founded"
+    case userNotFound = "user not founded"
+    case invalidPassword = "invalid password"
+    case unknownError = "unknown error"
     
-    func returnErrorMessage() -> String {
+    var errorDescription: String {
         
         switch self {
         
         case.userNotFound:
-            return "아이디가 잘못되었습니다."
+            return "잘못된 아이디입니다."
         case .invalidPassword:
             return "비밀번호를 다시 한 번 확인해 주세요."
+        default:
+            return "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요😢"
+        }
+    }
+    
+    static func returnError(responseData: Data?) -> LogInError {
+        
+        let data = JSON(responseData)
+        
+        let errorMessage = data["error"].stringValue
+        
+        switch errorMessage {
+        case self.invalidPassword.rawValue:
+            return .invalidPassword
+        case self.userNotFound.rawValue:
+            return .userNotFound
+        default:
+            return .unknownError
         }
     }
 }
