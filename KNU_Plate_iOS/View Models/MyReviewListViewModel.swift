@@ -68,10 +68,7 @@ class MyReviewListViewModel {
             switch result {
             
             case .success(let responseModel):
-                
-                print("✏️ responseModel count: \(responseModel.count)")
-                print("✏️ responseModel: \(responseModel)")
-                
+        
                 if responseModel.isEmpty {
                     self.delegate?.didFetchEmptyReviewListResults()
                     return

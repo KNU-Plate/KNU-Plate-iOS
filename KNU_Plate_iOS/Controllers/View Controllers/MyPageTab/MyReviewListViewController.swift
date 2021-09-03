@@ -190,7 +190,7 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         let userID = reviewDetailVM.userID
         let profileImageURL = viewModel.getProfileImageURL(index: indexPath.row)
         let reviewImageFiles = reviewDetailVM.reviewImageFileFolder?.files
-        let nickname = reviewDetailVM.userInfo.displayName
+        let nickname = reviewDetailVM.userInfo.username
         let medal = reviewDetailVM.userInfo.medal
         let rating = reviewDetailVM.rating
         let review = reviewDetailVM.review
