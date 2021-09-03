@@ -60,8 +60,18 @@ class RestaurantInfoViewController: UIViewController {
         dismissProgressBar()
     }
     
+    @IBAction func pressedNewReviewButton(_ sender: UIBarButtonItem) {
+        
+        if !User.shared.isLoggedIn {
+            presentWelcomeVC()
+            return
+        }
+        performSegue(withIdentifier: Constants.SegueIdentifier.goToNewReviewVC, sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.SegueIdentifier.restaurantInfoSegue {
+        if segue.identifier == Constants.SegueIdentifier.goToNewReviewVC {
+        
             guard let nextVC = segue.destination as? NewReviewViewController else { fatalError() }
             guard let mallID = self.mallID else {
                 print("RestaurantInfoViewController - prepare(for segue:) - mallID is empty")
