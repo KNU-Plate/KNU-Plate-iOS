@@ -92,6 +92,10 @@ extension RestaurantCollectionViewController {
     }
     
     @objc func floatingButtonWasTapped(_ sender: UIButton) {
+        if !User.shared.isLoggedIn {
+            showLoginNeededAlert(message: "새 매장을 등록하려면 로그인이 필요합니다.")
+            return
+        }
         let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
         let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.searchRestaurantViewController)
         self.navigationController?.pushViewController(nextVC, animated: true)

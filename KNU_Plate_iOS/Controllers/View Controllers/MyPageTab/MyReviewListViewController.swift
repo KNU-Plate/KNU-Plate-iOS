@@ -80,6 +80,7 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         refreshControl.endRefreshing()
         dismissProgressBar()
         tableView.tableFooterView = UIView(frame: .zero)
+        title = "내가 쓴 리뷰 (\(viewModel.reviewList.count)개)"
     }
     
     func didFetchEmptyReviewListResults() {

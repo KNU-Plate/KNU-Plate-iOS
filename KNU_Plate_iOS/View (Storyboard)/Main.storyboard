@@ -63,12 +63,12 @@
                             <color key="tintColor" name="AppDefaultColor"/>
                             <connections>
                                 <action selector="pressedNewReviewButton:" destination="obV-VK-3on" id="dnw-Lf-wzo"/>
-                                <segue destination="FJA-jb-0m6" kind="show" identifier="goToNewReviewVC" id="TQ3-cM-gZn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="4kc-mm-M4W" kind="show" identifier="NotUsingSegue4" id="5KI-G6-5uX"/>
+                        <segue destination="FJA-jb-0m6" kind="show" identifier="goToNewReviewVC" id="Hy7-pf-Z39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeD-Qm-sE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

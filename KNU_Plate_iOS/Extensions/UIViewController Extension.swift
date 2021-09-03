@@ -62,6 +62,13 @@ extension UIViewController {
 
     }
     
+    func showLoginNeededAlert(message: String) {
+        showSimpleBottomAlertWithAction(message: message,
+                                        buttonTitle: "로그인") {
+            self.presentWelcomeVC()
+        }
+    }
+    
     // 테이블뷰 Footer에 Activity Indicator 추가 -> 데이터 추가로 받아올 때 실행
     func createSpinnerFooterView() -> UIView {
         
@@ -124,6 +131,8 @@ extension UIViewController {
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
+    
+    
 }
 
 //MARK: - Observers
@@ -146,4 +155,10 @@ extension UIViewController {
                                                object: nil)
         
     }
+}
+
+//MARK: - Others
+
+extension UIViewController {
+    
 }

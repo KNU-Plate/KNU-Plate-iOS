@@ -63,7 +63,7 @@ class RestaurantInfoViewController: UIViewController {
     @IBAction func pressedNewReviewButton(_ sender: UIBarButtonItem) {
         
         if !User.shared.isLoggedIn {
-            presentWelcomeVC()
+            showLoginNeededAlert(message: "새 리뷰를 작성하려면 로그인이 필요합니다.")
             return
         }
         performSegue(withIdentifier: Constants.SegueIdentifier.goToNewReviewVC, sender: self)
@@ -159,6 +159,11 @@ extension RestaurantInfoViewController {
     }
     
     @objc func favoriteButtonTapped(_ sender: UIBarButtonItem) {
+        
+        if !User.shared.isLoggedIn {
+            showLoginNeededAlert(message: "좋아요 기능을 사용하시려면 로그인이 필요합니다.")
+            return
+        }
         sender.isEnabled = false
         if !restaurantInfoVM.isFavorite {
             // not marked favorite
