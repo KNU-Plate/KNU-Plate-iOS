@@ -13,6 +13,7 @@ class ReportReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+        print("✏️ reviewID: \(reviewID)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

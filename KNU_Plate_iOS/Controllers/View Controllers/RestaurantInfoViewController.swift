@@ -51,7 +51,13 @@ class RestaurantInfoViewController: UIViewController {
         restaurantInfoVM.delegate = self
         restaurantInfoVM.setMallID(mallID: mallID)
         
+        showProgressBar()
         restaurantInfoVM.fetch()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -516,6 +522,7 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     
     func didFetchReview() {
         print("didFetchReview reloadData")
+        dismissProgressBar()
         customTableView.tableView.reloadData()
     }
     

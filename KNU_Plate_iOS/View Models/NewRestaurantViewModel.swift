@@ -87,17 +87,16 @@ class NewRestaurantViewModel {
             
             case .success(_):
                 self.delegate?.didCompleteUpload(true)
+                NotificationCenter.default.post(name: .didUploadNewMall, object: nil)
                 
             case .failure(let error):
                 
                 if let uploadError = error as? UploadError {
-                
                     self.delegate?.alreadyRegisteredRestaurant(with: uploadError)
                     return
                 }
                 
                 if let error = error as? NetworkError {
-                 
                     self.delegate?.failedToUpload(with: error)
                 }
             
@@ -108,7 +107,6 @@ class NewRestaurantViewModel {
     func convertUIImagesToDataFormat() {
         
         userSelectedImagesInDataFormat?.removeAll()
-        
         userSelectedImagesInDataFormat = userSelectedImages.map( { (image: UIImage) -> Data in
             if let imageData =
                 image.jpegData(compressionQuality: 1.0) {

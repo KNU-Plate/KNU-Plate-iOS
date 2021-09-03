@@ -7,4 +7,6 @@ extension Notification.Name {
 
     static let didMarkFavorite = Notification.Name("co.kuchelin.didMarkFavorite")
     static let didFailedMarkFavorite = Notification.Name("co.kuchelin.didFailedMarkFavorite")
+    
+    static let didUploadNewMall = Notification.Name("co.kuchelin.didUploadNewMall")
 }

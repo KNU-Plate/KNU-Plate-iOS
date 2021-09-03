@@ -254,7 +254,6 @@ extension RestaurantInfoViewModel {
                 }
         
                 for review in data {
-
                     if User.shared.blockedUserUIDList.contains(review.userID) {
                         continue
                     }

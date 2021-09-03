@@ -13,7 +13,7 @@ public func setUserMedalImage(medalRank: Int) -> UIImage {
 }
 
 func showProgressBar() {
-    ProgressHUD.animationType = .circleRotateChase
+    ProgressHUD.animationType = .lineSpinFade
     ProgressHUD.colorAnimation = UIColor(named: Constants.Color.appDefaultColor) ?? .systemGray
     ProgressHUD.show()
 }

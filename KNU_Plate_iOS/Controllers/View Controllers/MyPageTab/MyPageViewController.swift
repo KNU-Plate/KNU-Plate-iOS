@@ -269,6 +269,7 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
+        profileImageButton.layer.borderWidth = 0
     }
     
     func initializeMedalImageView() {
