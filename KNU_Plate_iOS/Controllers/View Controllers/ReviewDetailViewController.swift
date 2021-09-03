@@ -34,7 +34,7 @@ class ReviewDetailViewController: UIViewController {
     // Review Cell
     func initialize() {
         
-        self.title = reviewDetails.nickname + "님의 리뷰"
+        self.title = reviewDetails.userID + "님의 리뷰"
          
         userProfileImageView.sd_setImage(with: reviewDetails.profileImageURL,
                                          placeholderImage: UIImage(named: Constants.Images.defaultProfileImage))

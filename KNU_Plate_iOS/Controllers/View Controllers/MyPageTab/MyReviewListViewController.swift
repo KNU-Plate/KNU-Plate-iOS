@@ -79,16 +79,14 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         tableView.reloadData()
         refreshControl.endRefreshing()
         dismissProgressBar()
-        tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func didFetchEmptyReviewListResults() {
         print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
-        showEmptyView()
         refreshControl.endRefreshing()
-        tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.reloadData()
     }
     
     func failedFetchingReviewListResults(with error: NetworkError) {
@@ -126,10 +124,13 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        if viewModel.reviewList.count == 0 { showEmptyView() }
         
         if indexPath.row > viewModel.reviewList.count - 1 {
             return UITableViewCell()
-        } else {
+        }
+        else {
             
             let reviewVM = viewModel.reviewList[indexPath.row]
             

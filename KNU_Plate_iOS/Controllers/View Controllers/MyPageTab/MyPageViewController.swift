@@ -103,8 +103,10 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController {
     
     func removeProfileImage() {
-        
+        showProgressBar()
         UserManager.shared.removeProfileImage { [weak self] result in
+            
+            dismissProgressBar()
             
             guard let self = self else { return }
             
