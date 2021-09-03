@@ -90,7 +90,11 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
     }
     
     func failedFetchingReviewListResults(with error: NetworkError) {
+        print("❗️ failedFetchingReviewListResults")
         refreshControl.endRefreshing()
+        if error == .unauthorized {
+            navigationController?.popViewController(animated: true)
+        }
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "재시도") {
             self.viewModel.fetchReviewList()

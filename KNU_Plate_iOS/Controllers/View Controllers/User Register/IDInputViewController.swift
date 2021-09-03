@@ -10,10 +10,13 @@ class IDInputViewController: UIViewController {
     @IBOutlet var idTextField: HoshiTextField!
     @IBOutlet var errorLabel: UILabel!
     
+    private let idErrorMessage = "아이디는 4자 이상, 20자 이하로 적어주세요.\n아이디가 한글이 포함되면 안 됩니다."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initialize()
+        showErrorMessage(message: idErrorMessage)
     }
     
     @IBAction func pressedNext(_ sender: UIBarButtonItem) {
@@ -83,7 +86,7 @@ extension IDInputViewController {
         if id.count >= 4 && id.count <= 20 { return true }
         else {
        
-            showErrorMessage(message: "아이디는 4자 이상, 20자 이하로 적어주세요.\n아이디가 한글이 포함되면 안 됩니다.")
+            showErrorMessage(message: idErrorMessage)
             return false
         }
     }

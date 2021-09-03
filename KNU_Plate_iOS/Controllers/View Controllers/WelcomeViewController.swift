@@ -14,6 +14,10 @@ class WelcomeViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         dismissProgressBar()
     }

@@ -109,8 +109,10 @@ extension UIViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(title: "세션 만료", message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.")
-                    self.presentWelcomeVC()
+                    self.showSimpleBottomAlertWithAction(message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
+                                                         buttonTitle: "로그인") {
+                        self.presentWelcomeVC()
+                    }
                 }
                 
             case .failure(let error):

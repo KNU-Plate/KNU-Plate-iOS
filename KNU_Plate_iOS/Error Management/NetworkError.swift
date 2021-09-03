@@ -28,7 +28,7 @@ enum NetworkError: Int, Error {
         case .notFound:
             return "요청히신 작업을 처리할 수 없습니다. 잠시 후 다시 시도해주세요😢 "
         case .unauthorized:
-            return "세션이 만료되었습니다. 다시 로그인해주세요🧐"
+            return "로그인이 필요한 기능입니다.🧐"
         }
     }
     
@@ -37,6 +37,13 @@ enum NetworkError: Int, Error {
         print("❗️ Network Error - status code : \(statusCode)")
         if let data = responseData {
             print("❗️ Network Error - error : \(String(data: data, encoding: .utf8) ?? "error encoding error")")
+        }
+    
+        if statusCode == 401 {
+
+            User.shared.isLoggedIn ?
+                NotificationCenter.default.post(name: .refreshTokenExpired, object: nil) :
+                NotificationCenter.default.post(name: .presentWelcomeVC, object: nil)
         }
         return NetworkError(rawValue: statusCode) ?? .internalError
     }
