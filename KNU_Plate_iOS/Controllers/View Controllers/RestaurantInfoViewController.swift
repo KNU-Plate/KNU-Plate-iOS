@@ -485,7 +485,6 @@ extension RestaurantInfoViewController: UITableViewDelegate {
                 }
             } else {
                 guard let baseURL = URL(string: "https://itunes.apple.com/us/app/id304608425?mt=8") else { return }
-                print("open baseURL: \(baseURL)")
                 self.presentAlertWithConfirmAction(title: "카카오맵 설치",
                                                    message: "카카오맵 설치 화면으로 이동하시겠습니까?") { isOKAction in
                     if isOKAction {

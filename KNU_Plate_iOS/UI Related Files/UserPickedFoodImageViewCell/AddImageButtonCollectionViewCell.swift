@@ -15,6 +15,8 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
     var selectedAssets: [PHAsset] = [PHAsset]()
     var userSelectedImages: [UIImage] = [UIImage]()
     
+    var maxSelection: Int = 1
+    
     @IBAction func pressedAddButton(_ sender: UIButton) {
                 
         /// 기존 선택된 사진 모두 초기화
@@ -22,7 +24,7 @@ class AddImageButtonCollectionViewCell: UICollectionViewCell {
         userSelectedImages.removeAll()
         
         let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 5
+        imagePicker.settings.selection.max = maxSelection
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
         
         let vc = self.window?.rootViewController

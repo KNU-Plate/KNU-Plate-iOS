@@ -13,12 +13,14 @@ class NewRestaurantViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.title = ""
+        navigationController?.navigationBar.prefersLargeTitles = false
         initialize()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
         dismissProgressBar()
     }
     
@@ -98,6 +100,7 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
                 fatalError()
             }
             cell.delegate = self
+            cell.maxSelection = 1
             return cell
         }
         
