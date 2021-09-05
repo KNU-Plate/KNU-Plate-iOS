@@ -59,6 +59,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="n0L-de-hkY">
+                        <barButtonItem key="backBarButtonItem" title="뒤로" id="CYK-Cr-x1F"/>
                         <rightBarButtonItems>
                             <barButtonItem image="ellipsis" catalog="system" id="rZo-VD-4ze">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -138,7 +139,9 @@
                         <viewLayoutGuide key="safeArea" id="zpb-rZ-CLM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ake-Qz-1dQ"/>
+                    <navigationItem key="navigationItem" id="ake-Qz-1dQ">
+                        <barButtonItem key="backBarButtonItem" title=" " id="gSR-F9-wBD"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="pZU-V7-YvR" kind="show" identifier="NotUsingSegue2" id="ImL-SQ-ATb"/>
                     </connections>

@@ -122,6 +122,7 @@
 		7C833688266215880032308D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C833687266215880032308D /* Interceptor.swift */; };
 		7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */; };
 		7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */; };
+		7C8E668526E4B6840060F37B /* FeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668426E4B6840060F37B /* FeedbackType.swift */; };
 		7C8F622826A56B8500BB0703 /* congratulate.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F622726A56B8500BB0703 /* congratulate.json */; };
 		7C99FB9C2648FE520063C967 /* ReviewListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */; };
 		7C99FB9E2648FFD60063C967 /* FetchReviewListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */; };
@@ -130,7 +131,6 @@
 		7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66206263FD05A000E0B7A /* UserAddedMenuModel.swift */; };
 		7CA6620E263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */; };
 		7CA66215263FF65C000E0B7A /* ExistingMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66214263FF65C000E0B7A /* ExistingMenuModel.swift */; };
-		7CA6621726400698000E0B7A /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6621626400698000E0B7A /* Test.swift */; };
 		7CA66219264113CF000E0B7A /* MenuRegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */; };
 		7CA6621B26412203000E0B7A /* RegisterNewMenuRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6621A26412203000E0B7A /* RegisterNewMenuRequestDTO.swift */; };
 		7CB8DF65264D37090001CC6D /* UIViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */; };
@@ -297,6 +297,7 @@
 		7C833687266215880032308D /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
+		7C8E668426E4B6840060F37B /* FeedbackType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackType.swift; sourceTree = "<group>"; };
 		7C8F622726A56B8500BB0703 /* congratulate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate.json; sourceTree = "<group>"; };
 		7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListResponseModel.swift; sourceTree = "<group>"; };
 		7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchReviewListRequestDTO.swift; sourceTree = "<group>"; };
@@ -305,7 +306,6 @@
 		7CA66206263FD05A000E0B7A /* UserAddedMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddedMenuModel.swift; sourceTree = "<group>"; };
 		7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailInfoResponseModel.swift; sourceTree = "<group>"; };
 		7CA66214263FF65C000E0B7A /* ExistingMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingMenuModel.swift; sourceTree = "<group>"; };
-		7CA6621626400698000E0B7A /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRegisterResponseModel.swift; sourceTree = "<group>"; };
 		7CA6621A26412203000E0B7A /* RegisterNewMenuRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewMenuRequestDTO.swift; sourceTree = "<group>"; };
 		7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController Extension.swift"; sourceTree = "<group>"; };
@@ -783,7 +783,7 @@
 				7C65869C26494D34004B8584 /* ReviewDetail.swift */,
 				7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */,
 				7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */,
-				7CA6621626400698000E0B7A /* Test.swift */,
+				7C8E668426E4B6840060F37B /* FeedbackType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -986,6 +986,7 @@
 				7C60DC7D2695DB6D001DEA9A /* NoticeDetailViewController.swift in Sources */,
 				3CD96BAA26B93F00007E3A53 /* EmptyStateView.swift in Sources */,
 				3CC2847726921F2D0075399E /* Category.swift in Sources */,
+				7C8E668526E4B6840060F37B /* FeedbackType.swift in Sources */,
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantRequestDTO.swift in Sources */,
 				7CA6621B26412203000E0B7A /* RegisterNewMenuRequestDTO.swift in Sources */,
 				7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */,
@@ -1037,7 +1038,6 @@
 				3C8AB204268A3C1700D51AC8 /* RestaurantTabBarView.swift in Sources */,
 				7C16DF26262183C900AA8239 /* RegisterRequestDTO.swift in Sources */,
 				3CBA75D8261B301B00D6CCCE /* TextFieldStackView.swift in Sources */,
-				7CA6621726400698000E0B7A /* Test.swift in Sources */,
 				7CCDB1FB26A3FB090092F28D /* PasswordInputViewController.swift in Sources */,
 				7C6D252E268D93AB0030F9A1 /* NoticeViewController.swift in Sources */,
 				7C1F774A26314A1E00C7B41D /* LoginResponseModel.swift in Sources */,

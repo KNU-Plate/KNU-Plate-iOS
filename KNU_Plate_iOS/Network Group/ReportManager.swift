@@ -52,13 +52,13 @@ class ReportManager {
         }
     }
 
-    //MARK: - 건의사항 보내기
-    func sendSuggestion(content: String,
+    //MARK: - 건의사항 보내기 및 식당 정보 수정 요청
+    func sendFeedback(content: String,
                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
-            multipartFormData.append("..".data(using: .utf8)!,
+            multipartFormData.append("건의/신고:".data(using: .utf8)!,
                                      withName: "title")
             multipartFormData.append("\(content)".data(using: .utf8)!,
                                      withName: "contents")

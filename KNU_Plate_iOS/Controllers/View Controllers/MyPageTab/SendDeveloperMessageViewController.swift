@@ -27,7 +27,7 @@ class SendDeveloperMessageViewController: UIViewController {
         
         showProgressBar()
         
-        ReportManager.shared.sendSuggestion(content: messageTextView.text!) { result in
+        ReportManager.shared.sendFeedback(content: messageTextView.text!) { result in
             
             dismissProgressBar()
             

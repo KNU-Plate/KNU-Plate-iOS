@@ -77,10 +77,42 @@ class RestaurantInfoViewController: UIViewController {
         
         actionSheet.addAction(UIAlertAction(title: "정보 수정 요청",
                                             style: .default, handler: { [weak self] _ in
-                                                
-                                                //
+                                                self?.dismiss(animated: true) {
+                                                    self?.presentFeedbackActionSheet()
+                                                }
+                                            }))
+        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func presentFeedbackActionSheet() {
+        
+        let actionSheet = UIAlertController(title: "어떤 정보를 수정 요청하시겠어요?",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "폐업한 가게예요",
+                                            style: .default, handler: { [weak self] _ in
+                                                self?.restaurantInfoVM.sendFeedback(with: .closedMall)
                                             }))
         
+        actionSheet.addAction(UIAlertAction(title: "썸네일 사진이 맞지 않아요",
+                                            style: .default, handler: { [weak self] _ in
+                                                self?.restaurantInfoVM.sendFeedback(with: .incorrectMallThumbnail)
+                                            }))
+        
+        actionSheet.addAction(UIAlertAction(title: "식당 위치가 틀려요",
+                                            style: .default, handler: { [weak self] _ in
+                                                self?.restaurantInfoVM.sendFeedback(with: .incorrectLocation)
+                                            }))
+        
+        actionSheet.addAction(UIAlertAction(title: "부적절한 사진이 포함되어 있어요",
+                                            style: .default, handler: { [weak self] _ in
+                                                self?.restaurantInfoVM.sendFeedback(with: .inappropriatePhoto)
+                                            }))
+        actionSheet.addAction(UIAlertAction(title: "취소",
+                                            style: .cancel,
+                                            handler: nil))
         present(actionSheet, animated: true, completion: nil)
     }
     
@@ -205,7 +237,7 @@ extension RestaurantInfoViewController {
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didFailedMarkFavorite),
+                                               selector: #selector(didFailMarkFavorite),
                                                name: NSNotification.Name.didFailedMarkFavorite,
                                                object: nil)
     }
@@ -522,7 +554,7 @@ extension RestaurantInfoViewController {
         restaurantInfoVM.fetchRestaurantInfo()
     }
     
-    @objc func didFailedMarkFavorite() {
+    @objc func didFailMarkFavorite() {
         self.showSimpleBottomAlert(with: "매장 좋아요에 실패하였습니다. 잠시 후 다시 시도해주세요")
         favoriteButton?.isEnabled = true
     }
@@ -567,9 +599,18 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
         restaurantInfoVM.refreshViewModel()
     }
     
-    func didFailedDeletingMyReview() {
-        print("❗️ didFailedDeletiangMyReview")
-        self.showSimpleBottomAlert(with: "리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요 😥")
+    func didFailDeletingMyReview() {
+        showSimpleBottomAlert(with: "리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요 😥")
+    }
+    
+    func didSendFeedback() {
+        dismissProgressBar()
+        showSimpleBottomAlert(with: "요청하신 정보는 개발팀이 검토 후 조치하도록 하겠습니다. 감사합니다.😁")
+    }
+    
+    func didFailSendingFeedback() {
+        dismissProgressBar()
+        showSimpleBottomAlert(with: "현재 요청사항을 처리할 수 없습니다. 잠시 후 다시 시도해주세요 😥")
     }
 }
 
