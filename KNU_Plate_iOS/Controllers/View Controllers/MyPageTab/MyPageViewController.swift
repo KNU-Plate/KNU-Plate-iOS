@@ -37,7 +37,6 @@ class MyPageViewController: UIViewController {
         initializeUserInfoRelatedUIComponents()
     }
 
-    
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
     
         User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")

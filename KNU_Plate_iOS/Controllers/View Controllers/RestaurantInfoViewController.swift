@@ -69,6 +69,21 @@ class RestaurantInfoViewController: UIViewController {
         performSegue(withIdentifier: Constants.SegueIdentifier.goToNewReviewVC, sender: self)
     }
     
+    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "정보 수정 요청",
+                                            style: .default, handler: { [weak self] _ in
+                                                
+                                                //
+                                            }))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.SegueIdentifier.goToNewReviewVC {
         
@@ -106,16 +121,18 @@ extension RestaurantInfoViewController {
     
     private func configureFavoriteButton() {
         self.favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTapped))
-        self.favoriteButton?.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        self.favoriteButton?.tintColor = .black
         self.favoriteButton?.isEnabled = false
-        self.navigationItem.rightBarButtonItems?.insert(favoriteButton!, at: 1)
+        self.navigationItem.rightBarButtonItems?.insert(favoriteButton!, at: 2)
     }
     
     private func setFavoriteButton(_ isFavorite: Bool) {
         if isFavorite {
             self.favoriteButton?.image = UIImage(systemName: "heart.fill")
+            self.favoriteButton?.tintColor = UIColor(named: Constants.Color.appDefaultColor)
         } else {
             self.favoriteButton?.image = UIImage(systemName: "heart")
+            self.favoriteButton?.tintColor = .black
         }
     }
     

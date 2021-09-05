@@ -13,14 +13,11 @@ class NewRestaurantViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = ""
-        navigationController?.navigationBar.prefersLargeTitles = false
         initialize()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
         dismissProgressBar()
     }
     

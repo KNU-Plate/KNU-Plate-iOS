@@ -100,10 +100,10 @@ class User {
     
     func resetAllUserInfo() {
         
-        self.userUID = ""
-        self.username = ""
-        self.dateCreated = ""
-        self.password = ""
+        userUID = ""
+        username = ""
+        dateCreated = ""
+        password = ""
    
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userID)
@@ -116,10 +116,11 @@ class User {
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.refreshToken)
         let _: Bool = KeychainWrapper.standard.removeObject(forKey: Constants.KeyChainKey.password)
         
-        self.savedAccessToken = false
-        self.savedRefreshToken = false
-        self.profileImage = nil
-        self.profileImageLink = ""
+        savedAccessToken = false
+        savedRefreshToken = false
+        profileImage = nil
+        profileImageLink = ""
+        User.shared.medal = 3
         
         print("User - resetAllUserInfo activated")
     }
