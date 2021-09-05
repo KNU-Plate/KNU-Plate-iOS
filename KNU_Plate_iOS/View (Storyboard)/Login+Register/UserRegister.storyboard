@@ -52,7 +52,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인할 때 사용할 아이디를 입력해주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udR-sF-si9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인할 때 사용할 아이디를 입력해주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udR-sF-si9">
                                 <rect key="frame" x="20" y="181" width="374" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -334,6 +334,7 @@
         <designable name="0KQ-8u-Hvt">
             <size key="intrinsicContentSize" width="98" height="22"/>
         </designable>
+        <designable name="22W-bZ-kdH"/>
         <designable name="5iA-TZ-20M">
             <size key="intrinsicContentSize" width="62.5" height="22"/>
         </designable>
