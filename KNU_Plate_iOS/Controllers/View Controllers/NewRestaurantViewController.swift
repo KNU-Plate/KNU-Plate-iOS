@@ -13,7 +13,6 @@ class NewRestaurantViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         initialize()
     }
     
@@ -54,9 +53,7 @@ class NewRestaurantViewController: UIViewController {
 extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     
     func didCompleteUpload(_ success: Bool) {
-        
         dismissProgressBar()
-        
         showSimpleBottomAlertWithAction(message: "매장 등록 성공 🎉",
                                         buttonTitle: "홈으로 돌아가기") {
             self.goBackToHomeVC()
@@ -64,9 +61,7 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     }
     
     func failedToUpload(with error: NetworkError) {
-        
         dismissProgressBar()
-        
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "홈으로 돌아가기") {
             self.goBackToHomeVC()
@@ -74,9 +69,7 @@ extension NewRestaurantViewController: NewRestaurantViewModelDelegate {
     }
     
     func alreadyRegisteredRestaurant(with error: UploadError){
-        
         dismissProgressBar()
-        
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "홈으로 돌아가기") {
             self.goBackToHomeVC()
@@ -104,6 +97,7 @@ extension NewRestaurantViewController: UICollectionViewDelegate, UICollectionVie
                 fatalError()
             }
             cell.delegate = self
+            cell.maxSelection = 1
             return cell
         }
         

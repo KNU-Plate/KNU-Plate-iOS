@@ -62,6 +62,13 @@ extension UIViewController {
 
     }
     
+    func showLoginNeededAlert(message: String) {
+        showSimpleBottomAlertWithAction(message: message,
+                                        buttonTitle: "로그인") {
+            self.presentWelcomeVC()
+        }
+    }
+    
     // 테이블뷰 Footer에 Activity Indicator 추가 -> 데이터 추가로 받아올 때 실행
     func createSpinnerFooterView() -> UIView {
         
@@ -109,8 +116,10 @@ extension UIViewController {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(title: "세션 만료", message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.")
-                    self.presentWelcomeVC()
+                    self.showSimpleBottomAlertWithAction(message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
+                                                         buttonTitle: "로그인") {
+                        self.presentWelcomeVC()
+                    }
                 }
                 
             case .failure(let error):
@@ -122,6 +131,8 @@ extension UIViewController {
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
+    
+    
 }
 
 //MARK: - Observers
@@ -144,4 +155,10 @@ extension UIViewController {
                                                object: nil)
         
     }
+}
+
+//MARK: - Others
+
+extension UIViewController {
+    
 }

@@ -16,15 +16,22 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
+        changeButton.isUserInteractionEnabled = false
+        
         self.view.endEditing(true)
         
         if !validateUserInput() { return }
         
         let model = EditUserInfoRequestDTO(password: passwordTextField.text!)
         
+        showProgressBar()
+        
         UserManager.shared.updatePassword(with: model) { [weak self] result in
             
             guard let self = self else { return }
+            
+            dismissProgressBar()
+            self.changeButton.isUserInteractionEnabled = true
             
             switch result {
             case .success(_):

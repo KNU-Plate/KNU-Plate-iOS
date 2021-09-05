@@ -46,18 +46,14 @@ class NoticeViewController: UIViewController {
     }
     
     func fetchNoticeList() {
-        
         isFetchingData = true
-        
         NoticeManager.shared.fetchNoticeList(index: indexToFetch) { [weak self] result in
             
             guard let self = self else { return }
             
-         
-            
             switch result {
             case .success(let model):
-
+                
                 if model.isEmpty {
                     DispatchQueue.main.async {
                         self.tableView.tableFooterView = nil

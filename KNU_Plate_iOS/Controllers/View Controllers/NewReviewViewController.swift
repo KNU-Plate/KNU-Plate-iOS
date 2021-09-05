@@ -149,6 +149,7 @@ extension NewReviewViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addImageButtonCellIdentifier, for: indexPath) as? AddImageButtonCollectionViewCell else {
                 fatalError()
             }
+            cell.maxSelection = 5
             cell.delegate = self
             return cell
         }

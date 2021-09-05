@@ -8,10 +8,12 @@ class ReportReviewViewController: UIViewController {
     
     var reviewID: Int = 0
     
+    private let textViewPlaceholder: String = "✻ 신고 내용을 적어서 아래 신고 접수 버튼을 눌러주세요. 개발팀이 검토 후 조치를 취하도록 하겠습니다."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
+        print("✏️ reviewID: \(reviewID)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,6 +56,7 @@ extension ReportReviewViewController {
     
     func initialize() {
         
+        initializeNavigationBar()
         initializeTextView()
         initializeButton()
     }
@@ -62,16 +65,37 @@ extension ReportReviewViewController {
         
         contentTextView.delegate = self
         contentTextView.layer.borderWidth = 1.0
-        contentTextView.layer.cornerRadius = 10.0
+        contentTextView.layer.cornerRadius = 5.0
         contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         contentTextView.clipsToBounds = true
         contentTextView.font = UIFont.systemFont(ofSize: 15)
-        contentTextView.text = "신고 내용을 적어주세요 🤔"
+        contentTextView.text = textViewPlaceholder
         contentTextView.textColor = UIColor.lightGray
     }
     
     func initializeButton() {
         sendButton.layer.cornerRadius = 10
+    }
+    
+    func initializeNavigationBar() {
+        
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 150
+        
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight,
+                                                          width: view.bounds.size.width, height: 50))
+        navigationBar.tintColor = .lightGray
+        navigationBar.setBackgroundImage(UIImage(),
+                                         for: .default)
+        navigationBar.shadowImage = UIImage()
+        self.view.addSubview(navigationBar)
+        
+        let navItem = UINavigationItem(title: "")
+        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
+                                           target: self,
+                                           action: #selector(dismissVC))
+        navItem.rightBarButtonItem = navBarButton
+        navigationBar.items = [navItem]
     }
 }
 
@@ -106,7 +130,7 @@ extension ReportReviewViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
     
         if textView.text.isEmpty {
-            textView.text = "신고 내용을 적어주세요 🤔"
+            textView.text = textViewPlaceholder
             textView.textColor = UIColor.lightGray
             return
         }

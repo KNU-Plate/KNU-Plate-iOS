@@ -35,7 +35,6 @@ class RestaurantCollectionViewController: UIViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("👌 RestaurantCollectionViewController viewDidLoad")
         
         self.view.addSubview(collectionView)
         self.view.addSubview(floatingButton)
@@ -44,6 +43,7 @@ class RestaurantCollectionViewController: UIViewController {
         setupCollectionView()
         setupSearchController()
         setupFloatingButton()
+        createObserver()
         
         guard let category = category else { return }
         if let gate = category.gate {
@@ -53,10 +53,6 @@ class RestaurantCollectionViewController: UIViewController {
             self.navigationItem.title = foodCategory
             restaurantListVM.fetchRestaurantList(category: foodCategory)
         }
-    }
-    
-    deinit {
-        print("👌 RestaurantCollectionViewController deinit")
     }
 }
 
@@ -96,6 +92,10 @@ extension RestaurantCollectionViewController {
     }
     
     @objc func floatingButtonWasTapped(_ sender: UIButton) {
+        if !User.shared.isLoggedIn {
+            showLoginNeededAlert(message: "새 매장을 등록하려면 로그인이 필요합니다.")
+            return
+        }
         let kevinSB = UIStoryboard(name: "Kevin", bundle: nil)
         let nextVC = kevinSB.instantiateViewController(withIdentifier: Constants.StoryboardID.searchRestaurantViewController)
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -177,7 +177,6 @@ extension RestaurantCollectionViewController: RestaurantListViewModelDelegate {
 extension RestaurantCollectionViewController: UICollectionViewDelegate {
     // cell selected, prepare for next view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected, indexPath: \(indexPath.item)")
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantInfoViewController) as? RestaurantInfoViewController else {
             fatalError("fail to instantiate view controller")
@@ -197,7 +196,6 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
     
     // touch animation when cell is highlighted
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print("Highligted, indexPath: \(indexPath.item)")
         UIView.animate(withDuration: 0.2) {
             if let cell = collectionView.cellForItem(at: indexPath) {
                 cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
@@ -207,7 +205,6 @@ extension RestaurantCollectionViewController: UICollectionViewDelegate {
     
     // touch animation when cell is unhighlighted
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        print("Unhighlited, indexPath: \(indexPath.item)")
         UIView.animate(withDuration: 0.2) {
             if let cell = collectionView.cellForItem(at: indexPath) {
                 cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
@@ -257,5 +254,28 @@ extension RestaurantCollectionViewController: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+}
+
+//MARK: - Create Observer
+extension RestaurantCollectionViewController {
+    
+    func createObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshCollectionView),
+                                               name: .didUploadNewMall,
+                                               object: nil)
+    }
+    
+    @objc func refreshCollectionView() {
+        restaurantListVM.resetRestaurantList()
+        guard let category = category else { return }
+        if let gate = category.gate {
+            self.navigationItem.title = gate
+            restaurantListVM.fetchRestaurantList(gate: gateKoreanToEnglish(gate: gate))
+        } else if let foodCategory = category.foodCategory {
+            self.navigationItem.title = foodCategory
+            restaurantListVM.fetchRestaurantList(category: foodCategory)
+        }
     }
 }

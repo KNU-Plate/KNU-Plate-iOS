@@ -37,7 +37,6 @@ class MyPageViewController: UIViewController {
         initializeUserInfoRelatedUIComponents()
     }
 
-    
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
     
         User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")
@@ -103,8 +102,10 @@ class MyPageViewController: UIViewController {
 extension MyPageViewController {
     
     func removeProfileImage() {
-        
+        showProgressBar()
         UserManager.shared.removeProfileImage { [weak self] result in
+            
+            dismissProgressBar()
             
             guard let self = self else { return }
             
@@ -267,6 +268,7 @@ extension MyPageViewController {
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
+        profileImageButton.layer.borderWidth = 0
     }
     
     func initializeMedalImageView() {

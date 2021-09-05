@@ -28,11 +28,23 @@ enum NetworkError: Int, Error {
         case .notFound:
             return "요청히신 작업을 처리할 수 없습니다. 잠시 후 다시 시도해주세요😢 "
         case .unauthorized:
-            return "세션이 만료되었습니다. 다시 로그인해주세요🧐"
+            return "로그인이 필요한 기능입니다.🧐"
         }
     }
     
-    static func returnError(statusCode: Int) -> NetworkError {
+    static func returnError(statusCode: Int, responseData: Data? = nil) -> NetworkError {
+        
+        print("❗️ Network Error - status code : \(statusCode)")
+        if let data = responseData {
+            print("❗️ Network Error - error : \(String(data: data, encoding: .utf8) ?? "error encoding error")")
+        }
+    
+        if statusCode == 401 {
+
+            User.shared.isLoggedIn ?
+                NotificationCenter.default.post(name: .refreshTokenExpired, object: nil) :
+                NotificationCenter.default.post(name: .presentWelcomeVC, object: nil)
+        }
         return NetworkError(rawValue: statusCode) ?? .internalError
     }
 }
@@ -61,8 +73,6 @@ enum SignUpError: String, Error {
     case usernameLengthTooLong = "user_name length is too short or too long"
     case usernameAlreadyExists = "user_name is unique"
     
-    ///다른 에러는 준수씨한테 받기
-    
     func returnErrorMessage() -> String {
         
         switch self {
@@ -80,41 +90,36 @@ enum SignUpError: String, Error {
 
 enum LogInError: String, Error {
     
-    case userNotFound = "invalid password"
-    case invalidPassword = "user not founded"
+    case userNotFound = "user not founded"
+    case invalidPassword = "invalid password"
+    case unknownError = "unknown error"
     
-    func returnErrorMessage() -> String {
+    var errorDescription: String {
         
         switch self {
         
         case.userNotFound:
-            return "아이디가 잘못되었습니다."
+            return "잘못된 아이디입니다.🤔"
         case .invalidPassword:
-            return "비밀번호를 다시 한 번 확인해 주세요."
+            return "비밀번호를 다시 한 번 확인해 주세요.🧐"
+        default:
+            return "일시적인 서비스 오류입니다. 잠시 후 다시 시도해주세요.😢"
         }
     }
-}
-
-//MARK: - 메일 인증 Error Message 관리
-
-//enum MailVerificationError: String {
-//
-//
-//}
-
-//MARK: - 인증코드 발급 Error Message 관리
-
-enum MailVerificationIssuanceError: String, Error {
     
-    case emptyToken = "token is empty"
-
-    func returnErrorMessage() -> String {
+    static func returnError(responseData: Data?) -> LogInError {
         
-        switch self {
+        let data = JSON(responseData)
         
-        case .emptyToken:
-            return "잘못된 요청입니다."
+        let errorMessage = data["error"].stringValue
+        
+        switch errorMessage {
+        case self.invalidPassword.rawValue:
+            return .invalidPassword
+        case self.userNotFound.rawValue:
+            return .userNotFound
+        default:
+            return .unknownError
         }
     }
-
 }

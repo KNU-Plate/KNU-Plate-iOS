@@ -68,7 +68,7 @@ class MyReviewListViewModel {
             switch result {
             
             case .success(let responseModel):
-                
+        
                 if responseModel.isEmpty {
                     self.delegate?.didFetchEmptyReviewListResults()
                     return

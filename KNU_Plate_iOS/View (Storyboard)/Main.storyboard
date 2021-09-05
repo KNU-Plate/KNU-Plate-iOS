@@ -59,15 +59,24 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="n0L-de-hkY">
-                        <barButtonItem key="rightBarButtonItem" image="pencil" catalog="system" id="1xE-nQ-5Na">
-                            <color key="tintColor" name="AppDefaultColor"/>
-                            <connections>
-                                <segue destination="FJA-jb-0m6" kind="show" identifier="RestaurantInfoSegue" id="TQ3-cM-gZn"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="ellipsis" catalog="system" id="rZo-VD-4ze">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="pressedMoreButton:" destination="obV-VK-3on" id="vDc-N9-I8F"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="pencil" catalog="system" id="1xE-nQ-5Na">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="pressedNewReviewButton:" destination="obV-VK-3on" id="dnw-Lf-wzo"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="4kc-mm-M4W" kind="show" identifier="NotUsingSegue4" id="5KI-G6-5uX"/>
+                        <segue destination="FJA-jb-0m6" kind="show" identifier="goToNewReviewVC" id="Hy7-pf-Z39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeD-Qm-sE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -286,13 +295,11 @@
         <segue reference="ImL-SQ-ATb"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="favorite tab bar icon" width="30.5" height="30.5"/>
         <image name="home tab bar icon" width="28.5" height="28.5"/>
         <image name="my page tab bar icon" width="28.5" height="28.5"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
-        <namedColor name="AppDefaultColor">
-            <color red="1" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="KNU_Plate Color">
             <color red="0.93725490196078431" green="0.30980392156862746" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

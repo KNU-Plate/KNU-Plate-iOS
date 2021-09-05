@@ -11,10 +11,16 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        dismissProgressBar()
+    }
     
     @IBAction func pressedLoginButton(_ sender: UIButton) {
         
@@ -33,7 +39,7 @@ class WelcomeViewController: UIViewController {
             
             switch result {
             case .success:
-                
+                self.showSimpleBottomAlert(with: "로그인 성공 🎉")
                 self.dismiss(animated: true)
                 UserManager.shared.loadUserProfileInfo { _ in }
                 

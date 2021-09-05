@@ -57,16 +57,15 @@ struct Constants {
                                                                 sendDeveloperMessageViewController,
                                                                 termsAndConditionsViewController,
                                                                 developerInfoViewController,
-                                                                openSourceInfoViewController,
-                                                                ]
-        static let myPageVCOptions                          = [ "공지사항",
-                                                                "내가 쓴 리뷰",
-                                                                "계정 정보 관리",
-                                                                "개발자에게 건의사항 보내기",
-                                                                "서비스 이용약관",
-                                                                "개발자 정보",
-                                                                "오픈 소스 라이센스"
-                                                                ]
+            openSourceInfoViewController,
+        ]
+        static let myPageVCOptions                          = ["공지사항",
+                                                               "내가 쓴 리뷰",
+                                                               "계정 정보 관리",
+                                                               "개발자에게 건의사항 보내기",
+                                                               "서비스 이용약관",
+                                                               "개발자 정보"
+                                                              ]
         
         // Others
         static let welcomeUserViewController            = "WelcomeViewController"
@@ -104,7 +103,7 @@ struct Constants {
         static let goToTermsAndConditions       = "goToTermsAndConditions"
         static let goChangeDisplayName          = "goChangeDisplayName"
         static let goChangePassword             = "goChangePassword"
-        static let restaurantInfoSegue          = "RestaurantInfoSegue"
+        static let goToNewReviewVC              = "goToNewReviewVC"
     }
     
     //MARK: - Keys

@@ -79,20 +79,23 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         tableView.reloadData()
         refreshControl.endRefreshing()
         dismissProgressBar()
-        tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
+        title = "내가 쓴 리뷰 (\(viewModel.reviewList.count)개)"
     }
     
     func didFetchEmptyReviewListResults() {
         print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
-        showEmptyView()
         refreshControl.endRefreshing()
-        tableView.tableFooterView = nil
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.reloadData()
     }
     
     func failedFetchingReviewListResults(with error: NetworkError) {
+        print("❗️ failedFetchingReviewListResults")
         refreshControl.endRefreshing()
+        if error == .unauthorized {
+            navigationController?.popViewController(animated: true)
+        }
         showSimpleBottomAlertWithAction(message: error.errorDescription,
                                         buttonTitle: "재시도") {
             self.viewModel.fetchReviewList()
@@ -126,10 +129,13 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        if viewModel.reviewList.count == 0 { showEmptyView() }
         
         if indexPath.row > viewModel.reviewList.count - 1 {
             return UITableViewCell()
-        } else {
+        }
+        else {
             
             let reviewVM = viewModel.reviewList[indexPath.row]
             
@@ -189,7 +195,7 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         let userID = reviewDetailVM.userID
         let profileImageURL = viewModel.getProfileImageURL(index: indexPath.row)
         let reviewImageFiles = reviewDetailVM.reviewImageFileFolder?.files
-        let nickname = reviewDetailVM.userInfo.displayName
+        let nickname = reviewDetailVM.userInfo.username
         let medal = reviewDetailVM.userInfo.medal
         let rating = reviewDetailVM.rating
         let review = reviewDetailVM.review

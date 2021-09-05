@@ -51,11 +51,42 @@ class RestaurantInfoViewController: UIViewController {
         restaurantInfoVM.delegate = self
         restaurantInfoVM.setMallID(mallID: mallID)
         
+        showProgressBar()
         restaurantInfoVM.fetch()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
+    
+    @IBAction func pressedNewReviewButton(_ sender: UIBarButtonItem) {
+        
+        if !User.shared.isLoggedIn {
+            showLoginNeededAlert(message: "새 리뷰를 작성하려면 로그인이 필요합니다.")
+            return
+        }
+        performSegue(withIdentifier: Constants.SegueIdentifier.goToNewReviewVC, sender: self)
+    }
+    
+    @IBAction func pressedMoreButton(_ sender: UIBarButtonItem) {
+        
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "정보 수정 요청",
+                                            style: .default, handler: { [weak self] _ in
+                                                
+                                                //
+                                            }))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.SegueIdentifier.restaurantInfoSegue {
+        if segue.identifier == Constants.SegueIdentifier.goToNewReviewVC {
+        
             guard let nextVC = segue.destination as? NewReviewViewController else { fatalError() }
             guard let mallID = self.mallID else {
                 print("RestaurantInfoViewController - prepare(for segue:) - mallID is empty")
@@ -90,16 +121,18 @@ extension RestaurantInfoViewController {
     
     private func configureFavoriteButton() {
         self.favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTapped))
-        self.favoriteButton?.tintColor = UIColor(named: Constants.Color.appDefaultColor)
+        self.favoriteButton?.tintColor = .black
         self.favoriteButton?.isEnabled = false
-        self.navigationItem.rightBarButtonItems?.insert(favoriteButton!, at: 1)
+        self.navigationItem.rightBarButtonItems?.insert(favoriteButton!, at: 2)
     }
     
     private func setFavoriteButton(_ isFavorite: Bool) {
         if isFavorite {
             self.favoriteButton?.image = UIImage(systemName: "heart.fill")
+            self.favoriteButton?.tintColor = UIColor(named: Constants.Color.appDefaultColor)
         } else {
             self.favoriteButton?.image = UIImage(systemName: "heart")
+            self.favoriteButton?.tintColor = .black
         }
     }
     
@@ -143,6 +176,11 @@ extension RestaurantInfoViewController {
     }
     
     @objc func favoriteButtonTapped(_ sender: UIBarButtonItem) {
+        
+        if !User.shared.isLoggedIn {
+            showLoginNeededAlert(message: "좋아요 기능을 사용하시려면 로그인이 필요합니다.")
+            return
+        }
         sender.isEnabled = false
         if !restaurantInfoVM.isFavorite {
             // not marked favorite
@@ -349,6 +387,8 @@ extension RestaurantInfoViewController: ReviewTableViewCellDelegate {
         guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.StoryboardID.reportReviewViewController) as? ReportReviewViewController else {
             fatalError()
         }
+        
+        vc.modalPresentationStyle = .overFullScreen
         vc.reviewID = reviewID
         self.present(vc, animated: true)
     }
@@ -462,7 +502,6 @@ extension RestaurantInfoViewController: UITableViewDelegate {
                 }
             } else {
                 guard let baseURL = URL(string: "https://itunes.apple.com/us/app/id304608425?mt=8") else { return }
-                print("open baseURL: \(baseURL)")
                 self.presentAlertWithConfirmAction(title: "카카오맵 설치",
                                                    message: "카카오맵 설치 화면으로 이동하시겠습니까?") { isOKAction in
                     if isOKAction {
@@ -514,6 +553,7 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     
     func didFetchReview() {
         print("didFetchReview reloadData")
+        dismissProgressBar()
         customTableView.tableView.reloadData()
     }
     
