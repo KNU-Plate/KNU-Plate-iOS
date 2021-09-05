@@ -80,10 +80,6 @@ class RestaurantInfoViewController: UIViewController {
                                                 self?.dismiss(animated: true) {
                                                     self?.presentFeedbackActionSheet()
                                                 }
-//                                                actionSheet.dismiss(animated: true) {
-//
-//                                                    self?.presentFeedbackActionSheet()
-//                                                }
                                             }))
         actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         present(actionSheet, animated: true, completion: nil)
@@ -91,7 +87,7 @@ class RestaurantInfoViewController: UIViewController {
     
     private func presentFeedbackActionSheet() {
         
-        let actionSheet = UIAlertController(title: nil,
+        let actionSheet = UIAlertController(title: "어떤 정보를 수정 요청하시겠어요?",
                                             message: nil,
                                             preferredStyle: .actionSheet)
         
@@ -604,15 +600,16 @@ extension RestaurantInfoViewController: RestaurantInfoViewModelDelegate {
     }
     
     func didFailDeletingMyReview() {
-        print("❗️ didFailedDeletiangMyReview")
         showSimpleBottomAlert(with: "리뷰 삭제에 실패했습니다. 잠시 후 다시 시도해주세요 😥")
     }
     
     func didSendFeedback() {
+        dismissProgressBar()
         showSimpleBottomAlert(with: "요청하신 정보는 개발팀이 검토 후 조치하도록 하겠습니다. 감사합니다.😁")
     }
     
     func didFailSendingFeedback() {
+        dismissProgressBar()
         showSimpleBottomAlert(with: "현재 요청사항을 처리할 수 없습니다. 잠시 후 다시 시도해주세요 😥")
     }
 }

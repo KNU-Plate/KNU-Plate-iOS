@@ -105,6 +105,7 @@ extension WelcomeViewController {
         idTextField.textAlignment = .center
         idTextField.adjustsFontSizeToFitWidth = true
         idTextField.minimumFontSize = 12
+        idTextField.layer.masksToBounds = true
         idTextField.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
         
         
@@ -116,6 +117,7 @@ extension WelcomeViewController {
         passwordTextField.textAlignment = .center
         passwordTextField.adjustsFontSizeToFitWidth = true
         passwordTextField.minimumFontSize = 12
+        passwordTextField.layer.masksToBounds = true
         passwordTextField.isSecureTextEntry = true
         passwordTextField.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
         

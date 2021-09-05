@@ -314,7 +314,7 @@ extension RestaurantInfoViewModel {
 extension RestaurantInfoViewModel {
 
     func sendFeedback(with type: FeedbackType) {
-        
+        showProgressBar()
         let mallName = restaurant?.mallName ?? "(매장명 불러오기 실패)"
         let feedback = mallName + " - " + type.rawValue
         
@@ -323,7 +323,6 @@ extension RestaurantInfoViewModel {
             switch result {
             case .success:
                 self.delegate?.didSendFeedback()
-                print("✏️ feedback: \(feedback)")
             case .failure:
                 self.delegate?.didFailSendingFeedback()
             }

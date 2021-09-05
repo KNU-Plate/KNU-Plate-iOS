@@ -706,11 +706,8 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="리뷰" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-0c-6HT" userLabel="Review Text View">
-                                                <rect key="frame" x="15" y="552" width="345" height="200"/>
+                                                <rect key="frame" x="15" y="552" width="345" height="528"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="S1U-Zw-Uv7"/>
-                                                </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -745,6 +742,7 @@
                                             <constraint firstItem="hPw-SM-yiS" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="15" id="50r-Kf-2go"/>
                                             <constraint firstItem="gRK-0c-6HT" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="15" id="5Fa-gZ-Jlg"/>
                                             <constraint firstItem="sUS-7Z-136" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="5GL-MX-cmP"/>
+                                            <constraint firstAttribute="bottom" secondItem="gRK-0c-6HT" secondAttribute="bottom" constant="20" id="AeU-bX-ADt"/>
                                             <constraint firstItem="cQc-rV-uSJ" firstAttribute="leading" secondItem="puI-3v-0ML" secondAttribute="leading" constant="15" id="Efn-ns-ejy"/>
                                             <constraint firstItem="bBl-WA-nha" firstAttribute="centerX" secondItem="puI-3v-0ML" secondAttribute="centerX" id="EyG-sH-S0z"/>
                                             <constraint firstItem="3Hk-u8-0mr" firstAttribute="top" secondItem="Wd8-SL-bnd" secondAttribute="bottom" constant="15" id="Ia7-Kz-4kr"/>
