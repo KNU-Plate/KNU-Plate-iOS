@@ -1842,6 +1842,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VlU-aN-b5g">
+                        <barButtonItem key="backBarButtonItem" title="뒤로" id="7gQ-70-1PT"/>
                         <barButtonItem key="leftBarButtonItem" title="마이페이지" style="done" id="DrB-a6-hjo">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>

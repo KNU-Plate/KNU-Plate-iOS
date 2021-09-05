@@ -6,9 +6,11 @@ protocol RestaurantInfoViewModelDelegate: AnyObject {
     func didFetchReview()
     func didFetchMenu()
     func didMarkFavorite()
-    func didFailedMarkFavorite()
+    func didFailMarkFavorite()
     func didDeleteMyReview()
-    func didFailedDeletingMyReview()
+    func didFailDeletingMyReview()
+    func didSendFeedback()
+    func didFailSendingFeedback()
 }
 
 // MARK: - Main Body
@@ -232,7 +234,7 @@ extension RestaurantInfoViewModel {
     }
 }
 
-// MARK: - Related To Fetch Reviews
+// MARK: - Fetch Reviews
 extension RestaurantInfoViewModel {
     func fetchReviews() {
         guard let mallID = self.mallID else {
@@ -268,7 +270,7 @@ extension RestaurantInfoViewModel {
     }
 }
 
-// MARK: - Related To Mark Favorite
+// MARK: - Mark Favorite
 extension RestaurantInfoViewModel {
     func markFavorite(markMyFavorite: Bool) {
         guard let mallID = self.mallID else {
@@ -291,7 +293,7 @@ extension RestaurantInfoViewModel {
     }
 }
 
-//MARK: - Related To Deleting My Review
+//MARK: - Delete My Review
 extension RestaurantInfoViewModel {
     
     func deleteMyReview(reviewID: Int) {
@@ -302,7 +304,28 @@ extension RestaurantInfoViewModel {
             case .success:
                 self.delegate?.didDeleteMyReview()
             case .failure:
-                self.delegate?.didFailedDeletingMyReview()
+                self.delegate?.didFailDeletingMyReview()
+            }
+        }
+    }
+}
+
+//MARK: - Report Incorrect Info of Restaurant
+extension RestaurantInfoViewModel {
+
+    func sendFeedback(with type: FeedbackType) {
+        
+        let mallName = restaurant?.mallName ?? "(매장명 불러오기 실패)"
+        let feedback = mallName + " - " + type.rawValue
+        
+        ReportManager.shared.sendFeedback(content: feedback) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.delegate?.didSendFeedback()
+                print("✏️ feedback: \(feedback)")
+            case .failure:
+                self.delegate?.didFailSendingFeedback()
             }
         }
     }
