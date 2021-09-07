@@ -137,7 +137,7 @@ extension MainCollectionReusableView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoryCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseID1, for: indexPath) as? MainCollectionViewCell else { fatalError() }
-            cell.foodImageView.image = UIImage(named: "foodCategory\(indexPath.item)")
+            cell.foodImageView.image = UIImage(named: "food\(indexPath.item)")
             cell.insideLabel.textColor = .clear
             
             let foodCategoryName = Constants.footCategoryArray[indexPath.item]

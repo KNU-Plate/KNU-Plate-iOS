@@ -78,6 +78,7 @@ final class Interceptor: RequestInterceptor {
                 
                         NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
                                                         object: nil)
+                        completion(.doNotRetry)
                         
                     } else {
                         print("Interceptor - 이건 뭔 에러지?")

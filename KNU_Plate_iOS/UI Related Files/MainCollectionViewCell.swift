@@ -5,7 +5,7 @@ import SnapKit
 class MainCollectionViewCell: UICollectionViewCell {
     
     let backView = UIView().then {
-        $0.backgroundColor = .systemGray4
+        $0.backgroundColor = .clear
     }
     
     let foodImageView = UIImageView().then {
@@ -43,7 +43,8 @@ class MainCollectionViewCell: UICollectionViewCell {
         }
         
         foodImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(spacing*3)
+            make.edges.equalToSuperview()
+//            make.edges.equalToSuperview().inset(spacing*3)
         }
         insideLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
