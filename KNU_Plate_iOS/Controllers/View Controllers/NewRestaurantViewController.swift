@@ -36,9 +36,12 @@ class NewRestaurantViewController: UIViewController {
     
     @IBAction func pressedUploadButton(_ sender: UIBarButtonItem) {
         
-        showProgressBar()
-        viewModel.upload()
-       
+        presentAlertWithConfirmAction(title: "새 매장으로 등록하시겠습니까?", message: "") { selectedOk in
+            if selectedOk {
+                showProgressBar()
+                self.viewModel.upload()
+            }
+        }
     }
     
     func goBackToHomeVC() {

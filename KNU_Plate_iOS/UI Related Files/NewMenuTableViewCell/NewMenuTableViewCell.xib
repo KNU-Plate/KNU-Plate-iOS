@@ -24,7 +24,8 @@
                             <constraint firstAttribute="height" constant="35" id="D6H-Jo-Buq"/>
                             <constraint firstAttribute="width" constant="180" id="kQp-Ol-YA0"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="T4Z-b4-URM" userLabel="Rating Stack View">
