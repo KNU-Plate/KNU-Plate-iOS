@@ -40,9 +40,11 @@ extension RestaurantListViewModel {
 
 extension RestaurantListViewModel {
     func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil) {
+        showProgressBar()
         isFetchingData = true
         let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
         RestaurantManager.shared.fetchRestaurantList(with: model) { [weak self] result in
+            dismissProgressBar()
             switch result {
             case .success(let data):
                 guard let self = self else { return }

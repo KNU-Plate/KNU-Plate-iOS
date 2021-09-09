@@ -54,6 +54,11 @@ class RestaurantCollectionViewController: UIViewController {
             restaurantListVM.fetchRestaurantList(category: foodCategory)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissProgressBar()
+    }
 }
 
 //MARK: - Basic Set Up
