@@ -12,6 +12,7 @@ class RatingView: UIView {
     
     let averageRatingLabel = UILabel().then {
         $0.textAlignment = .center
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
     var averageRating: Double = 0.0 {
@@ -35,7 +36,7 @@ class RatingView: UIView {
         }
         
         averageRatingLabel.snp.makeConstraints { make in
-            make.left.equalTo(starImage.snp.right)
+            make.left.equalTo(starImage.snp.right).offset(3)
             make.top.right.bottom.equalToSuperview()
             make.width.equalTo(30).priority(.low)
             make.height.equalTo(20)
