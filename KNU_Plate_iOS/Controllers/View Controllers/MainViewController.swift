@@ -15,7 +15,11 @@ class MainViewController: UIViewController {
     private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 2
     private let headerReuseIdentifier = "MainCollectionReusableView"
-    private let cellReuseIdentifier = "RestaurantCollectionViewCell"
+    private let cellReuseIdentifier = "Cell"
+    
+    private let viewModel = RestaurantListViewModel()
+    
+    private var foodCategory: Category?
     
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -32,13 +36,32 @@ class MainViewController: UIViewController {
         // set prefersLargeTitles
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        viewModel.delegate = self
+        
         setupCollectionView()
         createRefreshTokenExpirationObserver()
+        viewModel.fetchTodaysRecommendation()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+     
+    }
+}
+
+//MARK: - RestaurantListViewModelDelegate
+extension MainViewController: RestaurantListViewModelDelegate {
+    
+    func didFetchRestaurantList() {
+        print("✏️ res count: \(viewModel.restaurants.count)")
+        collectionView.reloadData()
+    }
+    
 }
 
 //MARK: - Basic UI Set Up
 extension MainViewController {
+    
     func setupCollectionView() {
         self.view.addSubview(collectionView)
         collectionView.dataSource = self
@@ -53,7 +76,9 @@ extension MainViewController {
     }
 }
 
+//MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -66,18 +91,36 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        
+        if viewModel.restaurants.count == 0 {
+            return 0
+        } else {
+            return 6
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? RestaurantCollectionViewCell else {
-            fatalError("fail to dequeue cell or cast cell as RestaurantCollectionViewCell")
+        
+        if viewModel.restaurants.count == 0 { return UICollectionViewCell() }
+        
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: cellReuseIdentifier,
+                for: indexPath
+        ) as? RestaurantCollectionViewCell else {
+            fatalError()
         }
-
-        // Configure the cell
-        cell.nameLabel.text = "반미리코"
-        cell.countLabel.text = "10"
-        cell.ratingView.averageRating = 4.7
+    
+        
+        let cellVM = viewModel.restaurantAtIndex(indexPath.item)
+        
+        cell.imageView.sd_setImage(
+            with: cellVM.thumbnailURL,
+            placeholderImage: UIImage(named: "restaurant cell placeholder (gray)")
+        )
+        cell.nameLabel.text = cellVM.mallName
+        cell.countLabel.text = String(cellVM.reviewCount)
+        cell.ratingView.averageRating = cellVM.averageRating
+        cell.mallID = cellVM.mallID
         
         return cell
     }
@@ -113,6 +156,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - MainCollectionReusableViewDelegate
 extension MainViewController: MainCollectionReusableViewDelegate {
+    
     func pushVC(category: Category) {
         guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.restaurantCollectionViewController) as? RestaurantCollectionViewController else {
             fatalError()

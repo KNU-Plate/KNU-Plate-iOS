@@ -6,7 +6,7 @@ protocol RestaurantListViewModelDelegate: AnyObject {
 
 class RestaurantListViewModel {
     weak var delegate: RestaurantListViewModelDelegate?
-    private var restaurants: [RestaurantListResponseModel] = []
+    var restaurants: [RestaurantListResponseModel] = []
     var hasMore: Bool = true
     var isFetchingData: Bool = false
     private var lastMallID: Int?
@@ -80,6 +80,16 @@ extension RestaurantListViewModel {
                 return
             }
         }
+    }
+    
+    func fetchTodaysRecommendation() {
+        
+        let foodCategoryName = Constants.footCategoryArray[Int.random(in: 0...6)]
+        let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
+        let foodCategory = String(foodCategoryName[startIdx...])
+        let category = Category(foodCategory: foodCategory)
+        
+        fetchRestaurantList(category: category.foodCategory)
     }
 }
 
