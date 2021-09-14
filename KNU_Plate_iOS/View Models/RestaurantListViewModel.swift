@@ -83,15 +83,38 @@ extension RestaurantListViewModel {
     }
     
     func fetchTodaysRecommendation() {
-        
-        let foodCategoryName = Constants.footCategoryArray[Int.random(in: 0...6)]
-        let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
-        let foodCategory = String(foodCategoryName[startIdx...])
+        let foodCategory = getRecommendationCategory()
         let category = Category(foodCategory: foodCategory)
         
         fetchRestaurantList(category: category.foodCategory)
     }
 }
+
+extension RestaurantListViewModel {
+    
+    // 오후 1~5시 사이에는 카페, 그 외는 음식점 추천을 위함
+    func getRecommendationCategory() -> String {
+        let now = Date()
+        let one_PM = now.dateAt(hours: 13, minutes: 0)
+        let five_PM = now.dateAt(hours: 17, minutes: 0)
+        
+        let index: Int?
+        
+        if now >= one_PM && now <= five_PM {
+            index = Constants.footCategoryArray.firstIndex(of: "☕️ 카페") ?? 5
+        } else {
+            let array = Constants.footCategoryArray.filter { $0 != "☕️ 카페" }
+            index = Int.random(in: 0...array.count - 1)
+        }
+        
+        let foodCategoryName = Constants.footCategoryArray[index!]
+        let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
+        let foodCategory = String(foodCategoryName[startIdx...])
+        return foodCategory
+    }
+}
+
+//MARK: - RestaurantViewModel
 
 class RestaurantViewModel {
     private let restaurant: RestaurantListResponseModel

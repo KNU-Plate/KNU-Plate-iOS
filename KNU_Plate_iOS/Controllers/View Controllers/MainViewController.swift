@@ -53,7 +53,13 @@ class MainViewController: UIViewController {
 extension MainViewController: RestaurantListViewModelDelegate {
     
     func didFetchRestaurantList() {
-        print("✏️ res count: \(viewModel.restaurants.count)")
+        
+        if viewModel.restaurants.count == 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.viewModel.fetchTodaysRecommendation()
+            }
+            return
+        }
         collectionView.reloadData()
     }
     
@@ -72,6 +78,47 @@ extension MainViewController {
         collectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension MainViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.restaurantInfoViewController
+        ) as? RestaurantInfoViewController else { fatalError() }
+        
+        guard let cell = collectionView.cellForItem(
+                at: indexPath
+        ) as? RestaurantCollectionViewCell else { fatalError() }
+        
+        vc.navigationItem.title = cell.nameLabel.text
+        vc.mallID = cell.mallID
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            }
+        } completion: { _ in
+            UIView.animate(withDuration: 0.2) {
+                if let cell = collectionView.cellForItem(at: indexPath) {
+                    cell.transform = .identity
+                }
+            }
         }
     }
 }
