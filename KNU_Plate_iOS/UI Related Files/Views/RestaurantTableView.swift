@@ -46,7 +46,7 @@ class RestaurantTableView: UIView {
     let foodCategoryLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = .lightGray
-        $0.font = UIFont.systemFont(ofSize: 13)
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     }
     
     let stackView2 = UIStackView().then {
@@ -67,7 +67,7 @@ class RestaurantTableView: UIView {
     let ratingView = RatingView()
     let numberLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.textColor = .lightGray
     }
     

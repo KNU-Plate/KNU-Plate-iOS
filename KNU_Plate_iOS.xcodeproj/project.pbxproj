@@ -123,6 +123,7 @@
 		7C85F83326345DBF00FA9FCC /* SearchRestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */; };
 		7C85F83A26356C4D00FA9FCC /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */; };
 		7C8E668526E4B6840060F37B /* FeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8E668426E4B6840060F37B /* FeedbackType.swift */; };
+		7C8EC8CB26F03D5E00893CCD /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EC8CA26F03D5E00893CCD /* Date Extension.swift */; };
 		7C8F622826A56B8500BB0703 /* congratulate.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F622726A56B8500BB0703 /* congratulate.json */; };
 		7C99FB9C2648FE520063C967 /* ReviewListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */; };
 		7C99FB9E2648FFD60063C967 /* FetchReviewListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */; };
@@ -298,6 +299,7 @@
 		7C85F83226345DBF00FA9FCC /* SearchRestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurantViewModel.swift; sourceTree = "<group>"; };
 		7C85F83926356C4D00FA9FCC /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
 		7C8E668426E4B6840060F37B /* FeedbackType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackType.swift; sourceTree = "<group>"; };
+		7C8EC8CA26F03D5E00893CCD /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
 		7C8F622726A56B8500BB0703 /* congratulate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulate.json; sourceTree = "<group>"; };
 		7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListResponseModel.swift; sourceTree = "<group>"; };
 		7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchReviewListRequestDTO.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				7CB8DF64264D37090001CC6D /* UIViewController Extension.swift */,
 				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,
 				7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */,
+				7C8EC8CA26F03D5E00893CCD /* Date Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */,
 				7CDAD9FE26BAB78000F7F58F /* NotificationName Extension.swift in Sources */,
 				7CA66207263FD05B000E0B7A /* UserAddedMenuModel.swift in Sources */,
+				7C8EC8CB26F03D5E00893CCD /* Date Extension.swift in Sources */,
 				7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */,
 				3CC2A4E12649891D00F5E392 /* UIButton+AlignTextBelow.swift in Sources */,
 				7C6D2531268D9A0D0030F9A1 /* NoticeManager.swift in Sources */,

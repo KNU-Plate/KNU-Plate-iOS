@@ -53,7 +53,7 @@ class MainCollectionReusableView: UICollectionReusableView {
     
     //MARK: - Recommend Label
     let recommendLabel = UILabel().then {
-        $0.text = "오늘은 이거 어때?"
+        $0.text = UIViewController().getRecommendationLabel()
         $0.textColor = .black
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -76,7 +76,7 @@ class MainCollectionReusableView: UICollectionReusableView {
         
         categoryLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(spacing)
-            make.leading.trailing.equalToSuperview().inset(spacing)
+            make.leading.trailing.equalToSuperview().inset(spacing + 5)
             make.height.equalTo(labelHeight)
         }
         categoryCollectionView.snp.makeConstraints { make in
@@ -86,7 +86,7 @@ class MainCollectionReusableView: UICollectionReusableView {
         }
         gateLabel.snp.makeConstraints { make in
             make.top.equalTo(categoryCollectionView.snp.bottom).offset(spacing)
-            make.leading.trailing.equalToSuperview().inset(spacing)
+            make.leading.trailing.equalToSuperview().inset(spacing + 5)
             make.height.equalTo(labelHeight)
         }
         gateCollectionView.snp.makeConstraints { make in
@@ -96,7 +96,7 @@ class MainCollectionReusableView: UICollectionReusableView {
         }
         recommendLabel.snp.makeConstraints { make in
             make.top.equalTo(gateCollectionView.snp.bottom).offset(spacing)
-            make.leading.trailing.equalToSuperview().inset(spacing)
+            make.leading.trailing.equalToSuperview().inset(spacing + 5)
             make.height.equalTo(labelHeight)
             make.bottom.equalToSuperview().offset(-spacing).priority(.low)
         }
