@@ -45,7 +45,6 @@
 		3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
-		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB92698164700F6C29B /* MyReviewListViewController.swift */; };
 		7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1C2621590800AA8239 /* UserInputError.swift */; };
 		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
@@ -171,10 +170,10 @@
 		7CE4D7A22608DD2E002FCC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */; };
 		7CE4D7A52608DD2E002FCC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */; };
 		7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7C42609B628002FCC2D /* Constants.swift */; };
+		B675547727B537134C56D25C /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReviewListViewModel.swift; sourceTree = "<group>"; };
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -212,6 +211,7 @@
 		3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
+		44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7C036AB92698164700F6C29B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
 		7C16DF1C2621590800AA8239 /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 		7CE4D7A42608DD2E002FCC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CE4D7A62608DD2E002FCC2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CE4D7C42609B628002FCC2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.release.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Plate_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Plate_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.release.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,7 +366,7 @@
 				7C1F79082632E1E600C7B41D /* libxml2.tbd in Frameworks */,
 				7C1F78FE2632DE5E00C7B41D /* libsqlite3.tbd in Frameworks */,
 				3C8AA2D926A05D92002D6451 /* DaumMap.framework in Frameworks */,
-				539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */,
+				B675547727B537134C56D25C /* Pods_KNU_Plate_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +417,7 @@
 				7C1F79072632E1E600C7B41D /* libxml2.tbd */,
 				7C1F78FD2632DE5E00C7B41D /* libsqlite3.tbd */,
 				7C1F78B62632DE3500C7B41D /* DaumMap.embeddedframework */,
-				F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */,
+				8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -425,8 +425,8 @@
 		60D3F04F9B3D02052F72E0A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */,
-				ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */,
+				44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */,
+				F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -819,11 +819,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CE4D7A92608DD2E002FCC2D /* Build configuration list for PBXNativeTarget "KNU_Plate_iOS" */;
 			buildPhases = (
-				07CE530DBE75E4B8B2BBD2F8 /* [CP] Check Pods Manifest.lock */,
+				461D7C3367AF9EB17CA34596 /* [CP] Check Pods Manifest.lock */,
 				7CE4D7912608DD2B002FCC2D /* Sources */,
 				7CE4D7922608DD2B002FCC2D /* Frameworks */,
 				7CE4D7932608DD2B002FCC2D /* Resources */,
-				1C8C566DC1AA8A5951F2E133 /* [CP] Embed Pods Frameworks */,
+				B86BCD95FBC2B281F8036E6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -919,7 +919,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07CE530DBE75E4B8B2BBD2F8 /* [CP] Check Pods Manifest.lock */ = {
+		461D7C3367AF9EB17CA34596 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -941,7 +941,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1C8C566DC1AA8A5951F2E133 /* [CP] Embed Pods Frameworks */ = {
+		B86BCD95FBC2B281F8036E6F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1136,6 +1136,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "Any iOS Simulator SDK - arm64";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1197,6 +1198,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "Any iOS Simulator SDK - arm64";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1208,6 +1210,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1217,7 +1220,7 @@
 		};
 		7CE4D7AA2608DD2E002FCC2D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */;
+			baseConfigurationReference = 44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1247,7 +1250,7 @@
 		};
 		7CE4D7AB2608DD2E002FCC2D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */;
+			baseConfigurationReference = F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

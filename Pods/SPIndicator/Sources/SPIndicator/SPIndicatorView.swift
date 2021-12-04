@@ -35,7 +35,12 @@ import UIKit
  
  Recomended call `SPIndicator` and choose style func.
  */
+@available(iOSApplicationExtension, unavailable)
 open class SPIndicatorView: UIView {
+    
+    // MARK: - UIAppearance
+
+    @objc dynamic open var duration: TimeInterval = 1.5
     
     // MARK: - Properties
     
@@ -79,7 +84,7 @@ open class SPIndicatorView: UIView {
         return view
     }()
     
-    weak open var presentWindow: UIWindow? = UIApplication.shared.windows.first
+    weak open var presentWindow: UIWindow?
     
     // MARK: - Init
     
@@ -196,7 +201,17 @@ open class SPIndicatorView: UIView {
         return false
     }
     
-    open func present(duration: TimeInterval = 1.5, haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
+    open func present(haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
+        present(duration: self.duration, haptic: haptic, completion: completion)
+    }
+    
+    
+    open func present(duration: TimeInterval, haptic: SPIndicatorHaptic = .success, completion: (() -> Void)? = nil) {
+        
+        if self.presentWindow == nil {
+            self.presentWindow = UIApplication.shared.keyWindow
+        }
+        
         guard let window = self.presentWindow else { return }
         
         window.addSubview(self)
@@ -236,9 +251,16 @@ open class SPIndicatorView: UIView {
                 iconView.animate()
             }
         }
+        
+        safeAreaInsetsObserver = window.observe(\.safeAreaInsets, changeHandler: { [weak self] window, _ in
+            guard let self = self else { return }
+            self.center.x = window.frame.midX
+            self.toPresentPosition(.visible(self.presentSide))
+        })
     }
     
     @objc open func dismiss() {
+        safeAreaInsetsObserver?.invalidate()
         UIView.animate(withDuration: presentAndDismissDuration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             self.toPresentPosition(.prepare(self.presentSide))
             if self.presentWithOpacity { self.alpha = 0 }
@@ -258,7 +280,6 @@ open class SPIndicatorView: UIView {
     private var whenGesterEndShoudHide: Bool = false
     
     @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             self.gesterIsDragging = true
             let translation = gestureRecognizer.translation(in: self)
@@ -313,56 +334,62 @@ open class SPIndicatorView: UIView {
     }
     
     private func toPresentPosition(_ position: PresentPosition) {
+        
+        let getPrepareTransform: ((_ side: SPIndicatorPresentSide) -> CGAffineTransform) = { [weak self] side in
+            guard let self = self else { return .identity }
+            guard let window = UIApplication.shared.windows.first else { return .identity }
+            switch side {
+            case .top:
+                let topInset = window.safeAreaInsets.top
+                let position = -(topInset + 50)
+                return CGAffineTransform.identity.translatedBy(x: 0, y: position)
+            case .bottom:
+                let height = window.frame.height
+                let bottomInset = window.safeAreaInsets.bottom
+                let position = height + bottomInset + 50
+                return CGAffineTransform.identity.translatedBy(x: 0, y: position)
+            case .center:
+                return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - self.frame.height / 2).scaledBy(x: 0.9, y: 0.9)
+            }
+        }
+        
+        let getVisibleTransform: ((_ side: SPIndicatorPresentSide) -> CGAffineTransform) = { [weak self] side in
+            guard let self = self else { return .identity }
+            guard let window = UIApplication.shared.windows.first else { return .identity }
+            switch side {
+            case .top:
+                var topSafeAreaInsets = window.safeAreaInsets.top
+                if topSafeAreaInsets < 20 { topSafeAreaInsets = 20 }
+                let position = topSafeAreaInsets - 3 + self.offset
+                return CGAffineTransform.identity.translatedBy(x: 0, y: position)
+            case .bottom:
+                let height = window.frame.height
+                var bottomSafeAreaInsets = window.safeAreaInsets.top
+                if bottomSafeAreaInsets < 20 { bottomSafeAreaInsets = 20 }
+                let position = height - bottomSafeAreaInsets - 3 - self.frame.height - self.offset
+                return CGAffineTransform.identity.translatedBy(x: 0, y: position)
+            case .center:
+                return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - self.frame.height / 2)
+            }
+        }
+        
         switch position {
         case .prepare(let presentSide):
-            transform = getPrepareTransform(from: presentSide)
+            transform = getPrepareTransform(presentSide)
         case .visible(let presentSide):
-            transform = getVisibleTransform(from: presentSide)
+            transform = getVisibleTransform(presentSide)
         case .fromVisible(let translation, let presentSide):
-            transform = getVisibleTransform(from: presentSide).translatedBy(x: 0, y: translation)
-        }
-    }
-    
-    private func getPrepareTransform(from side: SPIndicatorPresentSide) -> CGAffineTransform {
-        guard let window = UIApplication.shared.windows.first else { return .identity }
-        switch side {
-        case .top:
-            let topInset = window.safeAreaInsets.top
-            let position = -(topInset + 50)
-            return CGAffineTransform.identity.translatedBy(x: 0, y: position)
-        case .bottom:
-            let height = window.frame.height
-            let bottomInset = window.safeAreaInsets.bottom
-            let position = height + bottomInset + 50
-            return CGAffineTransform.identity.translatedBy(x: 0, y: position)
-        case .center:
-            return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - frame.height / 2).scaledBy(x: 0.9, y: 0.9)
-        }
-    }
-    
-    private func getVisibleTransform(from side: SPIndicatorPresentSide) -> CGAffineTransform {
-        guard let window = UIApplication.shared.windows.first else { return .identity }
-        switch side {
-        case .top:
-            var topSafeAreaInsets = window.safeAreaInsets.top
-            if topSafeAreaInsets < 20 { topSafeAreaInsets = 20 }
-            let position = topSafeAreaInsets - 3 + offset
-            return CGAffineTransform.identity.translatedBy(x: 0, y: position)
-        case .bottom:
-            let height = window.frame.height
-            var bottomSafeAreaInsets = window.safeAreaInsets.top
-            if bottomSafeAreaInsets < 20 { bottomSafeAreaInsets = 20 }
-            let position = height - bottomSafeAreaInsets - 3 - frame.height - offset
-            return CGAffineTransform.identity.translatedBy(x: 0, y: position)
-        case .center:
-            return CGAffineTransform.identity.translatedBy(x: 0, y: window.frame.height / 2 - frame.height / 2)
+            transform = getVisibleTransform(presentSide).translatedBy(x: 0, y: translation)
         }
     }
     
     // MARK: - Layout
     
+    /**
+     SPIndicator: Wraper of layout values.
+     */
     open var layout: SPIndicatorLayout = .init()
- 
+    
     /**
      SPIndicator: Alert offset
      */
@@ -374,6 +401,8 @@ open class SPIndicatorView: UIView {
     private var titleAreaFactor: CGFloat = 2.5
     private var spaceBetweenTitles: CGFloat = 1
     private var spaceBetweenTitlesAndImage: CGFloat = 16
+    
+    private var safeAreaInsetsObserver: NSKeyValueObservation?
     
     private var titlesCompactWidth: CGFloat {
         if let iconView = self.iconView {
@@ -494,7 +523,8 @@ open class SPIndicatorView: UIView {
             guard let self = self else { return }
             guard let titleLabel = self.titleLabel else { return }
             guard let iconView = self.iconView else { return }
-            titleLabel.textAlignment = UIApplication.shared.userInterfaceRightToLeft ? .right : .left
+            let rtl = self.effectiveUserInterfaceLayoutDirection == .rightToLeft
+            titleLabel.textAlignment = rtl ? .right : .left
             titleLabel.layoutDynamicHeight(width: self.titlesFullWidth)
             titleLabel.frame.origin.x = self.layoutMargins.left + iconView.frame.width + self.spaceBetweenTitlesAndImage
         }

@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 import UIKit
-import Foundation
 
 extension UILabel {
     
@@ -35,5 +34,4 @@ extension UILabel {
             frame = .init(x: x, y: y, width: width, height: frame.height)
         }
     }
-
 }
