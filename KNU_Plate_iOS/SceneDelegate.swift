@@ -4,7 +4,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+    func changeRootViewController(_ presentingVC: UIViewController, parentVC: UIViewController, animated: Bool = true) {
         
         print("✏️ SceneDelegate - changeRootViewController")
         
@@ -12,13 +12,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        window.rootViewController = vc
+        presentingVC.modalTransitionStyle = .crossDissolve
         
-        UIView.transition(with: window,
-                          duration: 1,
-                          options: [.curveLinear],
-                          animations: nil,
-                          completion: nil)
+        parentVC.present(presentingVC, animated: animated) {
+            window.rootViewController?.dismiss(animated: false) {
+                window.rootViewController = presentingVC
+            }
+        }
+        
+        if animated {
+            UIView.transition(
+                with: window,
+                duration: 1,
+                options: [.curveLinear],
+                animations: nil,
+                completion: nil
+            )
+        }
     }
     
     

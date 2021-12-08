@@ -212,7 +212,7 @@ struct Constants {
     
     static let gateNames: [String]              = ["북문", "정/쪽문", "동문", "서문"]
     static let gateNamesShort: [String]         = ["북", "정", "동", "서"]
-    static let footCategoryArray: [String]      = [
+    static let foodCategoryArray: [String]      = [
         "🇰🇷 한식", "🇯🇵 일식", "🇨🇳 중식", "🇺🇸 양식",
         "🌎 세계 음식","☕️ 카페", "🍹 술집"
     ]

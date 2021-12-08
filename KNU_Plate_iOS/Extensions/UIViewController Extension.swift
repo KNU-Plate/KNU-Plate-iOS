@@ -95,7 +95,7 @@ extension UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC = storyboard.instantiateViewController(identifier: Constants.StoryboardID.welcomeViewController)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(initialVC, parentVC: self)
     }
     
     @objc func presentWelcomeVC() {

@@ -42,24 +42,18 @@ class MainViewController: UIViewController {
         createRefreshTokenExpirationObserver()
         viewModel.fetchTodaysRecommendation()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-     
-    }
 }
 
 //MARK: - RestaurantListViewModelDelegate
 extension MainViewController: RestaurantListViewModelDelegate {
     
     func didFetchRestaurantList() {
-        
-        if viewModel.restaurants.count == 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.viewModel.fetchTodaysRecommendation()
-            }
-            return
-        }
+//        if viewModel.numberOfRestaurants == 0 {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                self.viewModel.fetchTodaysRecommendation()
+//            }
+//            return
+//        }
         collectionView.reloadData()
     }
     
@@ -87,13 +81,9 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.restaurantInfoViewController
-        ) as? RestaurantInfoViewController else { fatalError() }
+        guard let vc = storyboard?.instantiateViewController(identifier: Constants.StoryboardID.restaurantInfoViewController) as? RestaurantInfoViewController else { fatalError() }
         
-        guard let cell = collectionView.cellForItem(
-                at: indexPath
-        ) as? RestaurantCollectionViewCell else { fatalError() }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RestaurantCollectionViewCell else { fatalError() }
         
         vc.navigationItem.title = cell.nameLabel.text
         vc.mallID = cell.mallID
@@ -138,25 +128,22 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if viewModel.restaurants.count == 0 {
-            return 0
+        if viewModel.numberOfRestaurants < 6 {
+            return viewModel.numberOfRestaurants
         } else {
             return 6
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if viewModel.restaurants.count == 0 { return UICollectionViewCell() }
+//        if viewModel.numberOfRestaurants == 0 { return UICollectionViewCell() }
         
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: cellReuseIdentifier,
-                for: indexPath
+            withReuseIdentifier: cellReuseIdentifier,
+            for: indexPath
         ) as? RestaurantCollectionViewCell else {
             fatalError()
         }
-    
         
         let cellVM = viewModel.restaurantAtIndex(indexPath.item)
         
@@ -175,6 +162,7 @@ extension MainViewController: UICollectionViewDataSource {
 
 //MARK: - Collection View Flow Layout Delegate
 extension MainViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width: CGFloat = collectionView.frame.width
         let height: CGFloat = 60.0 + 60.0 + 300.0

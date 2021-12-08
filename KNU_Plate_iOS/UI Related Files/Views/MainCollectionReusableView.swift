@@ -140,7 +140,7 @@ extension MainCollectionReusableView: UICollectionViewDataSource {
             cell.foodImageView.image = UIImage(named: "food\(indexPath.item)")
             cell.insideLabel.textColor = .clear
             
-            let foodCategoryName = Constants.footCategoryArray[indexPath.item]
+            let foodCategoryName = Constants.foodCategoryArray[indexPath.item]
             let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
             cell.titleLabel.text = String(foodCategoryName[startIdx...])
             return cell
@@ -169,7 +169,7 @@ extension MainCollectionReusableView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            let foodCategoryName = Constants.footCategoryArray[indexPath.item]
+            let foodCategoryName = Constants.foodCategoryArray[indexPath.item]
             let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
             let foodCategory = String(foodCategoryName[startIdx...])
             

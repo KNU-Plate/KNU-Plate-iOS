@@ -40,11 +40,12 @@ class RestaurantInfoViewController: UIViewController {
         
         createWelcomeVCObserver()
         createRefreshTokenExpirationObserver()
+        createObservers()
+        
         setupTableView()
         setButtonTarget()
         registerCells()
         configureFavoriteButton()
-        createObservers()
         
         currentButton.isSelected = true
         

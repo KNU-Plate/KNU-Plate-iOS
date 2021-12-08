@@ -29,7 +29,7 @@ class NewRestaurantViewModel {
     var foodCategory: String = "🇰🇷 한식"
     
     /// 음식 카테고리 배열
-    let foodCategoryArray: [String] = Constants.footCategoryArray
+    let foodCategoryArray: [String] = Constants.foodCategoryArray
     
     /// 학교 문 배열
     let schoolGates: [String] = Constants.gateNames
