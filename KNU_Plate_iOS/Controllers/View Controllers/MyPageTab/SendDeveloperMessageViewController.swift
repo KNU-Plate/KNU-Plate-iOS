@@ -9,7 +9,6 @@ class SendDeveloperMessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
     
@@ -18,24 +17,15 @@ class SendDeveloperMessageViewController: UIViewController {
         dismissProgressBar()
     }
  
-    
     @IBAction func pressedSendButton(_ sender: UIBarButtonItem) {
-        
         self.view.endEditing(true)
-        
         if !validateUserInput() { return }
-        
         showProgressBar()
-        
         ReportManager.shared.sendFeedback(content: messageTextView.text!) { result in
-            
             dismissProgressBar()
-            
             switch result {
-            
             case .success(_):
                 self.showSimpleBottomAlert(with: "건의사항을 성공적으로 전송하였습니다 😁")
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -43,7 +33,6 @@ class SendDeveloperMessageViewController: UIViewController {
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
     }
 }
 
@@ -52,12 +41,10 @@ class SendDeveloperMessageViewController: UIViewController {
 extension SendDeveloperMessageViewController {
     
     func initialize() {
-        
         initializeTextView()
     }
     
     func initializeTextView() {
-        
         messageTextView.delegate = self
         messageTextView.layer.borderWidth = 1.0
         messageTextView.layer.cornerRadius = 10.0

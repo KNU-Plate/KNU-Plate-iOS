@@ -9,34 +9,25 @@ class ChangePasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
     }
-    
     
     @IBAction func pressedChangeButton(_ sender: UIButton) {
         
         changeButton.isUserInteractionEnabled = false
-        
         self.view.endEditing(true)
-        
         if !validateUserInput() { return }
         
         let model = EditUserInfoRequestDTO(password: passwordTextField.text!)
         
         showProgressBar()
-        
         UserManager.shared.updatePassword(with: model) { [weak self] result in
-            
             guard let self = self else { return }
-            
             dismissProgressBar()
             self.changeButton.isUserInteractionEnabled = true
-            
             switch result {
             case .success(_):
                 self.showSimpleBottomAlert(with: "비밀번호 변경 성공 🎉")
-         
             case .failure(_):
                 self.showSimpleBottomAlert(with: "비밀번호 변경 실패. 잠시 후 다시 시도해주세요. 🥲")
             }
@@ -70,7 +61,6 @@ class ChangePasswordViewController: UIViewController {
         }
         return true
     }
-    
 }
 
 //MARK: - UI Configuration
@@ -78,7 +68,6 @@ class ChangePasswordViewController: UIViewController {
 extension ChangePasswordViewController {
     
     func initialize() {
-        
         initializeTextFields()
         initializeButton()
     }
@@ -90,7 +79,6 @@ extension ChangePasswordViewController {
     }
     
     func initializeButton() {
-        
         changeButton.layer.cornerRadius = 10
     }
     

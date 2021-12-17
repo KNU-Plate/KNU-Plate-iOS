@@ -80,18 +80,15 @@ extension MyReviewListViewController: ReviewListViewModelDelegate {
         refreshControl.endRefreshing()
         dismissProgressBar()
         tableView.tableFooterView = UIView(frame: .zero)
-        title = "내가 쓴 리뷰 (\(viewModel.reviewList.count)개)"
     }
     
     func didFetchEmptyReviewListResults() {
-        print("✏️ MyReviewListVC - didFetchEmptyReviewListResults")
         refreshControl.endRefreshing()
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
     }
     
     func failedFetchingReviewListResults(with error: NetworkError) {
-        print("❗️ failedFetchingReviewListResults")
         refreshControl.endRefreshing()
         if error == .unauthorized {
             navigationController?.popViewController(animated: true)
@@ -164,22 +161,24 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
             
             if reviewVM.reviewImageFileFolder != nil {
                 reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                reviewCell.reviewImageView.sd_setImage(with: viewModel.getReviewImageURL(index: indexPath.row),
-                                                       placeholderImage: nil,
-                                                       completed: nil)
+                reviewCell.reviewImageView.sd_setImage(
+                    with: viewModel.getReviewImageURL(index: indexPath.row),
+                    placeholderImage: nil,
+                    completed: nil
+                )
             } else {
                 reviewCell.reviewImageHeight.constant = 0
             }
             
-            reviewCell.userProfileImageView.sd_setImage(with: viewModel.getProfileImageURL(index: indexPath.row),
-                                                        placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
-                                                        completed: nil)
+            reviewCell.userProfileImageView.sd_setImage(
+                with: viewModel.getProfileImageURL(index: indexPath.row),
+                placeholderImage: UIImage(named: Constants.Images.defaultProfileImage),
+                completed: nil
+            )
             return reviewCell
         }
         
     }
-    
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -200,18 +199,19 @@ extension MyReviewListViewController: UITableViewDelegate, UITableViewDataSource
         let rating = reviewDetailVM.rating
         let review = reviewDetailVM.review
         
-        let reviewDetails = ReviewDetail(userID: userID,
-                                         reviewID: reviewID,
-                                         profileImageURL: profileImageURL,
-                                         nickname: nickname,
-                                         medal: medal,
-                                         reviewImageFiles: reviewImageFiles,
-                                         rating: rating,
-                                         review: review)
+        let reviewDetails = ReviewDetail(
+            userID: userID,
+            reviewID: reviewID,
+            profileImageURL: profileImageURL,
+            nickname: nickname,
+            medal: medal,
+            reviewImageFiles: reviewImageFiles,
+            rating: rating,
+            review: review
+        )
         
         vc.configure(with: reviewDetails)
         navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
 
@@ -224,14 +224,16 @@ extension MyReviewListViewController: ReviewTableViewCellDelegate {
         guard let reviewID = reviewID else { return }
         showProgressBar()
         
-        self.presentAlertWithConfirmAction(title: "정말 삭제하시겠습니까?",
-                                           message: "") { selectedOk in
+        self.presentAlertWithConfirmAction(
+            title: "정말 삭제하시겠습니까?",
+            message: ""
+        ) { selectedOk in
             if selectedOk {
                 self.viewModel.deleteMyReview(reviewID: reviewID)
             }
         }
     }
-
+    
     // 내가 쓴 글만 불러오기 때문에 이건 사실 필요 X
     func goToReportReviewVC(reviewID: Int?, displayName: String?) {
         //

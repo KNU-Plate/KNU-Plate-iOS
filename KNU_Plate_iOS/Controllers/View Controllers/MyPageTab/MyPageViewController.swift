@@ -38,10 +38,8 @@ class MyPageViewController: UIViewController {
     }
 
     @IBAction func pressedProfileImageButton(_ sender: UIButton) {
-    
         User.shared.isLoggedIn ? presentActionSheet() : showSimpleBottomAlert(with: "로그인 후 사용해주세요.")
     }
-    
     
     @IBAction func pressedInfoButton(sender: UIButton) {
         showTipView(on: infoButton)
@@ -65,36 +63,41 @@ class MyPageViewController: UIViewController {
     
     func presentActionSheet() {
         
-        let alert = UIAlertController(title: "프로필 사진 변경",
-                                      message: "",
-                                      preferredStyle: .actionSheet)
-        let library = UIAlertAction(title: "앨범에서 선택",
-                                    style: .default) { _ in
-            
+        let alert = UIAlertController(
+            title: "프로필 사진 변경",
+            message: "",
+            preferredStyle: .actionSheet
+        )
+        let library = UIAlertAction(
+            title: "앨범에서 선택",
+            style: .default
+        ) { _ in
             self.initializeImagePicker()
             self.present(self.imagePicker, animated: true)
         }
-        let remove = UIAlertAction(title: "프로필 사진 제거",
-                                   style: .default) { _ in
-            
-            self.presentAlertWithConfirmAction(title: "프로필 사진 제거",
-                                              message: "정말로 제거하시겠습니까?") { selectedOk in
-                
+        let remove = UIAlertAction(
+            title: "프로필 사진 제거",
+            style: .default
+        ) { _ in
+            self.presentAlertWithConfirmAction(
+                title: "프로필 사진 제거",
+                message: "정말로 제거하시겠습니까?"
+            ) { selectedOk in
                 if selectedOk { self.removeProfileImage() }
                 else { return }
             }
         }
-        let cancel = UIAlertAction(title: "취소",
-                                   style: .cancel,
-                                   handler: nil)
+        let cancel = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
         
         alert.addAction(library)
         alert.addAction(remove)
         alert.addAction(cancel)
-        
         present(alert, animated: true, completion: nil)
     }
-    
 }
 
 //MARK: - API Networking
@@ -104,13 +107,9 @@ extension MyPageViewController {
     func removeProfileImage() {
         showProgressBar()
         UserManager.shared.removeProfileImage { [weak self] result in
-            
             dismissProgressBar()
-            
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(_):
                 self.showSimpleBottomAlert(with: "프로필 사진 제거 성공 🎉")
                 DispatchQueue.main.async {
@@ -120,24 +119,17 @@ extension MyPageViewController {
                 }
             case .failure(_):
                 self.showSimpleBottomAlert(with: "프로필 이미지 제거에 실패하였습니다. 다시 시도해주세요.🥲")
-
             }
         }
     }
 
     func updateProfileImage(with image: UIImage) {
-        
         showProgressBar()
-        
         let imageData = image.jpegData(compressionQuality: 0.8)!
         let model = EditUserInfoRequestDTO(userProfileImage: imageData)
-        
         UserManager.shared.updateProfileImage(with: model) { [weak self] result in
-            
             dismissProgressBar()
-            
             guard let self = self else { return }
-            
             switch result {
             case .success(_):
                 self.showSimpleBottomAlert(with: "프로필 사진 변경 성공 🎉")
@@ -162,15 +154,9 @@ extension MyPageViewController: UIImagePickerControllerDelegate, UINavigationCon
             
             dismiss(animated: true) {
                 self.presentAlertWithConfirmAction(title: "프로필 사진 변경", message: "선택하신 이미지로 프로필 사진을 변경하시겠습니까?") { selectedOk in
-                
-                    if selectedOk {
-                        
-                        self.updateProfileImage(with: originalImage)
-           
-
-                    } else {
-                        self.imagePickerControllerDidCancel(self.imagePicker)
-                    }
+                    selectedOk
+                    ? self.updateProfileImage(with: originalImage)
+                    : self.imagePickerControllerDidCancel(self.imagePicker)
                 }
             }
         }
@@ -195,14 +181,14 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.myPageCell, for: indexPath) as? MyPageTableViewCell else {
-            fatalError()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.CellIdentifier.myPageCell,
+            for: indexPath
+        ) as? MyPageTableViewCell else { fatalError() }
         
         cell.settingsTitleLabel.text = Constants.StoryboardID.myPageVCOptions[indexPath.row]
         cell.leftImageView.image = UIImage(systemName: Constants.Images.myPageVCImageOptions[indexPath.row])
         cell.leftImageView.tintColor = .black
-        
         return cell
     }
     
@@ -210,7 +196,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let vc = self.storyboard?.instantiateViewController(identifier: Constants.StoryboardID.myPageVCStoryBoardID[indexPath.row]) else { return }
+        guard let vc = self.storyboard?.instantiateViewController(
+            identifier: Constants.StoryboardID.myPageVCStoryBoardID[indexPath.row]
+        ) else { return }
         pushViewController(with: vc)
     }
     
@@ -237,7 +225,6 @@ extension MyPageViewController: EasyTipViewDelegate {
 extension MyPageViewController {
     
     func initialize() {
-        
         createWelcomeVCObserver()
         createRefreshTokenExpirationObserver()
         initializeTipView()
@@ -250,20 +237,20 @@ extension MyPageViewController {
     }
     
     func initializeTipView() {
-        tipView = EasyTipView(text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
-                                  preferences: preferences,
-                                  delegate: self)
+        tipView = EasyTipView(
+            text: "금메달: 리뷰 50개 이상 작성\n은메달: 리뷰 10개 이상 작성\n동메달: 리뷰 0회 이상",
+            preferences: preferences,
+            delegate: self
+        )
         tipView?.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
     }
     
     func initializeTableView() {
-        
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     func initializeProfileImageButton() {
-        
         profileImageButton.isUserInteractionEnabled = true
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.masksToBounds = true

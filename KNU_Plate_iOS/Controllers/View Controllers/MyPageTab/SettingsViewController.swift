@@ -28,19 +28,22 @@ class SettingsViewController: UIViewController {
     
     func presentLogOutAlert() {
         
-        self.presentAlertWithConfirmAction(title: "정말 로그아웃 하시겠습니까?",
-                                          message: "") { selectedOk in
+        self.presentAlertWithConfirmAction(
+            title: "정말 로그아웃 하시겠습니까?",
+            message: ""
+        ) { selectedOk in
             if selectedOk {
                 UserManager.shared.logOut { result in
                     switch result {
                     case .success(_):
-                        
                         UserManager.shared.resetAllUserInfo()
                         self.navigationController?.popViewController(animated: true)
                         
                     case .failure(let error):
-                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                                             buttonTitle: "재시도") {
+                        self.showSimpleBottomAlertWithAction(
+                            message: error.errorDescription,
+                            buttonTitle: "재시도"
+                        ) {
                             self.pressedLogInAndOutButton(self.logInAndOutButton)
                         }
                     }
@@ -51,30 +54,29 @@ class SettingsViewController: UIViewController {
     
     @IBAction func pressedUnregisterButton(_ sender: UIButton) {
         
-        self.presentAlertWithConfirmAction(title: "정말 회원 탈퇴를 하시겠습니까?",
-                                          message: "다시 한 번만 더 생각해주세요 😥") { selectedOk in
-            
+        self.presentAlertWithConfirmAction(
+            title: "정말 회원 탈퇴를 하시겠습니까?",
+            message: "다시 한 번만 더 생각해주세요 😥"
+        ) { selectedOk in
             if selectedOk {
-                
                 UserManager.shared.unregisterUser { result in
-                    
                     switch result {
                     case .success(_):
                         DispatchQueue.main.async {
                             self.popToWelcomeViewController()
                         }
                     case .failure(let error):
-                        self.showSimpleBottomAlertWithAction(message: error.errorDescription,
-                                                             buttonTitle: "재시도",
-                                                             action: {
-                                                                self.pressedUnregisterButton(self.unregisterButton)
-                                                             })
+                        self.showSimpleBottomAlertWithAction(
+                            message: error.errorDescription,
+                            buttonTitle: "재시도",
+                            action: { self.pressedUnregisterButton(self.unregisterButton) }
+                        )
                     }
                 }
             }
         }
     }
-
+    
     func initialize() {
         
         userNicknameLabel.text = User.shared.username

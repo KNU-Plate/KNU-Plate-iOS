@@ -15,29 +15,26 @@ class NoticeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
         fetchNoticeList()
     }
     
-    
     func initialize() {
-        
         initializeTableView()
     }
     
     func initializeTableView() {
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self,
-                                 action: #selector(refreshTable),
-                                 for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTable),
+            for: .valueChanged
+        )
     }
-
+    
     @objc func refreshTable() {
-        
         noticeList.removeAll()
         refreshControl.endRefreshing()
         isFetchingData = false
@@ -48,12 +45,9 @@ class NoticeViewController: UIViewController {
     func fetchNoticeList() {
         isFetchingData = true
         NoticeManager.shared.fetchNoticeList(index: indexToFetch) { [weak self] result in
-            
             guard let self = self else { return }
-            
             switch result {
             case .success(let model):
-                
                 if model.isEmpty {
                     DispatchQueue.main.async {
                         self.tableView.tableFooterView = nil
@@ -118,7 +112,6 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
     
         navigationController?.pushViewController(vc, animated: true)
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70

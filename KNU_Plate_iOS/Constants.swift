@@ -3,7 +3,6 @@ import UIKit
 
 struct Constants {
     
-    //static let API_BASE_URL = "http://3.35.58.40:4100/api/"
     static let API_BASE_URL = "http://222.104.199.114:4100/api/"
     
     

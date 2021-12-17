@@ -11,21 +11,14 @@ class FindPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
     
-
     @IBAction func pressedFindPasswordButton(_ sender: UIButton) {
-        
-        guard let id = idTextField.text, let email = emailTextField.text else {
+        guard let _ = idTextField.text, let _ = emailTextField.text else {
             return
         }
-        
-        
-        
     }
-    
 }
 
 //MARK: - UI Configuration & Initialization
@@ -33,12 +26,10 @@ class FindPasswordViewController: UIViewController {
 extension FindPasswordViewController {
     
     func initialize() {
-        
         initializeFindPasswordButton()
     }
     
     func initializeFindPasswordButton() {
-        
         findPasswordButton.layer.cornerRadius = findPasswordButton.frame.height / 2
         findPasswordButton.addBounceReactionWithoutFeedback()
         findPasswordButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)

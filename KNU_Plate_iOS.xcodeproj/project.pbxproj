@@ -50,7 +50,6 @@
 		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
 		7C16DF232621810700AA8239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF222621810700AA8239 /* User.swift */; };
 		7C16DF26262183C900AA8239 /* RegisterRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */; };
-		7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */; };
 		7C1C1D04265CE40600C08C66 /* EditUserInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */; };
 		7C1C1D08265E190300C08C66 /* LoadUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */; };
@@ -95,7 +94,6 @@
 		7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */; };
 		7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */; };
 		7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */; };
-		7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C3517CF267C63D100BD9A88 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517CE267C63D100BD9A88 /* ReportManager.swift */; };
@@ -217,7 +215,6 @@
 		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7C16DF222621810700AA8239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequestDTO.swift; sourceTree = "<group>"; };
-		7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoRequestDTO.swift; sourceTree = "<group>"; };
 		7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserInfoModel.swift; sourceTree = "<group>"; };
@@ -272,7 +269,6 @@
 		7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C3517CE267C63D100BD9A88 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
@@ -533,9 +529,7 @@
 				7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */,
 				7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */,
 				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
-				7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */,
 				7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */,
-				7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */,
 				7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */,
 				7C6D252D268D93AB0030F9A1 /* NoticeViewController.swift */,
 				7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */,
@@ -639,13 +633,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7CDADA0126BBDAC900F7F58F /* Find PW & ID */ = {
+		7CDADA0126BBDAC900F7F58F /* Find PW&ID */ = {
 			isa = PBXGroup;
 			children = (
 				7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */,
 				7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */,
 			);
-			path = "Find PW & ID";
+			path = "Find PW&ID";
 			sourceTree = "<group>";
 		};
 		7CDADA0A26BFB85300F7F58F /* Others */ = {
@@ -660,7 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				7CDADA0A26BFB85300F7F58F /* Others */,
-				7CDADA0126BBDAC900F7F58F /* Find PW & ID */,
+				7CDADA0126BBDAC900F7F58F /* Find PW&ID */,
 				7CCDB1F326A3EA900092F28D /* User Register */,
 				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
@@ -992,7 +986,6 @@
 				7C8E668526E4B6840060F37B /* FeedbackType.swift in Sources */,
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantRequestDTO.swift in Sources */,
 				7CA6621B26412203000E0B7A /* RegisterNewMenuRequestDTO.swift in Sources */,
-				7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */,
 				3CB6C3EB268D994F00F7515A /* RestaurantListViewModel.swift in Sources */,
 				7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
@@ -1017,7 +1010,6 @@
 				7C8152252685A6A20041EC47 /* SearchListViewController.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				7C3D985C26AD2FEC005DFAE0 /* RegisterNavigationController.swift in Sources */,
-				7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				3C8E581A26B1408A00A08290 /* MainCollectionViewCell.swift in Sources */,
 				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,
 				3CA8D44626A02E2200B9E434 /* LocationTableViewCell.swift in Sources */,

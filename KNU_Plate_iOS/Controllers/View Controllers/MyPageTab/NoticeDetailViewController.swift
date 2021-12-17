@@ -12,7 +12,6 @@ class NoticeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
     }
     

@@ -11,9 +11,7 @@ class FindIDViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initialize()
-
     }
     
     @IBAction func pressedFindIDButton(_ sender: UIButton) {
@@ -23,7 +21,6 @@ class FindIDViewController: UIViewController {
         }
         
         guard email.contains("@") else {
-            
             emailTextField.resignFirstResponder()
             self.showSimpleBottomAlert(with: "올바른 이메일 형식인지 확인해 주세요. 🧐")
             return
@@ -32,23 +29,15 @@ class FindIDViewController: UIViewController {
         let parsedEmailString = email.components(separatedBy: "@")
       
         UserManager.shared.findMyID(email: parsedEmailString[0]) { [weak self] result in
-                
             guard let self = self else { return }
-            
             switch result {
-            
             case .success(let username):
-                
                 self.showResult(with: "아이디: ", username: username)
             
             case .failure(_):
-                
                 self.showResult(with: "아이디를 찾지 못했습니다. 😥", username: nil)
-           
             }
         }
-        
-        
     }
     
     func showResult(with message: String, username: String?) {
@@ -56,14 +45,12 @@ class FindIDViewController: UIViewController {
         resultLabel.isHidden = false
         
         if let username = username {
-            
             resultLabel.text = message + username
             resultLabel.textColor = UIColor.systemGreen
         } else {
             resultLabel.text = message
             resultLabel.textColor = UIColor(named: Constants.Color.appDefaultColor)
         }
-        
         resultLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     }
     
@@ -74,7 +61,6 @@ class FindIDViewController: UIViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         dismissResult()
     }
-
 }
 
 //MARK: - UI Configuration & Initialization
@@ -82,27 +68,25 @@ class FindIDViewController: UIViewController {
 extension FindIDViewController {
     
     func initialize() {
-        
         initializeFindIDButton()
         initializeResultLabel()
     }
     
     func initializeTextField() {
-        
-        emailTextField.addTarget(self,
-                                 action: #selector(textFieldDidChange(_:)),
-                                 for: .editingChanged)
+        emailTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChange(_:)),
+            for: .editingChanged
+        )
     }
     
     func initializeFindIDButton() {
-        
         findIDButton.layer.cornerRadius = findIDButton.frame.height / 2
         findIDButton.addBounceReactionWithoutFeedback()
         findIDButton.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
     }
     
     func initializeResultLabel() {
-        
         resultLabel.isHidden = true
     }
 }

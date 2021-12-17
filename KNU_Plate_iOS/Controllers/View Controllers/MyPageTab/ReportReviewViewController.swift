@@ -13,7 +13,6 @@ class ReportReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        print("✏️ reviewID: \(reviewID)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -28,14 +27,12 @@ class ReportReviewViewController: UIViewController {
         if !validateUserInput() { return }
         
         showProgressBar()
-        
-        ReportManager.shared.reportReview(reviewID: reviewID,
-                                          reason: contentTextView.text!) { result in
-            
+        ReportManager.shared.reportReview(
+            reviewID: reviewID,
+            reason: contentTextView.text!
+        ) { result in
             dismissProgressBar()
-            
             switch result {
-            
             case .success(_):
                 self.showSimpleBottomAlert(with: "신고해주셔서 감사합니다. 검토 후 처리할게요! 😁")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -46,7 +43,6 @@ class ReportReviewViewController: UIViewController {
                 self.showSimpleBottomAlert(with: error.errorDescription)
             }
         }
-        
     }
 }
 
@@ -55,14 +51,12 @@ class ReportReviewViewController: UIViewController {
 extension ReportReviewViewController {
     
     func initialize() {
-        
         initializeNavigationBar()
         initializeTextView()
         initializeButton()
     }
     
     func initializeTextView() {
-        
         contentTextView.delegate = self
         contentTextView.layer.borderWidth = 1.0
         contentTextView.layer.cornerRadius = 5.0
@@ -91,9 +85,11 @@ extension ReportReviewViewController {
         self.view.addSubview(navigationBar)
         
         let navItem = UINavigationItem(title: "")
-        let navBarButton = UIBarButtonItem(barButtonSystemItem: .stop,
-                                           target: self,
-                                           action: #selector(dismissVC))
+        let navBarButton = UIBarButtonItem(
+            barButtonSystemItem: .stop,
+            target: self,
+            action: #selector(dismissVC)
+        )
         navItem.rightBarButtonItem = navBarButton
         navigationBar.items = [navItem]
     }

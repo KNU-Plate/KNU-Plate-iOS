@@ -346,7 +346,7 @@ extension RestaurantInfoViewController: UITableViewDataSource {
             if reviewVM.hasReviewImage {
                 reviewCell.reviewImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 reviewCell.reviewImageView.sd_setImage(with: reviewVM.reviewImageURL,
-                                                       placeholderImage: nil,
+                                                       placeholderImage: UIImage(named: "restaurant cell placeholder (gray)"),
                                                        completed: nil)
             } else {
                 reviewCell.reviewImageHeight.constant = 0
