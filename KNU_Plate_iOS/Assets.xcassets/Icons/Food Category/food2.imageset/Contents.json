@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "chinese.png",
+      "filename" : "food2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "chinese@2x.png",
+      "filename" : "food2-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "chinese@3x.png",
+      "filename" : "food2-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

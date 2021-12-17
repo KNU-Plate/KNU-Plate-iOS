@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "korean.png",
+      "filename" : "food0.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "korean@2x.png",
+      "filename" : "food0-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "korean@3x.png",
+      "filename" : "food0-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

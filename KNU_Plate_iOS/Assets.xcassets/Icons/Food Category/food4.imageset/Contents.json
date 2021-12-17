@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "world food.png",
+      "filename" : "food4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "world food@2x.png",
+      "filename" : "food4-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "world food@3x.png",
+      "filename" : "food4-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
