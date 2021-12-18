@@ -54,13 +54,13 @@ extension MainViewController: RestaurantListViewModelDelegate {
     
     func didFetchRestaurantList() {
         
-        if viewModel.restaurants.count == 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.viewModel.fetchTodaysRecommendation()
-            }
-            return
-        }
-        collectionView.reloadData()
+//        if viewModel.restaurants.count == 0 {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                self.viewModel.fetchTodaysRecommendation()
+//            }
+//            return
+//        }
+//        collectionView.reloadData()
     }
     
 }

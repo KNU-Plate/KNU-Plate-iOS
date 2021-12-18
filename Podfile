@@ -25,6 +25,14 @@ target 'KNU_Plate_iOS' do
   pod "ImageSlideshow/SDWebImage"
   pod 'TextFieldEffects'
   pod 'lottie-ios'
+  
+  #Rx
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxViewController'
+  pod 'RxAnimated'
+  pod 'RxGesture'
+  pod 'RxKeyboard'
 
 
 post_install do |installer|   
