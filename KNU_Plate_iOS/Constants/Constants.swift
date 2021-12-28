@@ -54,16 +54,13 @@ struct Constants {
                                                                 myReviewListViewController,
                                                                 settingsViewController,
                                                                 sendDeveloperMessageViewController,
-                                                                termsAndConditionsViewController,
-                                                                developerInfoViewController,
-            openSourceInfoViewController,
-        ]
+                                                                termsAndConditionsViewController
+                                                                ]
         static let myPageVCOptions                          = ["공지사항",
                                                                "내가 쓴 리뷰",
                                                                "계정 정보 관리",
                                                                "개발자에게 건의사항 보내기",
-                                                               "서비스 이용약관",
-                                                               "개발자 정보"
+                                                               "서비스 이용약관"
                                                               ]
         
         // Others

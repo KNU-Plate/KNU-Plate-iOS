@@ -53,7 +53,7 @@ class MainCollectionReusableView: UICollectionReusableView {
     
     //MARK: - Recommend Label
     let recommendLabel = UILabel().then {
-        $0.text = UIViewController().getRecommendationLabel()
+        $0.text = UIHelper.getRecommendationLabelForMainScreen()
         $0.textColor = .black
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)

@@ -75,9 +75,10 @@ final class Interceptor: RequestInterceptor {
                     if error == .unauthorized {
                         
                         print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 (refreshToken 만료)")
-                
-                        NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
-                                                        object: nil)
+                        NotificationCenter.default.post(
+                            name: Notification.Name.refreshTokenExpired,
+                            object: nil
+                        )
                         completion(.doNotRetry)
                         
                     } else {

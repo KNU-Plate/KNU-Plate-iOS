@@ -10,6 +10,7 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userMedal: UIImageView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var infoButton: UIButton!
+    @IBOutlet var loginButton: UIButton!
     
     lazy var imagePicker = UIImagePickerController()
     
@@ -59,6 +60,10 @@ class MyPageViewController: UIViewController {
                           withinSuperview: self.view)
             tipViewIsVisible = true
         }
+    }
+    
+    @IBAction func pressedLoginButton(_ sender: UIButton) {
+        presentWelcomeVC()
     }
     
     func presentActionSheet() {
@@ -234,6 +239,7 @@ extension MyPageViewController {
         initializeUserInfoRelatedUIComponents()
         initializeImagePicker()
         initializeTipViewPreferences()
+        initializeLoginButton()
     }
     
     func initializeTipView() {
@@ -259,7 +265,6 @@ extension MyPageViewController {
     }
     
     func initializeMedalImageView() {
-        
         userMedal.isUserInteractionEnabled = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(pressedUserMedal(_:)))
         userMedal.addGestureRecognizer(tapRecognizer)
@@ -277,10 +282,10 @@ extension MyPageViewController {
             profileImageButton.setImage(UIImage(named: Constants.Images.pickProfileImage),
                                         for: .normal)
         }
+        initializeLoginButton()
     }
 
     func updateProfileImageButton(with image: UIImage) {
-        
         profileImageButton.setImage(image, for: .normal)
         profileImageButton.contentMode = .scaleAspectFit
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height / 2
@@ -289,17 +294,20 @@ extension MyPageViewController {
     }
     
     func initializeImagePicker() {
-        
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
     }
     
     func initializeTipViewPreferences() {
-        
         preferences.drawing.font = UIFont.boldSystemFont(ofSize: 15)
         preferences.drawing.foregroundColor = .white
         preferences.drawing.backgroundColor = .lightGray
         preferences.drawing.arrowPosition = .top
+    }
+    
+    func initializeLoginButton() {
+        loginButton.layer.cornerRadius = 5
+        loginButton.isHidden = User.shared.isLoggedIn ? true : false
     }
 }

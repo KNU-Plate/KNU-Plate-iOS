@@ -25,8 +25,8 @@ class RestaurantCollectionViewController: UIViewController {
     }()
     
     private let floatingButton = UIButton().then {
-        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 30))
-        $0.setImage(UIImage(systemName: "plus", withConfiguration: configuration), for: .normal)
+        let configuration = UIImage.SymbolConfiguration(font: UIFont.systemFont(ofSize: 24))
+        $0.setImage(UIImage(systemName: "map.fill", withConfiguration: configuration), for: .normal)
         $0.addBounceReaction()
         $0.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
         $0.tintColor = .white
@@ -89,7 +89,7 @@ extension RestaurantCollectionViewController {
         let buttonHeight: CGFloat = 60
         
         floatingButton.snp.makeConstraints { make in
-            make.right.bottom.equalTo(safeArea).inset(10)
+            make.right.bottom.equalTo(safeArea).inset(20)
             make.height.width.equalTo(buttonHeight)
         }
         floatingButton.layer.cornerRadius = buttonHeight/2
@@ -125,10 +125,7 @@ extension RestaurantCollectionViewController: UISearchBarDelegate {
             self.searchController.isActive = false
         }
     }
-    
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        <#code#>
-//    }
+
 }
 
 //MARK: - UISearchControllerDelegate

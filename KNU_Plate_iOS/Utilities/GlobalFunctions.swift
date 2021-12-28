@@ -1,8 +1,7 @@
 import UIKit
 import ProgressHUD
 
-
-public func setUserMedalImage(medalRank: Int) -> UIImage {
+func setUserMedalImage(medalRank: Int) -> UIImage {
     
     switch medalRank {
     case 1: return UIImage(named: Constants.Images.firstMedal)!

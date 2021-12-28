@@ -40,10 +40,9 @@ enum NetworkError: Int, Error {
         }
     
         if statusCode == 401 {
-
-            User.shared.isLoggedIn ?
-                NotificationCenter.default.post(name: .refreshTokenExpired, object: nil) :
-                NotificationCenter.default.post(name: .presentWelcomeVC, object: nil)
+            User.shared.isLoggedIn
+            ? NotificationCenter.default.post(name: .refreshTokenExpired, object: nil)
+            : NotificationCenter.default.post(name: .presentWelcomeVC, object: nil)
         }
         return NetworkError(rawValue: statusCode) ?? .internalError
     }

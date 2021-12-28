@@ -62,7 +62,7 @@ class RestaurantTableView: UIView {
         $0.backgroundColor = UIColor(named: Constants.Color.appDefaultColor)
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
-        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.font = UIFont.systemFont(ofSize: 15)
     }
     let ratingView = RatingView()
     let numberLabel = UILabel().then {
