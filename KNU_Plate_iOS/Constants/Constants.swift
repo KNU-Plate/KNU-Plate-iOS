@@ -46,8 +46,7 @@ struct Constants {
         static let reportReviewViewController               = "ReportReviewViewController"
         static let noticeViewController                     = "NoticeViewController"
         static let noticeDetailViewController               = "NoticeDetailViewController"
-        static let developerInfoViewController              = "DeveloperInformationViewController"
-        static let openSourceInfoViewController             = "OpenSourceInfoViewController"
+
         
         static let myPageVCStoryBoardID                     = [
                                                                 noticeViewController,
@@ -60,7 +59,8 @@ struct Constants {
                                                                "내가 쓴 리뷰",
                                                                "계정 정보 관리",
                                                                "개발자에게 건의사항 보내기",
-                                                               "서비스 이용약관"
+                                                               "서비스 이용약관",
+                                                               "개인정보 처리방침"
                                                               ]
         
         // Others
@@ -130,6 +130,13 @@ struct Constants {
         static let Admin_Key                    = "41f6c290aeeebf1584538be2eb0c3379"
     }
     
+    //MARK: - URLs
+    
+    struct URL {
+        static let termsAndConditionURL         = "https://linen-twister-e2b.notion.site/970e6ecf3a0b4a90b3a9f63b1c47a25f"
+        static let privacyTermsURL              = "https://linen-twister-e2b.notion.site/5db3bf70a05c4a1c8e11c42af2a73892"
+    }
+    
     //MARK: - UI Related Constants
     
     struct Images {
@@ -177,8 +184,7 @@ struct Constants {
                                                                 "gear",
                                                                 "paperplane",
                                                                 "doc.text",
-                                                                "info.circle",
-                                                                "book.closed"
+                                                                "hand.raised"
                                                                 ]
     }
     

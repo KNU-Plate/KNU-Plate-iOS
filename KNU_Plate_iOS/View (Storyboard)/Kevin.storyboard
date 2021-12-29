@@ -1096,36 +1096,6 @@
             </objects>
             <point key="canvasLocation" x="591" y="2169"/>
         </scene>
-        <!--Test View Controller-->
-        <scene sceneID="gni-49-vFy">
-            <objects>
-                <viewController id="LsD-BZ-mdu" customClass="TestViewController" customModule="KNU_Plate_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iRX-YM-hRj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v7y-KE-QNW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="nz9-4x-YNz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="v7y-KE-QNW" firstAttribute="bottom" secondItem="nz9-4x-YNz" secondAttribute="bottom" id="LLQ-cR-Zaz"/>
-                            <constraint firstItem="v7y-KE-QNW" firstAttribute="top" secondItem="nz9-4x-YNz" secondAttribute="top" id="ibf-Cn-kMq"/>
-                            <constraint firstItem="v7y-KE-QNW" firstAttribute="leading" secondItem="nz9-4x-YNz" secondAttribute="leading" id="j07-BY-ZLg"/>
-                            <constraint firstItem="v7y-KE-QNW" firstAttribute="trailing" secondItem="nz9-4x-YNz" secondAttribute="trailing" id="lfp-RE-zse"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="v7y-KE-QNW" id="MYs-Ds-Kei"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="byd-1i-OGD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2791" y="3904"/>
-        </scene>
         <!--Example View Controller-->
         <scene sceneID="2mT-EE-gHf">
             <objects>
@@ -1474,21 +1444,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSQ-xo-uIH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2054" y="3904"/>
-        </scene>
-        <!--Open Source Info View Controller-->
-        <scene sceneID="gJb-VN-PPO">
-            <objects>
-                <viewController storyboardIdentifier="OpenSourceInfoViewController" title="Open Source Info View Controller" hidesBottomBarWhenPushed="YES" id="Bcf-JZ-srw" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dkH-EN-GOB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="US7-vc-f45"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ILB-UI-sfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1415" y="4638"/>
         </scene>
         <!--NoticeDetailViewController-->
         <scene sceneID="wWN-25-HZf">

@@ -198,13 +198,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let vc = self.storyboard?.instantiateViewController(
-            identifier: Constants.StoryboardID.myPageVCStoryBoardID[indexPath.row]
-        ) else { return }
-        pushViewController(with: vc)
+        switch indexPath.row {
+        case 4:
+            let url = URL(string: Constants.URL.termsAndConditionURL)!
+            presentSafariView(with: url)
+        case 5:
+            let url = URL(string: Constants.URL.privacyTermsURL)!
+            presentSafariView(with: url)
+        default:
+            guard let vc = self.storyboard?.instantiateViewController(
+                identifier: Constants.StoryboardID.myPageVCStoryBoardID[indexPath.row]
+            ) else { return }
+            pushViewController(with: vc)
+        }
+
     }
     
     func pushViewController(with vc: UIViewController) {

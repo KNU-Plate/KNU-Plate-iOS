@@ -1,5 +1,6 @@
 import Foundation
 import SnackBar_swift
+import SafariServices
 
 //MARK: - Alert Methods
 
@@ -129,6 +130,11 @@ extension UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func presentSafariView(with url: URL) {
+        let config = SFSafariViewController.Configuration()
+        let vc = SFSafariViewController(url: url, configuration: config)
+        present(vc, animated: true)
+    }
     
 }
 
