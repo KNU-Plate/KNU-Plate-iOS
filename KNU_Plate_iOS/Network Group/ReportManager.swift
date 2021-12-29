@@ -18,9 +18,11 @@ class ReportManager {
     private init() {}
     
     //MARK: - 유저 신고하기
-    func reportReview(reviewID: Int,
-                      reason: String,
-                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func reportReview(
+        reviewID: Int,
+        reason: String,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         let headers: HTTPHeaders = [.authorization(User.shared.accessToken)]
         
@@ -32,55 +34,54 @@ class ReportManager {
                                      withName: "reason")
             
         }, to: reportURL,
-        headers: headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            
-            case 200:
-                completion(.success(true))
-            
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("ReportManager - reportReview() error \(error.errorDescription) and statusCode: \(statusCode)")
-                completion(.failure(error))
+                  headers: headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                    
+                case 200:
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("ReportManager - reportReview() error \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
-
+    
     //MARK: - 건의사항 보내기 및 식당 정보 수정 요청
-    func sendFeedback(content: String,
-                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
-        
+    func sendFeedback(
+        content: String,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         AF.upload(multipartFormData: { multipartFormData in
             
             multipartFormData.append("건의/신고:".data(using: .utf8)!,
                                      withName: "title")
             multipartFormData.append("\(content)".data(using: .utf8)!,
                                      withName: "contents")
-        
         }, to: suggestURL,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            
-            case 200:
-                print("✏️ ReportManager - sendSuggestion success")
-                completion(.success(true))
-            
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode)
-                print("ReportManager - sendSuggestion() error \(error.errorDescription) and statusCode: \(statusCode)")
-                completion(.failure(error))
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    print("✏️ ReportManager - sendSuggestion success")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("ReportManager - sendSuggestion() error \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
 }

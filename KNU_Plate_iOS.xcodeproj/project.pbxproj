@@ -669,9 +669,9 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				7CF748F2277AD4DE0085CD3E /* Report */,
 				7CF748F1277AD45C0085CD3E /* Notice */,
-				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
 				7CF748F0277AD4270085CD3E /* My Favorite */,
 				7CF748EF277AD4210085CD3E /* Restaurant */,
 				7CF748EE277AD4190085CD3E /* Review */,
@@ -692,8 +692,8 @@
 				7C1F79DC2633025900C7B41D /* MapManager.swift */,
 				7CB8DF66264D3AB40001CC6D /* FileManager.swift */,
 				7C3517CE267C63D100BD9A88 /* ReportManager.swift */,
-				7C833687266215880032308D /* Interceptor.swift */,
 				7C6D2530268D9A0D0030F9A1 /* NoticeManager.swift */,
+				7C833687266215880032308D /* Interceptor.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";

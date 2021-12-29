@@ -497,15 +497,17 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             let reviewImageFiles = reviewVM.reviewImageFiles
             let date = reviewVM.getFormattedDate()
             
-            let reviewDetails = ReviewDetail(userID: userID,
-                                             reviewID: reviewID,
-                                             profileImageURL: profileImageURL,
-                                             nickname: nickname,
-                                             medal: medal,
-                                             reviewImageFiles: reviewImageFiles,
-                                             rating: rating,
-                                             review: review,
-                                             date: date)
+            let reviewDetails = ReviewDetail(
+                userID: userID,
+                reviewID: reviewID,
+                profileImageURL: profileImageURL,
+                nickname: nickname,
+                medal: medal,
+                reviewImageFiles: reviewImageFiles,
+                rating: rating,
+                review: review,
+                date: date
+            )
             nextVC.configure(with: reviewDetails)
             self.navigationController?.pushViewController(nextVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: false)
@@ -526,16 +528,20 @@ extension RestaurantInfoViewController: UITableViewDelegate {
             
             if UIApplication.shared.canOpenURL(url) {
                 print("open URL: \(url)")
-                self.presentAlertWithConfirmAction(title: "카카오맵 열기",
-                                                   message: "카카오맵으로 연결하시겠습니까?") { isOKAction in
+                self.presentAlertWithConfirmAction(
+                    title: "카카오맵 열기",
+                    message: "카카오맵으로 연결하시겠습니까?"
+                ) { isOKAction in
                     if isOKAction {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
             } else {
                 guard let baseURL = URL(string: "https://itunes.apple.com/us/app/id304608425?mt=8") else { return }
-                self.presentAlertWithConfirmAction(title: "카카오맵 설치",
-                                                   message: "카카오맵 설치 화면으로 이동하시겠습니까?") { isOKAction in
+                self.presentAlertWithConfirmAction(
+                    title: "카카오맵 설치",
+                    message: "카카오맵 설치 화면으로 이동하시겠습니까?"
+                ) { isOKAction in
                     if isOKAction {
                         UIApplication.shared.open(baseURL, options: [:], completionHandler: nil)
                     }

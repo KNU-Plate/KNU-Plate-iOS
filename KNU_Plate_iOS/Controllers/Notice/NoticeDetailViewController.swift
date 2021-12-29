@@ -16,7 +16,6 @@ class NoticeDetailViewController: UIViewController {
     }
     
     func initialize() {
-        
         noticeTitleLabel.text = noticeTitle
         noticeDateLabel.text = noticeDate
         noticeContentLabel.text = noticeContent
