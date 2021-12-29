@@ -109,21 +109,18 @@ extension UIViewController {
     }
     
     @objc func logOutUser() {
-        
         UserManager.shared.logOut { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.showSimpleBottomAlertWithAction(message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
-                                                         buttonTitle: "로그인") {
-                        self.presentWelcomeVC()
-                    }
+                    self.showSimpleBottomAlertWithAction(
+                        message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
+                        buttonTitle: "로그인"
+                    ) { self.presentWelcomeVC() }
                 }
-                
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
+            case .failure(_):
+                UserManager.shared.resetAllUserInfo()
             }
         }
     }
