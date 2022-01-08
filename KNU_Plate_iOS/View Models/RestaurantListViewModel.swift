@@ -6,7 +6,7 @@ protocol RestaurantListViewModelDelegate: AnyObject {
 
 class RestaurantListViewModel {
     weak var delegate: RestaurantListViewModelDelegate?
-    var restaurants: [RestaurantListResponseModel] = []
+    private var restaurants: [RestaurantListResponseModel] = []
     var hasMore: Bool = true
     var isFetchingData: Bool = false
     private var lastMallID: Int?
@@ -40,6 +40,7 @@ extension RestaurantListViewModel {
 
 extension RestaurantListViewModel {
     func fetchRestaurantList(mall mallName: String? = nil, category categoryName: String? = nil, gate gateLocation: String? = nil) {
+        #warning("showProgressBar()하는 위치 Manager파일로 옮기기")
         showProgressBar()
         isFetchingData = true
         let model = FetchRestaurantListRequestDTO(mallName: mallName, categoryName: categoryName, gateLocation: gateLocation, cursor: lastMallID)
@@ -95,19 +96,18 @@ extension RestaurantListViewModel {
     // 오후 1~5시 사이에는 카페, 그 외는 음식점 추천을 위함
     func getRecommendationCategory() -> String {
         let now = Date()
-        let one_PM = now.dateAt(hours: 13, minutes: 0)
-        let five_PM = now.dateAt(hours: 17, minutes: 0)
+        let onePM = now.dateAt(hours: 13, minutes: 0)
+        let fivePM = now.dateAt(hours: 17, minutes: 0)
         
-        let index: Int?
+        var index: Int = Constants.foodCategoryArray.firstIndex(of: "☕️ 카페") ?? 5
         
-        if now >= one_PM && now <= five_PM {
-            index = Constants.footCategoryArray.firstIndex(of: "☕️ 카페") ?? 5
-        } else {
-            let array = Constants.footCategoryArray.filter { $0 != "☕️ 카페" }
-            index = Int.random(in: 0...array.count - 1)
+        if now < onePM || now > fivePM {
+            var indexArray = Array<Int>(0..<Constants.foodCategoryArray.count)
+            indexArray.remove(at: index)
+            index = indexArray.randomElement() ?? 0
         }
         
-        let foodCategoryName = Constants.footCategoryArray[index!]
+        let foodCategoryName = Constants.foodCategoryArray[index]
         let startIdx = foodCategoryName.index(foodCategoryName.startIndex, offsetBy: 2)
         let foodCategory = String(foodCategoryName[startIdx...])
         return foodCategory

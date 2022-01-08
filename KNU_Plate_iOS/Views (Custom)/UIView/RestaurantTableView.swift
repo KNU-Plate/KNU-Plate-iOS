@@ -72,7 +72,9 @@ class RestaurantTableView: UIView {
     }
     
     // MARK: - Table Header View
-    let headerView = UIView()
+    let headerView = UIView().then {
+        $0.backgroundColor = .systemGreen
+    }
     
     // MARK: - TableView
     let tableView = UITableView().then {

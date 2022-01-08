@@ -11,7 +11,10 @@
 		3C1F4532260B8866008E8AA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F4531260B8866008E8AA7 /* MainViewController.swift */; };
 		3C1F4538260B88B3008E8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F4537260B88B3008E8AA7 /* Main.storyboard */; };
 		3C2DDBDC2611CACF0075F25E /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2DDBDB2611CACF0075F25E /* RestaurantCollectionViewCell.swift */; };
-		3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */; };
+		3C6B700226F311E7001FD7BB /* NewReviewRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA5B261C31FF009A4464 /* NewReviewRequestDTO.swift */; };
+		3C6B700326F31268001FD7BB /* UIButton+TouchReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74F65A2616F1A2001E8ED5 /* UIButton+TouchReaction.swift */; };
+		3C6B700426F31274001FD7BB /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
+		3C6B700526F31298001FD7BB /* FetchRestaurantListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */; };
 		3C88A4A326A1D8D400E7FC75 /* FavoriteRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A226A1D8D400E7FC75 /* FavoriteRestaurantViewController.swift */; };
 		3C88A4A526A204D600E7FC75 /* RestaurantImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */; };
 		3C88A4A726A207C400E7FC75 /* RestaurantImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C88A4A626A207C400E7FC75 /* RestaurantImageViewModel.swift */; };
@@ -24,7 +27,6 @@
 		3C9B2BD426143C9900CC010F /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9B2BD326143C9900CC010F /* RatingView.swift */; };
 		3CA704DE268DA35200943DC1 /* RestaurantListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */; };
 		3CA8D44626A02E2200B9E434 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA8D44526A02E2200B9E434 /* LocationTableViewCell.swift */; };
-		3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */; };
 		3CB6C3EB268D994F00F7515A /* RestaurantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6C3EA268D994F00F7515A /* RestaurantListViewModel.swift */; };
 		3CB6F97F26957E9F001324BB /* RestaurantInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6F97E26957E9F001324BB /* RestaurantInfoViewModel.swift */; };
 		3CB6F9812695879E001324BB /* RestaurantInfoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */; };
@@ -136,7 +138,6 @@
 		7CBA9A3826A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3626A13BC4002F5BCB /* MenuRecommendationTableViewCell.swift */; };
 		7CBA9A3926A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3726A13BC4002F5BCB /* MenuRecommendationTableViewCell.xib */; };
 		7CBA9A3C26A179C1002F5BCB /* UserRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */; };
-		7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE745126208366002E1FF7 /* UploadMenuModel.swift */; };
 		7CC751082666018900249EDF /* RestaurantDetailFromKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */; };
 		7CC962E2262C06D700AA71E1 /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */; };
 		7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC962ED262D5A4D00AA71E1 /* RestaurantManager.swift */; };
@@ -158,7 +159,6 @@
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
 		7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */; };
-		7CE4BA5C261C31FF009A4464 /* NewReviewRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA5B261C31FF009A4464 /* NewReviewRequestDTO.swift */; };
 		7CE4D7992608DD2B002FCC2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */; };
 		7CE4D79B2608DD2B002FCC2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */; };
 		7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */; };
@@ -1084,8 +1084,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CE4BA5C261C31FF009A4464 /* NewReviewRequestDTO.swift in Sources */,
-				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
+				3C6B700526F31298001FD7BB /* FetchRestaurantListRequestDTO.swift in Sources */,
+				3C6B700426F31274001FD7BB /* UploadMenuModel.swift in Sources */,
+				3C6B700326F31268001FD7BB /* UIButton+TouchReaction.swift in Sources */,
+				3C6B700226F311E7001FD7BB /* NewReviewRequestDTO.swift in Sources */,
 				7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */,
 				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
 				7C833688266215880032308D /* Interceptor.swift in Sources */,
@@ -1342,6 +1344,7 @@
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1373,6 +1376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
 				EXCLUDED_ARCHS = "";
+				DEVELOPMENT_TEAM = 2W776SPR4X;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
