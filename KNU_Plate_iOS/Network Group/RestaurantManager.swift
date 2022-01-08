@@ -27,8 +27,10 @@ class RestaurantManager {
     private init() {}
     
     //MARK: - 신규 매장 등록
-    func uploadNewRestaurant(with model: NewRestaurantRequestDTO,
-                             completion: @escaping ((Result<Bool, Error>) -> Void)) {
+    func uploadNewRestaurant(
+        with model: NewRestaurantRequestDTO,
+        completion: @escaping ((Result<Bool, Error>) -> Void)
+    ) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -54,42 +56,44 @@ class RestaurantManager {
                 }
             }
         }, to: uploadNewRestaurantRequestURL,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
+                  headers: model.headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                 
-                print("RestaurantManager - 매장 등록 성공")
-                completion(.success(true))
+                guard let statusCode = response.response?.statusCode else { return }
                 
-            default:
-                
-                let errorJSON = JSON(response.data!)
-                
-                if errorJSON["error"] == "already enrolled mall" {
+                switch statusCode {
+                case 200:
                     
-                    print("❗️ RestaurantManager - Already Enrolled Mall")
-                    completion(.failure(UploadError.alreadyEnrolledMall))
+                    print("RestaurantManager - 매장 등록 성공")
+                    completion(.success(true))
                     
-                } else {
-                    let error = NetworkError.returnError(statusCode: statusCode)
-                     
-                    print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                default:
                     
-                    completion(.failure(error))
+                    let errorJSON = JSON(response.data!)
+                    
+                    if errorJSON["error"] == "already enrolled mall" {
+                        
+                        print("❗️ RestaurantManager - Already Enrolled Mall")
+                        completion(.failure(UploadError.alreadyEnrolledMall))
+                        
+                    } else {
+                        let error = NetworkError.returnError(statusCode: statusCode)
+                        
+                        print("RestaurantManager - uploadNewRes() statusCode: \(statusCode) and error: \(error.errorDescription)")
+                        
+                        completion(.failure(error))
+                    }
                 }
             }
-        }
     }
     
     //MARK: - 신규 메뉴 등록 (DB에 저장되지 않은 메뉴일 경우 실행)
-    func uploadNewMenu(with model: RegisterNewMenuRequestDTO,
-                       completion: @escaping ((Result<[MenuRegisterResponseModel], NetworkError>) -> Void)) {
+    func uploadNewMenu(
+        with model: RegisterNewMenuRequestDTO,
+        completion: @escaping ((Result<[MenuRegisterResponseModel], NetworkError>) -> Void)
+    ) {
         
         AF.request(uploadNewMenuRequestURL,
                    method: .post,
@@ -105,7 +109,7 @@ class RestaurantManager {
                 }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     
                     print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW MENU")
@@ -131,8 +135,10 @@ class RestaurantManager {
     }
     
     //MARK: - 신규 리뷰 등록 
-    func uploadNewReview(with model: NewReviewRequestDTO,
-                         completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func uploadNewReview(
+        with model: NewReviewRequestDTO,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -155,34 +161,36 @@ class RestaurantManager {
                 }
             }
         }, to: uploadNewReviewRequestURL,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            
-            case 200:
+                  headers: model.headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                 
-                print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
-                completion(.success(true))
+                guard let statusCode = response.response?.statusCode else { return }
                 
-                
-            default:
-                
-                let error = NetworkError.returnError(statusCode: statusCode)
-                print("RestaurantManager uploadNewReview error: \(error.errorDescription)")
-                completion(.failure(error))
+                switch statusCode {
+                    
+                case 200:
+                    
+                    print("RESTAURANT MANAGER - SUCCESS IN UPLOADING NEW REVIEW")
+                    completion(.success(true))
+                    
+                    
+                default:
+                    
+                    let error = NetworkError.returnError(statusCode: statusCode)
+                    print("RestaurantManager uploadNewReview error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
     
     //MARK: - 특정 매장 리뷰 목록 불러오기
     
-    func fetchReviewList(with model: FetchReviewListRequestDTO,
-                         completion: @escaping ((Result<[ReviewListResponseModel], NetworkError>) -> Void)) {
+    func fetchReviewList(
+        with model: FetchReviewListRequestDTO,
+        completion: @escaping ((Result<[ReviewListResponseModel], NetworkError>) -> Void)
+    ) {
         
         AF.request(fetchReviewListRequestURL,
                    method: .get,
@@ -220,9 +228,11 @@ class RestaurantManager {
     
     
     //MARK: - 매장 좋아요하기 API
-    func markFavorite(mallID: Int,
-                      markMyFavorite: Bool,
-                      completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func markFavorite(
+        mallID: Int,
+        markMyFavorite: Bool,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         var headers: HTTPHeaders = [:]
         if User.shared.accessToken != "Invalid AccessToken" {
@@ -258,8 +268,10 @@ class RestaurantManager {
     }
     
     // MARK: - 매장 목록 조회
-    func fetchRestaurantList(with model: FetchRestaurantListRequestDTO,
-                             completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)) {
+    func fetchRestaurantList(
+        with model: FetchRestaurantListRequestDTO,
+        completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)
+    ) {
         AF.request(fetchRestaurantListRequestURL,
                    method: .get,
                    parameters: model.parameters,
@@ -293,8 +305,10 @@ class RestaurantManager {
     }
     
     // MARK: - 좋아하는 매장 목록 조회
-    func fetchFavoriteRestaurantList(cursor: Int?,
-                                     completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)) {
+    func fetchFavoriteRestaurantList(
+        cursor: Int?,
+        completion: @escaping ((Result<[RestaurantListResponseModel], NetworkError>) -> Void)
+    ) {
         var headers: HTTPHeaders = [:]
         var parameters: Parameters = [:]
         if User.shared.accessToken != "Invalid AccessToken" {
@@ -336,8 +350,10 @@ class RestaurantManager {
     }
     
     // MARK: - 매장 상세 조회
-    func fetchRestaurantInfo(of mallID: Int,
-                             completion: @escaping ((Result<RestaurantInfoResponseModel, NetworkError>) -> Void)) {
+    func fetchRestaurantInfo(
+        of mallID: Int,
+        completion: @escaping ((Result<RestaurantInfoResponseModel, NetworkError>) -> Void)
+    ) {
         let requestURL = fetchRestaurantInfoRequestURL + String(mallID)
         var headers: HTTPHeaders = [
             "accept":"application/json",
@@ -380,9 +396,11 @@ class RestaurantManager {
     }
     
     // MARK: - 매장 상세보기의 이미지 조회
-    func fetchRestaurantImages(of mallID: Int,
-                               cursor: Int? = nil,
-                               completion: @escaping ((Result<[RestaurantImageResponseModel], NetworkError>) -> Void)) {
+    func fetchRestaurantImages(
+        of mallID: Int,
+        cursor: Int? = nil,
+        completion: @escaping ((Result<[RestaurantImageResponseModel], NetworkError>) -> Void)
+    ) {
         var parameters: Parameters = ["mall_id":String(mallID)]
         let headers: HTTPHeaders = ["accept": "application/json"]
         parameters["cursor"] = cursor

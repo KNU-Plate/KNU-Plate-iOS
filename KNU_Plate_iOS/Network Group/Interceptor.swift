@@ -7,9 +7,11 @@ final class Interceptor: RequestInterceptor {
     private var isRefreshing: Bool = false
     private var retryLimit = 3
     
-    func adapt(_ urlRequest: URLRequest,
-               for session: Session,
-               completion: @escaping (Result<URLRequest, Error>) -> Void) {
+    func adapt(
+        _ urlRequest: URLRequest,
+        for session: Session,
+        completion: @escaping (Result<URLRequest, Error>) -> Void
+    ) {
         
         print("Interceptor - adapt() activated")
         
@@ -26,10 +28,12 @@ final class Interceptor: RequestInterceptor {
     }
     
     // AF.request(..).validate() 수행 후 statusCode 가 200...299 사이가 아니면 실행되는 함수
-    func retry(_ request: Request,
-               for session: Session,
-               dueTo error: Error,
-               completion: @escaping (RetryResult) -> Void) {
+    func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: Error,
+        completion: @escaping (RetryResult) -> Void
+    ) {
         
         if !User.shared.isLoggedIn {
             completion(.doNotRetry)
@@ -44,10 +48,10 @@ final class Interceptor: RequestInterceptor {
         print("Interceptor - retry() activated with statusCode: \(statusCode)")
         
         switch statusCode {
-        
+            
         case 200...299: completion(.doNotRetry)
             
-        // 토큰이 만료되면 statusCode 401: Unauthorized 가 날라옴
+            // 토큰이 만료되면 statusCode 401: Unauthorized 가 날라옴
         case 401:
             guard !isRefreshing else { return }
             
@@ -60,9 +64,9 @@ final class Interceptor: RequestInterceptor {
                 print("Interceptor - retry() refreshToken result: \(refreshResult)")
                 
                 switch refreshResult {
-                
+                    
                 case .success(_):
-
+                    
                     if request.retryCount < self.retryLimit {
                         completion(.retry)
                     } else {
@@ -76,8 +80,10 @@ final class Interceptor: RequestInterceptor {
                         
                         print("❗️ Interceptor - 세션이 만료되었습니다. 다시 로그인 요망 (refreshToken 만료)")
                 
-                        NotificationCenter.default.post(name: Notification.Name.refreshTokenExpired,
-                                                        object: nil)
+                        NotificationCenter.default.post(
+                            name: Notification.Name.refreshTokenExpired,
+                            object: nil
+                        )
                         completion(.doNotRetry)
                         
                     } else {
@@ -110,30 +116,28 @@ extension Interceptor {
         
         let headers: HTTPHeaders = ["Authorization" : User.shared.refreshToken]
         
-        AF.request(UserManager.shared.refreshTokenRequestURL,
-                   method: .post,
-                   headers: headers).responseJSON { [weak self] response in
-                    
-                    self?.isRefreshing = false
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    print("Interceptor - refreshToken() activated with statusCode: \(statusCode)")
-                    
-                    switch statusCode {
-                    case 200:
-                        do {
-                            let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
-                            UserManager.shared.saveLoginInfo(with: decodedData)
-                            print("successfully refreshed NEW token: \(User.shared.accessToken)")
-                            completion(.success(true))
-                        } catch {
-                            completion(.failure(.internalError))
-                        }
-                    default:
-                        print("Interceptor - refreshToken() failed default with statusCode: \(statusCode)")
-                        completion(.failure(.unauthorized))
-                    }
-                   }
+        AF.request(
+            UserManager.shared.refreshTokenRequestURL,
+            method: .post,
+            headers: headers
+        ).responseJSON { [weak self] response in
+            self?.isRefreshing = false
+            guard let statusCode = response.response?.statusCode else { return }
+            print("❗️ Interceptor - refreshToken() activated with statusCode: \(statusCode)")
+            switch statusCode {
+            case 200:
+                do {
+                    let decodedData = try JSONDecoder().decode(LoginResponseModel.self, from: response.data!)
+                    UserManager.shared.saveLoginInfo(with: decodedData)
+                    print("successfully refreshed NEW token: \(User.shared.accessToken)")
+                    completion(.success(true))
+                } catch {
+                    completion(.failure(.internalError))
+                }
+            default:
+                print("Interceptor - refreshToken() failed default with statusCode: \(statusCode)")
+                completion(.failure(.unauthorized))
+            }
+        }
     }
 }

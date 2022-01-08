@@ -45,13 +45,11 @@
 		3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */; };
 		3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */; };
 		3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */; };
-		539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */; };
 		7C036ABA2698164700F6C29B /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C036AB92698164700F6C29B /* MyReviewListViewController.swift */; };
 		7C16DF1D2621590800AA8239 /* UserInputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1C2621590800AA8239 /* UserInputError.swift */; };
 		7C16DF202621779600AA8239 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF1F2621779600AA8239 /* NetworkError.swift */; };
 		7C16DF232621810700AA8239 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF222621810700AA8239 /* User.swift */; };
 		7C16DF26262183C900AA8239 /* RegisterRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */; };
-		7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */; };
 		7C1C1D02265CCAAE00C08C66 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */; };
 		7C1C1D04265CE40600C08C66 /* EditUserInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */; };
 		7C1C1D08265E190300C08C66 /* LoadUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */; };
@@ -96,7 +94,6 @@
 		7C2187DA265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */; };
 		7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */; };
 		7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */; };
-		7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */; };
 		7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311423261AE37200392742 /* NewReviewViewController.swift */; };
 		7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */; };
 		7C3517CF267C63D100BD9A88 /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3517CE267C63D100BD9A88 /* ReportManager.swift */; };
@@ -107,8 +104,6 @@
 		7C5E2131264662F900E98FE5 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */; };
 		7C5E2132264662F900E98FE5 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */; };
 		7C5EDD4F26427A8700B79178 /* FinalMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD4E26427A8700B79178 /* FinalMenuModel.swift */; };
-		7C5EDD512642BD0100B79178 /* EmailVerifyCodeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD502642BD0000B79178 /* EmailVerifyCodeRequestDTO.swift */; };
-		7C5EDD532642BF1F00B79178 /* VerifyMailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD522642BF1F00B79178 /* VerifyMailRequestDTO.swift */; };
 		7C5EDD552642C22500B79178 /* CheckDuplicateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EDD542642C22500B79178 /* CheckDuplicateRequestDTO.swift */; };
 		7C60DC7B2695B27B001DEA9A /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC7A2695B27A001DEA9A /* MyPageTableViewCell.swift */; };
 		7C60DC7D2695DB6D001DEA9A /* NoticeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */; };
@@ -160,7 +155,6 @@
 		7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */; };
 		7CDADA0526BBDB2B00F7F58F /* FindIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */; };
 		7CDADA0926BFB74300F7F58F /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDADA0826BFB74300F7F58F /* Welcome.storyboard */; };
-		7CDADA0C26BFB86700F7F58F /* VerifyEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */; };
 		7CE4BA53261C28DC009A4464 /* NewMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */; };
 		7CE4BA54261C28DC009A4464 /* NewMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */; };
 		7CE4BA59261C31DF009A4464 /* NewReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */; };
@@ -171,10 +165,12 @@
 		7CE4D7A22608DD2E002FCC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */; };
 		7CE4D7A52608DD2E002FCC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */; };
 		7CE4D7C52609B628002FCC2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4D7C42609B628002FCC2D /* Constants.swift */; };
+		7CF748E8277AD2BE0085CD3E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF748E7277AD2BE0085CD3E /* String+Extension.swift */; };
+		7CF748EB277AD3000085CD3E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF748EA277AD3000085CD3E /* UIHelper.swift */; };
+		B675547727B537134C56D25C /* Pods_KNU_Plate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3C1A95DD26A13EB7001966F9 /* MyReviewListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReviewListViewModel.swift; sourceTree = "<group>"; };
 		3C1F4531260B8866008E8AA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C1F4537260B88B3008E8AA7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "KNU_Plate_iOS/View (Storyboard)/Main.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -212,12 +208,12 @@
 		3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewController.swift; sourceTree = "<group>"; };
 		3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewController.swift; sourceTree = "<group>"; };
+		44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.debug.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7C036AB92698164700F6C29B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
 		7C16DF1C2621590800AA8239 /* UserInputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputError.swift; sourceTree = "<group>"; };
 		7C16DF1F2621779600AA8239 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7C16DF222621810700AA8239 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequestDTO.swift; sourceTree = "<group>"; };
-		7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoRequestDTO.swift; sourceTree = "<group>"; };
 		7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserInfoModel.swift; sourceTree = "<group>"; };
@@ -272,7 +268,6 @@
 		7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDeveloperMessageViewController.swift; sourceTree = "<group>"; };
 		7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7C311423261AE37200392742 /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 		7C311428261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickedFoodImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C3517CE267C63D100BD9A88 /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
@@ -283,8 +278,6 @@
 		7C5E212F264662F900E98FE5 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		7C5E2130264662F900E98FE5 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
 		7C5EDD4E26427A8700B79178 /* FinalMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalMenuModel.swift; sourceTree = "<group>"; };
-		7C5EDD502642BD0000B79178 /* EmailVerifyCodeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifyCodeRequestDTO.swift; sourceTree = "<group>"; };
-		7C5EDD522642BF1F00B79178 /* VerifyMailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMailRequestDTO.swift; sourceTree = "<group>"; };
 		7C5EDD542642C22500B79178 /* CheckDuplicateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDTO.swift; sourceTree = "<group>"; };
 		7C60DC7A2695B27A001DEA9A /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailViewController.swift; sourceTree = "<group>"; };
@@ -336,7 +329,6 @@
 		7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDViewController.swift; sourceTree = "<group>"; };
 		7CDADA0826BFB74300F7F58F /* Welcome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
-		7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailViewController.swift; sourceTree = "<group>"; };
 		7CE4BA51261C28DC009A4464 /* NewMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4BA52261C28DC009A4464 /* NewMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7CE4BA58261C31DF009A4464 /* NewReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewModel.swift; sourceTree = "<group>"; };
@@ -349,8 +341,10 @@
 		7CE4D7A42608DD2E002FCC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CE4D7A62608DD2E002FCC2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CE4D7C42609B628002FCC2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.release.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.release.xcconfig"; sourceTree = "<group>"; };
-		F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Plate_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CF748E7277AD2BE0085CD3E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		7CF748EA277AD3000085CD3E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KNU_Plate_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KNU_Plate_iOS.release.xcconfig"; path = "Target Support Files/Pods-KNU_Plate_iOS/Pods-KNU_Plate_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,17 +360,17 @@
 				7C1F79082632E1E600C7B41D /* libxml2.tbd in Frameworks */,
 				7C1F78FE2632DE5E00C7B41D /* libsqlite3.tbd in Frameworks */,
 				3C8AA2D926A05D92002D6451 /* DaumMap.framework in Frameworks */,
-				539320D18A8E99B27AB6F069 /* Pods_KNU_Plate_iOS.framework in Frameworks */,
+				B675547727B537134C56D25C /* Pods_KNU_Plate_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C2DDBE22611FB1C0075F25E /* UI Related Files */ = {
+		3C2DDBE22611FB1C0075F25E /* Views (Custom) */ = {
 			isa = PBXGroup;
 			children = (
-				3C3898AF26429840007E26DF /* Views */,
+				3C3898AF26429840007E26DF /* UIView */,
 				7C60DC792695B251001DEA9A /* MyPageTableViewCell */,
 				7C38F21D2670CEA4007D8313 /* MenuRecommendationCell */,
 				7C5E212E264662CF00E98FE5 /* ReviewTableViewCell */,
@@ -392,10 +386,10 @@
 				7CD74B67260AE06E00D05B84 /* RatingController.swift */,
 				7C6D2534268DAD950030F9A1 /* NoticeTableViewCell.swift */,
 			);
-			path = "UI Related Files";
+			path = "Views (Custom)";
 			sourceTree = "<group>";
 		};
-		3C3898AF26429840007E26DF /* Views */ = {
+		3C3898AF26429840007E26DF /* UIView */ = {
 			isa = PBXGroup;
 			children = (
 				3C8AB201268A376500D51AC8 /* RestaurantTableView.swift */,
@@ -403,7 +397,7 @@
 				3C8E581726B1213000A08290 /* MainCollectionReusableView.swift */,
 				3CD96BA926B93F00007E3A53 /* EmptyStateView.swift */,
 			);
-			path = Views;
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		3F955F326C60DB233DE0AFBE /* Frameworks */ = {
@@ -417,7 +411,7 @@
 				7C1F79072632E1E600C7B41D /* libxml2.tbd */,
 				7C1F78FD2632DE5E00C7B41D /* libsqlite3.tbd */,
 				7C1F78B62632DE3500C7B41D /* DaumMap.embeddedframework */,
-				F4E798294509A425FFB967D4 /* Pods_KNU_Plate_iOS.framework */,
+				8528917DD9594E4FD23938B1 /* Pods_KNU_Plate_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -425,8 +419,8 @@
 		60D3F04F9B3D02052F72E0A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */,
-				ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */,
+				44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */,
+				F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -527,38 +521,20 @@
 			path = MyPageTableViewCell;
 			sourceTree = "<group>";
 		};
-		7C6D252F268D93C20030F9A1 /* MyPageTab */ = {
+		7C6D252F268D93C20030F9A1 /* My Page */ = {
 			isa = PBXGroup;
 			children = (
 				7C2187DB265A8FC6002CFDD8 /* MyPageViewController.swift */,
-				7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */,
-				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
-				7C1C1CFF265CC90800C08C66 /* ChangeNicknameViewController.swift */,
-				7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */,
-				7C2187DF265AA20B002CFDD8 /* TermsAndConditionsViewController.swift */,
-				7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */,
-				7C6D252D268D93AB0030F9A1 /* NoticeViewController.swift */,
-				7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */,
-				7C036AB92698164700F6C29B /* MyReviewListViewController.swift */,
 			);
-			path = MyPageTab;
+			path = "My Page";
 			sourceTree = "<group>";
 		};
 		7C85F8422636EFC500FA9FCC /* RequestDTO */ = {
 			isa = PBXGroup;
 			children = (
-				7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */,
-				7CE4BA5B261C31FF009A4464 /* NewReviewRequestDTO.swift */,
-				7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */,
-				7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */,
-				7CA6621A26412203000E0B7A /* RegisterNewMenuRequestDTO.swift */,
-				7C1F79DE26330ACF00C7B41D /* SearchRestaurantRequestDTO.swift */,
-				7C5EDD502642BD0000B79178 /* EmailVerifyCodeRequestDTO.swift */,
-				7C5EDD522642BF1F00B79178 /* VerifyMailRequestDTO.swift */,
-				7C5EDD542642C22500B79178 /* CheckDuplicateRequestDTO.swift */,
-				7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */,
-				7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */,
-				3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */,
+				7CF748E1277AD1C80085CD3E /* Restaurant */,
+				7CF748E0277AD19D0085CD3E /* Review */,
+				7CF748DF277AD1990085CD3E /* User */,
 			);
 			path = RequestDTO;
 			sourceTree = "<group>";
@@ -574,7 +550,7 @@
 			path = "Lottie Files";
 			sourceTree = "<group>";
 		};
-		7CB8DF68264D3E5B0001CC6D /* MenuModel */ = {
+		7CB8DF68264D3E5B0001CC6D /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				7CA66214263FF65C000E0B7A /* ExistingMenuModel.swift */,
@@ -582,35 +558,27 @@
 				7CBE745126208366002E1FF7 /* UploadMenuModel.swift */,
 				7C5EDD4E26427A8700B79178 /* FinalMenuModel.swift */,
 			);
-			path = MenuModel;
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		7CBA9A3A26A179A1002F5BCB /* Login+Register */ = {
 			isa = PBXGroup;
 			children = (
 				7CBA9A3B26A179C1002F5BCB /* UserRegister.storyboard */,
-				7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */,
 				7CDAD9FF26BBD60D00F7F58F /* Find_PW+ID.storyboard */,
 			);
 			path = "Login+Register";
 			sourceTree = "<group>";
 		};
-		7CC96309263052EA00AA71E1 /* ResponseModel */ = {
+		7CC96309263052EA00AA71E1 /* ResponseDTO */ = {
 			isa = PBXGroup;
 			children = (
-				7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */,
-				7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */,
-				7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */,
-				7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */,
-				7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */,
-				7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */,
-				7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */,
-				7C6D2532268D9B010030F9A1 /* NoticeListModel.swift */,
-				3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */,
-				3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */,
-				3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */,
+				7CF748E5277AD1E90085CD3E /* Notice */,
+				7CF748E4277AD1E30085CD3E /* User */,
+				7CF748E3277AD1DB0085CD3E /* Restaurant */,
+				7CF748E2277AD1D60085CD3E /* Review */,
 			);
-			path = ResponseModel;
+			path = ResponseDTO;
 			sourceTree = "<group>";
 		};
 		7CCDB1F326A3EA900092F28D /* User Register */ = {
@@ -635,59 +603,18 @@
 				7CCDB1F626A3F0AA0092F28D /* UILabel Extension.swift */,
 				7CDAD9FD26BAB78000F7F58F /* NotificationName Extension.swift */,
 				7C8EC8CA26F03D5E00893CCD /* Date Extension.swift */,
+				7CF748E7277AD2BE0085CD3E /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7CDADA0126BBDAC900F7F58F /* Find PW & ID */ = {
+		7CDADA0126BBDAC900F7F58F /* Find User Info */ = {
 			isa = PBXGroup;
 			children = (
 				7CDADA0226BBDADD00F7F58F /* FindPasswordViewController.swift */,
 				7CDADA0426BBDB2B00F7F58F /* FindIDViewController.swift */,
 			);
-			path = "Find PW & ID";
-			sourceTree = "<group>";
-		};
-		7CDADA0A26BFB85300F7F58F /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				7CDADA0B26BFB86700F7F58F /* VerifyEmailViewController.swift */,
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		7CE10470260C446500E18C00 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				7CDADA0A26BFB85300F7F58F /* Others */,
-				7CDADA0126BBDAC900F7F58F /* Find PW & ID */,
-				7CCDB1F326A3EA900092F28D /* User Register */,
-				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
-				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
-				3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */,
-				3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */,
-				3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */,
-				3C88A4A226A1D8D400E7FC75 /* FavoriteRestaurantViewController.swift */,
-				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
-				7C311423261AE37200392742 /* NewReviewViewController.swift */,
-				3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */,
-				3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */,
-				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
-				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
-				7C8152242685A6A20041EC47 /* SearchListViewController.swift */,
-				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
-				7C6D252F268D93C20030F9A1 /* MyPageTab */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		7CE10471260C447500E18C00 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */,
-				3CC2847626921F2D0075399E /* Category.swift */,
-			);
-			path = Utilities;
+			path = "Find User Info";
 			sourceTree = "<group>";
 		};
 		7CE4BA56261C28F8009A4464 /* NewMenuTableViewCell */ = {
@@ -720,18 +647,18 @@
 		7CE4D7972608DD2B002FCC2D /* KNU_Plate_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7CF748E6277AD2760085CD3E /* Application */,
+				7CF748EC277AD35A0085CD3E /* Constants */,
 				7CE4D7B22609B18F002FCC2D /* View (Storyboard) */,
 				7CE4D7B12609B188002FCC2D /* Models */,
 				7CE4D7AF2609B17C002FCC2D /* Network Group */,
 				7CE775002641724C0032558F /* Error Management */,
-				3C2DDBE22611FB1C0075F25E /* UI Related Files */,
-				7CDAD9FC26BAB75D00F7F58F /* Extensions */,
+				3C2DDBE22611FB1C0075F25E /* Views (Custom) */,
 				7CE4D7B02609B183002FCC2D /* View Models */,
 				7CE4D7AE2609B175002FCC2D /* Controllers */,
+				7CDAD9FC26BAB75D00F7F58F /* Extensions */,
+				7CF748E9277AD2EE0085CD3E /* Utilities */,
 				7C8F622926A56BF800BB0703 /* Lottie Files */,
-				7CE4D7C42609B628002FCC2D /* Constants.swift */,
-				7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */,
-				7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */,
 				7CE4D7A12608DD2E002FCC2D /* Assets.xcassets */,
 				7CE4D7A62608DD2E002FCC2D /* Info.plist */,
 				7C1F78FF2632DEA500C7B41D /* Kakao-Map-Bridge-Header.h */,
@@ -742,8 +669,17 @@
 		7CE4D7AE2609B175002FCC2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7CE10471260C447500E18C00 /* Utilities */,
-				7CE10470260C446500E18C00 /* View Controllers */,
+				3C1F4531260B8866008E8AA7 /* MainViewController.swift */,
+				7CF748F2277AD4DE0085CD3E /* Report */,
+				7CF748F1277AD45C0085CD3E /* Notice */,
+				7CF748F0277AD4270085CD3E /* My Favorite */,
+				7CF748EF277AD4210085CD3E /* Restaurant */,
+				7CF748EE277AD4190085CD3E /* Review */,
+				7CF748ED277AD40C0085CD3E /* Login+Register */,
+				7CDADA0126BBDAC900F7F58F /* Find User Info */,
+				7CCDB1F326A3EA900092F28D /* User Register */,
+				7C6D252F268D93C20030F9A1 /* My Page */,
+				7CF748F3277AD4F20085CD3E /* Settings */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -756,8 +692,8 @@
 				7C1F79DC2633025900C7B41D /* MapManager.swift */,
 				7CB8DF66264D3AB40001CC6D /* FileManager.swift */,
 				7C3517CE267C63D100BD9A88 /* ReportManager.swift */,
-				7C833687266215880032308D /* Interceptor.swift */,
 				7C6D2530268D9A0D0030F9A1 /* NoticeManager.swift */,
+				7C833687266215880032308D /* Interceptor.swift */,
 			);
 			path = "Network Group";
 			sourceTree = "<group>";
@@ -779,14 +715,11 @@
 		7CE4D7B12609B188002FCC2D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7CF748DD277AD1420085CD3E /* User Related */,
 				7C85F8422636EFC500FA9FCC /* RequestDTO */,
-				7CC96309263052EA00AA71E1 /* ResponseModel */,
-				7CB8DF68264D3E5B0001CC6D /* MenuModel */,
-				7C16DF222621810700AA8239 /* User.swift */,
-				7C65869C26494D34004B8584 /* ReviewDetail.swift */,
-				7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */,
-				7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */,
-				7C8E668426E4B6840060F37B /* FeedbackType.swift */,
+				7CC96309263052EA00AA71E1 /* ResponseDTO */,
+				7CB8DF68264D3E5B0001CC6D /* Menu */,
+				7CF748DE277AD15A0085CD3E /* Others */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -794,9 +727,9 @@
 		7CE4D7B22609B18F002FCC2D /* View (Storyboard) */ = {
 			isa = PBXGroup;
 			children = (
+				7CBA9A3A26A179A1002F5BCB /* Login+Register */,
 				3C1F4537260B88B3008E8AA7 /* Main.storyboard */,
 				7CD74B8C260B38C000D05B84 /* Kevin.storyboard */,
-				7CBA9A3A26A179A1002F5BCB /* Login+Register */,
 				7CE4D7A32608DD2E002FCC2D /* LaunchScreen.storyboard */,
 				7CDADA0826BFB74300F7F58F /* Welcome.storyboard */,
 			);
@@ -812,6 +745,192 @@
 			path = "Error Management";
 			sourceTree = "<group>";
 		};
+		7CF748DD277AD1420085CD3E /* User Related */ = {
+			isa = PBXGroup;
+			children = (
+				7C16DF222621810700AA8239 /* User.swift */,
+				7CB8DF69264D3E820001CC6D /* UserDisplayModel.swift */,
+			);
+			path = "User Related";
+			sourceTree = "<group>";
+		};
+		7CF748DE277AD15A0085CD3E /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				3CC2847626921F2D0075399E /* Category.swift */,
+				7C8E668426E4B6840060F37B /* FeedbackType.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		7CF748DF277AD1990085CD3E /* User */ = {
+			isa = PBXGroup;
+			children = (
+				7C16DF25262183C900AA8239 /* RegisterRequestDTO.swift */,
+				7C1C1D03265CE40600C08C66 /* EditUserInfoRequestDTO.swift */,
+				7C5EDD542642C22500B79178 /* CheckDuplicateRequestDTO.swift */,
+				7CC962E1262C06D700AA71E1 /* LoginRequestDTO.swift */,
+				7CCDB20026A5390A0092F28D /* UserRegisterValues.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		7CF748E0277AD19D0085CD3E /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				7CA6621A26412203000E0B7A /* RegisterNewMenuRequestDTO.swift */,
+				7C99FB9D2648FFD60063C967 /* FetchReviewListRequestDTO.swift */,
+				7CE4BA5B261C31FF009A4464 /* NewReviewRequestDTO.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		7CF748E1277AD1C80085CD3E /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				7CD74B71260B11CC00D05B84 /* NewRestaurantRequestDTO.swift */,
+				7C1F79DE26330ACF00C7B41D /* SearchRestaurantRequestDTO.swift */,
+				3CAFEAC926900A1F00F0899E /* FetchRestaurantListRequestDTO.swift */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		7CF748E2277AD1D60085CD3E /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				7CA66218264113CE000E0B7A /* MenuRegisterResponseModel.swift */,
+				7C99FB9B2648FE520063C967 /* ReviewListResponseModel.swift */,
+				7C65869C26494D34004B8584 /* ReviewDetail.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		7CF748E3277AD1DB0085CD3E /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				3CBFB586269815EC00E7EB30 /* RestaurantImageResponseModel.swift */,
+				7CC751072666018900249EDF /* RestaurantDetailFromKakao.swift */,
+				3CB6F9802695879E001324BB /* RestaurantInfoResponseModel.swift */,
+				3CA704DD268DA35200943DC1 /* RestaurantListResponseModel.swift */,
+				7C1F79E02633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift */,
+				7CA6620D263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		7CF748E4277AD1E30085CD3E /* User */ = {
+			isa = PBXGroup;
+			children = (
+				7C1F774926314A1E00C7B41D /* LoginResponseModel.swift */,
+				7CC96306263051CC00AA71E1 /* RegisterResponseModel.swift */,
+				7C1C1D07265E190200C08C66 /* LoadUserInfoModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		7CF748E5277AD1E90085CD3E /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				7C6D2532268D9B010030F9A1 /* NoticeListModel.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		7CF748E6277AD2760085CD3E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7CE4D7982608DD2B002FCC2D /* AppDelegate.swift */,
+				7CE4D79A2608DD2B002FCC2D /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		7CF748E9277AD2EE0085CD3E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7CB8DF6D264D71840001CC6D /* GlobalFunctions.swift */,
+				7CF748EA277AD3000085CD3E /* UIHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7CF748EC277AD35A0085CD3E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7CE4D7C42609B628002FCC2D /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		7CF748ED277AD40C0085CD3E /* Login+Register */ = {
+			isa = PBXGroup;
+			children = (
+				3CBA75D1261AE77E00D6CCCE /* RegisterViewController.swift */,
+				3CBA75CB261AE74C00D6CCCE /* WelcomeViewController.swift */,
+				3CBA75CE261AE76700D6CCCE /* LoginViewController.swift */,
+			);
+			path = "Login+Register";
+			sourceTree = "<group>";
+		};
+		7CF748EE277AD4190085CD3E /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				7C311423261AE37200392742 /* NewReviewViewController.swift */,
+				7C036AB92698164700F6C29B /* MyReviewListViewController.swift */,
+				7C65869A26494C5D004B8584 /* ReviewDetailViewController.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		7CF748EF277AD4210085CD3E /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				7C8152242685A6A20041EC47 /* SearchListViewController.swift */,
+				3CE2BFDA260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift */,
+				3CECC1842617679800C971C5 /* RestaurantInfoViewController.swift */,
+				3C88A4A426A204D600E7FC75 /* RestaurantImageViewController.swift */,
+				7CE4D79C2608DD2B002FCC2D /* NewRestaurantViewController.swift */,
+				7C1F77882632A9B800C7B41D /* SearchRestaurantViewController.swift */,
+				3CE050E226AC4E8D003EE896 /* ImageZoomViewController.swift */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		7CF748F0277AD4270085CD3E /* My Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				3C88A4A226A1D8D400E7FC75 /* FavoriteRestaurantViewController.swift */,
+			);
+			path = "My Favorite";
+			sourceTree = "<group>";
+		};
+		7CF748F1277AD45C0085CD3E /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				7C6D252D268D93AB0030F9A1 /* NoticeViewController.swift */,
+				7C60DC7C2695DB6D001DEA9A /* NoticeDetailViewController.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		7CF748F2277AD4DE0085CD3E /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				7C3517D0267C76F000BD9A88 /* ReportReviewViewController.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		7CF748F3277AD4F20085CD3E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7C1C1D01265CCAAE00C08C66 /* ChangePasswordViewController.swift */,
+				7C2187DD265AA200002CFDD8 /* SettingsViewController.swift */,
+				7C2187D9265A6E05002CFDD8 /* SendDeveloperMessageViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -819,11 +938,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CE4D7A92608DD2E002FCC2D /* Build configuration list for PBXNativeTarget "KNU_Plate_iOS" */;
 			buildPhases = (
-				07CE530DBE75E4B8B2BBD2F8 /* [CP] Check Pods Manifest.lock */,
+				461D7C3367AF9EB17CA34596 /* [CP] Check Pods Manifest.lock */,
 				7CE4D7912608DD2B002FCC2D /* Sources */,
 				7CE4D7922608DD2B002FCC2D /* Frameworks */,
 				7CE4D7932608DD2B002FCC2D /* Resources */,
-				1C8C566DC1AA8A5951F2E133 /* [CP] Embed Pods Frameworks */,
+				B86BCD95FBC2B281F8036E6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -841,7 +960,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					7CE4D7942608DD2B002FCC2D = {
 						CreatedOnToolsVersion = 12.4;
@@ -919,7 +1038,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07CE530DBE75E4B8B2BBD2F8 /* [CP] Check Pods Manifest.lock */ = {
+		461D7C3367AF9EB17CA34596 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -941,7 +1060,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1C8C566DC1AA8A5951F2E133 /* [CP] Embed Pods Frameworks */ = {
+		B86BCD95FBC2B281F8036E6F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -969,10 +1088,7 @@
 				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
 				7C2187DE265AA200002CFDD8 /* SettingsViewController.swift in Sources */,
 				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
-				7CE4BA5C261C31FF009A4464 /* NewReviewRequestDTO.swift in Sources */,
 				7C833688266215880032308D /* Interceptor.swift in Sources */,
-				3C74F65B2616F1A2001E8ED5 /* UIButton+TouchReaction.swift in Sources */,
-				7CBE745226208366002E1FF7 /* UploadMenuModel.swift in Sources */,
 				3CBA75CC261AE74C00D6CCCE /* WelcomeViewController.swift in Sources */,
 				7C16DF232621810700AA8239 /* User.swift in Sources */,
 				7C1C1D08265E190300C08C66 /* LoadUserInfoModel.swift in Sources */,
@@ -983,7 +1099,6 @@
 				7C1F79E12633118B00C7B41D /* SearchRestaurantByKeywordResponseModel.swift in Sources */,
 				3CECC1852617679800C971C5 /* RestaurantInfoViewController.swift in Sources */,
 				3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */,
-				3CAFEACA26900A1F00F0899E /* FetchRestaurantListRequestDTO.swift in Sources */,
 				3CB6F9812695879E001324BB /* RestaurantInfoResponseModel.swift in Sources */,
 				3C88A4A526A204D600E7FC75 /* RestaurantImageViewController.swift in Sources */,
 				7C60DC7D2695DB6D001DEA9A /* NoticeDetailViewController.swift in Sources */,
@@ -992,32 +1107,28 @@
 				7C8E668526E4B6840060F37B /* FeedbackType.swift in Sources */,
 				7C1F79DF26330AD000C7B41D /* SearchRestaurantRequestDTO.swift in Sources */,
 				7CA6621B26412203000E0B7A /* RegisterNewMenuRequestDTO.swift in Sources */,
-				7C2187E0265AA20B002CFDD8 /* TermsAndConditionsViewController.swift in Sources */,
+				7CF748EB277AD3000085CD3E /* UIHelper.swift in Sources */,
 				3CB6C3EB268D994F00F7515A /* RestaurantListViewModel.swift in Sources */,
 				7C2187DC265A8FC7002CFDD8 /* MyPageViewController.swift in Sources */,
 				7C311424261AE37200392742 /* NewReviewViewController.swift in Sources */,
 				7CDADA0326BBDADE00F7F58F /* FindPasswordViewController.swift in Sources */,
 				3CBA75DB261B374600D6CCCE /* UITextField+Padding.swift in Sources */,
 				3CD96BA826B92063007E3A53 /* EmptyStateTableViewCell.swift in Sources */,
-				7C5EDD532642BF1F00B79178 /* VerifyMailRequestDTO.swift in Sources */,
 				7CCDB20326A564F50092F28D /* CongratulateRegisterViewController.swift in Sources */,
 				7C1F79DD2633025900C7B41D /* MapManager.swift in Sources */,
 				7CE4D79D2608DD2B002FCC2D /* NewRestaurantViewController.swift in Sources */,
 				7CC962EE262D5A4D00AA71E1 /* RestaurantManager.swift in Sources */,
 				7CA66215263FF65C000E0B7A /* ExistingMenuModel.swift in Sources */,
-				7C5EDD512642BD0100B79178 /* EmailVerifyCodeRequestDTO.swift in Sources */,
 				7CA6620E263FEA33000E0B7A /* RestaurantDetailInfoResponseModel.swift in Sources */,
 				7C16DF202621779600AA8239 /* NetworkError.swift in Sources */,
 				3C8E581826B1213000A08290 /* MainCollectionReusableView.swift in Sources */,
 				7CD74B68260AE06E00D05B84 /* RatingController.swift in Sources */,
 				7C311429261B136700392742 /* UserPickedFoodImageCollectionViewCell.swift in Sources */,
 				7C65869D26494D34004B8584 /* ReviewDetail.swift in Sources */,
-				7CDADA0C26BFB86700F7F58F /* VerifyEmailViewController.swift in Sources */,
 				7CA66219264113CF000E0B7A /* MenuRegisterResponseModel.swift in Sources */,
 				7C8152252685A6A20041EC47 /* SearchListViewController.swift in Sources */,
 				7CD74B6B260B020A00D05B84 /* NewRestaurantViewModel.swift in Sources */,
 				7C3D985C26AD2FEC005DFAE0 /* RegisterNavigationController.swift in Sources */,
-				7C1C1D00265CC90800C08C66 /* ChangeNicknameViewController.swift in Sources */,
 				3C8E581A26B1408A00A08290 /* MainCollectionViewCell.swift in Sources */,
 				7C443229261D92D000A0D83F /* AddImageButtonCollectionViewCell.swift in Sources */,
 				3CA8D44626A02E2200B9E434 /* LocationTableViewCell.swift in Sources */,
@@ -1051,6 +1162,7 @@
 				7CB8DF67264D3AB40001CC6D /* FileManager.swift in Sources */,
 				3CE2BFDB260CB4AC006B9BA3 /* RestaurantCollectionViewController.swift in Sources */,
 				3CE050E326AC4E8D003EE896 /* ImageZoomViewController.swift in Sources */,
+				7CF748E8277AD2BE0085CD3E /* String+Extension.swift in Sources */,
 				7CCDB1F726A3F0AA0092F28D /* UILabel Extension.swift in Sources */,
 				7CB8DF6E264D71840001CC6D /* GlobalFunctions.swift in Sources */,
 				7C6D2535268DAD950030F9A1 /* NoticeTableViewCell.swift in Sources */,
@@ -1136,6 +1248,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "Any iOS Simulator SDK - arm64";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1197,6 +1310,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "Any iOS Simulator SDK - arm64";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1208,6 +1322,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1217,7 +1332,7 @@
 		};
 		7CE4D7AA2608DD2E002FCC2D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B46B7EB252C8F36BD346EEC /* Pods-KNU_Plate_iOS.debug.xcconfig */;
+			baseConfigurationReference = 44A0B3B64515F6009D16550B /* Pods-KNU_Plate_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1225,6 +1340,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1247,7 +1364,7 @@
 		};
 		7CE4D7AB2608DD2E002FCC2D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED0986C7A2EE32DE8DA20D86 /* Pods-KNU_Plate_iOS.release.xcconfig */;
+			baseConfigurationReference = F565B563F1837ED0F3CFD3C6 /* Pods-KNU_Plate_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1255,6 +1372,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBX5GK4LT4;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

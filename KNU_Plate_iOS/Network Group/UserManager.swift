@@ -32,8 +32,10 @@ class UserManager {
     private init() {}
     
     //MARK: - 회원가입
-    func register(with model: RegisterRequestDTO,
-                completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func register(
+        with model: RegisterRequestDTO,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -41,41 +43,43 @@ class UserManager {
                                      withName: "user_name")
             multipartFormData.append(Data(model.password.utf8),
                                      withName: "password")
-
+            
             
         }, to: signUpRequestURL,
-        headers: model.headers)
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
-                do {
-                    let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
-                                                               from: response.data!)
-                    
-                    print("✏️ UserManager - register SUCCESS ")
-                    print("✏️ NEW ACCESS TOKEN: \(decodedData.accessToken)")
-                    self.saveUserRegisterInfoToDevice(with: decodedData)
-                    completion(.success(true))
-                    
-                } catch {
-                    print("❗️ UserManager - register catch ERROR: \(error)")
-                    completion(.failure(.internalError))
-                }
+                  headers: model.headers)
+            .responseJSON { response in
                 
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("UserManager - signUp error: \(error.errorDescription), with statusCode: \(statusCode)")
-                completion(.failure(error))
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    do {
+                        let decodedData = try JSONDecoder().decode(RegisterResponseModel.self,
+                                                                   from: response.data!)
+                        
+                        print("✏️ UserManager - register SUCCESS ")
+                        print("✏️ NEW ACCESS TOKEN: \(decodedData.accessToken)")
+                        self.saveUserRegisterInfoToDevice(with: decodedData)
+                        completion(.success(true))
+                        
+                    } catch {
+                        print("❗️ UserManager - register catch ERROR: \(error)")
+                        completion(.failure(.internalError))
+                    }
+                    
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("UserManager - signUp error: \(error.errorDescription), with statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
     
-    //MARK: - 로그인    
-    func logIn(with model: LoginRequestDTO,
-               completion: @escaping ((Result<Bool, LogInError>) -> Void)) {
+    //MARK: - 로그인
+    func logIn(
+        with model: LoginRequestDTO,
+        completion: @escaping ((Result<Bool, LogInError>) -> Void)
+    ) {
         
         User.shared.resetAllUserInfo()
         
@@ -89,7 +93,7 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(LoginResponseModel.self,
@@ -107,24 +111,26 @@ class UserManager {
                 default:
                     
                     let error = LogInError.returnError(responseData: response.data)
-
+                    
                     completion(.failure(error))
                 }
             }
     }
     
     //MARK: - 아이디 or 닉네임 중복 체크
-    func checkDuplication(requestURL: String,
-                          completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func checkDuplication(
+        requestURL: String,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.request(requestURL,
                    method: .get)
-        .responseJSON { (response) in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
+            .responseJSON { (response) in
                 
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                    
                 case 200:
                     completion(.success(true))
                 case 400:
@@ -157,7 +163,7 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     self.resetAllUserInfo()
                     completion(.success(true))
@@ -167,7 +173,7 @@ class UserManager {
                 }
             }
     }
-        
+    
     //MARK: - 사용자 정보 불러오기
     func loadUserProfileInfo(completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
         
@@ -185,7 +191,7 @@ class UserManager {
                 print("✏️ loadUserProfileInfo statusCode: \(statusCode)")
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     do {
                         let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
@@ -204,11 +210,13 @@ class UserManager {
                 }
             }
     }
-
+    
     
     //MARK: - 사용자 비밀번호 수정
-    func updatePassword(with model: EditUserInfoRequestDTO,
-                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func updatePassword(
+        with model: EditUserInfoRequestDTO,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -218,30 +226,32 @@ class UserManager {
                                      withName: "force")
             
         }, to: modifyUserInfoURL,
-        method: .patch,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
-                print("UserManager - 비밀번호 변경 성공")
-                completion(.success(true))
+                  method: .patch,
+                  headers: model.headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                 
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("UserManager - updatePassword error: \(error.errorDescription) and statusCode: \(statusCode)")
-                completion(.failure(error))
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    print("UserManager - 비밀번호 변경 성공")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("UserManager - updatePassword error: \(error.errorDescription) and statusCode: \(statusCode)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
     
     //MARK: - 사용자 프로필 이미지 업데이트
-    func updateProfileImage(with model: EditUserInfoRequestDTO,
-                            completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func updateProfileImage(
+        with model: EditUserInfoRequestDTO,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -256,24 +266,24 @@ class UserManager {
             }
             
         }, to: modifyUserInfoURL,
-        method: .patch,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
-                print("UserManager - 프로필 이미지 변경 성공")
-                completion(.success(true))
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("UserManager - updateProfileImage error: \(error.errorDescription)")
-                completion(.failure(error))
+                  method: .patch,
+                  headers: model.headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
+                
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    print("UserManager - 프로필 이미지 변경 성공")
+                    completion(.success(true))
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("UserManager - updateProfileImage error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
             }
-        }
         
     }
     
@@ -287,25 +297,25 @@ class UserManager {
             multipartFormData.append(Data(model.removeUserProfileImage.utf8),
                                      withName: "force")
         }, to: modifyUserInfoURL,
-        method: .patch,
-        headers: model.headers,
-        interceptor: interceptor)
-        .validate()
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
-                print("UserManager - 프로필 이미지 제거하기 성공")
-                completion(.success(true))
+                  method: .patch,
+                  headers: model.headers,
+                  interceptor: interceptor)
+            .validate()
+            .responseJSON { response in
                 
-            default:
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("UserManager - updateNickname error: \(error.errorDescription)")
-                completion(.failure(error))
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
+                case 200:
+                    print("UserManager - 프로필 이미지 제거하기 성공")
+                    completion(.success(true))
+                    
+                default:
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("UserManager - updateNickname error: \(error.errorDescription)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
     
     //MARK: - 회원 탈퇴
@@ -320,7 +330,7 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     completion(.success(true))
                     
@@ -333,8 +343,10 @@ class UserManager {
     }
     
     //MARK: - 내가 쓴 리뷰 삭제
-    func deleteMyReview(reviewID: Int,
-                        completion: @escaping ((Result<Bool, NetworkError>) -> Void)) {
+    func deleteMyReview(
+        reviewID: Int,
+        completion: @escaping ((Result<Bool, NetworkError>) -> Void)
+    ) {
         
         let url = deleteReviewURL + "\(reviewID)"
         
@@ -347,11 +359,11 @@ class UserManager {
                 guard let statusCode = response.response?.statusCode else { return }
                 
                 switch statusCode {
-                
+                    
                 case 200:
                     print("✏️ UserManager - deleteMyReview SUCCESS")
                     completion(.success(true))
-                
+                    
                 default:
                     let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
                     print("❗️ UserManager - deleteMyReview FAILED error :\(error.errorDescription)")
@@ -361,8 +373,10 @@ class UserManager {
     }
     
     //MARK: - 아이디 찾기
-    func findMyID(email: String,
-                  completion: @escaping (Result<String, NetworkError>) -> Void) {
+    func findMyID(
+        email: String,
+        completion: @escaping (Result<String, NetworkError>) -> Void
+    ) {
         
         AF.upload(multipartFormData: { multipartFormData in
             
@@ -370,36 +384,36 @@ class UserManager {
                                      withName: "mail_address")
             
         }, to: findIDURL)
-        .responseJSON { response in
-            
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            
-            case 200:
+            .responseJSON { response in
                 
-                do {
-                    let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                guard let statusCode = response.response?.statusCode else { return }
+                
+                switch statusCode {
                     
-                    print("✏️ UserManager - findMyID SUCCESS")
+                case 200:
                     
-                    let userID = decodedData.username
-                    completion(.success(userID))
+                    do {
+                        let decodedData = try JSONDecoder().decode(LoadUserInfoModel.self, from: response.data!)
+                        
+                        print("✏️ UserManager - findMyID SUCCESS")
+                        
+                        let userID = decodedData.username
+                        completion(.success(userID))
+                        
+                    } catch {
+                        print("❗️ UserManager - findMyID decoding catch error: \(error)")
+                        completion(.failure(.internalError))
+                    }
                     
-                } catch {
-                    print("❗️ UserManager - findMyID decoding catch error: \(error)")
-                    completion(.failure(.internalError))
+                default:
+                    
+                    let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
+                    print("❗️ UserManager - findMyID error statusCode: \(statusCode), with error: \(error.errorDescription)")
+                    completion(.failure(error))
                 }
-                
-            default:
-                
-                let error = NetworkError.returnError(statusCode: statusCode, responseData: response.data)
-                print("❗️ UserManager - findMyID error statusCode: \(statusCode), with error: \(error.errorDescription)")
-                completion(.failure(error))
             }
-        }
         
-        }
+    }
 }
 
 //MARK: - 사용자 정보를 로컬에 저장하는 메서드 모음
@@ -412,10 +426,10 @@ extension UserManager {
                                                                     forKey: Constants.KeyChainKey.accessToken)
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
-    
+        
         User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
-
+        
         User.shared.medal = model.user.medal
         
         print("UserManager - saveUserRegisterInfoToDevice success ")
@@ -449,7 +463,7 @@ extension UserManager {
                                                                     forKey: Constants.KeyChainKey.accessToken)
         User.shared.savedRefreshToken = KeychainWrapper.standard.set(model.refreshToken,
                                                                      forKey: Constants.KeyChainKey.refreshToken)
-    
+        
         User.shared.userUID = model.user.userID
         User.shared.username = model.user.username
         User.shared.medal = model.user.medal

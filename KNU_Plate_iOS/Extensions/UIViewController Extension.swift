@@ -1,5 +1,6 @@
 import Foundation
 import SnackBar_swift
+import SafariServices
 
 //MARK: - Alert Methods
 
@@ -109,21 +110,18 @@ extension UIViewController {
     }
     
     @objc func logOutUser() {
-        
         UserManager.shared.logOut { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.showSimpleBottomAlertWithAction(message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
-                                                         buttonTitle: "로그인") {
-                        self.presentWelcomeVC()
-                    }
+                    self.showSimpleBottomAlertWithAction(
+                        message: "장시간 사용하지 않아 자동 로그아웃되었습니다. 다시 로그인 하시기 바랍니다.",
+                        buttonTitle: "로그인"
+                    ) { self.presentWelcomeVC() }
                 }
-                
-            case .failure(let error):
-                self.showSimpleBottomAlert(with: error.errorDescription)
+            case .failure(_):
+                UserManager.shared.resetAllUserInfo()
             }
         }
     }
@@ -132,6 +130,11 @@ extension UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func presentSafariView(with url: URL) {
+        let config = SFSafariViewController.Configuration()
+        let vc = SFSafariViewController(url: url, configuration: config)
+        present(vc, animated: true)
+    }
     
 }
 
@@ -154,25 +157,5 @@ extension UIViewController {
                                                name: .refreshTokenExpired,
                                                object: nil)
         
-    }
-}
-
-//MARK: - Others
-
-extension UIViewController {
-    
-    func getRecommendationLabel() -> String {
-        
-        let now = Date()
-        let one_PM = now.dateAt(hours: 13, minutes: 0)
-        let five_PM = now.dateAt(hours: 17, minutes: 0)
-        
-        if now >= one_PM && now <= five_PM {
-           return "오늘은 이 카페 어때?"
-        } else if now < one_PM {
-            return "점심으로는 이거 어때?"
-        } else {
-            return "저녁으로는 이거 어때?"
-        }
     }
 }

@@ -17,26 +17,26 @@ class NoticeManager {
     private init() {}
     
     //MARK: - 공지 목록 조회
-    func fetchNoticeList(index: Int,
-                       completion: @escaping ((Result<[NoticeListModel], NetworkError>) -> Void)) {
+    func fetchNoticeList(
+        index: Int,
+        completion: @escaping ((Result<[NoticeListModel], NetworkError>
+                               ) -> Void)) {
         
         let requestURL = getNoticeURL + "?cursor=\(index)"
         
-        AF.request(requestURL,
-                   method: .get)
-            .responseJSON { response in
+        AF.request(
+            requestURL,
+            method: .get
+        ).responseJSON { response in
                 
                 guard let statusCode = response.response?.statusCode else { return }
-                
                 switch statusCode {
                 case 200:
                     print("✏️ NoticeManager - getNoticeList SUCCESS")
-                    
                     do {
                         let decodedData = try JSONDecoder().decode([NoticeListModel].self,
                                                                    from: response.data!)
                         completion(.success(decodedData))
-                        
                     } catch {
                         print("❗️ NoticeManager - getNoticeList error in parsing data, error: \(error)")
                         completion(.failure(.internalError))

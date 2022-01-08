@@ -14,32 +14,35 @@ class MapManager {
     private init() {}
     
     //MARK: - 키워드로 장소 검색
-    func searchByKeyword(with model: SearchRestaurantRequestDTO,
-                         completion: @escaping ((Result<SearchRestaurantByKeywordResponseModel,NetworkError>) -> Void)) {
+    func searchByKeyword(
+        with model: SearchRestaurantRequestDTO,
+        completion: @escaping ((Result<SearchRestaurantByKeywordResponseModel,NetworkError>) -> Void)
+    ) {
         
-        AF.request(searchByKeywordRequestURL,
-                   method: .get,
-                   parameters: model.parameters,
-                   headers: model.headers).responseJSON { (response) in
+        AF.request(
+            searchByKeywordRequestURL,
+            method: .get,
+            parameters: model.parameters,
+            headers: model.headers
+        ).responseJSON { (response) in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            
+            switch statusCode {
+            case 200:
+                do {
+                    let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
+                                                               from: response.data!)
+                    completion(.success(decodedData))
                     
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
-                    
-                    case 200:
-                        do {
-                            let decodedData = try JSONDecoder().decode(SearchRestaurantByKeywordResponseModel.self,
-                                                                       from: response.data!)
-                            completion(.success(decodedData))
-                            
-                        } catch {
-                            completion(.failure(.internalError))
-                            print("There was an error decoding JSON Data (KakaoMap)")
-                        }
-                    default:
-                        completion(.failure(.internalError))
-                        print("default activated in MAPMANAGER")
-                    }
-                   }
+                } catch {
+                    completion(.failure(.internalError))
+                    print("There was an error decoding JSON Data (KakaoMap)")
+                }
+            default:
+                completion(.failure(.internalError))
+                print("default activated in MAPMANAGER")
+            }
+        }
     }
 }

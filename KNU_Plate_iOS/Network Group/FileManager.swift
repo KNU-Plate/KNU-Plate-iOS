@@ -13,32 +13,35 @@ class FileManager {
     
     private init() {}
     
-    func searchFileFolder(fileFolderID: String,
-                          completion: @escaping (([Files]) -> Void)){
+    func searchFileFolder(
+        fileFolderID: String,
+        completion: @escaping (([Files]) -> Void)
+    ) {
         
         let parameters: Parameters = ["file_folder_id": fileFolderID]
         let headers: HTTPHeaders = ["Authorization": User.shared.accessToken]
         
-        AF.request(searchFileFolderRequestURL,
-                   method: .get,
-                   parameters: parameters,
-                   headers: headers).responseJSON { response in
-                    
-                    guard let statusCode = response.response?.statusCode else { return }
-                    
-                    switch statusCode {
+        AF.request(
+            searchFileFolderRequestURL,
+            method: .get,
+            parameters: parameters,
+            headers: headers
+        ).responseJSON { response in
+            
+            guard let statusCode = response.response?.statusCode else { return }
+            switch statusCode {
                 
-                    case 200:
-                        do {
-                            let decodedData = try JSONDecoder().decode([Files].self, from: response.data!)
-                            completion(decodedData)
-                            
-                        } catch { print("FILE MANAGER - searchFileFolder() Error decoding: \(error)") }
-                        
-                    default:
-                        print("DEFAULT activated in FILE MANAGER - searchFileFolder()")
-                    }
-                   }
+            case 200:
+                do {
+                    let decodedData = try JSONDecoder().decode([Files].self, from: response.data!)
+                    completion(decodedData)
+                    
+                } catch { print("FILE MANAGER - searchFileFolder() Error decoding: \(error)") }
+                
+            default:
+                print("DEFAULT activated in FILE MANAGER - searchFileFolder()")
+            }
+        }
     }
     
 }
